@@ -161,7 +161,7 @@ bool ndApplications::Load(const string &filename)
 
     if (! ifs.is_open()) return false;
 
-    unique_lock<mutex> ul(lock);
+    lock_guard<mutex> ul(lock);
 
     Reset();
 
@@ -239,7 +239,7 @@ bool ndApplications::LoadLegacy(const string &filename)
 
     if (! ifs.is_open()) return false;
 
-    unique_lock<mutex> ul(lock);
+    lock_guard<mutex> ul(lock);
 
     Reset();
 
@@ -317,7 +317,7 @@ bool ndApplications::Save(const string &filename)
 
     if (! ofs.is_open()) return false;
 
-    unique_lock<mutex> ul(lock);
+    lock_guard<mutex> ul(lock);
 
     for (auto &it : apps)
         ofs << "app:" << it.first << ":" << it.second->tag << endl;
@@ -355,7 +355,7 @@ bool ndApplications::Save(const string &filename)
 
 nd_app_id_t ndApplications::Find(const string &domain)
 {
-    unique_lock<mutex> ul(lock);
+    lock_guard<mutex> ul(lock);
 
     vector<string> search;
 
@@ -400,7 +400,7 @@ nd_app_id_t ndApplications::Find(const ndAddr &addr)
         ndRadixNetworkEntry<32> entry;
         if (ndRadixNetworkEntry<32>::CreateQuery(entry, addr)) {
 
-            unique_lock<mutex> ul(lock);
+            lock_guard<mutex> ul(lock);
 
             nd_rn4_app::iterator it;
             nd_rn4_app *rn4 = static_cast<nd_rn4_app *>(app_networks4);
@@ -413,7 +413,7 @@ nd_app_id_t ndApplications::Find(const ndAddr &addr)
         ndRadixNetworkEntry<128> entry;
         if (ndRadixNetworkEntry<128>::CreateQuery(entry, addr)) {
 
-            unique_lock<mutex> ul(lock);
+            lock_guard<mutex> ul(lock);
 
             nd_rn6_app::iterator it;
             nd_rn6_app *rn6 = static_cast<nd_rn6_app *>(app_networks6);
@@ -427,7 +427,7 @@ nd_app_id_t ndApplications::Find(const ndAddr &addr)
 
 const char *ndApplications::Lookup(nd_app_id_t id)
 {
-    unique_lock<mutex> ul(lock);
+    lock_guard<mutex> ul(lock);
 
     auto it = apps.find(id);
     if (it != apps.end()) return it->second->tag.c_str();
@@ -436,7 +436,7 @@ const char *ndApplications::Lookup(nd_app_id_t id)
 
 nd_app_id_t ndApplications::Lookup(const string &tag)
 {
-    unique_lock<mutex> ul(lock);
+    lock_guard<mutex> ul(lock);
 
     auto it = app_tags.find(tag);
     if (it != app_tags.end()) return it->second->id;
@@ -445,7 +445,7 @@ nd_app_id_t ndApplications::Lookup(const string &tag)
 
 bool ndApplications::Lookup(const string &tag, ndApplication &app)
 {
-    unique_lock<mutex> ul(lock);
+    lock_guard<mutex> ul(lock);
 
     auto it = app_tags.find(tag);
     if (it != app_tags.end()) {
@@ -458,7 +458,7 @@ bool ndApplications::Lookup(const string &tag, ndApplication &app)
 
 bool ndApplications::Lookup(nd_app_id_t id, ndApplication &app)
 {
-    unique_lock<mutex> ul(lock);
+    lock_guard<mutex> ul(lock);
 
     auto it = apps.find(id);
     if (it != apps.end()) {
@@ -511,7 +511,7 @@ void ndApplications::Get(nd_apps_t &apps_copy)
 {
     apps_copy.clear();
 
-    unique_lock<mutex> ul(lock);
+    lock_guard<mutex> ul(lock);
 
     for (auto &app : apps)
         apps_copy.insert(make_pair(app.second->tag, app.first));
@@ -630,7 +630,7 @@ bool ndApplications::AddSoftDissector(
 bool ndApplications::SoftDissectorMatch(
     nd_flow_ptr const& flow, ndFlowParser *parser, ndSoftDissector &match)
 {
-    unique_lock<mutex> ul(lock);
+    lock_guard<mutex> ul(lock);
 
     for (auto &it : soft_dissectors) {
         try {

@@ -555,7 +555,7 @@ bool ndGlobalConfig::LoadUUID(UUID which, string &uuid)
 {
     size_t length = 0;
     string *dest = nullptr, path;
-    unique_lock<mutex> ul(lock_uuid);
+    lock_guard<mutex> ul(lock_uuid);
 
     uuid.clear();
 
@@ -605,7 +605,7 @@ bool ndGlobalConfig::SaveUUID(UUID which, const string &uuid)
 {
     size_t length = 0;
     string *dest = nullptr, path;
-    unique_lock<mutex> ul(lock_uuid);
+    lock_guard<mutex> ul(lock_uuid);
 
     switch (which) {
     case UUID_AGENT:
@@ -640,7 +640,7 @@ bool ndGlobalConfig::SaveUUID(UUID which, const string &uuid)
 
 void ndGlobalConfig::GetUUID(UUID which, string &uuid)
 {
-    unique_lock<mutex> ul(lock_uuid);
+    lock_guard<mutex> ul(lock_uuid);
 
     switch (which) {
     case UUID_AGENT:

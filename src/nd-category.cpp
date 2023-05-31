@@ -76,7 +76,7 @@ using namespace std;
 
 bool ndCategories::Load(void)
 {
-    unique_lock<mutex> ul(lock);
+    lock_guard<mutex> ul(lock);
 
     json jdata;
 
@@ -165,7 +165,7 @@ bool ndCategories::LoadLegacy(json &jdata) {
 
 bool ndCategories::Load(ndCategoryType type, json &jdata)
 {
-    unique_lock<mutex> ul(lock);
+    lock_guard<mutex> ul(lock);
 
     auto ci = categories.find(type);
 
@@ -214,7 +214,7 @@ bool ndCategories::Load(ndCategoryType type, json &jdata)
 
 bool ndCategories::Save(void)
 {
-    unique_lock<mutex> ul(lock);
+    lock_guard<mutex> ul(lock);
 
     json j;
 
@@ -267,7 +267,7 @@ bool ndCategories::Save(void)
 
 void ndCategories::Dump(ndCategoryType type)
 {
-    unique_lock<mutex> ul(lock);
+    lock_guard<mutex> ul(lock);
 
     for (auto &ci : categories) {
         if (type != ndCAT_TYPE_MAX && ci.first != type) continue;
@@ -297,7 +297,7 @@ void ndCategories::Dump(ndCategoryType type)
 
 bool ndCategories::IsMember(ndCategoryType type, nd_cat_id_t cat_id, unsigned id)
 {
-    unique_lock<mutex> ul(lock);
+    lock_guard<mutex> ul(lock);
     auto ci = categories.find(type);
 
     if (ci == categories.end()) {
@@ -316,7 +316,7 @@ bool ndCategories::IsMember(ndCategoryType type, nd_cat_id_t cat_id, unsigned id
 
 bool ndCategories::IsMember(ndCategoryType type, const string &cat_tag, unsigned id)
 {
-    unique_lock<mutex> ul(lock);
+    lock_guard<mutex> ul(lock);
     auto ci = categories.find(type);
 
     if (ci == categories.end()) {
@@ -341,7 +341,7 @@ nd_cat_id_t ndCategories::Lookup(ndCategoryType type, unsigned id)
 {
     if (type >= ndCAT_TYPE_MAX) return ND_CAT_UNKNOWN;
 
-    unique_lock<mutex> ul(lock);
+    lock_guard<mutex> ul(lock);
 
     for (auto &it : categories[type].index) {
         if (it.second.find(id) == it.second.end()) continue;
@@ -355,7 +355,7 @@ nd_cat_id_t ndCategories::LookupTag(ndCategoryType type, const string &tag)
 {
     if (type >= ndCAT_TYPE_MAX) return ND_CAT_UNKNOWN;
 
-    unique_lock<mutex> ul(lock);
+    lock_guard<mutex> ul(lock);
 
     ndCategory::index_tag::const_iterator it = categories[type].tag.find(tag);
     if (it != categories[type].tag.end()) return it->second;
@@ -371,7 +371,7 @@ nd_cat_id_t ndCategories::ResolveTag(ndCategoryType type, unsigned id, string& t
 
     if (cat_id == ND_CAT_UNKNOWN) return ND_CAT_UNKNOWN;
 
-    unique_lock<mutex> ul(lock);
+    lock_guard<mutex> ul(lock);
 
     for (auto &i : categories[type].tag) {
         if (i.second != cat_id) continue;
@@ -384,7 +384,7 @@ nd_cat_id_t ndCategories::ResolveTag(ndCategoryType type, unsigned id, string& t
 
 bool ndDomains::Load(const string &path_domains)
 {
-    unique_lock<mutex> ul(lock);
+    lock_guard<mutex> ul(lock);
 
     ndCategories categories;
     categories.Load();
@@ -450,7 +450,7 @@ bool ndDomains::Load(const string &path_domains)
 
 nd_cat_id_t ndDomains::Lookup(const string &domain)
 {
-    unique_lock<mutex> ul(lock);
+    lock_guard<mutex> ul(lock);
 
     string search(domain);
     size_t p = string::npos;

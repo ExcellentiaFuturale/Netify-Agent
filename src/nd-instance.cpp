@@ -301,7 +301,6 @@ uint32_t ndInstance::InitializeConfig(int argc, char * const argv[])
     {
         { "config", 1, 0, 'c' },
         { "debug", 0, 0, 'd' },
-        { "debug-ether-names", 0, 0, 'e' },
         { "debug-ndpi", 0, 0, 'n' },
         { "debug-curl", 0, 0, 'D' },
         { "debug-flow-expression", 1, 0, 'x' },
@@ -362,7 +361,7 @@ uint32_t ndInstance::InitializeConfig(int argc, char * const argv[])
     };
 
     static const char *flags = {
-        "?A:c:DdE:eF:f:hI:i:j:lN:nPpRrS:stT:Uu:Vvx:"
+        "?A:c:DdE:F:f:hI:i:j:lN:nPpRrS:stT:Uu:Vvx:"
     };
 
     int rc;
@@ -1013,7 +1012,6 @@ void ndInstance::CommandLineHelp(bool version_only)
 
             "\nGlobal options:\n"
             "  -d, --debug\n    Enable debug output and remain in foreground.\n"
-            "  -e, --debug-ether-names\n    In debug mode, resolve and display addresses from: /etc/ethers\n"
             "  -n, --debug-ndpi\n    In debug mode, display nDPI debug message when enabled (compile-time).\n"
             "  -D, --debug-curl\n    In debug mode, display debug output from libCURL.\n"
             "  -v, --verbose\n    In debug mode, display real-time flow detections.\n"
@@ -1665,6 +1663,7 @@ ndInstance_RunReturn:
 
 void *ndInstance::ndInstance::Entry(void)
 {
+    size_t proc_plugins = 0;
     nd_capture_threads thread_capture;
 
     // Process an initial update on start-up
@@ -1809,6 +1808,19 @@ void *ndInstance::ndInstance::Entry(void)
         (terminate_force.load() == false && ShouldTerminate() &&
         status.flows_active > 0) || ShouldTerminate() == false
     );
+
+    proc_plugins = plugins.Terminate(ndPlugin::TYPE_PROC);
+
+    do {
+        nd_dprintf("%s: waiting on %d processor plugins to exit.\n",
+            tag.c_str(), proc_plugins
+        );
+
+        proc_plugins -= plugins.Reap(ndPlugin::TYPE_PROC);
+
+        if (proc_plugins > 0) sleep(1);
+    }
+    while (proc_plugins > 0);
 
 ndInstance_EntryReturn:
     if (! ShouldTerminate()) Terminate();

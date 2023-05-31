@@ -41,7 +41,7 @@ public:
     void Save(void);
 
     size_t GetSize(void) {
-        unique_lock<mutex> ul(lock);
+        lock_guard<mutex> ul(lock);
         return map_ar.size();
     };
 

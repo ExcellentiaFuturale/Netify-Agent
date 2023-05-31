@@ -727,7 +727,7 @@ public:
     }
 
     inline bool Push(const ndAddr &addr) {
-        unique_lock<mutex> ul(*lock);
+        lock_guard<mutex> ul(*lock);
         auto result = addrs.insert(addr);
         return result.second;
     }
@@ -735,7 +735,7 @@ public:
     template <class T>
     void Encode(T &output, const string &key) const {
         if (addrs.empty()) return;
-        unique_lock<mutex> ul(*lock);
+        lock_guard<mutex> ul(*lock);
         vector<string> addresses;
         for (auto& a : addrs)
             addresses.push_back(a.GetString());
@@ -745,7 +745,7 @@ public:
     inline bool FindFirstOf(
         sa_family_t family, ndAddr& addr) const {
 
-        unique_lock<mutex> ul(*lock);
+        lock_guard<mutex> ul(*lock);
         for (auto& it : addrs) {
             if (it.addr.ss.ss_family != family) continue;
             addr = it;
@@ -759,7 +759,7 @@ public:
         vector<string> &results) const {
 
         size_t count = results.size();
-        unique_lock<mutex> ul(*lock);
+        lock_guard<mutex> ul(*lock);
 
         for (auto& it : addrs) {
             if (find_if(
@@ -926,7 +926,7 @@ public:
     }
 
     inline bool PushEndpoint(const ndAddr &mac, const ndAddr &ip) {
-        unique_lock<mutex> ul(*lock);
+        lock_guard<mutex> ul(*lock);
         auto result = endpoints[endpoint_snapshot.load()].emplace(
             make_pair(mac, ndInterfaceAddr(ip))
         );
@@ -938,21 +938,21 @@ public:
     }
 
     inline void ClearEndpoints(bool snapshot) {
-        unique_lock<mutex> ul(*lock);
+        lock_guard<mutex> ul(*lock);
         for (auto &it : endpoints[snapshot]) it.second.Clear();
         endpoints[snapshot].clear();
     }
 
     template <class T>
     inline void EncodeEndpoints(bool snapshot, T &output) const {
-        unique_lock<mutex> ul(*lock);
+        lock_guard<mutex> ul(*lock);
         for (auto &i : endpoints[snapshot])
             i.second.Encode(output,  i.first.GetString());
     }
 
     inline void GetEndpoints(bool snapshot,
         unordered_map<string, unordered_set<string>> &output) const {
-        unique_lock<mutex> ul(*lock);
+        lock_guard<mutex> ul(*lock);
         for (auto& i : endpoints[snapshot]) {
             vector<string> ip_addrs;
             if (! i.second.FindAllOf(

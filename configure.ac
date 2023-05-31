@@ -192,6 +192,7 @@ PKG_CHECK_MODULES([ZLIB], [zlib])
 AC_ARG_WITH([systemdsystemunitdir],
      [AS_HELP_STRING([--with-systemdsystemunitdir=DIR], [Directory for systemd service files])],,
      [with_systemdsystemunitdir=auto])
+
 AS_IF([test "x$with_systemdsystemunitdir" = "xyes" -o "x$with_systemdsystemunitdir" = "xauto"], [
      def_systemdsystemunitdir=$($PKG_CONFIG --variable=systemdsystemunitdir systemd)
 
@@ -200,6 +201,7 @@ AS_IF([test "x$with_systemdsystemunitdir" = "xyes" -o "x$with_systemdsystemunitd
     [AC_MSG_ERROR([systemd support requested but pkg-config unable to query systemd package])])
     with_systemdsystemunitdir=no],
    [with_systemdsystemunitdir="$def_systemdsystemunitdir"])])
+
 AS_IF([test "x$with_systemdsystemunitdir" != "xno"],
       [AC_SUBST([systemdsystemunitdir], [$with_systemdsystemunitdir])])
 AM_CONDITIONAL([HAVE_SYSTEMD], [test "x$with_systemdsystemunitdir" != "xno"])
@@ -215,6 +217,7 @@ AS_IF([test "x$with_tmpfilesdir" = "xyes" -o "x$with_tmpfilesdir" = "xauto"], [
     [AC_MSG_ERROR([tmpfiles support requested but pkg-config unable to query systemd package])])
     with_tmpfilesdir=no],
    [with_tmpfilesdir="$def_tmpfilesdir"])])
+
 AS_IF([test "x$with_tmpfilesdir" != "xno"],
       [AC_SUBST([tmpfilesdir], [$with_tmpfilesdir])])
 
@@ -230,6 +233,7 @@ AS_IF([test "x$with_libcurl_zlib" != "xno"], [
 AC_ARG_WITH([persistentstatedir],
      [AS_HELP_STRING([--with-persistentstatedir=DIR], [Directory for persistent state files])],,
      [with_persistentstatedir=auto])
+
 AS_IF([test "x$with_persistentstatedir" = "xyes" -o "x$with_persistentstatedir" = "xauto"],
     AC_SUBST([persistentstatedir], [$sysconfdir/netifyd]),
     AC_SUBST([persistentstatedir], [$with_persistentstatedir])
@@ -238,6 +242,7 @@ AS_IF([test "x$with_persistentstatedir" = "xyes" -o "x$with_persistentstatedir" 
 AC_ARG_WITH([volatilestatedir],
      [AS_HELP_STRING([--with-volatilestatedir=DIR], [Directory for volatile state files])],,
      [with_volatilestatedir=auto])
+
 AS_IF([test "x$with_volatilestatedir" = "xyes" -o "x$with_volatilestatedir" = "xauto"],
     AC_SUBST([volatilestatedir], [$localstatedir/run/$PACKAGE_TARNAME]),
     AC_SUBST([volatilestatedir], [$with_volatilestatedir])

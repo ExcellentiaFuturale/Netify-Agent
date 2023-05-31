@@ -290,7 +290,7 @@ protected:
 class ndPluginManager : public ndSerializer
 {
 public:
-    virtual ~ndPluginManager();
+    virtual ~ndPluginManager() { Destroy(); }
 
     void Load(
         ndPlugin::Type type = ndPlugin::TYPE_BASE,
@@ -298,7 +298,11 @@ public:
 
     bool Create(ndPlugin::Type type = ndPlugin::TYPE_BASE);
 
-    bool Reap(ndPlugin::Type type = ndPlugin::TYPE_BASE);
+    size_t Terminate(ndPlugin::Type type = ndPlugin::TYPE_BASE);
+
+    void Destroy(ndPlugin::Type type = ndPlugin::TYPE_BASE);
+
+    size_t Reap(ndPlugin::Type type = ndPlugin::TYPE_BASE);
 
     void BroadcastEvent(ndPlugin::Type type,
         ndPlugin::Event event, void *param = nullptr);

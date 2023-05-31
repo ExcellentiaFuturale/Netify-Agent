@@ -171,7 +171,7 @@ void ndDNSHintCache::Insert(const ndAddr &addr, const string &hostname)
 
     digest.assign((const char *)sha1_result(&ctx, _digest), SHA1_DIGEST_LENGTH);
 
-    unique_lock<mutex> ul(lock);
+    lock_guard<mutex> ul(lock);
 
     nd_dns_tuple ar(time_t(time(NULL) + ndGC.ttl_dns_entry), hostname);
     nd_dhc_insert i = map_ar.insert(nd_dhc_insert_pair(digest, ar));
@@ -232,7 +232,7 @@ bool ndDNSHintCache::Lookup(const ndAddr &addr, string &hostname)
 bool ndDNSHintCache::Lookup(const string &digest, string &hostname)
 {
     bool found = false;
-    unique_lock<mutex> ul(lock);
+    lock_guard<mutex> ul(lock);
 
     nd_dns_ar::iterator i = map_ar.find(digest);
     if (i != map_ar.end()) {
@@ -246,7 +246,7 @@ bool ndDNSHintCache::Lookup(const string &digest, string &hostname)
 
 size_t ndDNSHintCache::Purge(void)
 {
-    unique_lock<mutex> ul(lock);
+    lock_guard<mutex> ul(lock);
     size_t purged = 0, remaining = 0;
 
     nd_dns_ar::iterator i = map_ar.begin();
@@ -291,7 +291,7 @@ void ndDNSHintCache::Load(void)
 
     if (fgets(header, sizeof(header), hf) == NULL) { fclose(hf); return; }
 
-    unique_lock<mutex> ul(lock);
+    lock_guard<mutex> ul(lock);
 
     while (! feof(hf)) {
         line++;
@@ -339,7 +339,7 @@ void ndDNSHintCache::Save(void)
 
     if (! (hf = fopen(filename.c_str(), "w"))) return;
 
-    unique_lock<mutex> ul(lock);
+    lock_guard<mutex> ul(lock);
 
     fprintf(hf, "\"host\",\"addr_digest\",\"ttl\"\n");
 

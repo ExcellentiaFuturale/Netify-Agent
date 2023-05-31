@@ -74,7 +74,7 @@ public:
     nd_cat_id_t ResolveTag(ndCategoryType type, unsigned id, string &tag);
 
     bool GetTagIndex(ndCategoryType type, ndCategory::index_tag &index) {
-        unique_lock<mutex> ul(lock);
+        lock_guard<mutex> ul(lock);
 
         auto it = categories.find(type);
         if (it == categories.end()) return false;

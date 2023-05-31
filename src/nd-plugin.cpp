@@ -497,33 +497,9 @@ ndPluginLoader::~ndPluginLoader()
     }
 }
 
-ndPluginManager::~ndPluginManager()
-{
-    unique_lock<mutex> ul(lock);
-
-    for (auto &p : processors)
-        p.second->GetPlugin()->Terminate();
-
-    for (auto &p : processors) {
-        delete p.second->GetPlugin();
-        delete p.second;
-    }
-
-    for (auto &p : sinks)
-        p.second->GetPlugin()->Terminate();
-
-    for (auto &p : sinks) {
-        delete p.second->GetPlugin();
-        delete p.second;
-    }
-
-    processors.clear();
-    sinks.clear();
-}
-
 void ndPluginManager::Load(ndPlugin::Type type, bool create)
 {
-    unique_lock<mutex> ul(lock);
+    lock_guard<mutex> ul(lock);
 
     for (auto &t : ndPlugin::types) {
         if (type != ndPlugin::TYPE_BASE && type != t.first)
@@ -591,7 +567,7 @@ void ndPluginManager::Load(ndPlugin::Type type, bool create)
 
 bool ndPluginManager::Create(ndPlugin::Type type)
 {
-    unique_lock<mutex> ul(lock);
+    lock_guard<mutex> ul(lock);
 
     for (auto &t : ndPlugin::types) {
         if (type != ndPlugin::TYPE_BASE && type != t.first)
@@ -629,10 +605,63 @@ bool ndPluginManager::Create(ndPlugin::Type type)
     return false;
 }
 
-bool ndPluginManager::Reap(ndPlugin::Type type)
+size_t ndPluginManager::Terminate(ndPlugin::Type type)
 {
     size_t count = 0;
-    unique_lock<mutex> ul(lock);
+
+    if (type == ndPlugin::TYPE_BASE ||
+        type == ndPlugin::TYPE_PROC) {
+        for (auto &p : processors) {
+            count++;
+            p.second->GetPlugin()->Terminate();
+        }
+    }
+
+    if (type == ndPlugin::TYPE_BASE ||
+        type == ndPlugin::TYPE_SINK) {
+        for (auto &p : sinks) {
+            count++;
+            p.second->GetPlugin()->Terminate();
+        }
+    }
+
+    return count;
+}
+
+void ndPluginManager::Destroy(ndPlugin::Type type)
+{
+    lock_guard<mutex> ul(lock);
+
+    if (type == ndPlugin::TYPE_BASE ||
+        type == ndPlugin::TYPE_PROC) {
+        for (auto &p : processors)
+            p.second->GetPlugin()->Terminate();
+
+        for (auto &p : processors) {
+            delete p.second->GetPlugin();
+            delete p.second;
+        }
+
+        processors.clear();
+    }
+
+    if (type == ndPlugin::TYPE_BASE ||
+        type == ndPlugin::TYPE_SINK) {
+        for (auto &p : sinks)
+            p.second->GetPlugin()->Terminate();
+
+        for (auto &p : sinks) {
+            delete p.second->GetPlugin();
+            delete p.second;
+        }
+
+        sinks.clear();
+    }
+}
+
+size_t ndPluginManager::Reap(ndPlugin::Type type)
+{
+    size_t count = 0;
 
     for (auto &t : ndPlugin::types) {
         if (type != ndPlugin::TYPE_BASE && type != t.first)
@@ -662,10 +691,12 @@ bool ndPluginManager::Reap(ndPlugin::Type type)
                 continue;
             }
 
-            nd_printf("Plugin exited abnormally: %s: %s\n",
+            nd_printf("Plugin has terminated: %s: %s\n",
                 p->second->GetTag().c_str(),
                 p->second->GetObjectName().c_str()
             );
+
+            lock_guard<mutex> ul(lock);
 
             delete p->second->GetPlugin();
             delete p->second;
@@ -675,13 +706,13 @@ bool ndPluginManager::Reap(ndPlugin::Type type)
         }
     }
 
-    return (count > 0);
+    return count;
 }
 
 void ndPluginManager::BroadcastEvent(ndPlugin::Type type,
     ndPlugin::Event event, void *param)
 {
-    unique_lock<mutex> ul(lock);
+    lock_guard<mutex> ul(lock);
 
     for (auto &t : ndPlugin::types) {
         if (type != ndPlugin::TYPE_BASE && type != t.first)
@@ -711,7 +742,7 @@ void ndPluginManager::BroadcastEvent(ndPlugin::Type type,
 void ndPluginManager::BroadcastSinkPayload(
     ndPluginSinkPayload *payload)
 {
-    unique_lock<mutex> ul(lock);
+    lock_guard<mutex> ul(lock);
 
     if (sinks.empty()) {
         delete payload;
@@ -736,7 +767,7 @@ void ndPluginManager::BroadcastSinkPayload(
 bool ndPluginManager::DispatchSinkPayload(const string &target,
     ndPluginSinkPayload *payload)
 {
-    unique_lock<mutex> ul(lock);
+    lock_guard<mutex> ul(lock);
 
     auto p = sinks.find(target);
 
@@ -751,7 +782,7 @@ bool ndPluginManager::DispatchSinkPayload(const string &target,
 void ndPluginManager::BroadcastProcessorEvent(
     ndPluginProcessor::Event event, ndFlowMap *flow_map)
 {
-    unique_lock<mutex> ul(lock);
+    lock_guard<mutex> ul(lock);
 
     for (auto &p : processors) {
         reinterpret_cast<ndPluginProcessor *>(
@@ -764,7 +795,7 @@ void ndPluginManager::BroadcastProcessorEvent(
 void ndPluginManager::BroadcastProcessorEvent(
     ndPluginProcessor::Event event, nd_flow_ptr& flow)
 {
-    unique_lock<mutex> ul(lock);
+    lock_guard<mutex> ul(lock);
 
     for (auto &p : processors) {
         reinterpret_cast<ndPluginProcessor *>(
@@ -777,7 +808,7 @@ void ndPluginManager::BroadcastProcessorEvent(
 void ndPluginManager::BroadcastProcessorEvent(
     ndPluginProcessor::Event event, ndInterfaces *interfaces)
 {
-    unique_lock<mutex> ul(lock);
+    lock_guard<mutex> ul(lock);
 
     for (auto &p : processors) {
         reinterpret_cast<ndPluginProcessor *>(
@@ -791,7 +822,7 @@ void ndPluginManager::BroadcastProcessorEvent(
     ndPluginProcessor::Event event,
     const string &iface, ndPacketStats *stats)
 {
-    unique_lock<mutex> ul(lock);
+    lock_guard<mutex> ul(lock);
 
     for (auto &p : processors) {
         reinterpret_cast<ndPluginProcessor *>(
@@ -804,7 +835,7 @@ void ndPluginManager::BroadcastProcessorEvent(
 void ndPluginManager::BroadcastProcessorEvent(
     ndPluginProcessor::Event event, ndPacketStats *stats)
 {
-    unique_lock<mutex> ul(lock);
+    lock_guard<mutex> ul(lock);
 
     for (auto &p : processors) {
         reinterpret_cast<ndPluginProcessor *>(
@@ -817,7 +848,7 @@ void ndPluginManager::BroadcastProcessorEvent(
 void ndPluginManager::BroadcastProcessorEvent(
     ndPluginProcessor::Event event, ndInstanceStatus *status)
 {
-    unique_lock<mutex> ul(lock);
+    lock_guard<mutex> ul(lock);
 
     for (auto &p : processors) {
         reinterpret_cast<ndPluginProcessor *>(
@@ -830,7 +861,7 @@ void ndPluginManager::BroadcastProcessorEvent(
 void ndPluginManager::BroadcastProcessorEvent(
     ndPluginProcessor::Event event)
 {
-    unique_lock<mutex> ul(lock);
+    lock_guard<mutex> ul(lock);
 
     for (auto &p : processors) {
         reinterpret_cast<ndPluginProcessor *>(
@@ -842,8 +873,6 @@ void ndPluginManager::BroadcastProcessorEvent(
 
 void ndPluginManager::DumpVersions(ndPlugin::Type type)
 {
-    unique_lock<mutex> ul(lock);
-
     for (auto &t : ndPlugin::types) {
         if (type != ndPlugin::TYPE_BASE && type != t.first)
             continue;
@@ -863,6 +892,8 @@ void ndPluginManager::DumpVersions(ndPlugin::Type type)
             );
             break;
         }
+
+        lock_guard<mutex> ul(lock);
 
         for (auto &p : *mp) {
             string version;

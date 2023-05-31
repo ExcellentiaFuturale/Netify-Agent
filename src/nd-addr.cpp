@@ -507,7 +507,7 @@ bool ndAddrType::AddAddress(
             ifname.c_str() : "(global)", addr.GetString().c_str()
     );
 #endif
-    unique_lock<mutex> ul(lock);
+    lock_guard<mutex> ul(lock);
 
     try {
         if (addr.IsEthernet()) {
@@ -580,7 +580,7 @@ bool ndAddrType::RemoveAddress(
             ifname.c_str() : "(global)", addr.GetString().c_str()
     );
 #endif
-    unique_lock<mutex> ul(lock);
+    lock_guard<mutex> ul(lock);
 
     try {
         if (addr.IsEthernet()) {
@@ -693,7 +693,7 @@ void ndAddrType::Classify(ndAddr::Type &type, const ndAddr &addr)
         }
 #endif
         if (ether_reserved.size()) {
-            unique_lock<mutex> ul(lock);
+            lock_guard<mutex> ul(lock);
 
             auto it = ether_reserved.find(addr.GetString());
             if (it != ether_reserved.end()) {
@@ -717,7 +717,7 @@ void ndAddrType::Classify(ndAddr::Type &type, const ndAddr &addr)
             ndRadixNetworkEntry<_ND_ADDR_BITSv4> entry;
             if (ndRadixNetworkEntry<_ND_ADDR_BITSv4>::CreateQuery(entry, addr)) {
 
-                unique_lock<mutex> ul(lock);
+                lock_guard<mutex> ul(lock);
 
                 nd_rn4_atype::iterator it;
                 if ((it = iface.second.longest_match(entry))
@@ -733,7 +733,7 @@ void ndAddrType::Classify(ndAddr::Type &type, const ndAddr &addr)
         ndRadixNetworkEntry<_ND_ADDR_BITSv4> entry;
         if (ndRadixNetworkEntry<_ND_ADDR_BITSv4>::CreateQuery(entry, addr)) {
 
-            unique_lock<mutex> ul(lock);
+            lock_guard<mutex> ul(lock);
 
             nd_rn4_atype::iterator it;
             if ((it = ipv4_reserved.longest_match(entry))
@@ -758,7 +758,7 @@ void ndAddrType::Classify(ndAddr::Type &type, const ndAddr &addr)
             ndRadixNetworkEntry<_ND_ADDR_BITSv6> entry;
             if (ndRadixNetworkEntry<_ND_ADDR_BITSv6>::CreateQuery(entry, addr)) {
 
-                unique_lock<mutex> ul(lock);
+                lock_guard<mutex> ul(lock);
 
                 nd_rn6_atype::iterator it;
                 if ((it = iface.second.longest_match(entry))
@@ -774,7 +774,7 @@ void ndAddrType::Classify(ndAddr::Type &type, const ndAddr &addr)
         ndRadixNetworkEntry<_ND_ADDR_BITSv6> entry;
         if (ndRadixNetworkEntry<_ND_ADDR_BITSv6>::CreateQuery(entry, addr)) {
 
-            unique_lock<mutex> ul(lock);
+            lock_guard<mutex> ul(lock);
 
             nd_rn6_atype::iterator it;
             if ((it = ipv6_reserved.longest_match(entry))

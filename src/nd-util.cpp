@@ -165,7 +165,7 @@ void nd_printf(const char *format, va_list ap)
 {
     if (ndGC_QUIET) return;
 
-    unique_lock<mutex> lock(nd_printf_mutex);
+    lock_guard<mutex> lock(nd_printf_mutex);
 
     vsyslog(LOG_DAEMON | LOG_INFO, format, ap);
 }
@@ -184,14 +184,14 @@ void nd_dprintf(const char *format, va_list ap)
 {
     if (! ndGC_DEBUG) return;
 
-    unique_lock<mutex> lock(nd_printf_mutex);
+    lock_guard<mutex> lock(nd_printf_mutex);
 
     vfprintf(stderr, format, ap);
 }
 
 void nd_flow_printf(const char *format, ...)
 {
-    unique_lock<mutex> lock(nd_printf_mutex);
+    lock_guard<mutex> lock(nd_printf_mutex);
 
     va_list ap;
     va_start(ap, format);
@@ -206,7 +206,7 @@ void nd_ndpi_debug_printf(uint32_t protocol, void *ndpi,
 {
     if (ndGC_DEBUG && (ndGC_DEBUG_NDPI || level == NDPI_LOG_ERROR)) {
 
-        unique_lock<mutex> lock(nd_printf_mutex);
+        lock_guard<mutex> lock(nd_printf_mutex);
 
         va_list ap;
         va_start(ap, format);

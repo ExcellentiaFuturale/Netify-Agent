@@ -198,7 +198,9 @@ public:
 
     void Terminate(void) {
         if (ShouldTerminate()) {
-            nd_dprintf("%s: Forcing termination...\n", tag.c_str());
+            nd_dprintf(
+                "%s: Forcing termination...\n", tag.c_str()
+            );
             terminate_force = true;
         }
         ndThread::Terminate();
