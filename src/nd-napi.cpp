@@ -225,9 +225,9 @@ static int ndNetifyApiThread_progress(void *user,
 
 ndNetifyApiThread::ndNetifyApiThread()
     : ndThread("nap-api-update"),
-    ch(NULL), headers_tx(NULL)
+    ch(nullptr), headers_tx(nullptr)
 {
-    if ((ch = curl_easy_init()) == NULL)
+    if ((ch = curl_easy_init()) == nullptr)
         throw ndThreadException("curl_easy_init");
 
     curl_easy_setopt(ch, CURLOPT_MAXREDIRS, 3L);
@@ -294,14 +294,14 @@ ndNetifyApiThread::~ndNetifyApiThread()
 
     Join();
 
-    if (ch != NULL) {
+    if (ch != nullptr) {
         curl_easy_cleanup(ch);
-        ch = NULL;
+        ch = nullptr;
     }
 
-    if (headers_tx != NULL) {
+    if (headers_tx != nullptr) {
         curl_slist_free_all(headers_tx);
-        headers_tx = NULL;
+        headers_tx = nullptr;
     }
 }
 
@@ -352,7 +352,7 @@ unsigned ndNetifyApiThread::Get(const string &url)
         CURLINFO_RESPONSE_CODE, &http_rc)) != CURLE_OK)
         throw curl_rc;
 
-    char *content_type = NULL;
+    char *content_type = nullptr;
     curl_easy_getinfo(ch, CURLINFO_CONTENT_TYPE, &content_type);
 
     double content_length = 0.0f;
@@ -363,12 +363,22 @@ unsigned ndNetifyApiThread::Get(const string &url)
 #endif
 
     if (http_rc == 200) {
-        if (content_type == NULL) throw string("Content-type is NULL");
+        if (content_type == nullptr) throw string("Content-type is nullptr");
 
         if (content_length == 0.0f) throw string("Zero-length content length");
     }
 
     return (unsigned)http_rc;
+}
+
+void *ndNetifyApiProvision::Entry(void)
+{
+    return nullptr;
+}
+
+void *ndNetifyApiRefreshApplications::Entry(void)
+{
+    return nullptr;
 }
 
 void *ndNetifyApiRefreshCategories::Entry(void)
@@ -429,7 +439,7 @@ void *ndNetifyApiRefreshCategories::Entry(void)
             if (headers_rx.find("retry-after") != headers_rx.end()) {
                 string retry_value = headers_rx["retry-after"];
                 if (isdigit(retry_value[0]))
-                    ttl = (unsigned)strtoul(retry_value.c_str(), NULL, 0);
+                    ttl = (unsigned)strtoul(retry_value.c_str(), nullptr, 0);
             }
 
             if (ttl == 0) ttl = _ND_NAPI_RETRY_TTL;
@@ -494,7 +504,7 @@ void *ndNetifyApiRefreshCategories::Entry(void)
         }
     }
 
-    return NULL;
+    return nullptr;
 }
 
 // vi: expandtab shiftwidth=4 softtabstop=4 tabstop=4

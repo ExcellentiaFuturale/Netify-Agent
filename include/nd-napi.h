@@ -47,6 +47,26 @@ protected:
     string body_data;
 };
 
+class ndNetifyApiProvision: public ndNetifyApiThread
+{
+public:
+    ndNetifyApiProvision() : ndNetifyApiThread() { }
+
+    virtual void *Entry(void);
+
+protected:
+};
+
+class ndNetifyApiRefreshApplications: public ndNetifyApiThread
+{
+public:
+    ndNetifyApiRefreshApplications() : ndNetifyApiThread() { }
+
+    virtual void *Entry(void);
+
+protected:
+};
+
 class ndNetifyApiRefreshCategories : public ndNetifyApiThread
 {
 public:
