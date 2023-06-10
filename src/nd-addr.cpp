@@ -480,6 +480,7 @@ ndAddrType::ndAddrType()
     AddAddress(ndAddr::atRESERVED, "172.16.0.0/12");
     AddAddress(ndAddr::atRESERVED, "192.168.0.0/16");
 
+    AddAddress(ndAddr::atRESERVED, "::1/128");
     AddAddress(ndAddr::atRESERVED, "fc00::/7");
     AddAddress(ndAddr::atRESERVED, "fd00::/8");
     AddAddress(ndAddr::atRESERVED, "fe80::/10");
@@ -704,7 +705,7 @@ void ndAddrType::Classify(ndAddr::Type &type, const ndAddr &addr)
     }
     else if (addr.IsIPv4()) {
         if (addr.addr.in.sin_addr.s_addr == 0) {
-            type = ndAddr::atNONE;
+            type = ndAddr::atLOCAL;
             return;
         }
 
@@ -746,14 +747,6 @@ void ndAddrType::Classify(ndAddr::Type &type, const ndAddr &addr)
         }
     }
     else if (addr.IsIPv6()) {
-        if (addr.addr.in6.sin6_addr.s6_addr32[0] == 0
-            && addr.addr.in6.sin6_addr.s6_addr32[1] == 0
-            && addr.addr.in6.sin6_addr.s6_addr32[2] == 0
-            && addr.addr.in6.sin6_addr.s6_addr32[3]) {
-            type = ndAddr::atNONE;
-            return;
-        }
-
         for (auto &iface : ipv6_iface) {
             ndRadixNetworkEntry<_ND_ADDR_BITSv6> entry;
             if (ndRadixNetworkEntry<_ND_ADDR_BITSv6>::CreateQuery(entry, addr)) {

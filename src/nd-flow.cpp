@@ -44,8 +44,6 @@
 
 #include <arpa/inet.h>
 
-#include <netdb.h>
-
 #include <net/if.h>
 #include <net/if_arp.h>
 #if defined(__linux__)
@@ -524,19 +522,8 @@ void ndFlow::Print(uint8_t pflags) const
             '-')
         << " ";
 
-
     string proto;
-    struct protoent *pe = getprotobynumber(ip_protocol);
-
-    if (pe == nullptr || pe->p_name == nullptr)
-        proto = to_string(ip_protocol);
-    else {
-        proto = pe->p_name;
-        transform(proto.begin(), proto.end(), proto.begin(),
-            [](unsigned char c){ return toupper(c); }
-        );
-    }
-
+    nd_get_ip_protocol_name(ip_protocol, proto);
     dls << proto << " ";
 
     switch (lower_map) {

@@ -1434,4 +1434,46 @@ void ndTimer::Set(const struct itimerspec &itspec)
     }
 }
 
+void nd_get_ip_protocol_name(int protocol, string &result)
+{
+    static mutex lock;
+    static unordered_map<int, string> cache;
+
+    lock_guard<mutex> ul(lock);
+
+    auto it = cache.find(protocol);
+    if (it != cache.end()) {
+        result = it->second;
+        return;
+    }
+
+#define _ND_GET_PROTO_BUFSIZ    1024
+    uint8_t buffer[_ND_GET_PROTO_BUFSIZ];
+    struct protoent pe_buffer, *pe_result;
+    int rc = getprotobynumber_r(protocol, &pe_buffer,
+        (char *)buffer, _ND_GET_PROTO_BUFSIZ, &pe_result);
+
+    if (rc == ENOENT) {
+        result = to_string(protocol);
+        return;
+    }
+    else if (rc == 0) {
+        if (pe_result->p_aliases != nullptr &&
+            pe_result->p_aliases[0] != nullptr)
+            result = pe_result->p_aliases[0];
+        else {
+            result = pe_result->p_name;
+            transform(result.begin(), result.end(), result.begin(),
+                [](unsigned char c){ return toupper(c); }
+            );
+        }
+        cache.insert(make_pair(protocol, result));
+        return;
+    }
+
+    throw ndSystemException(
+        __PRETTY_FUNCTION__, "getprotobynumber_r", errno
+    );
+}
+
 // vi: expandtab shiftwidth=4 softtabstop=4 tabstop=4

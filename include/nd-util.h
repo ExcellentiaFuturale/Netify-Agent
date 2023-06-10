@@ -216,5 +216,7 @@ protected:
     timer_t id;
 };
 
+void nd_get_ip_protocol_name(int protocol, string &result);
+
 #endif // _ND_UTIL_H
 // vi: expandtab shiftwidth=4 softtabstop=4 tabstop=4
