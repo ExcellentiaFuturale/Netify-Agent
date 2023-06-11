@@ -363,7 +363,8 @@ public:
     };
 
     template <class T>
-    void Encode(T &output, uint8_t encode_includes = ENCODE_ALL) const {
+    void Encode(T &output, const ndFlowStats &stats,
+        uint8_t encode_includes = ENCODE_ALL) const {
         string _other_type = "unknown";
         string _lower_mac = "local_mac", _upper_mac = "other_mac";
         string _lower_ip = "local_ip", _upper_ip = "other_ip";
