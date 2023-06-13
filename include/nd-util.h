@@ -152,7 +152,8 @@ int nd_dir_exists(const string &path);
 
 void nd_uptime(time_t ut, string &uptime);
 
-int nd_functions_exec(const string &func, string &output);
+int nd_functions_exec(
+    const string &func, const string &arg, string &output);
 
 void nd_os_detect(string &os);
 
@@ -217,6 +218,8 @@ protected:
 };
 
 void nd_get_ip_protocol_name(int protocol, string &result);
+
+int nd_glob(const string &pattern, vector<string> &results);
 
 #endif // _ND_UTIL_H
 // vi: expandtab shiftwidth=4 softtabstop=4 tabstop=4

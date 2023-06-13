@@ -285,11 +285,14 @@ auto_detect_options()
 restart_netifyd()
 {
     case "$(detect_os)" in
+        centos)
+            systemctl try-restart netifyd
+        ;;
         clearos)
-            systemctl restart netifyd
+            systemctl try-restart netifyd
         ;;
         nethserver)
-            systemctl restart netifyd
+            systemctl try-restart netifyd
         ;;
         freebsd)
             @sysconfdir@/rc.d/@PACKAGE_TARNAME@ restart
@@ -306,19 +309,17 @@ restart_netifyd()
     esac
 }
 
-config_enable_sink()
+config_enable_plugin()
 {
-    if grep -E -i -q '^enable_sink = (no|0|false)' $NETIFYD_CONF; then
-        sed -i -e 's/^enable_sink.*/enable_sink = yes/' $NETIFYD_CONF
-        restart_netifyd
+    if grep -E -i -q '^enable = (no|0|false)' $1; then
+        sed -i -e 's/^enable.*/enable = yes/' $1
     fi
 }
 
-config_disable_sink()
+config_disable_plugin()
 {
-    if grep -E -i -q '^enable_sink = (yes|1|true)' $NETIFYD_CONF; then
-        sed -i -e 's/^enable_sink.*/enable_sink = no/' $NETIFYD_CONF
-        restart_netifyd
+    if grep -E -i -q '^enable = (yes|1|true)' $1; then
+        sed -i -e 's/^enable.*/enable = no/' $1
     fi
 }
 

@@ -65,6 +65,7 @@
 #include <grp.h>
 #include <libgen.h>
 #include <dirent.h>
+#include <glob.h>
 
 #include <arpa/inet.h>
 #include <netdb.h>
@@ -1047,10 +1048,14 @@ void nd_uptime(time_t ut, string &uptime)
     uptime.assign(os.str());
 }
 
-int nd_functions_exec(const string &func, string &output)
+int nd_functions_exec(
+    const string &func, const string &arg, string &output)
 {
     ostringstream os;
-    os << "sh -c \". " << ND_DATADIR << "/functions.sh && " << func << "\" 2>&1";
+    os << "sh -c \". " << ND_DATADIR <<
+        "/functions.sh && " << func;
+    if (! arg.empty()) os << " " << arg;
+    os << "\" 2>&1";
 
     int rc = -1;
     FILE *ph = popen(os.str().c_str(), "r");
@@ -1074,7 +1079,7 @@ int nd_functions_exec(const string &func, string &output)
 void nd_os_detect(string &os)
 {
     string output;
-    int rc = nd_functions_exec("detect_os", output);
+    int rc = nd_functions_exec("detect_os", string(), output);
 
     if (rc == 0 && output.size()) {
         const char *ws = "\n";
@@ -1474,6 +1479,34 @@ void nd_get_ip_protocol_name(int protocol, string &result)
     throw ndSystemException(
         __PRETTY_FUNCTION__, "getprotobynumber_r", errno
     );
+}
+
+int nd_glob(const string &pattern, vector<string> &results)
+{
+    int rc;
+    glob_t gr = { 0 };
+    if ((rc = glob(pattern.c_str(), 0, NULL, &gr)) == 0) {
+        for (size_t i = 0; i < gr.gl_pathc; i++)
+            results.push_back(gr.gl_pathv[i]);
+        globfree(&gr);
+    }
+    else results.push_back(pattern);
+
+    switch (rc) {
+    case 0:
+        break;
+    case GLOB_NOSPACE:
+        rc = ENOMEM;
+        break;
+    case GLOB_NOMATCH:
+        rc = ENOENT;
+        break;
+    default:
+        rc = EINVAL;
+        break;
+    }
+
+    return rc;
 }
 
 // vi: expandtab shiftwidth=4 softtabstop=4 tabstop=4

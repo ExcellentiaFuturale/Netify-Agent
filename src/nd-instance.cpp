@@ -325,21 +325,29 @@ uint32_t ndInstance::InitializeConfig(int argc, char * const argv[])
         { "uuidgen", 0, 0, 'U' },
         { "verbose", 0, 0, 'v' },
         { "version", 0, 0, 'V' },
-#define _ND_LO_FORCE_RESET          1
+#define _ND_LO_ENABLE_PLUGIN        1
+#define _ND_LO_DISABLE_PLUGIN       2
+        { "enable-plugin", 1, 0, _ND_LO_ENABLE_PLUGIN },
+        { "disable-plugin", 1, 0, _ND_LO_DISABLE_PLUGIN },
+#define _ND_LO_ENABLE_SINK          3
+#define _ND_LO_DISABLE_SINK         4
+        { "enable-sink", 0, 0, _ND_LO_ENABLE_SINK },
+        { "disable-sink", 0, 0, _ND_LO_DISABLE_SINK },
+#define _ND_LO_FORCE_RESET          5
         { "force-reset", 0, 0, _ND_LO_FORCE_RESET },
-#define _ND_LO_CA_CAPTURE_BASE      2
-#define _ND_LO_CA_CONNTRACK         3
-#define _ND_LO_CA_DETECTION_BASE    4
-#define _ND_LO_CA_DETECTION_CORES   5
+#define _ND_LO_CA_CAPTURE_BASE      6
+#define _ND_LO_CA_CONNTRACK         7
+#define _ND_LO_CA_DETECTION_BASE    8
+#define _ND_LO_CA_DETECTION_CORES   9
         { "thread-capture-base", 1, 0, _ND_LO_CA_CAPTURE_BASE },
         { "thread-conntrack", 1, 0, _ND_LO_CA_CONNTRACK },
         { "thread-detection-base", 1, 0, _ND_LO_CA_DETECTION_BASE },
         { "thread-detection-cores", 1, 0, _ND_LO_CA_DETECTION_CORES },
-#define _ND_LO_DUMP_PROTOS          6
-#define _ND_LO_DUMP_APPS            7
-#define _ND_LO_DUMP_CAT             8
-#define _ND_LO_DUMP_CATS            9
-#define _ND_LO_DUMP_RISKS           10
+#define _ND_LO_DUMP_PROTOS          10
+#define _ND_LO_DUMP_APPS            11
+#define _ND_LO_DUMP_CAT             12
+#define _ND_LO_DUMP_CATS            13
+#define _ND_LO_DUMP_RISKS           14
         { "dump-all", 0, 0, 'P' },
         { "dump-protos", 0, 0, _ND_LO_DUMP_PROTOS },
         { "dump-protocols", 0, 0, _ND_LO_DUMP_PROTOS },
@@ -348,13 +356,13 @@ uint32_t ndInstance::InitializeConfig(int argc, char * const argv[])
         { "dump-category", 1, 0, _ND_LO_DUMP_CAT },
         { "dump-categories", 0, 0, _ND_LO_DUMP_CATS },
         { "dump-risks", 0, 0, _ND_LO_DUMP_RISKS },
-#define _ND_LO_DUMP_SORT_BY_TAG     11
+#define _ND_LO_DUMP_SORT_BY_TAG     15
         { "dump-sort-by-tag", 0, 0, _ND_LO_DUMP_SORT_BY_TAG },
-#define _ND_LO_DUMP_WITH_CATS       12
+#define _ND_LO_DUMP_WITH_CATS       16
         { "dump-with-categories", 0, 0, _ND_LO_DUMP_WITH_CATS },
-#define _ND_LO_EXPORT_APPS          13
+#define _ND_LO_EXPORT_APPS          17
         { "export-apps", 0, 0, _ND_LO_EXPORT_APPS },
-#define _ND_LO_LOOKUP_IP            14
+#define _ND_LO_LOOKUP_IP            18
         { "lookup-ip", 1, 0, _ND_LO_LOOKUP_IP },
 
         { NULL, 0, 0, 0 }
@@ -394,7 +402,8 @@ uint32_t ndInstance::InitializeConfig(int argc, char * const argv[])
 
     if (conf_filename != "/dev/null") {
         if (ndGC.Load(conf_filename) == false) {
-            fprintf(stderr, "Error while loading configuration: %s\n",
+            fprintf(stderr,
+                "Error while loading configuration: %s\n",
                 conf_filename.c_str()
             );
             return ndCR_Pack(
@@ -414,6 +423,17 @@ uint32_t ndInstance::InitializeConfig(int argc, char * const argv[])
 
         switch (rc) {
         case 0:
+            break;
+        case _ND_LO_ENABLE_PLUGIN:
+        case _ND_LO_DISABLE_PLUGIN:
+        case _ND_LO_ENABLE_SINK:
+        case _ND_LO_DISABLE_SINK:
+            return ndCR_Pack(
+                ndCR_DUMP_LIST,
+                (SetConfigOption(rc,
+                    (optarg) ? optarg : string()
+                )) ? 0 : 1
+            );
             break;
         case _ND_LO_FORCE_RESET:
             rc = ndGC.ForceReset();
@@ -836,6 +856,95 @@ bool ndInstance::Daemonize(void)
     return true;
 }
 
+bool ndInstance::SetConfigOption(int option, const string &arg)
+{
+    string func, output, filename(conf_filename);
+
+    switch (option) {
+    case _ND_LO_ENABLE_SINK:
+        fprintf(stdout, "Enabling Netify Cloud Sink.\n");
+        func = "config_enable_plugin";
+        filename = ndGC.path_plugins;
+        filename.append("/\?\?-netify-sink-mqtt.conf");
+        break;
+    case _ND_LO_ENABLE_PLUGIN:
+        func = "config_enable_plugin";
+        filename = ndGC.path_plugins;
+        filename.append("/\?\?-netify-");
+        filename.append(arg);
+        filename.append(".conf");
+        break;
+    case _ND_LO_DISABLE_SINK:
+        fprintf(stdout, "Disabling Netify Cloud Sink.\n");
+        func = "config_disable_plugin";
+        filename = ndGC.path_plugins;
+        filename.append("/\?\?-netify-sink-mqtt.conf");
+        break;
+    case _ND_LO_DISABLE_PLUGIN:
+        func = "config_disable_plugin";
+        filename = ndGC.path_plugins;
+        filename.append("/\?\?-netify-");
+        filename.append(arg);
+        filename.append(".conf");
+        break;
+    default:
+        fprintf(stderr,
+            "Unrecognized configuration option: %d\n", option);
+        return false;
+    }
+
+    int rc;
+    vector<string> files;
+
+    if ((rc = nd_glob(filename, files)) != 0) {
+        fprintf(stderr,
+            "Error locating configuration file: %s: %s\n",
+            filename.c_str(), strerror(rc)
+        );
+        return false;
+    }
+
+    for (string &file : files) {
+        rc = nd_functions_exec(func, file, output);
+        if (rc != 0) {
+            fprintf(stderr,
+                "Error while modifying configuration file.\n"
+                "Manually edit configuration file: %s\n",
+                filename.c_str()
+            );
+
+            if (ndGC_DEBUG)
+                fprintf(stderr, "%s", output.c_str());
+
+            return false;
+        }
+        else {
+            fprintf(stdout, "Configuration modified: %s\n",
+                filename.c_str()
+            );
+        }
+    }
+
+    if (files.size() && rc == 0) {
+        rc = nd_functions_exec("restart_netifyd", string(), output);
+        if (rc != 0) {
+            fprintf(stderr,
+                "Error while restarting agent.\n"
+                "A manual restart is required to apply changes.\n"
+            );
+
+            if (ndGC_DEBUG)
+                fprintf(stderr, "%s", output.c_str());
+
+            return false;
+        }
+        else
+            fprintf(stdout, "Configuration applied.\n");
+    }
+
+    return true;
+}
+
 bool ndInstance::DumpList(uint8_t type)
 {
     if (! (type & ndDUMP_TYPE_PROTOS)
@@ -1027,6 +1136,13 @@ void ndInstance::CommandLineHelp(bool version_only)
             "    Default: %s\n"
             "  --force-reset\n    Reset global sink configuration options.\n"
             "    Deletes: %s, %s\n"
+
+            "\nPlugin options:\n"
+            "  --enable-plugin <plugin>\n    Enable the loader for <plugin> and restart the Agent.\n"
+            "  --disable-plugin <plugin>\n    Disable the loader for <plugin> and restart the Agent.\n"
+            "  --enable-sink\n    Compatibility wrapper for: --enable-plugin sink-mqtt\n"
+            "  --disable-sink\n    Compatibility wrapper for: --disable-plugin sink-mqtt\n"
+
             "\nDump options:\n"
             "  --dump-sort-by-tag\n    Sort entries by tag.\n"
             "    Default: sort entries by ID.\n"

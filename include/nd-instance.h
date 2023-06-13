@@ -133,6 +133,7 @@ public:
         ndCR_LOOKUP_ADDR,
         ndCR_PROVISION_UUID,
         ndCR_SAVE_UUID_FAILURE,
+        ndCR_SET_CONFIG,
         ndCR_USAGE_OR_VERSION,
     };
 
@@ -179,6 +180,8 @@ public:
             1.9 // XXX: Deprecated, keep for compatibility
         );
     }
+
+    bool SetConfigOption(int option, const string &arg);
 
     bool DumpList(uint8_t type = ndDUMP_TYPE_ALL);
 

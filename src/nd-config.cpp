@@ -690,11 +690,11 @@ bool ndGlobalConfig::ForceReset(void)
     }
 
     string result;
-    int rc = nd_functions_exec("restart_netifyd", result);
+    int rc = nd_functions_exec("restart_netifyd", string(), result);
 
     if (rc != 0) {
         success = false;
-        fprintf(stderr, "Error while restarting service.\n"
+        fprintf(stderr, "Error while restarting agent.\n"
             "Manual restart is required for the reset to be completed.\n");
     }
 
