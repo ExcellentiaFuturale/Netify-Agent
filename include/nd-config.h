@@ -150,9 +150,11 @@ public:
     string path_config;
     string path_domains;
     string path_export_json;
+    string path_functions;
     string path_legacy_config;
     string path_pid_file;
     string path_plugins;
+    string path_shared_data;
     string path_state_persistent;
     string path_state_volatile;
     string path_uuid;

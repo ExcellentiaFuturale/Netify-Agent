@@ -1052,8 +1052,7 @@ int nd_functions_exec(
     const string &func, const string &arg, string &output)
 {
     ostringstream os;
-    os << "sh -c \". " << ND_DATADIR <<
-        "/functions.sh && " << func;
+    os << "sh -c \". " << ndGC.path_functions << " && " << func;
     if (! arg.empty()) os << " " << arg;
     os << "\" 2>&1";
 

@@ -86,8 +86,8 @@
 #define ND_PERSISTENT_STATEDIR  "/etc/netifyd"
 #endif
 
-#ifndef ND_DATADIR
-#define ND_DATADIR              "/usr/share/netifyd"
+#ifndef ND_SHARED_DATADIR
+#define ND_SHARED_DATADIR       "/usr/share/netifyd"
 #endif
 
 #ifndef ND_CONF_FILE_NAME
@@ -105,6 +105,9 @@
 
 #define ND_DOMAINS_BASE         "domains.d"
 #define ND_DOMAINS_PATH         ND_PERSISTENT_STATEDIR "/" ND_DOMAINS_BASE
+
+#define ND_FUNCTIONS_BASE       "functions.sh"
+#define ND_FUNCTIONS_PATH       ND_SHARED_DATADIR "/" ND_FUNCTIONS_BASE
 
 #define ND_JSON_DATA_CHUNKSIZ   4096
 #define ND_JSON_INDENT          4

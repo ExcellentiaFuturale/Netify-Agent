@@ -133,9 +133,11 @@ ndGlobalConfig::ndGlobalConfig() :
     path_cat_config(ND_CONF_CAT_PATH),
     path_config(ND_CONF_FILE_NAME),
     path_domains(ND_DOMAINS_PATH),
+    path_functions(ND_FUNCTIONS_PATH),
     path_legacy_config(ND_CONF_LEGACY_PATH),
     path_pid_file(ND_PID_FILE_NAME),
     path_plugins(ND_PLUGINS_PATH),
+    path_shared_data(ND_SHARED_DATADIR),
     path_state_persistent(ND_PERSISTENT_STATEDIR),
     path_state_volatile(ND_VOLATILE_STATEDIR),
     path_uuid(ND_AGENT_UUID_PATH),
@@ -287,6 +289,9 @@ bool ndGlobalConfig::Load(const string &filename)
 
     path_state_volatile = r->Get(
         "netifyd", "path_state_volatile", ND_VOLATILE_STATEDIR);
+
+    path_shared_data = r->Get(
+        "netifyd", "path_shared_data", ND_SHARED_DATADIR);
 
     UpdatePaths();
 
@@ -1232,6 +1237,9 @@ void ndGlobalConfig::UpdatePaths(void)
 
     path_domains =
         path_state_persistent + "/" + ND_DOMAINS_BASE;
+
+    path_functions =
+        path_shared_data + "/" + ND_FUNCTIONS_BASE;
 
     conf_vars.clear();
 
