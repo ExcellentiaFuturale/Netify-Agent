@@ -44,11 +44,7 @@
 
 #include <net/if.h>
 #include <net/if_arp.h>
-#if defined(__linux__)
 #include <linux/if_packet.h>
-#elif defined(__FreeBSD__)
-#include <net/if_dl.h>
-#endif
 
 #include <unistd.h>
 #include <pthread.h>
@@ -65,16 +61,14 @@
 
 #include <arpa/inet.h>
 
+#include <linux/netfilter.h>
+
 #ifdef _ND_USE_CONNTRACK
 #include <libnetfilter_conntrack/libnetfilter_conntrack.h>
 #endif
 
 #include <libmnl/libmnl.h>
 #include <libnetfilter_queue/libnetfilter_queue.h>
-
-#ifndef NF_ACCEPT
-#define NF_ACCEPT   1
-#endif
 
 #include <pcap/pcap.h>
 
