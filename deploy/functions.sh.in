@@ -92,22 +92,22 @@ load_nethserver()
     local ifcfg_sw="@sysconfdir@/shorewall/interfaces"
 
     if [ -f "$ifcfg_sw" ]; then
-        for ifn in $(grep '^loc[[:space:]]' $ifcfg_sw | awk '{ print $2 }'); do
+        for ifn in $(grep -E '^loc[[:space:]]' $ifcfg_sw | awk '{ print $2 }'); do
             [ -z "$ifn" ] && break
             options="$options -I $ifn"
         done
 
-        for ifn in $(grep "^blue[[:space:]]" $ifcfg_sw | awk '{ print $2 }'); do
+        for ifn in $(grep -E "^blue[[:space:]]" $ifcfg_sw | awk '{ print $2 }'); do
             [ -z "$ifn" ] && break
             options="$options -I $ifn"
         done
 
-        for ifn in $(grep "^orang[[:space:]]" $ifcfg_sw | awk '{ print $2 }'); do
+        for ifn in $(grep -E "^orang[[:space:]]" $ifcfg_sw | awk '{ print $2 }'); do
             [ -z "$ifn" ] && break
             options="$options -I $ifn"
         done
 
-        for ifn in $(grep '^net[[:space:]]' $ifcfg_sw | awk '{ print $2 }'); do
+        for ifn in $(grep -E '^net[[:space:]]' $ifcfg_sw | awk '{ print $2 }'); do
             [ -z "$ifn" ] && break
             [ -f "@sysconfdir@/sysconfig/network-scripts/ifcfg-${ifn}" ] &&
                 . "@sysconfdir@/sysconfig/network-scripts/ifcfg-${ifn}"
@@ -194,28 +194,28 @@ load_modules()
 detect_os()
 {
     if [ -f /etc/version ]; then
-        if egrep -q '^UniFiSecurityGateway' /etc/version; then
+        if grep -E -q '^UniFiSecurityGateway' /etc/version; then
             echo "edgeos"
             return
         fi
     fi
 
     if [ -f /etc/os-release ]; then
-        if egrep -q '^NAME=UbiOS' /etc/os-release; then
+        if grep -E -q '^NAME=UbiOS' /etc/os-release; then
             echo "ubios"
             return
         fi
     fi
 
     if [ -f /etc/issue ]; then
-        if egrep -q '^Ubuntu' /etc/issue; then
+        if grep -E -q '^Ubuntu' /etc/issue; then
             echo "ubuntu"
             return
         fi
     fi
 
     if [ -f /etc/release ]; then
-        if egrep -q '^Endian ' /etc/release; then
+        if grep -E -q '^Endian ' /etc/release; then
             echo "endian"
             return
         fi
@@ -308,7 +308,7 @@ restart_netifyd()
 
 config_enable_sink()
 {
-    if egrep -i -q '^enable_sink = (no|0|false)' $NETIFYD_CONF; then
+    if grep -E -i -q '^enable_sink = (no|0|false)' $NETIFYD_CONF; then
         sed -i -e 's/^enable_sink.*/enable_sink = yes/' $NETIFYD_CONF
         restart_netifyd
     fi
@@ -316,7 +316,7 @@ config_enable_sink()
 
 config_disable_sink()
 {
-    if egrep -i -q '^enable_sink = (yes|1|true)' $NETIFYD_CONF; then
+    if grep -E -i -q '^enable_sink = (yes|1|true)' $NETIFYD_CONF; then
         sed -i -e 's/^enable_sink.*/enable_sink = no/' $NETIFYD_CONF
         restart_netifyd
     fi
