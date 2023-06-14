@@ -94,15 +94,15 @@ ndFlow::ndFlow(ndInterface &iface)
     detected_application_name(NULL),
     category { ND_CAT_UNKNOWN, ND_CAT_UNKNOWN, ND_CAT_UNKNOWN },
     ndpi_flow(NULL),
-    digest_lower{}, digest_mdata{},
-    dns_host_name{}, host_server_name{}, http{},
+    digest_lower{0}, digest_mdata{0},
+    dns_host_name{0}, host_server_name{0}, http{0},
     privacy_mask(0), origin(0), direction(0),
 #if defined(_ND_USE_CONNTRACK) && defined(_ND_WITH_CONNTRACK_MDATA)
     ct_id(0), ct_mark(0),
 #endif
     lower_type(ndAddr::atNONE), upper_type(ndAddr::atNONE),
     flags{},
-    gtp{},
+    gtp{0},
     risks{},
     ndpi_risk_score(0), ndpi_risk_score_client(0), ndpi_risk_score_server(0)
 {
@@ -125,7 +125,8 @@ ndFlow::ndFlow(const ndFlow &flow)
     detected_application_name(NULL),
     category { ND_CAT_UNKNOWN, ND_CAT_UNKNOWN, ND_CAT_UNKNOWN },
     ndpi_flow(NULL),
-    dns_host_name{}, host_server_name{}, http{},
+    digest_lower{0}, digest_mdata{0},
+    dns_host_name{0}, host_server_name{0}, http{0},
     privacy_mask(0), origin(0), direction(0),
 #if defined(_ND_USE_CONNTRACK) && defined(_ND_WITH_CONNTRACK_MDATA)
     ct_id(0), ct_mark(0),
@@ -133,7 +134,7 @@ ndFlow::ndFlow(const ndFlow &flow)
     lower_type(ndAddr::atNONE), upper_type(ndAddr::atNONE),
     flags{},
     gtp(flow.gtp),
-    risks{},
+    risks{0},
     ndpi_risk_score(0), ndpi_risk_score_client(0), ndpi_risk_score_server(0)
 {
     memcpy(digest_lower, flow.digest_lower, SHA1_DIGEST_LENGTH);
@@ -487,201 +488,209 @@ void ndFlow::Print(uint8_t pflags) const
 
     nd_output_lock();
 
-    dls << iface.ifname.c_str() << ": ";
+    try {
+        dls << iface.ifname.c_str() << ": ";
 
-    if ((pflags & PRINTF_HASHES)) {
-        for (unsigned i = 0; i < 5; i++) {
-            dls << setw(2) << setfill('0')
-                << hex << (int)digest_lower[i];
+        if ((pflags & PRINTF_HASHES)) {
+            for (unsigned i = 0; i < 5; i++) {
+                dls << setw(2) << setfill('0')
+                    << hex << (int)digest_lower[i];
+            }
+            dls << ":";
+            for (unsigned i = 0; i < 5; i++) {
+                dls << setw(2) << setfill('0')
+                    << hex << (int)digest_lower[i];
+            }
+            dls << " ";
         }
-        dls << ":";
-        for (unsigned i = 0; i < 5; i++) {
-            dls << setw(2) << setfill('0')
-                << hex << (int)digest_lower[i];
+
+        dls << setfill(' ') << dec
+            << ((iface.role == ndIR_LAN) ? 'i' : 'e')
+            << ((ip_version == 4) ? '4' : (ip_version == 6) ? '6' : '-')
+            << (flags.detection_init.load() ? 'p' : '-')
+            << (flags.detection_complete.load() ? 'c' : '-')
+            << (flags.detection_updated.load() ? 'u' : '-')
+            << (flags.detection_guessed.load() ? 'g' : '-')
+            << (flags.expiring.load() ? 'x' : '-')
+            << (flags.expired.load() ? 'X' : '-')
+            << (flags.dhc_hit.load() ? 'd' : '-')
+            << (flags.ip_nat.load() ? 'n' : '-')
+            << (flags.risk_checked.load() ? 'r' : '-')
+            << (flags.soft_dissector.load() ? 's' : '-')
+            << (flags.tcp_fin.load() ? 'f' : '-')
+            << (flags.tcp_fin_ack.load() ? 'a' : '-')
+            << ((privacy_mask & PRIVATE_LOWER) ? 'v' :
+                (privacy_mask & PRIVATE_UPPER) ? 'V' :
+                (privacy_mask & (PRIVATE_LOWER | PRIVATE_UPPER)) ? '?' :
+                '-')
+            << " ";
+
+        string proto;
+        nd_get_ip_protocol_name(ip_protocol, proto);
+        dls << proto << " ";
+
+        switch (lower_map) {
+        case LOWER_UNKNOWN:
+            dls << "[U";
+            break;
+        case LOWER_LOCAL:
+            dls << "[L";
+            break;
+        case LOWER_OTHER:
+            dls << "[O";
+            break;
         }
-        dls << " ";
+
+        char ot = '?';
+        switch (other_type) {
+        case OTHER_UNKNOWN:
+            ot = 'U';
+            break;
+        case OTHER_UNSUPPORTED:
+            ot = 'X';
+            break;
+        case OTHER_LOCAL:
+            ot = 'L';
+            break;
+        case OTHER_MULTICAST:
+            ot = 'M';
+            break;
+        case OTHER_BROADCAST:
+            ot = 'B';
+            break;
+        case OTHER_REMOTE:
+            ot = 'R';
+            break;
+        case OTHER_ERROR:
+            ot = 'E';
+            break;
+        }
+
+        if (lower_map == LOWER_OTHER)
+            dls << ot;
+
+        dls << "] ";
+
+        if ((pflags & PRINTF_MACS))
+            dls << lower_mac.GetString() << " ";
+
+        dls << lower_addr.GetString() << ":"
+            << lower_addr.GetPort() << " "
+            << ((origin == ORIGIN_LOWER || origin == ORIGIN_UNKNOWN) ?
+                '-' : '<')
+            << ((origin == ORIGIN_UNKNOWN) ? '?' : '-')
+            << ((origin == ORIGIN_UPPER || origin == ORIGIN_UNKNOWN) ?
+                '-' : '>')
+            << " ";
+
+        switch (lower_map) {
+        case LOWER_UNKNOWN:
+            dls << "[U";
+            break;
+        case LOWER_LOCAL:
+            dls << "[O";
+            break;
+        case LOWER_OTHER:
+            dls << "[L";
+            break;
+        }
+
+        if (lower_map == LOWER_LOCAL)
+            dls << ot;
+
+        dls << "] ";
+
+        if ((pflags & PRINTF_MACS))
+            dls << upper_mac.GetString() << " ";
+
+        dls << upper_addr.GetString() << ":"
+            << upper_addr.GetPort();
+
+        if ((pflags & PRINTF_METADATA) && flags.detection_init.load()) {
+            multiline = true;
+
+            dls << endl << setw(iface.ifname.size()) << " " << ": "
+                << detected_protocol_name
+                << ((detected_application_name != nullptr) ? "." : "")
+                << ((detected_application_name != nullptr) ?
+                    detected_application_name : "");
+
+            if (dns_host_name[0] != '\0' ||
+                host_server_name[0] != '\0') {
+                dls << endl << setw(iface.ifname.size()) << " " << ":";
+                if (dns_host_name[0] != '\0')
+                    dls << " D: " << dns_host_name;
+                if (host_server_name[0] != '\0' &&
+                    strcasecmp(dns_host_name, host_server_name))
+                    dls << " H: " << host_server_name;
+            }
+
+            if (HasMDNSDomainName()) {
+                dls << endl << setw(iface.ifname.size()) << " " << ":";
+                dls << " MDNS/DN: " << mdns.domain_name;
+            }
+
+            if (HasDhcpFingerprint() || HasDhcpClassIdent()) {
+                dls << endl << setw(iface.ifname.size()) << " " << ":";
+                if (HasDhcpFingerprint())
+                    dls << " DHCP/FP: " << dhcp.fingerprint;
+                if (HasDhcpClassIdent())
+                    dls << " DHCP/CI: " << dhcp.class_ident;
+            }
+
+            if (HasHttpUserAgent()) {
+                dls << endl << setw(iface.ifname.size()) << " " << ":";
+                dls << " HTTP/UA: " << http.user_agent;
+            }
+
+            if (HasHttpURL()) {
+                dls << endl << setw(iface.ifname.size()) << " " << ":";
+                dls << " URL: " << http.url;
+            }
+
+            if (HasSSHClientAgent() || HasSSHServerAgent()) {
+                dls << endl << setw(iface.ifname.size()) << " " << ":";
+                if (HasSSHClientAgent())
+                    dls << " SSH/CA: " << ssh.client_agent;
+                if (HasSSHServerAgent())
+                    dls << " SSH/CA: " << ssh.server_agent;
+            }
+
+            if (HasTLSClientSNI() || HasTLSServerCN()) {
+                dls << endl << setw(iface.ifname.size()) << " " << ":";
+                if (HasTLSClientSNI())
+                    dls << " SNI: " << ssl.client_sni;
+                if (HasTLSServerCN())
+                    dls << " CN: " << ssl.server_cn;
+            }
+
+            if (HasTLSIssuerDN() || HasTLSSubjectDN()) {
+                dls << endl << setw(iface.ifname.size()) << " " << ":";
+                if (HasTLSIssuerDN())
+                    dls << " IDN: " << ssl.issuer_dn;
+                if (HasTLSSubjectDN())
+                    dls << " SDN: " << ssl.subject_dn;
+            }
+        }
+
+        if ((pflags & PRINTF_STATS)) {
+            multiline = true;
+
+            dls << endl << setw(iface.ifname.size()) << " " << ": "
+                << "DP: " << (int)stats.detection_packets.load() << " "
+                << "TP: " << (int)stats.total_packets.load() << " "
+                << "TB: " << (int)stats.total_bytes.load();
+        }
+
+        if (multiline) dls << endl;
+        dls << endl;
     }
+    catch (exception &e) {
+        nd_output_unlock();
 
-    dls << setfill(' ') << dec
-        << ((iface.role == ndIR_LAN) ? 'i' : 'e')
-        << ((ip_version == 4) ? '4' : (ip_version == 6) ? '6' : '-')
-        << (flags.detection_init.load() ? 'p' : '-')
-        << (flags.detection_complete.load() ? 'c' : '-')
-        << (flags.detection_updated.load() ? 'u' : '-')
-        << (flags.detection_guessed.load() ? 'g' : '-')
-        << (flags.expiring.load() ? 'x' : '-')
-        << (flags.expired.load() ? 'X' : '-')
-        << (flags.dhc_hit.load() ? 'd' : '-')
-        << (flags.ip_nat.load() ? 'n' : '-')
-        << (flags.risk_checked.load() ? 'r' : '-')
-        << (flags.soft_dissector.load() ? 's' : '-')
-        << (flags.tcp_fin.load() ? 'f' : '-')
-        << (flags.tcp_fin_ack.load() ? 'a' : '-')
-        << ((privacy_mask & PRIVATE_LOWER) ? 'v' :
-            (privacy_mask & PRIVATE_UPPER) ? 'V' :
-            (privacy_mask & (PRIVATE_LOWER | PRIVATE_UPPER)) ? '?' :
-            '-')
-        << " ";
-
-    string proto;
-    nd_get_ip_protocol_name(ip_protocol, proto);
-    dls << proto << " ";
-
-    switch (lower_map) {
-    case LOWER_UNKNOWN:
-        dls << "[U";
-        break;
-    case LOWER_LOCAL:
-        dls << "[L";
-        break;
-    case LOWER_OTHER:
-        dls << "[O";
-        break;
+        nd_dprintf("exception caught printing flow: %s\n", e.what());
+        return;
     }
-
-    char ot = '?';
-    switch (other_type) {
-    case OTHER_UNKNOWN:
-        ot = 'U';
-        break;
-    case OTHER_UNSUPPORTED:
-        ot = 'X';
-        break;
-    case OTHER_LOCAL:
-        ot = 'L';
-        break;
-    case OTHER_MULTICAST:
-        ot = 'M';
-        break;
-    case OTHER_BROADCAST:
-        ot = 'B';
-        break;
-    case OTHER_REMOTE:
-        ot = 'R';
-        break;
-    case OTHER_ERROR:
-        ot = 'E';
-        break;
-    }
-
-    if (lower_map == LOWER_OTHER)
-        dls << ot;
-
-    dls << "] ";
-
-    if ((pflags & PRINTF_MACS))
-        dls << lower_mac.GetString() << " ";
-
-    dls << lower_addr.GetString() << ":"
-        << lower_addr.GetPort() << " "
-        << ((origin == ORIGIN_LOWER || origin == ORIGIN_UNKNOWN) ?
-            '-' : '<')
-        << ((origin == ORIGIN_UNKNOWN) ? '?' : '-')
-        << ((origin == ORIGIN_UPPER || origin == ORIGIN_UNKNOWN) ?
-            '-' : '>')
-        << " ";
-
-    switch (lower_map) {
-    case LOWER_UNKNOWN:
-        dls << "[U";
-        break;
-    case LOWER_LOCAL:
-        dls << "[O";
-        break;
-    case LOWER_OTHER:
-        dls << "[L";
-        break;
-    }
-
-    if (lower_map == LOWER_LOCAL)
-        dls << ot;
-
-    dls << "] ";
-
-    if ((pflags & PRINTF_MACS))
-        dls << upper_mac.GetString() << " ";
-
-    dls << upper_addr.GetString() << ":"
-        << upper_addr.GetPort();
-
-    if ((pflags & PRINTF_METADATA) && flags.detection_init.load()) {
-        multiline = true;
-
-        dls << endl << setw(iface.ifname.size()) << " " << ": "
-            << detected_protocol_name
-            << ((detected_application_name != nullptr) ? "." : "")
-            << ((detected_application_name != nullptr) ?
-                detected_application_name : "");
-
-        if (dns_host_name[0] != '\0' ||
-            host_server_name[0] != '\0') {
-            dls << endl << setw(iface.ifname.size()) << " " << ":";
-            if (dns_host_name[0] != '\0')
-                dls << " D: " << dns_host_name;
-            if (host_server_name[0] != '\0' &&
-                strcasecmp(dns_host_name, host_server_name))
-                dls << " H: " << host_server_name;
-        }
-
-        if (HasMDNSDomainName()) {
-            dls << endl << setw(iface.ifname.size()) << " " << ":";
-            dls << " MDNS/DN: " << mdns.domain_name;
-        }
-
-        if (HasDhcpFingerprint() || HasDhcpClassIdent()) {
-            dls << endl << setw(iface.ifname.size()) << " " << ":";
-            if (HasDhcpFingerprint())
-                dls << " DHCP/FP: " << dhcp.fingerprint;
-            if (HasDhcpClassIdent())
-                dls << " DHCP/CI: " << dhcp.class_ident;
-        }
-
-        if (HasHttpUserAgent()) {
-            dls << endl << setw(iface.ifname.size()) << " " << ":";
-            dls << " HTTP/UA: " << http.user_agent;
-        }
-
-        if (HasHttpURL()) {
-            dls << endl << setw(iface.ifname.size()) << " " << ":";
-            dls << " URL: " << http.url;
-        }
-
-        if (HasSSHClientAgent() || HasSSHServerAgent()) {
-            dls << endl << setw(iface.ifname.size()) << " " << ":";
-            if (HasSSHClientAgent())
-                dls << " SSH/CA: " << ssh.client_agent;
-            if (HasSSHServerAgent())
-                dls << " SSH/CA: " << ssh.server_agent;
-        }
-
-        if (HasTLSClientSNI() || HasTLSServerCN()) {
-            dls << endl << setw(iface.ifname.size()) << " " << ":";
-            if (HasTLSClientSNI())
-                dls << " SNI: " << ssl.client_sni;
-            if (HasTLSServerCN())
-                dls << " CN: " << ssl.server_cn;
-        }
-
-        if (HasTLSIssuerDN() || HasTLSSubjectDN()) {
-            dls << endl << setw(iface.ifname.size()) << " " << ":";
-            if (HasTLSIssuerDN())
-                dls << " IDN: " << ssl.issuer_dn;
-            if (HasTLSSubjectDN())
-                dls << " SDN: " << ssl.subject_dn;
-        }
-    }
-
-    if ((pflags & PRINTF_STATS)) {
-        multiline = true;
-
-        dls << endl << setw(iface.ifname.size()) << " " << ": "
-            << "DP: " << (int)stats.detection_packets.load() << " "
-            << "TP: " << (int)stats.total_packets.load() << " "
-            << "TB: " << (int)stats.total_bytes.load();
-    }
-
-    if (multiline) dls << endl;
-    dls << endl;
 
     nd_output_unlock();
 }

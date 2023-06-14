@@ -1468,11 +1468,9 @@ void nd_get_ip_protocol_name(int protocol, string &result)
     int rc = getprotobynumber_r(protocol, &pe_buffer,
         (char *)buffer, _ND_GET_PROTO_BUFSIZ, &pe_result);
 
-    if (rc == ENOENT) {
+    if (rc != 0 || pe_result == nullptr)
         result = to_string(protocol);
-        return;
-    }
-    else if (rc == 0) {
+    else {
         if (pe_result->p_aliases != nullptr &&
             pe_result->p_aliases[0] != nullptr)
             result = pe_result->p_aliases[0];
@@ -1485,10 +1483,6 @@ void nd_get_ip_protocol_name(int protocol, string &result)
         cache.insert(make_pair(protocol, result));
         return;
     }
-
-    throw ndSystemException(
-        __PRETTY_FUNCTION__, "getprotobynumber_r", errno
-    );
 }
 
 int nd_glob(const string &pattern, vector<string> &results)
