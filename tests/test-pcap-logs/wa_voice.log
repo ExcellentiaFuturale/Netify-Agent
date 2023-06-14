@@ -1,30 +1,112 @@
-lo: [i4------] DNS.netify.google 192.168.2.1:53 <-- 192.168.2.12:51431 H: www.google.com
-lo: [i4------] DNS.netify.whatsapp 192.168.2.1:53 <-- 192.168.2.12:60765 H: g.whatsapp.net
-lo: [i4------] Apple/Push.netify.apple-push 17.242.60.84:5223 <-- 192.168.2.12:49354
-lo: [i4------] Spotify.netify.spotify 192.168.2.1:57621 --> 192.168.2.255:57621
-lo: [i4-----s] XMPP.netify.meta-messaging 157.240.20.53:5222 <-- 192.168.2.12:49355
-lo: [i4------] DNS.netify.whatsapp 192.168.2.1:53 <-- 192.168.2.12:55296 H: media-mxp1-1.cdn.whatsapp.net
-lo: [i4------] HTTP/S.netify.whatsapp 31.13.86.51:443 <-- 192.168.2.12:50503 H: media-mxp1-1.cdn.whatsapp.net SSL C: media-mxp1-1.cdn.whatsapp.net
-lo: [i4-u----] HTTP/S.netify.whatsapp 31.13.86.51:443 <-- 192.168.2.12:50503 H: media-mxp1-1.cdn.whatsapp.net SSL C: media-mxp1-1.cdn.whatsapp.net
-lo: [i4------] Dropbox 192.168.2.1:17500 --> 192.168.2.255:17500
-lo: [i4------] HTTP/S.netify.apple 17.171.47.85:443 <-- 192.168.2.12:50502
-lo: [i4------] SSDP 169.254.162.244:50384 --> 239.255.255.250:1900 H: 239.255.255.250
-lo: [i4------] SSDP 192.168.2.1:50384 --> 239.255.255.250:1900 H: 239.255.255.250
-lo: [i4------] MDNS.netify.internal-network 192.168.2.12:5353 --> 224.0.0.251:5353 H: _raop._tcp.local
-lo: [i6------] MDNS.netify.internal-network fe80::414:409d:8afd:9f05:5353 --> ff02::fb:5353 H: _raop._tcp.local
-lo: [i4------] STUN.netify.meta-cdn 31.13.86.48:3478 <-- 192.168.2.12:56328
-lo: [i4------] STUN.netify.meta-cdn 185.60.216.51:3478 <-- 192.168.2.12:56328
-lo: [i4------] STUN.netify.meta-cdn 157.240.193.48:3478 <-- 192.168.2.12:56328
-lo: [i4------] STUN.netify.meta-cdn 179.60.192.48:3478 <-- 192.168.2.12:56328
-lo: [i4------] STUN.netify.meta-cdn 157.240.196.62:3478 <-- 192.168.2.12:56328
-lo: [i4------] SSDP 192.168.2.12:64716 --> 239.255.255.250:1900 H: 239.255.255.250
-lo: [i4------] DNS.netify.whatsapp 192.168.2.1:53 <-- 192.168.2.12:60549 H: pps.whatsapp.net
-lo: [i4------] HTTP/S.netify.whatsapp 157.240.20.52:443 <-- 192.168.2.12:50504 H: pps.whatsapp.net SSL C: pps.whatsapp.net
-lo: [i4-u----] HTTP/S.netify.whatsapp 157.240.20.52:443 <-- 192.168.2.12:50504 H: pps.whatsapp.net SSL C: pps.whatsapp.net
-lo: [i4------] DHCP 0.0.0.0:68 --> 255.255.255.255:67 H: lucas-imac
-lo: [i4------] STUN 91.252.56.51:32704 <-- 192.168.2.12:56328
-lo: [i4------] STUN 1.60.78.64:64282 --> 192.168.2.12:56328
-lo: [i4------] SSDP 192.168.2.12:50191 --> 239.255.255.250:1900 H: 239.255.255.250
-lo: [i4------] SSDP 192.168.2.12:57546 --> 239.255.255.250:1900 H: 239.255.255.250
-lo: [i4------] ICMP 91.252.56.51:0 <-- 192.168.2.12:0
-lo: [i4--g---] Unknown 169.254.162.244:49159 <-- 192.168.2.12:49352
+offline0: i4p-------r---- UDP [L] 192.168.2.1:53 <-- [OL] 192.168.2.12:51431
+        : DNS.netify.google
+        : H: www.google.com
+
+offline0: i4p-------r---- UDP [L] 192.168.2.1:53 <-- [OL] 192.168.2.12:60765
+        : DNS.netify.whatsapp
+        : H: g.whatsapp.net
+
+offline0: i4pc------r---- TCP [OR] 17.242.60.84:5223 <-- [L] 192.168.2.12:49354
+        : Apple/Push.netify.apple-push
+
+offline0: i4pc------r---- UDP [L] 192.168.2.1:57621 --> [OL] 192.168.2.255:57621
+        : Spotify.netify.spotify
+
+offline0: i4pc----d-r---- TCP [OR] 157.240.20.53:5222 <-- [L] 192.168.2.12:49355
+        : WhatsApp.netify.whatsapp
+        : D: chat.cdn.whatsapp.net
+
+offline0: i4p-------r---- UDP [L] 192.168.2.1:53 <-- [OL] 192.168.2.12:55296
+        : DNS.netify.whatsapp
+        : H: media-mxp1-1.cdn.whatsapp.net
+
+offline0: i4p-----d-r---- TCP [OR] 31.13.86.51:443 <-- [L] 192.168.2.12:50503
+        : HTTP/S.netify.whatsapp
+        : D: media-mxp1-1.cdn.whatsapp.net
+        : SNI: media-mxp1-1.cdn.whatsapp.net
+
+offline0: i4p-u---d-r---- TCP [OR] 31.13.86.51:443 <-- [L] 192.168.2.12:50503
+        : HTTP/S.netify.whatsapp
+        : D: media-mxp1-1.cdn.whatsapp.net
+        : SNI: media-mxp1-1.cdn.whatsapp.net
+
+offline0: i4pc------r---- UDP [L] 192.168.2.1:17500 --> [OL] 192.168.2.255:17500
+        : Dropbox
+
+offline0: i4pc------r-fa- TCP [OR] 17.171.47.85:443 <-- [L] 192.168.2.12:50502
+        : HTTP/S.netify.apple
+
+offline0: i4pc------r---- UDP [L] 169.254.162.244:50384 --> [OM] 239.255.255.250:1900
+        : SSDP
+        : H: 239.255.255.250
+
+offline0: i4pc------r---- UDP [L] 192.168.2.1:50384 --> [OM] 239.255.255.250:1900
+        : SSDP
+        : H: 239.255.255.250
+
+offline0: i4p-------r---- UDP [L] 192.168.2.12:5353 --> [OM] 224.0.0.251:5353
+        : MDNS.netify.internal-network
+        : H: _raop._tcp.local
+
+offline0: i6p-------r---- UDP [L] fe80::414:409d:8afd:9f05:5353 --> [OM] ff02::fb:5353
+        : MDNS.netify.internal-network
+        : H: _raop._tcp.local
+
+offline0: i4pc------r---- UDP [OR] 31.13.86.48:3478 <-- [L] 192.168.2.12:56328
+        : STUN.netify.meta-cdn
+
+offline0: i4pc------r---- UDP [OR] 185.60.216.51:3478 <-- [L] 192.168.2.12:56328
+        : STUN.netify.meta-cdn
+
+offline0: i4pc------r---- UDP [OR] 157.240.193.48:3478 <-- [L] 192.168.2.12:56328
+        : STUN.netify.meta-cdn
+
+offline0: i4pc------r---- UDP [OR] 179.60.192.48:3478 <-- [L] 192.168.2.12:56328
+        : STUN.netify.meta-cdn
+
+offline0: i4pc------r---- UDP [OR] 157.240.196.62:3478 <-- [L] 192.168.2.12:56328
+        : STUN.netify.meta-cdn
+
+offline0: i4pc------r---- UDP [L] 192.168.2.12:64716 --> [OM] 239.255.255.250:1900
+        : SSDP
+        : H: 239.255.255.250
+
+offline0: i4p-------r---- UDP [L] 192.168.2.1:53 <-- [OL] 192.168.2.12:60549
+        : DNS.netify.whatsapp
+        : H: pps.whatsapp.net
+
+offline0: i4p-----d-r-fa- TCP [OR] 157.240.20.52:443 <-- [L] 192.168.2.12:50504
+        : HTTP/S.netify.whatsapp
+        : D: mmx-ds.cdn.whatsapp.net H: pps.whatsapp.net
+        : SNI: pps.whatsapp.net
+
+offline0: i4p-u---d-r-fa- TCP [OR] 157.240.20.52:443 <-- [L] 192.168.2.12:50504
+        : HTTP/S.netify.whatsapp
+        : D: mmx-ds.cdn.whatsapp.net H: pps.whatsapp.net
+        : SNI: pps.whatsapp.net
+
+offline0: i4pc------r---- UDP [L] 0.0.0.0:68 --> [OB] 255.255.255.255:67
+        : DHCP
+        : H: lucas-imac
+        : DHCP/FP: 1,121,3,6,15,119,252,95,44,46
+
+offline0: i4pc------r---- UDP [OR] 91.252.56.51:32704 <-- [L] 192.168.2.12:56328
+        : STUN
+
+offline0: i4pc------r---- UDP [OR] 1.60.78.64:64282 --> [L] 192.168.2.12:56328
+        : STUN
+
+offline0: i4pc------r---- UDP [L] 192.168.2.12:50191 --> [OM] 239.255.255.250:1900
+        : SSDP
+        : H: 239.255.255.250
+
+offline0: i4pc------r---- UDP [L] 192.168.2.12:57546 --> [OM] 239.255.255.250:1900
+        : SSDP
+        : H: 239.255.255.250
+
+offline0: i4pc------r---- ICMP [OR] 91.252.56.51:0 <-- [L] 192.168.2.12:0
+        : ICMP
+
+offline0: i4pc-gx-------- TCP [L] 169.254.162.244:49159 <-- [OR] 192.168.2.12:49352
+        : Unknown
+

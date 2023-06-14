@@ -1,67 +1,337 @@
-lo: [i4------] HTTP/S 10.0.0.1:53674 --> 139.99.222.72:443 H: doh-2.seby.io SSL C: doh-2.seby.io
-lo: [i4-u----] HTTP/S 10.0.0.1:53674 --> 139.99.222.72:443 H: doh-2.seby.io SSL C: doh-2.seby.io
-lo: [i4------] HTTP/S 10.0.0.1:53676 --> 139.99.222.72:443 H: doh-2.seby.io SSL C: doh-2.seby.io
-lo: [i4-u----] HTTP/S 10.0.0.1:53676 --> 139.99.222.72:443 H: doh-2.seby.io SSL C: doh-2.seby.io
-lo: [i4------] HTTP/S 10.0.0.1:50614 --> 185.95.218.42:443 H: dns.digitale-gesellschaft.ch SSL C: dns.digitale-gesellschaft.ch
-lo: [i4-u----] HTTP/S 10.0.0.1:50614 --> 185.95.218.42:443 H: dns.digitale-gesellschaft.ch SSL C: dns.digitale-gesellschaft.ch
-lo: [i4------] HTTP/S 10.0.0.1:55962 --> 51.158.147.50:443 H: resolver-eu.lelux.fi SSL C: resolver-eu.lelux.fi
-lo: [i4-u----] HTTP/S 10.0.0.1:55962 --> 51.158.147.50:443 H: resolver-eu.lelux.fi SSL C: resolver-eu.lelux.fi
-lo: [i4------] HTTP/S 10.0.0.1:59404 --> 185.253.154.66:443 H: dnses.alekberg.net SSL C: dnses.alekberg.net
-lo: [i4-u----] HTTP/S 10.0.0.1:59404 --> 185.253.154.66:443 H: dnses.alekberg.net SSL C: dnses.alekberg.net
-lo: [i4------] HTTP/S 10.0.0.1:40938 --> 172.104.93.80:443 H: jp.tiar.app SSL C: jp.tiar.app
-lo: [i4-u----] HTTP/S 10.0.0.1:40938 --> 172.104.93.80:443 H: jp.tiar.app SSL C: jp.tiar.app
-lo: [i4------] TLS 10.0.0.1:37530 --> 167.114.220.125:453 H: dns1.dnscrypt.ca SSL C: dns1.dnscrypt.ca
-lo: [i4-u----] TLS 10.0.0.1:37530 --> 167.114.220.125:453 H: dns1.dnscrypt.ca SSL C: dns1.dnscrypt.ca
-lo: [i4------] HTTP/S 10.0.0.1:38186 --> 185.43.135.1:443 H: odvr.nic.cz SSL C: odvr.nic.cz
-lo: [i4------] HTTP/S.netify.quad9 9.9.9.10:443 <-- 10.0.0.1:51770 H: dns10.quad9.net SSL C: dns10.quad9.net
-lo: [i4-u----] HTTP/S.netify.quad9 9.9.9.10:443 <-- 10.0.0.1:51770 H: dns10.quad9.net SSL C: dns10.quad9.net
-lo: [i4------] HTTP/S 10.0.0.1:55322 --> 185.134.196.55:443 H: rdns.faelix.net SSL C: rdns.faelix.net
-lo: [i4-u----] HTTP/S 10.0.0.1:55322 --> 185.134.196.55:443 H: rdns.faelix.net SSL C: rdns.faelix.net
-lo: [i4------] HTTP/S 10.0.0.1:52386 --> 51.15.124.208:443 H: dnsnl.alekberg.net SSL C: dnsnl.alekberg.net
-lo: [i4-u----] HTTP/S 10.0.0.1:52386 --> 51.15.124.208:443 H: dnsnl.alekberg.net SSL C: dnsnl.alekberg.net
-lo: [i4------] HTTP/S 10.0.0.1:41720 --> 116.203.179.248:443 H: rumpelsepp.org SSL C: rumpelsepp.org
-lo: [i4-u----] HTTP/S 10.0.0.1:41720 --> 116.203.179.248:443 H: rumpelsepp.org SSL C: rumpelsepp.org
-lo: [i4------] HTTP/S 10.0.0.1:60026 --> 195.30.94.28:443 H: doh.ffmuc.net SSL C: doh.ffmuc.net
-lo: [i4-u----] HTTP/S 10.0.0.1:60026 --> 195.30.94.28:443 H: doh.ffmuc.net SSL C: doh.ffmuc.net
-lo: [i4------] HTTP/S 10.0.0.1:46658 --> 185.233.106.232:443 H: dns.dnshome.de SSL C: dns.dnshome.de
-lo: [i4-u----] HTTP/S 10.0.0.1:46658 --> 185.233.106.232:443 H: dns.dnshome.de SSL C: dns.dnshome.de
-lo: [i4------] TLS 10.0.0.1:36012 --> 149.56.228.45:453 H: dns2.dnscrypt.ca SSL C: dns2.dnscrypt.ca
-lo: [i4-u----] TLS 10.0.0.1:36012 --> 149.56.228.45:453 H: dns2.dnscrypt.ca SSL C: dns2.dnscrypt.ca
-lo: [i4------] HTTP/S 10.0.0.1:38018 --> 45.153.187.96:443 H: dnsse.alekberg.net SSL C: dnsse.alekberg.net
-lo: [i4-u----] HTTP/S 10.0.0.1:38018 --> 45.153.187.96:443 H: dnsse.alekberg.net SSL C: dnsse.alekberg.net
-lo: [i4------] HTTP/S 10.0.0.1:44640 --> 185.235.81.1:443 H: doh.dnslify.com SSL C: doh.dnslify.com
-lo: [i4-u----] HTTP/S 10.0.0.1:44640 --> 185.235.81.1:443 H: doh.dnslify.com SSL C: doh.dnslify.com
-lo: [i4------] HTTP/S 10.0.0.1:43106 --> 116.202.176.26:443 H: doh.libredns.gr SSL C: doh.libredns.gr
-lo: [i4-u----] HTTP/S 10.0.0.1:43106 --> 116.202.176.26:443 H: doh.libredns.gr SSL C: doh.libredns.gr
-lo: [i4------] HTTP/S 10.0.0.1:59026 --> 85.5.93.230:443 H: ibksturm.synology.me SSL C: ibksturm.synology.me
-lo: [i4-u----] HTTP/S 10.0.0.1:59026 --> 85.5.93.230:443 H: ibksturm.synology.me SSL C: ibksturm.synology.me
-lo: [i4------] HTTP/S 10.0.0.1:33724 --> 104.28.28.34:443 H: jp.tiarap.org SSL C: jp.tiarap.org
-lo: [i4-u----] HTTP/S 10.0.0.1:33724 --> 104.28.28.34:443 H: jp.tiarap.org SSL C: jp.tiarap.org
-lo: [i4------] HTTP/S.netify.cloudflare-dns 1.0.0.1:443 <-- 10.0.0.1:53802 H: dns.cloudflare.com SSL C: dns.cloudflare.com
-lo: [i4-u----] HTTP/S.netify.cloudflare-dns 1.0.0.1:443 <-- 10.0.0.1:53802 H: dns.cloudflare.com SSL C: dns.cloudflare.com
-lo: [i4------] HTTP/S.netify.nextdns 10.0.0.1:33338 --> 45.90.28.0:443 H: dns.nextdns.io SSL C: dns.nextdns.io
-lo: [i4-u----] HTTP/S.netify.nextdns 10.0.0.1:33338 --> 45.90.28.0:443 H: dns.nextdns.io SSL C: dns.nextdns.io
-lo: [i4------] HTTP/S 10.0.0.1:52176 --> 136.144.215.158:443 H: doh.powerdns.org SSL C: doh.powerdns.org
-lo: [i4-u----] HTTP/S 10.0.0.1:52176 --> 136.144.215.158:443 H: doh.powerdns.org SSL C: doh.powerdns.org
-lo: [i4------] HTTP/S 10.0.0.1:39214 --> 104.28.0.106:443 H: doh.crypto.sx SSL C: doh.crypto.sx
-lo: [i4-u----] HTTP/S 10.0.0.1:39214 --> 104.28.0.106:443 H: doh.crypto.sx SSL C: doh.crypto.sx
-lo: [i4------] TLS 10.0.0.1:52028 --> 45.76.113.31:8443 H: doh.seby.io SSL C: doh.seby.io
-lo: [i4-u----] TLS 10.0.0.1:52028 --> 45.76.113.31:8443 H: doh.seby.io SSL C: doh.seby.io
-lo: [i4------] HTTP/S 10.0.0.1:34036 --> 217.169.20.23:443 H: dns.aa.net.uk SSL C: dns.aa.net.uk
-lo: [i4-u----] HTTP/S 10.0.0.1:34036 --> 217.169.20.23:443 H: dns.aa.net.uk SSL C: dns.aa.net.uk
-lo: [i4------] HTTP/S 10.0.0.1:43718 --> 146.255.56.98:443 H: doh.appliedprivacy.net SSL C: doh.appliedprivacy.net
-lo: [i4-u----] HTTP/S 10.0.0.1:43718 --> 146.255.56.98:443 H: doh.appliedprivacy.net SSL C: doh.appliedprivacy.net
-lo: [i4------] HTTP/S 10.0.0.1:54164 --> 193.70.85.11:443 H: doh.bortzmeyer.fr SSL C: doh.bortzmeyer.fr
-lo: [i4-u----] HTTP/S 10.0.0.1:54164 --> 193.70.85.11:443 H: doh.bortzmeyer.fr SSL C: doh.bortzmeyer.fr
-lo: [i4------] HTTP/S 10.0.0.1:35714 --> 209.250.241.25:443 H: jarjar.meganerd.nl SSL C: jarjar.meganerd.nl
-lo: [i4-u----] HTTP/S 10.0.0.1:35714 --> 209.250.241.25:443 H: jarjar.meganerd.nl SSL C: jarjar.meganerd.nl
-lo: [i4------] HTTP/S 10.0.0.1:43888 --> 95.216.229.153:443 H: fi.doh.dns.snopyta.org SSL C: fi.doh.dns.snopyta.org
-lo: [i4-u----] HTTP/S 10.0.0.1:43888 --> 95.216.229.153:443 H: fi.doh.dns.snopyta.org SSL C: fi.doh.dns.snopyta.org
-lo: [i4------] HTTP/S 10.0.0.1:57058 --> 46.227.200.54:443 H: rdns.faelix.net SSL C: rdns.faelix.net
-lo: [i4-u----] HTTP/S 10.0.0.1:57058 --> 46.227.200.54:443 H: rdns.faelix.net SSL C: rdns.faelix.net
-lo: [i4------] HTTP/S.netify.quad9 9.9.9.10:443 <-- 10.0.0.1:51846 H: dns10.quad9.net SSL C: dns10.quad9.net
-lo: [i4-u----] HTTP/S.netify.quad9 9.9.9.10:443 <-- 10.0.0.1:51846 H: dns10.quad9.net SSL C: dns10.quad9.net
-lo: [i4------] HTTP/S 10.0.0.1:44704 --> 185.235.81.1:443 H: doh.dnslify.com SSL C: doh.dnslify.com
-lo: [i4-u----] HTTP/S 10.0.0.1:44704 --> 185.235.81.1:443 H: doh.dnslify.com SSL C: doh.dnslify.com
-lo: [i4------] HTTP/S 10.0.0.1:35742 --> 209.250.241.25:443 H: jarjar.meganerd.nl SSL C: jarjar.meganerd.nl
-lo: [i4-u----] HTTP/S 10.0.0.1:35742 --> 209.250.241.25:443 H: jarjar.meganerd.nl SSL C: jarjar.meganerd.nl
+offline0: i4p-------r---- TCP [L] 10.0.0.1:53674 --> [OR] 139.99.222.72:443
+        : HTTP/S
+        : H: doh-2.seby.io
+        : SNI: doh-2.seby.io
+
+offline0: i4p-u-----r---- TCP [L] 10.0.0.1:53674 --> [OR] 139.99.222.72:443
+        : HTTP/S
+        : H: doh-2.seby.io
+        : SNI: doh-2.seby.io
+
+offline0: i4p-------r---- TCP [L] 10.0.0.1:53676 --> [OR] 139.99.222.72:443
+        : HTTP/S
+        : H: doh-2.seby.io
+        : SNI: doh-2.seby.io
+
+offline0: i4p-u-----r---- TCP [L] 10.0.0.1:53676 --> [OR] 139.99.222.72:443
+        : HTTP/S
+        : H: doh-2.seby.io
+        : SNI: doh-2.seby.io
+
+offline0: i4p-------r---- TCP [L] 10.0.0.1:50614 --> [OR] 185.95.218.42:443
+        : HTTP/S
+        : H: dns.digitale-gesellschaft.ch
+        : SNI: dns.digitale-gesellschaft.ch
+
+offline0: i4p-u-----r---- TCP [L] 10.0.0.1:50614 --> [OR] 185.95.218.42:443
+        : HTTP/S
+        : H: dns.digitale-gesellschaft.ch
+        : SNI: dns.digitale-gesellschaft.ch
+
+offline0: i4p-------r---- TCP [L] 10.0.0.1:55962 --> [OR] 51.158.147.50:443
+        : HTTP/S
+        : H: resolver-eu.lelux.fi
+        : SNI: resolver-eu.lelux.fi
+
+offline0: i4p-u-----r---- TCP [L] 10.0.0.1:55962 --> [OR] 51.158.147.50:443
+        : HTTP/S
+        : H: resolver-eu.lelux.fi
+        : SNI: resolver-eu.lelux.fi
+
+offline0: i4p-------r---- TCP [L] 10.0.0.1:59404 --> [OR] 185.253.154.66:443
+        : HTTP/S
+        : H: dnses.alekberg.net
+        : SNI: dnses.alekberg.net
+
+offline0: i4p-u-----r---- TCP [L] 10.0.0.1:59404 --> [OR] 185.253.154.66:443
+        : HTTP/S
+        : H: dnses.alekberg.net
+        : SNI: dnses.alekberg.net
+
+offline0: i4p-------r---- TCP [L] 10.0.0.1:40938 --> [OR] 172.104.93.80:443
+        : HTTP/S
+        : H: jp.tiar.app
+        : SNI: jp.tiar.app
+
+offline0: i4p-u-----r---- TCP [L] 10.0.0.1:40938 --> [OR] 172.104.93.80:443
+        : HTTP/S
+        : H: jp.tiar.app
+        : SNI: jp.tiar.app
+
+offline0: i4p-------r---- TCP [L] 10.0.0.1:37530 --> [OR] 167.114.220.125:453
+        : TLS
+        : H: dns1.dnscrypt.ca
+        : SNI: dns1.dnscrypt.ca
+
+offline0: i4p-u-----r---- TCP [L] 10.0.0.1:37530 --> [OR] 167.114.220.125:453
+        : TLS
+        : H: dns1.dnscrypt.ca
+        : SNI: dns1.dnscrypt.ca
+
+offline0: i4p-------r---- TCP [L] 10.0.0.1:38186 --> [OR] 185.43.135.1:443
+        : HTTP/S
+        : H: odvr.nic.cz
+        : SNI: odvr.nic.cz
+
+offline0: i4p-------r---- TCP [OR] 9.9.9.10:443 <-- [L] 10.0.0.1:51770
+        : HTTP/S.netify.quad9
+        : H: dns10.quad9.net
+        : SNI: dns10.quad9.net
+
+offline0: i4p-u-----r---- TCP [OR] 9.9.9.10:443 <-- [L] 10.0.0.1:51770
+        : HTTP/S.netify.quad9
+        : H: dns10.quad9.net
+        : SNI: dns10.quad9.net
+
+offline0: i4p-------r---- TCP [L] 10.0.0.1:55322 --> [OR] 185.134.196.55:443
+        : HTTP/S
+        : H: rdns.faelix.net
+        : SNI: rdns.faelix.net
+
+offline0: i4p-u-----r---- TCP [L] 10.0.0.1:55322 --> [OR] 185.134.196.55:443
+        : HTTP/S
+        : H: rdns.faelix.net
+        : SNI: rdns.faelix.net
+
+offline0: i4p-------r---- TCP [L] 10.0.0.1:52386 --> [OR] 51.15.124.208:443
+        : HTTP/S
+        : H: dnsnl.alekberg.net
+        : SNI: dnsnl.alekberg.net
+
+offline0: i4p-u-----r---- TCP [L] 10.0.0.1:52386 --> [OR] 51.15.124.208:443
+        : HTTP/S
+        : H: dnsnl.alekberg.net
+        : SNI: dnsnl.alekberg.net
+
+offline0: i4p-------r---- TCP [L] 10.0.0.1:41720 --> [OR] 116.203.179.248:443
+        : HTTP/S
+        : H: rumpelsepp.org
+        : SNI: rumpelsepp.org
+
+offline0: i4p-u-----r---- TCP [L] 10.0.0.1:41720 --> [OR] 116.203.179.248:443
+        : HTTP/S
+        : H: rumpelsepp.org
+        : SNI: rumpelsepp.org
+
+offline0: i4p-------r---- TCP [L] 10.0.0.1:60026 --> [OR] 195.30.94.28:443
+        : HTTP/S
+        : H: doh.ffmuc.net
+        : SNI: doh.ffmuc.net
+
+offline0: i4p-u-----r---- TCP [L] 10.0.0.1:60026 --> [OR] 195.30.94.28:443
+        : HTTP/S
+        : H: doh.ffmuc.net
+        : SNI: doh.ffmuc.net
+
+offline0: i4p-------r---- TCP [L] 10.0.0.1:46658 --> [OR] 185.233.106.232:443
+        : HTTP/S
+        : H: dns.dnshome.de
+        : SNI: dns.dnshome.de
+
+offline0: i4p-u-----r---- TCP [L] 10.0.0.1:46658 --> [OR] 185.233.106.232:443
+        : HTTP/S
+        : H: dns.dnshome.de
+        : SNI: dns.dnshome.de
+
+offline0: i4p-------r---- TCP [L] 10.0.0.1:36012 --> [OR] 149.56.228.45:453
+        : TLS
+        : H: dns2.dnscrypt.ca
+        : SNI: dns2.dnscrypt.ca
+
+offline0: i4p-u-----r---- TCP [L] 10.0.0.1:36012 --> [OR] 149.56.228.45:453
+        : TLS
+        : H: dns2.dnscrypt.ca
+        : SNI: dns2.dnscrypt.ca
+
+offline0: i4p-------r---- TCP [L] 10.0.0.1:38018 --> [OR] 45.153.187.96:443
+        : HTTP/S
+        : H: dnsse.alekberg.net
+        : SNI: dnsse.alekberg.net
+
+offline0: i4p-u-----r---- TCP [L] 10.0.0.1:38018 --> [OR] 45.153.187.96:443
+        : HTTP/S
+        : H: dnsse.alekberg.net
+        : SNI: dnsse.alekberg.net
+
+offline0: i4p-------r---- TCP [L] 10.0.0.1:44640 --> [OR] 185.235.81.1:443
+        : HTTP/S
+        : H: doh.dnslify.com
+        : SNI: doh.dnslify.com
+
+offline0: i4p-u-----r---- TCP [L] 10.0.0.1:44640 --> [OR] 185.235.81.1:443
+        : HTTP/S
+        : H: doh.dnslify.com
+        : SNI: doh.dnslify.com
+
+offline0: i4p-------r---- TCP [L] 10.0.0.1:43106 --> [OR] 116.202.176.26:443
+        : HTTP/S
+        : H: doh.libredns.gr
+        : SNI: doh.libredns.gr
+
+offline0: i4p-u-----r---- TCP [L] 10.0.0.1:43106 --> [OR] 116.202.176.26:443
+        : HTTP/S
+        : H: doh.libredns.gr
+        : SNI: doh.libredns.gr
+
+offline0: i4p-------r---- TCP [L] 10.0.0.1:59026 --> [OR] 85.5.93.230:443
+        : HTTP/S
+        : H: ibksturm.synology.me
+        : SNI: ibksturm.synology.me
+
+offline0: i4p-u-----r---- TCP [L] 10.0.0.1:59026 --> [OR] 85.5.93.230:443
+        : HTTP/S
+        : H: ibksturm.synology.me
+        : SNI: ibksturm.synology.me
+
+offline0: i4p-------r---- TCP [L] 10.0.0.1:33724 --> [OR] 104.28.28.34:443
+        : HTTP/S
+        : H: jp.tiarap.org
+        : SNI: jp.tiarap.org
+
+offline0: i4p-u-----r---- TCP [L] 10.0.0.1:33724 --> [OR] 104.28.28.34:443
+        : HTTP/S
+        : H: jp.tiarap.org
+        : SNI: jp.tiarap.org
+
+offline0: i4p-------r---- TCP [OR] 1.0.0.1:443 <-- [L] 10.0.0.1:53802
+        : HTTP/S.netify.cloudflare-dns
+        : H: dns.cloudflare.com
+        : SNI: dns.cloudflare.com
+
+offline0: i4p-u-----r---- TCP [OR] 1.0.0.1:443 <-- [L] 10.0.0.1:53802
+        : HTTP/S.netify.cloudflare-dns
+        : H: dns.cloudflare.com
+        : SNI: dns.cloudflare.com
+
+offline0: i4p-------r---- TCP [L] 10.0.0.1:33338 --> [OR] 45.90.28.0:443
+        : HTTP/S.netify.nextdns
+        : H: dns.nextdns.io
+        : SNI: dns.nextdns.io
+
+offline0: i4p-u-----r---- TCP [L] 10.0.0.1:33338 --> [OR] 45.90.28.0:443
+        : HTTP/S.netify.nextdns
+        : H: dns.nextdns.io
+        : SNI: dns.nextdns.io
+
+offline0: i4p-------r---- TCP [L] 10.0.0.1:52176 --> [OR] 136.144.215.158:443
+        : HTTP/S
+        : H: doh.powerdns.org
+        : SNI: doh.powerdns.org
+
+offline0: i4p-u-----r---- TCP [L] 10.0.0.1:52176 --> [OR] 136.144.215.158:443
+        : HTTP/S
+        : H: doh.powerdns.org
+        : SNI: doh.powerdns.org
+
+offline0: i4p-------r---- TCP [L] 10.0.0.1:39214 --> [OR] 104.28.0.106:443
+        : HTTP/S
+        : H: doh.crypto.sx
+        : SNI: doh.crypto.sx
+
+offline0: i4p-u-----r---- TCP [L] 10.0.0.1:39214 --> [OR] 104.28.0.106:443
+        : HTTP/S
+        : H: doh.crypto.sx
+        : SNI: doh.crypto.sx
+
+offline0: i4p-------r---- TCP [L] 10.0.0.1:52028 --> [OR] 45.76.113.31:8443
+        : TLS
+        : H: doh.seby.io
+        : SNI: doh.seby.io
+
+offline0: i4p-u-----r---- TCP [L] 10.0.0.1:52028 --> [OR] 45.76.113.31:8443
+        : TLS
+        : H: doh.seby.io
+        : SNI: doh.seby.io
+
+offline0: i4p-------r---- TCP [L] 10.0.0.1:34036 --> [OR] 217.169.20.23:443
+        : HTTP/S
+        : H: dns.aa.net.uk
+        : SNI: dns.aa.net.uk
+
+offline0: i4p-u-----r---- TCP [L] 10.0.0.1:34036 --> [OR] 217.169.20.23:443
+        : HTTP/S
+        : H: dns.aa.net.uk
+        : SNI: dns.aa.net.uk
+
+offline0: i4p-------r---- TCP [L] 10.0.0.1:43718 --> [OR] 146.255.56.98:443
+        : HTTP/S
+        : H: doh.appliedprivacy.net
+        : SNI: doh.appliedprivacy.net
+
+offline0: i4p-u-----r---- TCP [L] 10.0.0.1:43718 --> [OR] 146.255.56.98:443
+        : HTTP/S
+        : H: doh.appliedprivacy.net
+        : SNI: doh.appliedprivacy.net
+
+offline0: i4p-------r---- TCP [L] 10.0.0.1:54164 --> [OR] 193.70.85.11:443
+        : HTTP/S
+        : H: doh.bortzmeyer.fr
+        : SNI: doh.bortzmeyer.fr
+
+offline0: i4p-u-----r---- TCP [L] 10.0.0.1:54164 --> [OR] 193.70.85.11:443
+        : HTTP/S
+        : H: doh.bortzmeyer.fr
+        : SNI: doh.bortzmeyer.fr
+
+offline0: i4p-------r---- TCP [L] 10.0.0.1:35714 --> [OR] 209.250.241.25:443
+        : HTTP/S
+        : H: jarjar.meganerd.nl
+        : SNI: jarjar.meganerd.nl
+
+offline0: i4p-u-----r---- TCP [L] 10.0.0.1:35714 --> [OR] 209.250.241.25:443
+        : HTTP/S
+        : H: jarjar.meganerd.nl
+        : SNI: jarjar.meganerd.nl CN: jarjar.meganerd.nl
+        : IDN: C=US, O=Let's Encrypt, CN=Let's Encrypt Authority X3 SDN: CN=jarjar.meganerd.nl
+
+offline0: i4p-------r---- TCP [L] 10.0.0.1:43888 --> [OR] 95.216.229.153:443
+        : HTTP/S
+        : H: fi.doh.dns.snopyta.org
+        : SNI: fi.doh.dns.snopyta.org
+
+offline0: i4p-u-----r---- TCP [L] 10.0.0.1:43888 --> [OR] 95.216.229.153:443
+        : HTTP/S
+        : H: fi.doh.dns.snopyta.org
+        : SNI: fi.doh.dns.snopyta.org
+
+offline0: i4p-------r---- TCP [L] 10.0.0.1:57058 --> [OR] 46.227.200.54:443
+        : HTTP/S
+        : H: rdns.faelix.net
+        : SNI: rdns.faelix.net
+
+offline0: i4p-u-----r---- TCP [L] 10.0.0.1:57058 --> [OR] 46.227.200.54:443
+        : HTTP/S
+        : H: rdns.faelix.net
+        : SNI: rdns.faelix.net
+
+offline0: i4p-------r---- TCP [OR] 9.9.9.10:443 <-- [L] 10.0.0.1:51846
+        : HTTP/S.netify.quad9
+        : H: dns10.quad9.net
+        : SNI: dns10.quad9.net
+
+offline0: i4p-u-----r---- TCP [OR] 9.9.9.10:443 <-- [L] 10.0.0.1:51846
+        : HTTP/S.netify.quad9
+        : H: dns10.quad9.net
+        : SNI: dns10.quad9.net
+
+offline0: i4p-------r---- TCP [L] 10.0.0.1:44704 --> [OR] 185.235.81.1:443
+        : HTTP/S
+        : H: doh.dnslify.com
+        : SNI: doh.dnslify.com
+
+offline0: i4p-u-----r---- TCP [L] 10.0.0.1:44704 --> [OR] 185.235.81.1:443
+        : HTTP/S
+        : H: doh.dnslify.com
+        : SNI: doh.dnslify.com
+
+offline0: i4p-------r---- TCP [L] 10.0.0.1:35742 --> [OR] 209.250.241.25:443
+        : HTTP/S
+        : H: jarjar.meganerd.nl
+        : SNI: jarjar.meganerd.nl
+
+offline0: i4p-u-----r---- TCP [L] 10.0.0.1:35742 --> [OR] 209.250.241.25:443
+        : HTTP/S
+        : H: jarjar.meganerd.nl
+        : SNI: jarjar.meganerd.nl CN: jarjar.meganerd.nl
+        : IDN: C=US, O=Let's Encrypt, CN=Let's Encrypt Authority X3 SDN: CN=jarjar.meganerd.nl
+

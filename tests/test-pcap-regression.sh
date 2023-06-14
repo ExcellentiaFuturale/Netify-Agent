@@ -9,7 +9,7 @@ fi
 
 ND_PCAPS=$(find "${TESTDIR}/pcap/" -name '*.cap.gz' | sort)
 NDPI_PCAPS=$(sort "${TESTDIR}/ndpi-pcap-files.txt" | egrep -v '^#' |\
-    xargs -n 1 -i find "${TESTDIR}/../libs/ndpi/tests/pcap" -name '{}*cap*' |\
+    xargs -n 1 -i find "${TESTDIR}/../libs/ndpi/tests/cfgs/default/pcap" -name '{}*cap*' |\
     egrep -v -- '-test.cap$')
 
 PCAPS="$(echo ${ND_PCAPS} ${NDPI_PCAPS} | sort)"
@@ -34,7 +34,7 @@ run_test() {
         cat $1 > ${BASE}-test.cap || exit $?
     fi
     echo -e "\n${BOLD}>>> ${NAME}${NORMAL}"
-    CMD="${NETIFYD} -t -c $CONF --thread-detection-cores=1 -I lo,${BASE}-test.cap -A $NETWORK -T ${LOG}"
+    CMD="${NETIFYD} -t -c $CONF --thread-detection-cores=1 -I ${BASE}-test.cap -A $NETWORK -T ${LOG}"
     if [ "x${WITH_VALGRIND}" == "xyes" ]; then
         CMD="valgrind --tool=memcheck --leak-check=full --track-origins=yes --log-file=/tmp/${NAME}.log ${CMD}"
     else

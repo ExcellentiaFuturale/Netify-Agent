@@ -1,10 +1,60 @@
-lo: [i4------] HTTP 109.70.240.130:80 <-- 192.168.1.227:49813 H: ocsp07.actalis.it
-lo: [i4------] HTTP.netify.google 142.250.184.99:80 <-- 192.168.1.128:54154 H: ocsp.pki.goog
-lo: [i4------] HTTP.netify.lets-encrypt 92.122.95.235:80 <-- 192.168.1.128:43728 H: r3.o.lencr.org
-lo: [i4------] HTTP.netify.sectigo 151.139.128.14:80 <-- 192.168.1.128:34320 H: geant.ocsp.sectigo.com
-lo: [i4------] HTTP.netify.sectigo 151.139.128.14:80 <-- 192.168.1.128:34340 H: ocsp.usertrust.com
-lo: [i4------] HTTP.netify.digicert 93.184.220.29:80 <-- 192.168.1.128:47904 H: ocsp.digicert.com
-lo: [i4------] HTTP.netify.amazon 52.85.15.92:80 <-- 192.168.1.128:49382 H: ocsp.sca1b.amazontrust.com
-lo: [i4------] HTTP.netify.globalsign 151.101.2.133:80 <-- 192.168.1.128:59922 H: ocsp.globalsign.com
-lo: [i4------] HTTP 109.70.240.114:80 <-- 192.168.1.128:45514 H: ocsp09.actalis.it
-lo: [i4------] HTTP.netify.entrust 23.12.96.145:80 <-- 192.168.1.128:49034 H: ocsp.entrust.net
+offline0: i4p-------r-fa- TCP [OR] 109.70.240.130:80 <-- [L] 192.168.1.227:49813
+        : HTTP
+        : H: ocsp07.actalis.it
+        : HTTP/UA: Microsoft-CryptoAPI/10.0
+        : URL: ocsp07.actalis.it/VA/AUTH-ROOT/MFEwTzBNMEswSTAJBgUrDgMCGgUABBSw4x5v4bTlizjNRmTdkYSy7q0R9gQUUtiIOsifeGbtifN7OHCUyQICNtACEEWXMtjzGMt1k6L0aA%2BQ6tk%3D
+
+offline0: i4p-------r-fa- TCP [OR] 142.250.184.99:80 <-- [L] 192.168.1.128:54154
+        : HTTP.netify.google
+        : H: ocsp.pki.goog
+        : HTTP/UA: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:89.0) Gecko/20100101 Firefox/89.0
+        : URL: ocsp.pki.goog/gts1o1core
+
+offline0: i4p-------r-fa- TCP [OR] 92.122.95.235:80 <-- [L] 192.168.1.128:43728
+        : HTTP.netify.lets-encrypt
+        : H: r3.o.lencr.org
+        : HTTP/UA: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:89.0) Gecko/20100101 Firefox/89.0
+        : URL: r3.o.lencr.org/
+
+offline0: i4p-------r-fa- TCP [OR] 151.139.128.14:80 <-- [L] 192.168.1.128:34320
+        : HTTP.netify.sectigo
+        : H: geant.ocsp.sectigo.com
+        : HTTP/UA: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:89.0) Gecko/20100101 Firefox/89.0
+        : URL: geant.ocsp.sectigo.com/
+
+offline0: i4p-------r-fa- TCP [OR] 151.139.128.14:80 <-- [L] 192.168.1.128:34340
+        : HTTP.netify.sectigo
+        : H: ocsp.usertrust.com
+        : HTTP/UA: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:89.0) Gecko/20100101 Firefox/89.0
+        : URL: ocsp.usertrust.com/
+
+offline0: i4p-------r-fa- TCP [OR] 93.184.220.29:80 <-- [L] 192.168.1.128:47904
+        : HTTP.netify.digicert
+        : H: ocsp.digicert.com
+        : HTTP/UA: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:89.0) Gecko/20100101 Firefox/89.0
+        : URL: ocsp.digicert.com/
+
+offline0: i4p-------r-fa- TCP [OR] 52.85.15.92:80 <-- [L] 192.168.1.128:49382
+        : HTTP.netify.amazon
+        : H: ocsp.sca1b.amazontrust.com
+        : HTTP/UA: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:89.0) Gecko/20100101 Firefox/89.0
+        : URL: ocsp.sca1b.amazontrust.com/
+
+offline0: i4p-------r-fa- TCP [OR] 151.101.2.133:80 <-- [L] 192.168.1.128:59922
+        : HTTP.netify.globalsign
+        : H: ocsp.globalsign.com
+        : HTTP/UA: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:89.0) Gecko/20100101 Firefox/89.0
+        : URL: ocsp.globalsign.com/gsrsaovsslca2018
+
+offline0: i4p-------r-fa- TCP [OR] 109.70.240.114:80 <-- [L] 192.168.1.128:45514
+        : HTTP
+        : H: ocsp09.actalis.it
+        : HTTP/UA: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:89.0) Gecko/20100101 Firefox/89.0
+        : URL: ocsp09.actalis.it/VA/AUTHOV-G3
+
+offline0: i4p-------r-fa- TCP [OR] 23.12.96.145:80 <-- [L] 192.168.1.128:49034
+        : HTTP.netify.entrust
+        : H: ocsp.entrust.net
+        : HTTP/UA: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:89.0) Gecko/20100101 Firefox/89.0
+        : URL: ocsp.entrust.net/
+

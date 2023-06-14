@@ -1,1 +1,4 @@
-lo: [i4------] DNS 10.0.2.20:53 <-- 10.0.2.30:44639 H: vaaaakardli.pirate.sea
+offline0: i4p-------r---- UDP [L] 10.0.2.20:53 <-- [OL] 10.0.2.30:44639
+        : DNS
+        : H: vaaaakardli.pirate.sea
+

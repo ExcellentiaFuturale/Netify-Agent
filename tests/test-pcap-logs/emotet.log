@@ -1,8 +1,36 @@
-lo: [i4------] SMTP 10.2.25.102:57309 --> 193.252.22.84:587 H: opmta1mto02nd1
-lo: [i4------] HTTP 10.3.29.101:56309 --> 104.161.127.22:80 H: fkl.co.ke
-lo: [i4------] HTTP 10.4.20.102:54319 --> 107.161.178.210:80 H: gandhitoday.org
-lo: [i4------] HTTP 10.4.25.101:49797 --> 77.105.36.156:80 H: filmmogzivota.rs
-lo: [i4------] HTTP/S 10.4.25.101:49803 --> 138.197.147.101:443
-lo: [i4-u----] HTTP/S 10.4.25.101:49803 --> 138.197.147.101:443
-lo: [i4------] HTTP/S 10.4.25.101:49804 --> 138.197.147.101:443
-lo: [i4-u----] HTTP/S 10.4.25.101:49804 --> 138.197.147.101:443
+offline0: i4p-------r---- TCP [L] 10.2.25.102:57309 --> [OR] 193.252.22.84:587
+        : SMTP
+        : H: opmta1mto02nd1
+
+offline0: i4p-------r---- TCP [L] 10.3.29.101:56309 --> [OR] 104.161.127.22:80
+        : HTTP
+        : H: fkl.co.ke
+        : HTTP/UA: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4844.74 Safari/537.36 Edg/99.0.1150.55
+        : URL: fkl.co.ke/wp-content/Elw3kPvOsZxM5/
+
+offline0: i4p-------r---- TCP [L] 10.4.20.102:54319 --> [OR] 107.161.178.210:80
+        : HTTP
+        : H: gandhitoday.org
+        : HTTP/UA: Mozilla/5.0 (Windows NT 10.0; Win64; x64; Trident/7.0; rv:11.0) like Gecko
+        : URL: gandhitoday.org/video/6JvA8/
+
+offline0: i4p-------r---- TCP [L] 10.4.25.101:49797 --> [OR] 77.105.36.156:80
+        : HTTP
+        : H: filmmogzivota.rs
+        : HTTP/UA: vBKbaQgjyvRRbcgfvlsc
+        : URL: filmmogzivota.rs/SpryAssets/gDR/
+
+offline0: i4p-------r---- TCP [L] 10.4.25.101:49803 --> [OR] 138.197.147.101:443
+        : HTTP/S
+
+offline0: i4p-u-----r---- TCP [L] 10.4.25.101:49803 --> [OR] 138.197.147.101:443
+        : HTTP/S
+        : CN: example.com
+        : IDN: C=GB, ST=London, L=London, O=Global Security, OU=IT Department, CN=example.com SDN: C=GB, ST=London, L=London, O=Global Security, OU=IT Department, CN=example.com
+
+offline0: i4p-------r-fa- TCP [L] 10.4.25.101:49804 --> [OR] 138.197.147.101:443
+        : HTTP/S
+
+offline0: i4pcu-----r-fa- TCP [L] 10.4.25.101:49804 --> [OR] 138.197.147.101:443
+        : HTTP/S
+

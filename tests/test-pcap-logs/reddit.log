@@ -1,120 +1,623 @@
-lo: [i6------] HTTP/S.netify.google 2a00:1450:4007:80a::200a:443 <-- 2a01:cb01:2049:8b07:991d:ec85:28df:f629:40028 H: safebrowsing.googleapis.com SSL C: safebrowsing.googleapis.com
-lo: [i6------] HTTP/S.netify.google 2a00:1450:4007:80a::200a:443 <-- 2a01:cb01:2049:8b07:991d:ec85:28df:f629:40030 H: safebrowsing.googleapis.com SSL C: safebrowsing.googleapis.com
-lo: [i6------] HTTP/S.netify.reddit 64:ff9b::9765:798c:443 <-- 2a01:cb01:2049:8b07:991d:ec85:28df:f629:56558 H: www.reddit.com SSL C: www.reddit.com
-lo: [i6-u----] HTTP/S.netify.google 2a00:1450:4007:80a::200a:443 <-- 2a01:cb01:2049:8b07:991d:ec85:28df:f629:40028 H: safebrowsing.googleapis.com SSL C: safebrowsing.googleapis.com
-lo: [i6-u----] HTTP/S.netify.reddit 64:ff9b::9765:798c:443 <-- 2a01:cb01:2049:8b07:991d:ec85:28df:f629:56558 H: www.reddit.com SSL C: www.reddit.com
-lo: [i6-u----] HTTP/S.netify.google 2a00:1450:4007:80a::200a:443 <-- 2a01:cb01:2049:8b07:991d:ec85:28df:f629:40030 H: safebrowsing.googleapis.com SSL C: safebrowsing.googleapis.com
-lo: [i6------] HTTP/S.netify.reddit 64:ff9b::9765:798c:443 <-- 2a01:cb01:2049:8b07:991d:ec85:28df:f629:56560 H: www.reddit.com SSL C: www.reddit.com
-lo: [i6-u----] HTTP/S.netify.reddit 64:ff9b::9765:798c:443 <-- 2a01:cb01:2049:8b07:991d:ec85:28df:f629:56560 H: www.reddit.com SSL C: www.reddit.com
-lo: [i6------] HTTP/S.netify.reddit 64:ff9b::9765:798c:443 <-- 2a01:cb01:2049:8b07:991d:ec85:28df:f629:56564 H: www.redditstatic.com SSL C: www.redditstatic.com
-lo: [i6------] HTTP/S.netify.reddit 64:ff9b::9765:798c:443 <-- 2a01:cb01:2049:8b07:991d:ec85:28df:f629:56562 H: www.redditstatic.com SSL C: www.redditstatic.com
-lo: [i6------] HTTP/S.netify.reddit 64:ff9b::9765:798c:443 <-- 2a01:cb01:2049:8b07:991d:ec85:28df:f629:56570 H: www.redditstatic.com SSL C: www.redditstatic.com
-lo: [i6------] HTTP/S.netify.reddit 64:ff9b::9765:798c:443 <-- 2a01:cb01:2049:8b07:991d:ec85:28df:f629:56568 H: www.redditstatic.com SSL C: www.redditstatic.com
-lo: [i6------] HTTP/S.netify.reddit 64:ff9b::9765:798c:443 <-- 2a01:cb01:2049:8b07:991d:ec85:28df:f629:56566 H: www.redditstatic.com SSL C: www.redditstatic.com
-lo: [i6------] HTTP/S.netify.reddit 64:ff9b::9765:798c:443 <-- 2a01:cb01:2049:8b07:991d:ec85:28df:f629:56572 H: www.redditstatic.com SSL C: www.redditstatic.com
-lo: [i6------] HTTP/S.netify.reddit 64:ff9b::9765:798c:443 <-- 2a01:cb01:2049:8b07:991d:ec85:28df:f629:56578 H: styles.redditmedia.com SSL C: styles.redditmedia.com
-lo: [i6------] HTTP/S.netify.reddit 64:ff9b::9765:798c:443 <-- 2a01:cb01:2049:8b07:991d:ec85:28df:f629:56576 H: styles.redditmedia.com SSL C: styles.redditmedia.com
-lo: [i6------] HTTP/S.netify.reddit 64:ff9b::9765:798c:443 <-- 2a01:cb01:2049:8b07:991d:ec85:28df:f629:56574 H: styles.redditmedia.com SSL C: styles.redditmedia.com
-lo: [i6------] HTTP/S.netify.reddit 64:ff9b::9765:798c:443 <-- 2a01:cb01:2049:8b07:991d:ec85:28df:f629:56582 H: preview.redd.it SSL C: preview.redd.it
-lo: [i6------] HTTP/S.netify.reddit 64:ff9b::9765:798c:443 <-- 2a01:cb01:2049:8b07:991d:ec85:28df:f629:56580 H: styles.redditmedia.com SSL C: styles.redditmedia.com
-lo: [i6------] HTTP/S.netify.reddit 64:ff9b::9765:798c:443 <-- 2a01:cb01:2049:8b07:991d:ec85:28df:f629:56584 H: preview.redd.it SSL C: preview.redd.it
-lo: [i6------] HTTP/S.netify.reddit 64:ff9b::9765:798c:443 <-- 2a01:cb01:2049:8b07:991d:ec85:28df:f629:56586 H: preview.redd.it SSL C: preview.redd.it
-lo: [i6------] HTTP/S.netify.reddit 64:ff9b::9765:798c:443 <-- 2a01:cb01:2049:8b07:991d:ec85:28df:f629:56588 H: preview.redd.it SSL C: preview.redd.it
-lo: [i6-u----] HTTP/S.netify.reddit 64:ff9b::9765:798c:443 <-- 2a01:cb01:2049:8b07:991d:ec85:28df:f629:56564 H: www.redditstatic.com SSL C: www.redditstatic.com
-lo: [i6-u----] HTTP/S.netify.reddit 64:ff9b::9765:798c:443 <-- 2a01:cb01:2049:8b07:991d:ec85:28df:f629:56562 H: www.redditstatic.com SSL C: www.redditstatic.com
-lo: [i6-u----] HTTP/S.netify.reddit 64:ff9b::9765:798c:443 <-- 2a01:cb01:2049:8b07:991d:ec85:28df:f629:56568 H: www.redditstatic.com SSL C: www.redditstatic.com
-lo: [i6-u----] HTTP/S.netify.reddit 64:ff9b::9765:798c:443 <-- 2a01:cb01:2049:8b07:991d:ec85:28df:f629:56570 H: www.redditstatic.com SSL C: www.redditstatic.com
-lo: [i6-u----] HTTP/S.netify.reddit 64:ff9b::9765:798c:443 <-- 2a01:cb01:2049:8b07:991d:ec85:28df:f629:56566 H: www.redditstatic.com SSL C: www.redditstatic.com
-lo: [i6------] HTTP/S.netify.reddit 64:ff9b::9765:798c:443 <-- 2a01:cb01:2049:8b07:991d:ec85:28df:f629:56592 H: emoji.redditmedia.com SSL C: emoji.redditmedia.com
-lo: [i6------] HTTP/S.netify.reddit 64:ff9b::9765:798c:443 <-- 2a01:cb01:2049:8b07:991d:ec85:28df:f629:56590 H: emoji.redditmedia.com SSL C: emoji.redditmedia.com
-lo: [i6-u----] HTTP/S.netify.reddit 64:ff9b::9765:798c:443 <-- 2a01:cb01:2049:8b07:991d:ec85:28df:f629:56572 H: www.redditstatic.com SSL C: www.redditstatic.com
-lo: [i6-u----] HTTP/S.netify.reddit 64:ff9b::9765:798c:443 <-- 2a01:cb01:2049:8b07:991d:ec85:28df:f629:56578 H: styles.redditmedia.com SSL C: styles.redditmedia.com
-lo: [i6-u----] HTTP/S.netify.reddit 64:ff9b::9765:798c:443 <-- 2a01:cb01:2049:8b07:991d:ec85:28df:f629:56576 H: styles.redditmedia.com SSL C: styles.redditmedia.com
-lo: [i6-u----] HTTP/S.netify.reddit 64:ff9b::9765:798c:443 <-- 2a01:cb01:2049:8b07:991d:ec85:28df:f629:56574 H: styles.redditmedia.com SSL C: styles.redditmedia.com
-lo: [i6-u----] HTTP/S.netify.reddit 64:ff9b::9765:798c:443 <-- 2a01:cb01:2049:8b07:991d:ec85:28df:f629:56582 H: preview.redd.it SSL C: preview.redd.it
-lo: [i6-u----] HTTP/S.netify.reddit 64:ff9b::9765:798c:443 <-- 2a01:cb01:2049:8b07:991d:ec85:28df:f629:56580 H: styles.redditmedia.com SSL C: styles.redditmedia.com
-lo: [i6-u----] HTTP/S.netify.reddit 64:ff9b::9765:798c:443 <-- 2a01:cb01:2049:8b07:991d:ec85:28df:f629:56584 H: preview.redd.it SSL C: preview.redd.it
-lo: [i6-u----] HTTP/S.netify.reddit 64:ff9b::9765:798c:443 <-- 2a01:cb01:2049:8b07:991d:ec85:28df:f629:56586 H: preview.redd.it SSL C: preview.redd.it
-lo: [i6-u----] HTTP/S.netify.reddit 64:ff9b::9765:798c:443 <-- 2a01:cb01:2049:8b07:991d:ec85:28df:f629:56588 H: preview.redd.it SSL C: preview.redd.it
-lo: [i6-u----] HTTP/S.netify.reddit 64:ff9b::9765:798c:443 <-- 2a01:cb01:2049:8b07:991d:ec85:28df:f629:56592 H: emoji.redditmedia.com SSL C: emoji.redditmedia.com
-lo: [i6-u----] HTTP/S.netify.reddit 64:ff9b::9765:798c:443 <-- 2a01:cb01:2049:8b07:991d:ec85:28df:f629:56590 H: emoji.redditmedia.com SSL C: emoji.redditmedia.com
-lo: [i6------] HTTP/S.netify.reddit 64:ff9b::9765:798c:443 <-- 2a01:cb01:2049:8b07:991d:ec85:28df:f629:56594 H: b.thumbs.redditmedia.com SSL C: b.thumbs.redditmedia.com
-lo: [i6-u----] HTTP/S.netify.reddit 64:ff9b::9765:798c:443 <-- 2a01:cb01:2049:8b07:991d:ec85:28df:f629:56594 H: b.thumbs.redditmedia.com SSL C: b.thumbs.redditmedia.com
-lo: [i6------] HTTP/S.netify.google-ads 2a00:1450:4007:805::2002:443 <-- 2a01:cb01:2049:8b07:991d:ec85:28df:f629:50960 H: www.googletagservices.com SSL C: www.googletagservices.com
-lo: [i6------] HTTP/S.netify.aax-media 64:ff9b::6853:b3b6:443 <-- 2a01:cb01:2049:8b07:991d:ec85:28df:f629:38320 H: c.aaxads.com SSL C: c.aaxads.com
-lo: [i6------] HTTP/S.netify.amazon-advertising 64:ff9b::df9:21c6:443 <-- 2a01:cb01:2049:8b07:991d:ec85:28df:f629:43492 H: c.amazon-adsystem.com SSL C: c.amazon-adsystem.com
-lo: [i6-u----] HTTP/S.netify.google-ads 2a00:1450:4007:805::2002:443 <-- 2a01:cb01:2049:8b07:991d:ec85:28df:f629:50960 H: www.googletagservices.com SSL C: www.googletagservices.com
-lo: [i6-u----] HTTP/S.netify.amazon-advertising 64:ff9b::df9:21c6:443 <-- 2a01:cb01:2049:8b07:991d:ec85:28df:f629:43492 H: c.amazon-adsystem.com SSL C: c.amazon-adsystem.com
-lo: [i6-u----] HTTP/S.netify.aax-media 64:ff9b::6853:b3b6:443 <-- 2a01:cb01:2049:8b07:991d:ec85:28df:f629:38320 H: c.aaxads.com SSL C: c.aaxads.com
-lo: [i6------] HTTP/S.netify.google-ads 64:ff9b::acd9:12c2:443 <-- 2a01:cb01:2049:8b07:991d:ec85:28df:f629:51026 H: securepubads.g.doubleclick.net SSL C: securepubads.g.doubleclick.net
-lo: [i6------] HTTP/S.netify.twitter 64:ff9b::9765:789d:443 <-- 2a01:cb01:2049:8b07:991d:ec85:28df:f629:48240 H: platform.twitter.com SSL C: platform.twitter.com
-lo: [i6-u----] HTTP/S.netify.google-ads 64:ff9b::acd9:12c2:443 <-- 2a01:cb01:2049:8b07:991d:ec85:28df:f629:51026 H: securepubads.g.doubleclick.net SSL C: securepubads.g.doubleclick.net
-lo: [i6-u----] HTTP/S.netify.twitter 64:ff9b::9765:789d:443 <-- 2a01:cb01:2049:8b07:991d:ec85:28df:f629:48240 H: platform.twitter.com SSL C: platform.twitter.com
-lo: [i6------] HTTP/S.netify.analytics 2a00:1450:4007:816::2008:443 <-- 2a01:cb01:2049:8b07:991d:ec85:28df:f629:39520 H: www.googletagmanager.com SSL C: www.googletagmanager.com
-lo: [i6-u----] HTTP/S.netify.analytics 2a00:1450:4007:816::2008:443 <-- 2a01:cb01:2049:8b07:991d:ec85:28df:f629:39520 H: www.googletagmanager.com SSL C: www.googletagmanager.com
-lo: [i6------] HTTP/S.netify.aax-media 64:ff9b::6853:b3d1:443 <-- 2a01:cb01:2049:8b07:991d:ec85:28df:f629:32970 H: www.aaxdetect.com SSL C: www.aaxdetect.com
-lo: [i6------] HTTP/S.netify.twitter 64:ff9b::68f4:2ac8:443 <-- 2a01:cb01:2049:8b07:991d:ec85:28df:f629:56782 H: syndication.twitter.com SSL C: syndication.twitter.com
-lo: [i6-u----] HTTP/S.netify.aax-media 64:ff9b::6853:b3d1:443 <-- 2a01:cb01:2049:8b07:991d:ec85:28df:f629:32970 H: www.aaxdetect.com SSL C: www.aaxdetect.com
-lo: [i6------] HTTP/S.netify.towerdata 64:ff9b::2278:cf94:443 <-- 2a01:cb01:2049:8b07:991d:ec85:28df:f629:39626 H: id.rlcdn.com SSL C: id.rlcdn.com
-lo: [i6------] HTTP/S.netify.youtube 2a00:1450:4007:806::200e:443 <-- 2a01:cb01:2049:8b07:991d:ec85:28df:f629:54862 H: www.youtube.com SSL C: www.youtube.com
-lo: [i6------] HTTP/S.netify.quantcast 2620:116:800d:21:f916:5049:f87f:108e:443 <-- 2a01:cb01:2049:8b07:991d:ec85:28df:f629:48648 H: secure.quantserve.com SSL C: secure.quantserve.com
-lo: [i6------] HTTP/S.netify.comscore 64:ff9b::1736:86f1:443 <-- 2a01:cb01:2049:8b07:991d:ec85:28df:f629:44264 H: sb.scorecardresearch.com SSL C: sb.scorecardresearch.com
-lo: [i6-u----] HTTP/S.netify.towerdata 64:ff9b::2278:cf94:443 <-- 2a01:cb01:2049:8b07:991d:ec85:28df:f629:39626 H: id.rlcdn.com SSL C: id.rlcdn.com
-lo: [i6-u----] HTTP/S.netify.youtube 2a00:1450:4007:806::200e:443 <-- 2a01:cb01:2049:8b07:991d:ec85:28df:f629:54862 H: www.youtube.com SSL C: www.youtube.com
-lo: [i6-u----] HTTP/S.netify.comscore 64:ff9b::1736:86f1:443 <-- 2a01:cb01:2049:8b07:991d:ec85:28df:f629:44264 H: sb.scorecardresearch.com SSL C: sb.scorecardresearch.com
-lo: [i6-u----] HTTP/S.netify.quantcast 2620:116:800d:21:f916:5049:f87f:108e:443 <-- 2a01:cb01:2049:8b07:991d:ec85:28df:f629:48648 H: secure.quantserve.com SSL C: secure.quantserve.com
-lo: [i6-u----] HTTP/S.netify.twitter 64:ff9b::68f4:2ac8:443 <-- 2a01:cb01:2049:8b07:991d:ec85:28df:f629:56782 H: syndication.twitter.com SSL C: syndication.twitter.com
-lo: [i6------] HTTP/S.netify.google-ads 64:ff9b::d83a:d1e6:443 <-- 2a01:cb01:2049:8b07:991d:ec85:28df:f629:51100 H: ad.doubleclick.net SSL C: ad.doubleclick.net
-lo: [i6------] HTTP/S.netify.google-ads 64:ff9b::d83a:d1e6:443 <-- 2a01:cb01:2049:8b07:991d:ec85:28df:f629:51102 H: ad.doubleclick.net SSL C: ad.doubleclick.net
-lo: [i6------] HTTP/S.netify.quantcast 2600:9000:219c:ee00:6:44e3:f8c0:93a1:443 <-- 2a01:cb01:2049:8b07:991d:ec85:28df:f629:56186 H: rules.quantcount.com SSL C: rules.quantcount.com
-lo: [i6-u----] HTTP/S.netify.google-ads 64:ff9b::d83a:d1e6:443 <-- 2a01:cb01:2049:8b07:991d:ec85:28df:f629:51100 H: ad.doubleclick.net SSL C: ad.doubleclick.net
-lo: [i6-u----] HTTP/S.netify.google-ads 64:ff9b::d83a:d1e6:443 <-- 2a01:cb01:2049:8b07:991d:ec85:28df:f629:51102 H: ad.doubleclick.net SSL C: ad.doubleclick.net
-lo: [i6-u----] HTTP/S.netify.quantcast 2600:9000:219c:ee00:6:44e3:f8c0:93a1:443 <-- 2a01:cb01:2049:8b07:991d:ec85:28df:f629:56186 H: rules.quantcount.com SSL C: rules.quantcount.com
-lo: [i6------] HTTP/S.netify.twitter 2606:2800:134:1a0d:1429:742:782:b6:443 <-- 2a01:cb01:2049:8b07:991d:ec85:28df:f629:39736 H: cdn.syndication.twimg.com SSL C: cdn.syndication.twimg.com
-lo: [i6-u----] HTTP/S.netify.twitter 2606:2800:134:1a0d:1429:742:782:b6:443 <-- 2a01:cb01:2049:8b07:991d:ec85:28df:f629:39736 H: cdn.syndication.twimg.com SSL C: cdn.syndication.twimg.com
-lo: [i6------] HTTP/S.netify.google-ads 2a00:1450:4007:808::2006:443 <-- 2a01:cb01:2049:8b07:991d:ec85:28df:f629:54726 H: static.doubleclick.net SSL C: static.doubleclick.net
-lo: [i6------] HTTP/S.netify.google 2a00:1450:4007:805::2004:443 <-- 2a01:cb01:2049:8b07:991d:ec85:28df:f629:57282 H: www.google.com SSL C: www.google.com
-lo: [i6-u----] HTTP/S.netify.google-ads 2a00:1450:4007:808::2006:443 <-- 2a01:cb01:2049:8b07:991d:ec85:28df:f629:54726 H: static.doubleclick.net SSL C: static.doubleclick.net
-lo: [i6-u----] HTTP/S.netify.google 2a00:1450:4007:805::2004:443 <-- 2a01:cb01:2049:8b07:991d:ec85:28df:f629:57282 H: www.google.com SSL C: www.google.com
-lo: [i6------] HTTP/S.netify.google 2a00:1450:4007:80c::2003:443 <-- 2a01:cb01:2049:8b07:991d:ec85:28df:f629:47302 H: fonts.gstatic.com SSL C: fonts.gstatic.com
-lo: [i6------] HTTP/S.netify.google 2a00:1450:4007:80c::2003:443 <-- 2a01:cb01:2049:8b07:991d:ec85:28df:f629:47304 H: fonts.gstatic.com SSL C: fonts.gstatic.com
-lo: [i6------] HTTP/S.netify.youtube 2a00:1450:4007:805::2001:443 <-- 2a01:cb01:2049:8b07:991d:ec85:28df:f629:58122 H: yt3.ggpht.com SSL C: yt3.ggpht.com
-lo: [i6------] HTTP/S.netify.youtube 2a00:1450:4007:815::2016:443 <-- 2a01:cb01:2049:8b07:991d:ec85:28df:f629:52296 H: i.ytimg.com SSL C: i.ytimg.com
-lo: [i6-u----] HTTP/S.netify.youtube 2a00:1450:4007:805::2001:443 <-- 2a01:cb01:2049:8b07:991d:ec85:28df:f629:58122 H: yt3.ggpht.com SSL C: yt3.ggpht.com
-lo: [i6-u----] HTTP/S.netify.youtube 2a00:1450:4007:815::2016:443 <-- 2a01:cb01:2049:8b07:991d:ec85:28df:f629:52296 H: i.ytimg.com SSL C: i.ytimg.com
-lo: [i6-u----] HTTP/S.netify.google 2a00:1450:4007:80c::2003:443 <-- 2a01:cb01:2049:8b07:991d:ec85:28df:f629:47302 H: fonts.gstatic.com SSL C: fonts.gstatic.com
-lo: [i6-u----] HTTP/S.netify.google 2a00:1450:4007:80c::2003:443 <-- 2a01:cb01:2049:8b07:991d:ec85:28df:f629:47304 H: fonts.gstatic.com SSL C: fonts.gstatic.com
-lo: [i6------] HTTP/S.netify.reddit 64:ff9b::9765:798c:443 <-- 2a01:cb01:2049:8b07:991d:ec85:28df:f629:56640 H: gateway.reddit.com SSL C: gateway.reddit.com
-lo: [i6-u----] HTTP/S.netify.reddit 64:ff9b::9765:798c:443 <-- 2a01:cb01:2049:8b07:991d:ec85:28df:f629:56640 H: gateway.reddit.com SSL C: gateway.reddit.com
-lo: [i6------] HTTP/S.netify.google-ads 2a00:1450:4007:805::2002:443 <-- 2a01:cb01:2049:8b07:991d:ec85:28df:f629:51006 H: adservice.google.fr SSL C: adservice.google.fr
-lo: [i6------] HTTP/S.netify.google-ads 2a00:1450:4007:80b::2002:443 <-- 2a01:cb01:2049:8b07:991d:ec85:28df:f629:59336 H: adservice.google.com SSL C: adservice.google.com
-lo: [i6------] HTTP/S.netify.amazon-advertising 64:ff9b::345f:7ca5:443 <-- 2a01:cb01:2049:8b07:991d:ec85:28df:f629:46646 H: aax-eu.amazon-adsystem.com SSL C: aax-eu.amazon-adsystem.com
-lo: [i6-u----] HTTP/S.netify.google-ads 2a00:1450:4007:805::2002:443 <-- 2a01:cb01:2049:8b07:991d:ec85:28df:f629:51006 H: adservice.google.fr SSL C: adservice.google.fr
-lo: [i6-u----] HTTP/S.netify.google-ads 2a00:1450:4007:80b::2002:443 <-- 2a01:cb01:2049:8b07:991d:ec85:28df:f629:59336 H: adservice.google.com SSL C: adservice.google.com
-lo: [i6------] HTTP/S.netify.google-ads 2a00:1450:4007:80b::2001:443 <-- 2a01:cb01:2049:8b07:991d:ec85:28df:f629:59624 H: 8a755a3fef0b189d8ab5b0d10758f68a.safeframe.googlesyndication.com SSL C: 8a755a3fef0b189d8ab5b0d10758f68a.safeframe.googlesyndication.com
-lo: [i6-u----] HTTP/S.netify.google-ads 2a00:1450:4007:80b::2001:443 <-- 2a01:cb01:2049:8b07:991d:ec85:28df:f629:59624 H: 8a755a3fef0b189d8ab5b0d10758f68a.safeframe.googlesyndication.com SSL C: 8a755a3fef0b189d8ab5b0d10758f68a.safeframe.googlesyndication.com
-lo: [i6-u----] HTTP/S.netify.amazon-advertising 64:ff9b::345f:7ca5:443 <-- 2a01:cb01:2049:8b07:991d:ec85:28df:f629:46646 H: aax-eu.amazon-adsystem.com SSL C: aax-eu.amazon-adsystem.com
-lo: [i6------] HTTP/S.netify.amp 2a00:1450:4007:808::2001:443 <-- 2a01:cb01:2049:8b07:991d:ec85:28df:f629:46806 H: cdn.ampproject.org SSL C: cdn.ampproject.org
-lo: [i6------] HTTP/S.netify.amp 2a00:1450:4007:808::2001:443 <-- 2a01:cb01:2049:8b07:991d:ec85:28df:f629:46808 H: cdn.ampproject.org SSL C: cdn.ampproject.org
-lo: [i6------] HTTP/S.netify.amp 2a00:1450:4007:808::2001:443 <-- 2a01:cb01:2049:8b07:991d:ec85:28df:f629:46810 H: cdn.ampproject.org SSL C: cdn.ampproject.org
-lo: [i6------] HTTP/S.netify.amp 2a00:1450:4007:808::2001:443 <-- 2a01:cb01:2049:8b07:991d:ec85:28df:f629:46812 H: cdn.ampproject.org SSL C: cdn.ampproject.org
-lo: [i6------] HTTP/S.netify.amp 2a00:1450:4007:808::2001:443 <-- 2a01:cb01:2049:8b07:991d:ec85:28df:f629:46814 H: cdn.ampproject.org SSL C: cdn.ampproject.org
-lo: [i6------] HTTP/S.netify.google 2a00:1450:4007:811::200a:443 <-- 2a01:cb01:2049:8b07:991d:ec85:28df:f629:38166 H: fonts.googleapis.com SSL C: fonts.googleapis.com
-lo: [i6------] HTTP/S.netify.google-ads 2a00:1450:4007:80f::2001:443 <-- 2a01:cb01:2049:8b07:991d:ec85:28df:f629:36964 H: tpc.googlesyndication.com SSL C: tpc.googlesyndication.com
-lo: [i6------] HTTP/S.netify.google-ads 2a00:1450:4007:80f::2001:443 <-- 2a01:cb01:2049:8b07:991d:ec85:28df:f629:36966 H: tpc.googlesyndication.com SSL C: tpc.googlesyndication.com
-lo: [i6------] HTTP/S.netify.google-ads 2a00:1450:4007:80f::2001:443 <-- 2a01:cb01:2049:8b07:991d:ec85:28df:f629:36970 H: tpc.googlesyndication.com SSL C: tpc.googlesyndication.com
-lo: [i6------] HTTP/S.netify.google-ads 2a00:1450:4007:80f::2001:443 <-- 2a01:cb01:2049:8b07:991d:ec85:28df:f629:36968 H: tpc.googlesyndication.com SSL C: tpc.googlesyndication.com
-lo: [i6-u----] HTTP/S.netify.amp 2a00:1450:4007:808::2001:443 <-- 2a01:cb01:2049:8b07:991d:ec85:28df:f629:46806 H: cdn.ampproject.org SSL C: cdn.ampproject.org
-lo: [i6-u----] HTTP/S.netify.amp 2a00:1450:4007:808::2001:443 <-- 2a01:cb01:2049:8b07:991d:ec85:28df:f629:46808 H: cdn.ampproject.org SSL C: cdn.ampproject.org
-lo: [i6-u----] HTTP/S.netify.amp 2a00:1450:4007:808::2001:443 <-- 2a01:cb01:2049:8b07:991d:ec85:28df:f629:46810 H: cdn.ampproject.org SSL C: cdn.ampproject.org
-lo: [i6-u----] HTTP/S.netify.amp 2a00:1450:4007:808::2001:443 <-- 2a01:cb01:2049:8b07:991d:ec85:28df:f629:46812 H: cdn.ampproject.org SSL C: cdn.ampproject.org
-lo: [i6-u----] HTTP/S.netify.amp 2a00:1450:4007:808::2001:443 <-- 2a01:cb01:2049:8b07:991d:ec85:28df:f629:46814 H: cdn.ampproject.org SSL C: cdn.ampproject.org
-lo: [i6-u----] HTTP/S.netify.google 2a00:1450:4007:811::200a:443 <-- 2a01:cb01:2049:8b07:991d:ec85:28df:f629:38166 H: fonts.googleapis.com SSL C: fonts.googleapis.com
-lo: [i6-u----] HTTP/S.netify.google-ads 2a00:1450:4007:80f::2001:443 <-- 2a01:cb01:2049:8b07:991d:ec85:28df:f629:36964 H: tpc.googlesyndication.com SSL C: tpc.googlesyndication.com
-lo: [i6-u----] HTTP/S.netify.google-ads 2a00:1450:4007:80f::2001:443 <-- 2a01:cb01:2049:8b07:991d:ec85:28df:f629:36966 H: tpc.googlesyndication.com SSL C: tpc.googlesyndication.com
-lo: [i6-u----] HTTP/S.netify.google-ads 2a00:1450:4007:80f::2001:443 <-- 2a01:cb01:2049:8b07:991d:ec85:28df:f629:36970 H: tpc.googlesyndication.com SSL C: tpc.googlesyndication.com
-lo: [i6-u----] HTTP/S.netify.google-ads 2a00:1450:4007:80f::2001:443 <-- 2a01:cb01:2049:8b07:991d:ec85:28df:f629:36968 H: tpc.googlesyndication.com SSL C: tpc.googlesyndication.com
-lo: [i6------] HTTP/S.netify.flashtalking 64:ff9b::34d3:acec:443 <-- 2a01:cb01:2049:8b07:991d:ec85:28df:f629:47006 H: d9.flashtalking.com SSL C: d9.flashtalking.com
-lo: [i6-u----] HTTP/S.netify.flashtalking 64:ff9b::34d3:acec:443 <-- 2a01:cb01:2049:8b07:991d:ec85:28df:f629:47006 H: d9.flashtalking.com SSL C: d9.flashtalking.com
-lo: [i6-u----] HTTP/S.netify.flashtalking 64:ff9b::34d3:acec:443 <-- 2a01:cb01:2049:8b07:991d:ec85:28df:f629:47006 H: d9.flashtalking.com SSL C: d9.flashtalking.com
-lo: [i6--g---] HTTP/S.netify.google 2a00:1450:4007:80f::2001:443 <-- 2a01:cb01:2049:8b07:991d:ec85:28df:f629:36972
+offline0: i6p-------r---- TCP [OR] 2a00:1450:4007:80a::200a:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:40028
+        : HTTP/S.netify.google
+        : H: safebrowsing.googleapis.com
+        : SNI: safebrowsing.googleapis.com
+
+offline0: i6p-------r-fa- TCP [OR] 2a00:1450:4007:80a::200a:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:40030
+        : HTTP/S.netify.google
+        : H: safebrowsing.googleapis.com
+        : SNI: safebrowsing.googleapis.com
+
+offline0: i6p-------r---- TCP [OR] 64:ff9b::9765:798c:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:56558
+        : HTTP/S.netify.reddit
+        : H: www.reddit.com
+        : SNI: www.reddit.com
+
+offline0: i6p-u-----r---- TCP [OR] 2a00:1450:4007:80a::200a:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:40028
+        : HTTP/S.netify.google
+        : H: safebrowsing.googleapis.com
+        : SNI: safebrowsing.googleapis.com
+
+offline0: i6p-u-----r---- TCP [OR] 64:ff9b::9765:798c:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:56558
+        : HTTP/S.netify.reddit
+        : H: www.reddit.com
+        : SNI: www.reddit.com
+        : IDN: C=US, O=DigiCert Inc, CN=DigiCert SHA2 Secure Server CA SDN: C=US, ST=California, L=San Francisco, O=Reddit Inc., CN=*.reddit.com
+
+offline0: i6p-u-----r-fa- TCP [OR] 2a00:1450:4007:80a::200a:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:40030
+        : HTTP/S.netify.google
+        : H: safebrowsing.googleapis.com
+        : SNI: safebrowsing.googleapis.com
+
+offline0: i6p-------r---- TCP [OR] 64:ff9b::9765:798c:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:56560
+        : HTTP/S.netify.reddit
+        : H: www.reddit.com
+        : SNI: www.reddit.com
+
+offline0: i6p-u-----r---- TCP [OR] 64:ff9b::9765:798c:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:56560
+        : HTTP/S.netify.reddit
+        : H: www.reddit.com
+        : SNI: www.reddit.com
+        : IDN: C=US, O=DigiCert Inc, CN=DigiCert SHA2 Secure Server CA SDN: C=US, ST=California, L=San Francisco, O=Reddit Inc., CN=*.reddit.com
+
+offline0: i6p-------r---- TCP [OR] 64:ff9b::9765:798c:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:56564
+        : HTTP/S.netify.reddit
+        : H: www.redditstatic.com
+        : SNI: www.redditstatic.com
+
+offline0: i6p-------r-fa- TCP [OR] 64:ff9b::9765:798c:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:56562
+        : HTTP/S.netify.reddit
+        : H: www.redditstatic.com
+        : SNI: www.redditstatic.com
+
+offline0: i6p-------r-fa- TCP [OR] 64:ff9b::9765:798c:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:56570
+        : HTTP/S.netify.reddit
+        : H: www.redditstatic.com
+        : SNI: www.redditstatic.com
+
+offline0: i6p-------r-fa- TCP [OR] 64:ff9b::9765:798c:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:56568
+        : HTTP/S.netify.reddit
+        : H: www.redditstatic.com
+        : SNI: www.redditstatic.com
+
+offline0: i6p-------r-fa- TCP [OR] 64:ff9b::9765:798c:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:56566
+        : HTTP/S.netify.reddit
+        : H: www.redditstatic.com
+        : SNI: www.redditstatic.com
+
+offline0: i6p-------r-fa- TCP [OR] 64:ff9b::9765:798c:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:56572
+        : HTTP/S.netify.reddit
+        : H: www.redditstatic.com
+        : SNI: www.redditstatic.com
+
+offline0: i6p-------r---- TCP [OR] 64:ff9b::9765:798c:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:56578
+        : HTTP/S.netify.reddit
+        : H: styles.redditmedia.com
+        : SNI: styles.redditmedia.com
+
+offline0: i6p-------r-fa- TCP [OR] 64:ff9b::9765:798c:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:56576
+        : HTTP/S.netify.reddit
+        : H: styles.redditmedia.com
+        : SNI: styles.redditmedia.com
+
+offline0: i6p-------r-fa- TCP [OR] 64:ff9b::9765:798c:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:56574
+        : HTTP/S.netify.reddit
+        : H: styles.redditmedia.com
+        : SNI: styles.redditmedia.com
+
+offline0: i6p-------r---- TCP [OR] 64:ff9b::9765:798c:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:56582
+        : HTTP/S.netify.reddit
+        : H: preview.redd.it
+        : SNI: preview.redd.it
+
+offline0: i6p-------r-fa- TCP [OR] 64:ff9b::9765:798c:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:56580
+        : HTTP/S.netify.reddit
+        : H: styles.redditmedia.com
+        : SNI: styles.redditmedia.com
+
+offline0: i6p-------r-fa- TCP [OR] 64:ff9b::9765:798c:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:56584
+        : HTTP/S.netify.reddit
+        : H: preview.redd.it
+        : SNI: preview.redd.it
+
+offline0: i6p-------r-fa- TCP [OR] 64:ff9b::9765:798c:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:56586
+        : HTTP/S.netify.reddit
+        : H: preview.redd.it
+        : SNI: preview.redd.it
+
+offline0: i6p-------r-fa- TCP [OR] 64:ff9b::9765:798c:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:56588
+        : HTTP/S.netify.reddit
+        : H: preview.redd.it
+        : SNI: preview.redd.it
+
+offline0: i6p-u-----r---- TCP [OR] 64:ff9b::9765:798c:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:56564
+        : HTTP/S.netify.reddit
+        : H: www.redditstatic.com
+        : SNI: www.redditstatic.com CN: www.redditstatic.com
+        : IDN: C=US, O=DigiCert Inc, CN=DigiCert SHA2 Secure Server CA SDN: C=US, ST=California, L=San Francisco, O=Reddit Inc., CN=www.redditstatic.com
+
+offline0: i6p-u-----r-fa- TCP [OR] 64:ff9b::9765:798c:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:56562
+        : HTTP/S.netify.reddit
+        : H: www.redditstatic.com
+        : SNI: www.redditstatic.com CN: www.redditstatic.com
+        : IDN: C=US, O=DigiCert Inc, CN=DigiCert SHA2 Secure Server CA SDN: C=US, ST=California, L=San Francisco, O=Reddit Inc., CN=www.redditstatic.com
+
+offline0: i6p-u-----r-fa- TCP [OR] 64:ff9b::9765:798c:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:56568
+        : HTTP/S.netify.reddit
+        : H: www.redditstatic.com
+        : SNI: www.redditstatic.com CN: www.redditstatic.com
+        : IDN: C=US, O=DigiCert Inc, CN=DigiCert SHA2 Secure Server CA SDN: C=US, ST=California, L=San Francisco, O=Reddit Inc., CN=www.redditstatic.com
+
+offline0: i6p-u-----r-fa- TCP [OR] 64:ff9b::9765:798c:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:56570
+        : HTTP/S.netify.reddit
+        : H: www.redditstatic.com
+        : SNI: www.redditstatic.com CN: www.redditstatic.com
+        : IDN: C=US, O=DigiCert Inc, CN=DigiCert SHA2 Secure Server CA SDN: C=US, ST=California, L=San Francisco, O=Reddit Inc., CN=www.redditstatic.com
+
+offline0: i6p-u-----r-fa- TCP [OR] 64:ff9b::9765:798c:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:56566
+        : HTTP/S.netify.reddit
+        : H: www.redditstatic.com
+        : SNI: www.redditstatic.com CN: www.redditstatic.com
+        : IDN: C=US, O=DigiCert Inc, CN=DigiCert SHA2 Secure Server CA SDN: C=US, ST=California, L=San Francisco, O=Reddit Inc., CN=www.redditstatic.com
+
+offline0: i6p-------r---- TCP [OR] 64:ff9b::9765:798c:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:56592
+        : HTTP/S.netify.reddit
+        : H: emoji.redditmedia.com
+        : SNI: emoji.redditmedia.com
+
+offline0: i6p-------r-fa- TCP [OR] 64:ff9b::9765:798c:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:56590
+        : HTTP/S.netify.reddit
+        : H: emoji.redditmedia.com
+        : SNI: emoji.redditmedia.com
+
+offline0: i6p-u-----r-fa- TCP [OR] 64:ff9b::9765:798c:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:56572
+        : HTTP/S.netify.reddit
+        : H: www.redditstatic.com
+        : SNI: www.redditstatic.com CN: www.redditstatic.com
+        : IDN: C=US, O=DigiCert Inc, CN=DigiCert SHA2 Secure Server CA SDN: C=US, ST=California, L=San Francisco, O=Reddit Inc., CN=www.redditstatic.com
+
+offline0: i6p-u-----r---- TCP [OR] 64:ff9b::9765:798c:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:56578
+        : HTTP/S.netify.reddit
+        : H: styles.redditmedia.com
+        : SNI: styles.redditmedia.com
+        : IDN: C=US, O=DigiCert Inc, CN=DigiCert SHA2 Secure Server CA SDN: C=US, ST=California, L=San Francisco, O=Reddit Inc., CN=*.redditmedia.com
+
+offline0: i6p-u-----r-fa- TCP [OR] 64:ff9b::9765:798c:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:56576
+        : HTTP/S.netify.reddit
+        : H: styles.redditmedia.com
+        : SNI: styles.redditmedia.com
+        : IDN: C=US, O=DigiCert Inc, CN=DigiCert SHA2 Secure Server CA SDN: C=US, ST=California, L=San Francisco, O=Reddit Inc., CN=*.redditmedia.com
+
+offline0: i6p-u-----r-fa- TCP [OR] 64:ff9b::9765:798c:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:56574
+        : HTTP/S.netify.reddit
+        : H: styles.redditmedia.com
+        : SNI: styles.redditmedia.com
+        : IDN: C=US, O=DigiCert Inc, CN=DigiCert SHA2 Secure Server CA SDN: C=US, ST=California, L=San Francisco, O=Reddit Inc., CN=*.redditmedia.com
+
+offline0: i6p-u-----r---- TCP [OR] 64:ff9b::9765:798c:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:56582
+        : HTTP/S.netify.reddit
+        : H: preview.redd.it
+        : SNI: preview.redd.it
+        : IDN: C=US, O=DigiCert Inc, CN=DigiCert SHA2 Secure Server CA SDN: C=US, ST=California, L=San Francisco, O=Reddit Inc., CN=*.redd.it
+
+offline0: i6p-u-----r-fa- TCP [OR] 64:ff9b::9765:798c:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:56580
+        : HTTP/S.netify.reddit
+        : H: styles.redditmedia.com
+        : SNI: styles.redditmedia.com
+        : IDN: C=US, O=DigiCert Inc, CN=DigiCert SHA2 Secure Server CA SDN: C=US, ST=California, L=San Francisco, O=Reddit Inc., CN=*.redditmedia.com
+
+offline0: i6p-u-----r-fa- TCP [OR] 64:ff9b::9765:798c:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:56584
+        : HTTP/S.netify.reddit
+        : H: preview.redd.it
+        : SNI: preview.redd.it
+        : IDN: C=US, O=DigiCert Inc, CN=DigiCert SHA2 Secure Server CA SDN: C=US, ST=California, L=San Francisco, O=Reddit Inc., CN=*.redd.it
+
+offline0: i6p-u-----r-fa- TCP [OR] 64:ff9b::9765:798c:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:56586
+        : HTTP/S.netify.reddit
+        : H: preview.redd.it
+        : SNI: preview.redd.it
+        : IDN: C=US, O=DigiCert Inc, CN=DigiCert SHA2 Secure Server CA SDN: C=US, ST=California, L=San Francisco, O=Reddit Inc., CN=*.redd.it
+
+offline0: i6p-u-----r-fa- TCP [OR] 64:ff9b::9765:798c:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:56588
+        : HTTP/S.netify.reddit
+        : H: preview.redd.it
+        : SNI: preview.redd.it
+        : IDN: C=US, O=DigiCert Inc, CN=DigiCert SHA2 Secure Server CA SDN: C=US, ST=California, L=San Francisco, O=Reddit Inc., CN=*.redd.it
+
+offline0: i6p-u-----r---- TCP [OR] 64:ff9b::9765:798c:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:56592
+        : HTTP/S.netify.reddit
+        : H: emoji.redditmedia.com
+        : SNI: emoji.redditmedia.com
+        : IDN: C=US, O=DigiCert Inc, CN=DigiCert SHA2 Secure Server CA SDN: C=US, ST=California, L=San Francisco, O=Reddit Inc., CN=*.redditmedia.com
+
+offline0: i6p-u-----r-fa- TCP [OR] 64:ff9b::9765:798c:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:56590
+        : HTTP/S.netify.reddit
+        : H: emoji.redditmedia.com
+        : SNI: emoji.redditmedia.com
+        : IDN: C=US, O=DigiCert Inc, CN=DigiCert SHA2 Secure Server CA SDN: C=US, ST=California, L=San Francisco, O=Reddit Inc., CN=*.redditmedia.com
+
+offline0: i6p-------r---- TCP [OR] 64:ff9b::9765:798c:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:56594
+        : HTTP/S.netify.reddit
+        : H: b.thumbs.redditmedia.com
+        : SNI: b.thumbs.redditmedia.com
+
+offline0: i6p-u-----r---- TCP [OR] 64:ff9b::9765:798c:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:56594
+        : HTTP/S.netify.reddit
+        : H: b.thumbs.redditmedia.com
+        : SNI: b.thumbs.redditmedia.com
+        : IDN: C=US, O=DigiCert Inc, CN=DigiCert SHA2 Secure Server CA SDN: C=US, ST=California, L=San Francisco, O=Reddit Inc., CN=*.thumbs.redditmedia.com
+
+offline0: i6p-------r---- TCP [OR] 2a00:1450:4007:805::2002:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:50960
+        : HTTP/S.netify.google-ads
+        : H: www.googletagservices.com
+        : SNI: www.googletagservices.com
+
+offline0: i6p-------r---- TCP [OR] 64:ff9b::6853:b3b6:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:38320
+        : HTTP/S.netify.aax-media
+        : H: c.aaxads.com
+        : SNI: c.aaxads.com
+
+offline0: i6p-------r---- TCP [OR] 64:ff9b::df9:21c6:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:43492
+        : HTTP/S.netify.amazon-advertising
+        : H: c.amazon-adsystem.com
+        : SNI: c.amazon-adsystem.com
+
+offline0: i6p-u-----r---- TCP [OR] 2a00:1450:4007:805::2002:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:50960
+        : HTTP/S.netify.google-ads
+        : H: www.googletagservices.com
+        : SNI: www.googletagservices.com
+
+offline0: i6p-u-----r---- TCP [OR] 64:ff9b::df9:21c6:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:43492
+        : HTTP/S.netify.amazon-advertising
+        : H: c.amazon-adsystem.com
+        : SNI: c.amazon-adsystem.com
+
+offline0: i6p-u-----r---- TCP [OR] 64:ff9b::6853:b3b6:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:38320
+        : HTTP/S.netify.aax-media
+        : H: c.aaxads.com
+        : SNI: c.aaxads.com
+
+offline0: i6p-------r---- TCP [OR] 64:ff9b::acd9:12c2:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:51026
+        : HTTP/S.netify.google-ads
+        : H: securepubads.g.doubleclick.net
+        : SNI: securepubads.g.doubleclick.net
+
+offline0: i6p-------r---- TCP [OR] 64:ff9b::9765:789d:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:48240
+        : HTTP/S.netify.twitter
+        : H: platform.twitter.com
+        : SNI: platform.twitter.com
+
+offline0: i6p-u-----r---- TCP [OR] 64:ff9b::acd9:12c2:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:51026
+        : HTTP/S.netify.google-ads
+        : H: securepubads.g.doubleclick.net
+        : SNI: securepubads.g.doubleclick.net
+
+offline0: i6p-u-----r---- TCP [OR] 64:ff9b::9765:789d:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:48240
+        : HTTP/S.netify.twitter
+        : H: platform.twitter.com
+        : SNI: platform.twitter.com CN: platform.twitter.com
+        : IDN: C=US, O=DigiCert Inc, OU=www.digicert.com, CN=DigiCert SHA2 High Assurance Server CA SDN: C=US, ST=California, L=San Francisco, O=Twitter, Inc., OU=Twitter Security, CN=platform.twitter.com
+
+offline0: i6p-------r---- TCP [OR] 2a00:1450:4007:816::2008:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:39520
+        : HTTP/S.netify.analytics
+        : H: www.googletagmanager.com
+        : SNI: www.googletagmanager.com
+
+offline0: i6p-u-----r---- TCP [OR] 2a00:1450:4007:816::2008:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:39520
+        : HTTP/S.netify.analytics
+        : H: www.googletagmanager.com
+        : SNI: www.googletagmanager.com
+
+offline0: i6p-------r---- TCP [OR] 64:ff9b::6853:b3d1:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:32970
+        : HTTP/S.netify.aax-media
+        : H: www.aaxdetect.com
+        : SNI: www.aaxdetect.com
+
+offline0: i6p-------r---- TCP [OR] 64:ff9b::68f4:2ac8:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:56782
+        : HTTP/S.netify.twitter
+        : H: syndication.twitter.com
+        : SNI: syndication.twitter.com
+
+offline0: i6p-u-----r---- TCP [OR] 64:ff9b::6853:b3d1:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:32970
+        : HTTP/S.netify.aax-media
+        : H: www.aaxdetect.com
+        : SNI: www.aaxdetect.com
+
+offline0: i6p-------r---- TCP [OR] 64:ff9b::2278:cf94:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:39626
+        : HTTP/S.netify.towerdata
+        : H: id.rlcdn.com
+        : SNI: id.rlcdn.com
+
+offline0: i6p-------r---- TCP [OR] 2a00:1450:4007:806::200e:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:54862
+        : HTTP/S.netify.youtube
+        : H: www.youtube.com
+        : SNI: www.youtube.com
+
+offline0: i6p-------r---- TCP [OR] 2620:116:800d:21:f916:5049:f87f:108e:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:48648
+        : HTTP/S.netify.quantcast
+        : H: secure.quantserve.com
+        : SNI: secure.quantserve.com
+
+offline0: i6p-------r---- TCP [OR] 64:ff9b::1736:86f1:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:44264
+        : HTTP/S.netify.comscore
+        : H: sb.scorecardresearch.com
+        : SNI: sb.scorecardresearch.com
+
+offline0: i6p-u-----r---- TCP [OR] 64:ff9b::2278:cf94:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:39626
+        : HTTP/S.netify.towerdata
+        : H: id.rlcdn.com
+        : SNI: id.rlcdn.com
+
+offline0: i6p-u-----r---- TCP [OR] 2a00:1450:4007:806::200e:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:54862
+        : HTTP/S.netify.youtube
+        : H: www.youtube.com
+        : SNI: www.youtube.com
+
+offline0: i6p-u-----r---- TCP [OR] 64:ff9b::1736:86f1:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:44264
+        : HTTP/S.netify.comscore
+        : H: sb.scorecardresearch.com
+        : SNI: sb.scorecardresearch.com
+
+offline0: i6p-u-----r---- TCP [OR] 2620:116:800d:21:f916:5049:f87f:108e:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:48648
+        : HTTP/S.netify.quantcast
+        : H: secure.quantserve.com
+        : SNI: secure.quantserve.com
+        : IDN: C=US, O=DigiCert Inc, OU=www.digicert.com, CN=DigiCert SHA2 High Assurance Server CA SDN: C=US, ST=California, L=San Francisco, O=Quantcast Corporation, CN=*.quantserve.com
+
+offline0: i6p-u-----r---- TCP [OR] 64:ff9b::68f4:2ac8:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:56782
+        : HTTP/S.netify.twitter
+        : H: syndication.twitter.com
+        : SNI: syndication.twitter.com CN: syndication.twitter.com
+        : IDN: C=US, O=DigiCert Inc, OU=www.digicert.com, CN=DigiCert SHA2 High Assurance Server CA SDN: C=US, ST=California, L=San Francisco, O=Twitter, Inc., OU=lon3, CN=syndication.twitter.com
+
+offline0: i6p-------r---- TCP [OR] 64:ff9b::d83a:d1e6:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:51100
+        : HTTP/S.netify.google-ads
+        : H: ad.doubleclick.net
+        : SNI: ad.doubleclick.net
+
+offline0: i6p-------r-fa- TCP [OR] 64:ff9b::d83a:d1e6:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:51102
+        : HTTP/S.netify.google-ads
+        : H: ad.doubleclick.net
+        : SNI: ad.doubleclick.net
+
+offline0: i6p-------r---- TCP [OR] 2600:9000:219c:ee00:6:44e3:f8c0:93a1:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:56186
+        : HTTP/S.netify.quantcast
+        : H: rules.quantcount.com
+        : SNI: rules.quantcount.com
+
+offline0: i6p-u-----r---- TCP [OR] 64:ff9b::d83a:d1e6:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:51100
+        : HTTP/S.netify.google-ads
+        : H: ad.doubleclick.net
+        : SNI: ad.doubleclick.net
+
+offline0: i6p-u-----r-fa- TCP [OR] 64:ff9b::d83a:d1e6:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:51102
+        : HTTP/S.netify.google-ads
+        : H: ad.doubleclick.net
+        : SNI: ad.doubleclick.net
+
+offline0: i6p-u-----r---- TCP [OR] 2600:9000:219c:ee00:6:44e3:f8c0:93a1:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:56186
+        : HTTP/S.netify.quantcast
+        : H: rules.quantcount.com
+        : SNI: rules.quantcount.com
+
+offline0: i6p-------r---- TCP [OR] 2606:2800:134:1a0d:1429:742:782:b6:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:39736
+        : HTTP/S.netify.twitter
+        : H: cdn.syndication.twimg.com
+        : SNI: cdn.syndication.twimg.com
+
+offline0: i6p-u-----r---- TCP [OR] 2606:2800:134:1a0d:1429:742:782:b6:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:39736
+        : HTTP/S.netify.twitter
+        : H: cdn.syndication.twimg.com
+        : SNI: cdn.syndication.twimg.com
+
+offline0: i6p-------r---- TCP [OR] 2a00:1450:4007:808::2006:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:54726
+        : HTTP/S.netify.google-ads
+        : H: static.doubleclick.net
+        : SNI: static.doubleclick.net
+
+offline0: i6p-------r---- TCP [OR] 2a00:1450:4007:805::2004:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:57282
+        : HTTP/S.netify.google
+        : H: www.google.com
+        : SNI: www.google.com
+
+offline0: i6p-u-----r---- TCP [OR] 2a00:1450:4007:808::2006:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:54726
+        : HTTP/S.netify.google-ads
+        : H: static.doubleclick.net
+        : SNI: static.doubleclick.net
+
+offline0: i6p-u-----r---- TCP [OR] 2a00:1450:4007:805::2004:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:57282
+        : HTTP/S.netify.google
+        : H: www.google.com
+        : SNI: www.google.com
+
+offline0: i6p-------r---- TCP [OR] 2a00:1450:4007:80c::2003:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:47302
+        : HTTP/S.netify.google
+        : H: fonts.gstatic.com
+        : SNI: fonts.gstatic.com
+
+offline0: i6p-------r-fa- TCP [OR] 2a00:1450:4007:80c::2003:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:47304
+        : HTTP/S.netify.google
+        : H: fonts.gstatic.com
+        : SNI: fonts.gstatic.com
+
+offline0: i6p-------r---- TCP [OR] 2a00:1450:4007:805::2001:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:58122
+        : HTTP/S.netify.youtube
+        : H: yt3.ggpht.com
+        : SNI: yt3.ggpht.com
+
+offline0: i6p-------r---- TCP [OR] 2a00:1450:4007:815::2016:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:52296
+        : HTTP/S.netify.youtube
+        : H: i.ytimg.com
+        : SNI: i.ytimg.com
+
+offline0: i6p-u-----r---- TCP [OR] 2a00:1450:4007:805::2001:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:58122
+        : HTTP/S.netify.youtube
+        : H: yt3.ggpht.com
+        : SNI: yt3.ggpht.com
+
+offline0: i6p-u-----r---- TCP [OR] 2a00:1450:4007:815::2016:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:52296
+        : HTTP/S.netify.youtube
+        : H: i.ytimg.com
+        : SNI: i.ytimg.com
+
+offline0: i6p-u-----r---- TCP [OR] 2a00:1450:4007:80c::2003:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:47302
+        : HTTP/S.netify.google
+        : H: fonts.gstatic.com
+        : SNI: fonts.gstatic.com
+
+offline0: i6p-u-----r-fa- TCP [OR] 2a00:1450:4007:80c::2003:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:47304
+        : HTTP/S.netify.google
+        : H: fonts.gstatic.com
+        : SNI: fonts.gstatic.com
+
+offline0: i6p-------r---- TCP [OR] 64:ff9b::9765:798c:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:56640
+        : HTTP/S.netify.reddit
+        : H: gateway.reddit.com
+        : SNI: gateway.reddit.com
+
+offline0: i6p-u-----r---- TCP [OR] 64:ff9b::9765:798c:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:56640
+        : HTTP/S.netify.reddit
+        : H: gateway.reddit.com
+        : SNI: gateway.reddit.com
+        : IDN: C=US, O=DigiCert Inc, CN=DigiCert SHA2 Secure Server CA SDN: C=US, ST=California, L=San Francisco, O=Reddit Inc., CN=*.reddit.com
+
+offline0: i6p-------r---- TCP [OR] 2a00:1450:4007:805::2002:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:51006
+        : HTTP/S.netify.google-ads
+        : H: adservice.google.fr
+        : SNI: adservice.google.fr
+
+offline0: i6p-------r---- TCP [OR] 2a00:1450:4007:80b::2002:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:59336
+        : HTTP/S.netify.google-ads
+        : H: adservice.google.com
+        : SNI: adservice.google.com
+
+offline0: i6p-------r---- TCP [OR] 64:ff9b::345f:7ca5:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:46646
+        : HTTP/S.netify.amazon-advertising
+        : H: aax-eu.amazon-adsystem.com
+        : SNI: aax-eu.amazon-adsystem.com
+
+offline0: i6p-u-----r---- TCP [OR] 2a00:1450:4007:805::2002:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:51006
+        : HTTP/S.netify.google-ads
+        : H: adservice.google.fr
+        : SNI: adservice.google.fr
+
+offline0: i6p-u-----r---- TCP [OR] 2a00:1450:4007:80b::2002:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:59336
+        : HTTP/S.netify.google-ads
+        : H: adservice.google.com
+        : SNI: adservice.google.com
+
+offline0: i6p-------r---- TCP [OR] 2a00:1450:4007:80b::2001:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:59624
+        : HTTP/S.netify.google-ads
+        : H: 8a755a3fef0b189d8ab5b0d10758f68a.safeframe.googlesyndication.com
+        : SNI: 8a755a3fef0b189d8ab5b0d10758f68a.safeframe.googlesyndication.com
+
+offline0: i6p-u-----r---- TCP [OR] 2a00:1450:4007:80b::2001:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:59624
+        : HTTP/S.netify.google-ads
+        : H: 8a755a3fef0b189d8ab5b0d10758f68a.safeframe.googlesyndication.com
+        : SNI: 8a755a3fef0b189d8ab5b0d10758f68a.safeframe.googlesyndication.com
+
+offline0: i6p-u-----r---- TCP [OR] 64:ff9b::345f:7ca5:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:46646
+        : HTTP/S.netify.amazon-advertising
+        : H: aax-eu.amazon-adsystem.com
+        : SNI: aax-eu.amazon-adsystem.com CN: aax-eu.amazon-adsystem.com
+        : IDN: C=US, O=Amazon, OU=Server CA 1B, CN=Amazon SDN: CN=aax-eu.amazon-adsystem.com
+
+offline0: i6p-------r---- TCP [OR] 2a00:1450:4007:808::2001:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:46806
+        : HTTP/S.netify.amp
+        : H: cdn.ampproject.org
+        : SNI: cdn.ampproject.org
+
+offline0: i6p-------r-fa- TCP [OR] 2a00:1450:4007:808::2001:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:46808
+        : HTTP/S.netify.amp
+        : H: cdn.ampproject.org
+        : SNI: cdn.ampproject.org
+
+offline0: i6p-------r-fa- TCP [OR] 2a00:1450:4007:808::2001:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:46810
+        : HTTP/S.netify.amp
+        : H: cdn.ampproject.org
+        : SNI: cdn.ampproject.org
+
+offline0: i6p-------r-fa- TCP [OR] 2a00:1450:4007:808::2001:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:46812
+        : HTTP/S.netify.amp
+        : H: cdn.ampproject.org
+        : SNI: cdn.ampproject.org
+
+offline0: i6p-------r-fa- TCP [OR] 2a00:1450:4007:808::2001:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:46814
+        : HTTP/S.netify.amp
+        : H: cdn.ampproject.org
+        : SNI: cdn.ampproject.org
+
+offline0: i6p-------r---- TCP [OR] 2a00:1450:4007:811::200a:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:38166
+        : HTTP/S.netify.google
+        : H: fonts.googleapis.com
+        : SNI: fonts.googleapis.com
+
+offline0: i6p-------r---- TCP [OR] 2a00:1450:4007:80f::2001:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:36964
+        : HTTP/S.netify.google-ads
+        : H: tpc.googlesyndication.com
+        : SNI: tpc.googlesyndication.com
+
+offline0: i6p-------r-fa- TCP [OR] 2a00:1450:4007:80f::2001:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:36966
+        : HTTP/S.netify.google-ads
+        : H: tpc.googlesyndication.com
+        : SNI: tpc.googlesyndication.com
+
+offline0: i6p-------r-fa- TCP [OR] 2a00:1450:4007:80f::2001:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:36970
+        : HTTP/S.netify.google-ads
+        : H: tpc.googlesyndication.com
+        : SNI: tpc.googlesyndication.com
+
+offline0: i6p-------r-fa- TCP [OR] 2a00:1450:4007:80f::2001:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:36968
+        : HTTP/S.netify.google-ads
+        : H: tpc.googlesyndication.com
+        : SNI: tpc.googlesyndication.com
+
+offline0: i6p-u-----r---- TCP [OR] 2a00:1450:4007:808::2001:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:46806
+        : HTTP/S.netify.amp
+        : H: cdn.ampproject.org
+        : SNI: cdn.ampproject.org
+
+offline0: i6p-u-----r-fa- TCP [OR] 2a00:1450:4007:808::2001:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:46808
+        : HTTP/S.netify.amp
+        : H: cdn.ampproject.org
+        : SNI: cdn.ampproject.org
+
+offline0: i6p-u-----r-fa- TCP [OR] 2a00:1450:4007:808::2001:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:46810
+        : HTTP/S.netify.amp
+        : H: cdn.ampproject.org
+        : SNI: cdn.ampproject.org
+
+offline0: i6p-u-----r-fa- TCP [OR] 2a00:1450:4007:808::2001:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:46812
+        : HTTP/S.netify.amp
+        : H: cdn.ampproject.org
+        : SNI: cdn.ampproject.org
+
+offline0: i6p-u-----r-fa- TCP [OR] 2a00:1450:4007:808::2001:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:46814
+        : HTTP/S.netify.amp
+        : H: cdn.ampproject.org
+        : SNI: cdn.ampproject.org
+
+offline0: i6p-u-----r---- TCP [OR] 2a00:1450:4007:811::200a:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:38166
+        : HTTP/S.netify.google
+        : H: fonts.googleapis.com
+        : SNI: fonts.googleapis.com
+
+offline0: i6p-u-----r---- TCP [OR] 2a00:1450:4007:80f::2001:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:36964
+        : HTTP/S.netify.google-ads
+        : H: tpc.googlesyndication.com
+        : SNI: tpc.googlesyndication.com
+
+offline0: i6p-u-----r-fa- TCP [OR] 2a00:1450:4007:80f::2001:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:36966
+        : HTTP/S.netify.google-ads
+        : H: tpc.googlesyndication.com
+        : SNI: tpc.googlesyndication.com
+
+offline0: i6p-u-----r-fa- TCP [OR] 2a00:1450:4007:80f::2001:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:36970
+        : HTTP/S.netify.google-ads
+        : H: tpc.googlesyndication.com
+        : SNI: tpc.googlesyndication.com
+
+offline0: i6p-u-----r-fa- TCP [OR] 2a00:1450:4007:80f::2001:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:36968
+        : HTTP/S.netify.google-ads
+        : H: tpc.googlesyndication.com
+        : SNI: tpc.googlesyndication.com
+
+offline0: i6p-------r---- TCP [OR] 64:ff9b::34d3:acec:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:47006
+        : HTTP/S.netify.flashtalking
+        : H: d9.flashtalking.com
+        : SNI: d9.flashtalking.com
+
+offline0: i6p-u-----r---- TCP [OR] 64:ff9b::34d3:acec:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:47006
+        : HTTP/S.netify.flashtalking
+        : H: d9.flashtalking.com
+        : SNI: d9.flashtalking.com
+
+offline0: i6p-u-----r---- TCP [OR] 64:ff9b::34d3:acec:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:47006
+        : HTTP/S.netify.flashtalking
+        : H: d9.flashtalking.com
+        : SNI: d9.flashtalking.com CN: tag.device9.com
+        : IDN: C=US, ST=Arizona, L=Scottsdale, O=GoDaddy.com, Inc., OU=http://certs.godaddy.com/repository/, CN=Go Daddy Secure Certificate Authority - G2 SDN: OU=Domain Control Validated, CN=tag.device9.com
+
+offline0: i6pc-gx-------- TCP [OR] 2a00:1450:4007:80f::2001:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:36972
+        : HTTP/S.netify.google
+

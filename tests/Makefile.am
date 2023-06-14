@@ -6,8 +6,22 @@
 AUTOMAKE_OPTIONS = foreign
 ACLOCAL_AMFLAGS = -I m4
 
+TEMPLATES = netifyd-test-pcap.conf
+TEMPLATES_IN = netifyd-test-pcap.conf.in
+
+BUILT_SOURCES = $(TEMPLATES)
+CLEANFILES = $(TEMPLATES)
 EXTRA_DIST = ndpi-pcap-files.txt netifyd-test-pcap.conf \
-	test-pcap-logs test-pcap-regression.sh pcap/ssdp.cap.gz
+	test-pcap-logs test-pcap-regression.sh pcap/ssdp.cap.gz \
+	$(TEMPLATES_IN)
+
+%: %.in
+	$(SED) \
+		-e 's|[@]testdir@|$(abs_builddir)/netifyd|g' \
+		< "$<" > "$@"
+
+clean-local:
+	rm -f $(TEMPLATES)
 
 AM_CPPFLAGS = $(CPPFLAGS) -D_GNU_SOURCE -I $(top_srcdir)/include \
 	-I $(top_srcdir)/libs/ndpi/src/include -I $(top_srcdir)/libs/inih/cpp \
@@ -49,11 +63,18 @@ AM_CPPFLAGS += $(LIBTCMALLOC_CFLAGS) -fno-builtin-malloc -fno-builtin-calloc -fn
 check_risks_LDADD += $(LIBTCMALLOC_LIBS)
 endif
 
-test:
-	sudo WITH_VALGRIND="no" TESTDIR="$(abs_srcdir)" ./test-pcap-regression.sh
+dirs:
+	$(MKDIR_P) \
+		"$(abs_builddir)/netifyd/var/run/netifyd" \
+		"$(abs_builddir)/netifyd/etc/netifyd/plugins.d" \
+		"$(abs_builddir)/netifyd/etc/netifyd/domains.d" \
+		"$(abs_builddir)/netifyd/etc/netifyd/interfaces.d"
 
-test-valgrind:
-	sudo WITH_VALGRIND="yes" TESTDIR="$(abs_srcdir)" ./test-pcap-regression.sh
+test: dirs
+	sudo WITH_VALGRIND="no" TESTDIR="$(abs_builddir)" ./test-pcap-regression.sh
+
+test-valgrind: dirs
+	sudo WITH_VALGRIND="yes" TESTDIR="$(abs_builddir)" ./test-pcap-regression.sh
 
 clean-local: clean-local-check
 clean-local-check:

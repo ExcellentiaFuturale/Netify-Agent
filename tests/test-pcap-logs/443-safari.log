@@ -1,2 +1,11 @@
-lo: [i4------] HTTP/S 178.62.197.130:443 <-- 192.168.1.13:53031 H: www.ntop.org SSL C: www.ntop.org
-lo: [i4-u----] HTTP/S 178.62.197.130:443 <-- 192.168.1.13:53031 H: www.ntop.org SSL C: www.ntop.org
+offline0: i4p-------r---- TCP [OR] 178.62.197.130:443 <-- [L] 192.168.1.13:53031
+        : HTTP/S
+        : H: www.ntop.org
+        : SNI: www.ntop.org
+
+offline0: i4p-u-----r---- TCP [OR] 178.62.197.130:443 <-- [L] 192.168.1.13:53031
+        : HTTP/S
+        : H: www.ntop.org
+        : SNI: www.ntop.org CN: www.ntop.org
+        : IDN: C=US, O=Let's Encrypt, CN=Let's Encrypt Authority X3 SDN: CN=www.ntop.org
+

@@ -1,57 +1,262 @@
-lo: [i6------] HTTP/S.netify.pinterest 64:ff9b::9765:7854:443 <-- 2a01:cb01:2049:8b07:991d:ec85:28df:f629:33262 H: www.pinterest.fr SSL C: www.pinterest.fr
-lo: [i6-u----] HTTP/S.netify.pinterest 64:ff9b::9765:7854:443 <-- 2a01:cb01:2049:8b07:991d:ec85:28df:f629:33262 H: www.pinterest.fr SSL C: www.pinterest.fr
-lo: [i6------] HTTP/S.netify.pinterest 2a01:cb01:2049:8b07:991d:ec85:28df:f629:38512 --> 2a04:4e42:1d::84:443 H: s.pinimg.com SSL C: s.pinimg.com
-lo: [i6------] HTTP/S.netify.pinterest 2a01:cb01:2049:8b07:991d:ec85:28df:f629:38518 --> 2a04:4e42:1d::84:443 H: s.pinimg.com SSL C: s.pinimg.com
-lo: [i6------] HTTP/S.netify.pinterest 2a01:cb01:2049:8b07:991d:ec85:28df:f629:38516 --> 2a04:4e42:1d::84:443 H: s.pinimg.com SSL C: s.pinimg.com
-lo: [i6------] HTTP/S.netify.pinterest 2a01:cb01:2049:8b07:991d:ec85:28df:f629:38514 --> 2a04:4e42:1d::84:443 H: s.pinimg.com SSL C: s.pinimg.com
-lo: [i6------] HTTP/S.netify.pinterest 2a01:cb01:2049:8b07:991d:ec85:28df:f629:38522 --> 2a04:4e42:1d::84:443 H: s.pinimg.com SSL C: s.pinimg.com
-lo: [i6------] HTTP/S.netify.pinterest 2a01:cb01:2049:8b07:991d:ec85:28df:f629:38520 --> 2a04:4e42:1d::84:443 H: s.pinimg.com SSL C: s.pinimg.com
-lo: [i6-u----] HTTP/S.netify.pinterest 2a01:cb01:2049:8b07:991d:ec85:28df:f629:38512 --> 2a04:4e42:1d::84:443 H: s.pinimg.com SSL C: s.pinimg.com
-lo: [i6-u----] HTTP/S.netify.pinterest 2a01:cb01:2049:8b07:991d:ec85:28df:f629:38518 --> 2a04:4e42:1d::84:443 H: s.pinimg.com SSL C: s.pinimg.com
-lo: [i6-u----] HTTP/S.netify.pinterest 2a01:cb01:2049:8b07:991d:ec85:28df:f629:38522 --> 2a04:4e42:1d::84:443 H: s.pinimg.com SSL C: s.pinimg.com
-lo: [i6-u----] HTTP/S.netify.pinterest 2a01:cb01:2049:8b07:991d:ec85:28df:f629:38516 --> 2a04:4e42:1d::84:443 H: s.pinimg.com SSL C: s.pinimg.com
-lo: [i6-u----] HTTP/S.netify.pinterest 2a01:cb01:2049:8b07:991d:ec85:28df:f629:38514 --> 2a04:4e42:1d::84:443 H: s.pinimg.com SSL C: s.pinimg.com
-lo: [i6-u----] HTTP/S.netify.pinterest 2a01:cb01:2049:8b07:991d:ec85:28df:f629:38520 --> 2a04:4e42:1d::84:443 H: s.pinimg.com SSL C: s.pinimg.com
-lo: [i6------] HTTP/S.netify.bugsnag 2600:1901:0:7a0b:::443 <-- 2a01:cb01:2049:8b07:991d:ec85:28df:f629:47032 H: sessions.bugsnag.com SSL C: sessions.bugsnag.com
-lo: [i6-u----] HTTP/S.netify.bugsnag 2600:1901:0:7a0b:::443 <-- 2a01:cb01:2049:8b07:991d:ec85:28df:f629:47032 H: sessions.bugsnag.com SSL C: sessions.bugsnag.com
-lo: [i6------] HTTP/S.netify.google 2a00:1450:4007:816::2004:443 <-- 2a01:cb01:2049:8b07:991d:ec85:28df:f629:40694 H: www.google.com SSL C: www.google.com
-lo: [i6-u----] HTTP/S.netify.google 2a00:1450:4007:816::2004:443 <-- 2a01:cb01:2049:8b07:991d:ec85:28df:f629:40694 H: www.google.com SSL C: www.google.com
-lo: [i6------] HTTP/S.netify.pinterest 64:ff9b::9765:7854:443 <-- 2a01:cb01:2049:8b07:991d:ec85:28df:f629:33280 H: accounts.pinterest.com SSL C: accounts.pinterest.com
-lo: [i6-u----] HTTP/S.netify.pinterest 64:ff9b::9765:7854:443 <-- 2a01:cb01:2049:8b07:991d:ec85:28df:f629:33280 H: accounts.pinterest.com SSL C: accounts.pinterest.com
-lo: [i6------] HTTP/S 2a01:cb01:2049:8b07:991d:ec85:28df:f629:57050 --> 2a04:4e42:1d::720:443 H: images.unsplash.com SSL C: images.unsplash.com
-lo: [i6-u----] HTTP/S.netify.fastly 2a01:cb01:2049:8b07:991d:ec85:28df:f629:57050 --> 2a04:4e42:1d::720:443 H: images.unsplash.com SSL C: images.unsplash.com
-lo: [i6------] HTTP/S.netify.google 2a00:1450:4007:816::2003:443 <-- 2a01:cb01:2049:8b07:991d:ec85:28df:f629:51582 H: www.gstatic.com SSL C: www.gstatic.com
-lo: [i6------] HTTP/S.netify.google 2a00:1450:4007:806::200e:443 <-- 2a01:cb01:2049:8b07:991d:ec85:28df:f629:54416 H: apis.google.com SSL C: apis.google.com
-lo: [i6-u----] HTTP/S.netify.google 2a00:1450:4007:816::2003:443 <-- 2a01:cb01:2049:8b07:991d:ec85:28df:f629:51582 H: www.gstatic.com SSL C: www.gstatic.com
-lo: [i6------] HTTP/S.netify.facebook 2a01:cb01:2049:8b07:991d:ec85:28df:f629:51292 --> 2a03:2880:f030:13:face:b00c:0:3:443 H: connect.facebook.net SSL C: connect.facebook.net
-lo: [i6-u----] HTTP/S.netify.google 2a00:1450:4007:806::200e:443 <-- 2a01:cb01:2049:8b07:991d:ec85:28df:f629:54416 H: apis.google.com SSL C: apis.google.com
-lo: [i6-u----] HTTP/S.netify.facebook 2a01:cb01:2049:8b07:991d:ec85:28df:f629:51292 --> 2a03:2880:f030:13:face:b00c:0:3:443 H: connect.facebook.net SSL C: connect.facebook.net
-lo: [i6------] HTTP/S.netify.facebook 2a01:cb01:2049:8b07:991d:ec85:28df:f629:60340 --> 2a03:2880:f11f:83:face:b00c:0:25de:443 H: www.facebook.com SSL C: www.facebook.com
-lo: [i6-u----] HTTP/S.netify.facebook 2a01:cb01:2049:8b07:991d:ec85:28df:f629:60340 --> 2a03:2880:f11f:83:face:b00c:0:25de:443 H: www.facebook.com SSL C: www.facebook.com
-lo: [i6------] HTTP/S.netify.google 2a00:1450:4007:816::200a:443 <-- 2a01:cb01:2049:8b07:991d:ec85:28df:f629:47790 H: content-autofill.googleapis.com SSL C: content-autofill.googleapis.com
-lo: [i6-u----] HTTP/S.netify.google 2a00:1450:4007:816::200a:443 <-- 2a01:cb01:2049:8b07:991d:ec85:28df:f629:47790 H: content-autofill.googleapis.com SSL C: content-autofill.googleapis.com
-lo: [i6------] HTTP/S.netify.google 2a00:1450:4007:805::2003:443 <-- 2a01:cb01:2049:8b07:991d:ec85:28df:f629:43562
-lo: [i6------] HTTP/S.netify.google-authentication 2a00:1450:4007:816::200d:443 <-- 2a01:cb01:2049:8b07:991d:ec85:28df:f629:40894 H: accounts.google.com SSL C: accounts.google.com
-lo: [i6-u----] HTTP/S.netify.google-authentication 2a00:1450:4007:816::200d:443 <-- 2a01:cb01:2049:8b07:991d:ec85:28df:f629:40894 H: accounts.google.com SSL C: accounts.google.com
-lo: [i6------] HTTP/S.netify.pinterest 2a01:cb01:2049:8b07:991d:ec85:28df:f629:38546 --> 2a04:4e42:1d::84:443 H: assets.pinterest.com SSL C: assets.pinterest.com
-lo: [i6------] HTTP/S.netify.analytics 2a00:1450:4007:80a::200e:443 <-- 2a01:cb01:2049:8b07:991d:ec85:28df:f629:45126 H: www.google-analytics.com SSL C: www.google-analytics.com
-lo: [i6-u----] HTTP/S.netify.pinterest 2a01:cb01:2049:8b07:991d:ec85:28df:f629:38546 --> 2a04:4e42:1d::84:443 H: assets.pinterest.com SSL C: assets.pinterest.com
-lo: [i6-u----] HTTP/S.netify.analytics 2a00:1450:4007:80a::200e:443 <-- 2a01:cb01:2049:8b07:991d:ec85:28df:f629:45126 H: www.google-analytics.com SSL C: www.google-analytics.com
-lo: [i6------] HTTP/S.netify.new-relic 64:ff9b::9765:7a6e:443 <-- 2a01:cb01:2049:8b07:991d:ec85:28df:f629:40114 H: js-agent.newrelic.com SSL C: js-agent.newrelic.com
-lo: [i6-u----] HTTP/S.netify.fastly 64:ff9b::9765:7a6e:443 <-- 2a01:cb01:2049:8b07:991d:ec85:28df:f629:40114 H: js-agent.newrelic.com SSL C: js-agent.newrelic.com
-lo: [i6--g---] HTTP/S 64:ff9b::acd9:13e2:443 <-- 2a01:cb01:2049:8b07:991d:ec85:28df:f629:34626
-lo: [i6--g---] HTTP/S.netify.google 2a00:1450:4007:80c::200a:443 <-- 2a01:cb01:2049:8b07:991d:ec85:28df:f629:57130
-lo: [i6--g---] HTTP/S.netify.google 2a00:1450:4007:806::200e:443 <-- 2a01:cb01:2049:8b07:991d:ec85:28df:f629:54308
-lo: [i6--g---] HTTP/S 2600:1901:0:7a0b:::443 <-- 2a01:cb01:2049:8b07:991d:ec85:28df:f629:46918
-lo: [i6--g---] HTTP/S.netify.google 2a00:1450:4007:816::200a:443 <-- 2a01:cb01:2049:8b07:991d:ec85:28df:f629:47682
-lo: [i6--g---] HTTP/S 64:ff9b::9765:7854:443 <-- 2a01:cb01:2049:8b07:991d:ec85:28df:f629:33164
-lo: [i6--g---] HTTP/S.netify.google 2a00:1450:4007:816::2004:443 <-- 2a01:cb01:2049:8b07:991d:ec85:28df:f629:40560
-lo: [i6--g---] HTTP/S 2a01:cb01:2049:8b07:991d:ec85:28df:f629:38402 --> 2a04:4e42:1d::84:443
-lo: [i6--g---] HTTP/S.netify.google 2a00:1450:4007:816::2003:443 <-- 2a01:cb01:2049:8b07:991d:ec85:28df:f629:51472
-lo: [i6--g---] HTTP/S.netify.google 2a00:1450:4007:80b::2002:443 <-- 2a01:cb01:2049:8b07:991d:ec85:28df:f629:58726
-lo: [i6--g---] HTTP/S 2a01:cb01:2049:8b07:991d:ec85:28df:f629:38406 --> 2a04:4e42:1d::84:443
-lo: [i6--g---] HTTP/S.netify.google 2a00:1450:4007:807::200a:443 <-- 2a01:cb01:2049:8b07:991d:ec85:28df:f629:40876
-lo: [i6--g---] HTTP/S 64:ff9b::9765:7854:443 <-- 2a01:cb01:2049:8b07:991d:ec85:28df:f629:33156
-lo: [i6--g---] HTTP/S 2a01:cb01:2049:8b07:991d:ec85:28df:f629:56940 --> 2a04:4e42:1d::720:443
-lo: [i6--g---] HTTP/S.netify.google 2a00:1450:4007:815::2003:443 <-- 2a01:cb01:2049:8b07:991d:ec85:28df:f629:48890
-lo: [i6--g---] HTTP/S.netify.google 2a00:1450:4007:816::2003:443 <-- 2a01:cb01:2049:8b07:991d:ec85:28df:f629:51446
+offline0: i6p-------r---- TCP [OR] 64:ff9b::9765:7854:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:33262
+        : HTTP/S.netify.pinterest
+        : H: www.pinterest.fr
+        : SNI: www.pinterest.fr
+
+offline0: i6p-u-----r---- TCP [OR] 64:ff9b::9765:7854:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:33262
+        : HTTP/S.netify.pinterest
+        : H: www.pinterest.fr
+        : SNI: www.pinterest.fr
+        : IDN: C=US, O=DigiCert Inc, OU=www.digicert.com, CN=DigiCert SHA2 High Assurance Server CA SDN: C=US, ST=California, L=San Francisco, O=Pinterest, Inc., CN=*.pinterest.com
+
+offline0: i6p-------r---- TCP [OR] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:38512 --> [L] 2a04:4e42:1d::84:443
+        : HTTP/S.netify.pinterest
+        : H: s.pinimg.com
+        : SNI: s.pinimg.com
+
+offline0: i6p-------r-fa- TCP [OR] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:38518 --> [L] 2a04:4e42:1d::84:443
+        : HTTP/S.netify.pinterest
+        : H: s.pinimg.com
+        : SNI: s.pinimg.com
+
+offline0: i6p-------r-fa- TCP [OR] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:38516 --> [L] 2a04:4e42:1d::84:443
+        : HTTP/S.netify.pinterest
+        : H: s.pinimg.com
+        : SNI: s.pinimg.com
+
+offline0: i6p-------r-fa- TCP [OR] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:38514 --> [L] 2a04:4e42:1d::84:443
+        : HTTP/S.netify.pinterest
+        : H: s.pinimg.com
+        : SNI: s.pinimg.com
+
+offline0: i6p-------r-fa- TCP [OR] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:38522 --> [L] 2a04:4e42:1d::84:443
+        : HTTP/S.netify.pinterest
+        : H: s.pinimg.com
+        : SNI: s.pinimg.com
+
+offline0: i6p-------r-fa- TCP [OR] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:38520 --> [L] 2a04:4e42:1d::84:443
+        : HTTP/S.netify.pinterest
+        : H: s.pinimg.com
+        : SNI: s.pinimg.com
+
+offline0: i6p-u-----r---- TCP [OR] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:38512 --> [L] 2a04:4e42:1d::84:443
+        : HTTP/S.netify.pinterest
+        : H: s.pinimg.com
+        : SNI: s.pinimg.com
+        : IDN: C=US, O=DigiCert Inc, OU=www.digicert.com, CN=DigiCert SHA2 High Assurance Server CA SDN: C=US, ST=California, L=San Francisco, O=Pinterest, Inc., CN=*.pinterest.com
+
+offline0: i6p-u-----r-fa- TCP [OR] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:38518 --> [L] 2a04:4e42:1d::84:443
+        : HTTP/S.netify.pinterest
+        : H: s.pinimg.com
+        : SNI: s.pinimg.com
+        : IDN: C=US, O=DigiCert Inc, OU=www.digicert.com, CN=DigiCert SHA2 High Assurance Server CA SDN: C=US, ST=California, L=San Francisco, O=Pinterest, Inc., CN=*.pinterest.com
+
+offline0: i6p-u-----r-fa- TCP [OR] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:38522 --> [L] 2a04:4e42:1d::84:443
+        : HTTP/S.netify.pinterest
+        : H: s.pinimg.com
+        : SNI: s.pinimg.com
+        : IDN: C=US, O=DigiCert Inc, OU=www.digicert.com, CN=DigiCert SHA2 High Assurance Server CA SDN: C=US, ST=California, L=San Francisco, O=Pinterest, Inc., CN=*.pinterest.com
+
+offline0: i6p-u-----r-fa- TCP [OR] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:38516 --> [L] 2a04:4e42:1d::84:443
+        : HTTP/S.netify.pinterest
+        : H: s.pinimg.com
+        : SNI: s.pinimg.com
+        : IDN: C=US, O=DigiCert Inc, OU=www.digicert.com, CN=DigiCert SHA2 High Assurance Server CA SDN: C=US, ST=California, L=San Francisco, O=Pinterest, Inc., CN=*.pinterest.com
+
+offline0: i6p-u-----r-fa- TCP [OR] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:38514 --> [L] 2a04:4e42:1d::84:443
+        : HTTP/S.netify.pinterest
+        : H: s.pinimg.com
+        : SNI: s.pinimg.com
+        : IDN: C=US, O=DigiCert Inc, OU=www.digicert.com, CN=DigiCert SHA2 High Assurance Server CA SDN: C=US, ST=California, L=San Francisco, O=Pinterest, Inc., CN=*.pinterest.com
+
+offline0: i6p-u-----r-fa- TCP [OR] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:38520 --> [L] 2a04:4e42:1d::84:443
+        : HTTP/S.netify.pinterest
+        : H: s.pinimg.com
+        : SNI: s.pinimg.com
+        : IDN: C=US, O=DigiCert Inc, OU=www.digicert.com, CN=DigiCert SHA2 High Assurance Server CA SDN: C=US, ST=California, L=San Francisco, O=Pinterest, Inc., CN=*.pinterest.com
+
+offline0: i6p-------r---- TCP [OR] 2600:1901:0:7a0b:::443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:47032
+        : HTTP/S.netify.bugsnag
+        : H: sessions.bugsnag.com
+        : SNI: sessions.bugsnag.com
+
+offline0: i6p-u-----r---- TCP [OR] 2600:1901:0:7a0b:::443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:47032
+        : HTTP/S.netify.bugsnag
+        : H: sessions.bugsnag.com
+        : SNI: sessions.bugsnag.com
+
+offline0: i6p-------r---- TCP [OR] 2a00:1450:4007:816::2004:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:40694
+        : HTTP/S.netify.google
+        : H: www.google.com
+        : SNI: www.google.com
+
+offline0: i6p-u-----r---- TCP [OR] 2a00:1450:4007:816::2004:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:40694
+        : HTTP/S.netify.google
+        : H: www.google.com
+        : SNI: www.google.com
+
+offline0: i6p-------r---- TCP [OR] 64:ff9b::9765:7854:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:33280
+        : HTTP/S.netify.pinterest
+        : H: accounts.pinterest.com
+        : SNI: accounts.pinterest.com
+
+offline0: i6p-u-----r---- TCP [OR] 64:ff9b::9765:7854:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:33280
+        : HTTP/S.netify.pinterest
+        : H: accounts.pinterest.com
+        : SNI: accounts.pinterest.com
+        : IDN: C=US, O=DigiCert Inc, OU=www.digicert.com, CN=DigiCert SHA2 High Assurance Server CA SDN: C=US, ST=California, L=San Francisco, O=Pinterest, Inc., CN=*.pinterest.com
+
+offline0: i6p-------r---- TCP [OR] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:57050 --> [L] 2a04:4e42:1d::720:443
+        : HTTP/S
+        : H: images.unsplash.com
+        : SNI: images.unsplash.com
+
+offline0: i6p-u-----r---- TCP [OR] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:57050 --> [L] 2a04:4e42:1d::720:443
+        : HTTP/S.netify.fastly
+        : H: images.unsplash.com
+        : SNI: images.unsplash.com CN: imgix2.map.fastly.net
+        : IDN: C=BE, O=GlobalSign nv-sa, CN=GlobalSign CloudSSL CA - SHA256 - G3 SDN: C=US, ST=California, L=San Francisco, O=Fastly, Inc., CN=imgix2.map.fastly.net
+
+offline0: i6p-------r---- TCP [OR] 2a00:1450:4007:816::2003:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:51582
+        : HTTP/S.netify.google
+        : H: www.gstatic.com
+        : SNI: www.gstatic.com
+
+offline0: i6p-------r---- TCP [OR] 2a00:1450:4007:806::200e:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:54416
+        : HTTP/S.netify.google
+        : H: apis.google.com
+        : SNI: apis.google.com
+
+offline0: i6p-u-----r---- TCP [OR] 2a00:1450:4007:816::2003:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:51582
+        : HTTP/S.netify.google
+        : H: www.gstatic.com
+        : SNI: www.gstatic.com
+
+offline0: i6p-------r---- TCP [OR] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:51292 --> [L] 2a03:2880:f030:13:face:b00c:0:3:443
+        : HTTP/S.netify.facebook
+        : H: connect.facebook.net
+        : SNI: connect.facebook.net
+
+offline0: i6p-u-----r---- TCP [OR] 2a00:1450:4007:806::200e:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:54416
+        : HTTP/S.netify.google
+        : H: apis.google.com
+        : SNI: apis.google.com
+
+offline0: i6p-u-----r---- TCP [OR] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:51292 --> [L] 2a03:2880:f030:13:face:b00c:0:3:443
+        : HTTP/S.netify.facebook
+        : H: connect.facebook.net
+        : SNI: connect.facebook.net
+
+offline0: i6p-------r---- TCP [OR] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:60340 --> [L] 2a03:2880:f11f:83:face:b00c:0:25de:443
+        : HTTP/S.netify.facebook
+        : H: www.facebook.com
+        : SNI: www.facebook.com
+
+offline0: i6p-u-----r---- TCP [OR] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:60340 --> [L] 2a03:2880:f11f:83:face:b00c:0:25de:443
+        : HTTP/S.netify.facebook
+        : H: www.facebook.com
+        : SNI: www.facebook.com
+
+offline0: i6p-------r---- TCP [OR] 2a00:1450:4007:816::200a:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:47790
+        : HTTP/S.netify.google
+        : H: content-autofill.googleapis.com
+        : SNI: content-autofill.googleapis.com
+
+offline0: i6p-u-----r---- TCP [OR] 2a00:1450:4007:816::200a:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:47790
+        : HTTP/S.netify.google
+        : H: content-autofill.googleapis.com
+        : SNI: content-autofill.googleapis.com
+
+offline0: i6p-------r---- TCP [OR] 2a00:1450:4007:805::2003:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:43562
+        : HTTP/S.netify.google
+
+offline0: i6p-------r---- TCP [OR] 2a00:1450:4007:816::200d:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:40894
+        : HTTP/S.netify.google-authentication
+        : H: accounts.google.com
+        : SNI: accounts.google.com
+
+offline0: i6p-u-----r---- TCP [OR] 2a00:1450:4007:816::200d:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:40894
+        : HTTP/S.netify.google-authentication
+        : H: accounts.google.com
+        : SNI: accounts.google.com
+
+offline0: i6p-------r---- TCP [OR] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:38546 --> [L] 2a04:4e42:1d::84:443
+        : HTTP/S.netify.pinterest
+        : H: assets.pinterest.com
+        : SNI: assets.pinterest.com
+
+offline0: i6p-------r---- TCP [OR] 2a00:1450:4007:80a::200e:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:45126
+        : HTTP/S.netify.analytics
+        : H: www.google-analytics.com
+        : SNI: www.google-analytics.com
+
+offline0: i6p-u-----r---- TCP [OR] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:38546 --> [L] 2a04:4e42:1d::84:443
+        : HTTP/S.netify.pinterest
+        : H: assets.pinterest.com
+        : SNI: assets.pinterest.com
+        : IDN: C=US, O=DigiCert Inc, OU=www.digicert.com, CN=DigiCert SHA2 High Assurance Server CA SDN: C=US, ST=California, L=San Francisco, O=Pinterest, Inc., CN=*.pinterest.com
+
+offline0: i6p-u-----r---- TCP [OR] 2a00:1450:4007:80a::200e:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:45126
+        : HTTP/S.netify.analytics
+        : H: www.google-analytics.com
+        : SNI: www.google-analytics.com
+
+offline0: i6p-------r---- TCP [OR] 64:ff9b::9765:7a6e:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:40114
+        : HTTP/S.netify.new-relic
+        : H: js-agent.newrelic.com
+        : SNI: js-agent.newrelic.com
+
+offline0: i6p-u-----r---- TCP [OR] 64:ff9b::9765:7a6e:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:40114
+        : HTTP/S.netify.fastly
+        : H: js-agent.newrelic.com
+        : SNI: js-agent.newrelic.com CN: f4.shared.global.fastly.net
+        : IDN: C=BE, O=GlobalSign nv-sa, CN=GlobalSign CloudSSL CA - SHA256 - G3 SDN: C=US, ST=California, L=San Francisco, O=Fastly, Inc., CN=f4.shared.global.fastly.net
+
+offline0: i6pc-gx-------- TCP [OR] 2a00:1450:4007:807::200a:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:40876
+        : HTTP/S.netify.google
+
+offline0: i6pc-gx-------- TCP [OR] 64:ff9b::9765:7854:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:33164
+        : HTTP/S
+
+offline0: i6pc-gx-------- TCP [OR] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:56940 --> [L] 2a04:4e42:1d::720:443
+        : HTTP/S
+
+offline0: i6pc-gxX------- TCP [OR] 2a00:1450:4007:80c::200a:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:57130
+        : HTTP/S.netify.google
+
+offline0: i6pc-gx-------- TCP [OR] 2600:1901:0:7a0b:::443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:46918
+        : HTTP/S
+
+offline0: i6pc-gx-------- TCP [OR] 64:ff9b::9765:7854:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:33156
+        : HTTP/S
+
+offline0: i6pc-gx-------- TCP [OR] 64:ff9b::acd9:13e2:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:34626
+        : HTTP/S
+
+offline0: i6pc-gx-------- TCP [OR] 2a00:1450:4007:816::200a:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:47682
+        : HTTP/S.netify.google
+
+offline0: i6pc-gx-------- TCP [OR] 2a00:1450:4007:80b::2002:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:58726
+        : HTTP/S.netify.google
+
+offline0: i6pc-gx-------- TCP [OR] 2a00:1450:4007:815::2003:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:48890
+        : HTTP/S.netify.google
+
+offline0: i6pc-gx-------- TCP [OR] 2a00:1450:4007:816::2004:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:40560
+        : HTTP/S.netify.google
+
+offline0: i6pc-gx-------- TCP [OR] 2a00:1450:4007:806::200e:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:54308
+        : HTTP/S.netify.google
+
+offline0: i6pc-gx-------- TCP [OR] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:38402 --> [L] 2a04:4e42:1d::84:443
+        : HTTP/S
+
+offline0: i6pc-gx-------- TCP [OR] 2a00:1450:4007:816::2003:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:51472
+        : HTTP/S.netify.google
+
+offline0: i6pc-gx-------- TCP [OR] 2a00:1450:4007:816::2003:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:51446
+        : HTTP/S.netify.google
+
+offline0: i6pc-gx-------- TCP [OR] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:38406 --> [L] 2a04:4e42:1d::84:443
+        : HTTP/S
+

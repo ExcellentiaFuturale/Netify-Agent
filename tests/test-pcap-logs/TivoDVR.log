@@ -1,1 +1,3 @@
-lo: [i4------] TiVo/Connect.netify.tivo 98.245.242.69:2190 --> 255.255.255.255:2190
+offline0: i4pc------r---- UDP [L] 98.245.242.69:2190 --> [OB] 255.255.255.255:2190
+        : TiVo/Connect.netify.tivo
+

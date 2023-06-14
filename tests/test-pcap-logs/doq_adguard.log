@@ -1,1 +1,5 @@
-lo: [i4------] QUIC.netify.adguard 94.140.14.14:784 <-- 192.168.12.169:41070 H: dns.adguard.com SSL C: dns.adguard.com
+offline0: i4pc------r---- UDP [OR] 94.140.14.14:784 <-- [L] 192.168.12.169:41070
+        : QUIC.netify.adguard
+        : H: dns.adguard.com
+        : SNI: dns.adguard.com
+

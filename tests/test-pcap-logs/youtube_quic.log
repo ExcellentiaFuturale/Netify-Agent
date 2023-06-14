@@ -1,3 +1,15 @@
-lo: [i4------] QUIC.netify.google-ads 192.168.1.7:54997 --> 216.58.205.66:443 H: pagead2.googlesyndication.com SSL C: pagead2.googlesyndication.com
-lo: [i4------] QUIC.netify.youtube 192.168.1.7:56074 --> 216.58.198.33:443 H: yt3.ggpht.com SSL C: yt3.ggpht.com
-lo: [i4------] QUIC.netify.google-ads 192.168.1.7:53859 --> 216.58.205.66:443 H: googleads.g.doubleclick.net SSL C: googleads.g.doubleclick.net
+offline0: i4pc------r---- UDP [L] 192.168.1.7:54997 --> [OR] 216.58.205.66:443
+        : QUIC.netify.google-ads
+        : H: pagead2.googlesyndication.com
+        : SNI: pagead2.googlesyndication.com
+
+offline0: i4pc------r---- UDP [L] 192.168.1.7:56074 --> [OR] 216.58.198.33:443
+        : QUIC.netify.youtube
+        : H: yt3.ggpht.com
+        : SNI: yt3.ggpht.com
+
+offline0: i4pc------r---- UDP [L] 192.168.1.7:53859 --> [OR] 216.58.205.66:443
+        : QUIC.netify.google-ads
+        : H: googleads.g.doubleclick.net
+        : SNI: googleads.g.doubleclick.net
+

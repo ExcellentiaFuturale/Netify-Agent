@@ -1,1 +1,6 @@
-lo: [i4------] HTTP 40.77.167.36:64768 --> 89.31.72.220:80 H: atlanteditorino.it
+offline0: i4p-------r---- TCP [OR] 40.77.167.36:64768 --> [L] 89.31.72.220:80
+        : HTTP
+        : H: atlanteditorino.it
+        : HTTP/UA: Mozilla/5.0 (compatible; bingbot/2.0; +http://www.bing.com/bingbot.htm)
+        : URL: atlanteditorino.it/quartieri/img/S.Donato_M.Vittoria1930_B.jpg
+

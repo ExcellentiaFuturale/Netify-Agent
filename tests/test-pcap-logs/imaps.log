@@ -1,5 +1,26 @@
-lo: [i4------] IMAP/S 167.99.215.164:993 <-- 192.168.1.8:50506 H: mail.ntop.org SSL C: mail.ntop.org
-lo: [i4-u----] IMAP/S 167.99.215.164:993 <-- 192.168.1.8:50506 H: mail.ntop.org SSL C: mail.ntop.org
-lo: [i4-u----] IMAP/S 167.99.215.164:993 <-- 192.168.1.8:50506 H: mail.ntop.org SSL C: mail.ntop.org
-lo: [i4------] IMAP/S.netify.godaddy 10.10.10.1:993 <-- 192.168.0.1:51529 H: imap.asia.secureserver.net SSL C: imap.asia.secureserver.net
-lo: [i4-u----] IMAP/S.netify.godaddy 10.10.10.1:993 <-- 192.168.0.1:51529 H: imap.asia.secureserver.net SSL C: imap.asia.secureserver.net
+offline0: i4p-------r---- TCP [OR] 167.99.215.164:993 <-- [L] 192.168.1.8:50506
+        : IMAP/S
+        : H: mail.ntop.org
+        : SNI: mail.ntop.org
+
+offline0: i4p-u-----r---- TCP [OR] 167.99.215.164:993 <-- [L] 192.168.1.8:50506
+        : IMAP/S
+        : H: mail.ntop.org
+        : SNI: mail.ntop.org
+
+offline0: i4p-u-----r---- TCP [OR] 167.99.215.164:993 <-- [L] 192.168.1.8:50506
+        : IMAP/S
+        : H: mail.ntop.org
+        : SNI: mail.ntop.org CN: mail.ntop.org
+        : IDN: C=US, O=Let's Encrypt, CN=Let's Encrypt Authority X3 SDN: CN=mail.ntop.org
+
+offline0: i4p-------r---- TCP [L] 10.10.10.1:993 <-- [OL] 192.168.0.1:51529
+        : IMAP/S.netify.godaddy
+        : H: imap.asia.secureserver.net
+        : SNI: imap.asia.secureserver.net
+
+offline0: i4p-u-----r---- TCP [L] 10.10.10.1:993 <-- [OL] 192.168.0.1:51529
+        : IMAP/S.netify.godaddy
+        : H: imap.asia.secureserver.net
+        : SNI: imap.asia.secureserver.net
+

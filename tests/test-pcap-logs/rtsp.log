@@ -1,7 +1,28 @@
-lo: [i4------] RTSP 10.1.1.10:52470 --> 10.2.2.2:8554
-lo: [i4------] RTSP 10.1.1.10:52472 --> 10.2.2.2:8554
-lo: [i4------] RTSP 10.1.1.10:52474 --> 10.2.2.2:8554
-lo: [i4------] RTSP 10.1.1.10:52476 --> 10.2.2.2:8554
-lo: [i4------] RTSP 10.1.1.10:52478 --> 10.2.2.2:8554
-lo: [i4------] RTSP 10.1.1.10:52480 --> 10.2.2.2:8554
-lo: [i4------] RTSP 10.1.1.10:52482 --> 10.2.2.2:8554
+offline0: i4pc------r---- TCP [L] 10.1.1.10:52470 --> [OL] 10.2.2.2:8554
+        : RTSP
+        : HTTP/UA: LibVLC/3.0.16 (LIVE555 Streaming Media v2016.11.28)
+
+offline0: i4pc------r---- TCP [L] 10.1.1.10:52472 --> [OL] 10.2.2.2:8554
+        : RTSP
+        : HTTP/UA: LibVLC/3.0.16 (LIVE555 Streaming Media v2016.11.28)
+
+offline0: i4pc------r---- TCP [L] 10.1.1.10:52474 --> [OL] 10.2.2.2:8554
+        : RTSP
+        : HTTP/UA: LibVLC/3.0.16 (LIVE555 Streaming Media v2016.11.28)
+
+offline0: i4pc------r-fa- TCP [L] 10.1.1.10:52476 --> [OL] 10.2.2.2:8554
+        : RTSP
+        : HTTP/UA: LibVLC/3.0.16 (LIVE555 Streaming Media v2016.11.28)
+
+offline0: i4pc------r---- TCP [L] 10.1.1.10:52478 --> [OL] 10.2.2.2:8554
+        : RTSP
+        : HTTP/UA: LibVLC/3.0.16 (LIVE555 Streaming Media v2016.11.28)
+
+offline0: i4pc------r---- TCP [L] 10.1.1.10:52480 --> [OL] 10.2.2.2:8554
+        : RTSP
+        : HTTP/UA: LibVLC/3.0.16 (LIVE555 Streaming Media v2016.11.28)
+
+offline0: i4pc------r---- TCP [L] 10.1.1.10:52482 --> [OL] 10.2.2.2:8554
+        : RTSP
+        : HTTP/UA: LibVLC/3.0.16 (LIVE555 Streaming Media v2016.11.28)
+

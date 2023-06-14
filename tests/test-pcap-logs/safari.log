@@ -1,14 +1,72 @@
-lo: [i4------] HTTP/S 146.48.58.18:443 <-- 192.168.1.178:55262 H: www.iit.cnr.it SSL C: www.iit.cnr.it
-lo: [i4-u----] HTTP/S 146.48.58.18:443 <-- 192.168.1.178:55262 H: www.iit.cnr.it SSL C: www.iit.cnr.it
-lo: [i4------] HTTP/S 146.48.58.18:443 <-- 192.168.1.178:55267 H: www.iit.cnr.it SSL C: www.iit.cnr.it
-lo: [i4------] HTTP/S 146.48.58.18:443 <-- 192.168.1.178:55265 H: www.iit.cnr.it SSL C: www.iit.cnr.it
-lo: [i4------] HTTP/S 146.48.58.18:443 <-- 192.168.1.178:55268 H: www.iit.cnr.it SSL C: www.iit.cnr.it
-lo: [i4------] HTTP/S 146.48.58.18:443 <-- 192.168.1.178:55266 H: www.iit.cnr.it SSL C: www.iit.cnr.it
-lo: [i4------] HTTP/S 146.48.58.18:443 <-- 192.168.1.178:55269 H: www.iit.cnr.it SSL C: www.iit.cnr.it
-lo: [i4-u----] HTTP/S 146.48.58.18:443 <-- 192.168.1.178:55267 H: www.iit.cnr.it SSL C: www.iit.cnr.it
-lo: [i4-u----] HTTP/S 146.48.58.18:443 <-- 192.168.1.178:55265 H: www.iit.cnr.it SSL C: www.iit.cnr.it
-lo: [i4-u----] HTTP/S 146.48.58.18:443 <-- 192.168.1.178:55268 H: www.iit.cnr.it SSL C: www.iit.cnr.it
-lo: [i4-u----] HTTP/S 146.48.58.18:443 <-- 192.168.1.178:55266 H: www.iit.cnr.it SSL C: www.iit.cnr.it
-lo: [i4-u----] HTTP/S 146.48.58.18:443 <-- 192.168.1.178:55269 H: www.iit.cnr.it SSL C: www.iit.cnr.it
-lo: [i4------] HTTP/S 146.48.58.18:443 <-- 192.168.1.178:55285 H: www.iit.cnr.it SSL C: www.iit.cnr.it
-lo: [i4-u----] HTTP/S 146.48.58.18:443 <-- 192.168.1.178:55285 H: www.iit.cnr.it SSL C: www.iit.cnr.it
+offline0: i4p-------r---- TCP [OR] 146.48.58.18:443 <-- [L] 192.168.1.178:55262
+        : HTTP/S
+        : H: www.iit.cnr.it
+        : SNI: www.iit.cnr.it
+
+offline0: i4p-u-----r---- TCP [OR] 146.48.58.18:443 <-- [L] 192.168.1.178:55262
+        : HTTP/S
+        : H: www.iit.cnr.it
+        : SNI: www.iit.cnr.it CN: www.iit.cnr.it
+        : IDN: C=NL, ST=Noord-Holland, L=Amsterdam, O=TERENA, CN=TERENA SSL CA 3 SDN: C=IT, ST=Lazio, L=Roma, O=Consiglio Nazionale delle Ricerche, OU=IIT, CN=www.iit.cnr.it
+
+offline0: i4p-------r---- TCP [OR] 146.48.58.18:443 <-- [L] 192.168.1.178:55267
+        : HTTP/S
+        : H: www.iit.cnr.it
+        : SNI: www.iit.cnr.it
+
+offline0: i4p-------r---- TCP [OR] 146.48.58.18:443 <-- [L] 192.168.1.178:55265
+        : HTTP/S
+        : H: www.iit.cnr.it
+        : SNI: www.iit.cnr.it
+
+offline0: i4p-------r---- TCP [OR] 146.48.58.18:443 <-- [L] 192.168.1.178:55268
+        : HTTP/S
+        : H: www.iit.cnr.it
+        : SNI: www.iit.cnr.it
+
+offline0: i4p-------r---- TCP [OR] 146.48.58.18:443 <-- [L] 192.168.1.178:55266
+        : HTTP/S
+        : H: www.iit.cnr.it
+        : SNI: www.iit.cnr.it
+
+offline0: i4p-------r---- TCP [OR] 146.48.58.18:443 <-- [L] 192.168.1.178:55269
+        : HTTP/S
+        : H: www.iit.cnr.it
+        : SNI: www.iit.cnr.it
+
+offline0: i4pcu-----r---- TCP [OR] 146.48.58.18:443 <-- [L] 192.168.1.178:55267
+        : HTTP/S
+        : H: www.iit.cnr.it
+        : SNI: www.iit.cnr.it
+
+offline0: i4pcu-----r---- TCP [OR] 146.48.58.18:443 <-- [L] 192.168.1.178:55265
+        : HTTP/S
+        : H: www.iit.cnr.it
+        : SNI: www.iit.cnr.it
+
+offline0: i4pcu-----r---- TCP [OR] 146.48.58.18:443 <-- [L] 192.168.1.178:55268
+        : HTTP/S
+        : H: www.iit.cnr.it
+        : SNI: www.iit.cnr.it
+
+offline0: i4pcu-----r---- TCP [OR] 146.48.58.18:443 <-- [L] 192.168.1.178:55266
+        : HTTP/S
+        : H: www.iit.cnr.it
+        : SNI: www.iit.cnr.it
+
+offline0: i4pcu-----r---- TCP [OR] 146.48.58.18:443 <-- [L] 192.168.1.178:55269
+        : HTTP/S
+        : H: www.iit.cnr.it
+        : SNI: www.iit.cnr.it
+
+offline0: i4p-------r---- TCP [OR] 146.48.58.18:443 <-- [L] 192.168.1.178:55285
+        : HTTP/S
+        : H: www.iit.cnr.it
+        : SNI: www.iit.cnr.it
+
+offline0: i4p-u-----r---- TCP [OR] 146.48.58.18:443 <-- [L] 192.168.1.178:55285
+        : HTTP/S
+        : H: www.iit.cnr.it
+        : SNI: www.iit.cnr.it CN: www.iit.cnr.it
+        : IDN: C=NL, ST=Noord-Holland, L=Amsterdam, O=TERENA, CN=TERENA SSL CA 3 SDN: C=IT, ST=Lazio, L=Roma, O=Consiglio Nazionale delle Ricerche, OU=IIT, CN=www.iit.cnr.it
+

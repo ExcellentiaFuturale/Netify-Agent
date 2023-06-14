@@ -1,33 +1,134 @@
-lo: [i4------] DNS.netify.facebook 192.168.0.15:53 <-- 192.168.0.17:45743 H: graph.facebook.com
-lo: [i4------] DNS.netify.adjust 192.168.0.15:53 <-- 192.168.0.17:35283 H: app.adjust.com
-lo: [i4------] DNS.netify.urban-airship 192.168.0.15:53 <-- 192.168.0.17:62872 H: mapi.apptimize.com
-lo: [i4------] HTTP/S.netify.urban-airship 54.69.166.226:443 <-- 192.168.0.17:36986 H: mapi.apptimize.com SSL C: mapi.apptimize.com
-lo: [i4-u----] HTTP/S.netify.urban-airship 54.69.166.226:443 <-- 192.168.0.17:36986 H: mapi.apptimize.com SSL C: mapi.apptimize.com
-lo: [i4------] HTTP/S.netify.urban-airship 54.69.166.226:443 <-- 192.168.0.17:36988 H: mapi.apptimize.com SSL C: mapi.apptimize.com
-lo: [i4------] DNS.netify.viber 192.168.0.15:53 <-- 192.168.0.17:37418 H: media.cdn.viber.com
-lo: [i4------] HTTP/S.netify.viber 54.230.93.96:443 <-- 192.168.0.17:57520 H: media.cdn.viber.com SSL C: media.cdn.viber.com
-lo: [i4-u----] HTTP/S.netify.viber 54.230.93.96:443 <-- 192.168.0.17:57520 H: media.cdn.viber.com SSL C: media.cdn.viber.com
-lo: [i4------] DNS.netify.viber 192.168.0.15:53 <-- 192.168.0.17:40445 H: dl-media.viber.com
-lo: [i4------] HTTP/S.netify.viber 54.230.93.53:443 <-- 192.168.0.17:53934 H: dl-media.viber.com SSL C: dl-media.viber.com
-lo: [i4-u----] HTTP/S.netify.viber 54.230.93.53:443 <-- 192.168.0.17:53934 H: dl-media.viber.com SSL C: dl-media.viber.com
-lo: [i4------] DNS.netify.google-ads 192.168.0.15:53 <-- 192.168.0.17:35331 H: app-measurement.com
-lo: [i4------] HTTP/S.netify.google-ads 172.217.23.78:443 <-- 192.168.0.17:43702 H: app-measurement.com SSL C: app-measurement.com
-lo: [i4------] MDNS.netify.internal-network 192.168.0.17:5353 --> 224.0.0.251:5353 H: _805741c9._sub._googlecast._tcp.local
-lo: [i6------] ICMPv6 fe80::3207:4dff:fea3:5fa7:0 --> ff02::2:0
-lo: [i4------] DNS.netify.braze 192.168.0.15:53 <-- 192.168.0.17:44376 H: venetia.iad.appboy.com
-lo: [i4------] HTTP/S.netify.braze 151.101.1.130:443 <-- 192.168.0.17:55746 H: venetia.iad.appboy.com SSL C: venetia.iad.appboy.com
-lo: [i4--g---] Viber.netify.viber 52.0.253.101:4244 <-- 192.168.0.17:33208
-lo: [i4------] Viber 18.201.4.32:7985 <-- 192.168.0.17:47171
-lo: [i4------] Viber 18.201.4.32:7987 <-- 192.168.0.17:47171
-lo: [i4------] HTTP/S.netify.urban-airship 54.187.91.182:443 <-- 192.168.0.17:49048 H: brahe.apptimize.com SSL C: brahe.apptimize.com
-lo: [i4-u----] HTTP/S.netify.urban-airship 54.187.91.182:443 <-- 192.168.0.17:49048 H: brahe.apptimize.com SSL C: brahe.apptimize.com
-lo: [i4------] Viber 18.201.4.3:7985 <-- 192.168.0.17:38190
-lo: [i4------] Viber 18.201.4.3:7987 <-- 192.168.0.17:38190
-lo: [i4------] DNS.netify.google 192.168.0.15:53 <-- 192.168.0.17:50097 H: www.google.com
-lo: [i4------] ICMP 192.168.0.15:0 <-- 192.168.0.17:0
-lo: [i4------] Viber.netify.viber 52.0.252.145:4244 <-- 192.168.2.100:48690
-lo: [i4------] Viber.netify.viber 52.0.252.2:5242 <-- 192.168.2.100:41184
-lo: [i4------] Viber.netify.viber 44.192.202.74:4244 <-- 192.168.2.100:42900
-lo: [i4--g---] HTTP/S 18.201.4.32:443 <-- 192.168.0.17:45424
-lo: [i4--g---] HTTP/S 18.201.4.3:443 <-- 192.168.0.17:33744
-lo: [i4--g---] QUIC.netify.google 172.217.23.106:443 <-- 192.168.0.17:41993
+offline0: i4p-------r---- UDP [L] 192.168.0.15:53 <-- [OL] 192.168.0.17:45743
+        : DNS.netify.facebook
+        : H: graph.facebook.com
+
+offline0: i4p-------r---- UDP [L] 192.168.0.15:53 <-- [OL] 192.168.0.17:35283
+        : DNS.netify.adjust
+        : H: app.adjust.com
+
+offline0: i4p-------r---- UDP [L] 192.168.0.15:53 <-- [OL] 192.168.0.17:62872
+        : DNS.netify.urban-airship
+        : H: mapi.apptimize.com
+
+offline0: i4p-----d-r-fa- TCP [OR] 54.69.166.226:443 <-- [L] 192.168.0.17:36986
+        : HTTP/S.netify.urban-airship
+        : D: apptimize.com H: mapi.apptimize.com
+        : SNI: mapi.apptimize.com
+
+offline0: i4p-u---d-r-fa- TCP [OR] 54.69.166.226:443 <-- [L] 192.168.0.17:36986
+        : HTTP/S.netify.urban-airship
+        : D: apptimize.com H: mapi.apptimize.com
+        : SNI: mapi.apptimize.com
+        : IDN: C=GB, ST=Greater Manchester, L=Salford, O=COMODO CA Limited, CN=COMODO RSA Organization Validation Secure Server CA SDN: C=US, ST=CA, L=Mountain View, O=Apptimize, Inc, OU=PremiumSSL Wildcard, CN=*.apptimize.com
+
+offline0: i4p-----d-r-fa- TCP [OR] 54.69.166.226:443 <-- [L] 192.168.0.17:36988
+        : HTTP/S.netify.urban-airship
+        : D: apptimize.com H: mapi.apptimize.com
+        : SNI: mapi.apptimize.com
+
+offline0: i4p-------r---- UDP [L] 192.168.0.15:53 <-- [OL] 192.168.0.17:37418
+        : DNS.netify.viber
+        : H: media.cdn.viber.com
+
+offline0: i4p-----d-r---- TCP [OR] 54.230.93.96:443 <-- [L] 192.168.0.17:57520
+        : HTTP/S.netify.viber
+        : D: do2gy2kwak9k2.cloudfront.net H: media.cdn.viber.com
+        : SNI: media.cdn.viber.com
+
+offline0: i4p-u---d-r---- TCP [OR] 54.230.93.96:443 <-- [L] 192.168.0.17:57520
+        : HTTP/S.netify.viber
+        : D: do2gy2kwak9k2.cloudfront.net H: media.cdn.viber.com
+        : SNI: media.cdn.viber.com
+        : IDN: C=US, O=thawte, Inc., CN=thawte SSL CA - G2 SDN: C=LU, ST=Luxembourg, L=Luxembourg, O=Viber Media Sarl, OU=IT, CN=*.cdn.viber.com
+
+offline0: i4p-------r---- UDP [L] 192.168.0.15:53 <-- [OL] 192.168.0.17:40445
+        : DNS.netify.viber
+        : H: dl-media.viber.com
+
+offline0: i4p-----d-r---- TCP [OR] 54.230.93.53:443 <-- [L] 192.168.0.17:53934
+        : HTTP/S.netify.viber
+        : D: d1fje9gm3d05t8.cloudfront.net H: dl-media.viber.com
+        : SNI: dl-media.viber.com
+
+offline0: i4p-u---d-r---- TCP [OR] 54.230.93.53:443 <-- [L] 192.168.0.17:53934
+        : HTTP/S.netify.viber
+        : D: d1fje9gm3d05t8.cloudfront.net H: dl-media.viber.com
+        : SNI: dl-media.viber.com
+        : IDN: C=US, O=thawte, Inc., CN=thawte SSL CA - G2 SDN: C=LU, ST=Luxembourg, L=Luxembourg, O=Viber Media Sarl, OU=IT, CN=*.viber.com
+
+offline0: i4p-------r---- UDP [L] 192.168.0.15:53 <-- [OL] 192.168.0.17:35331
+        : DNS.netify.google-ads
+        : H: app-measurement.com
+
+offline0: i4p-----d-r---- TCP [OR] 172.217.23.78:443 <-- [L] 192.168.0.17:43702
+        : HTTP/S.netify.google-ads
+        : D: app-measurement.com
+        : SNI: app-measurement.com
+
+offline0: i4p-------r---- UDP [L] 192.168.0.17:5353 --> [OM] 224.0.0.251:5353
+        : MDNS.netify.internal-network
+        : H: _805741c9._sub._googlecast._tcp.local
+
+offline0: i6pc------r---- IPv6-ICMP [L] fe80::3207:4dff:fea3:5fa7:0 --> [OM] ff02::2:0
+        : ICMPv6
+
+offline0: i4p-------r---- UDP [L] 192.168.0.15:53 <-- [OL] 192.168.0.17:44376
+        : DNS.netify.braze
+        : H: venetia.iad.appboy.com
+
+offline0: i4p-----d-r---- TCP [OR] 151.101.1.130:443 <-- [L] 192.168.0.17:55746
+        : HTTP/S.netify.braze
+        : D: y.ssl.global.fastly.net H: venetia.iad.appboy.com
+        : SNI: venetia.iad.appboy.com
+
+offline0: i4pc-g--------- TCP [OR] 52.0.253.101:4244 <-- [L] 192.168.0.17:33208
+        : Viber
+
+offline0: i4pc------r---- UDP [OR] 18.201.4.32:7985 <-- [L] 192.168.0.17:47171
+        : Viber
+
+offline0: i4pc------r---- UDP [OR] 18.201.4.32:7987 <-- [L] 192.168.0.17:47171
+        : Viber
+
+offline0: i4p-----d-r-fa- TCP [OR] 54.187.91.182:443 <-- [L] 192.168.0.17:49048
+        : HTTP/S.netify.urban-airship
+        : D: apptimize.com H: brahe.apptimize.com
+        : SNI: brahe.apptimize.com
+
+offline0: i4p-u---d-r-fa- TCP [OR] 54.187.91.182:443 <-- [L] 192.168.0.17:49048
+        : HTTP/S.netify.urban-airship
+        : D: apptimize.com H: brahe.apptimize.com
+        : SNI: brahe.apptimize.com
+        : IDN: C=GB, ST=Greater Manchester, L=Salford, O=COMODO CA Limited, CN=COMODO RSA Organization Validation Secure Server CA SDN: C=US, ST=CA, L=Mountain View, O=Apptimize, Inc, OU=PremiumSSL Wildcard, CN=*.apptimize.com
+
+offline0: i4pc------r---- UDP [OR] 18.201.4.3:7985 <-- [L] 192.168.0.17:38190
+        : Viber
+
+offline0: i4pc------r---- UDP [OR] 18.201.4.3:7987 <-- [L] 192.168.0.17:38190
+        : Viber
+
+offline0: i4p-------r---- UDP [L] 192.168.0.15:53 <-- [OL] 192.168.0.17:50097
+        : DNS.netify.google
+        : H: www.google.com
+
+offline0: i4pc------r---- ICMP [L] 192.168.0.15:0 <-- [OL] 192.168.0.17:0
+        : ICMP
+
+offline0: i4pc------r---- TCP [OR] 52.0.252.145:4244 <-- [L] 192.168.2.100:48690
+        : Viber
+
+offline0: i4pc------r-fa- TCP [OR] 52.0.252.2:5242 <-- [L] 192.168.2.100:41184
+        : Viber
+
+offline0: i4pc------r---- TCP [OR] 44.192.202.74:4244 <-- [L] 192.168.2.100:42900
+        : Viber
+
+offline0: i4pc-gx-------- UDP [OR] 172.217.23.106:443 <-- [L] 192.168.0.17:41993
+        : QUIC.netify.google
+
+offline0: i4pc-gxX----fa- TCP [OR] 18.201.4.32:443 <-- [L] 192.168.0.17:45424
+        : HTTP/S
+
+offline0: i4pc-gx-----fa- TCP [OR] 18.201.4.3:443 <-- [L] 192.168.0.17:33744
+        : HTTP/S
+

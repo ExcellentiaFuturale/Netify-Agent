@@ -1,2 +1,11 @@
-lo: [i4------] HTTP/S.netify.abuse-ch 151.101.66.49:443 <-- 192.168.1.160:54804 H: feodotracker.abuse.ch SSL C: feodotracker.abuse.ch
-lo: [i4-u----] HTTP/S.netify.fastly 151.101.66.49:443 <-- 192.168.1.160:54804 H: feodotracker.abuse.ch SSL C: feodotracker.abuse.ch
+offline0: i4p-------r---- TCP [OR] 151.101.66.49:443 <-- [L] 192.168.1.160:54804
+        : HTTP/S.netify.abuse-ch
+        : H: feodotracker.abuse.ch
+        : SNI: feodotracker.abuse.ch
+
+offline0: i4p-u-----r---- TCP [OR] 151.101.66.49:443 <-- [L] 192.168.1.160:54804
+        : HTTP/S.netify.fastly
+        : H: feodotracker.abuse.ch
+        : SNI: feodotracker.abuse.ch CN: p2.shared.global.fastly.net
+        : IDN: C=BE, O=GlobalSign nv-sa, CN=GlobalSign CloudSSL CA - SHA256 - G3 SDN: C=US, ST=California, L=San Francisco, O=Fastly, Inc., CN=p2.shared.global.fastly.net
+

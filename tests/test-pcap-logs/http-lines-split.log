@@ -1,1 +1,5 @@
-lo: [i4------] HTTP.netify.internal-network 192.168.0.1:39236 --> 192.168.0.20:31337 H: toni.lan
+offline0: i4p-------r---- TCP [L] 192.168.0.1:39236 --> [OL] 192.168.0.20:31337
+        : HTTP.netify.internal-network
+        : H: toni.lan
+        : URL: toni.lan:31337/
+

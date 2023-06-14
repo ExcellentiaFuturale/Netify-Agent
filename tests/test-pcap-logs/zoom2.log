@@ -1,7 +1,28 @@
-lo: [i4------] HTTP/S.netify.zoom 144.195.73.154:443 <-- 192.168.1.178:50076 H: zoomsjccv154mmr.sjc.zoom.us SSL C: zoomsjccv154mmr.sjc.zoom.us
-lo: [i4-u----] HTTP/S.netify.zoom 144.195.73.154:443 <-- 192.168.1.178:50076 H: zoomsjccv154mmr.sjc.zoom.us SSL C: zoomsjccv154mmr.sjc.zoom.us
-lo: [i4-u----] HTTP/S.netify.zoom 144.195.73.154:443 <-- 192.168.1.178:50076 H: zoomsjccv154mmr.sjc.zoom.us SSL C: zoomsjccv154mmr.sjc.zoom.us
-lo: [i4-----s] ZOOM.netify.zoom 144.195.73.154:8801 <-- 192.168.1.178:60653
-lo: [i4-----s] ZOOM.netify.zoom 144.195.73.154:8801 <-- 192.168.1.178:58117
-lo: [i4-----s] ZOOM.netify.zoom 144.195.73.154:8801 <-- 192.168.1.178:57953
-lo: [i4------] ICMP.netify.zoom 144.195.73.154:0 <-- 192.168.1.178:0
+offline0: i4p-------r---- TCP [OR] 144.195.73.154:443 <-- [L] 192.168.1.178:50076
+        : HTTP/S.netify.zoom
+        : H: zoomsjccv154mmr.sjc.zoom.us
+        : SNI: zoomsjccv154mmr.sjc.zoom.us
+
+offline0: i4p-u-----r---- TCP [OR] 144.195.73.154:443 <-- [L] 192.168.1.178:50076
+        : HTTP/S.netify.zoom
+        : H: zoomsjccv154mmr.sjc.zoom.us
+        : SNI: zoomsjccv154mmr.sjc.zoom.us
+
+offline0: i4p-u-----r---- TCP [OR] 144.195.73.154:443 <-- [L] 192.168.1.178:50076
+        : HTTP/S.netify.zoom
+        : H: zoomsjccv154mmr.sjc.zoom.us
+        : SNI: zoomsjccv154mmr.sjc.zoom.us
+        : IDN: C=US, O=DigiCert Inc, CN=DigiCert TLS RSA SHA256 2020 CA1 SDN: C=US, ST=California, L=San Jose, O=Zoom Video Communications, Inc., CN=*.sjc.zoom.us
+
+offline0: i4pc------rs--- UDP [OR] 144.195.73.154:8801 <-- [L] 192.168.1.178:60653
+        : ZOOM.netify.zoom
+
+offline0: i4pc------rs--- UDP [OR] 144.195.73.154:8801 <-- [L] 192.168.1.178:58117
+        : ZOOM.netify.zoom
+
+offline0: i4pc------rs--- UDP [OR] 144.195.73.154:8801 <-- [L] 192.168.1.178:57953
+        : ZOOM.netify.zoom
+
+offline0: i4pc------r---- ICMP [OR] 144.195.73.154:0 <-- [L] 192.168.1.178:0
+        : ICMP.netify.zoom
+

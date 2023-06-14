@@ -1,2 +1,11 @@
-lo: [i4------] HTTP/S.netify.alibaba-cloud 106.15.100.123:443 <-- 192.168.1.60:55333 H: beacon-api.aliyuncs.com SSL C: beacon-api.aliyuncs.com
-lo: [i4-u----] HTTP/S.netify.alibaba-cloud 106.15.100.123:443 <-- 192.168.1.60:55333 H: beacon-api.aliyuncs.com SSL C: beacon-api.aliyuncs.com
+offline0: i4p-------r---- TCP [OR] 106.15.100.123:443 <-- [L] 192.168.1.60:55333
+        : HTTP/S.netify.alibaba-cloud
+        : H: beacon-api.aliyuncs.com
+        : SNI: beacon-api.aliyuncs.com
+
+offline0: i4p-u-----r---- TCP [OR] 106.15.100.123:443 <-- [L] 192.168.1.60:55333
+        : HTTP/S.netify.alibaba-cloud
+        : H: beacon-api.aliyuncs.com
+        : SNI: beacon-api.aliyuncs.com
+        : IDN: C=BE, O=GlobalSign nv-sa, CN=GlobalSign Organization Validation CA - SHA256 - G2 SDN: C=CN, ST=ZheJiang, L=HangZhou, O=Alibaba (China) Technology Co., Ltd., CN=*.aliyun.com
+

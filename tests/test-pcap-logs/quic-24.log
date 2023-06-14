@@ -1,1 +1,5 @@
-lo: [i4------] QUIC.netify.internal-network 10.9.0.1:41436 --> 10.9.0.2:443 H: localhost SSL C: localhost
+offline0: i4pc------r---- UDP [L] 10.9.0.1:41436 --> [OL] 10.9.0.2:443
+        : QUIC.netify.internal-network
+        : H: localhost
+        : SNI: localhost
+

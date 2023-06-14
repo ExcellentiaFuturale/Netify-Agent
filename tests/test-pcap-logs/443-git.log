@@ -1,2 +1,11 @@
-lo: [i4------] HTTP/S.netify.github 140.82.114.4:443 <-- 192.168.1.13:55744 H: github.com SSL C: github.com
-lo: [i4-u----] HTTP/S.netify.github 140.82.114.4:443 <-- 192.168.1.13:55744 H: github.com SSL C: github.com
+offline0: i4p-------r---- TCP [OR] 140.82.114.4:443 <-- [L] 192.168.1.13:55744
+        : HTTP/S.netify.github
+        : H: github.com
+        : SNI: github.com
+
+offline0: i4p-u-----r---- TCP [OR] 140.82.114.4:443 <-- [L] 192.168.1.13:55744
+        : HTTP/S.netify.github
+        : H: github.com
+        : SNI: github.com CN: github.com
+        : IDN: C=US, O=DigiCert Inc, OU=www.digicert.com, CN=DigiCert SHA2 Extended Validation Server CA SDN: C=US, ST=California, L=San Francisco, O=GitHub, Inc., CN=github.com
+

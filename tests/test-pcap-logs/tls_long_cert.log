@@ -1,2 +1,11 @@
-lo: [i4------] HTTP/S 104.111.215.93:443 <-- 192.168.2.126:60174 H: www.repubblica.it SSL C: www.repubblica.it
-lo: [i4-u----] HTTP/S 104.111.215.93:443 <-- 192.168.2.126:60174 H: www.repubblica.it SSL C: www.repubblica.it
+offline0: i4p-------r---- TCP [OR] 104.111.215.93:443 <-- [L] 192.168.2.126:60174
+        : HTTP/S
+        : H: www.repubblica.it
+        : SNI: www.repubblica.it
+
+offline0: i4p-u-----r---- TCP [OR] 104.111.215.93:443 <-- [L] 192.168.2.126:60174
+        : HTTP/S
+        : H: www.repubblica.it
+        : SNI: www.repubblica.it CN: www.repstatic.it
+        : IDN: C=US, O=DigiCert Inc, OU=www.digicert.com, CN=GeoTrust RSA CA 2018 SDN: C=IT, ST=Roma, L=Roma, O=GEDI Digital S.r.l., CN=www.repstatic.it
+

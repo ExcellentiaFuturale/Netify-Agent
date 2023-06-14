@@ -1,3 +1,16 @@
-lo: [i4------] HTTP/S 151.121.193.160:443 <-- 192.168.147.177:58496 H: 192.69.136.179 SSL C: 192.69.136.179
-lo: [i4-u----] HTTP/S 151.121.193.160:443 <-- 192.168.147.177:58496 H: 192.69.136.179 SSL C: 192.69.136.179
-lo: [i4-u----] HTTP/S 151.121.193.160:443 <-- 192.168.147.177:58496 H: 192.69.136.179 SSL C: 192.69.136.179
+offline0: i4p-------r-fa- TCP [OR] 151.121.193.160:443 <-- [L] 192.168.147.177:58496
+        : HTTP/S
+        : H: 192.69.136.179
+        : SNI: 192.69.136.179
+
+offline0: i4p-u-----r-fa- TCP [OR] 151.121.193.160:443 <-- [L] 192.168.147.177:58496
+        : HTTP/S
+        : H: 192.69.136.179
+        : SNI: 192.69.136.179
+
+offline0: i4p-u-----r-fa- TCP [OR] 151.121.193.160:443 <-- [L] 192.168.147.177:58496
+        : HTTP/S
+        : H: 192.69.136.179
+        : SNI: 192.69.136.179 CN: munniccan.de
+        : IDN: C=DE, ST=Munich, L=Grenoble, O=Munniccan Establishment GmBH, OU=Munnican Workforce, CN=munniccan.de SDN: C=DE, ST=Munich, L=Grenoble, O=Munniccan Establishment GmBH, OU=Munnican Workforce, CN=munniccan.de
+
