@@ -670,6 +670,10 @@ public:
         Classify(type, ndAddr(addr));
     }
 
+    size_t GetInterfaceAddresses(
+        const string &iface, set<string> &result,
+        sa_family_t family = AF_UNSPEC);
+
 protected:
     mutex lock;
 
@@ -682,7 +686,8 @@ protected:
     unordered_map<string, nd_rn6_atype> ipv6_iface;
 };
 
-typedef unordered_set<ndAddr, ndAddr::ndAddrHash, ndAddr::ndAddrEqual> ndInterfaceAddrs;
+typedef unordered_set<ndAddr,
+    ndAddr::ndAddrHash, ndAddr::ndAddrEqual> ndInterfaceAddrs;
 
 class ndInterfaceAddr : public ndSerializer
 {
@@ -1017,6 +1022,10 @@ public:
 #endif
         }
         return true;
+    }
+
+    inline bool operator<(const ndInterface &i) const {
+        return ifname < i.ifname;
     }
 
     string ifname;

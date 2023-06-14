@@ -694,6 +694,8 @@ bool ndGlobalConfig::ForceReset(void)
 
 bool ndGlobalConfig::LoadInterfaces(void)
 {
+    ClearInterfaces();
+
     vector<string> files;
     if (nd_scan_dotd(path_interfaces, files)) {
         for (auto &filename : files) {
@@ -866,8 +868,6 @@ bool ndGlobalConfig::AddInterfaceFilter(
 
 bool ndGlobalConfig::LoadInterfaces(void *config_reader)
 {
-    ClearInterfaces();
-
     INIReader *r = static_cast<INIReader *>(config_reader);
 
     set<string> sections;
@@ -1032,6 +1032,10 @@ void ndGlobalConfig::ClearInterfaces(bool cmdline_entries)
         auto ifp = interface_peers.find(iface);
         if (ifp != interface_peers.end())
             interface_peers.erase(ifp);
+
+        auto ifa = interface_addrs.find(iface);
+        if (ifa != interface_addrs.end())
+            interface_addrs.erase(ifa);
     }
 }
 

@@ -224,7 +224,10 @@ public:
 
     typedef map<string, pair<unsigned, void *>> nd_config_interfaces;
     map<nd_interface_role, nd_config_interfaces> interfaces;
-    map<string, set<string>> interface_addrs;
+
+    typedef map<string, set<string>> InterfaceAddrs;
+    InterfaceAddrs interface_addrs;
+
     map<string, string> interface_peers;
 
     map<string, string> conf_vars;

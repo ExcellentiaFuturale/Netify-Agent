@@ -1821,7 +1821,10 @@ void *ndInstance::ndInstance::Entry(void)
                 tag.c_str(), ipc, "Reload run-time configuration"
             );
             Reload();
-            ReloadCaptureThreads(thread_capture);
+            if (! ReloadCaptureThreads(thread_capture)) {
+                exit_code = EXIT_FAILURE;
+                goto ndInstance_EntryReturn;
+            }
             break;
         case ndIPC_TERMINATE:
             Terminate();
@@ -1867,8 +1870,6 @@ void *ndInstance::ndInstance::Entry(void)
             exit_code = EXIT_FAILURE;
             break;
         }
-
-        //nd_dprintf("%s: tick\n", tag.c_str());
     }
     while (
         (terminate_force.load() == false && ShouldTerminate() &&
@@ -1893,7 +1894,7 @@ ndInstance_EntryReturn:
 
     DestroyCaptureThreads(thread_capture);
 
-    // Process an final update on shutdown
+    // Process a final update on shutdown
     ProcessUpdate(thread_capture);
 
     if (exit_code == 0)
@@ -2161,47 +2162,101 @@ size_t ndInstance::ReapCaptureThreads(nd_capture_threads &threads)
 
 bool ndInstance::ReloadCaptureThreads(nd_capture_threads &threads)
 {
-    ndGC.LoadInterfaces();
+    ndInterfaces ifaces, ifaces_new, ifaces_common, ifaces_delete;
 
-    ndInterfaces ifaces, ifaces_new;
+    ndGlobalConfig::InterfaceAddrs old_addrs;
+    old_addrs.insert(
+        ndGC.interface_addrs.begin(),
+        ndGC.interface_addrs.end()
+    );
+
+    ndGC.LoadInterfaces();
     CreateCaptureInterfaces(ifaces);
 
-    list<string> ifaces_delete;
+    set_difference(
+        ifaces.begin(), ifaces.end(),
+        interfaces.begin(), interfaces.end(),
+        inserter(ifaces_new, ifaces_new.begin())
+    );
+    set_intersection(
+        ifaces.begin(), ifaces.end(),
+        interfaces.begin(), interfaces.end(),
+        inserter(ifaces_common, ifaces_common.begin())
+    );
+    set_difference(
+        interfaces.begin(), interfaces.end(),
+        ifaces.begin(), ifaces.end(),
+        inserter(ifaces_delete, ifaces_delete.begin())
+    );
 
-    for (auto &iface : ifaces) {
+    for (auto &iface : ifaces_common) {
         auto i = interfaces.find(iface.first);
 
         if (i == interfaces.end()) {
-            ifaces_new.insert(iface);
+            nd_dprintf("%s: interface not found: %s\n",
+                tag.c_str(), iface.first.c_str());
+            return false;
+        }
+
+        if (i->second == iface.second) {
+
+            set<string> ifaddrs_a, ifaddrs_b;
+
+            auto it = ndGC.interface_addrs.find(iface.first);
+            if (it != ndGC.interface_addrs.end()) {
+                for (auto &a : it->second)
+                    ifaddrs_a.insert(a);
+            }
+
+            it = old_addrs.find(iface.first);
+            if (it != old_addrs.end()) {
+                for (auto &a : it->second)
+                    ifaddrs_b.insert(a);
+            }
+
+            if (ifaddrs_a.empty() && ifaddrs_b.empty())
+                continue;
+
+            set<string> ifaddrs_new, ifaddrs_delete;
+
+            set_difference(
+                ifaddrs_a.begin(), ifaddrs_a.end(),
+                ifaddrs_b.begin(), ifaddrs_b.end(),
+                inserter(ifaddrs_new, ifaddrs_new.begin())
+            );
+            set_difference(
+                ifaddrs_b.begin(), ifaddrs_b.end(),
+                ifaddrs_a.begin(), ifaddrs_a.end(),
+                inserter(ifaddrs_delete, ifaddrs_delete.begin())
+            );
+
+            for (auto &a : ifaddrs_new) {
+                addr_types.AddAddress(
+                    ndAddr::atLOCAL, a, iface.first
+                );
+            }
+            for (auto &a : ifaddrs_delete)
+                addr_types.RemoveAddress(a, iface.first);
+
             continue;
         }
 
-        if (i->second == iface.second)
-            continue;
-
         ifaces_new.insert(iface);
-        ifaces_delete.push_back(iface.first);
-    }
-
-    for (auto &iface : interfaces) {
-        auto i = ifaces.find(iface.first);
-
-        if (i == ifaces.end())
-            ifaces_delete.push_back(iface.first);
+        ifaces_delete.insert(iface);
     }
 
     for (auto &iface : ifaces_delete) {
 
-        auto ifa = ndGC.interface_addrs.find(iface);
+        auto ifa = ndGC.interface_addrs.find(iface.first);
 
         if (ifa != ndGC.interface_addrs.end()) {
             for (auto &a : ifa->second)
-                addr_types.RemoveAddress(a, iface);
+                addr_types.RemoveAddress(a, iface.first);
 
             ndGC.interface_addrs.erase(ifa);
         }
         {
-            auto it = threads.find(iface);
+            auto it = threads.find(iface.first);
 
             if (it != threads.end()) {
 
@@ -2214,7 +2269,7 @@ bool ndInstance::ReloadCaptureThreads(nd_capture_threads &threads)
             }
         }
         {
-            auto it = interfaces.find(iface);
+            auto it = interfaces.find(iface.first);
 
             if (it != interfaces.end())
                 interfaces.erase(it);

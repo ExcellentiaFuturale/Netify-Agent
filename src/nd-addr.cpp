@@ -781,6 +781,36 @@ void ndAddrType::Classify(ndAddr::Type &type, const ndAddr &addr)
     }
 }
 
+size_t ndAddrType::GetInterfaceAddresses(const string &iface,
+    set<string> &result, sa_family_t family)
+{
+    lock_guard<mutex> ul(lock);
+
+    if (family == AF_UNSPEC || family == AF_INET) {
+        auto rn = ipv4_iface.find(iface);
+        if (rn == ipv4_iface.end()) return result.size();
+
+        for (auto &it : rn->second) {
+            string ip;
+            if (it.first.GetString(ip))
+                result.insert(ip);
+        }
+    }
+
+    if (family == AF_UNSPEC || family == AF_INET6) {
+        auto rn = ipv6_iface.find(iface);
+        if (rn == ipv6_iface.end()) return result.size();
+
+        for (auto &it : rn->second) {
+            string ip;
+            if (it.first.GetString(ip))
+                result.insert(ip);
+        }
+    }
+
+    return result.size();
+}
+
 size_t ndInterface::UpdateAddrs(ndInterfaces& interfaces)
 {
     size_t count = 0;
