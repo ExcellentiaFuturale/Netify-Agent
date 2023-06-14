@@ -14,8 +14,8 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-#ifndef _ND_H
-#define _ND_H
+#ifndef _NETIFYD_H
+#define _NETIFYD_H
 
 #ifndef AF_LINK
 #define AF_LINK AF_PACKET
@@ -174,31 +174,6 @@
 
 #include "nd-sha1.h"
 
-typedef vector<pair<string, string> > nd_device_addr;
-
-typedef map<string, string> nd_interface_filter;
-
-typedef map<string, string> nd_netlink_device;
-
-typedef pair<struct sockaddr_storage, struct sockaddr_storage> nd_private_addr;
-
-void nd_json_agent_hello(string &json_string);
-void nd_json_protocols(string &json_string);
-
-struct ndInterfaceAddress
-{
-    sa_family_t family;
-    union {
-        uint8_t mac[ETH_ALEN];
-        struct sockaddr_storage ip;
-    };
-};
-
-typedef vector<struct ndInterfaceAddress *> nd_interface_addr_array;
-typedef map<string, nd_interface_addr_array *> nd_interface_addr_map;
-typedef pair<string, nd_interface_addr_array *> nd_interface_addr_pair;
-typedef pair<nd_interface_addr_map::iterator, bool> nd_interface_addr_insert;
-
 class ndException : public runtime_error
 {
 public:
@@ -228,5 +203,5 @@ public:
     const char *message;
 };
 
-#endif // _ND_H
+#endif // _NETIFYD_H
 // vi: expandtab shiftwidth=4 softtabstop=4 tabstop=4

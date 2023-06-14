@@ -135,9 +135,6 @@ class ndInstanceStatus;
 #include "nd-base64.h"
 #include "nd-napi.h"
 
-ndNetlink *netlink = NULL;
-nd_netlink_device nd_netlink_devices;
-
 ndNetlink::ndNetlink(void)
     : nd(-1), seq(0), sa{0}, buffer{0}
 {

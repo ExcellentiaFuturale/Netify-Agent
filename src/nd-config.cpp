@@ -1206,7 +1206,7 @@ bool ndGlobalConfig::AddPlugin(const string &filename)
 
     for (auto &tag : sections) {
         size_t p = string::npos;
-        map_plugin *mpi = nullptr;
+        Plugins *mpi = nullptr;
         ndPlugin::Type type = ndPlugin::TYPE_BASE;
 
         if ((p = tag.find("proc-")) != string::npos) {

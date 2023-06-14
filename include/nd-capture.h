@@ -62,7 +62,7 @@ protected:
     uint64_t ts_pkt_first;
     uint64_t ts_pkt_last;
 
-    nd_private_addr private_addrs;
+    ndAddr::PrivatePair private_addrs;
 
     ndPacketStats stats;
 

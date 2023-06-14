@@ -82,7 +82,8 @@ protected:
     ndConntrackThread *thread_conntrack;
 #endif
     struct ndpi_detection_module_struct *ndpi;
-    nd_private_addr private_addrs;
+
+    ndAddr::PrivatePair private_addrs;
 
     ndDNSHintCache *dhc;
     ndFlowHashCache *fhc;

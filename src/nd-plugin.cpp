@@ -505,7 +505,7 @@ void ndPluginManager::Load(ndPlugin::Type type, bool create)
         if (type != ndPlugin::TYPE_BASE && type != t.first)
             continue;
 
-        const ndGlobalConfig::map_plugin *plugins = nullptr;
+        const ndGlobalConfig::Plugins *plugins = nullptr;
 
         switch (t.first) {
         case ndPlugin::TYPE_PROC:

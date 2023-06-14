@@ -36,6 +36,9 @@ public:
         atERROR = 0x7f,
     };
 
+    typedef pair<struct sockaddr_storage,
+        struct sockaddr_storage> PrivatePair;
+
     ndAddr(uint8_t prefix = 0)
         : addr{0}, prefix(prefix), comparison_flags(cfALL) { }
 

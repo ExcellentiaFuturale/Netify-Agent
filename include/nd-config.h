@@ -210,29 +210,49 @@ public:
     unsigned update_imf;
     unsigned update_interval;
 
-    vector<pair<string, string> > socket_host;
-    vector<string> socket_path;
-    vector<struct sockaddr *> privacy_filter_host;
-    vector<uint8_t *> privacy_filter_mac;
-    vector<pair<regex *, string> > privacy_regex;
-    nd_interface_filter interface_filters;
-    typedef map<string, pair<string, map<string, string>>> map_plugin;
-    map_plugin plugin_processors;
-    map_plugin plugin_sinks;
-    map<string, string> custom_headers;
-    map<string, string> protocols;
+    typedef vector<pair<string, string>> SocketHosts;
+    SocketHosts socket_host;
 
-    typedef map<string, pair<unsigned, void *>> nd_config_interfaces;
-    map<nd_interface_role, nd_config_interfaces> interfaces;
+    typedef vector<string> SocketPaths;
+    SocketPaths socket_path;
+
+    typedef vector<struct sockaddr *> PrivacyFilterHosts;
+    PrivacyFilterHosts privacy_filter_host;
+
+    typedef vector<uint8_t *> PrivacyFilterMACs;
+    PrivacyFilterMACs privacy_filter_mac;
+
+    typedef vector<pair<regex *, string> > PrivacyFilterRegex;
+    PrivacyFilterRegex privacy_regex;
+
+    typedef map<string, string> InterfaceFilters;
+    InterfaceFilters interface_filters;
+
+    typedef map<string, pair<string, map<string, string>>> Plugins;
+    Plugins plugin_processors;
+    Plugins plugin_sinks;
+
+    typedef map<string, string> CustomHeaders;
+    CustomHeaders custom_headers;
+
+    typedef map<string, string> Protocols;
+    Protocols protocols;
+
+    typedef map<string, pair<unsigned, void *>> Interfaces;
+    typedef map<nd_interface_role, Interfaces> InterfacesByRole;
+    InterfacesByRole interfaces;
 
     typedef map<string, set<string>> InterfaceAddrs;
     InterfaceAddrs interface_addrs;
 
-    map<string, string> interface_peers;
+    typedef map<string, string> InterfacePeers;
+    InterfacePeers interface_peers;
 
-    map<string, string> conf_vars;
+    typedef map<string, string> ConfVars;
+    ConfVars conf_vars;
 
-    vector<string> debug_flow_print_exprs;
+    typedef vector<string> FlowDebugExpressions;
+    FlowDebugExpressions debug_flow_print_exprs;
 
     ndGlobalConfig(const ndGlobalConfig&) = delete;
     ndGlobalConfig& operator=(const ndGlobalConfig&) = delete;

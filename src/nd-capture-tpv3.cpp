@@ -646,8 +646,7 @@ void *ndCaptureTPv3::Entry(void)
 
     ring = static_cast<void *>(_ring);
 
-    nd_interface_filter::const_iterator it_filter;
-    it_filter = ndGC.interface_filters.find(tag);
+    auto it_filter = ndGC.interface_filters.find(tag);
 
     if (it_filter != ndGC.interface_filters.end())
         _ring->SetFilter(it_filter->second);

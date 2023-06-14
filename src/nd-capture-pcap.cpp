@@ -329,7 +329,7 @@ pcap_t *ndCapturePcap::OpenCapture(void)
         if ((pcap_fd = pcap_get_selectable_fd(pcap_new)) < 0)
             nd_dprintf("%s: pcap_get_selectable_fd: -1\n", tag.c_str());
 
-        nd_interface_filter::const_iterator i = ndGC.interface_filters.find(tag);
+        auto i = ndGC.interface_filters.find(tag);
 
         if (i != ndGC.interface_filters.end()) {
 
