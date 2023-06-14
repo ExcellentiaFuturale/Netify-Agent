@@ -481,7 +481,8 @@ void ndFlow::Print(uint8_t pflags) const
 #else
 void ndFlow::Print(uint8_t pflags) const
 {
-    ndDebugLogStream dls;
+    ndDebugLogStream dls(ndDebugLogStream::DLT_FLOW);
+
     bool multiline = false;
 
     nd_output_lock();

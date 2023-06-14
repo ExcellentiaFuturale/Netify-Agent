@@ -268,6 +268,17 @@ int ndDebugLogBufferUnlocked::sync()
 
     return 0;
 }
+
+int ndDebugLogBufferFlow::sync()
+{
+    if (! os.str().empty()) {
+        if (ndGC_DEBUG || ndGC.h_flow != stderr)
+            fprintf(ndGC.h_flow, "%s", os.str().c_str());
+        os.str("");
+    }
+
+    return 0;
+}
 #endif
 
 void nd_print_address(const struct sockaddr_storage *addr)

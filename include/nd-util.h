@@ -58,6 +58,12 @@ public:
     virtual int sync();
 };
 
+class ndDebugLogBufferFlow : public ndLogBuffer
+{
+public:
+    virtual int sync();
+};
+
 class ndLogStream : public ostream
 {
 public:
@@ -71,10 +77,19 @@ public:
 class ndDebugLogStream : public ostream
 {
 public:
-    ndDebugLogStream(bool unlocked = false) :
-        ostream((unlocked) ?
-            (streambuf *)new ndDebugLogBuffer :
-            (streambuf *)new ndDebugLogBufferUnlocked) { }
+    enum Type {
+        DLT_NONE,
+        DLT_UNLOCKED,
+        DLT_FLOW,
+    };
+
+    ndDebugLogStream(Type type = DLT_NONE) :
+        ostream((type == DLT_NONE) ?
+            (streambuf *)new ndDebugLogBuffer : (
+            (type == DLT_UNLOCKED) ?
+                (streambuf *)new ndDebugLogBufferUnlocked :
+                (streambuf *)new ndDebugLogBufferFlow
+            )) { }
 
     virtual ~ndDebugLogStream() {
         delete rdbuf();
