@@ -15,6 +15,10 @@ sysconf_DATA = netifyd.conf
 
 persistentstate_DATA = netify-apps.conf netify-categories.json netify-sink.conf
 
+interfacesdir = $(persistentstatedir)/interfaces.d
+interfaces_DATA = ./interfaces.d/10-example-nfq.conf \
+	./interfaces.d/10-example-tpv3.conf ./interfaces.d/10-example-pcap.conf
+
 BUILT_SOURCES = $(TEMPLATEFILES)
 CLEANFILES = $(TEMPLATEFILES)
 EXTRA_DIST = $(TEMPLATEFILES_IN) freebsd netifyd.default netify-apps.conf netify-categories.json netify-sink.conf pfsense

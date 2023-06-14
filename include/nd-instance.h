@@ -190,7 +190,7 @@ public:
     void CommandLineHelp(bool version_only = false);
 
     bool AddInterface(const string &ifname,
-        nd_interface_role role, nd_capture_type type);
+        nd_interface_role role, unsigned type);
 
     bool CheckAgentUUID(void);
 
@@ -318,10 +318,14 @@ protected:
 
     bool Reload(bool broadcast = true);
 
-    bool CreateCaptureThreads(nd_capture_threads &threads);
+    void CreateCaptureInterfaces(ndInterfaces &ifaces);
+
+    bool CreateCaptureThreads(
+        ndInterfaces &ifaces, nd_capture_threads &threads);
     void DestroyCaptureThreads(
         nd_capture_threads &threads, bool expire_flows = false);
     size_t ReapCaptureThreads(nd_capture_threads &threads);
+    bool ReloadCaptureThreads(nd_capture_threads &threads);
 
     int WaitForIPC(int timeout = -1);
 

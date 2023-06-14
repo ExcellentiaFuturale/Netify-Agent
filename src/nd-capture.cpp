@@ -288,7 +288,7 @@ struct __attribute__((packed)) nd_dns_header_t {
 };
 
 ndCaptureThread::ndCaptureThread(
-    nd_capture_type cs_type,
+    unsigned cs_type,
     int16_t cpu,
     ndInterface& iface,
     const nd_detection_threads &threads_dpi,
@@ -304,7 +304,7 @@ ndCaptureThread::ndCaptureThread(
     capture_state = STATE_INIT;
 
     if (ndGC_REPLAY_DELAY &&
-        iface.capture_type != ndCT_PCAP_OFFLINE) {
+        ndCT_TYPE(iface.capture_type) != ndCT_PCAP_OFFLINE) {
         nd_printf(
             "%s: WARNING: replay delay enabled for online capture!",
             tag.c_str()

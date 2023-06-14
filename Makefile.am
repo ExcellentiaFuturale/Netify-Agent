@@ -28,13 +28,13 @@ pkgconfig_DATA = lib@PACKAGE_TARNAME@.pc
 
 install-data-local:
 	$(MKDIR_P) $(DESTDIR)$(volatilestatedir)
-	$(MKDIR_P) $(DESTDIR)$(persistentstatedir)/plugins.d
 	$(MKDIR_P) $(DESTDIR)$(persistentstatedir)/domains.d
+	$(MKDIR_P) $(DESTDIR)$(persistentstatedir)/plugins.d
 
 uninstall-local:
 	rmdir $(DESTDIR)$(volatilestatedir)
-	rmdir $(DESTDIR)$(persistentstatedir)/plugins.d
 	rmdir $(DESTDIR)$(persistentstatedir)/domains.d
+	rmdir $(DESTDIR)$(persistentstatedir)/plugins.d
 
 dist-git:
 	rm -f $(PACKAGE)-$(VERSION).tar*

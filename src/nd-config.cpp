@@ -134,6 +134,7 @@ ndGlobalConfig::ndGlobalConfig() :
     path_config(ND_CONF_FILE_NAME),
     path_domains(ND_DOMAINS_PATH),
     path_functions(ND_FUNCTIONS_PATH),
+    path_interfaces(ND_INTERFACES_PATH),
     path_legacy_config(ND_CONF_LEGACY_PATH),
     path_pid_file(ND_PID_FILE_NAME),
     path_plugins(ND_PLUGINS_PATH),
@@ -192,36 +193,7 @@ ndGlobalConfig::ndGlobalConfig() :
 ndGlobalConfig::~ndGlobalConfig()
 {
     Close();
-
-    if (interfaces.size()) {
-        for (auto &r : interfaces) {
-            for (auto &i : r.second) {
-                if (i.second.second == nullptr) continue;
-
-                switch (i.second.first) {
-                case ndCT_PCAP:
-                    delete static_cast<nd_config_pcap *>(
-                        i.second.second
-                    );
-                    break;
-                case ndCT_TPV3:
-                    delete static_cast<nd_config_tpv3 *>(
-                        i.second.second
-                    );
-                    break;
-                case ndCT_NFQ:
-                    delete static_cast<nd_config_nfq *>(
-                        i.second.second
-                    );
-                    break;
-                default:
-                    break;
-                }
-            }
-        }
-
-        interfaces.clear();
-    }
+    ClearInterfaces(true);
 }
 
 void ndGlobalConfig::Close(void)
@@ -294,6 +266,7 @@ bool ndGlobalConfig::Load(const string &filename)
         "netifyd", "path_shared_data", ND_SHARED_DATADIR);
 
     UpdatePaths();
+    UpdateConfigVars();
 
     value = r->Get(
         "netifyd", "path_pid_file",
@@ -310,6 +283,11 @@ bool ndGlobalConfig::Load(const string &filename)
         path_state_persistent + "/" + ND_DOMAINS_BASE);
     nd_expand_variables(value, path_domains, conf_vars);
 
+    value = r->Get(
+        "netifyd", "path_interfaces",
+        path_state_persistent + "/" + ND_INTERFACES_BASE);
+    nd_expand_variables(value, path_interfaces, conf_vars);
+
     path_uuid = r->Get(
         "netifyd", "path_uuid",
         path_state_persistent + "/" + ND_AGENT_UUID_BASE);
@@ -321,6 +299,8 @@ bool ndGlobalConfig::Load(const string &filename)
     path_uuid_site = r->Get(
         "netifyd", "path_uuid_site",
         path_state_persistent + "/" + ND_SITE_UUID_BASE);
+
+    UpdateConfigVars();
 
     update_interval = (unsigned)r->GetInteger(
         "netifyd", "update_interval", ND_STATS_INTERVAL);
@@ -374,7 +354,7 @@ bool ndGlobalConfig::Load(const string &filename)
     capture_read_timeout = (unsigned)r->GetInteger(
         "capture-defaults", "read_timeout", ND_CAPTURE_READ_TIMEOUT);
     capture_type = LoadCaptureType(
-        "capture-defaults", "capture_type"
+        reader, "capture-defaults", "capture_type"
     );
 
     if (capture_type == ndCT_NONE) {
@@ -392,8 +372,8 @@ bool ndGlobalConfig::Load(const string &filename)
     }
 
     // TPv3 capture defaults section
-    nd_capture_type ct = ndCT_TPV3;
-    if (! LoadCaptureSettings("capture-defaults-tpv3",
+    unsigned ct = ndCT_TPV3;
+    if (! LoadCaptureSettings(reader, "capture-defaults-tpv3",
         ct, static_cast<void *>(&tpv3_defaults)))
         return false;
 
@@ -543,7 +523,7 @@ bool ndGlobalConfig::Load(const string &filename)
     r->GetSection("protocols", protocols);
 
     // Add static (non-command-line) capture interfaces
-    if (! AddInterfaces()) return false;
+    if (! LoadInterfaces()) return false;
 
     // Add plugins
     vector<string> files;
@@ -712,8 +692,40 @@ bool ndGlobalConfig::ForceReset(void)
     return success;
 }
 
+bool ndGlobalConfig::LoadInterfaces(void)
+{
+    vector<string> files;
+    if (nd_scan_dotd(path_interfaces, files)) {
+        for (auto &filename : files) {
+            INIReader r = INIReader(path_interfaces + "/" + filename);
+
+            int rc = r.ParseError();
+
+            switch (rc) {
+            case -1:
+                fprintf(stderr,
+                    "Error opening interface configuration file: %s: %s\n",
+                    filename.c_str(), strerror(errno));
+                return false;
+            case 0:
+                break;
+            default:
+                fprintf(stderr,
+                    "Error while parsing line #%d of interface file: %s\n",
+                    rc, filename.c_str()
+                );
+                return false;
+            }
+
+            if (! LoadInterfaces(static_cast<void *>(&r))) return false;
+        }
+    }
+
+    return true;
+}
+
 bool ndGlobalConfig::AddInterface(const string &iface,
-    nd_interface_role role, nd_capture_type type, void *config)
+    nd_interface_role role, unsigned type, void *config)
 {
     for (auto &r : interfaces) {
         auto i = interfaces[r.first].find(iface);
@@ -726,8 +738,8 @@ bool ndGlobalConfig::AddInterface(const string &iface,
         }
     }
 
-    if (type == ndCT_NONE) {
-        if (capture_type == ndCT_NONE) {
+    if (ndCT_TYPE(type) == ndCT_NONE) {
+        if (ndCT_TYPE(capture_type) == ndCT_NONE) {
             fprintf(stderr,
                 "WARNING: capture type not set for interface: %s\n",
                 iface.c_str()
@@ -739,7 +751,7 @@ bool ndGlobalConfig::AddInterface(const string &iface,
     }
 
     if (config == nullptr) {
-        switch (type) {
+        switch (ndCT_TYPE(type)) {
         case ndCT_PCAP:
         case ndCT_PCAP_OFFLINE:
             config = static_cast<void *>(new nd_config_pcap);
@@ -778,7 +790,7 @@ bool ndGlobalConfig::AddInterface(const string &iface,
     );
 
     if (! result.second) {
-        switch (type) {
+        switch (ndCT_TYPE(type)) {
         case ndCT_PCAP:
         case ndCT_PCAP_OFFLINE:
             delete static_cast<nd_config_pcap *>(config);
@@ -852,9 +864,11 @@ bool ndGlobalConfig::AddInterfaceFilter(
     return result.second;
 }
 
-bool ndGlobalConfig::AddInterfaces(void)
+bool ndGlobalConfig::LoadInterfaces(void *config_reader)
 {
-    INIReader *r = static_cast<INIReader *>(reader);
+    ClearInterfaces();
+
+    INIReader *r = static_cast<INIReader *>(config_reader);
 
     set<string> sections;
     r->GetSections(sections);
@@ -904,22 +918,22 @@ bool ndGlobalConfig::AddInterfaces(void)
             }
         }
 
-        nd_capture_type type = LoadCaptureType(
-            s, "capture_type"
+        unsigned type = LoadCaptureType(
+            r, s, "capture_type"
         );
 
         void *config = nullptr;
 
-        switch (type) {
+        switch (ndCT_TYPE(type)) {
         case ndCT_PCAP:
             config = static_cast<void *>(new nd_config_pcap);
-            if (! LoadCaptureSettings(s, type, config))
+            if (! LoadCaptureSettings(r, s, type, config))
                 return false;
             break;
         case ndCT_TPV3:
             config = static_cast<void *>(new nd_config_tpv3);
             memcpy(config, &tpv3_defaults, sizeof(nd_config_tpv3));
-            if (! LoadCaptureSettings(s, type, config))
+            if (! LoadCaptureSettings(r, s, type, config))
                 return false;
             break;
         case ndCT_NFQ:
@@ -932,7 +946,7 @@ bool ndGlobalConfig::AddInterfaces(void)
                 return false;
             }
             config = static_cast<void *>(new nd_config_nfq);
-            if (! LoadCaptureSettings(s, type, config))
+            if (! LoadCaptureSettings(r, s, type, config))
                 return false;
             static_cast<nd_config_nfq *>(
                 config
@@ -965,6 +979,198 @@ bool ndGlobalConfig::AddInterfaces(void)
 
         if (filter.size())
             AddInterfaceFilter(iface, filter);
+    }
+
+    return true;
+}
+
+void ndGlobalConfig::ClearInterfaces(bool cmdline_entries)
+{
+    list<string> clear_list;
+
+    if (interfaces.size()) {
+        for (auto &r : interfaces) {
+            for (auto &i : r.second) {
+                if ((i.second.first & ndCT_CMDLINE) &&
+                    ! cmdline_entries) continue;
+
+                clear_list.push_back(i.first);
+            }
+        }
+    }
+
+    for (const string &iface : clear_list) {
+        for (auto &r : interfaces) {
+            auto it = r.second.find(iface);
+            if (it == r.second.end()) continue;
+
+            if (it->second.second != nullptr) {
+                switch (ndCT_TYPE(it->second.first)) {
+                case ndCT_PCAP:
+                    delete static_cast<nd_config_pcap *>(
+                        it->second.second
+                    );
+                    break;
+                case ndCT_TPV3:
+                    delete static_cast<nd_config_tpv3 *>(
+                        it->second.second
+                    );
+                    break;
+                case ndCT_NFQ:
+                    delete static_cast<nd_config_nfq *>(
+                        it->second.second
+                    );
+                    break;
+                default:
+                    break;
+                }
+            }
+
+            r.second.erase(it);
+        }
+
+        auto ifp = interface_peers.find(iface);
+        if (ifp != interface_peers.end())
+            interface_peers.erase(ifp);
+    }
+}
+
+enum nd_capture_type ndGlobalConfig::LoadCaptureType(
+    void *config_reader,
+    const string &section, const string &key)
+{
+    INIReader *r = static_cast<INIReader *>(config_reader);
+
+    enum nd_capture_type ct = ndCT_NONE;
+    string capture_type = r->Get(section, key, "auto");
+
+    if (capture_type == "auto") {
+#if defined(_ND_USE_LIBPCAP)
+        ct = ndCT_PCAP;
+#elif defined(_ND_USE_TPACKETV3)
+        ct = ndCT_TPV3;
+#else
+#error "No available capture types!"
+#endif
+    }
+#if defined(_ND_USE_LIBPCAP)
+    else if (capture_type == "pcap")
+        ct = ndCT_PCAP;
+#endif
+#if defined(_ND_USE_TPACKETV3)
+    else if (capture_type == "tpv3")
+        ct = ndCT_TPV3;
+#endif
+#if defined(_ND_USE_NFQUEUE)
+    else if (capture_type == "nfqueue")
+        ct = ndCT_NFQ;
+#endif
+    else {
+        fprintf(stderr, "Invalid capture type: %s\n",
+            capture_type.c_str());
+        throw ndSystemException(
+            __PRETTY_FUNCTION__, "invalid capture type", EINVAL);
+    }
+
+    return ct;
+}
+
+bool ndGlobalConfig::LoadCaptureSettings(
+    void *config_reader,
+    const string &section, unsigned &type, void *config)
+{
+    INIReader *r = static_cast<INIReader *>(config_reader);
+
+    if (ndCT_TYPE(type) == ndCT_PCAP) {
+        nd_config_pcap *pcap = static_cast<nd_config_pcap *>(config);
+        string capture_filename = r->Get(
+            section, "filename", ""
+        );
+
+        if (! capture_filename.empty()) {
+            if (! nd_file_exists(capture_filename)) {
+                fprintf(stderr, "Capture file not found: %s\n",
+                    capture_filename.c_str()
+                );
+                return false;
+            }
+
+            if (! (type & ndCT_CMDLINE))
+                type = ndCT_PCAP_OFFLINE;
+            else
+                type = ndCT_PCAP_OFFLINE | ndCT_CMDLINE;
+            pcap->capture_filename = capture_filename;
+        }
+    }
+    else if (ndCT_TYPE(type) == ndCT_TPV3) {
+        nd_config_tpv3 *tpv3 = static_cast<nd_config_tpv3 *>(config);
+
+        string fanout_mode = r->Get(
+            section, "fanout_mode", "none"
+        );
+
+        if (fanout_mode == "hash")
+            tpv3->fanout_mode = ndFOM_HASH;
+        else if (fanout_mode == "lb" ||
+                fanout_mode == "load_balanced")
+            tpv3->fanout_mode = ndFOM_LOAD_BALANCED;
+        else if (fanout_mode == "cpu")
+            tpv3->fanout_mode = ndFOM_CPU;
+        else if (fanout_mode == "rollover")
+            tpv3->fanout_mode = ndFOM_ROLLOVER;
+        else if (fanout_mode == "random")
+            tpv3->fanout_mode = ndFOM_RANDOM;
+        else
+            tpv3->fanout_mode = ndFOM_DISABLED;
+
+        string fanout_flags = r->Get(
+            section, "fanout_flags", "none"
+        );
+
+        if (fanout_flags != "none") {
+            stringstream ss(fanout_flags);
+
+            while (ss.good()) {
+                string flag;
+                getline(ss, flag, ',');
+
+                nd_trim(flag, ' ');
+
+                if (flag == "defrag")
+                    tpv3->fanout_flags |= ndFOF_DEFRAG;
+                else if (flag == "rollover")
+                    tpv3->fanout_flags |= ndFOF_ROLLOVER;
+                else {
+                    fprintf(stderr, "Invalid fanout flag: %s\n",
+                        flag.c_str()
+                    );
+                    return false;
+                }
+            }
+        }
+
+        tpv3->fanout_instances = (unsigned)r->GetInteger(
+            section, "fanout_instances", 0);
+
+        if (tpv3->fanout_mode != ndFOM_DISABLED &&
+            tpv3->fanout_instances < 2) {
+            tpv3->fanout_mode = ndFOM_DISABLED;
+            tpv3->fanout_instances = 0;
+        }
+
+        tpv3->rb_block_size = (unsigned)r->GetInteger(
+            section, "rb_block_size", tpv3_defaults.rb_block_size);
+
+        tpv3->rb_frame_size = (unsigned)r->GetInteger(
+            section, "rb_frame_size", tpv3_defaults.rb_frame_size);
+
+        tpv3->rb_blocks = (unsigned)r->GetInteger(
+            section, "rb_blocks", tpv3_defaults.rb_blocks);
+    }
+    else if (ndCT_TYPE(type) == ndCT_NFQ) {
+        nd_config_nfq *nfq = static_cast<nd_config_nfq *>(config);
+        nfq->instances = (unsigned)r->GetInteger(
+            section, "queue_instances", 1);
     }
 
     return true;
@@ -1082,142 +1288,6 @@ bool ndGlobalConfig::AddPlugin(const string &filename)
     return true;
 }
 
-enum nd_capture_type ndGlobalConfig::LoadCaptureType(
-    const string &section, const string &key)
-{
-    INIReader *r = static_cast<INIReader *>(reader);
-
-    enum nd_capture_type ct = ndCT_NONE;
-    string capture_type = r->Get(section, key, "auto");
-
-    if (capture_type == "auto") {
-#if defined(_ND_USE_LIBPCAP)
-        ct = ndCT_PCAP;
-#elif defined(_ND_USE_TPACKETV3)
-        ct = ndCT_TPV3;
-#else
-#error "No available capture types!"
-#endif
-    }
-#if defined(_ND_USE_LIBPCAP)
-    else if (capture_type == "pcap")
-        ct = ndCT_PCAP;
-#endif
-#if defined(_ND_USE_TPACKETV3)
-    else if (capture_type == "tpv3")
-        ct = ndCT_TPV3;
-#endif
-#if defined(_ND_USE_NFQUEUE)
-    else if (capture_type == "nfqueue")
-        ct = ndCT_NFQ;
-#endif
-    else {
-        fprintf(stderr, "Invalid capture type: %s\n",
-            capture_type.c_str());
-        throw ndSystemException(
-            __PRETTY_FUNCTION__, "invalid capture type", EINVAL);
-    }
-
-    return ct;
-}
-
-bool ndGlobalConfig::LoadCaptureSettings(
-    const string &section, nd_capture_type &type, void *config)
-{
-    INIReader *r = static_cast<INIReader *>(reader);
-
-    if (type == ndCT_PCAP) {
-        nd_config_pcap *pcap = static_cast<nd_config_pcap *>(config);
-        string capture_filename = r->Get(
-            section, "filename", ""
-        );
-
-        if (! capture_filename.empty()) {
-            if (! nd_file_exists(capture_filename)) {
-                fprintf(stderr, "Capture file not found: %s\n",
-                    capture_filename.c_str()
-                );
-                return false;
-            }
-
-            type = ndCT_PCAP_OFFLINE;
-            pcap->capture_filename = capture_filename;
-        }
-    }
-    else if (type == ndCT_TPV3) {
-        nd_config_tpv3 *tpv3 = static_cast<nd_config_tpv3 *>(config);
-
-        string fanout_mode = r->Get(
-            section, "fanout_mode", "none"
-        );
-
-        if (fanout_mode == "hash")
-            tpv3->fanout_mode = ndFOM_HASH;
-        else if (fanout_mode == "lb" ||
-                fanout_mode == "load_balanced")
-            tpv3->fanout_mode = ndFOM_LOAD_BALANCED;
-        else if (fanout_mode == "cpu")
-            tpv3->fanout_mode = ndFOM_CPU;
-        else if (fanout_mode == "rollover")
-            tpv3->fanout_mode = ndFOM_ROLLOVER;
-        else if (fanout_mode == "random")
-            tpv3->fanout_mode = ndFOM_RANDOM;
-        else
-            tpv3->fanout_mode = ndFOM_DISABLED;
-
-        string fanout_flags = r->Get(
-            section, "fanout_flags", "none"
-        );
-
-        if (fanout_flags != "none") {
-            stringstream ss(fanout_flags);
-
-            while (ss.good()) {
-                string flag;
-                getline(ss, flag, ',');
-
-                nd_trim(flag, ' ');
-
-                if (flag == "defrag")
-                    tpv3->fanout_flags |= ndFOF_DEFRAG;
-                else if (flag == "rollover")
-                    tpv3->fanout_flags |= ndFOF_ROLLOVER;
-                else {
-                    fprintf(stderr, "Invalid fanout flag: %s\n",
-                        flag.c_str()
-                    );
-                    return false;
-                }
-            }
-        }
-
-        tpv3->fanout_instances = (unsigned)r->GetInteger(
-            section, "fanout_instances", 0);
-
-        if (tpv3->fanout_mode != ndFOM_DISABLED &&
-            tpv3->fanout_instances < 2) {
-            tpv3->fanout_mode = ndFOM_DISABLED;
-            tpv3->fanout_instances = 0;
-        }
-
-        tpv3->rb_block_size = (unsigned)r->GetInteger(
-            section, "rb_block_size", tpv3_defaults.rb_block_size);
-
-        tpv3->rb_frame_size = (unsigned)r->GetInteger(
-            section, "rb_frame_size", tpv3_defaults.rb_frame_size);
-
-        tpv3->rb_blocks = (unsigned)r->GetInteger(
-            section, "rb_blocks", tpv3_defaults.rb_blocks);
-    }
-    else if (type == ndCT_NFQ) {
-        nd_config_nfq *nfq = static_cast<nd_config_nfq *>(config);
-        nfq->instances = (unsigned)r->GetInteger(
-            section, "queue_instances", 1);
-    }
-
-    return true;
-}
-
 void ndGlobalConfig::UpdatePaths(void)
 {
     path_app_config =
@@ -1241,6 +1311,12 @@ void ndGlobalConfig::UpdatePaths(void)
     path_functions =
         path_shared_data + "/" + ND_FUNCTIONS_BASE;
 
+    path_interfaces =
+        path_state_persistent + "/" + ND_INTERFACES_BASE;
+}
+
+void ndGlobalConfig::UpdateConfigVars(void)
+{
     conf_vars.clear();
 
     conf_vars.insert(
@@ -1271,6 +1347,11 @@ void ndGlobalConfig::UpdatePaths(void)
     conf_vars.insert(
         make_pair(
             "${path_domains}", path_domains
+        )
+    );
+    conf_vars.insert(
+        make_pair(
+            "${path_interfaces}", path_interfaces
         )
     );
 }

@@ -790,7 +790,7 @@ class ndInterface : public ndSerializer
 public:
     ndInterface(
         const string &ifname,
-        nd_capture_type capture_type,
+        unsigned capture_type,
         nd_interface_role role = ndIR_LAN)
         : ifname(ifname), ifname_peer(ifname),
         capture_type(capture_type), role(role),
@@ -802,7 +802,7 @@ public:
                 __PRETTY_FUNCTION__, "new mutex", ENOMEM
             );
         }
-        switch (capture_type) {
+        switch (ndCT_TYPE(capture_type)) {
         case ndCT_PCAP:
             config.pcap = nullptr;
             break;
@@ -832,7 +832,7 @@ public:
                 __PRETTY_FUNCTION__, "new mutex", ENOMEM
             );
         }
-        switch(capture_type) {
+        switch(ndCT_TYPE(capture_type)) {
         case ndCT_PCAP:
             config.pcap = iface.config.pcap;
             break;
@@ -874,7 +874,7 @@ public:
             break;
         }
 
-        switch (capture_type) {
+        switch (ndCT_TYPE(capture_type)) {
         case ndCT_PCAP:
             serialize(output, { "capture_type" }, "PCAP");
             break;
@@ -976,9 +976,52 @@ public:
     }
 #endif
 
+    inline bool operator==(const ndInterface &i) const {
+        if (ifname != i.ifname || ifname_peer != i.ifname_peer)
+            return false;
+        if (capture_type != i.capture_type) return false;
+        if (role != i.role) return false;
+        switch (ndCT_TYPE(capture_type)) {
+        case ndCT_PCAP:
+        case ndCT_PCAP_OFFLINE:
+            if (config.pcap == nullptr && i.config.pcap == nullptr)
+                return true;
+            if (config.pcap == nullptr && i.config.pcap != nullptr)
+                return false;
+            if (config.pcap != nullptr && i.config.pcap == nullptr)
+                return false;
+            if (! (*config.pcap == *i.config.pcap))
+                return false;
+            break;
+#if defined(_ND_USE_TPACKETV3)
+        case ndCT_TPV3:
+            if (config.tpv3 == nullptr && i.config.tpv3 == nullptr)
+                return true;
+            if (config.tpv3 == nullptr && i.config.tpv3 != nullptr)
+                return false;
+            if (config.tpv3 != nullptr && i.config.tpv3 == nullptr)
+                return false;
+            if (! (*config.tpv3 == *i.config.tpv3))
+                return false;
+#endif
+#if defined(_ND_USE_NFQUEUE)
+        case ndCT_NFQ:
+            if (config.nfq == nullptr && i.config.nfq == nullptr)
+                return true;
+            if (config.nfq == nullptr && i.config.nfq != nullptr)
+                return false;
+            if (config.nfq != nullptr && i.config.nfq == nullptr)
+                return false;
+            if (! (*config.nfq == *i.config.nfq))
+                return false;
+#endif
+        }
+        return true;
+    }
+
     string ifname;
     string ifname_peer;
-    nd_capture_type capture_type;
+    unsigned capture_type;
     nd_interface_role role;
 
     union {

@@ -109,6 +109,9 @@
 #define ND_FUNCTIONS_BASE       "functions.sh"
 #define ND_FUNCTIONS_PATH       ND_SHARED_DATADIR "/" ND_FUNCTIONS_BASE
 
+#define ND_INTERFACES_BASE      "interfaces.d"
+#define ND_INTERFACES_PATH      ND_PERSISTENT_STATEDIR "/" ND_INTERFACES_BASE
+
 #define ND_JSON_DATA_CHUNKSIZ   4096
 #define ND_JSON_INDENT          4
 

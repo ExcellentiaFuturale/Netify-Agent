@@ -28,7 +28,7 @@ class ndCaptureThread : public ndThread, public ndInstanceClient
 {
 public:
     ndCaptureThread(
-        nd_capture_type cs_type,
+        unsigned cs_type,
         int16_t cpu,
         ndInterface& iface,
         const nd_detection_threads &threads_dpi,
@@ -54,7 +54,7 @@ public:
 
 protected:
     int dl_type;
-    nd_capture_type cs_type;
+    unsigned cs_type;
 
     ndInterface& iface;
 

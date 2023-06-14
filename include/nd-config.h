@@ -30,12 +30,15 @@ enum nd_fhc_save {
 };
 
 enum nd_capture_type {
-    ndCT_NONE,
-    ndCT_PCAP,
-    ndCT_PCAP_OFFLINE,
-    ndCT_TPV3,
-    ndCT_NFQ,
+    ndCT_NONE = 0x00,
+    ndCT_CMDLINE = 0x01,
+    ndCT_PCAP = 0x02,
+    ndCT_PCAP_OFFLINE = 0x04,
+    ndCT_TPV3 = 0x08,
+    ndCT_NFQ = 0x10,
 };
+
+#define ndCT_TYPE(t)    (t & 0xfffffffe)
 
 enum nd_interface_role {
     ndIR_NONE,
@@ -119,12 +122,16 @@ enum nd_global_flags {
     else ndGlobalConfig::GetInstance().flags &= ~flag; \
 }
 
-typedef struct
+typedef struct nd_config_pcap_t
 {
     string capture_filename;
+
+    inline bool operator==(const struct nd_config_pcap_t &i) const {
+        return (capture_filename == i.capture_filename);
+    }
 } nd_config_pcap;
 
-typedef struct
+typedef struct nd_config_tpv3_t
 {
     unsigned fanout_mode;
     unsigned fanout_flags;
@@ -132,12 +139,26 @@ typedef struct
     unsigned rb_block_size;
     unsigned rb_frame_size;
     unsigned rb_blocks;
+
+    inline bool operator==(const struct nd_config_tpv3_t &i) const {
+        if (fanout_mode != i.fanout_mode) return false;
+        if (fanout_flags != i.fanout_flags) return false;
+        if (fanout_instances != i.fanout_instances) return false;
+        if (rb_block_size != i.rb_block_size) return false;
+        if (rb_frame_size != i.rb_frame_size) return false;
+        if (rb_blocks != i.rb_blocks) return false;
+        return true;
+    }
 } nd_config_tpv3;
 
-typedef struct
+typedef struct nd_config_nfq_t
 {
     unsigned queue_id;
     unsigned instances;
+
+    inline bool operator==(const struct nd_config_nfq_t &i) const {
+        return (queue_id == i.queue_id && instances == instances);
+    }
 } nd_config_nfq;
 
 class ndGlobalConfig
@@ -151,6 +172,7 @@ public:
     string path_domains;
     string path_export_json;
     string path_functions;
+    string path_interfaces;
     string path_legacy_config;
     string path_pid_file;
     string path_plugins;
@@ -200,7 +222,7 @@ public:
     map<string, string> custom_headers;
     map<string, string> protocols;
 
-    typedef map<string, pair<nd_capture_type, void *>> nd_config_interfaces;
+    typedef map<string, pair<unsigned, void *>> nd_config_interfaces;
     map<nd_interface_role, nd_config_interfaces> interfaces;
     map<string, set<string>> interface_addrs;
     map<string, string> interface_peers;
@@ -233,10 +255,10 @@ public:
 
     bool ForceReset(void);
 
-    void UpdateConfVars(void);
+    bool LoadInterfaces(void);
 
     bool AddInterface(const string &iface, nd_interface_role role,
-        nd_capture_type type = ndCT_NONE, void *config = nullptr);
+        unsigned type = ndCT_NONE, void *config = nullptr);
 
     bool AddInterfaceAddress(const string &iface, const string &addr);
     bool AddInterfacePeer(const string &iface, const string &peer);
@@ -251,14 +273,20 @@ protected:
     string uuid_serial;
     string uuid_site;
 
-    bool AddInterfaces(void);
-    bool AddPlugin(const string &filename);
+    bool LoadInterfaces(void *config_reader);
+    void ClearInterfaces(bool cmdline_entries = false);
+
     enum nd_capture_type LoadCaptureType(
+        void *config_reader,
         const string &section, const string &key);
     bool LoadCaptureSettings(
-        const string &section, nd_capture_type &type, void *config);
+        void *config_reader,
+        const string &section, unsigned &type, void *config);
+
+    bool AddPlugin(const string &filename);
 
     void UpdatePaths(void);
+    void UpdateConfigVars(void);
 
 private:
     ndGlobalConfig();

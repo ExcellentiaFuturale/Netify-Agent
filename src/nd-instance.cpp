@@ -556,7 +556,7 @@ uint32_t ndInstance::InitializeConfig(int argc, char * const argv[])
         case 'c':
             break;
         case 'E':
-            if (! AddInterface(optarg, ndIR_WAN, ndCT_PCAP))
+            if (! AddInterface(optarg, ndIR_WAN, ndCT_PCAP | ndCT_CMDLINE))
                 return ndCR_INVALID_INTERFACE;
             last_iface = optarg;
             break;
@@ -576,7 +576,7 @@ uint32_t ndInstance::InitializeConfig(int argc, char * const argv[])
             CommandLineHelp();
             return ndCR_USAGE_OR_VERSION;
         case 'I':
-            if (! AddInterface(optarg, ndIR_LAN, ndCT_PCAP))
+            if (! AddInterface(optarg, ndIR_LAN, ndCT_PCAP | ndCT_CMDLINE))
                 return ndCR_INVALID_INTERFACE;
             last_iface = optarg;
             break;
@@ -689,58 +689,7 @@ uint32_t ndInstance::InitializeConfig(int argc, char * const argv[])
         }
     }
 
-    // Prepare packet capture interfaces
-    for (auto &r : ndGC.interfaces) {
-        for (auto &i : r.second) {
-            auto result = interfaces.insert(
-                make_pair(
-                    i.first,
-                    ndInterface(
-                        i.first,
-                        i.second.first,
-                        r.first
-                    )
-                )
-            );
-
-            if (result.second) {
-                switch (i.second.first) {
-                case ndCT_PCAP:
-                case ndCT_PCAP_OFFLINE:
-                    result.first->second.SetConfig(
-                        static_cast<nd_config_pcap *>(
-                            i.second.second
-                        )
-                    );
-                    break;
-#if defined(_ND_USE_TPACKETV3)
-                case ndCT_TPV3:
-                    result.first->second.SetConfig(
-                        static_cast<nd_config_tpv3 *>(
-                            i.second.second
-                        )
-                    );
-                    break;
-#endif
-#if defined(_ND_USE_NFQUEUE)
-                case ndCT_NFQ:
-                    result.first->second.SetConfig(
-                        static_cast<nd_config_nfq *>(
-                            i.second.second
-                        )
-                    );
-                    break;
-#endif
-                default:
-                    break;
-                }
-            }
-
-            auto peer = ndGC.interface_peers.find(i.first);
-            if (peer != ndGC.interface_peers.end())
-                result.first->second.ifname_peer = peer->second;
-        }
-    }
+    CreateCaptureInterfaces(interfaces);
 
     if (interfaces.size() == 0) {
         fprintf(stderr,
@@ -1179,11 +1128,11 @@ void ndInstance::CommandLineHelp(bool version_only)
 }
 
 bool ndInstance::AddInterface(const string &ifname,
-    nd_interface_role role, nd_capture_type type)
+    nd_interface_role role, unsigned type)
 {
     static unsigned pcap_id = 0;
 
-    if ((type == ndCT_PCAP || type == ndCT_NONE) &&
+    if ((ndCT_TYPE(type) == ndCT_PCAP || ndCT_TYPE(type) == ndCT_NONE) &&
         nd_file_exists(ifname)) {
 
         nd_config_pcap *pcap = new nd_config_pcap;
@@ -1197,7 +1146,7 @@ bool ndInstance::AddInterface(const string &ifname,
         string iface("offline");
         iface.append(to_string(pcap_id++));
 
-        return ndGC.AddInterface(iface, role, ndCT_PCAP_OFFLINE,
+        return ndGC.AddInterface(iface, role, ndCT_PCAP_OFFLINE | ndCT_CMDLINE,
             static_cast<void *>(pcap)
         );
     }
@@ -1802,7 +1751,7 @@ void *ndInstance::ndInstance::Entry(void)
 
     try {
         // Create and start capture threads
-        if (! CreateCaptureThreads(thread_capture))
+        if (! CreateCaptureThreads(interfaces, thread_capture))
             return nullptr;
     }
     catch (exception &e) {
@@ -1872,6 +1821,7 @@ void *ndInstance::ndInstance::Entry(void)
                 tag.c_str(), ipc, "Reload run-time configuration"
             );
             Reload();
+            ReloadCaptureThreads(thread_capture);
             break;
         case ndIPC_TERMINATE:
             Terminate();
@@ -1983,7 +1933,63 @@ bool ndInstance::Reload(bool broadcast)
     return result;
 }
 
-bool ndInstance::CreateCaptureThreads(nd_capture_threads &threads)
+void ndInstance::CreateCaptureInterfaces(ndInterfaces &ifaces)
+{
+    for (auto &r : ndGC.interfaces) {
+        for (auto &i : r.second) {
+            auto result = ifaces.insert(
+                make_pair(
+                    i.first,
+                    ndInterface(
+                        i.first,
+                        i.second.first,
+                        r.first
+                    )
+                )
+            );
+
+            if (result.second) {
+                switch (ndCT_TYPE(i.second.first)) {
+                case ndCT_PCAP:
+                case ndCT_PCAP_OFFLINE:
+                    result.first->second.SetConfig(
+                        static_cast<nd_config_pcap *>(
+                            i.second.second
+                        )
+                    );
+                    break;
+#if defined(_ND_USE_TPACKETV3)
+                case ndCT_TPV3:
+                    result.first->second.SetConfig(
+                        static_cast<nd_config_tpv3 *>(
+                            i.second.second
+                        )
+                    );
+                    break;
+#endif
+#if defined(_ND_USE_NFQUEUE)
+                case ndCT_NFQ:
+                    result.first->second.SetConfig(
+                        static_cast<nd_config_nfq *>(
+                            i.second.second
+                        )
+                    );
+                    break;
+#endif
+                default:
+                    break;
+                }
+            }
+
+            auto peer = ndGC.interface_peers.find(i.first);
+            if (peer != ndGC.interface_peers.end())
+                result.first->second.ifname_peer = peer->second;
+        }
+    }
+}
+
+bool ndInstance::CreateCaptureThreads(
+    ndInterfaces &ifaces, nd_capture_threads &threads)
 {
     if (threads.size() != 0) {
         nd_printf("%s: Capture threads already created.\n",
@@ -1992,17 +1998,17 @@ bool ndInstance::CreateCaptureThreads(nd_capture_threads &threads)
         return false;
     }
 
-    uint8_t private_addr = 0;
+    static uint8_t private_addr = 0;
     vector<ndCaptureThread *> thread_group;
 
-    int16_t cpu = (
+    static int16_t cpu = (
             ndGC.ca_capture_base > -1 &&
             ndGC.ca_capture_base < (int16_t)status.cpus
     ) ? ndGC.ca_capture_base : 0;
 
-    for (auto &it : interfaces) {
+    for (auto &it : ifaces) {
 
-        switch (it.second.capture_type) {
+        switch (ndCT_TYPE(it.second.capture_type)) {
         case ndCT_PCAP:
         case ndCT_PCAP_OFFLINE:
         {
@@ -2151,6 +2157,102 @@ size_t ndInstance::ReapCaptureThreads(nd_capture_threads &threads)
     }
 
     return count;
+}
+
+bool ndInstance::ReloadCaptureThreads(nd_capture_threads &threads)
+{
+    ndGC.LoadInterfaces();
+
+    ndInterfaces ifaces, ifaces_new;
+    CreateCaptureInterfaces(ifaces);
+
+    list<string> ifaces_delete;
+
+    for (auto &iface : ifaces) {
+        auto i = interfaces.find(iface.first);
+
+        if (i == interfaces.end()) {
+            ifaces_new.insert(iface);
+            continue;
+        }
+
+        if (i->second == iface.second)
+            continue;
+
+        ifaces_new.insert(iface);
+        ifaces_delete.push_back(iface.first);
+    }
+
+    for (auto &iface : interfaces) {
+        auto i = ifaces.find(iface.first);
+
+        if (i == ifaces.end())
+            ifaces_delete.push_back(iface.first);
+    }
+
+    for (auto &iface : ifaces_delete) {
+
+        auto ifa = ndGC.interface_addrs.find(iface);
+
+        if (ifa != ndGC.interface_addrs.end()) {
+            for (auto &a : ifa->second)
+                addr_types.RemoveAddress(a, iface);
+
+            ndGC.interface_addrs.erase(ifa);
+        }
+        {
+            auto it = threads.find(iface);
+
+            if (it != threads.end()) {
+
+                for (auto &i : it->second) {
+                    i->Terminate();
+                    delete i;
+                }
+
+                threads.erase(it);
+            }
+        }
+        {
+            auto it = interfaces.find(iface);
+
+            if (it != interfaces.end())
+                interfaces.erase(it);
+        }
+    }
+
+    nd_capture_threads threads_new;
+
+    try {
+        if (! CreateCaptureThreads(ifaces_new, threads_new))
+            return false;
+    }
+    catch (exception &e) {
+        nd_printf(
+            "%s: Exception while starting capture threads: %s\n",
+            tag.c_str(), e.what()
+        );
+
+        return false;
+    }
+
+    for (auto &iface : ifaces_new) {
+        interfaces.insert(iface);
+
+        auto ifa = ndGC.interface_addrs.find(iface.first);
+        if (ifa != ndGC.interface_addrs.end()) {
+            for (auto &a : ifa->second) {
+                addr_types.AddAddress(
+                    ndAddr::atLOCAL, a, iface.first
+                );
+            }
+        }
+    }
+
+    for (auto &thread : threads_new)
+        threads.insert(thread);
+
+    return true;
 }
 
 int ndInstance::WaitForIPC(int timeout)
