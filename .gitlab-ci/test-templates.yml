@@ -9,7 +9,7 @@
     - yum -y --nogpgcheck localinstall builds/netify/$RPMOS_OS/$RPMOS_VERSION/devel/$RPMOS_ARCH/netifyd-[0-9]*.*.$RPMOS_ARCH.rpm
     # yum returns exit code 0 even if target is corrupt or invalid, so verify with rpm
     - rpm -qV netifyd
-    - echo $RPMOS_UUID > /etc/netifyd/agent.uuid
+    - echo $RPMOS_UUID > /etc/netify.d/agent.uuid
     - echo NETIFYD_AUTODETECT="no" > /etc/sysconfig/netifyd
     - echo NETIFYD_EXTRA_OPTS="-t" >> /etc/sysconfig/netifyd
     - echo NETIFYD_INTNET="eth0" >> /etc/sysconfig/netifyd
