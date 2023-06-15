@@ -7,8 +7,10 @@ stages:
   - test
   - variants
 
-# variables:
+variables:
+  GIT_SUBMODULE_STRATEGY: recursive
 #  CI_DEBUG_TRACE: "true"
+
 
 # Incude templates
 include:
@@ -23,102 +25,19 @@ include:
 # Debian OS Targets
 #------------------
 
-debian 9 build:
-  extends: .debian_build
-  tags:
-    - docker
-  variables:
-    OS_IMAGE: "debian:9"
-    OS_NAME: "debian"
-    OS_VERSION: "9.0"
-    OS_ARCH: "amd64"
-    OS_EXTRA_PACKAGES: "byacc flex"
-
 debian 10 build:
   extends: .debian_build
   tags:
     - docker
+  only:
+    - tags
+    - web
   variables:
     OS_IMAGE: "debian:10"
     OS_NAME: "debian"
     OS_VERSION: "10"
     OS_ARCH: "amd64"
     OS_EXTRA_PACKAGES: "flex"
-
-debian 10 i386 build:
-  extends: .debian_build
-  tags:
-    - docker
-  variables:
-    OS_IMAGE: "i386/debian:10"
-    OS_NAME: "debian"
-    OS_VERSION: "10"
-    OS_ARCH: "i386"
-    OS_EXTRA_PACKAGES: "byacc flex"
-
-debian 10 build:
-  extends: .debian_build
-  tags:
-    - docker
-  variables:
-    OS_IMAGE: "debian:10"
-    OS_NAME: "debian"
-    OS_VERSION: "10"
-    OS_ARCH: "amd64"
-    OS_EXTRA_PACKAGES: ""
-
-debian 10 i386 build:
-  extends: .debian_build
-  tags:
-    - docker
-  variables:
-    OS_IMAGE: "i386/debian:10"
-    OS_NAME: "debian"
-    OS_VERSION: "10"
-    OS_ARCH: "i386"
-    OS_EXTRA_PACKAGES: "byacc flex"
-
-debian 10 armel build:
-  extends: .debian_build
-  tags:
-    - docker
-  only:
-    - tags
-    - web
-  variables:
-    OS_IMAGE: "arm32v5/debian:10"
-    OS_NAME: "debian"
-    OS_VERSION: "10"
-    OS_ARCH: "armel"
-    OS_EXTRA_PACKAGES: "byacc flex"
-
-debian 10 armhf build:
-  extends: .debian_build
-  tags:
-    - docker
-  only:
-    - tags
-    - web
-  variables:
-    OS_IMAGE: "arm32v7/debian:10"
-    OS_NAME: "debian"
-    OS_VERSION: "10"
-    OS_ARCH: "armhf"
-    OS_EXTRA_PACKAGES: "byacc flex"
-
-debian 10 arm64 build:
-  extends: .debian_build
-  tags:
-    - docker
-  only:
-    - tags
-    - web
-  variables:
-    OS_IMAGE: "arm64v8/debian:10"
-    OS_NAME: "debian"
-    OS_VERSION: "10"
-    OS_ARCH: "arm64"
-    OS_EXTRA_PACKAGES: "byacc flex"
 
 debian 11 build:
   extends: .debian_build
@@ -135,6 +54,9 @@ debian 11 i386 build:
   extends: .debian_build
   tags:
     - docker
+  only:
+    - tags
+    - web
   variables:
     OS_IMAGE: "i386/debian:11"
     OS_NAME: "debian"
@@ -154,7 +76,7 @@ debian 11 armel build:
     OS_NAME: "debian"
     OS_VERSION: "11"
     OS_ARCH: "armel"
-    OS_EXTRA_PACKAGES: "byacc flex"
+    OS_EXTRA_PACKAGES: "byacc flex libatomic1"
 
 debian 11 armhf build:
   extends: .debian_build
@@ -187,21 +109,13 @@ debian 11 arm64 build:
 # Ubuntu OS Targets
 #------------------
 
-ubuntu 18.04 build:
-  extends: .debian_build
-  tags:
-    - docker
-  variables:
-    OS_IMAGE: "ubuntu:18.04"
-    OS_NAME: "ubuntu"
-    OS_VERSION: "bionic"
-    OS_ARCH: "binary-amd64"
-    OS_EXTRA_PACKAGES: "byacc"
-
 ubuntu 20.04 build:
   extends: .debian_build
   tags:
     - docker
+  only:
+    - tags
+    - web
   variables:
     OS_IMAGE: "ubuntu:20.04"
     OS_NAME: "ubuntu"
@@ -213,6 +127,9 @@ ubuntu 22.04 build:
   extends: .debian_build
   tags:
     - docker
+  only:
+    - tags
+    - web
   variables:
     OS_IMAGE: "ubuntu:22.04"
     OS_NAME: "ubuntu"
@@ -227,6 +144,9 @@ centos 7 build:
   extends: .rpmos_build
   tags:
     - docker
+  only:
+    - tags
+    - web
   variables:
     RPMOS_IMAGE: "centos:7.9.2009"
     RPMOS_OS: "centos"
@@ -234,10 +154,27 @@ centos 7 build:
     RPMOS_ARCH: "x86_64"
     RPMOS_REPOS: ""
 
+rockylinux 8 build:
+  extends: .rpmos_build
+  tags:
+    - docker
+  only:
+    - tags
+    - web
+  variables:
+    RPMOS_IMAGE: "rockylinux:8"
+    RPMOS_OS: "rockylinux"
+    RPMOS_VERSION: "8"
+    RPMOS_ARCH: "x86_64"
+    RPMOS_REPOS: "--enablerepo=powertools,epel"
+
 almalinux 8 build:
   extends: .rpmos_build
   tags:
     - docker
+  only:
+    - tags
+    - web
   variables:
     RPMOS_IMAGE: "almalinux:8"
     RPMOS_OS: "almalinux"
@@ -245,66 +182,19 @@ almalinux 8 build:
     RPMOS_ARCH: "x86_64"
     RPMOS_REPOS: "--enablerepo=powertools,epel"
 
-# FreeBSD OS Targets
-#-------------------
-
-.freebsd 11.2 build:
-  extends: .xbsd_build
+almalinux 9 build:
+  extends: .rpmos_build
   tags:
-    - freebsd112
+    - docker
   only:
+    - tags
     - web
   variables:
-    OS_BASENAME: "freebsd"
-    OS_VERSION: "11"
-    OS_RELEASE: "2"
-    OS_ARCH: "x86_64"
-    OS_MAKE_TARGET: "deploy-freebsd-11x"
-    OS_CONFIGURE_FLAGS: ""
-    OS_PKG_EXTENSION: "txz"
-
-# freebsd 11.3 build:
-#   extends: .xbsd_build
-#   tags:
-#     - freebsd113
-#   variables:
-#     OS_BASENAME: "freebsd"
-#     OS_VERSION: "11"
-#     OS_RELEASE: "3"
-#     OS_ARCH: "x86_64"
-#     OS_MAKE_TARGET: "deploy-freebsd-11x"
-#     OS_CONFIGURE_FLAGS: ""
-#     OS_PKG_EXTENSION: "txz"
-
-.freebsd 12.1 build:
-  extends: .xbsd_build
-  tags:
-    - freebsd121
-  only:
-    - web
-  variables:
-    OS_BASENAME: "freebsd"
-    OS_VERSION: "12"
-    OS_RELEASE: "1"
-    OS_ARCH: "x86_64"
-    OS_MAKE_TARGET: "deploy-freebsd-12x"
-    OS_CONFIGURE_FLAGS: "--disable-libtcmalloc"
-    OS_PKG_EXTENSION: "txz"
-
-.freebsd 12.3 build:
-  extends: .xbsd_build
-  tags:
-    - freebsd123
-  only:
-    - web
-  variables:
-    OS_BASENAME: "freebsd"
-    OS_VERSION: "12"
-    OS_RELEASE: "3"
-    OS_ARCH: "x86_64"
-    OS_MAKE_TARGET: "deploy-freebsd-12x"
-    OS_CONFIGURE_FLAGS: ""
-    OS_PKG_EXTENSION: "pkg"
+    RPMOS_IMAGE: "almalinux:9"
+    RPMOS_OS: "almalinux"
+    RPMOS_VERSION: "9"
+    RPMOS_ARCH: "x86_64"
+    RPMOS_REPOS: "--enablerepo=crb"
 
 # -------------------------------------------------------------------------
 # Test stage
@@ -317,6 +207,9 @@ centos 7 test:
   extends: .rpmos_test
   tags:
     - docker
+  only:
+    - tags
+    - web
   variables:
     RPMOS_OS: "centos"
     RPMOS_VERSION: "7"
@@ -329,6 +222,9 @@ almalinux 8 test:
   extends: .rpmos_test
   tags:
     - docker
+  only:
+    - tags
+    - web
   variables:
     RPMOS_OS: "almalinux"
     RPMOS_VERSION: "8"
@@ -336,92 +232,6 @@ almalinux 8 test:
     RPMOS_ARCH: "x86_64"
     RPMOS_UUID: "NE-CE-08-X1"
   needs: ["almalinux 8 build"]
-
-# OPNsense/pfSense
-#-----------------
-
-.opnsense 19.7 test:
-  extends: .xsense_test
-  tags:
-    - opnsense197
-  only:
-    - web
-  variables:
-    AGENT_UUID: "NE-PN-19-XC"
-    FREEBSD_VERSION: "11"
-    FREEBSD_RELEASE: "2"
-    FREEBSD_LIBS_RELEASE: "3"
-    FREEBSD_PKG_EXTENSION: "txz"
-  before_script:
-    - ntpdate -u time.nist.gov
-    - pkg add http://pkg.freebsd.org/freebsd:$FREEBSD_VERSION:x86:64/release_$FREEBSD_LIBS_RELEASE/All/libunwind-20170615.txz
-    - pkg add http://pkg.freebsd.org/freebsd:$FREEBSD_VERSION:x86:64/release_$FREEBSD_LIBS_RELEASE/All/google-perftools-2.7.txz
-  needs: ["freebsd 11.2 build"]
-
-.opnsense 20.1 test:
-  extends: .xsense_test
-  tags:
-    - opnsense201
-  only:
-    - web
-  variables:
-    AGENT_UUID: "NE-PN-20-XC"
-    FREEBSD_VERSION: "11"
-    FREEBSD_RELEASE: "2"
-    FREEBSD_LIBS_RELEASE: "3"
-    FREEBSD_PKG_EXTENSION: "txz"
-  before_script:
-    - ntpdate -u time.nist.gov
-    - pkg add http://pkg.freebsd.org/freebsd:$FREEBSD_VERSION:x86:64/release_$FREEBSD_LIBS_RELEASE/All/libunwind-20170615.txz
-    - pkg add http://pkg.freebsd.org/freebsd:$FREEBSD_VERSION:x86:64/release_$FREEBSD_LIBS_RELEASE/All/google-perftools-2.7.txz
-  needs: ["freebsd 11.2 build"]
-
-.opnsense 20.7 test:
-  extends: .xsense_test
-  tags:
-   - opnsense207
-  only:
-    - web
-  variables:
-    AGENT_UUID: "NE-PN-27-XC"
-    FREEBSD_VERSION: "12"
-    FREEBSD_RELEASE: "1"
-    FREEBSD_LIBS_RELEASE: "1"
-    FREEBSD_PKG_EXTENSION: "txz"
-  before_script:
-    - ntpdate -u time.nist.gov
-  needs: ["freebsd 12.1 build"]
-
-.pfsense 2.4.5 test:
-  extends: .xsense_test
-  tags:
-    - pfsense245
-  only:
-    - web
-  variables:
-    AGENT_UUID: "NE-PF-24-XC"
-    FREEBSD_VERSION: "11"
-    FREEBSD_RELEASE: "2"
-    FREEBSD_LIBS_RELEASE: "3"
-    FREEBSD_PKG_EXTENSION: "txz"
-  before_script:
-    - ntpdate -u time.nist.gov
-    - pkg add http://pkg.freebsd.org/freebsd:$FREEBSD_VERSION:x86:64/release_$FREEBSD_LIBS_RELEASE/All/libunwind-20170615.txz
-    - pkg add http://pkg.freebsd.org/freebsd:$FREEBSD_VERSION:x86:64/release_$FREEBSD_LIBS_RELEASE/All/google-perftools-2.7.txz
-  needs: ["freebsd 11.2 build"]
-
-.pfsense 2.6.0 test:
-  extends: .xsense_test
-  tags:
-    - pfsense260
-  only:
-    - web
-  variables:
-    AGENT_UUID: "NE-PF-26-XC"
-    FREEBSD_VERSION: "12"
-    FREEBSD_RELEASE: "3"
-    FREEBSD_PKG_EXTENSION: "pkg"
-  needs: ["freebsd 12.3 build"]
 
 # -------------------------------------------------------------------------
 # Variants stage
@@ -434,6 +244,9 @@ clearos 7 variant:
   extends: .rpmos_variants
   tags:
     - docker
+  only:
+    - tags
+    - web
   variables:
     RPMOS_OS_SOURCE: "centos"
     RPMOS_OS: "clearos"
@@ -446,6 +259,9 @@ nethserver 7 variant:
   extends: .rpmos_variants
   tags:
     - docker
+  only:
+    - tags
+    - web
   variables:
     RPMOS_OS_SOURCE: "centos"
     RPMOS_OS: "nethserver"
@@ -458,6 +274,9 @@ rhel 7 variant:
   extends: .rpmos_variants
   tags:
     - docker
+  only:
+    - tags
+    - web
   variables:
     RPMOS_OS_SOURCE: "centos"
     RPMOS_OS: "rhel"
@@ -470,6 +289,9 @@ rhel 8 variant:
   extends: .rpmos_variants
   tags:
     - docker
+  only:
+    - tags
+    - web
   variables:
     RPMOS_OS_SOURCE: "almalinux"
     RPMOS_OS: "rhel"
