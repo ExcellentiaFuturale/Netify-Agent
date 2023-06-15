@@ -194,21 +194,21 @@ load_modules()
 detect_os()
 {
     if [ -f /etc/version ]; then
-        if egrep -q '^UniFiSecurityGateway' /etc/version; then
+        if grep -E -q '^UniFiSecurityGateway' /etc/version; then
             echo "edgeos"
             return
         fi
     fi
 
     if [ -f /etc/os-release ]; then
-        if egrep -q '^NAME=UbiOS' /etc/os-release; then
+        if grep -E -q '^NAME=UbiOS' /etc/os-release; then
             echo "ubios"
             return
         fi
     fi
 
     if [ -f /etc/issue ]; then
-        if egrep -q '^Ubuntu' /etc/issue; then
+        if grep -E -q '^Ubuntu' /etc/issue; then
             echo "ubuntu"
             return
         fi
@@ -299,7 +299,7 @@ restart_netifyd()
 
 config_enable_sink()
 {
-    if egrep -i -q '^enable_sink = (no|0|false)' $NETIFYD_CONF; then
+    if grep -E -i -q '^enable_sink = (no|0|false)' $NETIFYD_CONF; then
         sed -i -e 's/^enable_sink.*/enable_sink = yes/' $NETIFYD_CONF
         restart_netifyd
     fi
@@ -307,7 +307,7 @@ config_enable_sink()
 
 config_disable_sink()
 {
-    if egrep -i -q '^enable_sink = (yes|1|true)' $NETIFYD_CONF; then
+    if grep -E -i -q '^enable_sink = (yes|1|true)' $NETIFYD_CONF; then
         sed -i -e 's/^enable_sink.*/enable_sink = no/' $NETIFYD_CONF
         restart_netifyd
     fi
