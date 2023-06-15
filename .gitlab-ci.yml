@@ -7,8 +7,10 @@ stages:
   - test
   - variants
 
-# variables:
+variables:
+  GIT_SUBMODULE_STRATEGY: recursive
 #  CI_DEBUG_TRACE: "true"
+
 
 # Incude templates
 include:
@@ -23,20 +25,6 @@ include:
 # Debian OS Targets
 #------------------
 
-debian 9 build:
-  extends: .debian_build
-  tags:
-    - docker
-  only:
-    - tags
-    - web
-  variables:
-    OS_IMAGE: "debian:9"
-    OS_NAME: "debian"
-    OS_VERSION: "9.0"
-    OS_ARCH: "amd64"
-    OS_EXTRA_PACKAGES: "byacc flex"
-
 debian 10 build:
   extends: .debian_build
   tags:
@@ -50,20 +38,6 @@ debian 10 build:
     OS_VERSION: "10"
     OS_ARCH: "amd64"
     OS_EXTRA_PACKAGES: "flex"
-
-debian 10 i386 build:
-  extends: .debian_build
-  tags:
-    - docker
-  only:
-    - tags
-    - web
-  variables:
-    OS_IMAGE: "i386/debian:10"
-    OS_NAME: "debian"
-    OS_VERSION: "10"
-    OS_ARCH: "i386"
-    OS_EXTRA_PACKAGES: "byacc flex"
 
 debian 11 build:
   extends: .debian_build
@@ -102,7 +76,7 @@ debian 11 armel build:
     OS_NAME: "debian"
     OS_VERSION: "11"
     OS_ARCH: "armel"
-    OS_EXTRA_PACKAGES: "byacc flex"
+    OS_EXTRA_PACKAGES: "byacc flex libatomic1"
 
 debian 11 armhf build:
   extends: .debian_build
@@ -134,20 +108,6 @@ debian 11 arm64 build:
 
 # Ubuntu OS Targets
 #------------------
-
-ubuntu 18.04 build:
-  extends: .debian_build
-  tags:
-    - docker
-  only:
-    - tags
-    - web
-  variables:
-    OS_IMAGE: "ubuntu:18.04"
-    OS_NAME: "ubuntu"
-    OS_VERSION: "bionic"
-    OS_ARCH: "binary-amd64"
-    OS_EXTRA_PACKAGES: "byacc"
 
 ubuntu 20.04 build:
   extends: .debian_build
@@ -193,6 +153,20 @@ centos 7 build:
     RPMOS_VERSION: "7"
     RPMOS_ARCH: "x86_64"
     RPMOS_REPOS: ""
+
+rockylinux 8 build:
+  extends: .rpmos_build
+  tags:
+    - docker
+  only:
+    - tags
+    - web
+  variables:
+    RPMOS_IMAGE: "rockylinux:8"
+    RPMOS_OS: "rockylinux"
+    RPMOS_VERSION: "8"
+    RPMOS_ARCH: "x86_64"
+    RPMOS_REPOS: "--enablerepo=powertools,epel"
 
 almalinux 8 build:
   extends: .rpmos_build

@@ -48,7 +48,7 @@
   image: $RPMOS_IMAGE
   before_script:
     # Manually pull in submodules, the GIT_SUBMODULE_STRATEGY variable in GitLab is quirky
-    - yum install -y git
+    - yum install -y git findutils
     - git submodule sync --recursive
     - git submodule update --init --recursive
     - find . -name '\.git*' -print0 | xargs -0 rm -rf
