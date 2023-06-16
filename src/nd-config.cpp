@@ -696,6 +696,9 @@ bool ndGlobalConfig::LoadInterfaces(void)
 {
     ClearInterfaces();
 
+    INIReader *config_reader = static_cast<INIReader *>(reader);
+    if (! LoadInterfaces(static_cast<void *>(config_reader))) return false;
+
     vector<string> files;
     if (nd_scan_dotd(path_interfaces, files)) {
         for (auto &filename : files) {
@@ -1007,6 +1010,7 @@ void ndGlobalConfig::ClearInterfaces(bool cmdline_entries)
             if (it->second.second != nullptr) {
                 switch (ndCT_TYPE(it->second.first)) {
                 case ndCT_PCAP:
+                case ndCT_PCAP_OFFLINE:
                     delete static_cast<nd_config_pcap *>(
                         it->second.second
                     );
