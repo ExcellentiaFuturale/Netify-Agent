@@ -3,8 +3,8 @@
 #
 # This is free software, licensed under the GNU General Public License v3.
 
-DEBFILES = debian.changelog debian.conffiles debian.control debian.init debian.postinst debian.rules netifyd.dsc netifyd.install netifyd-dev.install debian.control-ci debian.rules-ci
-DEBFILES_IN = debian.changelog.in debian.conffiles.in debian.control.in debian.init debian.postinst.in debian.rules.in netifyd.dsc.in netifyd.install.in netify-dev.install.in debian.control-ci.in debian.rules-ci.in
+DEBFILES = changelog conffiles control debian.init debian.postinst netifyd-dev.install netifyd.dsc netifyd.install rules
+DEBFILES_IN = changelog.in conffiles.in control.in debian.init.in debian.postinst.in netifyd-dev.install.in netifyd.dsc.in netifyd.install.in rules.in
 
 BUILT_SOURCES = $(DEBFILES)
 CLEANFILES = $(DEBFILES)

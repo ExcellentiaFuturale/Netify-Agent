@@ -11,3 +11,7 @@ Makefile.in
 netifyd-dev.install
 netifyd.dsc
 netifyd.install
+changelog
+conffiles
+control
+rules
