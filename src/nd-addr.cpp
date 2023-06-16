@@ -376,7 +376,7 @@ bool ndAddr::MakeString(const ndAddr &a, string &result, uint8_t flags)
 {
     if (! a.IsValid()) return false;
 
-    char sa[INET6_ADDRSTRLEN + 4] = { 0 };
+    char sa[INET6_ADDRSTRLEN] = { 0 };
 
     switch (a.addr.ss.ss_family) {
 #if defined(__linux__)
@@ -430,10 +430,15 @@ bool ndAddr::MakeString(const ndAddr &a, string &result, uint8_t flags)
         break;
 #endif
     case AF_INET:
-        inet_ntop(AF_INET,
+        if (inet_ntop(AF_INET,
             (const void *)&a.addr.in.sin_addr.s_addr,
-            sa, INET_ADDRSTRLEN
-        );
+            sa, INET_ADDRSTRLEN) == nullptr) {
+            nd_dprintf(
+                "error converting %s address to string: %s",
+                "AF_INET", strerror(errno)
+            );
+            return false;
+        }
 
         result = sa;
 
@@ -449,10 +454,15 @@ bool ndAddr::MakeString(const ndAddr &a, string &result, uint8_t flags)
         return true;
 
     case AF_INET6:
-        inet_ntop(AF_INET6,
+        if (inet_ntop(AF_INET6,
             (const void *)&a.addr.in6.sin6_addr.s6_addr,
-            sa, INET6_ADDRSTRLEN
-        );
+            sa, INET6_ADDRSTRLEN) == nullptr) {
+            nd_dprintf(
+                "error converting %s address to string: %s",
+                "AF_INET6", strerror(errno)
+            );
+            return false;
+        }
 
         result = sa;
 
