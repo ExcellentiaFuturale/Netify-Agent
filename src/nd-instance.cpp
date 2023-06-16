@@ -1146,7 +1146,8 @@ bool ndInstance::AddInterface(const string &ifname,
         string iface("offline");
         iface.append(to_string(pcap_id++));
 
-        return ndGC.AddInterface(iface, role, ndCT_PCAP_OFFLINE | ndCT_CMDLINE,
+        return ndGC.AddInterface(iface, role,
+            ndCT_PCAP_OFFLINE | ndCT_CMDLINE,
             static_cast<void *>(pcap)
         );
     }
