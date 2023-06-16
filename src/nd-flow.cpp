@@ -94,7 +94,6 @@ ndFlow::ndFlow(ndInterface &iface)
     detected_application_name(NULL),
     category { ND_CAT_UNKNOWN, ND_CAT_UNKNOWN, ND_CAT_UNKNOWN },
     ndpi_flow(NULL),
-    digest_lower{0}, digest_mdata{0},
     dns_host_name{0}, host_server_name{0}, http{0},
     privacy_mask(0), origin(0), direction(0),
 #if defined(_ND_USE_CONNTRACK) && defined(_ND_WITH_CONNTRACK_MDATA)
@@ -107,6 +106,9 @@ ndFlow::ndFlow(ndInterface &iface)
     ndpi_risk_score(0), ndpi_risk_score_client(0), ndpi_risk_score_server(0)
 {
     gtp.version = 0xFF;
+
+    digest_lower.reserve(SHA1_DIGEST_LENGTH);
+    digest_mdata.reserve(SHA1_DIGEST_LENGTH);
 }
 
 ndFlow::ndFlow(const ndFlow &flow)
@@ -125,7 +127,6 @@ ndFlow::ndFlow(const ndFlow &flow)
     detected_application_name(NULL),
     category { ND_CAT_UNKNOWN, ND_CAT_UNKNOWN, ND_CAT_UNKNOWN },
     ndpi_flow(NULL),
-    digest_lower{0}, digest_mdata{0},
     dns_host_name{0}, host_server_name{0}, http{0},
     privacy_mask(0), origin(0), direction(0),
 #if defined(_ND_USE_CONNTRACK) && defined(_ND_WITH_CONNTRACK_MDATA)
@@ -137,8 +138,10 @@ ndFlow::ndFlow(const ndFlow &flow)
     risks{0},
     ndpi_risk_score(0), ndpi_risk_score_client(0), ndpi_risk_score_server(0)
 {
-    memcpy(digest_lower, flow.digest_lower, SHA1_DIGEST_LENGTH);
-    memset(digest_mdata, 0, SHA1_DIGEST_LENGTH);
+    digest_lower.assign(
+        flow.digest_lower.begin(), flow.digest_lower.end()
+    );
+    digest_mdata.reserve(SHA1_DIGEST_LENGTH);
 }
 
 ndFlow::~ndFlow()
@@ -232,10 +235,14 @@ void ndFlow::Hash(const string &device,
     if (key != NULL && key_length > 0)
         sha1_write(&ctx, (const char *)key, key_length);
 
-    if (! hash_mdata)
-        sha1_result(&ctx, digest_lower);
-    else
-        sha1_result(&ctx, digest_mdata);
+    if (! hash_mdata) {
+        digest_lower.resize(SHA1_DIGEST_LENGTH);
+        sha1_result(&ctx, &digest_lower[0]);
+    }
+    else {
+        digest_lower.resize(SHA1_DIGEST_LENGTH);
+        sha1_result(&ctx, &digest_mdata[0]);
+    }
 }
 
 void ndFlow::Reset(bool full_reset)
@@ -514,11 +521,12 @@ void ndFlow::Print(uint8_t pflags) const
             << (flags.expiring.load() ? 'x' : '-')
             << (flags.expired.load() ? 'X' : '-')
             << (flags.dhc_hit.load() ? 'd' : '-')
+            << (flags.fhc_hit.load() ? 'f' : '-')
             << (flags.ip_nat.load() ? 'n' : '-')
             << (flags.risk_checked.load() ? 'r' : '-')
             << (flags.soft_dissector.load() ? 's' : '-')
-            << (flags.tcp_fin.load() ? 'f' : '-')
-            << (flags.tcp_fin_ack.load() ? 'a' : '-')
+            << (flags.tcp_fin.load() ? 'F' : '-')
+            << (flags.tcp_fin_ack.load() ? 'A' : '-')
             << ((privacy_mask & PRIVATE_LOWER) ? 'v' :
                 (privacy_mask & PRIVATE_UPPER) ? 'V' :
                 (privacy_mask & (PRIVATE_LOWER | PRIVATE_UPPER)) ? '?' :

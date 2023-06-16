@@ -170,8 +170,8 @@ public:
 
     struct ndpi_flow_struct *ndpi_flow;
 
-    uint8_t digest_lower[SHA1_DIGEST_LENGTH];
-    uint8_t digest_mdata[SHA1_DIGEST_LENGTH];
+    vector<uint8_t> digest_lower;
+    vector<uint8_t> digest_mdata;
 
     char dns_host_name[ND_FLOW_HOSTNAME];
     char host_server_name[ND_FLOW_HOSTNAME];
@@ -265,18 +265,19 @@ public:
     ndAddr::Type upper_type;
 
     struct {
-        atomic_bool detection_complete;
-        atomic_bool detection_guessed;
-        atomic_bool detection_init;
-        atomic_bool detection_updated;
-        atomic_bool dhc_hit;
-        atomic_bool expired;
-        atomic_bool expiring;
-        atomic_bool ip_nat;
-        atomic_bool risk_checked;
-        atomic_bool soft_dissector;
-        atomic_bool tcp_fin;
-        atomic_uchar tcp_fin_ack;
+        atomic<bool> detection_complete;
+        atomic<bool> detection_guessed;
+        atomic<bool> detection_init;
+        atomic<bool> detection_updated;
+        atomic<bool> dhc_hit;
+        atomic<bool> fhc_hit;
+        atomic<bool> expired;
+        atomic<bool> expiring;
+        atomic<bool> ip_nat;
+        atomic<bool> risk_checked;
+        atomic<bool> soft_dissector;
+        atomic<bool> tcp_fin;
+        atomic<uint8_t> tcp_fin_ack;
     } flags;
 
     union {
@@ -375,9 +376,7 @@ public:
         string _lower_packets = "local_packets", _upper_packets = "other_packets";
 
         string digest;
-        uint8_t digest_null[SHA1_DIGEST_LENGTH] = { '\0' };
-
-        if (memcmp(digest_mdata, digest_null, SHA1_DIGEST_LENGTH) != 0) {
+        if (! digest_mdata.empty()) {
             nd_sha1_to_string(digest_mdata, digest);
             serialize(output, { "digest" }, digest);
         } else {

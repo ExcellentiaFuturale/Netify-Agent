@@ -57,6 +57,7 @@ protected:
     unsigned cs_type;
 
     ndInterface& iface;
+    ndFlow flow;
 
     time_t tv_epoch;
     uint64_t ts_pkt_first;

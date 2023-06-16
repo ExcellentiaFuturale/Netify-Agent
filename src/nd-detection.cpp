@@ -836,32 +836,46 @@ void ndDetectionThread::ProcessFlow(ndDetectionQueueEntry *entry)
     }
 
     if (fhc != NULL &&
-        ndEF->lower_addr.GetPort(false) != 0 && ndEF->upper_addr.GetPort(false) != 0) {
+        ndEF->lower_addr.GetPort(false) != 0 &&
+        ndEF->upper_addr.GetPort(false) != 0) {
 
         flow_digest.assign(
-            (const char *)ndEF->digest_lower, SHA1_DIGEST_LENGTH);
+            ndEF->digest_lower.begin(), ndEF->digest_lower.end());
 
         if (! fhc->Pop(flow_digest, flow_digest_mdata)) {
 
             ndEF->Hash(tag, true);
 
             flow_digest_mdata.assign(
-                (const char *)ndEF->digest_mdata, SHA1_DIGEST_LENGTH
+                ndEF->digest_mdata.begin(),
+                ndEF->digest_mdata.end()
             );
 
-            if (memcmp(ndEF->digest_lower, ndEF->digest_mdata,
-                SHA1_DIGEST_LENGTH))
+            if (equal(
+                ndEF->digest_lower.begin(),
+                ndEF->digest_lower.end(),
+                ndEF->digest_mdata.begin())) {
                 fhc->Push(flow_digest, flow_digest_mdata);
+            }
         }
         else {
-            if (memcmp(ndEF->digest_mdata, flow_digest_mdata.c_str(),
-                SHA1_DIGEST_LENGTH)) {
+            if (equal(
+                ndEF->digest_mdata.begin(),
+                ndEF->digest_mdata.end(),
+                flow_digest_mdata.begin())) {
+                nd_printf(
+                    "%s: restored flow metadata hash from cache.\n",
+                    tag.c_str());
 #ifdef _ND_LOG_FHC
-                nd_dprintf("%s: Resurrected flow metadata hash from cache.\n",
+                nd_dprintf(
+                    "%s: restored flow metadata hash from cache.\n",
                     tag.c_str());
 #endif
-                memcpy(ndEF->digest_mdata, flow_digest_mdata.c_str(),
-                    SHA1_DIGEST_LENGTH);
+                ndEF->digest_mdata.assign(
+                    flow_digest_mdata.begin(),
+                    flow_digest_mdata.end()
+                );
+                ndEF->flags.fhc_hit = true;
             }
         }
     }

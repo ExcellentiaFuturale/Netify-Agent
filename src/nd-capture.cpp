@@ -298,6 +298,7 @@ ndCaptureThread::ndCaptureThread(
     ndInstanceClient(),
     dl_type(0), cs_type(cs_type),
     iface(iface),
+    flow(iface),
     tv_epoch(0), ts_pkt_first(0), ts_pkt_last(0), dhc(dhc),
     threads_dpi(threads_dpi), dpi_thread_id(rand() % threads_dpi.size())
 {
@@ -324,7 +325,6 @@ ndCaptureThread::ndCaptureThread(
 const ndPacket *ndCaptureThread::ProcessPacket(const ndPacket *packet)
 {
     nd_flow_ptr nf;
-    ndFlow flow(iface);
 
     const struct ether_header *hdr_eth = NULL;
     const struct sll_header *hdr_sll = NULL;
@@ -926,7 +926,7 @@ nd_process_ip:
     }
 
     flow.Hash(tag);
-    flow_digest.assign((const char *)flow.digest_lower, SHA1_DIGEST_LENGTH);
+    flow_digest.assign(flow.digest_lower.begin(), flow.digest_lower.end());
 
     nf = ndi.flow_buckets->Lookup(flow_digest, true);
 
