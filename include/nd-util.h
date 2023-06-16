@@ -124,7 +124,11 @@ void nd_rtrim(string &s, unsigned char c = 0);
 void nd_trim(string &s, unsigned char c = 0);
 
 int nd_sha1_file(const string &filename, uint8_t *digest);
-void nd_sha1_to_string(const uint8_t *digest_bin, string &digest_str);
+
+void nd_sha1_to_string(
+    const uint8_t *digest_bin, string &digest_str);
+void nd_sha1_to_string(
+    const vector<uint8_t> &digest_bin, string &digest_str);
 
 bool nd_string_to_mac(const string &src, uint8_t *mac);
 sa_family_t nd_string_to_ip(const string &src, sockaddr_storage *ip);
