@@ -1,4 +1,4 @@
-offline0: i4pc------r---- UDP [OR] 34.246.231.140:443 <-- [L] 192.168.12.169:47520
+offline0: i4pc-------r---- UDP [OR] 34.246.231.140:443 <-- [L] 192.168.12.169:47520
         : QUIC.netify.snapchat
         : H: str1-euwest1-34-246-231-140.addlive.io
         : SNI: str1-euwest1-34-246-231-140.addlive.io

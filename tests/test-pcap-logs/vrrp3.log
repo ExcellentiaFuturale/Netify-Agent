@@ -1,6 +1,6 @@
-offline0: i6pc------r---- VRRP [L] fe80::2:0 --> [OM] ff02::12:0
+offline0: i6pc-------r---- VRRP [L] fe80::2:0 --> [OM] ff02::12:0
         : VRRP
 
-offline0: i6pc------r---- VRRP [L] fe80::1:0 --> [OM] ff02::12:0
+offline0: i6pc-------r---- VRRP [L] fe80::1:0 --> [OM] ff02::12:0
         : VRRP
 

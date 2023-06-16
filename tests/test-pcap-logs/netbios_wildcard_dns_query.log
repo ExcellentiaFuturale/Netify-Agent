@@ -1,4 +1,4 @@
-offline0: i4p-------r---- UDP [L] 10.1.66.20:53 <-- [OL] 10.1.67.250:41335
+offline0: i4p--------r---- UDP [L] 10.1.66.20:53 <-- [OL] 10.1.67.250:41335
         : DNS
         : H: ckaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 

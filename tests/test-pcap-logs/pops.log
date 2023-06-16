@@ -1,9 +1,9 @@
-offline0: i4p-------r---- TCP [L] 10.10.10.1:995 <-- [OL] 192.168.0.1:55077
+offline0: i4p--------r---- TCP [L] 10.10.10.1:995 <-- [OL] 192.168.0.1:55077
         : POP3/S.netify.godaddy
         : H: pop.secureserver.net
         : SNI: pop.secureserver.net
 
-offline0: i4p-u-----r---- TCP [L] 10.10.10.1:995 <-- [OL] 192.168.0.1:55077
+offline0: i4p-u------r---- TCP [L] 10.10.10.1:995 <-- [OL] 192.168.0.1:55077
         : POP3/S.netify.godaddy
         : H: pop.secureserver.net
         : SNI: pop.secureserver.net

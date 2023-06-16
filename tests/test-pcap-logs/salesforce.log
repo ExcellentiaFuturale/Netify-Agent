@@ -1,9 +1,9 @@
-offline0: i4p-------r---- TCP [OR] 85.222.142.6:443 <-- [L] 192.168.1.178:54399
+offline0: i4p--------r---- TCP [OR] 85.222.142.6:443 <-- [L] 192.168.1.178:54399
         : HTTP/S.netify.salesforce
         : H: help.salesforce.com
         : SNI: help.salesforce.com
 
-offline0: i4p-u-----r---- TCP [OR] 85.222.142.6:443 <-- [L] 192.168.1.178:54399
+offline0: i4p-u------r---- TCP [OR] 85.222.142.6:443 <-- [L] 192.168.1.178:54399
         : HTTP/S.netify.salesforce
         : H: help.salesforce.com
         : SNI: help.salesforce.com CN: support.salesforce.com

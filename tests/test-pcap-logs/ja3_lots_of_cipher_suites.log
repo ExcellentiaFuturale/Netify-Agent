@@ -1,10 +1,10 @@
-offline0: i4p-------r---- TCP [L] 10.206.65.249:443 <-- [OL] 10.206.131.18:58657
+offline0: i4p--------r---- TCP [L] 10.206.65.249:443 <-- [OL] 10.206.131.18:58657
         : HTTP/S
 
-offline0: i4p-u-----r---- TCP [L] 10.206.65.249:443 <-- [OL] 10.206.131.18:58657
+offline0: i4p-u------r---- TCP [L] 10.206.65.249:443 <-- [OL] 10.206.131.18:58657
         : HTTP/S
 
-offline0: i4p-u-----r---- TCP [L] 10.206.65.249:443 <-- [OL] 10.206.131.18:58657
+offline0: i4p-u------r---- TCP [L] 10.206.65.249:443 <-- [OL] 10.206.131.18:58657
         : HTTP/S
         : CN: xrx9c934e949fef
         : IDN: C=US, ST=New York, L=Rochester, O=Xerox Corporation, OU=Generic Root Certificate Authority, CN=Xerox Generic Root Certificate Authority SDN: C=US, ST=Connecticut, L=Norwalk, O=Xerox Corporation, OU=Global Product Delivery Group, CN=XRX9C934E949FEF, C=US, ST=Connecticut, L=Norwalk, O=Xerox Corporation, OU=Global Product Delivery Group, CN=XRX9C934E949FEF

@@ -1,27 +1,27 @@
-offline0: i4pc------r---- TCP [L] 10.52.151.160:39180 --> [OR] 47.241.7.88:5222
+offline0: i4pc-------r---- TCP [L] 10.52.151.160:39180 --> [OR] 47.241.7.88:5222
         : Xiaomi
 
-offline0: i4pc------r---- TCP [OR] 115.164.74.232:5222 <-- [L] 192.168.244.219:45904
-        : Xiaomi
-        : H: 47.241.35.73
-
-offline0: i4pc------r---- TCP [OR] 115.164.74.232:5222 <-- [L] 192.168.247.13:38018
+offline0: i4pc-------r---- TCP [OR] 115.164.74.232:5222 <-- [L] 192.168.244.219:45904
         : Xiaomi
         : H: 47.241.35.73
 
-offline0: i4pc------r---- TCP [OR] 97.39.119.172:5222 <-- [L] 192.168.93.59:51488
+offline0: i4pc-------r---- TCP [OR] 115.164.74.232:5222 <-- [L] 192.168.247.13:38018
+        : Xiaomi
+        : H: 47.241.35.73
+
+offline0: i4pc-------r---- TCP [OR] 97.39.119.172:5222 <-- [L] 192.168.93.59:51488
         : Xiaomi
         : H: 47.241.59.87
 
-offline0: i4pc------r---- TCP [OR] 3.127.176.74:5222 <-- [L] 192.168.2.100:37708
+offline0: i4pc-------r---- TCP [OR] 3.127.176.74:5222 <-- [L] 192.168.2.100:37708
         : Xiaomi.netify.xiaomi
         : H: fr-app-chat-global-xiaomi-net1-1667981913.eu-central-1.elb.amazonaws.com
 
-offline0: i4pc------r---- TCP [OR] 18.193.233.122:5222 <-- [L] 192.168.2.100:45106
+offline0: i4pc-------r---- TCP [OR] 18.193.233.122:5222 <-- [L] 192.168.2.100:45106
         : Xiaomi.netify.xiaomi
         : H: fr-app-chat-global-xiaomi-net2-2117517874.eu-central-1.elb.amazonaws.com
 
-offline0: i4p-------r---- TCP [L] 192.168.2.100:48698 --> [OR] 203.107.1.65:80
+offline0: i4p--------r---- TCP [L] 192.168.2.100:48698 --> [OR] 203.107.1.65:80
         : HTTP
         : H: 203.107.1.65
         : HTTP/UA: Dalvik/2.1.0 (Linux; U; Android 10; Redmi Note 9 Pro MIUI/V12.0.3.0.QJZMIXM)

@@ -1,299 +1,299 @@
-offline0: i4p-------r---- TCP [L] 10.0.0.149:8009 <-- [OL] 10.0.0.227:56320
+offline0: i4p--------r---- TCP [L] 10.0.0.149:8009 <-- [OL] 10.0.0.227:56320
         : TLS
 
-offline0: i4pc------r---- IGMP [L] 10.0.0.1:0 --> [OM] 224.0.0.1:0
+offline0: i4pc-------r---- IGMP [L] 10.0.0.1:0 --> [OM] 224.0.0.1:0
         : IGMP
 
-offline0: i6pc------r---- IPv6-ICMP [L] fe80::2e7e:81ff:feb0:4aa1:0 --> [OM] ff02::1:0
+offline0: i6pc-------r---- IPv6-ICMP [L] fe80::2e7e:81ff:feb0:4aa1:0 --> [OM] ff02::1:0
         : ICMPv6
 
-offline0: i4pc------r---- IGMP [L] 10.0.0.149:0 --> [OM] 224.0.0.251:0
+offline0: i4pc-------r---- IGMP [L] 10.0.0.149:0 --> [OM] 224.0.0.251:0
         : IGMP
 
-offline0: i4pc------r---- IGMP [L] 10.0.0.149:0 --> [OM] 239.255.3.22:0
+offline0: i4pc-------r---- IGMP [L] 10.0.0.149:0 --> [OM] 239.255.3.22:0
         : IGMP
 
-offline0: i4pc------r---- IGMP [L] 10.0.0.149:0 --> [OM] 239.255.255.250:0
+offline0: i4pc-------r---- IGMP [L] 10.0.0.149:0 --> [OM] 239.255.255.250:0
         : IGMP
 
-offline0: i4p-------r---- UDP [L] 10.0.0.227:52879 --> [OR] 75.75.76.76:53
+offline0: i4p--------r---- UDP [L] 10.0.0.227:52879 --> [OR] 75.75.76.76:53
         : DNS.netify.viasat
         : H: vco.pandion.viasat.com
 
-offline0: i4p-------r---- UDP [L] 10.0.0.227:61387 --> [OR] 75.75.75.75:53
+offline0: i4p--------r---- UDP [L] 10.0.0.227:61387 --> [OR] 75.75.75.75:53
         : DNS.netify.viasat
         : H: vco.pandion.viasat.com
 
-offline0: i4p-------r---- UDP [L] 10.0.0.227:62322 --> [OR] 75.75.76.76:53
+offline0: i4p--------r---- UDP [L] 10.0.0.227:62322 --> [OR] 75.75.76.76:53
         : DNS.netify.viasat
         : H: vco.pandion.viasat.com
 
-offline0: i4p-----d-r-fa- TCP [OR] 8.37.102.91:443 <-- [L] 10.0.0.227:56918
+offline0: i4p-----d--r-FA- TCP [OR] 8.37.102.91:443 <-- [L] 10.0.0.227:56918
         : HTTP/S.netify.viasat
         : D: vco.pandion.viasat.com
         : SNI: vco.pandion.viasat.com
 
-offline0: i4p-u---d-r-fa- TCP [OR] 8.37.102.91:443 <-- [L] 10.0.0.227:56918
+offline0: i4p-u---d--r-FA- TCP [OR] 8.37.102.91:443 <-- [L] 10.0.0.227:56918
         : HTTP/S.netify.viasat
         : D: vco.pandion.viasat.com
         : SNI: vco.pandion.viasat.com
 
-offline0: i4p-u---d-r-fa- TCP [OR] 8.37.102.91:443 <-- [L] 10.0.0.227:56918
+offline0: i4p-u---d--r-FA- TCP [OR] 8.37.102.91:443 <-- [L] 10.0.0.227:56918
         : HTTP/S.netify.viasat
         : D: vco.pandion.viasat.com
         : SNI: vco.pandion.viasat.com
         : IDN: C=US, O=Entrust, Inc., OU=See www.entrust.net/legal-terms, OU=(c) 2012 Entrust, Inc. - for authorized use only, CN=Entrust Certification Authority - L1K SDN: C=US, ST=California, L=Carlsbad, O=Viasat Inc., CN=*.pandion.viasat.com
 
-offline0: i4p-------r---- TCP [L] 10.0.0.227:56915 --> [OR] 52.37.243.173:443
+offline0: i4p--------r---- TCP [L] 10.0.0.227:56915 --> [OR] 52.37.243.173:443
         : HTTP/S
 
-offline0: i4p-------r---- TCP [L] 10.0.0.227:56914 --> [OR] 52.37.243.173:443
+offline0: i4p--------r---- TCP [L] 10.0.0.227:56914 --> [OR] 52.37.243.173:443
         : HTTP/S
 
-offline0: i4p-----d-r---- TCP [OR] 8.37.102.91:443 <-- [L] 10.0.0.227:56919
+offline0: i4p-----d--r-FA- TCP [OR] 8.37.102.91:443 <-- [L] 10.0.0.227:56919
         : HTTP/S.netify.viasat
         : D: vco.pandion.viasat.com
         : SNI: vco.pandion.viasat.com
 
-offline0: i4p-u---d-r---- TCP [OR] 8.37.102.91:443 <-- [L] 10.0.0.227:56919
+offline0: i4p-u---d--r-FA- TCP [OR] 8.37.102.91:443 <-- [L] 10.0.0.227:56919
         : HTTP/S.netify.viasat
         : D: vco.pandion.viasat.com
         : SNI: vco.pandion.viasat.com
 
-offline0: i4p-u---d-r-fa- TCP [OR] 8.37.102.91:443 <-- [L] 10.0.0.227:56919
+offline0: i4p-u---d--r-FA- TCP [OR] 8.37.102.91:443 <-- [L] 10.0.0.227:56919
         : HTTP/S.netify.viasat
         : D: vco.pandion.viasat.com
         : SNI: vco.pandion.viasat.com
         : IDN: C=US, O=Entrust, Inc., OU=See www.entrust.net/legal-terms, OU=(c) 2012 Entrust, Inc. - for authorized use only, CN=Entrust Certification Authority - L1K SDN: C=US, ST=California, L=Carlsbad, O=Viasat Inc., CN=*.pandion.viasat.com
 
-offline0: i4p-------r---- UDP [L] 10.0.0.227:63107 --> [OR] 75.75.76.76:53
+offline0: i4p--------r---- UDP [L] 10.0.0.227:63107 --> [OR] 75.75.76.76:53
         : DNS.netify.internal-network
         : H: local
 
-offline0: i4pc------r---- ICMP [L] 10.0.0.227:0 --> [OR] 75.75.76.76:0
+offline0: i4pc-------r---- ICMP [L] 10.0.0.227:0 --> [OR] 75.75.76.76:0
         : ICMP
 
-offline0: i4p-------r---- UDP [L] 10.0.0.213:5353 --> [OM] 224.0.0.251:5353
+offline0: i4p--------r---- UDP [L] 10.0.0.213:5353 --> [OM] 224.0.0.251:5353
         : MDNS.netify.internal-network
         : H: _companion-link._tcp.local
 
-offline0: i6p-------r---- UDP [L] fe80::408:3e45:3abc:1552:5353 --> [OM] ff02::fb:5353
+offline0: i6p--------r---- UDP [L] fe80::408:3e45:3abc:1552:5353 --> [OM] ff02::fb:5353
         : MDNS.netify.internal-network
         : H: _companion-link._tcp.local
 
-offline0: i4pc------r---- IGMP [L] 10.0.0.213:0 --> [OM] 224.0.0.2:0
+offline0: i4pc-------r---- IGMP [L] 10.0.0.213:0 --> [OM] 224.0.0.2:0
         : IGMP
 
-offline0: i4pc------r---- IGMP [L] 10.0.0.213:0 --> [OM] 224.0.0.251:0
+offline0: i4pc-------r---- IGMP [L] 10.0.0.213:0 --> [OM] 224.0.0.251:0
         : IGMP
 
-offline0: i4pc------r---- UDP [L] 10.0.0.213:5353 <-- [OL] 10.0.0.227:5353
+offline0: i4pc-------r---- UDP [L] 10.0.0.213:5353 <-- [OL] 10.0.0.227:5353
         : MDNS.netify.internal-network
         : H: _companion-link._tcp.local
         : MDNS/DN: LP-RKERUR-OSX (9)._companion-link._tcp.local
 
-offline0: i6pc------r---- IPv6-ICMP [L] fe80::408:3e45:3abc:1552:0 --> [OM] ff02::16:0
+offline0: i6pc-------r---- IPv6-ICMP [L] fe80::408:3e45:3abc:1552:0 --> [OM] ff02::16:0
         : ICMPv6
 
-offline0: i4p-------r---- UDP [L] 10.0.0.227:54851 --> [OR] 75.75.76.76:53
+offline0: i4p--------r---- UDP [L] 10.0.0.227:54851 --> [OR] 75.75.76.76:53
         : DNS.netify.viasat
         : H: print.viasat.com
 
-offline0: i4p-------r---- UDP [L] 10.0.0.227:58155 --> [OR] 75.75.76.76:53
+offline0: i4p--------r---- UDP [L] 10.0.0.227:58155 --> [OR] 75.75.76.76:53
         : DNS.netify.slack
         : H: slack.com
 
-offline0: i4p-----d-r-fa- TCP [L] 10.0.0.227:56920 --> [OR] 99.86.34.156:443
+offline0: i4p-----d--r-FA- TCP [L] 10.0.0.227:56920 --> [OR] 99.86.34.156:443
         : HTTP/S.netify.slack
         : D: slack.com
         : SNI: slack.com
 
-offline0: i4p-------r---- TCP [L] 10.0.0.227:56910 --> [OR] 35.201.124.9:443
+offline0: i4p--------r---- TCP [L] 10.0.0.227:56910 --> [OR] 35.201.124.9:443
         : HTTP/S
 
-offline0: i4p-------r---- TCP [OR] 8.37.96.194:4287 <-- [L] 10.0.0.227:56921
+offline0: i4p--------r---- TCP [OR] 8.37.96.194:4287 <-- [L] 10.0.0.227:56921
         : TLS
 
-offline0: i4p-u-----r---- TCP [OR] 8.37.96.194:4287 <-- [L] 10.0.0.227:56921
+offline0: i4p-u------r---- TCP [OR] 8.37.96.194:4287 <-- [L] 10.0.0.227:56921
         : TLS
         : CN: 813845657003339838
         : IDN: CN=813845657003339838, O=Code42, OU=TEST, ST=MN, C=US SDN: CN=813845657003339838, O=Code42, OU=TEST, ST=MN, C=US
 
-offline0: i4p-------r---- UDP [L] 10.0.0.227:64972 --> [OR] 75.75.75.75:53
+offline0: i4p--------r---- UDP [L] 10.0.0.227:64972 --> [OR] 75.75.75.75:53
         : DNS.netify.reverse-dns
         : H: lb._dns-sd._udp.0.128.28.172.in-addr.arpa
 
-offline0: i4p-------r---- UDP [L] 10.0.0.227:61613 --> [OR] 75.75.75.75:53
+offline0: i4p--------r---- UDP [L] 10.0.0.227:61613 --> [OR] 75.75.75.75:53
         : DNS.netify.reverse-dns
         : H: lb._dns-sd._udp.0.0.0.10.in-addr.arpa
 
-offline0: i4p-------r---- UDP [L] 10.0.0.227:57261 --> [OR] 75.75.75.75:53
+offline0: i4p--------r---- UDP [L] 10.0.0.227:57261 --> [OR] 75.75.75.75:53
         : DNS.netify.viasat
         : H: vcacrashplan01.hq.corp.viasat.com
 
-offline0: i4p-------r---- UDP [L] 10.0.0.227:52879 --> [OR] 75.75.75.75:53
+offline0: i4p--------r---- UDP [L] 10.0.0.227:52879 --> [OR] 75.75.75.75:53
         : DNS.netify.viasat
         : H: vcacrashplan01.hq.corp.viasat.com
 
-offline0: i4p-------r---- UDP [L] 10.0.0.227:59222 --> [OR] 75.75.75.75:53
+offline0: i4p--------r---- UDP [L] 10.0.0.227:59222 --> [OR] 75.75.75.75:53
         : DNS.netify.xfinity
         : H: lp-rkerur-osx.hsd1.ca.comcast.net
 
-offline0: i4p-------r---- UDP [L] 10.0.0.227:57017 --> [OR] 75.75.75.75:53
+offline0: i4p--------r---- UDP [L] 10.0.0.227:57017 --> [OR] 75.75.75.75:53
         : DNS.netify.xfinity
         : H: lp-rkerur-osx.hsd1.ca.comcast.net
 
-offline0: i4p-----d-r---- TCP [OR] 8.37.102.91:443 <-- [L] 10.0.0.227:56929
+offline0: i4p-----d--r---- TCP [OR] 8.37.102.91:443 <-- [L] 10.0.0.227:56929
         : HTTP/S.netify.viasat
         : D: vco.pandion.viasat.com
         : SNI: vco.pandion.viasat.com
 
-offline0: i4p-u---d-r---- TCP [OR] 8.37.102.91:443 <-- [L] 10.0.0.227:56929
+offline0: i4p-u---d--r---- TCP [OR] 8.37.102.91:443 <-- [L] 10.0.0.227:56929
         : HTTP/S.netify.viasat
         : D: vco.pandion.viasat.com
         : SNI: vco.pandion.viasat.com
 
-offline0: i4p-u---d-r---- TCP [OR] 8.37.102.91:443 <-- [L] 10.0.0.227:56929
+offline0: i4p-u---d--r---- TCP [OR] 8.37.102.91:443 <-- [L] 10.0.0.227:56929
         : HTTP/S.netify.viasat
         : D: vco.pandion.viasat.com
         : SNI: vco.pandion.viasat.com
         : IDN: C=US, O=Entrust, Inc., OU=See www.entrust.net/legal-terms, OU=(c) 2012 Entrust, Inc. - for authorized use only, CN=Entrust Certification Authority - L1K SDN: C=US, ST=California, L=Carlsbad, O=Viasat Inc., CN=*.pandion.viasat.com
 
-offline0: i4p-------r---- UDP [L] 10.0.0.227:57253 --> [OR] 75.75.75.75:53
+offline0: i4p--------r---- UDP [L] 10.0.0.227:57253 --> [OR] 75.75.75.75:53
         : DNS.netify.firefox
         : H: mozilla.org
 
-offline0: i4p-------r---- UDP [L] 10.0.0.227:62427 --> [OR] 75.75.75.75:53
+offline0: i4p--------r---- UDP [L] 10.0.0.227:62427 --> [OR] 75.75.75.75:53
         : DNS.netify.firefox
         : H: detectportal.firefox.com
 
-offline0: i4p-------r---- TCP [L] 10.0.0.227:56884 --> [OR] 184.25.56.77:80
+offline0: i4p--------r---- TCP [L] 10.0.0.227:56884 --> [OR] 184.25.56.77:80
         : HTTP.netify.firefox
         : H: detectportal.firefox.com
         : HTTP/UA: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.13; rv:69.0) Gecko/20100101 Firefox/69.0
         : URL: detectportal.firefox.com/success.txt?ipv4
 
-offline0: i4p-------r---- TCP [L] 10.0.0.227:56917 --> [OR] 184.25.56.77:80
+offline0: i4p--------r---- TCP [L] 10.0.0.227:56917 --> [OR] 184.25.56.77:80
         : HTTP.netify.firefox
         : H: detectportal.firefox.com
         : HTTP/UA: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.13; rv:69.0) Gecko/20100101 Firefox/69.0
         : URL: detectportal.firefox.com/success.txt
 
-offline0: i4p-------r---- TCP [L] 10.0.0.227:56879 --> [OR] 52.10.115.210:443
+offline0: i4p--------r---- TCP [L] 10.0.0.227:56879 --> [OR] 52.10.115.210:443
         : HTTP/S
 
-offline0: i4p-------r---- UDP [L] 10.0.0.227:60341 --> [OR] 75.75.75.75:53
+offline0: i4p--------r---- UDP [L] 10.0.0.227:60341 --> [OR] 75.75.75.75:53
         : DNS.netify.apple
         : H: www.apple.com
 
-offline0: i4p-------r---- UDP [L] 10.0.0.227:51060 --> [OR] 75.75.75.75:53
+offline0: i4p--------r---- UDP [L] 10.0.0.227:51060 --> [OR] 75.75.75.75:53
         : DNS.netify.apple-push
         : H: 1-courier.push.apple.com
 
-offline0: i4p-------r---- UDP [L] 10.0.0.227:59582 --> [OR] 75.75.75.75:53
+offline0: i4p--------r---- UDP [L] 10.0.0.227:59582 --> [OR] 75.75.75.75:53
         : DNS.netify.apple-push
         : H: 1-courier.sandbox.push.apple.com
 
-offline0: i4p-------r---- UDP [L] 10.0.0.227:64193 --> [OR] 75.75.75.75:53
+offline0: i4p--------r---- UDP [L] 10.0.0.227:64193 --> [OR] 75.75.75.75:53
         : DNS.netify.apple-push
         : H: 24-courier.push.apple.com
 
-offline0: i4p-------r---- UDP [L] 10.0.0.227:51990 --> [OR] 75.75.75.75:53
+offline0: i4p--------r---- UDP [L] 10.0.0.227:51990 --> [OR] 75.75.75.75:53
         : DNS.netify.viasat
         : H: mail.viasat.com
 
-offline0: i4pc----d-rsfa- TCP [L] 10.0.0.227:56886 --> [OR] 17.57.144.116:5223
+offline0: i4pc----d--rsFA- TCP [L] 10.0.0.227:56886 --> [OR] 17.57.144.116:5223
         : Apple/Push.netify.apple-push
         : D: us-sw-courier-4.push-apple.com.akadns.net
 
-offline0: i4p-------r---- UDP [L] 10.0.0.227:49781 --> [OR] 75.75.75.75:53
+offline0: i4p--------r---- UDP [L] 10.0.0.227:49781 --> [OR] 75.75.75.75:53
         : DNS.netify.apple
         : H: apple.com
 
-offline0: i4p-------r---- UDP [L] 10.0.0.227:58074 --> [OR] 75.75.75.75:53
+offline0: i4p--------r---- UDP [L] 10.0.0.227:58074 --> [OR] 75.75.75.75:53
         : DNS.netify.outlook
         : H: www.outlook.com
 
-offline0: i4pc------r---- UDP [L] 10.0.0.227:61328 --> [OM] 239.255.255.250:1900
+offline0: i4pc-------r---- UDP [L] 10.0.0.227:61328 --> [OM] 239.255.255.250:1900
         : SSDP
         : H: 239.255.255.250
 
-offline0: i4pc------r---- UDP [L] 10.0.0.149:38616 <-- [OL] 10.0.0.227:61328
+offline0: i4pc-------r---- UDP [L] 10.0.0.149:38616 <-- [OL] 10.0.0.227:61328
         : SSDP
 
-offline0: i4pc------r---- UDP [L] 10.0.0.151:1900 <-- [OL] 10.0.0.227:61328
+offline0: i4pc-------r---- UDP [L] 10.0.0.151:1900 <-- [OL] 10.0.0.227:61328
         : SSDP
 
-offline0: i4pc------r---- UDP [L] 10.0.0.227:57547 --> [OM] 239.255.255.250:1900
+offline0: i4pc-------r---- UDP [L] 10.0.0.227:57547 --> [OM] 239.255.255.250:1900
         : SSDP
         : H: 239.255.255.250
 
-offline0: i4p-----d-r---- UDP [OR] 8.37.102.91:443 <-- [L] 10.0.0.227:54107
+offline0: i4p-----d--r---- UDP [OR] 8.37.102.91:443 <-- [L] 10.0.0.227:54107
         : DTLS.netify.viasat
         : D: vco.pandion.viasat.com
 
-offline0: i4pc------r---- UDP [L] 10.0.0.149:50081 <-- [OL] 10.0.0.227:57547
+offline0: i4pc-------r---- UDP [L] 10.0.0.149:50081 <-- [OL] 10.0.0.227:57547
         : SSDP
 
-offline0: i4pc------r---- UDP [L] 10.0.0.151:1900 <-- [OL] 10.0.0.227:57547
+offline0: i4pc-------r---- UDP [L] 10.0.0.151:1900 <-- [OL] 10.0.0.227:57547
         : SSDP
 
-offline0: i4p-------r---- TCP [L] 10.0.0.149:8008 <-- [OL] 10.0.0.227:56954
+offline0: i4p--------r---- TCP [L] 10.0.0.149:8008 <-- [OL] 10.0.0.227:56954
         : HTTP
         : H: 10.0.0.149
         : HTTP/UA: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.90 Safari/537.36
         : URL: 10.0.0.149:8008/ssdp/device-desc.xml
 
-offline0: i4p-------r-fa- TCP [L] 10.0.0.151:8060 <-- [OL] 10.0.0.227:56955
+offline0: i4p--------r-FA- TCP [L] 10.0.0.151:8060 <-- [OL] 10.0.0.227:56955
         : HTTP
         : H: 10.0.0.151
         : HTTP/UA: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.90 Safari/537.36
         : URL: 10.0.0.151:8060/dial/dd.xml
 
-offline0: i4pc------r---- UDP [L] 10.0.0.149:49816 <-- [OL] 10.0.0.227:57547
+offline0: i4pc-------r---- UDP [L] 10.0.0.149:49816 <-- [OL] 10.0.0.227:57547
         : SSDP
 
-offline0: i4pc------r---- UDP [L] 10.0.0.149:48166 <-- [OL] 10.0.0.227:57547
+offline0: i4pc-------r---- UDP [L] 10.0.0.149:48166 <-- [OL] 10.0.0.227:57547
         : SSDP
 
-offline0: i4pc------r---- UDP [L] 10.0.0.149:51382 <-- [OL] 10.0.0.227:57547
+offline0: i4pc-------r---- UDP [L] 10.0.0.149:51382 <-- [OL] 10.0.0.227:57547
         : SSDP
 
-offline0: i4pc------r---- UDP [L] 10.0.0.227:137 --> [OL] 10.0.0.255:137
+offline0: i4pc-------r---- UDP [L] 10.0.0.227:137 --> [OL] 10.0.0.255:137
         : NETBIOS
         : H: lp-rkerur-osx
 
-offline0: i4p-------r---- UDP [L] 10.0.0.149:5353 --> [OM] 224.0.0.251:5353
+offline0: i4p--------r---- UDP [L] 10.0.0.149:5353 --> [OM] 224.0.0.251:5353
         : MDNS.netify.internal-network
         : H: _googlezone._tcp.local
         : MDNS/DN: 79d88e83-725c-b71b-bad0-5862d5b22386._googlezone._tcp.local
 
-offline0: i4pc------r---- ICMP [L] 10.0.0.1:0 --> [OM] 224.0.0.1:0
+offline0: i4pc-------r---- ICMP [L] 10.0.0.1:0 --> [OM] 224.0.0.1:0
         : ICMP
 
-offline0: i4pc-gxXd---fa- TCP [OR] 8.37.103.196:443 <-- [L] 10.0.0.227:56871
+offline0: i4pc-gxXd----FA- TCP [OR] 8.37.103.196:443 <-- [L] 10.0.0.227:56871
         : HTTP/S.netify.viasat
         : D: mail.viasat.com
         : SNI: mail.viasat.com
 
-offline0: i4pc-gx-------- UDP [L] 10.0.0.1:192 <-- [OL] 10.0.0.227:52595
+offline0: i4pc-gx--------- UDP [L] 10.0.0.1:192 <-- [OL] 10.0.0.227:52595
         : Unknown
 
-offline0: i4pc-gx-----fa- TCP [L] 10.0.0.227:56885 --> [OR] 184.25.56.53:80
+offline0: i4pc-gx------FA- TCP [L] 10.0.0.227:56885 --> [OR] 184.25.56.53:80
         : HTTP
 
-offline0: i4pc-gx-----fa- TCP [L] 10.0.0.149:8008 <-- [OL] 10.0.0.227:56865
+offline0: i4pc-gx------FA- TCP [L] 10.0.0.149:8008 <-- [OL] 10.0.0.227:56865
         : Cisco/VPN
 
-offline0: i4pc-gx-----fa- TCP [L] 10.0.0.151:8060 <-- [OL] 10.0.0.227:56866
+offline0: i4pc-gx------FA- TCP [L] 10.0.0.151:8060 <-- [OL] 10.0.0.227:56866
         : Unknown
 
-offline0: i4pc-gx-------- TCP [L] 10.0.0.227:56881 --> [OR] 162.222.43.153:443
+offline0: i4pc-gx--------- TCP [L] 10.0.0.227:56881 --> [OR] 162.222.43.153:443
         : HTTP/S
 
-offline0: i4pc-gx-----fa- TCP [L] 10.0.0.227:56874 --> [OR] 74.125.197.188:443
+offline0: i4pc-gx------FA- TCP [L] 10.0.0.227:56874 --> [OR] 74.125.197.188:443
         : HTTP/S.netify.google
 
-offline0: i4pc-gx-------- TCP [L] 10.0.0.151:8009 <-- [OL] 10.0.0.227:56916
+offline0: i4pc-gx--------- TCP [L] 10.0.0.151:8009 <-- [OL] 10.0.0.227:56916
         : AJP
 

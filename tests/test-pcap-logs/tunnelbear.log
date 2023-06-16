@@ -1,118 +1,118 @@
-offline0: i4p-------r---- TCP [L] 10.8.0.1:50178 --> [OR] 104.17.154.236:443
+offline0: i4p--------r---- TCP [L] 10.8.0.1:50178 --> [OR] 104.17.154.236:443
         : HTTP/S.netify.tunnelbear
         : H: api.tunnelbear.com
         : SNI: api.tunnelbear.com
 
-offline0: i4p-------r-fa- TCP [L] 10.8.0.1:45104 --> [OR] 104.17.115.40:443
+offline0: i4p--------r-FA- TCP [L] 10.8.0.1:45104 --> [OR] 104.17.115.40:443
         : HTTP/S.netify.tunnelbear
         : H: api.polargrizzly.com
         : SNI: api.polargrizzly.com
 
-offline0: i4p-------r-fa- TCP [L] 10.8.0.1:45106 --> [OR] 104.17.115.40:443
+offline0: i4p--------r-FA- TCP [L] 10.8.0.1:45106 --> [OR] 104.17.115.40:443
         : HTTP/S.netify.tunnelbear
         : H: api.polargrizzly.com
         : SNI: api.polargrizzly.com
 
-offline0: i4p-------r-fa- TCP [L] 10.8.0.1:45108 --> [OR] 104.17.115.40:443
+offline0: i4p--------r-FA- TCP [L] 10.8.0.1:45108 --> [OR] 104.17.115.40:443
         : HTTP/S.netify.tunnelbear
         : H: api.polargrizzly.com
         : SNI: api.polargrizzly.com
 
-offline0: i4p-------r-fa- TCP [L] 10.8.0.1:45114 --> [OR] 104.17.115.40:443
+offline0: i4p--------r-FA- TCP [L] 10.8.0.1:45114 --> [OR] 104.17.115.40:443
         : HTTP/S.netify.tunnelbear
         : H: api.polargrizzly.com
         : SNI: api.polargrizzly.com
 
-offline0: i4p-------r---- TCP [L] 10.8.0.1:47496 --> [OR] 162.247.243.188:443
+offline0: i4p--------r---- TCP [L] 10.8.0.1:47496 --> [OR] 162.247.243.188:443
         : HTTP/S.netify.new-relic
         : H: mobile-collector.newrelic.com
         : SNI: mobile-collector.newrelic.com
 
-offline0: i4p-------r-fa- TCP [L] 10.8.0.1:45124 --> [OR] 104.17.115.40:443
+offline0: i4p--------r-FA- TCP [L] 10.8.0.1:45124 --> [OR] 104.17.115.40:443
         : HTTP/S.netify.tunnelbear
         : H: api.polargrizzly.com
         : SNI: api.polargrizzly.com
 
-offline0: i4p-------r-fa- TCP [L] 10.8.0.1:45126 --> [OR] 104.17.115.40:443
+offline0: i4p--------r-FA- TCP [L] 10.8.0.1:45126 --> [OR] 104.17.115.40:443
         : HTTP/S.netify.tunnelbear
         : H: api.polargrizzly.com
         : SNI: api.polargrizzly.com
 
-offline0: i4p-------r---- TCP [L] 10.158.132.91:38398 --> [OR] 104.17.114.40:443
+offline0: i4p--------r---- TCP [L] 10.158.132.91:38398 --> [OR] 104.17.114.40:443
         : HTTP/S.netify.tunnelbear
         : H: api.polargrizzly.com
         : SNI: api.polargrizzly.com
 
-offline0: i4p-------r---- TCP [L] 10.8.0.1:60224 --> [OR] 157.240.7.32:443
+offline0: i4p--------r---- TCP [L] 10.8.0.1:60224 --> [OR] 157.240.7.32:443
         : HTTP/S.netify.meta-messaging
         : H: mqtt-mini.facebook.com
         : SNI: mqtt-mini.facebook.com
 
-offline0: i4p-u-----r---- TCP [L] 10.8.0.1:60224 --> [OR] 157.240.7.32:443
+offline0: i4p-u------r---- TCP [L] 10.8.0.1:60224 --> [OR] 157.240.7.32:443
         : HTTP/S.netify.meta-messaging
         : H: mqtt-mini.facebook.com
         : SNI: mqtt-mini.facebook.com
 
-offline0: i4p-------r---- TCP [L] 10.8.0.1:47594 --> [OR] 99.83.135.170:443
+offline0: i4p--------r---- TCP [L] 10.8.0.1:47594 --> [OR] 99.83.135.170:443
         : HTTP/S.netify.grammarly
         : H: capi.grammarly.com
         : SNI: capi.grammarly.com
 
-offline0: i4p-u-----r---- TCP [L] 10.8.0.1:47594 --> [OR] 99.83.135.170:443
+offline0: i4p-u------r---- TCP [L] 10.8.0.1:47594 --> [OR] 99.83.135.170:443
         : HTTP/S.netify.grammarly
         : H: capi.grammarly.com
         : SNI: capi.grammarly.com
 
-offline0: i4p-u-----r---- TCP [L] 10.8.0.1:47594 --> [OR] 99.83.135.170:443
+offline0: i4p-u------r---- TCP [L] 10.8.0.1:47594 --> [OR] 99.83.135.170:443
         : HTTP/S.netify.grammarly
         : H: capi.grammarly.com
         : SNI: capi.grammarly.com CN: capi.grammarly.com
         : IDN: C=US, O=Amazon, OU=Server CA 1B, CN=Amazon SDN: CN=capi.grammarly.com
 
-offline0: i4pc------rs--- TCP [L] 10.8.0.1:47046 --> [OR] 74.125.200.188:5228
+offline0: i4pc-------rs--- TCP [L] 10.8.0.1:47046 --> [OR] 74.125.200.188:5228
         : XMPP.netify.google-chat
         : H: mtalk.google.com
 
-offline0: i4p-------r-fa- TCP [L] 10.8.0.1:33830 --> [OR] 104.17.114.40:443
+offline0: i4p--------r-FA- TCP [L] 10.8.0.1:33830 --> [OR] 104.17.114.40:443
         : HTTP/S.netify.tunnelbear
         : H: api.polargrizzly.com
         : SNI: api.polargrizzly.com
 
-offline0: i4p-------r-fa- TCP [L] 10.8.0.1:33838 --> [OR] 104.17.114.40:443
+offline0: i4p--------r-FA- TCP [L] 10.8.0.1:33838 --> [OR] 104.17.114.40:443
         : HTTP/S.netify.tunnelbear
         : H: api.polargrizzly.com
         : SNI: api.polargrizzly.com
 
-offline0: i4p-------r---- TCP [L] 10.8.0.1:50904 --> [OR] 104.17.154.236:443
+offline0: i4p--------r---- TCP [L] 10.8.0.1:50904 --> [OR] 104.17.154.236:443
         : HTTP/S.netify.tunnelbear
         : H: api.tunnelbear.com
         : SNI: api.tunnelbear.com
 
-offline0: i4p-------r-fa- TCP [L] 10.8.0.1:33842 --> [OR] 104.17.114.40:443
+offline0: i4p--------r-FA- TCP [L] 10.8.0.1:33842 --> [OR] 104.17.114.40:443
         : HTTP/S.netify.tunnelbear
         : H: api.polargrizzly.com
         : SNI: api.polargrizzly.com
 
-offline0: i4p-------r-fa- TCP [L] 10.8.0.1:33846 --> [OR] 104.17.114.40:443
+offline0: i4p--------r-FA- TCP [L] 10.8.0.1:33846 --> [OR] 104.17.114.40:443
         : HTTP/S.netify.tunnelbear
         : H: api.polargrizzly.com
         : SNI: api.polargrizzly.com
 
-offline0: i4p-------r-fa- TCP [L] 10.8.0.1:33848 --> [OR] 104.17.114.40:443
+offline0: i4p--------r-FA- TCP [L] 10.8.0.1:33848 --> [OR] 104.17.114.40:443
         : HTTP/S.netify.tunnelbear
         : H: api.polargrizzly.com
         : SNI: api.polargrizzly.com
 
-offline0: i4p-------r---- TCP [L] 10.8.0.1:48222 --> [OR] 162.247.243.188:443
+offline0: i4p--------r---- TCP [L] 10.8.0.1:48222 --> [OR] 162.247.243.188:443
         : HTTP/S.netify.new-relic
         : H: mobile-collector.newrelic.com
         : SNI: mobile-collector.newrelic.com
 
-offline0: i4p-------r---- TCP [L] 10.8.0.1:33858 --> [OR] 104.17.114.40:443
+offline0: i4p--------r---- TCP [L] 10.8.0.1:33858 --> [OR] 104.17.114.40:443
         : HTTP/S.netify.tunnelbear
         : H: api.polargrizzly.com
         : SNI: api.polargrizzly.com
 
-offline0: i4pc-gx-----fa- TCP [OR] 8.8.8.8:53 <-- [L] 10.158.132.91:51120
+offline0: i4pc-gx------FA- TCP [OR] 8.8.8.8:53 <-- [L] 10.158.132.91:51120
         : DNS
 

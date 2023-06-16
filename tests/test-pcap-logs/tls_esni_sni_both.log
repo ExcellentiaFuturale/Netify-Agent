@@ -1,19 +1,19 @@
-offline0: i4p-------r---- TCP [OR] 104.17.175.85:443 <-- [L] 192.168.1.21:55500
+offline0: i4p--------r-FA- TCP [OR] 104.17.175.85:443 <-- [L] 192.168.1.21:55500
         : HTTP/S
         : H: these-are-not-the-droids-youre-looking-for.com
         : SNI: these-are-not-the-droids-youre-looking-for.com
 
-offline0: i4p-u-----r-fa- TCP [OR] 104.17.175.85:443 <-- [L] 192.168.1.21:55500
+offline0: i4p-u------r-FA- TCP [OR] 104.17.175.85:443 <-- [L] 192.168.1.21:55500
         : HTTP/S
         : H: these-are-not-the-droids-youre-looking-for.com
         : SNI: these-are-not-the-droids-youre-looking-for.com
 
-offline0: i4p-------r-fa- TCP [OR] 104.17.175.85:443 <-- [L] 192.168.1.21:55514
+offline0: i4p--------r-FA- TCP [OR] 104.17.175.85:443 <-- [L] 192.168.1.21:55514
         : HTTP/S
         : H: you-think-thats-normal-tls-traffic-youre-seeing.com
         : SNI: you-think-thats-normal-tls-traffic-youre-seeing.com
 
-offline0: i4p-u-----r-fa- TCP [OR] 104.17.175.85:443 <-- [L] 192.168.1.21:55514
+offline0: i4p-u------r-FA- TCP [OR] 104.17.175.85:443 <-- [L] 192.168.1.21:55514
         : HTTP/S
         : H: you-think-thats-normal-tls-traffic-youre-seeing.com
         : SNI: you-think-thats-normal-tls-traffic-youre-seeing.com

@@ -1,63 +1,63 @@
-offline0: i4p-------r---- TCP [OR] 54.69.188.18:443 <-- [L] 192.168.1.128:42642
+offline0: i4p--------r---- TCP [OR] 54.69.188.18:443 <-- [L] 192.168.1.128:42642
         : HTTP/S.netify.pluralsight
         : H: pluralsight.com
         : SNI: pluralsight.com
 
-offline0: i4p-u-----r---- TCP [OR] 54.69.188.18:443 <-- [L] 192.168.1.128:42642
+offline0: i4p-u------r---- TCP [OR] 54.69.188.18:443 <-- [L] 192.168.1.128:42642
         : HTTP/S.netify.pluralsight
         : H: pluralsight.com
         : SNI: pluralsight.com
         : IDN: C=US, ST=Arizona, L=Scottsdale, O=GoDaddy.com, Inc., OU=http://certs.godaddy.com/repository/, CN=Go Daddy Secure Certificate Authority - G2 SDN: OU=Domain Control Validated, CN=*.pluralsight.com
 
-offline0: i4p-------r---- TCP [OR] 146.75.62.208:443 <-- [L] 192.168.1.128:42782
+offline0: i4p--------r---- TCP [OR] 146.75.62.208:443 <-- [L] 192.168.1.128:42782
         : HTTP/S.netify.imgix
         : H: pluralsight2.imgix.net
         : SNI: pluralsight2.imgix.net
 
-offline0: i4p-------r---- TCP [OR] 146.75.62.208:443 <-- [L] 192.168.1.128:42790
+offline0: i4p--------r---- TCP [OR] 146.75.62.208:443 <-- [L] 192.168.1.128:42790
         : HTTP/S.netify.imgix
         : H: pluralsight.imgix.net
         : SNI: pluralsight.imgix.net
 
-offline0: i4p-u-----r---- TCP [OR] 146.75.62.208:443 <-- [L] 192.168.1.128:42782
+offline0: i4p-u------r---- TCP [OR] 146.75.62.208:443 <-- [L] 192.168.1.128:42782
         : HTTP/S.netify.imgix
         : H: pluralsight2.imgix.net
         : SNI: pluralsight2.imgix.net
         : IDN: C=BE, O=GlobalSign nv-sa, CN=GlobalSign Atlas R3 DV TLS CA 2020 SDN: CN=*.imgix.com
 
-offline0: i4p-u-----r---- TCP [OR] 146.75.62.208:443 <-- [L] 192.168.1.128:42790
+offline0: i4p-u------r---- TCP [OR] 146.75.62.208:443 <-- [L] 192.168.1.128:42790
         : HTTP/S.netify.imgix
         : H: pluralsight.imgix.net
         : SNI: pluralsight.imgix.net
         : IDN: C=BE, O=GlobalSign nv-sa, CN=GlobalSign Atlas R3 DV TLS CA 2020 SDN: CN=*.imgix.com
 
-offline0: i4p-------r---- TCP [OR] 18.203.201.56:443 <-- [L] 192.168.1.128:42618
+offline0: i4p--------r---- TCP [OR] 18.203.201.56:443 <-- [L] 192.168.1.128:42618
         : HTTP/S.netify.pluralsight
         : H: stt.pluralsight.com
         : SNI: stt.pluralsight.com
 
-offline0: i4p-u-----r---- TCP [OR] 18.203.201.56:443 <-- [L] 192.168.1.128:42618
+offline0: i4p-u------r---- TCP [OR] 18.203.201.56:443 <-- [L] 192.168.1.128:42618
         : HTTP/S.netify.pluralsight
         : H: stt.pluralsight.com
         : SNI: stt.pluralsight.com CN: stt.pluralsight.com
         : IDN: C=US, O=DigiCert Inc, CN=DigiCert TLS RSA SHA256 2020 CA1 SDN: C=US, ST=California, L=San Jose, O=Adobe Systems Incorporated, CN=stt.pluralsight.com
 
-offline0: i4p-------r---- TCP [OR] 104.19.162.127:443 <-- [L] 192.168.1.128:48948
+offline0: i4p--------r---- TCP [OR] 104.19.162.127:443 <-- [L] 192.168.1.128:48948
         : HTTP/S.netify.pluralsight
         : H: www.pluralsight.com
         : SNI: www.pluralsight.com
 
-offline0: i4p-u-----r---- TCP [OR] 104.19.162.127:443 <-- [L] 192.168.1.128:48948
+offline0: i4p-u------r---- TCP [OR] 104.19.162.127:443 <-- [L] 192.168.1.128:48948
         : HTTP/S.netify.pluralsight
         : H: www.pluralsight.com
         : SNI: www.pluralsight.com
 
-offline0: i4p-------r---- TCP [OR] 104.17.209.240:443 <-- [L] 192.168.1.128:44770
+offline0: i4p--------r---- TCP [OR] 104.17.209.240:443 <-- [L] 192.168.1.128:44770
         : HTTP/S.netify.qualtrics
         : H: zn6qzq6caaucudesr-pluralsight.siteintercept.qualtrics.com
         : SNI: zn6qzq6caaucudesr-pluralsight.siteintercept.qualtrics.com
 
-offline0: i4p-u-----r---- TCP [OR] 104.17.209.240:443 <-- [L] 192.168.1.128:44770
+offline0: i4p-u------r---- TCP [OR] 104.17.209.240:443 <-- [L] 192.168.1.128:44770
         : HTTP/S.netify.qualtrics
         : H: zn6qzq6caaucudesr-pluralsight.siteintercept.qualtrics.com
         : SNI: zn6qzq6caaucudesr-pluralsight.siteintercept.qualtrics.com

@@ -1,9 +1,9 @@
-offline0: i4p-------r-fa- TCP [OR] 104.154.89.105:443 <-- [L] 192.168.2.222:54772
+offline0: i4p--------r-FA- TCP [OR] 104.154.89.105:443 <-- [L] 192.168.2.222:54772
         : HTTP/S.netify.badssl
         : H: wrong.host.badssl.com
         : SNI: wrong.host.badssl.com
 
-offline0: i4p-u-----r-fa- TCP [OR] 104.154.89.105:443 <-- [L] 192.168.2.222:54772
+offline0: i4p-u------r-FA- TCP [OR] 104.154.89.105:443 <-- [L] 192.168.2.222:54772
         : HTTP/S.netify.badssl
         : H: wrong.host.badssl.com
         : SNI: wrong.host.badssl.com

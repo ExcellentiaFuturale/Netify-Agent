@@ -1,357 +1,357 @@
-offline0: i6pc------r---- UDP [OR] 2001:b07:ac9:d5ae:a4d3:fe47:691e:807d:38077 --> [L] 2400:8902::f03c:91ff:fe69:a454:443
+offline0: i6pc-------r---- UDP [OR] 2001:b07:ac9:d5ae:a4d3:fe47:691e:807d:38077 --> [L] 2400:8902::f03c:91ff:fe69:a454:443
         : QUIC
         : H: nghttp2.org
         : SNI: nghttp2.org
 
-offline0: i4pc------r---- UDP [OR] 71.202.41.169:443 <-- [L] 192.168.1.128:37643
+offline0: i4pc-------r---- UDP [OR] 71.202.41.169:443 <-- [L] 192.168.1.128:37643
         : QUIC
         : H: 71.202.41.169
         : SNI: 71.202.41.169
 
-offline0: i6pc------r---- UDP [OR] 2001:b07:ac9:d5ae:a4d3:fe47:691e:807d:37876 --> [L] 2a05:d018:ce9:8100:cd2a:e2fd:b3be:c5ab:443
+offline0: i6pc-------r---- UDP [OR] 2001:b07:ac9:d5ae:a4d3:fe47:691e:807d:37876 --> [L] 2a05:d018:ce9:8100:cd2a:e2fd:b3be:c5ab:443
         : QUIC
         : H: quic.aiortc.org
         : SNI: quic.aiortc.org
 
-offline0: i6pc------r---- UDP [OR] 2001:b07:ac9:d5ae:a4d3:fe47:691e:807d:34442 --> [L] 2001:4800:7817:101:be76:4eff:fe04:631d:443
+offline0: i6pc-------r---- UDP [OR] 2001:b07:ac9:d5ae:a4d3:fe47:691e:807d:34442 --> [L] 2001:4800:7817:101:be76:4eff:fe04:631d:443
         : QUIC
         : H: quic.ogre.com
         : SNI: quic.ogre.com
 
-offline0: i4pc------r---- UDP [OR] 3.121.242.54:443 <-- [L] 192.168.1.128:47010
+offline0: i4pc-------r---- UDP [OR] 3.121.242.54:443 <-- [L] 192.168.1.128:47010
         : QUIC
         : H: ietf.akaquic.com
         : SNI: ietf.akaquic.com
 
-offline0: i6pc------r---- UDP [OR] 2001:b07:ac9:d5ae:a4d3:fe47:691e:807d:48707 --> [L] 2a00:ac00:4000:400:2e0:4cff:fe68:199d:443
+offline0: i6pc-------r---- UDP [OR] 2001:b07:ac9:d5ae:a4d3:fe47:691e:807d:48707 --> [L] 2a00:ac00:4000:400:2e0:4cff:fe68:199d:443
         : QUIC
         : H: quant.eggert.org
         : SNI: quant.eggert.org
 
-offline0: i6pc------r---- UDP [OR] 2001:b07:ac9:d5ae:a4d3:fe47:691e:807d:60346 --> [L] 2001:bc8:47a4:1c25::1:443
+offline0: i6pc-------r---- UDP [OR] 2001:b07:ac9:d5ae:a4d3:fe47:691e:807d:60346 --> [L] 2001:bc8:47a4:1c25::1:443
         : QUIC
         : H: h3.stammw.eu
         : SNI: h3.stammw.eu
 
-offline0: i4pc------r---- UDP [OR] 40.112.191.60:4433 <-- [L] 192.168.1.128:46576
+offline0: i4pc-------r---- UDP [OR] 40.112.191.60:4433 <-- [L] 192.168.1.128:46576
         : QUIC
         : H: f5quic.com
         : SNI: f5quic.com
 
-offline0: i4pc------r---- UDP [OR] 40.112.191.60:443 <-- [L] 192.168.1.128:46334
+offline0: i4pc-------r---- UDP [OR] 40.112.191.60:443 <-- [L] 192.168.1.128:46334
         : QUIC
         : H: f5quic.com
         : SNI: f5quic.com
 
-offline0: i4pc------r---- UDP [L] 192.168.1.128:38366 --> [OR] 202.238.220.92:4433
+offline0: i4pc-------r---- UDP [L] 192.168.1.128:38366 --> [OR] 202.238.220.92:4433
         : QUIC
         : H: mew.org
         : SNI: mew.org
 
-offline0: i4pc------r---- ICMP [OR] 3.121.242.54:0 --> [L] 192.168.1.128:0
+offline0: i4pc-------r---- ICMP [OR] 3.121.242.54:0 --> [L] 192.168.1.128:0
         : ICMP
 
-offline0: i6pc------r---- UDP [OR] 2001:b07:ac9:d5ae:a4d3:fe47:691e:807d:32957 --> [L] 2606:4700:10::6816:826:4433
+offline0: i6pc-------r---- UDP [OR] 2001:b07:ac9:d5ae:a4d3:fe47:691e:807d:32957 --> [L] 2606:4700:10::6816:826:4433
         : QUIC.netify.cloudflare
         : H: cloudflare-quic.com
         : SNI: cloudflare-quic.com
 
-offline0: i4pc------r---- UDP [OR] 3.121.242.54:4433 <-- [L] 192.168.1.128:60784
+offline0: i4pc-------r---- UDP [OR] 3.121.242.54:4433 <-- [L] 192.168.1.128:60784
         : QUIC
         : H: ietf.akaquic.com
         : SNI: ietf.akaquic.com
 
-offline0: i6pc------r---- UDP [OR] 2001:b07:ac9:d5ae:a4d3:fe47:691e:807d:51185 --> [L] 2001:bc8:47a4:1c25::1:4433
+offline0: i6pc-------r---- UDP [OR] 2001:b07:ac9:d5ae:a4d3:fe47:691e:807d:51185 --> [L] 2001:bc8:47a4:1c25::1:4433
         : QUIC
         : H: h3.stammw.eu
         : SNI: h3.stammw.eu
 
-offline0: i4pc------r---- UDP [OR] 131.159.24.198:443 <-- [L] 192.168.1.128:34511
+offline0: i4pc-------r---- UDP [OR] 131.159.24.198:443 <-- [L] 192.168.1.128:34511
         : QUIC
         : H: pandora.cm.in.tum.de
         : SNI: pandora.cm.in.tum.de
 
-offline0: i4pc------r---- UDP [OR] 51.158.105.98:443 <-- [L] 192.168.1.128:51887
+offline0: i4pc-------r---- UDP [OR] 51.158.105.98:443 <-- [L] 192.168.1.128:51887
         : QUIC
         : H: quic.seemann.io
         : SNI: quic.seemann.io
 
-offline0: i4pc------r---- UDP [OR] 18.189.84.245:4433 <-- [L] 192.168.1.128:43475
+offline0: i4pc-------r---- UDP [OR] 18.189.84.245:4433 <-- [L] 192.168.1.128:43475
         : QUIC
         : H: fb.mvfst.net
         : SNI: fb.mvfst.net
 
-offline0: i4pc------r---- UDP [OR] 133.242.206.244:4433 <-- [L] 192.168.1.128:49151
+offline0: i4pc-------r---- UDP [OR] 133.242.206.244:4433 <-- [L] 192.168.1.128:49151
         : QUIC
         : H: h2o.examp1e.net
         : SNI: h2o.examp1e.net
 
-offline0: i6pc------r---- UDP [OR] 2001:b07:ac9:d5ae:a4d3:fe47:691e:807d:39945 --> [L] 2a05:d018:ce9:8100:cd2a:e2fd:b3be:c5ab:4433
+offline0: i6pc-------r---- UDP [OR] 2001:b07:ac9:d5ae:a4d3:fe47:691e:807d:39945 --> [L] 2a05:d018:ce9:8100:cd2a:e2fd:b3be:c5ab:4433
         : QUIC
         : H: quic.aiortc.org
         : SNI: quic.aiortc.org
 
-offline0: i6pc------r---- UDP [OR] 2001:b07:ac9:d5ae:a4d3:fe47:691e:807d:39624 --> [L] 2001:19f0:5:c21:5400:1ff:fe33:3b96:443
+offline0: i6pc-------r---- UDP [OR] 2001:b07:ac9:d5ae:a4d3:fe47:691e:807d:39624 --> [L] 2001:19f0:5:c21:5400:1ff:fe33:3b96:443
         : QUIC
         : H: quic.tech
         : SNI: quic.tech
 
-offline0: i4pc------r---- UDP [L] 192.168.1.128:59171 --> [OR] 193.190.10.98:4433
+offline0: i4pc-------r---- UDP [L] 192.168.1.128:59171 --> [OR] 193.190.10.98:4433
         : QUIC
         : H: quicker.edm.uhasselt.be
         : SNI: quicker.edm.uhasselt.be
 
-offline0: i6pc------r---- UDP [OR] 2001:b07:ac9:d5ae:a4d3:fe47:691e:807d:35643 --> [L] 2001:19f0:4:34::1:4433
+offline0: i6pc-------r---- UDP [OR] 2001:b07:ac9:d5ae:a4d3:fe47:691e:807d:35643 --> [L] 2001:19f0:4:34::1:4433
         : QUIC
         : H: quic.rocks
         : SNI: quic.rocks
 
-offline0: i6pc------r---- UDP [OR] 2001:b07:ac9:d5ae:a4d3:fe47:691e:807d:56213 --> [L] 2400:8902::f03c:91ff:fe69:a454:4433
+offline0: i6pc-------r---- UDP [OR] 2001:b07:ac9:d5ae:a4d3:fe47:691e:807d:56213 --> [L] 2400:8902::f03c:91ff:fe69:a454:4433
         : QUIC
         : H: nghttp2.org
         : SNI: nghttp2.org
 
-offline0: i6pc------r---- UDP [OR] 2001:b07:ac9:d5ae:a4d3:fe47:691e:807d:52080 --> [L] 2600:1f18:2310:d230:5103:7d9e:7d75:374f:4434
+offline0: i6pc-------r---- UDP [OR] 2001:b07:ac9:d5ae:a4d3:fe47:691e:807d:52080 --> [L] 2600:1f18:2310:d230:5103:7d9e:7d75:374f:4434
         : QUIC
         : H: test.privateoctopus.com
         : SNI: test.privateoctopus.com
 
-offline0: i4pc------r---- UDP [OR] 71.202.41.169:4433 <-- [L] 192.168.1.128:37661
+offline0: i4pc-------r---- UDP [OR] 71.202.41.169:4433 <-- [L] 192.168.1.128:37661
         : QUIC
         : H: 71.202.41.169
         : SNI: 71.202.41.169
 
-offline0: i4pc------r---- UDP [OR] 140.227.52.92:443 <-- [L] 192.168.1.128:37784
+offline0: i4pc-------r---- UDP [OR] 140.227.52.92:443 <-- [L] 192.168.1.128:37784
         : QUIC
         : H: quic.examp1e.net
         : SNI: quic.examp1e.net
 
-offline0: i6pc------r---- UDP [OR] 2001:b07:ac9:d5ae:a4d3:fe47:691e:807d:60983 --> [L] 2a00:ac00:4000:400:2e0:4cff:fe68:199d:4433
+offline0: i6pc-------r---- UDP [OR] 2001:b07:ac9:d5ae:a4d3:fe47:691e:807d:60983 --> [L] 2a00:ac00:4000:400:2e0:4cff:fe68:199d:4433
         : QUIC
         : H: quant.eggert.org
         : SNI: quant.eggert.org
 
-offline0: i4pc------r---- UDP [L] 192.168.1.128:49658 --> [OR] 193.190.10.98:443
+offline0: i4pc-------r---- UDP [L] 192.168.1.128:49658 --> [OR] 193.190.10.98:443
         : QUIC
         : H: quicker.edm.uhasselt.be
         : SNI: quicker.edm.uhasselt.be
 
-offline0: i4pc------r---- UDP [OR] 131.159.24.198:4433 <-- [L] 192.168.1.128:41587
+offline0: i4pc-------r---- UDP [OR] 131.159.24.198:4433 <-- [L] 192.168.1.128:41587
         : QUIC
         : H: pandora.cm.in.tum.de
         : SNI: pandora.cm.in.tum.de
 
-offline0: i4pc------r---- ICMP [OR] 51.158.105.98:0 --> [L] 192.168.1.128:0
+offline0: i4pc-------r---- ICMP [OR] 51.158.105.98:0 --> [L] 192.168.1.128:0
         : ICMP
 
-offline0: i4pc------r---- UDP [L] 192.168.1.128:38933 --> [OR] 202.238.220.92:443
+offline0: i4pc-------r---- UDP [L] 192.168.1.128:38933 --> [OR] 202.238.220.92:443
         : QUIC
         : H: mew.org
         : SNI: mew.org
 
-offline0: i6pc------r---- UDP [OR] 2001:b07:ac9:d5ae:a4d3:fe47:691e:807d:52271 --> [L] 2a00:ac00:4000:400:2e0:4cff:fe68:199d:4434
+offline0: i6pc-------r---- UDP [OR] 2001:b07:ac9:d5ae:a4d3:fe47:691e:807d:52271 --> [L] 2a00:ac00:4000:400:2e0:4cff:fe68:199d:4434
         : QUIC
         : H: quant.eggert.org
         : SNI: quant.eggert.org
 
-offline0: i6pc------r---- UDP [OR] 2001:b07:ac9:d5ae:a4d3:fe47:691e:807d:51040 --> [L] 2604:a880:800:a1::1279:3001:4433
+offline0: i6pc-------r---- UDP [OR] 2001:b07:ac9:d5ae:a4d3:fe47:691e:807d:51040 --> [L] 2604:a880:800:a1::1279:3001:4433
         : QUIC
         : H: http3-test.litespeedtech.com
         : SNI: http3-test.litespeedtech.com
 
-offline0: i4pc------r---- ICMP [OR] 131.159.24.198:0 --> [L] 192.168.1.128:0
+offline0: i4pc-------r---- ICMP [OR] 131.159.24.198:0 --> [L] 192.168.1.128:0
         : ICMP
 
-offline0: i4pc------r---- UDP [OR] 51.158.105.98:4433 <-- [L] 192.168.1.128:45250
+offline0: i4pc-------r---- UDP [OR] 51.158.105.98:4433 <-- [L] 192.168.1.128:45250
         : QUIC
         : H: quic.seemann.io
         : SNI: quic.seemann.io
 
-offline0: i4pc------r---- UDP [OR] 133.242.206.244:443 <-- [L] 192.168.1.128:42456
+offline0: i4pc-------r---- UDP [OR] 133.242.206.244:443 <-- [L] 192.168.1.128:42456
         : QUIC
         : H: h2o.examp1e.net
         : SNI: h2o.examp1e.net
 
-offline0: i6pc------r---- IPv6-ICMP [OR] 2001:b07:ac9:d5ae:a4d3:fe47:691e:807d:0 <-- [L] 2001:4800:7817:101:be76:4eff:fe04:631d:0
+offline0: i6pc-------r---- IPv6-ICMP [OR] 2001:b07:ac9:d5ae:a4d3:fe47:691e:807d:0 <-- [L] 2001:4800:7817:101:be76:4eff:fe04:631d:0
         : ICMPv6
 
-offline0: i4pc------r---- UDP [OR] 71.202.41.169:4434 <-- [L] 192.168.1.128:50289
+offline0: i4pc-------r---- UDP [OR] 71.202.41.169:4434 <-- [L] 192.168.1.128:50289
         : QUIC
         : H: 71.202.41.169
         : SNI: 71.202.41.169
 
-offline0: i6pc------r---- UDP [OR] 2001:b07:ac9:d5ae:a4d3:fe47:691e:807d:49270 --> [L] 2001:bc8:47a4:1c25::1:4434
+offline0: i6pc-------r---- UDP [OR] 2001:b07:ac9:d5ae:a4d3:fe47:691e:807d:49270 --> [L] 2001:bc8:47a4:1c25::1:4434
         : QUIC
         : H: h3.stammw.eu
         : SNI: h3.stammw.eu
 
-offline0: i4pc------r---- UDP [OR] 18.189.84.245:443 <-- [L] 192.168.1.128:34903
+offline0: i4pc-------r---- UDP [OR] 18.189.84.245:443 <-- [L] 192.168.1.128:34903
         : QUIC
         : H: fb.mvfst.net
         : SNI: fb.mvfst.net
 
-offline0: i6pc------r---- UDP [OR] 2001:b07:ac9:d5ae:a4d3:fe47:691e:807d:45852 --> [L] 2001:19f0:5:c21:5400:1ff:fe33:3b96:4433
+offline0: i6pc-------r---- UDP [OR] 2001:b07:ac9:d5ae:a4d3:fe47:691e:807d:45852 --> [L] 2001:19f0:5:c21:5400:1ff:fe33:3b96:4433
         : QUIC
         : H: quic.tech
         : SNI: quic.tech
 
-offline0: i4pc------r---- UDP [OR] 133.242.206.244:4434 <-- [L] 192.168.1.128:45855
+offline0: i4pc-------r---- UDP [OR] 133.242.206.244:4434 <-- [L] 192.168.1.128:45855
         : QUIC
         : H: h2o.examp1e.net
         : SNI: h2o.examp1e.net
 
-offline0: i6pc------r---- UDP [OR] 2001:b07:ac9:d5ae:a4d3:fe47:691e:807d:46353 --> [L] 2606:4700:10::6816:826:443
+offline0: i6pc-------r---- UDP [OR] 2001:b07:ac9:d5ae:a4d3:fe47:691e:807d:46353 --> [L] 2606:4700:10::6816:826:443
         : QUIC.netify.cloudflare
         : H: cloudflare-quic.com
         : SNI: cloudflare-quic.com
 
-offline0: i4pc------r---- UDP [OR] 40.112.191.60:4434 <-- [L] 192.168.1.128:53791
+offline0: i4pc-------r---- UDP [OR] 40.112.191.60:4434 <-- [L] 192.168.1.128:53791
         : QUIC
         : H: f5quic.com
         : SNI: f5quic.com
 
-offline0: i4pc------r---- UDP [L] 192.168.1.128:59515 --> [OR] 193.190.10.98:4434
+offline0: i4pc-------r---- UDP [L] 192.168.1.128:59515 --> [OR] 193.190.10.98:4434
         : QUIC
         : H: quicker.edm.uhasselt.be
         : SNI: quicker.edm.uhasselt.be
 
-offline0: i6pc------r---- UDP [OR] 2001:b07:ac9:d5ae:a4d3:fe47:691e:807d:49788 --> [L] 2001:4800:7817:101:be76:4eff:fe04:631d:4434
+offline0: i6pc-------r---- UDP [OR] 2001:b07:ac9:d5ae:a4d3:fe47:691e:807d:49788 --> [L] 2001:4800:7817:101:be76:4eff:fe04:631d:4434
         : QUIC
         : H: quic.ogre.com
         : SNI: quic.ogre.com
 
-offline0: i6pc------r---- UDP [OR] 2001:b07:ac9:d5ae:a4d3:fe47:691e:807d:46242 --> [L] 2600:1f18:2310:d230:5103:7d9e:7d75:374f:443
+offline0: i6pc-------r---- UDP [OR] 2001:b07:ac9:d5ae:a4d3:fe47:691e:807d:46242 --> [L] 2600:1f18:2310:d230:5103:7d9e:7d75:374f:443
         : QUIC
         : H: test.privateoctopus.com
         : SNI: test.privateoctopus.com
 
-offline0: i4pc------r---- UDP [OR] 140.227.52.92:4433 <-- [L] 192.168.1.128:44619
+offline0: i4pc-------r---- UDP [OR] 140.227.52.92:4433 <-- [L] 192.168.1.128:44619
         : QUIC
         : H: quic.examp1e.net
         : SNI: quic.examp1e.net
 
-offline0: i6pc------r---- UDP [OR] 2001:b07:ac9:d5ae:a4d3:fe47:691e:807d:44243 --> [L] 2001:19f0:4:34::1:4434
+offline0: i6pc-------r---- UDP [OR] 2001:b07:ac9:d5ae:a4d3:fe47:691e:807d:44243 --> [L] 2001:19f0:4:34::1:4434
         : QUIC
         : H: quic.rocks
         : SNI: quic.rocks
 
-offline0: i6pc------r---- UDP [OR] 2001:b07:ac9:d5ae:a4d3:fe47:691e:807d:38394 --> [L] 2600:1f18:2310:d230:5103:7d9e:7d75:374f:4433
+offline0: i6pc-------r---- UDP [OR] 2001:b07:ac9:d5ae:a4d3:fe47:691e:807d:38394 --> [L] 2600:1f18:2310:d230:5103:7d9e:7d75:374f:4433
         : QUIC
         : H: test.privateoctopus.com
         : SNI: test.privateoctopus.com
 
-offline0: i6pc------r---- IPv6-ICMP [OR] 2001:b07:ac9:d5ae:a4d3:fe47:691e:807d:0 <-- [L] 2001:19f0:5:c21:5400:1ff:fe33:3b96:0
+offline0: i6pc-------r---- IPv6-ICMP [OR] 2001:b07:ac9:d5ae:a4d3:fe47:691e:807d:0 <-- [L] 2001:19f0:5:c21:5400:1ff:fe33:3b96:0
         : ICMPv6
 
-offline0: i4pc------r---- UDP [L] 192.168.1.128:35263 --> [OR] 202.238.220.92:4434
+offline0: i4pc-------r---- UDP [L] 192.168.1.128:35263 --> [OR] 202.238.220.92:4434
         : QUIC
         : H: mew.org
         : SNI: mew.org
 
-offline0: i6pc------r---- UDP [OR] 2001:b07:ac9:d5ae:a4d3:fe47:691e:807d:53760 --> [L] 2604:a880:800:a1::1279:3001:4434
+offline0: i6pc-------r---- UDP [OR] 2001:b07:ac9:d5ae:a4d3:fe47:691e:807d:53760 --> [L] 2604:a880:800:a1::1279:3001:4434
         : QUIC
         : H: http3-test.litespeedtech.com
         : SNI: http3-test.litespeedtech.com
 
-offline0: i4pc------r---- UDP [OR] 18.189.84.245:4434 <-- [L] 192.168.1.128:54570
+offline0: i4pc-------r---- UDP [OR] 18.189.84.245:4434 <-- [L] 192.168.1.128:54570
         : QUIC
         : H: fb.mvfst.net
         : SNI: fb.mvfst.net
 
-offline0: i6pc------r---- UDP [OR] 2001:b07:ac9:d5ae:a4d3:fe47:691e:807d:44924 --> [L] 2400:8902::f03c:91ff:fe69:a454:4434
+offline0: i6pc-------r---- UDP [OR] 2001:b07:ac9:d5ae:a4d3:fe47:691e:807d:44924 --> [L] 2400:8902::f03c:91ff:fe69:a454:4434
         : QUIC
         : H: nghttp2.org
         : SNI: nghttp2.org
 
-offline0: i4pc------r---- UDP [OR] 138.91.188.147:443 <-- [L] 192.168.1.128:39975
+offline0: i4pc-------r---- UDP [OR] 138.91.188.147:443 <-- [L] 192.168.1.128:39975
         : QUIC.netify.azure
         : H: quic.westus.cloudapp.azure.com
         : SNI: quic.westus.cloudapp.azure.com
 
-offline0: i4pc------r---- UDP [OR] 138.91.188.147:4434 <-- [L] 192.168.1.128:50705
+offline0: i4pc-------r---- UDP [OR] 138.91.188.147:4434 <-- [L] 192.168.1.128:50705
         : QUIC.netify.azure
         : H: quic.westus.cloudapp.azure.com
         : SNI: quic.westus.cloudapp.azure.com
 
-offline0: i6pc------r---- UDP [OR] 2001:b07:ac9:d5ae:a4d3:fe47:691e:807d:41857 --> [L] 2606:4700:10::6816:826:4434
+offline0: i6pc-------r---- UDP [OR] 2001:b07:ac9:d5ae:a4d3:fe47:691e:807d:41857 --> [L] 2606:4700:10::6816:826:4434
         : QUIC.netify.cloudflare
         : H: cloudflare-quic.com
         : SNI: cloudflare-quic.com
 
-offline0: i6pc------r---- UDP [OR] 2001:b07:ac9:d5ae:a4d3:fe47:691e:807d:56073 --> [L] 2604:a880:800:a1::1279:3001:443
+offline0: i6pc-------r---- UDP [OR] 2001:b07:ac9:d5ae:a4d3:fe47:691e:807d:56073 --> [L] 2604:a880:800:a1::1279:3001:443
         : QUIC
         : H: http3-test.litespeedtech.com
         : SNI: http3-test.litespeedtech.com
 
-offline0: i6pc------r---- UDP [OR] 2001:b07:ac9:d5ae:a4d3:fe47:691e:807d:43645 --> [L] 2001:19f0:4:34::1:443
+offline0: i6pc-------r---- UDP [OR] 2001:b07:ac9:d5ae:a4d3:fe47:691e:807d:43645 --> [L] 2001:19f0:4:34::1:443
         : QUIC
         : H: quic.rocks
         : SNI: quic.rocks
 
-offline0: i4pc------r---- UDP [OR] 131.159.24.198:4434 <-- [L] 192.168.1.128:48644
+offline0: i4pc-------r---- UDP [OR] 131.159.24.198:4434 <-- [L] 192.168.1.128:48644
         : QUIC
         : H: pandora.cm.in.tum.de
         : SNI: pandora.cm.in.tum.de
 
-offline0: i4pc------r---- UDP [OR] 138.91.188.147:4433 <-- [L] 192.168.1.128:42468
+offline0: i4pc-------r---- UDP [OR] 138.91.188.147:4433 <-- [L] 192.168.1.128:42468
         : QUIC.netify.azure
         : H: quic.westus.cloudapp.azure.com
         : SNI: quic.westus.cloudapp.azure.com
 
-offline0: i6pc------r---- UDP [OR] 2001:b07:ac9:d5ae:a4d3:fe47:691e:807d:38689 --> [L] 2001:19f0:5:c21:5400:1ff:fe33:3b96:4434
+offline0: i6pc-------r---- UDP [OR] 2001:b07:ac9:d5ae:a4d3:fe47:691e:807d:38689 --> [L] 2001:19f0:5:c21:5400:1ff:fe33:3b96:4434
         : QUIC
         : H: quic.tech
         : SNI: quic.tech
 
-offline0: i4pc------r---- UDP [OR] 3.121.242.54:4434 <-- [L] 192.168.1.128:53402
+offline0: i4pc-------r---- UDP [OR] 3.121.242.54:4434 <-- [L] 192.168.1.128:53402
         : QUIC
         : H: ietf.akaquic.com
         : SNI: ietf.akaquic.com
 
-offline0: i6pc------r---- UDP [OR] 2001:b07:ac9:d5ae:a4d3:fe47:691e:807d:53140 --> [L] 2001:4800:7817:101:be76:4eff:fe04:631d:4433
+offline0: i6pc-------r---- UDP [OR] 2001:b07:ac9:d5ae:a4d3:fe47:691e:807d:53140 --> [L] 2001:4800:7817:101:be76:4eff:fe04:631d:4433
         : QUIC
         : H: quic.ogre.com
         : SNI: quic.ogre.com
 
-offline0: i4pc------r---- UDP [OR] 140.227.52.92:4434 <-- [L] 192.168.1.128:57926
+offline0: i4pc-------r---- UDP [OR] 140.227.52.92:4434 <-- [L] 192.168.1.128:57926
         : QUIC
         : H: quic.examp1e.net
         : SNI: quic.examp1e.net
 
-offline0: i6pc------r---- IPv6-ICMP [OR] 2001:b07:ac9:d5ae:a4d3:fe47:691e:807d:0 <-- [L] 2400:8902::f03c:91ff:fe69:a454:0
+offline0: i6pc-------r---- IPv6-ICMP [OR] 2001:b07:ac9:d5ae:a4d3:fe47:691e:807d:0 <-- [L] 2400:8902::f03c:91ff:fe69:a454:0
         : ICMPv6
 
-offline0: i6pc------r---- IPv6-ICMP [OR] 2001:b07:ac9:d5ae:a4d3:fe47:691e:807d:0 <-- [L] 2001:19f0:4:34::1:0
+offline0: i6pc-------r---- IPv6-ICMP [OR] 2001:b07:ac9:d5ae:a4d3:fe47:691e:807d:0 <-- [L] 2001:19f0:4:34::1:0
         : ICMPv6
 
-offline0: i4pc------r---- UDP [OR] 51.158.105.98:4434 <-- [L] 192.168.1.128:43735
+offline0: i4pc-------r---- UDP [OR] 51.158.105.98:4434 <-- [L] 192.168.1.128:43735
         : QUIC
         : H: quic.seemann.io
         : SNI: quic.seemann.io
 
-offline0: i6pc------r---- UDP [OR] 2001:b07:ac9:d5ae:a4d3:fe47:691e:807d:44605 --> [L] 2a05:d018:ce9:8100:cd2a:e2fd:b3be:c5ab:4434
+offline0: i6pc-------r---- UDP [OR] 2001:b07:ac9:d5ae:a4d3:fe47:691e:807d:44605 --> [L] 2a05:d018:ce9:8100:cd2a:e2fd:b3be:c5ab:4434
         : QUIC
         : H: quic.aiortc.org
         : SNI: quic.aiortc.org
 
-offline0: i4pc------r---- ICMP [L] 192.168.1.128:0 <-- [OR] 202.238.220.92:0
+offline0: i4pc-------r---- ICMP [L] 192.168.1.128:0 <-- [OR] 202.238.220.92:0
         : ICMP
 
-offline0: i4pc------r---- ICMP [OR] 18.189.84.245:0 --> [L] 192.168.1.128:0
+offline0: i4pc-------r---- ICMP [OR] 18.189.84.245:0 --> [L] 192.168.1.128:0
         : ICMP
 
-offline0: i6pc------r---- IPv6-ICMP [OR] 2001:b07:ac9:d5ae:a4d3:fe47:691e:807d:0 <-- [L] 2604:a880:800:a1::1279:3001:0
+offline0: i6pc-------r---- IPv6-ICMP [OR] 2001:b07:ac9:d5ae:a4d3:fe47:691e:807d:0 <-- [L] 2604:a880:800:a1::1279:3001:0
         : ICMPv6
 
-offline0: i4pc------r---- ICMP [OR] 40.112.191.60:0 <-- [L] 192.168.1.128:0
+offline0: i4pc-------r---- ICMP [OR] 40.112.191.60:0 <-- [L] 192.168.1.128:0
         : ICMP
 
-offline0: i4pc------r---- ICMP [OR] 133.242.206.244:0 --> [L] 192.168.1.128:0
+offline0: i4pc-------r---- ICMP [OR] 133.242.206.244:0 --> [L] 192.168.1.128:0
         : ICMP
 
-offline0: i4pc------r---- ICMP [OR] 140.227.52.92:0 <-- [L] 192.168.1.128:0
+offline0: i4pc-------r---- ICMP [OR] 140.227.52.92:0 <-- [L] 192.168.1.128:0
         : ICMP
 
-offline0: i4pc------r---- ICMP [OR] 138.91.188.147:0 <-- [L] 192.168.1.128:0
+offline0: i4pc-------r---- ICMP [OR] 138.91.188.147:0 <-- [L] 192.168.1.128:0
         : ICMP
 

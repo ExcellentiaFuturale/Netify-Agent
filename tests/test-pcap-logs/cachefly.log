@@ -1,9 +1,9 @@
-offline0: i4p-------r---- TCP [L] 10.10.10.1:443 <-- [OL] 192.168.0.1:43766
+offline0: i4p--------r---- TCP [L] 10.10.10.1:443 <-- [OL] 192.168.0.1:43766
         : HTTP/S.netify.cachefly
         : H: apptv.cachefly.net
         : SNI: apptv.cachefly.net
 
-offline0: i4p-u-----r---- TCP [L] 10.10.10.1:443 <-- [OL] 192.168.0.1:43766
+offline0: i4p-u------r---- TCP [L] 10.10.10.1:443 <-- [OL] 192.168.0.1:43766
         : HTTP/S.netify.cachefly
         : H: apptv.cachefly.net
         : SNI: apptv.cachefly.net

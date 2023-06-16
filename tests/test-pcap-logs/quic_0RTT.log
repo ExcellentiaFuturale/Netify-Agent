@@ -1,9 +1,9 @@
-offline0: i6pc------r---- UDP [L] ::1:60459 --> [OL] ::1:4443
+offline0: i6pc-------r---- UDP [L] ::1:60459 --> [OL] ::1:4443
         : QUIC
         : H: abcd
         : SNI: abcd
 
-offline0: i4pc------r---- UDP [OR] 142.250.181.227:443 <-- [L] 192.168.2.100:51972
+offline0: i4pc-------r---- UDP [OR] 142.250.181.227:443 <-- [L] 192.168.2.100:51972
         : QUIC.netify.google
         : H: ssl.gstatic.com
         : SNI: ssl.gstatic.com

@@ -1,4 +1,4 @@
-offline0: i4p-------r---- TCP [L] 10.0.2.15:49815 --> [OR] 151.99.72.125:80
+offline0: i4p--------r---- TCP [L] 10.0.2.15:49815 --> [OR] 151.99.72.125:80
         : HTTP
         : H: 151.99.72.125
         : HTTP/UA: Microsoft-Delivery-Optimization/10.0

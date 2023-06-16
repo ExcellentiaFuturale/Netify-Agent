@@ -1,19 +1,19 @@
-offline0: i4p-------r-fa- TCP [OR] 12.129.222.53:80 <-- [L] 192.168.178.20:39309
+offline0: i4p--------r-FA- TCP [OR] 12.129.222.53:80 <-- [L] 192.168.178.20:39309
         : HTTP
         : H: us.scan.worldofwarcraft.com
         : URL: us.scan.worldofwarcraft.com/update/Launcher.txt
 
-offline0: i4p-------r-fa- TCP [OR] 24.105.29.21:80 <-- [L] 192.168.178.20:39312
+offline0: i4p--------r-FA- TCP [OR] 24.105.29.21:80 <-- [L] 192.168.178.20:39312
         : HTTP.netify.activision-blizzard
         : H: launcher.worldofwarcraft.com
         : URL: launcher.worldofwarcraft.com/alert
 
-offline0: i4pc------r---- TCP [OR] 12.129.228.153:3724 <-- [L] 192.168.178.20:39329
+offline0: i4pc-------r---- TCP [OR] 12.129.228.153:3724 <-- [L] 192.168.178.20:39329
         : WoW
 
-offline0: i4pc------r---- TCP [OR] 12.129.228.153:3724 <-- [L] 192.168.178.20:39364
+offline0: i4pc-------r---- TCP [OR] 12.129.228.153:3724 <-- [L] 192.168.178.20:39364
         : WoW
 
-offline0: i4pc------r---- TCP [OR] 12.129.228.152:3724 <-- [L] 192.168.178.20:39593
+offline0: i4pc-------r---- TCP [OR] 12.129.228.152:3724 <-- [L] 192.168.178.20:39593
         : WoW
 

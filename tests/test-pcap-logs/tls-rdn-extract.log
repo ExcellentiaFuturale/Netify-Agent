@@ -1,14 +1,14 @@
-offline0: i4p-------r---- TCP [L] 10.0.0.1:31337 --> [OR] 213.199.149.251:443
+offline0: i4p--------r---- TCP [L] 10.0.0.1:31337 --> [OR] 213.199.149.251:443
         : HTTP/S
         : H: ads1.msads.net
         : SNI: ads1.msads.net
 
-offline0: i4p-u-----r---- TCP [L] 10.0.0.1:31337 --> [OR] 213.199.149.251:443
+offline0: i4p-u------r---- TCP [L] 10.0.0.1:31337 --> [OR] 213.199.149.251:443
         : HTTP/S
         : H: ads1.msads.net
         : SNI: ads1.msads.net
 
-offline0: i4p-u-----r---- TCP [L] 10.0.0.1:31337 --> [OR] 213.199.149.251:443
+offline0: i4p-u------r---- TCP [L] 10.0.0.1:31337 --> [OR] 213.199.149.251:443
         : HTTP/S
         : H: ads1.msads.net
         : SNI: ads1.msads.net

@@ -1,10 +1,10 @@
-offline0: i4p-------r-fa- TCP [L] 192.168.17.53:49640 --> [OR] 212.227.17.186:143
+offline0: i4p--------r---- TCP [L] 192.168.17.53:49640 --> [OR] 212.227.17.186:143
         : IMAP/S
 
-offline0: i4p-u-----r-fa- TCP [L] 192.168.17.53:49640 --> [OR] 212.227.17.186:143
+offline0: i4p-u------r---- TCP [L] 192.168.17.53:49640 --> [OR] 212.227.17.186:143
         : IMAP/S
 
-offline0: i4p-u-----r-fa- TCP [L] 192.168.17.53:49640 --> [OR] 212.227.17.186:143
+offline0: i4p-u------r---- TCP [L] 192.168.17.53:49640 --> [OR] 212.227.17.186:143
         : IMAP/S.netify.gmx-mail
         : CN: imap.gmx.net
         : IDN: C=DE, O=T-Systems International GmbH, OU=T-Systems Trust Center, ST=NRW, L=Netphen, CN=TeleSec ServerPass DE-1 SDN: C=DE, O=1&1 Mail & Media GmbH, ST=Rhineland-Palatinate, L=Montabaur, CN=imap.gmx.net

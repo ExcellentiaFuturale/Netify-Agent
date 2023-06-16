@@ -1,14 +1,14 @@
-offline0: i4p-------r---- TCP [L] 10.10.10.1:443 <-- [OL] 192.168.0.1:58842
+offline0: i4p--------r---- TCP [L] 10.10.10.1:443 <-- [OL] 192.168.0.1:58842
         : HTTP/S.netify.utorrent
         : H: web.utorrent.com
         : SNI: web.utorrent.com
 
-offline0: i4p-u-----r---- TCP [L] 10.10.10.1:443 <-- [OL] 192.168.0.1:58842
+offline0: i4p-u------r---- TCP [L] 10.10.10.1:443 <-- [OL] 192.168.0.1:58842
         : HTTP/S.netify.utorrent
         : H: web.utorrent.com
         : SNI: web.utorrent.com
 
-offline0: i4p-u-----r---- TCP [L] 10.10.10.1:443 <-- [OL] 192.168.0.1:58842
+offline0: i4p-u------r---- TCP [L] 10.10.10.1:443 <-- [OL] 192.168.0.1:58842
         : HTTP/S.netify.utorrent
         : H: web.utorrent.com
         : SNI: web.utorrent.com
