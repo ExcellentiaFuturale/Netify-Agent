@@ -146,7 +146,8 @@ void nd_seed_rng(void);
 
 void nd_generate_uuid(string &uuid);
 
-string nd_get_version_and_features(void);
+const string& nd_get_version(void);
+const string& nd_get_version_and_features(void);
 
 bool nd_parse_app_tag(const string &tag, unsigned &id, string &name);
 

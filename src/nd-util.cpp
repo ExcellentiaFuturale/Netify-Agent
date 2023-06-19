@@ -696,35 +696,50 @@ void nd_generate_uuid(string &uuid)
     uuid = os.str();
 }
 
-string nd_get_version_and_features(void)
+const string& nd_get_version(void)
 {
-    string os;
-    nd_os_detect(os);
+    static const string version(PACKAGE_VERSION);
+    return version;
+}
 
-    ostringstream ident;
-    ident << PACKAGE_NAME << "/" << GIT_RELEASE
-        << " (" << os << "; " << _ND_HOST_OS << "; " << _ND_HOST_CPU;
+const string& nd_get_version_and_features(void)
+{
+    static mutex lock;
+    static string version;
 
-    if (ndGC_USE_CONNTRACK) ident << "; conntrack";
-    if (ndGC_USE_NETLINK) ident << "; netlink";
-    if (ndGC_USE_DHC) ident << "; dns-cache";
+    lock_guard<mutex> ul(lock);
+
+    if (version.empty()) {
+        string os;
+        nd_os_detect(os);
+
+        ostringstream ident;
+        ident << PACKAGE_NAME << "/" << GIT_RELEASE
+            << " (" << os << "; " << _ND_HOST_OS << "; " << _ND_HOST_CPU;
+
+        if (ndGC_USE_CONNTRACK) ident << "; conntrack";
+        if (ndGC_USE_NETLINK) ident << "; netlink";
+        if (ndGC_USE_DHC) ident << "; dns-cache";
 #ifdef _ND_USE_TPACKETV3
-    ident << "; tpv3";
+        ident << "; tpv3";
 #endif
 #ifdef _ND_USE_NFQUEUE
-    ident << "; nfqueue";
+        ident << "; nfqueue";
 #endif
 #ifdef _ND_USE_LIBTCMALLOC
-    ident << "; tcmalloc";
+        ident << "; tcmalloc";
 #endif
-    if (ndGC_SSL_USE_TLSv1) ident << "; ssl-tlsv1";
-    if (! ndGC_SSL_VERIFY) ident << "; ssl-no-verify";
+        if (ndGC_SSL_USE_TLSv1) ident << "; ssl-tlsv1";
+        if (! ndGC_SSL_VERIFY) ident << "; ssl-no-verify";
 #ifdef HAVE_WORKING_REGEX
-    ident << "; regex";
+        ident << "; regex";
 #endif
-    ident << ")";
+        ident << ")";
 
-    return ident.str();
+        version = ident.str();
+    }
+
+    return version;
 }
 
 bool nd_parse_app_tag(const string &tag, unsigned &id, string &name)
