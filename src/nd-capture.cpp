@@ -585,6 +585,8 @@ const ndPacket *ndCaptureThread::ProcessPacket(const ndPacket *packet)
 
     stats.pkt.vlan += vlan_packet;
 
+    flow.tunnel_type = ndFlow::TUNNEL_NONE;
+
 nd_process_ip:
     if (l2_len + sizeof(struct ip) > packet->caplen) {
         stats.pkt.discard++;
