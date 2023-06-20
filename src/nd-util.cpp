@@ -1226,19 +1226,20 @@ bool nd_scan_dotd(const string &path, vector<string> &files)
     struct dirent *result = NULL;
     while ((result = readdir(dh)) != NULL) {
         if (
+            ! isdigit(result->d_name[0])
 #ifdef _DIRENT_HAVE_D_RECLEN
-            result->d_reclen == 0 ||
+            || result->d_reclen == 0
 #endif
 #ifndef _DIRENT_HAVE_D_TYPE
 #warning "struct dirent doesn't have a type!"
 #else
-            (
+            || (
                 result->d_type != DT_LNK &&
                 result->d_type != DT_REG &&
                 result->d_type != DT_UNKNOWN
             )
 #endif
-            || ! isdigit(result->d_name[0])) continue;
+	) continue;
         files.push_back(result->d_name);
     }
 
