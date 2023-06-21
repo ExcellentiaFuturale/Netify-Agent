@@ -192,6 +192,7 @@ exit 0
 %dir %attr(750,root,root) %{statedir_pdata}
 %dir %attr(750,root,root) %{statedir_pdata}/domains.d
 %dir %attr(750,root,root) %{statedir_pdata}/interfaces.d
+%{statedir_pdata}/interfaces.d/*
 %dir %attr(750,root,root) %{statedir_pdata}/plugins.d
 %dir %attr(750,root,root) %{statedir_vdata}
 %attr(755,root,root) %{_datadir}/%{name}/
