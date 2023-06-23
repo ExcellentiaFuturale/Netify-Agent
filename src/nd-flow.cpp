@@ -108,7 +108,9 @@ ndFlow::ndFlow(ndInterface &iface)
     gtp.version = 0xFF;
 
     digest_lower.reserve(SHA1_DIGEST_LENGTH);
+    digest_lower.resize(SHA1_DIGEST_LENGTH);
     digest_mdata.reserve(SHA1_DIGEST_LENGTH);
+    digest_mdata.resize(SHA1_DIGEST_LENGTH);
 }
 
 ndFlow::ndFlow(const ndFlow &flow)
@@ -142,6 +144,7 @@ ndFlow::ndFlow(const ndFlow &flow)
         flow.digest_lower.begin(), flow.digest_lower.end()
     );
     digest_mdata.reserve(SHA1_DIGEST_LENGTH);
+    digest_mdata.resize(SHA1_DIGEST_LENGTH);
 }
 
 ndFlow::~ndFlow()
@@ -235,14 +238,10 @@ void ndFlow::Hash(const string &device,
     if (key != NULL && key_length > 0)
         sha1_write(&ctx, (const char *)key, key_length);
 
-    if (! hash_mdata) {
-        digest_lower.resize(SHA1_DIGEST_LENGTH);
+    if (! hash_mdata)
         sha1_result(&ctx, &digest_lower[0]);
-    }
-    else {
-        digest_lower.resize(SHA1_DIGEST_LENGTH);
+    else
         sha1_result(&ctx, &digest_mdata[0]);
-    }
 }
 
 void ndFlow::Reset(bool full_reset)
