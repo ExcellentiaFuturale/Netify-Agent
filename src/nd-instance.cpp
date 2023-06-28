@@ -689,21 +689,6 @@ uint32_t ndInstance::InitializeConfig(int argc, char * const argv[])
         }
     }
 
-    CreateCaptureInterfaces(interfaces);
-
-    if (interfaces.size() == 0) {
-        fprintf(stderr,
-            "%s: No packet capture sources configured.\n",
-            tag.c_str()
-        );
-        return ndCR_INVALID_INTERFACES;
-    }
-
-    for (auto &i : ndGC.interface_addrs) {
-        for (auto &a : i.second)
-            addr_types.AddAddress(ndAddr::atLOCAL, a, i.first);
-    }
-
     // Test mode enabled?  Disable/set certain config parameters
     if (ndGC.h_flow != stderr) {
         ndGC_SetFlag(ndGF_USE_FHC, true);
@@ -1198,7 +1183,7 @@ bool ndInstance::SaveAgentStatus(const nd_interface_stats &stats)
             auto ifa = interfaces.find(i.first);
             if (ifa != interfaces.end()) {
                 json jiface;
-                ifa->second.Encode(jiface);
+                ifa->second->Encode(jiface);
                 jstatus["interfaces"][i.first] = jiface;
             }
             jstatus["interfaces"][i.first]["state"] = i.second.first;
@@ -1752,7 +1737,7 @@ void *ndInstance::ndInstance::Entry(void)
 
     try {
         // Create and start capture threads
-        if (! CreateCaptureThreads(interfaces, thread_capture))
+        if (! ReloadCaptureThreads(thread_capture))
             return nullptr;
     }
     catch (exception &e) {
@@ -1826,6 +1811,7 @@ void *ndInstance::ndInstance::Entry(void)
                 exit_code = EXIT_FAILURE;
                 goto ndInstance_EntryReturn;
             }
+            ndGC.Close();
             break;
         case ndIPC_TERMINATE:
             Terminate();
@@ -1942,7 +1928,7 @@ void ndInstance::CreateCaptureInterfaces(ndInterfaces &ifaces)
             auto result = ifaces.insert(
                 make_pair(
                     i.first,
-                    ndInterface(
+                    make_shared<ndInterface>(
                         i.first,
                         i.second.first,
                         r.first
@@ -1954,7 +1940,7 @@ void ndInstance::CreateCaptureInterfaces(ndInterfaces &ifaces)
                 switch (ndCT_TYPE(i.second.first)) {
                 case ndCT_PCAP:
                 case ndCT_PCAP_OFFLINE:
-                    result.first->second.SetConfig(
+                    result.first->second->SetConfig(
                         static_cast<nd_config_pcap *>(
                             i.second.second
                         )
@@ -1962,7 +1948,7 @@ void ndInstance::CreateCaptureInterfaces(ndInterfaces &ifaces)
                     break;
 #if defined(_ND_USE_TPACKETV3)
                 case ndCT_TPV3:
-                    result.first->second.SetConfig(
+                    result.first->second->SetConfig(
                         static_cast<nd_config_tpv3 *>(
                             i.second.second
                         )
@@ -1971,7 +1957,7 @@ void ndInstance::CreateCaptureInterfaces(ndInterfaces &ifaces)
 #endif
 #if defined(_ND_USE_NFQUEUE)
                 case ndCT_NFQ:
-                    result.first->second.SetConfig(
+                    result.first->second->SetConfig(
                         static_cast<nd_config_nfq *>(
                             i.second.second
                         )
@@ -1985,7 +1971,7 @@ void ndInstance::CreateCaptureInterfaces(ndInterfaces &ifaces)
 
             auto peer = ndGC.interface_peers.find(i.first);
             if (peer != ndGC.interface_peers.end())
-                result.first->second.ifname_peer = peer->second;
+                result.first->second->ifname_peer = peer->second;
         }
     }
 }
@@ -2010,7 +1996,7 @@ bool ndInstance::CreateCaptureThreads(
 
     for (auto &it : ifaces) {
 
-        switch (ndCT_TYPE(it.second.capture_type)) {
+        switch (ndCT_TYPE(it.second->capture_type)) {
         case ndCT_PCAP:
         case ndCT_PCAP_OFFLINE:
         {
@@ -2019,7 +2005,7 @@ bool ndInstance::CreateCaptureThreads(
                 it.second,
                 thread_detection,
                 dns_hint_cache,
-                (it.second.role == ndIR_LAN) ? 0 : ++private_addr
+                (it.second->role == ndIR_LAN) ? 0 : ++private_addr
             );
 
             thread_group.push_back(thread);
@@ -2028,9 +2014,9 @@ bool ndInstance::CreateCaptureThreads(
 #if defined(_ND_USE_TPACKETV3)
         case ndCT_TPV3:
         {
-            unsigned instances = it.second.config.tpv3->fanout_instances;
-            if (it.second.config.tpv3->fanout_mode == ndFOM_DISABLED ||
-                it.second.config.tpv3->fanout_instances < 2)
+            unsigned instances = it.second->config_tpv3.fanout_instances;
+            if (it.second->config_tpv3.fanout_mode == ndFOM_DISABLED ||
+                it.second->config_tpv3.fanout_instances < 2)
                 instances = 1;
 
             for (unsigned i = 0; i < instances; i++) {
@@ -2040,7 +2026,7 @@ bool ndInstance::CreateCaptureThreads(
                     it.second,
                     thread_detection,
                     dns_hint_cache,
-                    (it.second.role == ndIR_LAN) ? 0 : ++private_addr
+                    (it.second->role == ndIR_LAN) ? 0 : ++private_addr
                 );
 
                 thread_group.push_back(thread);
@@ -2054,8 +2040,8 @@ bool ndInstance::CreateCaptureThreads(
 #if defined(_ND_USE_NFQUEUE)
         case ndCT_NFQ:
         {
-            unsigned instances = it.second.config.nfq->instances;
-            if (it.second.config.nfq->instances == 0)
+            unsigned instances = it.second->config_nfq.instances;
+            if (it.second->config_nfq.instances == 0)
                 instances = 1;
 
             for (unsigned i = 0; i < instances; i++) {
@@ -2066,7 +2052,7 @@ bool ndInstance::CreateCaptureThreads(
                     thread_detection,
                     i, // instance_id
                     dns_hint_cache,
-                    (it.second.role == ndIR_LAN) ? 0 : ++private_addr
+                    (it.second->role == ndIR_LAN) ? 0 : ++private_addr
                 );
 
                 thread_group.push_back(thread);
@@ -2080,13 +2066,13 @@ bool ndInstance::CreateCaptureThreads(
         default:
             nd_printf("%s: WARNING: Unsupported capture type: %s: %hu",
                 tag.c_str(),
-                it.second.ifname.c_str(), it.second.capture_type
+                it.second->ifname.c_str(), it.second->capture_type
             );
         }
 
         if (! thread_group.size()) continue;
 
-        threads[it.second.ifname] = thread_group;
+        threads[it.second->ifname] = thread_group;
 
         thread_group.clear();
 
@@ -2171,23 +2157,26 @@ bool ndInstance::ReloadCaptureThreads(nd_capture_threads &threads)
         ndGC.interface_addrs.end()
     );
 
-    ndGC.LoadInterfaces();
+    ndGC.LoadInterfaces(conf_filename);
     CreateCaptureInterfaces(ifaces);
 
     set_difference(
         ifaces.begin(), ifaces.end(),
         interfaces.begin(), interfaces.end(),
-        inserter(ifaces_new, ifaces_new.begin())
+        inserter(ifaces_new, ifaces_new.begin()),
+        ifaces.value_comp()
     );
     set_intersection(
         ifaces.begin(), ifaces.end(),
         interfaces.begin(), interfaces.end(),
-        inserter(ifaces_common, ifaces_common.begin())
+        inserter(ifaces_common, ifaces_common.begin()),
+        ifaces.value_comp()
     );
     set_difference(
         interfaces.begin(), interfaces.end(),
         ifaces.begin(), ifaces.end(),
-        inserter(ifaces_delete, ifaces_delete.begin())
+        inserter(ifaces_delete, ifaces_delete.begin()),
+        interfaces.value_comp()
     );
 
     for (auto &iface : ifaces_common) {
@@ -2199,7 +2188,7 @@ bool ndInstance::ReloadCaptureThreads(nd_capture_threads &threads)
             return false;
         }
 
-        if (i->second == iface.second) {
+        if (*i->second == *iface.second) {
 
             set<string> ifaddrs_a, ifaddrs_b;
 
@@ -2241,6 +2230,9 @@ bool ndInstance::ReloadCaptureThreads(nd_capture_threads &threads)
 
             continue;
         }
+
+        nd_dprintf("%s: interface config changed.\n",
+            iface.first.c_str());
 
         ifaces_new.insert(iface);
         ifaces_delete.insert(iface);
@@ -2439,7 +2431,7 @@ void ndInstance::ProcessUpdate(nd_capture_threads &threads)
     ndInterface::UpdateAddrs(interfaces);
 
     for (auto &it : interfaces)
-        it.second.NextEndpointSnapshot();
+        it.second->NextEndpointSnapshot();
 
     plugins.BroadcastProcessorEvent(
         ndPluginProcessor::EVENT_INTERFACES, &interfaces
