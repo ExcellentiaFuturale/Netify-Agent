@@ -290,11 +290,11 @@ struct __attribute__((packed)) nd_dns_header_t {
 ndCaptureThread::ndCaptureThread(
     unsigned cs_type,
     int16_t cpu,
-    ndInterface& iface,
+    nd_iface_ptr& iface,
     const nd_detection_threads &threads_dpi,
     ndDNSHintCache *dhc,
     uint8_t private_addr)
-    : ndThread(iface.ifname, (long)cpu, /* IPC? */ false),
+    : ndThread(iface->ifname, (long)cpu, /* IPC? */ false),
     ndInstanceClient(),
     dl_type(0), cs_type(cs_type),
     iface(iface),
@@ -305,7 +305,7 @@ ndCaptureThread::ndCaptureThread(
     capture_state = STATE_INIT;
 
     if (ndGC_REPLAY_DELAY &&
-        ndCT_TYPE(iface.capture_type) != ndCT_PCAP_OFFLINE) {
+        ndCT_TYPE(iface->capture_type) != ndCT_PCAP_OFFLINE) {
         nd_printf(
             "%s: WARNING: replay delay enabled for online capture!",
             tag.c_str()
@@ -1148,7 +1148,7 @@ nd_process_ip:
             if (++dpi_thread_id == (int16_t)threads_dpi.size()) dpi_thread_id = 0;
         }
 
-        nd_detection_threads::const_iterator idpi = threads_dpi.find(nf->dpi_thread_id);
+        auto idpi = threads_dpi.find(nf->dpi_thread_id);
 
         if (idpi != threads_dpi.end()) {
             idpi->second->QueuePacket(nf, packet,
@@ -1157,19 +1157,25 @@ nd_process_ip:
                 packet->caplen - l2_len
             );
 
-            // Hand over ownership to the DPI packet queue
+            // Hand over packet ownership to the DPI queue
             packet = NULL;
         }
         else {
-            nd_dprintf("ERROR: CPU thread ID not found: %hd\n", nf->dpi_thread_id);
-            throw ndCaptureThreadException("CPU thread ID not found!");
+            nd_dprintf(
+                "ERROR: detection thread ID not found: %hd\n",
+                nf->dpi_thread_id
+            );
+            throw ndCaptureThreadException(
+                "detection thread ID not found!"
+            );
         }
     }
 
     return packet;
 }
 
-bool ndCaptureThread::ProcessDNSPacket(nd_flow_ptr& flow, const uint8_t *pkt, uint16_t pkt_len, uint16_t proto)
+bool ndCaptureThread::ProcessDNSPacket(
+    nd_flow_ptr& flow, const uint8_t *pkt, uint16_t pkt_len, uint16_t proto)
 {
     ns_rr rr;
     const char *host = NULL;

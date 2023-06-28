@@ -270,7 +270,7 @@ static int ndCaptureNFQueue_Callback(
 
 ndCaptureNFQueue::ndCaptureNFQueue(
     int16_t cpu,
-    ndInterface& iface,
+    nd_iface_ptr& iface,
     const nd_detection_threads &threads_dpi,
     unsigned instance_id,
     ndDNSHintCache *dhc,
@@ -287,7 +287,7 @@ ndCaptureNFQueue::ndCaptureNFQueue(
 
     tag.append("#" + to_string(instance_id));
 
-    queue_id = iface.config.nfq->queue_id + instance_id;
+    queue_id = iface->config_nfq.queue_id + instance_id;
 
     nl = mnl_socket_open(NETLINK_NETFILTER);
 

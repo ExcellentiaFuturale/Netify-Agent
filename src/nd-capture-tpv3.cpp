@@ -159,7 +159,7 @@ class ndPacketRing
 {
 public:
     ndPacketRing(const string &ifname,
-    const nd_config_tpv3 *config, ndPacketStats *stats);
+    const nd_config_tpv3 &config, ndPacketStats *stats);
 
     virtual ~ndPacketRing();
 
@@ -232,7 +232,7 @@ size_t ndPacketRingBlock::ProcessPackets(ndPacketRing *ring,
 }
 
 ndPacketRing::ndPacketRing(const string &ifname,
-    const nd_config_tpv3 *config, ndPacketStats *stats)
+    const nd_config_tpv3 &config, ndPacketStats *stats)
     : ifname(ifname), sd(-1), buffer(nullptr),
     tp_hdr_len(0), tp_reserved(0),
     tp_frame_size(0), tp_ring_size(0),
@@ -310,9 +310,9 @@ ndPacketRing::ndPacketRing(const string &ifname,
         }
     }
 #ifdef PACKET_FANOUT
-    if (config->fanout_mode != ndFOM_DISABLED) {
+    if (config.fanout_mode != ndFOM_DISABLED) {
 
-        switch (config->fanout_mode) {
+        switch (config.fanout_mode) {
         case ndFOM_HASH:
 #ifdef PACKET_FANOUT_HASH
             so_uintval = PACKET_FANOUT_HASH;
@@ -362,7 +362,7 @@ ndPacketRing::ndPacketRing(const string &ifname,
             throw ndCaptureThreadException("invalid fanout mode");
         }
 #ifdef PACKET_FANOUT_FLAG_DEFRAG
-        if (config->fanout_flags & ndFOF_DEFRAG)
+        if (config.fanout_flags & ndFOF_DEFRAG)
             so_uintval |= PACKET_FANOUT_FLAG_DEFRAG;
 #else
         nd_dprintf("%s: PACKET_FANOUT_FLAG_DEFRAG not supported.\n",
@@ -370,7 +370,7 @@ ndPacketRing::ndPacketRing(const string &ifname,
         );
 #endif
 #ifdef PACKET_FANOUT_FLAG_ROLLOVER
-        if (config->fanout_flags & ndFOF_ROLLOVER)
+        if (config.fanout_flags & ndFOF_ROLLOVER)
             so_uintval |= PACKET_FANOUT_FLAG_ROLLOVER;
 #else
         nd_dprintf("%s: PACKET_FANOUT_FLAG_ROLLOVER not supported.\n",
@@ -415,9 +415,9 @@ ndPacketRing::ndPacketRing(const string &ifname,
         throw ndCaptureThreadException("unexpected reserved VLAN TAG size");
     }
 
-    tp_req.tp_block_size = config->rb_block_size;
-    tp_req.tp_frame_size = config->rb_frame_size;
-    tp_req.tp_block_nr = config->rb_blocks;
+    tp_req.tp_block_size = config.rb_block_size;
+    tp_req.tp_frame_size = config.rb_frame_size;
+    tp_req.tp_block_nr = config.rb_blocks;
     tp_req.tp_frame_nr =
         (tp_req.tp_block_size * tp_req.tp_block_nr) /
             tp_req.tp_frame_size;
@@ -609,7 +609,7 @@ ndPacket *ndPacketRing::CopyPacket(const void *entry,
 
 ndCaptureTPv3::ndCaptureTPv3(
     int16_t cpu,
-    ndInterface& iface,
+    nd_iface_ptr& iface,
     const nd_detection_threads &threads_dpi,
     ndDNSHintCache *dhc,
     uint8_t private_addr)
@@ -639,7 +639,7 @@ void *ndCaptureTPv3::Entry(void)
     fd_set fds_read;
 
     ndPacketRing *_ring = new ndPacketRing(
-        iface.ifname, iface.config.tpv3, &stats
+        iface->ifname, iface->config_tpv3, &stats
     );
     if (_ring == nullptr)
         throw runtime_error(strerror(ENOMEM));
@@ -657,7 +657,7 @@ void *ndCaptureTPv3::Entry(void)
     int rc = 0;
 
     vector<ndPacket *> pkt_queue;
-    pkt_queue.reserve(iface.config.tpv3->rb_blocks);
+    pkt_queue.reserve(iface->config_tpv3.rb_blocks);
 
     capture_state = STATE_ONLINE;
 

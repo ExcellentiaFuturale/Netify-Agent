@@ -30,7 +30,7 @@ public:
     ndCaptureThread(
         unsigned cs_type,
         int16_t cpu,
-        ndInterface& iface,
+        nd_iface_ptr& iface,
         const nd_detection_threads &threads_dpi,
         ndDNSHintCache *dhc = NULL,
         uint8_t private_addr = 0);
@@ -56,7 +56,7 @@ protected:
     int dl_type;
     unsigned cs_type;
 
-    ndInterface& iface;
+    nd_iface_ptr iface;
     ndFlow flow;
 
     time_t tv_epoch;

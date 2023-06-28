@@ -910,12 +910,12 @@ void ndDetectionThread::ProcessFlow(ndDetectionQueueEntry *entry)
         if (type != ndAddr::atOTHER ||
             mac == nullptr || ip == nullptr) continue;
 
-        ndEF->iface.PushEndpoint(*mac, *ip);
+        ndEF->iface->PushEndpoint(*mac, *ip);
     }
 
 #ifdef _ND_USE_CONNTRACK
     if (thread_conntrack != NULL &&
-        ndEF->iface.role != ndIR_LAN) {
+        ndEF->iface->role != ndIR_LAN) {
 
         if ((ndEF->lower_type == ndAddr::atLOCAL &&
             ndEF->upper_type == ndAddr::atOTHER ) ||

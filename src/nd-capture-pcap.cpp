@@ -113,21 +113,21 @@ class ndInstanceStatus;
 
 ndCapturePcap::ndCapturePcap(
     int16_t cpu,
-    ndInterface& iface,
+    nd_iface_ptr& iface,
     const nd_detection_threads &threads_dpi,
     ndDNSHintCache *dhc,
     uint8_t private_addr)
     : ndCaptureThread(
-        iface.capture_type,
+        iface->capture_type,
         cpu, iface, threads_dpi, dhc, private_addr
     ),
     pcap(nullptr), pcap_fd(-1),
     pkt_header(nullptr), pkt_data(nullptr),
     pcs_last{0}
 {
-    if (ndCT_TYPE(iface.capture_type) == ndCT_PCAP_OFFLINE) {
+    if (ndCT_TYPE(iface->capture_type) == ndCT_PCAP_OFFLINE) {
         nd_dprintf("%s: capture file: %s\n",
-            tag.c_str(), iface.config.pcap->capture_filename.c_str()
+            tag.c_str(), iface->config_pcap.capture_filename.c_str()
         );
     }
 
@@ -212,7 +212,7 @@ void *ndCapturePcap::Entry(void)
 
                 if (rc == -1) {
                     nd_printf("%s: %s.\n", tag.c_str(), pcap_geterr(pcap));
-                    if (ndCT_TYPE(iface.capture_type) == ndCT_PCAP_OFFLINE)
+                    if (ndCT_TYPE(iface->capture_type) == ndCT_PCAP_OFFLINE)
                         Terminate();
                     else {
                         pcap_close(pcap);
@@ -222,14 +222,14 @@ void *ndCapturePcap::Entry(void)
                 }
                 else if (rc == -2) {
                     nd_dprintf("%s: end of capture file: %s\n", tag.c_str(),
-                        iface.config.pcap->capture_filename.c_str()
+                        iface->config_pcap.capture_filename.c_str()
                     );
                     Terminate();
                 }
             }
         }
         else if (! ShouldTerminate()) {
-            if (ndCT_TYPE(iface.capture_type) != ndCT_PCAP_OFFLINE && (
+            if (ndCT_TYPE(iface->capture_type) != ndCT_PCAP_OFFLINE && (
                 nd_ifreq(tag, SIOCGIFFLAGS, &ifr) == -1 ||
                 ! (ifr.ifr_flags & IFF_UP))) {
 
@@ -275,12 +275,12 @@ pcap_t *ndCapturePcap::OpenCapture(void)
 
     memset(pcap_errbuf, 0, PCAP_ERRBUF_SIZE);
 
-    if (ndCT_TYPE(iface.capture_type) == ndCT_PCAP_OFFLINE) {
+    if (ndCT_TYPE(iface->capture_type) == ndCT_PCAP_OFFLINE) {
         if ((pcap_new = pcap_open_offline(
-            iface.config.pcap->capture_filename.c_str(), pcap_errbuf)) != nullptr) {
+            iface->config_pcap.capture_filename.c_str(), pcap_errbuf)) != nullptr) {
             tv_epoch = time(nullptr);
             nd_dprintf("%s: reading from capture file: %s: v%d.%d\n",
-                tag.c_str(), iface.config.pcap->capture_filename.c_str(),
+                tag.c_str(), iface->config_pcap.capture_filename.c_str(),
                 pcap_major_version(pcap_new), pcap_minor_version(pcap_new));
         }
     }
@@ -321,7 +321,7 @@ pcap_t *ndCapturePcap::OpenCapture(void)
     else {
         capture_state = STATE_ONLINE;
 
-        if (ndCT_TYPE(iface.capture_type) != ndCT_PCAP_OFFLINE) {
+        if (ndCT_TYPE(iface->capture_type) != ndCT_PCAP_OFFLINE) {
             if (pcap_setnonblock(pcap_new, 1, pcap_errbuf) == PCAP_ERROR)
                 nd_printf("%s: pcap_setnonblock: %s\n", tag.c_str(), pcap_errbuf);
         }
@@ -356,7 +356,7 @@ pcap_t *ndCapturePcap::OpenCapture(void)
 void ndCapturePcap::GetCaptureStats(ndPacketStats &stats)
 {
     if (pcap != nullptr &&
-        ndCT_TYPE(iface.capture_type) != ndCT_PCAP_OFFLINE) {
+        ndCT_TYPE(iface->capture_type) != ndCT_PCAP_OFFLINE) {
 
         struct pcap_stat pcs;
         memset(&pcs, 0, sizeof(struct pcap_stat));
