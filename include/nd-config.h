@@ -133,12 +133,12 @@ typedef struct nd_config_pcap_t
 
 typedef struct nd_config_tpv3_t
 {
-    unsigned fanout_mode;
-    unsigned fanout_flags;
-    unsigned fanout_instances;
-    unsigned rb_block_size;
-    unsigned rb_frame_size;
-    unsigned rb_blocks;
+    unsigned fanout_mode{ndFOM_DISABLED};
+    unsigned fanout_flags{ndFOF_NONE};
+    unsigned fanout_instances{0};
+    unsigned rb_block_size{ND_TPV3_RB_BLOCK_SIZE};
+    unsigned rb_frame_size{ND_TPV3_RB_FRAME_SIZE};
+    unsigned rb_blocks{ND_TPV3_RB_BLOCKS};
 
     inline bool operator==(const struct nd_config_tpv3_t &i) const {
         if (fanout_mode != i.fanout_mode) return false;
@@ -153,8 +153,8 @@ typedef struct nd_config_tpv3_t
 
 typedef struct nd_config_nfq_t
 {
-    unsigned queue_id;
-    unsigned instances;
+    unsigned queue_id{0};
+    unsigned instances{0};
 
     inline bool operator==(const struct nd_config_nfq_t &i) const {
         return (queue_id == i.queue_id && instances == instances);
@@ -262,6 +262,7 @@ public:
         return config;
     }
 
+    bool Open(const string &filename);
     void Close(void);
 
     bool Load(const string &filename);
@@ -278,7 +279,7 @@ public:
 
     bool ForceReset(void);
 
-    bool LoadInterfaces(void);
+    bool LoadInterfaces(const string &filename);
 
     bool AddInterface(const string &iface, nd_interface_role role,
         unsigned type = ndCT_NONE, void *config = nullptr);

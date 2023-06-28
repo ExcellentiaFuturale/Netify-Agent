@@ -149,14 +149,6 @@ ndGlobalConfig::ndGlobalConfig() :
     fhc_save(ndFHC_PERSISTENT),
     capture_type(ndCT_NONE),
     capture_read_timeout(ND_CAPTURE_READ_TIMEOUT),
-    tpv3_defaults {
-        ndFOM_DISABLED, // fanout_mode
-        ndFOF_NONE, // fanout_flags
-        0, // fanout_instances
-        ND_TPV3_RB_BLOCK_SIZE, // rb_block_size
-        ND_TPV3_RB_FRAME_SIZE, // rb_frame_size
-        ND_TPV3_RB_BLOCKS // rb_blocks
-    },
     h_flow(stderr),
     ca_capture_base(0),
     ca_conntrack(-1),
@@ -196,6 +188,22 @@ ndGlobalConfig::~ndGlobalConfig()
     ClearInterfaces(true);
 }
 
+bool ndGlobalConfig::Open(const string &filename)
+{
+    if (reader == nullptr) {
+        reader = static_cast<void *>(new INIReader(filename));
+        if (reader == nullptr) {
+            fprintf(
+                stderr,
+                "Can not allocated reader: %s\n", strerror(ENOMEM)
+            );
+            return false;
+        }
+    }
+
+    return true;
+}
+
 void ndGlobalConfig::Close(void)
 {
     if (reader != nullptr) {
@@ -213,17 +221,7 @@ bool ndGlobalConfig::Load(const string &filename)
         return false;
     }
 
-    if (reader != nullptr)
-        delete static_cast<INIReader *>(reader);
-
-    reader = static_cast<void *>(new INIReader(filename));
-    if (reader == nullptr) {
-        fprintf(
-            stderr,
-            "Can not allocated reader: %s\n", strerror(ENOMEM)
-        );
-        return false;
-    }
+    if (! Open(filename)) return false;
 
     INIReader *r = static_cast<INIReader *>(reader);
 
@@ -522,9 +520,6 @@ bool ndGlobalConfig::Load(const string &filename)
     // Protocols section
     r->GetSection("protocols", protocols);
 
-    // Add static (non-command-line) capture interfaces
-    if (! LoadInterfaces()) return false;
-
     // Add plugins
     vector<string> files;
     if (nd_scan_dotd(path_plugins, files)) {
@@ -692,17 +687,20 @@ bool ndGlobalConfig::ForceReset(void)
     return success;
 }
 
-bool ndGlobalConfig::LoadInterfaces(void)
+bool ndGlobalConfig::LoadInterfaces(const string &filename)
 {
     ClearInterfaces();
 
+    if (! Open(filename)) return false;
+
     INIReader *config_reader = static_cast<INIReader *>(reader);
-    if (! LoadInterfaces(static_cast<void *>(config_reader))) return false;
+    if (! LoadInterfaces(
+        static_cast<void *>(config_reader))) return false;
 
     vector<string> files;
     if (nd_scan_dotd(path_interfaces, files)) {
-        for (auto &filename : files) {
-            INIReader r = INIReader(path_interfaces + "/" + filename);
+        for (auto &file : files) {
+            INIReader r = INIReader(path_interfaces + "/" + file);
 
             int rc = r.ParseError();
 
@@ -710,19 +708,20 @@ bool ndGlobalConfig::LoadInterfaces(void)
             case -1:
                 fprintf(stderr,
                     "Error opening interface configuration file: %s: %s\n",
-                    filename.c_str(), strerror(errno));
+                    file.c_str(), strerror(errno));
                 return false;
             case 0:
                 break;
             default:
                 fprintf(stderr,
                     "Error while parsing line #%d of interface file: %s\n",
-                    rc, filename.c_str()
+                    rc, file.c_str()
                 );
                 return false;
             }
 
-            if (! LoadInterfaces(static_cast<void *>(&r))) return false;
+            if (! LoadInterfaces(static_cast<void *>(&r)))
+                return false;
         }
     }
 
