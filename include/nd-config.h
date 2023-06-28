@@ -157,7 +157,7 @@ typedef struct nd_config_nfq_t
     unsigned instances{0};
 
     inline bool operator==(const struct nd_config_nfq_t &i) const {
-        return (queue_id == i.queue_id && instances == instances);
+        return (queue_id == i.queue_id && instances == i.instances);
     }
 } nd_config_nfq;
 
