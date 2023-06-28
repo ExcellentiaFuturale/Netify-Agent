@@ -108,7 +108,7 @@ public:
 class ndFlow : public ndSerializer
 {
 public:
-    ndInterface &iface;
+    nd_iface_ptr iface;
 
     int16_t dpi_thread_id;
 
@@ -300,8 +300,8 @@ public:
     uint16_t ndpi_risk_score_client;
     uint16_t ndpi_risk_score_server;
 
-    ndFlow(ndInterface &iface);
-    ndFlow(const ndFlow &flow);
+    ndFlow(nd_iface_ptr& iface);
+    ndFlow(const ndFlow& flow);
     virtual ~ndFlow();
 
     void Hash(const string &device, bool hash_mdata = false,
@@ -670,19 +670,6 @@ public:
             serialize(output, { "detection_packets" },
                 stats.detection_packets.load());
         }
-    }
-
-    inline bool operator==(const ndFlow &f) const {
-        return (
-            lower_addr == f.lower_addr &&
-            upper_addr == f.upper_addr
-        );
-    }
-
-    inline ndFlow& operator+=(const ndFlow &f)
-    {
-        stats += f.stats;
-        return *this;
     }
 
     ndFlowStats stats;
