@@ -829,8 +829,8 @@ size_t ndInterface::UpdateAddrs(ndInterfaces& interfaces)
 
     if (getifaddrs(&if_addrs) == 0) {
         for (auto &i : interfaces) {
-            i.second.addrs.Clear();
-            i.second.UpdateAddrs(if_addrs);
+            i.second->addrs.Clear();
+            i.second->UpdateAddrs(if_addrs);
         }
 
         freeifaddrs(if_addrs);

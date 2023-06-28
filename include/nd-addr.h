@@ -695,55 +695,32 @@ typedef unordered_set<ndAddr,
 class ndInterfaceAddr : public ndSerializer
 {
 public:
-    ndInterfaceAddr() : lock(nullptr) {
-        lock = new mutex;
-        if (lock == nullptr) {
-            throw ndSystemException(
-                __PRETTY_FUNCTION__, "new mutex", ENOMEM
-            );
-        }
-    }
+    ndInterfaceAddr() { }
 
-    ndInterfaceAddr(const ndAddr &a) : lock(nullptr) {
-        lock = new mutex;
-        if (lock == nullptr) {
-            throw ndSystemException(
-                __PRETTY_FUNCTION__, "new mutex", ENOMEM
-            );
-        }
-        Push(a);
-    }
+    ndInterfaceAddr(const ndAddr &a) { Push(a); }
 
     ndInterfaceAddr(const ndInterfaceAddr &iface) :
-        addrs(iface.addrs) {
-        lock = new mutex;
-        if (lock == nullptr) {
-            throw ndSystemException(
-                __PRETTY_FUNCTION__, "new mutex", ENOMEM
-            );
-        }
-    }
-
-    virtual ~ndInterfaceAddr() {
-        if (lock != nullptr) delete lock;
-    }
+        addrs(iface.addrs) { }
 
     inline void Clear(bool locked = true) {
-        if (locked) lock->lock();
-        addrs.clear();
-        if (locked) lock->unlock();
+        if (locked) {
+            lock_guard<mutex> ul(lock);
+            addrs.clear();
+        }
+        else
+            addrs.clear();
     }
 
     inline bool Push(const ndAddr &addr) {
-        lock_guard<mutex> ul(*lock);
+        lock_guard<mutex> ul(lock);
         auto result = addrs.insert(addr);
         return result.second;
     }
 
     template <class T>
-    void Encode(T &output, const string &key) const {
+    void Encode(T &output, const string &key) {
         if (addrs.empty()) return;
-        lock_guard<mutex> ul(*lock);
+        lock_guard<mutex> ul(lock);
         vector<string> addresses;
         for (auto& a : addrs)
             addresses.push_back(a.GetString());
@@ -751,9 +728,9 @@ public:
     }
 
     inline bool FindFirstOf(
-        sa_family_t family, ndAddr& addr) const {
+        sa_family_t family, ndAddr& addr) {
 
-        lock_guard<mutex> ul(*lock);
+        lock_guard<mutex> ul(lock);
         for (auto& it : addrs) {
             if (it.addr.ss.ss_family != family) continue;
             addr = it;
@@ -764,10 +741,10 @@ public:
 
     inline bool FindAllOf(
         const vector<sa_family_t> &families,
-        vector<string> &results) const {
+        vector<string> &results) {
 
         size_t count = results.size();
-        lock_guard<mutex> ul(*lock);
+        lock_guard<mutex> ul(lock);
 
         for (auto& it : addrs) {
             if (find_if(
@@ -785,13 +762,15 @@ public:
 
 protected:
     ndInterfaceAddrs addrs;
-    mutex *lock;
+    mutex lock;
 };
 
-typedef unordered_map<ndAddr, ndInterfaceAddr, ndAddr::ndAddrHash, ndAddr::ndAddrEqual> ndInterfaceEndpoints;
+typedef unordered_map<
+    ndAddr, ndInterfaceAddr, ndAddr::ndAddrHash,
+    ndAddr::ndAddrEqual> ndInterfaceEndpoints;
 
 class ndInterface;
-typedef map<string, ndInterface> ndInterfaces;
+typedef map<string, shared_ptr<ndInterface>> ndInterfaces;
 
 class ndInterface : public ndSerializer
 {
@@ -803,29 +782,13 @@ public:
         : ifname(ifname), ifname_peer(ifname),
         capture_type(capture_type), role(role),
         lock(nullptr) {
+
         endpoint_snapshot = false;
         lock = new mutex;
         if (lock == nullptr) {
             throw ndSystemException(
                 __PRETTY_FUNCTION__, "new mutex", ENOMEM
             );
-        }
-        switch (ndCT_TYPE(capture_type)) {
-        case ndCT_PCAP:
-            config.pcap = nullptr;
-            break;
-#if defined(_ND_USE_TPACKETV3)
-        case ndCT_TPV3:
-            config.tpv3 = nullptr;
-            break;
-#endif
-#if defined(_ND_USE_NFQUEUE)
-        case ndCT_NFQ:
-            config.nfq = nullptr;
-            break;
-#endif
-        default:
-            break;
         }
     }
 
@@ -842,16 +805,16 @@ public:
         }
         switch(ndCT_TYPE(capture_type)) {
         case ndCT_PCAP:
-            config.pcap = iface.config.pcap;
+            config_pcap = iface.config_pcap;
             break;
 #if defined(_ND_USE_TPACKETV3)
         case ndCT_TPV3:
-            config.tpv3 = iface.config.tpv3;
+            config_tpv3 = iface.config_tpv3;
             break;
 #endif
 #if defined(_ND_USE_NFQUEUE)
         case ndCT_NFQ:
-            config.nfq = iface.config.nfq;
+            config_nfq = iface.config_nfq;
             break;
 #endif
         default:
@@ -868,7 +831,7 @@ public:
     size_t UpdateAddrs(const struct ifaddrs *if_addrs);
 
     template <class T>
-    void Encode(T &output) const {
+    void Encode(T &output) {
 
         switch (role) {
         case ndIR_LAN:
@@ -889,7 +852,7 @@ public:
         case ndCT_PCAP_OFFLINE:
             serialize(output, { "capture_type" }, "PCAP");
             serialize(output, { "capture_file" },
-                config.pcap->capture_filename
+                config_pcap.capture_filename
             );
             break;
         case ndCT_TPV3:
@@ -915,7 +878,7 @@ public:
     }
 
     template <class T>
-    void EncodeAddrs(T &output, const vector<string> &keys, const string &delim = ",") const {
+    void EncodeAddrs(T &output, const vector<string> &keys, const string &delim = ",") {
         vector<string> ip_addrs;
         if (addrs.FindAllOf({ AF_INET, AF_INET6 }, ip_addrs))
             serialize(output, keys, ip_addrs, delim);
@@ -952,14 +915,14 @@ public:
     }
 
     template <class T>
-    inline void EncodeEndpoints(bool snapshot, T &output) const {
+    inline void EncodeEndpoints(bool snapshot, T &output) {
         lock_guard<mutex> ul(*lock);
         for (auto &i : endpoints[snapshot])
             i.second.Encode(output,  i.first.GetString());
     }
 
     inline void GetEndpoints(bool snapshot,
-        unordered_map<string, unordered_set<string>> &output) const {
+        unordered_map<string, unordered_set<string>> &output) {
         lock_guard<mutex> ul(*lock);
         for (auto& i : endpoints[snapshot]) {
             vector<string> ip_addrs;
@@ -971,16 +934,16 @@ public:
         }
     }
     inline void SetConfig(const nd_config_pcap *pcap) {
-        config.pcap = pcap;
+        config_pcap = *pcap;
     }
 #if defined(_ND_USE_TPACKETV3)
     inline void SetConfig(const nd_config_tpv3 *tpv3) {
-        config.tpv3 = tpv3;
+        config_tpv3 = *tpv3;
     }
 #endif
 #if defined(_ND_USE_NFQUEUE)
     inline void SetConfig(const nd_config_nfq *nfq) {
-        config.nfq = nfq;
+        config_nfq = *nfq;
     }
 #endif
 
@@ -992,43 +955,17 @@ public:
         switch (ndCT_TYPE(capture_type)) {
         case ndCT_PCAP:
         case ndCT_PCAP_OFFLINE:
-            if (config.pcap == nullptr && i.config.pcap == nullptr)
-                return true;
-            if (config.pcap == nullptr && i.config.pcap != nullptr)
-                return false;
-            if (config.pcap != nullptr && i.config.pcap == nullptr)
-                return false;
-            if (! (*config.pcap == *i.config.pcap))
-                return false;
-            break;
+            return (config_pcap == i.config_pcap);
 #if defined(_ND_USE_TPACKETV3)
         case ndCT_TPV3:
-            if (config.tpv3 == nullptr && i.config.tpv3 == nullptr)
-                return true;
-            if (config.tpv3 == nullptr && i.config.tpv3 != nullptr)
-                return false;
-            if (config.tpv3 != nullptr && i.config.tpv3 == nullptr)
-                return false;
-            if (! (*config.tpv3 == *i.config.tpv3))
-                return false;
+            return (config_tpv3 == i.config_tpv3);
 #endif
 #if defined(_ND_USE_NFQUEUE)
         case ndCT_NFQ:
-            if (config.nfq == nullptr && i.config.nfq == nullptr)
-                return true;
-            if (config.nfq == nullptr && i.config.nfq != nullptr)
-                return false;
-            if (config.nfq != nullptr && i.config.nfq == nullptr)
-                return false;
-            if (! (*config.nfq == *i.config.nfq))
-                return false;
+            return (config_nfq == i.config_nfq);
 #endif
         }
         return true;
-    }
-
-    inline bool operator<(const ndInterface &i) const {
-        return ifname < i.ifname;
     }
 
     string ifname;
@@ -1036,15 +973,13 @@ public:
     unsigned capture_type;
     nd_interface_role role;
 
-    union {
-        const nd_config_pcap *pcap;
+    nd_config_pcap config_pcap;
 #if defined(_ND_USE_TPACKETV3)
-        const nd_config_tpv3 *tpv3;
+    nd_config_tpv3 config_tpv3;
 #endif
 #if defined(_ND_USE_NFQUEUE)
-        const nd_config_nfq *nfq;
+    nd_config_nfq config_nfq;
 #endif
-    } config;
 
 protected:
     ndInterfaceAddr addrs;
@@ -1052,6 +987,8 @@ protected:
     atomic_bool endpoint_snapshot;
     mutex *lock;
 };
+
+typedef shared_ptr<ndInterface> nd_iface_ptr;
 
 #endif // _ND_ADDR_H
 // vi: expandtab shiftwidth=4 softtabstop=4 tabstop=4
