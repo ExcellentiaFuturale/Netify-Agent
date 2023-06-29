@@ -141,7 +141,7 @@ offline0: i4p-u---d--r---- TCP [OR] 34.199.52.240:443 <-- [L] 172.16.42.216:3836
         : D: cognito-identity.us-east-1.amazonaws.com
         : SNI: cognito-identity.us-east-1.amazonaws.com
 
-offline0: i4p-u---d--r-FA- TCP [OR] 34.199.52.240:443 <-- [L] 172.16.42.216:38363
+offline0: i4p-u---d--r---- TCP [OR] 34.199.52.240:443 <-- [L] 172.16.42.216:38363
         : HTTP/S.netify.amazon-aws
         : D: cognito-identity.us-east-1.amazonaws.com
         : SNI: cognito-identity.us-east-1.amazonaws.com CN: cognito-identity.us-east-1.amazonaws.com
@@ -172,22 +172,22 @@ offline0: i4p-u---d--r---- TCP [OR] 52.94.232.134:443 <-- [L] 172.16.42.216:4566
         : SNI: pitangui.amazon.com CN: pitangui.amazon.com
         : IDN: C=US, O=Symantec Corporation, OU=Symantec Trust Network, CN=Symantec Class 3 Secure Server CA - G4 SDN: C=US, ST=Washington, L=Seattle, O=Amazon.com, Inc., CN=pitangui.amazon.com
 
-offline0: i4p-----d--r-FA- TCP [OR] 52.94.232.134:443 <-- [L] 172.16.42.216:45662
+offline0: i4p-----d--r---- TCP [OR] 52.94.232.134:443 <-- [L] 172.16.42.216:45662
         : HTTP/S.netify.amazon-alexa
         : D: pitangui.amazon.com
         : SNI: pitangui.amazon.com
 
-offline0: i4p-----d--r-FA- TCP [OR] 52.94.232.134:443 <-- [L] 172.16.42.216:45663
+offline0: i4p-----d--r---- TCP [OR] 52.94.232.134:443 <-- [L] 172.16.42.216:45663
         : HTTP/S.netify.amazon-alexa
         : D: pitangui.amazon.com
         : SNI: pitangui.amazon.com
 
-offline0: i4p-u---d--r-FA- TCP [OR] 52.94.232.134:443 <-- [L] 172.16.42.216:45663
+offline0: i4p-u---d--r---- TCP [OR] 52.94.232.134:443 <-- [L] 172.16.42.216:45663
         : HTTP/S.netify.amazon-alexa
         : D: pitangui.amazon.com
         : SNI: pitangui.amazon.com
 
-offline0: i4p-u---d--r-FA- TCP [OR] 52.94.232.134:443 <-- [L] 172.16.42.216:45662
+offline0: i4p-u---d--r---- TCP [OR] 52.94.232.134:443 <-- [L] 172.16.42.216:45662
         : HTTP/S.netify.amazon-alexa
         : D: pitangui.amazon.com
         : SNI: pitangui.amazon.com
@@ -200,7 +200,7 @@ offline0: i4p--------r---- UDP [L] 172.16.42.1:53 <-- [OL] 172.16.42.216:52077
         : DNS.netify.amazon
         : H: www.amazon.com
 
-offline0: i4p-----d--r-FA- TCP [OR] 54.239.24.186:443 <-- [L] 172.16.42.216:34019
+offline0: i4p-----d--r---- TCP [OR] 54.239.24.186:443 <-- [L] 172.16.42.216:34019
         : HTTP/S.netify.amazon-aws
         : D: mobileanalytics.us-east-1.amazonaws.com
         : SNI: mobileanalytics.us-east-1.amazonaws.com
@@ -227,7 +227,7 @@ offline0: i4p-u---d--r---- TCP [OR] 52.85.209.216:443 <-- [L] 172.16.42.216:5441
         : SNI: www.amazon.com CN: www.amazon.com
         : IDN: C=US, O=Symantec Corporation, OU=Symantec Trust Network, CN=Symantec Class 3 Secure Server CA - G4 SDN: C=US, ST=Washington, L=Seattle, O=Amazon.com, Inc., CN=www.amazon.com
 
-offline0: i4p-u---d--r-FA- TCP [OR] 54.239.24.186:443 <-- [L] 172.16.42.216:34019
+offline0: i4p-u---d--r---- TCP [OR] 54.239.24.186:443 <-- [L] 172.16.42.216:34019
         : HTTP/S.netify.amazon-aws
         : D: mobileanalytics.us-east-1.amazonaws.com
         : SNI: mobileanalytics.us-east-1.amazonaws.com CN: mobileanalytics.us-east-1.amazonaws.com
@@ -237,49 +237,49 @@ offline0: i4p--------r---- UDP [L] 172.16.42.1:53 <-- [OL] 172.16.42.216:43350
         : DNS.netify.amazon
         : H: fls-na.amazon.com
 
-offline0: i4p-----d--r-FA- TCP [OR] 72.21.206.135:443 <-- [L] 172.16.42.216:42130
+offline0: i4p-----d--r---- TCP [OR] 72.21.206.135:443 <-- [L] 172.16.42.216:42130
         : HTTP/S.netify.amazon
         : D: fls-na.amazon.com
         : SNI: fls-na.amazon.com
 
-offline0: i4p-----d--r-FA- TCP [OR] 72.21.206.135:443 <-- [L] 172.16.42.216:42129
+offline0: i4p-----d--r---- TCP [OR] 72.21.206.135:443 <-- [L] 172.16.42.216:42129
         : HTTP/S.netify.amazon
         : D: fls-na.amazon.com
         : SNI: fls-na.amazon.com
 
-offline0: i4p-u---d--r-FA- TCP [OR] 72.21.206.135:443 <-- [L] 172.16.42.216:42129
+offline0: i4p-u---d--r---- TCP [OR] 72.21.206.135:443 <-- [L] 172.16.42.216:42129
         : HTTP/S.netify.amazon
         : D: fls-na.amazon.com
         : SNI: fls-na.amazon.com CN: fls-na.amazon.com
         : IDN: C=US, O=Symantec Corporation, OU=Symantec Trust Network, CN=Symantec Class 3 Secure Server CA - G4 SDN: C=US, ST=Washington, L=Seattle, O=Amazon.com, Inc., CN=fls-na.amazon.com
 
-offline0: i4p-----d--r-FA- TCP [OR] 52.94.232.134:443 <-- [L] 172.16.42.216:45673
+offline0: i4p-----d--r---- TCP [OR] 52.94.232.134:443 <-- [L] 172.16.42.216:45673
         : HTTP/S.netify.amazon-alexa
         : D: pitangui.amazon.com
         : SNI: pitangui.amazon.com
 
-offline0: i4p-----d--r-FA- TCP [OR] 52.94.232.134:443 <-- [L] 172.16.42.216:45674
+offline0: i4p-----d--r---- TCP [OR] 52.94.232.134:443 <-- [L] 172.16.42.216:45674
         : HTTP/S.netify.amazon-alexa
         : D: pitangui.amazon.com
         : SNI: pitangui.amazon.com
 
-offline0: i4p-u---d--r-FA- TCP [OR] 52.94.232.134:443 <-- [L] 172.16.42.216:45673
+offline0: i4p-u---d--r---- TCP [OR] 52.94.232.134:443 <-- [L] 172.16.42.216:45673
         : HTTP/S.netify.amazon-alexa
         : D: pitangui.amazon.com
         : SNI: pitangui.amazon.com
 
-offline0: i4p-u---d--r-FA- TCP [OR] 52.94.232.134:443 <-- [L] 172.16.42.216:45674
+offline0: i4p-u---d--r---- TCP [OR] 52.94.232.134:443 <-- [L] 172.16.42.216:45674
         : HTTP/S.netify.amazon-alexa
         : D: pitangui.amazon.com
         : SNI: pitangui.amazon.com
 
-offline0: i4p-----d--r-FA- TCP [OR] 52.94.232.134:80 <-- [L] 172.16.42.216:49589
+offline0: i4p-----d--r---- TCP [OR] 52.94.232.134:80 <-- [L] 172.16.42.216:49589
         : HTTP.netify.amazon-alexa
         : D: pitangui.amazon.com H: alexa.amazon.com
         : HTTP/UA: Mozilla/5.0 (Linux; Android 5.1.1; LGLS751 Build/LMY47V; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/56.0.2924.87 Mobile Safari/537.36 PitanguiBridge/1.16.4.5-[MANUFACTURER=LGE][RELEASE=5.1.1][BRAND=lge][SDK=22][MODEL=LGLS751]
         : URL: alexa.amazon.com/lib/bootstrap/img/glyphicons-halflings.png
 
-offline0: i4p-----d--r-FA- TCP [OR] 52.94.232.134:443 <-- [L] 172.16.42.216:45676
+offline0: i4p-----d--r---- TCP [OR] 52.94.232.134:443 <-- [L] 172.16.42.216:45676
         : HTTP/S.netify.amazon-alexa
         : D: pitangui.amazon.com
         : SNI: pitangui.amazon.com
@@ -671,12 +671,12 @@ offline0: i4p--------r---- UDP [L] 172.16.42.1:53 <-- [OL] 172.16.42.216:41639
         : DNS.netify.amazon-alexa
         : H: dp-gw-na-js.amazon.com
 
-offline0: i4p-----d--r-FA- TCP [L] 172.16.42.216:44001 --> [OR] 176.32.101.52:443
+offline0: i4p-----d--r---- TCP [L] 172.16.42.216:44001 --> [OR] 176.32.101.52:443
         : HTTP/S.netify.amazon-alexa
         : D: dp-gw-na.amazon.com H: dp-gw-na-js.amazon.com
         : SNI: dp-gw-na-js.amazon.com
 
-offline0: i4p-u---d--r-FA- TCP [L] 172.16.42.216:44001 --> [OR] 176.32.101.52:443
+offline0: i4p-u---d--r---- TCP [L] 172.16.42.216:44001 --> [OR] 176.32.101.52:443
         : HTTP/S.netify.amazon-alexa
         : D: dp-gw-na.amazon.com H: dp-gw-na-js.amazon.com
         : SNI: dp-gw-na-js.amazon.com CN: dp-gw-na.amazon.com
@@ -1191,7 +1191,7 @@ offline0: i4pc-gx-d----FA- TCP [OR] 54.239.24.186:443 <-- [L] 172.16.42.216:3407
         : D: mobileanalytics.us-east-1.amazonaws.com
         : SNI: mobileanalytics.us-east-1.amazonaws.com
 
-offline0: i4pc-gx--------- TCP [L] 172.16.42.216:38391 --> [OL] 192.168.11.1:8080
+offline0: i4pc-gxX-------- TCP [L] 172.16.42.216:38391 --> [OL] 192.168.11.1:8080
         : HTTP/Proxy
 
 offline0: i4pc-gx-d----FA- TCP [OR] 54.239.29.253:443 <-- [L] 172.16.42.216:40855
@@ -1209,7 +1209,7 @@ offline0: i4pc-gx-d----FA- TCP [OR] 54.239.24.180:443 <-- [L] 172.16.42.216:3755
         : D: mobileanalytics.us-east-1.amazonaws.com
         : SNI: mobileanalytics.us-east-1.amazonaws.com
 
-offline0: i4pc-gxXd----FA- TCP [OR] 54.239.28.178:443 <-- [L] 172.16.42.216:50798
+offline0: i4pc-gx-d----FA- TCP [OR] 54.239.28.178:443 <-- [L] 172.16.42.216:50798
         : HTTP/S.netify.amazon-alexa
         : D: pitangui.amazon.com
         : SNI: pitangui.amazon.com

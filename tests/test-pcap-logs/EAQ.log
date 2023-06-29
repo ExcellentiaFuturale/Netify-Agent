@@ -1,4 +1,4 @@
-offline0: i4p--------r-FA- TCP [L] 10.8.0.1:53497 --> [OR] 173.194.119.48:80
+offline0: i4p--------r---- TCP [L] 10.8.0.1:53497 --> [OR] 173.194.119.48:80
         : HTTP.netify.google
         : H: www.google.com
         : HTTP/UA: test

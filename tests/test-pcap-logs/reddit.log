@@ -3,7 +3,7 @@ offline0: i6p--------r---- TCP [OR] 2a00:1450:4007:80a::200a:443 <-- [L] 2a01:cb
         : H: safebrowsing.googleapis.com
         : SNI: safebrowsing.googleapis.com
 
-offline0: i6p--------r-FA- TCP [OR] 2a00:1450:4007:80a::200a:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:40030
+offline0: i6p--------r---- TCP [OR] 2a00:1450:4007:80a::200a:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:40030
         : HTTP/S.netify.google
         : H: safebrowsing.googleapis.com
         : SNI: safebrowsing.googleapis.com
@@ -24,7 +24,7 @@ offline0: i6p-u------r---- TCP [OR] 64:ff9b::9765:798c:443 <-- [L] 2a01:cb01:204
         : SNI: www.reddit.com
         : IDN: C=US, O=DigiCert Inc, CN=DigiCert SHA2 Secure Server CA SDN: C=US, ST=California, L=San Francisco, O=Reddit Inc., CN=*.reddit.com
 
-offline0: i6p-u------r-FA- TCP [OR] 2a00:1450:4007:80a::200a:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:40030
+offline0: i6p-u------r---- TCP [OR] 2a00:1450:4007:80a::200a:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:40030
         : HTTP/S.netify.google
         : H: safebrowsing.googleapis.com
         : SNI: safebrowsing.googleapis.com
@@ -45,27 +45,27 @@ offline0: i6p--------r---- TCP [OR] 64:ff9b::9765:798c:443 <-- [L] 2a01:cb01:204
         : H: www.redditstatic.com
         : SNI: www.redditstatic.com
 
-offline0: i6p--------r-FA- TCP [OR] 64:ff9b::9765:798c:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:56562
+offline0: i6p--------r---- TCP [OR] 64:ff9b::9765:798c:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:56562
         : HTTP/S.netify.reddit
         : H: www.redditstatic.com
         : SNI: www.redditstatic.com
 
-offline0: i6p--------r-FA- TCP [OR] 64:ff9b::9765:798c:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:56570
+offline0: i6p--------r---- TCP [OR] 64:ff9b::9765:798c:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:56570
         : HTTP/S.netify.reddit
         : H: www.redditstatic.com
         : SNI: www.redditstatic.com
 
-offline0: i6p--------r-FA- TCP [OR] 64:ff9b::9765:798c:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:56568
+offline0: i6p--------r---- TCP [OR] 64:ff9b::9765:798c:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:56568
         : HTTP/S.netify.reddit
         : H: www.redditstatic.com
         : SNI: www.redditstatic.com
 
-offline0: i6p--------r-FA- TCP [OR] 64:ff9b::9765:798c:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:56566
+offline0: i6p--------r---- TCP [OR] 64:ff9b::9765:798c:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:56566
         : HTTP/S.netify.reddit
         : H: www.redditstatic.com
         : SNI: www.redditstatic.com
 
-offline0: i6p--------r-FA- TCP [OR] 64:ff9b::9765:798c:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:56572
+offline0: i6p--------r---- TCP [OR] 64:ff9b::9765:798c:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:56572
         : HTTP/S.netify.reddit
         : H: www.redditstatic.com
         : SNI: www.redditstatic.com
@@ -75,12 +75,12 @@ offline0: i6p--------r---- TCP [OR] 64:ff9b::9765:798c:443 <-- [L] 2a01:cb01:204
         : H: styles.redditmedia.com
         : SNI: styles.redditmedia.com
 
-offline0: i6p--------r-FA- TCP [OR] 64:ff9b::9765:798c:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:56576
+offline0: i6p--------r---- TCP [OR] 64:ff9b::9765:798c:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:56576
         : HTTP/S.netify.reddit
         : H: styles.redditmedia.com
         : SNI: styles.redditmedia.com
 
-offline0: i6p--------r-FA- TCP [OR] 64:ff9b::9765:798c:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:56574
+offline0: i6p--------r---- TCP [OR] 64:ff9b::9765:798c:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:56574
         : HTTP/S.netify.reddit
         : H: styles.redditmedia.com
         : SNI: styles.redditmedia.com
@@ -90,22 +90,22 @@ offline0: i6p--------r---- TCP [OR] 64:ff9b::9765:798c:443 <-- [L] 2a01:cb01:204
         : H: preview.redd.it
         : SNI: preview.redd.it
 
-offline0: i6p--------r-FA- TCP [OR] 64:ff9b::9765:798c:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:56580
+offline0: i6p--------r---- TCP [OR] 64:ff9b::9765:798c:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:56580
         : HTTP/S.netify.reddit
         : H: styles.redditmedia.com
         : SNI: styles.redditmedia.com
 
-offline0: i6p--------r-FA- TCP [OR] 64:ff9b::9765:798c:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:56584
+offline0: i6p--------r---- TCP [OR] 64:ff9b::9765:798c:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:56584
         : HTTP/S.netify.reddit
         : H: preview.redd.it
         : SNI: preview.redd.it
 
-offline0: i6p--------r-FA- TCP [OR] 64:ff9b::9765:798c:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:56586
+offline0: i6p--------r---- TCP [OR] 64:ff9b::9765:798c:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:56586
         : HTTP/S.netify.reddit
         : H: preview.redd.it
         : SNI: preview.redd.it
 
-offline0: i6p--------r-FA- TCP [OR] 64:ff9b::9765:798c:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:56588
+offline0: i6p--------r---- TCP [OR] 64:ff9b::9765:798c:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:56588
         : HTTP/S.netify.reddit
         : H: preview.redd.it
         : SNI: preview.redd.it
@@ -145,7 +145,7 @@ offline0: i6p--------r---- TCP [OR] 64:ff9b::9765:798c:443 <-- [L] 2a01:cb01:204
         : H: emoji.redditmedia.com
         : SNI: emoji.redditmedia.com
 
-offline0: i6p--------r-FA- TCP [OR] 64:ff9b::9765:798c:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:56590
+offline0: i6p--------r---- TCP [OR] 64:ff9b::9765:798c:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:56590
         : HTTP/S.netify.reddit
         : H: emoji.redditmedia.com
         : SNI: emoji.redditmedia.com
@@ -162,13 +162,13 @@ offline0: i6p-u------r---- TCP [OR] 64:ff9b::9765:798c:443 <-- [L] 2a01:cb01:204
         : SNI: styles.redditmedia.com
         : IDN: C=US, O=DigiCert Inc, CN=DigiCert SHA2 Secure Server CA SDN: C=US, ST=California, L=San Francisco, O=Reddit Inc., CN=*.redditmedia.com
 
-offline0: i6p-u------r-FA- TCP [OR] 64:ff9b::9765:798c:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:56576
+offline0: i6p-u------r---- TCP [OR] 64:ff9b::9765:798c:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:56576
         : HTTP/S.netify.reddit
         : H: styles.redditmedia.com
         : SNI: styles.redditmedia.com
         : IDN: C=US, O=DigiCert Inc, CN=DigiCert SHA2 Secure Server CA SDN: C=US, ST=California, L=San Francisco, O=Reddit Inc., CN=*.redditmedia.com
 
-offline0: i6p-u------r-FA- TCP [OR] 64:ff9b::9765:798c:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:56574
+offline0: i6p-u------r---- TCP [OR] 64:ff9b::9765:798c:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:56574
         : HTTP/S.netify.reddit
         : H: styles.redditmedia.com
         : SNI: styles.redditmedia.com

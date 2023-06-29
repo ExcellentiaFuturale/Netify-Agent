@@ -206,7 +206,7 @@ offline0: i4p--------r---- TCP [OR] 101.227.200.11:80 <-- [L] 192.168.115.8:5049
         : HTTP/UA: Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.1; WOW64; Trident/4.0; SLCC2; .NET CLR 2.0.50727; .NET CLR 3.5.30729; .NET CLR 3.0.30729; Media Center PC 6.0)/QY-Player-Windows/2.0.102
         : URL: api.cupid.iqiyi.com/track2?a=0&as=1;2,3;4,5&b=1467353165&c=966542c82a5694d0e943d50d5fcf5a55&cv=5.2.15.2240&d=5000000854934&dr=2175&f=4e3ae415a584748ac9aa31628f39d1e8&g=0_aaoefdtqgfdepxc2tnv3piucgcb4eofn&h=&i=qc_100001_100140&iv=0&j=31&k=180932301&kp=4e3ae415a584748ac9aa31628f39d1e8&n=479531000&o=1&p=1000000000381&q=5000000923447&r=c4889e64ad9d9eeb9ff438910850c442&rt=1467353113&s=8edb694c8c8cca923d3eae6622f9aee6&sv=4.10.004&u=1&up=&v=5000000854858&ve=1&w=4,5
 
-offline0: i4p--------r---- TCP [OR] 123.125.112.49:80 <-- [L] 192.168.115.8:50497
+offline0: i4p--------r-FA- TCP [OR] 123.125.112.49:80 <-- [L] 192.168.115.8:50497
         : HTTP.netify.baidu
         : H: click.hm.baidu.com
         : HTTP/UA: Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.1; WOW64; Trident/4.0; SLCC2; .NET CLR 2.0.50727; .NET CLR 3.5.30729; .NET CLR 3.0.30729; Media Center PC 6.0)/QY-Player-Windows/2.0.102
@@ -424,10 +424,10 @@ offline0: i4p--------r---- TCP [OR] 77.234.41.35:80 <-- [L] 192.168.115.8:49174
 offline0: i4pc-gx--------- UDP [OR] 111.249.53.196:32443 --> [L] 192.168.115.8:22793
         : Unknown
 
-offline0: i4pc-gxX-------- UDP [L] 192.168.115.8:22793 --> [OR] 202.198.7.89:16039
+offline0: i4pc-gx--------- UDP [L] 192.168.115.8:22793 --> [OR] 202.198.7.89:16039
         : Unknown
 
-offline0: i4pc-gx--------- UDP [OR] 183.228.182.44:13913 <-- [L] 192.168.115.8:22793
+offline0: i4pc-gxX-------- UDP [OR] 183.228.182.44:13913 <-- [L] 192.168.115.8:22793
         : Unknown
 
 offline0: i4pc-gx--------- UDP [OR] 114.41.144.153:10492 <-- [L] 192.168.115.8:22793

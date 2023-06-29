@@ -2,7 +2,7 @@ offline0: i4p--------r---- UDP [L] 192.168.1.1:53 <-- [OL] 192.168.1.105:54988
         : DNS.netify.weibo
         : H: weibo.com
 
-offline0: i4p-----d--r-FA- TCP [OR] 114.134.80.162:80 <-- [L] 192.168.1.105:59119
+offline0: i4p-----d--r---- TCP [OR] 114.134.80.162:80 <-- [L] 192.168.1.105:59119
         : HTTP.netify.weibo
         : D: weibo.com
         : HTTP/UA: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 Safari/537.36

@@ -143,10 +143,10 @@ offline0: i4p-u------r---- TCP [OR] 17.173.66.102:443 <-- [L] 192.168.2.4:49205
 offline0: i4pc-gx------FA- TCP [OR] 17.167.142.31:443 <-- [L] 192.168.2.4:49164
         : HTTP/S.netify.apple
 
-offline0: i4pc-gxX-----FA- TCP [OR] 17.172.100.53:443 <-- [L] 192.168.2.4:49175
+offline0: i4pc-gx------FA- TCP [OR] 17.172.100.53:443 <-- [L] 192.168.2.4:49175
         : HTTP/S.netify.apple
 
-offline0: i4pc-gx------FA- TCP [OR] 17.154.66.121:443 <-- [L] 192.168.2.4:49166
+offline0: i4pc-gxX-----FA- TCP [OR] 17.154.66.121:443 <-- [L] 192.168.2.4:49166
         : HTTP/S.netify.apple
 
 offline0: i4pc-gx------FA- TCP [OR] 93.186.135.82:80 <-- [L] 192.168.2.4:49173

@@ -122,10 +122,10 @@ offline0: i6p-u------r---- TCP [OR] 64:ff9b::6006:749:443 <-- [L] 2a01:cb01:2049
 offline0: i6pc-gx--------- TCP [OR] 64:ff9b::9765:798c:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:56558
         : HTTP/S
 
-offline0: i6pc-gx--------- TCP [OR] 64:ff9b::d83a:d582:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:50906
+offline0: i6pc-gxX-------- TCP [OR] 64:ff9b::d83a:d582:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:50906
         : HTTP/S
 
-offline0: i6pc-gxX-------- TCP [OR] 64:ff9b::4a72:9a15:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:42674
+offline0: i6pc-gx--------- TCP [OR] 64:ff9b::4a72:9a15:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:42674
         : HTTP/S
 
 offline0: i6pc-gx--------- TCP [OR] 2a00:1450:4007:80b::200e:443 <-- [L] 2a01:cb01:2049:8b07:991d:ec85:28df:f629:57788

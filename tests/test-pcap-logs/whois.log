@@ -1,4 +1,4 @@
-offline0: i4pc-------r-FA- TCP [L] 10.0.2.15:44188 --> [OR] 192.0.47.59:43
+offline0: i4pc-------r---- TCP [L] 10.0.2.15:44188 --> [OR] 192.0.47.59:43
         : Whois/DAS
         : H: example.com
 

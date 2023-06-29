@@ -33,9 +33,9 @@ offline0: i4p-----d--r-FA- TCP [OR] 52.114.77.33:443 <-- [L] 192.168.1.6:60535
         : D: skypedataprdcolneu04.cloudapp.net H: mobile.pipe.aria.microsoft.com
         : SNI: mobile.pipe.aria.microsoft.com
 
-offline0: i4p--------r---- TCP [OR] 52.113.194.132:443 <-- [L] 192.168.1.6:60536
+offline0: i4p-----d--r---- TCP [OR] 52.113.194.132:443 <-- [L] 192.168.1.6:60536
         : HTTP/S.netify.teams
-        : H: teams.microsoft.com
+        : D: s-0005.s-msedge.net H: teams.microsoft.com
         : SNI: teams.microsoft.com
 
 offline0: i4p-----d--r-FA- TCP [OR] 52.114.77.33:443 <-- [L] 192.168.1.6:60537
@@ -149,7 +149,7 @@ offline0: i4p--------r---- TCP [OR] 167.99.215.164:4434 <-- [L] 192.168.1.6:6054
         : H: dati.ntop.org
         : SNI: dati.ntop.org
 
-offline0: i4pcu------r---- TCP [OR] 167.99.215.164:4434 <-- [L] 192.168.1.6:60546
+offline0: i4pcu------r-FA- TCP [OR] 167.99.215.164:4434 <-- [L] 192.168.1.6:60546
         : HTTP/S
         : H: dati.ntop.org
         : SNI: dati.ntop.org
@@ -441,6 +441,6 @@ offline0: i4pc-gx-d------- UDP [OR] 52.114.77.136:3478 <-- [L] 192.168.1.6:51681
 offline0: i4pc-gx--------- TCP [OR] 151.11.50.139:2222 <-- [L] 192.168.1.6:54750
         : Unknown
 
-offline0: i4pc-gx-----sFA- TCP [OR] 149.154.167.91:443 <-- [L] 192.168.1.6:58533
+offline0: i4pc-gxX----sFA- TCP [OR] 149.154.167.91:443 <-- [L] 192.168.1.6:58533
         : Telegram.netify.telegram
 

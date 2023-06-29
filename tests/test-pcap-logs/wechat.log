@@ -206,19 +206,19 @@ offline0: i4pc-------r---- IGMP [L] 192.168.1.100:0 --> [OM] 224.0.0.22:0
 offline0: i4pc-------r---- IGMP [L] 192.168.1.103:0 --> [OM] 224.0.0.22:0
         : IGMP
 
-offline0: i4p-----d--r-FA- TCP [L] 192.168.1.103:54099 --> [OR] 203.205.151.162:443
+offline0: i4p--------r-FA- TCP [L] 192.168.1.103:54099 --> [OR] 203.205.151.162:443
         : HTTP/S.netify.wechat
-        : D: web1.wechat.com H: web.wechat.com
+        : H: web.wechat.com
         : SNI: web.wechat.com
 
-offline0: i4p-u---d--r-FA- TCP [L] 192.168.1.103:54099 --> [OR] 203.205.151.162:443
+offline0: i4p-u------r-FA- TCP [L] 192.168.1.103:54099 --> [OR] 203.205.151.162:443
         : HTTP/S.netify.wechat
-        : D: web1.wechat.com H: web.wechat.com
+        : H: web.wechat.com
         : SNI: web.wechat.com
 
-offline0: i4p-u---d--r-FA- TCP [L] 192.168.1.103:54099 --> [OR] 203.205.151.162:443
+offline0: i4p-u------r-FA- TCP [L] 192.168.1.103:54099 --> [OR] 203.205.151.162:443
         : HTTP/S.netify.wechat
-        : D: web1.wechat.com H: web.wechat.com
+        : H: web.wechat.com
         : SNI: web.wechat.com CN: web.wechat.com
         : IDN: C=US, O=GeoTrust Inc., CN=GeoTrust SSL CA - G3 SDN: C=HK, ST=HongKong, L=Wan Chai, O=Tencent Mobility Limited, CN=web.wechat.com
 
@@ -638,7 +638,7 @@ offline0: i4pc-gx-d----FA- TCP [L] 192.168.1.103:54085 --> [OR] 203.205.151.162:
         : D: web1.wechat.com
         : SNI: web1.wechat.com
 
-offline0: i4pc-gx------FA- TCP [OR] 95.101.34.33:80 <-- [L] 192.168.1.103:34981
+offline0: i4pc-gxX-----FA- TCP [OR] 95.101.34.33:80 <-- [L] 192.168.1.103:34981
         : HTTP
 
 offline0: i4pc-gx-d----FA- TCP [L] 192.168.1.103:58039 --> [OR] 203.205.147.171:443

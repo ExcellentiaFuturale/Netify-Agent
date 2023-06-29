@@ -1,8 +1,8 @@
-offline0: i4p--------r-FA- TCP [L] 10.0.0.1:57406 --> [OR] 173.194.68.26:25
+offline0: i4p--------r---- TCP [L] 10.0.0.1:57406 --> [OR] 173.194.68.26:25
         : SMTP.netify.google
         : H: mx.google.com
 
-offline0: i6p--------r-FA- TCP [OR] 2003:de:2016:120::a08:53:25 <-- [L] 2003:de:2016:125:fc36:8317:4e86:cb72:7562
+offline0: i6p--------r---- TCP [OR] 2003:de:2016:120::a08:53:25 <-- [L] 2003:de:2016:125:fc36:8317:4e86:cb72:7562
         : SMTP
         : H: jw-vm08-int-dns.webernetz.net
 

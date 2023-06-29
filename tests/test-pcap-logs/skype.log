@@ -338,14 +338,6 @@ offline0: i4pc-------r---- UDP [OR] 111.221.77.155:40004 --> [L] 192.168.1.34:13
 offline0: i4pc-------r---- UDP [OR] 157.55.130.143:40017 --> [L] 192.168.1.34:13021
         : Skype/Teams
 
-offline0: i4p--------r---- UDP [L] 192.168.1.1:53 <-- [OL] 192.168.1.34:55711
-        : DNS.netify.skype
-        : H: conn.skype.akadns.net
-
-offline0: i4p--------r---- UDP [L] 192.168.1.1:53 <-- [OL] 192.168.1.34:52850
-        : DNS.netify.skype
-        : H: conn.skype.akadns.net
-
 offline0: i4pc-------r---- UDP [L] 192.168.1.92:57621 --> [OL] 192.168.1.255:57621
         : Spotify.netify.spotify
 
@@ -699,7 +691,7 @@ offline0: i4p--------r---- UDP [L] 192.168.1.1:53 <-- [OL] 192.168.1.34:55893
 offline0: i4pc-g-------FA- TCP [OR] 71.238.7.203:18767 <-- [L] 192.168.1.34:50138
         : Unknown
 
-offline0: i4pc-gx------FA- TCP [OR] 111.221.77.142:40023 <-- [L] 192.168.1.34:50086
+offline0: i4pc-gxX-----FA- TCP [OR] 111.221.77.142:40023 <-- [L] 192.168.1.34:50086
         : Unknown
 
 offline0: i4pc-gx------FA- TCP [OR] 157.55.130.176:443 <-- [L] 192.168.1.34:50081
@@ -708,7 +700,7 @@ offline0: i4pc-gx------FA- TCP [OR] 157.55.130.176:443 <-- [L] 192.168.1.34:5008
 offline0: i4pc-gx------FA- TCP [L] 192.168.1.34:50039 --> [OR] 213.199.179.175:443
         : HTTP/S
 
-offline0: i4pc-gxX-----FA- TCP [OR] 80.14.46.121:4415 <-- [L] 192.168.1.34:50127
+offline0: i4pc-gx------FA- TCP [OR] 80.14.46.121:4415 <-- [L] 192.168.1.34:50127
         : Unknown
 
 offline0: i4pc-gx------FA- TCP [L] 192.168.1.34:50130 --> [OR] 212.161.8.36:13392
