@@ -678,7 +678,7 @@ public:
         sa_family_t family = AF_UNSPEC);
 
 protected:
-    mutex lock;
+    mutable mutex lock;
 
     unordered_map<string, ndAddr::Type> ether_reserved;
 
@@ -718,7 +718,7 @@ public:
     }
 
     template <class T>
-    void Encode(T &output, const string &key) {
+    void Encode(T &output, const string &key) const {
         if (addrs.empty()) return;
         lock_guard<mutex> ul(lock);
         vector<string> addresses;
@@ -728,7 +728,7 @@ public:
     }
 
     inline bool FindFirstOf(
-        sa_family_t family, ndAddr& addr) {
+        sa_family_t family, ndAddr& addr) const {
 
         lock_guard<mutex> ul(lock);
         for (auto& it : addrs) {
@@ -741,7 +741,7 @@ public:
 
     inline bool FindAllOf(
         const vector<sa_family_t> &families,
-        vector<string> &results) {
+        vector<string> &results) const {
 
         size_t count = results.size();
         lock_guard<mutex> ul(lock);
@@ -762,7 +762,7 @@ public:
 
 protected:
     ndInterfaceAddrs addrs;
-    mutex lock;
+    mutable mutex lock;
 };
 
 typedef unordered_map<
@@ -780,29 +780,18 @@ public:
         unsigned capture_type,
         nd_interface_role role = ndIR_LAN)
         : ifname(ifname), ifname_peer(ifname),
-        capture_type(capture_type), role(role),
-        lock(nullptr) {
+        capture_type(capture_type), role(role) {
 
         endpoint_snapshot = false;
-        lock = new mutex;
-        if (lock == nullptr) {
-            throw ndSystemException(
-                __PRETTY_FUNCTION__, "new mutex", ENOMEM
-            );
-        }
     }
 
     ndInterface(const ndInterface &iface) :
         ifname(iface.ifname), ifname_peer(iface.ifname_peer),
         capture_type(iface.capture_type), role(iface.role)
     {
+
         endpoint_snapshot = false;
-        lock = new mutex;
-        if (lock == nullptr) {
-            throw ndSystemException(
-                __PRETTY_FUNCTION__, "new mutex", ENOMEM
-            );
-        }
+
         switch(ndCT_TYPE(capture_type)) {
         case ndCT_PCAP:
             config_pcap = iface.config_pcap;
@@ -822,16 +811,12 @@ public:
         }
     }
 
-    virtual ~ndInterface() {
-        if (lock != nullptr) delete lock;
-    }
-
     static size_t UpdateAddrs(ndInterfaces &interfaces);
 
     size_t UpdateAddrs(const struct ifaddrs *if_addrs);
 
     template <class T>
-    void Encode(T &output) {
+    void Encode(T &output) const {
 
         switch (role) {
         case ndIR_LAN:
@@ -878,7 +863,7 @@ public:
     }
 
     template <class T>
-    void EncodeAddrs(T &output, const vector<string> &keys, const string &delim = ",") {
+    void EncodeAddrs(T &output, const vector<string> &keys, const string &delim = ",") const {
         vector<string> ip_addrs;
         if (addrs.FindAllOf({ AF_INET, AF_INET6 }, ip_addrs))
             serialize(output, keys, ip_addrs, delim);
@@ -897,7 +882,7 @@ public:
     }
 
     inline bool PushEndpoint(const ndAddr &mac, const ndAddr &ip) {
-        lock_guard<mutex> ul(*lock);
+        lock_guard<mutex> ul(lock);
         auto result = endpoints[endpoint_snapshot.load()].emplace(
             make_pair(mac, ndInterfaceAddr(ip))
         );
@@ -909,21 +894,21 @@ public:
     }
 
     inline void ClearEndpoints(bool snapshot) {
-        lock_guard<mutex> ul(*lock);
+        lock_guard<mutex> ul(lock);
         for (auto &it : endpoints[snapshot]) it.second.Clear();
         endpoints[snapshot].clear();
     }
 
     template <class T>
-    inline void EncodeEndpoints(bool snapshot, T &output) {
-        lock_guard<mutex> ul(*lock);
+    inline void EncodeEndpoints(bool snapshot, T &output) const {
+        lock_guard<mutex> ul(lock);
         for (auto &i : endpoints[snapshot])
             i.second.Encode(output,  i.first.GetString());
     }
 
     inline void GetEndpoints(bool snapshot,
-        unordered_map<string, unordered_set<string>> &output) {
-        lock_guard<mutex> ul(*lock);
+        unordered_map<string, unordered_set<string>> &output) const {
+        lock_guard<mutex> ul(lock);
         for (auto& i : endpoints[snapshot]) {
             vector<string> ip_addrs;
             if (! i.second.FindAllOf(
@@ -985,7 +970,7 @@ protected:
     ndInterfaceAddr addrs;
     ndInterfaceEndpoints endpoints[2];
     atomic_bool endpoint_snapshot;
-    mutex *lock;
+    mutable mutex lock;
 };
 
 typedef shared_ptr<ndInterface> nd_iface_ptr;
