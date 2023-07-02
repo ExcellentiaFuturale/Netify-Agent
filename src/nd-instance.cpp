@@ -1739,6 +1739,7 @@ void *ndInstance::ndInstance::Entry(void)
         // Create and start capture threads
         if (! ReloadCaptureThreads(thread_capture))
             return nullptr;
+        ndGC.Close();
     }
     catch (exception &e) {
         nd_printf(
