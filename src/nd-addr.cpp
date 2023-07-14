@@ -78,10 +78,6 @@ using namespace std;
 #include "nd-util.h"
 #include "nd-addr.h"
 
-ndInterfaces nd_interfaces;
-
-ndAddrType *nd_addrtype = NULL;
-
 bool ndAddr::Create(ndAddr &a, const string &addr)
 {
     string _addr(addr);

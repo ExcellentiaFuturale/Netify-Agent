@@ -134,7 +134,6 @@ class ndInstanceStatus;
 #include "nd-base64.h"
 #include "nd-napi.h"
 
-
 //#define _ND_APPS_DEBUG    1
 
 ndApplications *nd_apps = NULL;
