@@ -3482,7 +3482,7 @@ yyreduce:
 
                 cmatch match;
                 _NDFP_result = ((yyval.bool_result) = regex_search(
-                    _NDFP_flow->host_server_name, match, re
+                    _NDFP_flow->host_server_name.c_str(), match, re
                 ));
             } catch (regex_error &e) {
                 nd_printf("WARNING: Error compiling regex: %s: %d\n",
