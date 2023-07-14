@@ -807,7 +807,7 @@ expr_app_id:
 expr_app_name:
       FLOW_APPLICATION CMP_EQUAL VALUE_NAME {
         _NDFP_result = ($$ = false);
-        if (_NDFP_flow->detected_application_name != NULL) {
+        if (! _NDFP_flow->detected_application_name.empty()) {
 
             size_t p;
             string search($3);
@@ -832,7 +832,7 @@ expr_app_name:
     }
     | FLOW_APPLICATION CMP_NOTEQUAL VALUE_NAME {
         _NDFP_result = ($$ = true);
-        if (_NDFP_flow->detected_application_name != NULL) {
+        if (! _NDFP_flow->detected_application_name.empty()) {
 
             size_t p;
             string search($3);
@@ -1167,7 +1167,7 @@ expr_proto_id:
 expr_proto_name:
       FLOW_PROTOCOL CMP_EQUAL VALUE_NAME {
         _NDFP_result = ($$ = false);
-        if (_NDFP_flow->detected_protocol_name != NULL) {
+        if (! _NDFP_flow->detected_protocol_name.empty()) {
 
             size_t p;
             string search($3);
@@ -1176,7 +1176,7 @@ expr_proto_name:
                 search.erase(p, 1);
 
             _NDFP_result = ($$ = (strncasecmp(
-                _NDFP_flow->detected_protocol_name, search.c_str(), _NDFP_MAX_NAMELEN
+                _NDFP_flow->detected_protocol_name.c_str(), search.c_str(), _NDFP_MAX_NAMELEN
             ) == 0));
         }
 
@@ -1186,7 +1186,7 @@ expr_proto_name:
     }
     | FLOW_PROTOCOL CMP_NOTEQUAL VALUE_NAME {
         _NDFP_result = ($$ = true);
-        if (_NDFP_flow->detected_protocol_name != NULL) {
+        if (! _NDFP_flow->detected_protocol_name.empty()) {
 
             size_t p;
             string search($3);
@@ -1195,7 +1195,7 @@ expr_proto_name:
                 search.erase(p, 1);
 
             _NDFP_result = ($$ = (strncasecmp(
-                _NDFP_flow->detected_protocol_name, search.c_str(), _NDFP_MAX_NAMELEN
+                _NDFP_flow->detected_protocol_name.c_str(), search.c_str(), _NDFP_MAX_NAMELEN
             )));
         }
         _NDFP_debugf(
@@ -1266,7 +1266,7 @@ expr_detected_hostname:
                 search.erase(p, 1);
 
             if (strncasecmp(search.c_str(),
-                _NDFP_flow->host_server_name, _NDFP_MAX_NAMELEN) == 0) {
+                _NDFP_flow->host_server_name.c_str(), _NDFP_MAX_NAMELEN) == 0) {
                 _NDFP_result = ($$ = true);
             }
         }
@@ -1284,7 +1284,7 @@ expr_detected_hostname:
                 search.erase(p, 1);
 
             if (strncasecmp(search.c_str(),
-                _NDFP_flow->host_server_name, _NDFP_MAX_NAMELEN) == 0) {
+                _NDFP_flow->host_server_name.c_str(), _NDFP_MAX_NAMELEN) == 0) {
                 _NDFP_result = ($$ = false);
             }
         }

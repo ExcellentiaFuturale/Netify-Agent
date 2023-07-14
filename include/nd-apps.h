@@ -79,6 +79,7 @@ public:
     nd_app_id_t Find(const string &domain);
     nd_app_id_t Find(const ndAddr &addr);
 
+    bool Lookup(nd_app_id_t id, string &dst);
     const char *Lookup(nd_app_id_t id);
     nd_app_id_t Lookup(const string &tag);
     bool Lookup(const string &tag, ndApplication &app);

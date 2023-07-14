@@ -2771,7 +2771,7 @@ yyreduce:
 #line 808 "nd-flow-parser.ypp" /* yacc.c:1646  */
     {
         _NDFP_result = ((yyval.bool_result) = false);
-        if (_NDFP_flow->detected_application_name != NULL) {
+        if (! _NDFP_flow->detected_application_name.empty()) {
 
             size_t p;
             string search((yyvsp[0].string));
@@ -2801,7 +2801,7 @@ yyreduce:
 #line 833 "nd-flow-parser.ypp" /* yacc.c:1646  */
     {
         _NDFP_result = ((yyval.bool_result) = true);
-        if (_NDFP_flow->detected_application_name != NULL) {
+        if (! _NDFP_flow->detected_application_name.empty()) {
 
             size_t p;
             string search((yyvsp[0].string));
@@ -3300,7 +3300,7 @@ yyreduce:
 #line 1168 "nd-flow-parser.ypp" /* yacc.c:1646  */
     {
         _NDFP_result = ((yyval.bool_result) = false);
-        if (_NDFP_flow->detected_protocol_name != NULL) {
+        if (! _NDFP_flow->detected_protocol_name.empty()) {
 
             size_t p;
             string search((yyvsp[0].string));
@@ -3309,7 +3309,7 @@ yyreduce:
                 search.erase(p, 1);
 
             _NDFP_result = ((yyval.bool_result) = (strncasecmp(
-                _NDFP_flow->detected_protocol_name, search.c_str(), _NDFP_MAX_NAMELEN
+                _NDFP_flow->detected_protocol_name.c_str(), search.c_str(), _NDFP_MAX_NAMELEN
             ) == 0));
         }
 
@@ -3324,7 +3324,7 @@ yyreduce:
 #line 1187 "nd-flow-parser.ypp" /* yacc.c:1646  */
     {
         _NDFP_result = ((yyval.bool_result) = true);
-        if (_NDFP_flow->detected_protocol_name != NULL) {
+        if (! _NDFP_flow->detected_protocol_name.empty()) {
 
             size_t p;
             string search((yyvsp[0].string));
@@ -3333,7 +3333,7 @@ yyreduce:
                 search.erase(p, 1);
 
             _NDFP_result = ((yyval.bool_result) = (strncasecmp(
-                _NDFP_flow->detected_protocol_name, search.c_str(), _NDFP_MAX_NAMELEN
+                _NDFP_flow->detected_protocol_name.c_str(), search.c_str(), _NDFP_MAX_NAMELEN
             )));
         }
         _NDFP_debugf(
@@ -3423,7 +3423,7 @@ yyreduce:
                 search.erase(p, 1);
 
             if (strncasecmp(search.c_str(),
-                _NDFP_flow->host_server_name, _NDFP_MAX_NAMELEN) == 0) {
+                _NDFP_flow->host_server_name.c_str(), _NDFP_MAX_NAMELEN) == 0) {
                 _NDFP_result = ((yyval.bool_result) = true);
             }
         }
@@ -3446,7 +3446,7 @@ yyreduce:
                 search.erase(p, 1);
 
             if (strncasecmp(search.c_str(),
-                _NDFP_flow->host_server_name, _NDFP_MAX_NAMELEN) == 0) {
+                _NDFP_flow->host_server_name.c_str(), _NDFP_MAX_NAMELEN) == 0) {
                 _NDFP_result = ((yyval.bool_result) = false);
             }
         }

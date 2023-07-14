@@ -424,6 +424,19 @@ nd_app_id_t ndApplications::Find(const ndAddr &addr)
     return ND_APP_UNKNOWN;
 }
 
+bool ndApplications::Lookup(nd_app_id_t id, string &dst)
+{
+    lock_guard<mutex> ul(lock);
+
+    auto it = apps.find(id);
+    if (it == apps.end()) {
+        dst = "Unknown";
+        return false;
+    }
+    dst = it->second->tag;
+    return true;
+}
+
 const char *ndApplications::Lookup(nd_app_id_t id)
 {
     lock_guard<mutex> ul(lock);

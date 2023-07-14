@@ -91,10 +91,9 @@ ndFlow::ndFlow(nd_iface_ptr& iface)
     detected_protocol(ND_PROTO_UNKNOWN),
     detected_application(ND_APP_UNKNOWN),
     detected_protocol_name("Unknown"),
-    detected_application_name(NULL),
     category { ND_CAT_UNKNOWN, ND_CAT_UNKNOWN, ND_CAT_UNKNOWN },
     ndpi_flow(NULL),
-    dns_host_name{0}, host_server_name{0}, http{0},
+    http{0},
     privacy_mask(0), origin(0), direction(0),
 #if defined(_ND_USE_CONNTRACK) && defined(_ND_WITH_CONNTRACK_MDATA)
     ct_id(0), ct_mark(0),
@@ -126,10 +125,9 @@ ndFlow::ndFlow(const ndFlow& flow)
     detected_protocol(ND_PROTO_UNKNOWN),
     detected_application(ND_APP_UNKNOWN),
     detected_protocol_name("Unknown"),
-    detected_application_name(NULL),
     category { ND_CAT_UNKNOWN, ND_CAT_UNKNOWN, ND_CAT_UNKNOWN },
     ndpi_flow(NULL),
-    dns_host_name{0}, host_server_name{0}, http{0},
+    http{0},
     privacy_mask(0), origin(0), direction(0),
 #if defined(_ND_USE_CONNTRACK) && defined(_ND_WITH_CONNTRACK_MDATA)
     ct_id(0), ct_mark(0),
@@ -150,11 +148,6 @@ ndFlow::ndFlow(const ndFlow& flow)
 ndFlow::~ndFlow()
 {
     Release();
-
-    if (detected_application_name != NULL) {
-        free(detected_application_name);
-        detected_application_name = NULL;
-    }
 
     if (HasTLSIssuerDN()) {
         free(ssl.issuer_dn);
@@ -222,13 +215,11 @@ void ndFlow::Hash(const string &device,
         sha1_write(&ctx,
             (const char *)&detected_protocol, sizeof(ndpi_protocol));
 
-        if (host_server_name[0] != '\0') {
+        if (! host_server_name.empty()) {
             sha1_write(&ctx,
-                host_server_name, strnlen(host_server_name, ND_FLOW_HOSTNAME));
-        }
-        if (HasTLSClientSNI()) {
-            sha1_write(&ctx,
-                ssl.client_sni, strnlen(ssl.client_sni, ND_FLOW_HOSTNAME));
+                host_server_name.c_str(),
+                host_server_name.size()
+            );
         }
         if (HasBTInfoHash()) {
             sha1_write(&ctx, bt.info_hash, ND_FLOW_BTIHASH_LEN);
@@ -361,7 +352,7 @@ bool ndFlow::HasTLSClientSNI(void) const
 {
     return (
         (GetMasterProtocol() == ND_PROTO_TLS || detected_protocol == ND_PROTO_QUIC) &&
-        ssl.client_sni != NULL && ssl.client_sni[0] != '\0'
+        host_server_name.empty() == false
     );
 }
 
@@ -444,7 +435,7 @@ void ndFlow::Print(uint8_t pflags) const
     nd_sha1_to_string((const uint8_t *)bt.info_hash, digest);
 
     nd_flow_printf(
-        "%s: [%c%c%c%c%c%c%c%c] %s%s%s %s %s:%hu %c%c%c %s %s:%hu%s%s%s%s%s%s%s\n",
+        "%s: [%c%c%c%c%c%c%c%c] %s%s%s %s %s:%hu %c%c%c %s %s:%hu%s%s%s%s%s\n",
         iface.ifname.c_str(),
         (iface.role == ndIR_LAN) ? 'i' : 'e',
         (ip_version == 4) ? '4' : (ip_version == 6) ? '6' : '-',
@@ -467,13 +458,11 @@ void ndFlow::Print(uint8_t pflags) const
         (origin == ORIGIN_UPPER || origin == ORIGIN_UNKNOWN) ? '-' : '>',
         (pflags & PRINTF_MACS) ? upper_mac.GetString().c_str() ? "",
         upper_addr.GetString().c_str(), upper_addr.GetPort(),
-        (dns_host_name[0] != '\0' || host_server_name[0] != '\0') ? " H: " : "",
-        (host_server_name[0] != '\0') ? host_server_name : (
-            (dns_host_name[0] != '\0') ? dns_host_name : ""
+        (! dns_host_name.empty() || ! host_server_name.empty()) ? " H: " : "",
+        (! host_server_name.empty()) ? host_server_name.c_str() : (
+            (! dns_host_name.empty()) ? dns_host_name.c_str() : ""
         ),
         (HasTLSClientSNI()) ? " SSL" : "",
-        (HasTLSClientSNI()) ? " C: " : "",
-        (HasTLSClientSNI()) ? ssl.client_sni : "",
         (HasBTInfoHash()) ? " BT-IH: " : "",
         (HasBTInfoHash()) ? digest.c_str() : ""
     );
@@ -618,17 +607,17 @@ void ndFlow::Print(uint8_t pflags) const
 
             dls << endl << setw(iface->ifname.size()) << " " << ": "
                 << detected_protocol_name
-                << ((detected_application_name != nullptr) ? "." : "")
-                << ((detected_application_name != nullptr) ?
+                << ((! detected_application_name.empty()) ? "." : "")
+                << ((! detected_application_name.empty()) ?
                     detected_application_name : "");
 
-            if (dns_host_name[0] != '\0' ||
-                host_server_name[0] != '\0') {
+            if (! dns_host_name.empty() ||
+                ! host_server_name.empty()) {
                 dls << endl << setw(iface->ifname.size()) << " " << ":";
-                if (dns_host_name[0] != '\0')
+                if (! dns_host_name.empty())
                     dls << " D: " << dns_host_name;
-                if (host_server_name[0] != '\0' &&
-                    strcasecmp(dns_host_name, host_server_name))
+                if (! host_server_name.empty() &&
+                    dns_host_name.compare(host_server_name))
                     dls << " H: " << host_server_name;
             }
 
@@ -666,7 +655,7 @@ void ndFlow::Print(uint8_t pflags) const
             if (HasTLSClientSNI() || HasTLSServerCN()) {
                 dls << endl << setw(iface->ifname.size()) << " " << ":";
                 if (HasTLSClientSNI())
-                    dls << " SNI: " << ssl.client_sni;
+                    dls << " SNI: " << host_server_name;
                 if (HasTLSServerCN())
                     dls << " CN: " << ssl.server_cn;
             }

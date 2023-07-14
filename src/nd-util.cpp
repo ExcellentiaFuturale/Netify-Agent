@@ -35,6 +35,7 @@
 #include <regex>
 #include <memory>
 #include <mutex>
+#include <algorithm>
 
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -1302,41 +1303,44 @@ bool nd_scan_dotd(const string &path, vector<string> &files)
     return (files.size () > 0);
 }
 
-void nd_set_hostname(char *dst,
+void nd_set_hostname(string &dst,
     const char *src, size_t length, bool strict)
 {
-    ssize_t i;
+    dst.clear();
+    dst.reserve(length);
 
     // Sanitize host server name; RFC 952 plus underscore for SSDP.
     if (strict) {
-        for (i = 0; i < (ssize_t)length; i++) {
+        for (size_t i = 0; i < length; i++) {
 
             if (isalnum(src[i]) || src[i] == '-' ||
                 src[i] == '_' || src[i] == '.')
-                dst[i] = tolower(src[i]);
-            else {
-                dst[i] = '\0';
+                dst += (char)tolower(src[i]);
+            else
                 break;
-            }
         }
     }
     else {
-        for (i = 0; i < (ssize_t)length; i++) {
+        for (size_t i = 0; i < length; i++) {
             if (isalnum(src[i]) || ispunct(src[i]) ||
                 src[i] == ' ' || src[i] == '\0') {
-                dst[i] = src[i];
+                dst += src[i];
                 if (src[i] == '\0') break;
             }
             else
-                dst[i] = '_';
+                dst += '_';
         }
     }
 
-    // Ensure dst is terminated.
-    dst[length - 1] = '\0';
+    nd_rtrim(dst, '.');
+}
 
-    // Right-trim dots.
-    for (--i; i > -1 && dst[i] == '.'; i--) dst[i] = '\0';
+void nd_set_hostname(char *dst,
+    const char *src, size_t length, bool strict)
+{
+    string buffer;
+    nd_set_hostname(buffer, src, length, strict);
+    strncpy(dst, buffer.c_str(), min(length, buffer.length()));
 }
 
 void nd_expand_variables(

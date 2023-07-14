@@ -159,8 +159,8 @@ public:
     nd_proto_id_t detected_protocol;
     nd_app_id_t detected_application;
 
-    const char *detected_protocol_name;
-    char *detected_application_name;
+    string detected_protocol_name;
+    string detected_application_name;
 
     struct {
         nd_cat_id_t application;
@@ -173,8 +173,8 @@ public:
     vector<uint8_t> digest_lower;
     vector<uint8_t> digest_mdata;
 
-    char dns_host_name[ND_FLOW_HOSTNAME];
-    char host_server_name[ND_FLOW_HOSTNAME];
+    string dns_host_name;
+    string host_server_name;
 
     union {
         struct {
@@ -195,7 +195,7 @@ public:
         struct {
             uint16_t version;
             uint16_t cipher_suite;
-            char *client_sni, *subject_dn, *issuer_dn;
+            char *subject_dn, *issuer_dn;
             char server_cn[ND_FLOW_TLS_CNLEN];
             char client_ja3[ND_FLOW_TLS_JA3LEN];
             char server_ja3[ND_FLOW_TLS_JA3LEN];
@@ -494,11 +494,13 @@ public:
 
             serialize(output, { "detected_protocol" }, (unsigned)detected_protocol);
             serialize(output, { "detected_protocol_name"},
-                (detected_protocol_name != NULL) ? detected_protocol_name : "Unknown");
+                (detected_protocol_name.empty()) ?
+                    "Unknown" : detected_protocol_name);
 
             serialize(output, { "detected_application" }, (unsigned)detected_application);
             serialize(output, { "detected_application_name" },
-                (detected_application_name != NULL) ? detected_application_name : "Unknown");
+                (detected_application_name.empty()) ?
+                    "Unknown" : detected_application_name);
 
             serialize(output, { "detection_guessed" }, flags.detection_guessed.load());
             serialize(output, { "detection_updated" }, flags.detection_updated.load());
@@ -507,10 +509,10 @@ public:
             serialize(output, { "category", "protocol" }, category.protocol);
             serialize(output, { "category", "domain" }, category.domain);
 
-            if (dns_host_name[0] != '\0')
+            if (! dns_host_name.empty())
                 serialize(output, { "dns_host_name" }, dns_host_name);
 
-            if (host_server_name[0] != '\0')
+            if (! host_server_name.empty())
                 serialize(output, { "host_server_name" }, host_server_name);
 
             if (HasHttpUserAgent() || HasHttpURL()) {
@@ -551,7 +553,7 @@ public:
                 serialize(output, { "ssl", "cipher_suite" }, tohex);
 
                 if (HasTLSClientSNI())
-                    serialize(output, { "ssl", "client_sni" }, ssl.client_sni);
+                    serialize(output, { "ssl", "client_sni" }, host_server_name);
 
                 if (HasTLSServerCN())
                     serialize(output, { "ssl", "server_cn" }, ssl.server_cn);

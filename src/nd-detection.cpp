@@ -579,7 +579,7 @@ bool ndDetectionThread::ProcessALPN(ndDetectionQueueEntry *entry, bool client)
             if ((ndGC_DEBUG && ndGC_VERBOSE)) {
                 nd_dprintf("%s: TLS ALPN: refined: %s: %s -> %s\n",
                     tag.c_str(), detected_alpn,
-                    ndEF->detected_protocol_name,
+                    ndEF->detected_protocol_name.c_str(),
                     nd_proto_get_name(nd_alpn_proto_map[i].proto_id)
                 );
             }
@@ -615,11 +615,7 @@ void ndDetectionThread::ProcessFlow(ndDetectionQueueEntry *entry)
         }
 
         if (ndEF->flags.dhc_hit.load()) {
-            snprintf(
-                ndEF->dns_host_name,
-                sizeof(ndEF->dns_host_name) - 1,
-                "%s", hostname.c_str()
-            );
+            ndEF->dns_host_name = hostname;
             if (ndEFNF->host_server_name[0] == '\0' ||
                 nd_is_ipaddr((const char *)ndEFNF->host_server_name)) {
                 snprintf(
@@ -736,8 +732,6 @@ void ndDetectionThread::ProcessFlow(ndDetectionQueueEntry *entry)
             ndEFNFP.tls_quic.ssl_version;
         ndEF->ssl.cipher_suite =
             ndEFNFP.tls_quic.server_cipher;
-
-        ndEF->ssl.client_sni = ndEF->host_server_name;
 
         if (ndEF->ssl.server_cn[0] == '\0' &&
             ndEFNFP.tls_quic.serverCN != NULL) {
@@ -1008,19 +1002,8 @@ void ndDetectionThread::ProcessFlow(ndDetectionQueueEntry *entry)
 void ndDetectionThread::SetDetectedApplication(ndDetectionQueueEntry *entry, nd_app_id_t app_id)
 {
     if (app_id == ND_APP_UNKNOWN) return;
-    ndEF->detected_application = app_id;
-    const char *name = ndi.apps.Lookup(app_id);
 
-    if (ndEF->detected_application_name != NULL) {
-        ndEF->detected_application_name = (char *)realloc(
-            ndEF->detected_application_name,
-            strlen(name) + 1
-        );
-
-        strcpy(ndEF->detected_application_name, name);
-    }
-    else
-        ndEF->detected_application_name = strdup(name);
+    ndi.apps.Lookup(app_id, ndEF->detected_application_name);
 
     ndEF->category.application = ndi.categories.Lookup(
         ndCAT_TYPE_APP, app_id
@@ -1067,10 +1050,7 @@ void ndDetectionThread::FlowUpdate(ndDetectionQueueEntry *entry)
             if (nsd.aid > -1) {
                 if (nsd.aid == ND_APP_UNKNOWN) {
                     ndEF->detected_application = 0;
-                    if (ndEF->detected_application_name != NULL) {
-                        free(ndEF->detected_application_name);
-                        ndEF->detected_application_name = NULL;
-                    }
+                    ndEF->detected_application_name.clear();
                     ndEF->category.application = ND_CAT_UNKNOWN;
                 }
                 else
