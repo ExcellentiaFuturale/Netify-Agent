@@ -173,17 +173,12 @@ case "${host_os}" in
         ;;
 
     *)
-            AM_CONDITIONAL(USE_CONNTRACK, false)
-            AM_CONDITIONAL(USE_NETLINK, false)
-            AM_CONDITIONAL(USE_NFQUEUE, false)
-            AM_CONDITIONAL(USE_TPACKETV3, false)
-    ;;
+        AM_CONDITIONAL(USE_CONNTRACK, false)
+        AM_CONDITIONAL(USE_NETLINK, false)
+        AM_CONDITIONAL(USE_NFQUEUE, false)
+        AM_CONDITIONAL(USE_TPACKETV3, false)
+        ;;
 esac
-
-AC_ARG_ENABLE([instance-support],
-    [AS_HELP_STRING([--enable-instance-support], [Enable instance support [default=no]])],
-    [],
-    [enable_instance_support=no])
 
 PKG_CHECK_MODULES([LIBCURL], [libcurl])
 PKG_CHECK_MODULES([ZLIB], [zlib])
@@ -298,6 +293,20 @@ AS_IF([test "x$enable_lean_and_mean" = "xyes"], [
     AM_CONDITIONAL(ENABLE_LEAN_AND_MEAN, true)
 ], [
     AM_CONDITIONAL(ENABLE_LEAN_AND_MEAN, false)
+])
+
+AC_ARG_ENABLE([extended-stats],
+    [AS_HELP_STRING([--enable-extended-stats], [Enable the collection of additional flow statistics [default=yes]])],
+    [],
+    [enable_extended_stats=yes])
+
+AS_IF([test "x$enable_extended_stats" = "xyes"], [
+    AC_DEFINE([_ND_EXTENDED_STATS], [1],
+        [Define to enable the collection of additional flow statistics.])
+    AS_VAR_APPEND([ND_DEFINES], [" -D_ND_EXTENDED_STATS=1"])
+    AM_CONDITIONAL(ENABLE_EXTENDED_STATS, true)
+], [
+    AM_CONDITIONAL(ENABLE_EXTENDED_STATS, false)
 ])
 
 AC_ARG_ENABLE([ndpi-debug],

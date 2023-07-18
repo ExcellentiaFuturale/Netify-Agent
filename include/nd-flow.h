@@ -51,7 +51,13 @@ public:
     ndFlowStats() :
         lower_bytes(0), upper_bytes(0), total_bytes(0),
         lower_packets(0), upper_packets(0), total_packets(0),
-        detection_packets(0) { }
+        detection_packets(0)
+#ifdef _ND_EXTENDED_STATS
+        , tcp_seq_errors(0)
+        , tcp_resets(0)
+        , tcp_retrans(0)
+#endif
+        { }
 
     ndFlowStats(const ndFlowStats &stats) :
         lower_bytes(stats.lower_bytes.load()),
@@ -60,7 +66,13 @@ public:
         lower_packets(stats.lower_packets.load()),
         upper_packets(stats.upper_packets.load()),
         total_packets(stats.total_packets.load()),
-        detection_packets(stats.detection_packets.load()) { }
+        detection_packets(stats.detection_packets.load())
+#ifdef _ND_EXTENDED_STATS
+        , tcp_seq_errors(stats.tcp_seq_errors.load())
+        , tcp_resets(stats.tcp_resets.load())
+        , tcp_retrans(stats.tcp_retrans.load())
+#endif
+        { }
 
     inline ndFlowStats &operator=(const ndFlowStats &fs) {
         lower_bytes = fs.lower_bytes.load();
@@ -70,6 +82,11 @@ public:
         upper_packets = fs.upper_packets.load();
         total_packets = fs.total_packets.load();
         detection_packets = fs.detection_packets.load();
+#ifdef _ND_EXTENDED_STATS
+        tcp_seq_errors = fs.tcp_seq_errors.load();
+        tcp_resets = fs.tcp_resets.load();
+        tcp_retrans = fs.tcp_retrans.load();
+#endif
         return *this;
     };
 
@@ -81,6 +98,11 @@ public:
         lower_packets += fs.lower_packets.load();
         upper_packets += fs.upper_packets.load();
         total_packets += fs.total_packets.load();
+#ifdef _ND_EXTENDED_STATS
+        tcp_seq_errors += fs.tcp_seq_errors.load();
+        tcp_resets += fs.tcp_resets.load();
+        tcp_retrans += fs.tcp_retrans.load();
+#endif
         return *this;
     }
 
@@ -90,8 +112,16 @@ public:
         upper_bytes = 0;
         lower_packets = 0;
         upper_packets = 0;
-
-        if (full_reset) detection_packets = 0;
+#ifdef _ND_EXTENDED_STATS
+        tcp_seq_errors = 0;
+        tcp_resets = 0;
+        tcp_retrans = 0;
+#endif
+        if (full_reset) {
+            detection_packets = 0;
+#ifdef _ND_EXTENDED_STATS
+#endif
+        }
     }
 
     atomic<uint64_t> lower_bytes;
@@ -103,6 +133,11 @@ public:
     atomic<uint32_t> total_packets;
 
     atomic<uint8_t> detection_packets;
+#ifdef _ND_EXTENDED_STATS
+    atomic<uint32_t> tcp_seq_errors;
+    atomic<uint32_t> tcp_resets;
+    atomic<uint32_t> tcp_retrans;
+#endif
 };
 
 class ndFlow : public ndSerializer
@@ -671,6 +706,15 @@ public:
                 { "total_bytes" }, stats.total_bytes.load());
             serialize(output, { "detection_packets" },
                 stats.detection_packets.load());
+
+#ifdef _ND_EXTENDED_STATS
+            serialize(output,
+                { "tcp", "seq_errors" }, stats.tcp_seq_errors.load());
+            serialize(output,
+                { "tcp", "resets" }, stats.tcp_resets.load());
+            serialize(output,
+                { "tcp", "retrans" }, stats.tcp_retrans.load());
+#endif
         }
     }
 

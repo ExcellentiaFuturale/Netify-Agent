@@ -86,7 +86,7 @@ public:
         uint64_t icmp;
         uint64_t igmp;
         uint64_t tcp;
-        uint64_t tcp_seq_error;
+        uint64_t tcp_seq_errors;
         uint64_t tcp_resets;
         uint64_t udp;
         uint64_t ip_bytes;
@@ -121,7 +121,7 @@ public:
         pkt.icmp += rhs.pkt.icmp;
         pkt.igmp += rhs.pkt.igmp;
         pkt.tcp += rhs.pkt.tcp;
-        pkt.tcp_seq_error += rhs.pkt.tcp_seq_error;
+        pkt.tcp_seq_errors += rhs.pkt.tcp_seq_errors;
         pkt.tcp_resets += rhs.pkt.tcp_resets;
         pkt.udp += rhs.pkt.udp;
         pkt.ip_bytes += rhs.pkt.ip_bytes;
@@ -159,7 +159,7 @@ public:
         serialize(output, { "largest_bytes" }, pkt.maxlen);
         serialize(output, { "ip" }, pkt.ip);
         serialize(output, { "tcp" }, pkt.tcp);
-        serialize(output, { "tcp_seq_error" }, pkt.tcp_seq_error);
+        serialize(output, { "tcp_seq_errors" }, pkt.tcp_seq_errors);
         serialize(output, { "tcp_resets" }, pkt.tcp_resets);
         serialize(output, { "udp" }, pkt.udp);
         serialize(output, { "icmp" }, pkt.icmp);

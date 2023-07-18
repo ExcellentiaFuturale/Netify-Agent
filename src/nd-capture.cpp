@@ -1096,15 +1096,24 @@ nd_process_ip:
 
     if (nf->ip_protocol == IPPROTO_TCP) {
         if (hdr_tcp->th_seq <= nf->tcp_last_seq) {
-            stats.pkt.tcp_seq_error++;
             nf->tcp_last_seq = hdr_tcp->th_seq;
+#ifdef _ND_EXTENDED_STATS
+            nf->stats.tcp_seq_errors++;
+            // TODO: tcp_retrans detection
+#endif
+            stats.pkt.tcp_seq_errors++;
         }
 
         if (hdr_tcp->th_flags & TH_FIN)
             nf->flags.tcp_fin = true;
         if (hdr_tcp->th_flags & TH_ACK && nf->flags.tcp_fin)
             nf->flags.tcp_fin_ack++;
-        if (hdr_tcp->th_flags & TH_RST) stats.pkt.tcp_resets++;
+        if (hdr_tcp->th_flags & TH_RST) {
+#ifdef _ND_EXTENDED_STATS
+            nf->stats.tcp_resets++;
+#endif
+            stats.pkt.tcp_resets++;
+        }
     }
 
     if (dhc != NULL && pkt != NULL
