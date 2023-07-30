@@ -777,7 +777,7 @@ class ndInterface : public ndSerializer
 public:
     ndInterface(
         const string &ifname,
-        unsigned capture_type,
+        uint32_t capture_type,
         nd_interface_role role = ndIR_LAN)
         : ifname(ifname), ifname_peer(ifname),
         capture_type(capture_type), role(role) {
@@ -955,7 +955,7 @@ public:
 
     string ifname;
     string ifname_peer;
-    unsigned capture_type;
+    uint32_t capture_type;
     nd_interface_role role;
 
     nd_config_pcap config_pcap;

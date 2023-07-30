@@ -4,17 +4,17 @@ offline0: i4pc-------r---- UDP [L] 10.0.2.15:50835 --> [OR] 125.209.252.210:2061
 offline0: i4p--------r---- TCP [L] 10.200.3.125:57841 --> [OR] 147.92.165.194:443
         : HTTP/S.netify.line
 
-offline0: i4p--------r---- TCP [L] 10.200.3.125:58160 --> [OR] 147.92.242.232:443
+offline0: i4p--------r-FA- TCP [L] 10.200.3.125:58160 --> [OR] 147.92.242.232:443
         : HTTP/S.netify.line
         : H: uts-front.line-apps.com
         : SNI: uts-front.line-apps.com
 
-offline0: i4p-u------r---- TCP [L] 10.200.3.125:58160 --> [OR] 147.92.242.232:443
+offline0: i4p-u------r-FA- TCP [L] 10.200.3.125:58160 --> [OR] 147.92.242.232:443
         : HTTP/S.netify.line
         : H: uts-front.line-apps.com
         : SNI: uts-front.line-apps.com
 
-offline0: i4p-u------r---- TCP [L] 10.200.3.125:58160 --> [OR] 147.92.242.232:443
+offline0: i4p-u------r-FA- TCP [L] 10.200.3.125:58160 --> [OR] 147.92.242.232:443
         : HTTP/S.netify.line
         : H: uts-front.line-apps.com
         : SNI: uts-front.line-apps.com

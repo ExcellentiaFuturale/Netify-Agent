@@ -36,6 +36,7 @@ enum nd_capture_type {
     ndCT_PCAP_OFFLINE = 0x04,
     ndCT_TPV3 = 0x08,
     ndCT_NFQ = 0x10,
+    ndCT_USER = 0x80,
 };
 
 #define ndCT_TYPE(t)    (t & 0xfffffffe)

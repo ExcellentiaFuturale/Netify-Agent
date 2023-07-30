@@ -1,4 +1,4 @@
-offline0: i4p--------r---- TCP [L] 192.168.0.7:8080 <-- [OL] 192.168.0.20:33632
+offline0: i4p--------r-FA- TCP [L] 192.168.0.7:8080 <-- [OL] 192.168.0.20:33632
         : HTTP.netify.internal-network
         : H: wwww.lan
         : HTTP/UA: curl/7.64.0

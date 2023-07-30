@@ -441,6 +441,6 @@ offline0: i4pc-gx-d------- UDP [OR] 52.114.77.136:3478 <-- [L] 192.168.1.6:51681
 offline0: i4pc-gx--------- TCP [OR] 151.11.50.139:2222 <-- [L] 192.168.1.6:54750
         : Unknown
 
-offline0: i4pc-gxX----sFA- TCP [OR] 149.154.167.91:443 <-- [L] 192.168.1.6:58533
+offline0: i4pc-gx-----sFA- TCP [OR] 149.154.167.91:443 <-- [L] 192.168.1.6:58533
         : Telegram.netify.telegram
 

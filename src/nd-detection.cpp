@@ -1003,6 +1003,7 @@ void ndDetectionThread::SetDetectedApplication(ndDetectionQueueEntry *entry, nd_
 {
     if (app_id == ND_APP_UNKNOWN) return;
 
+    ndEF->detected_application = app_id;
     ndi.apps.Lookup(app_id, ndEF->detected_application_name);
 
     ndEF->category.application = ndi.categories.Lookup(

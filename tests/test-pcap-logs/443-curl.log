@@ -3,7 +3,7 @@ offline0: i4p--------r---- TCP [OR] 178.62.197.130:443 <-- [L] 192.168.1.13:5552
         : H: www.ntop.org
         : SNI: www.ntop.org
 
-offline0: i4p-u------r-FA- TCP [OR] 178.62.197.130:443 <-- [L] 192.168.1.13:55523
+offline0: i4p-u------r---- TCP [OR] 178.62.197.130:443 <-- [L] 192.168.1.13:55523
         : HTTP/S
         : H: www.ntop.org
         : SNI: www.ntop.org CN: www.ntop.org

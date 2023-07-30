@@ -17,17 +17,17 @@ offline0: i4p--------r---- UDP [L] 192.168.12.1:53 <-- [OL] 192.168.12.114:18874
         : DNS.netify.nintendo
         : H: e0d67c509fb203858ebcb2fe3f88c2aa.baas.nintendo.com
 
-offline0: i4p-----d--r-FA- TCP [OR] 54.192.27.217:443 <-- [L] 192.168.12.114:41517
+offline0: i4p-----d--r---- TCP [OR] 54.192.27.217:443 <-- [L] 192.168.12.114:41517
         : HTTP/S.netify.nintendo
         : D: d3fthpvv7fzx00.cloudfront.net H: e0d67c509fb203858ebcb2fe3f88c2aa.baas.nintendo.com
         : SNI: e0d67c509fb203858ebcb2fe3f88c2aa.baas.nintendo.com
 
-offline0: i4p-u---d--r-FA- TCP [OR] 54.192.27.217:443 <-- [L] 192.168.12.114:41517
+offline0: i4p-u---d--r---- TCP [OR] 54.192.27.217:443 <-- [L] 192.168.12.114:41517
         : HTTP/S.netify.nintendo
         : D: d3fthpvv7fzx00.cloudfront.net H: e0d67c509fb203858ebcb2fe3f88c2aa.baas.nintendo.com
         : SNI: e0d67c509fb203858ebcb2fe3f88c2aa.baas.nintendo.com
 
-offline0: i4p-u---d--r-FA- TCP [OR] 54.192.27.217:443 <-- [L] 192.168.12.114:41517
+offline0: i4p-u---d--r---- TCP [OR] 54.192.27.217:443 <-- [L] 192.168.12.114:41517
         : HTTP/S.netify.nintendo
         : D: d3fthpvv7fzx00.cloudfront.net H: e0d67c509fb203858ebcb2fe3f88c2aa.baas.nintendo.com
         : SNI: e0d67c509fb203858ebcb2fe3f88c2aa.baas.nintendo.com

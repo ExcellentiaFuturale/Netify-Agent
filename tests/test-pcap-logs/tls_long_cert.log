@@ -3,7 +3,7 @@ offline0: i4p--------r---- TCP [OR] 104.111.215.93:443 <-- [L] 192.168.2.126:601
         : H: www.repubblica.it
         : SNI: www.repubblica.it
 
-offline0: i4p-u------r-FA- TCP [OR] 104.111.215.93:443 <-- [L] 192.168.2.126:60174
+offline0: i4p-u------r---- TCP [OR] 104.111.215.93:443 <-- [L] 192.168.2.126:60174
         : HTTP/S
         : H: www.repubblica.it
         : SNI: www.repubblica.it CN: www.repstatic.it

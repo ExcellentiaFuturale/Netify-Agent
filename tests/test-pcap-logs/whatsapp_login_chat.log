@@ -28,6 +28,6 @@ offline0: i6p--------r---- UDP [L] fe80::189c:c31b:1298:224:5353 --> [OM] ff02::
         : MDNS.netify.internal-network
         : H: _raop._tcp.local
 
-offline0: i4pc-------rs--- TCP [OR] 17.110.229.14:5223 <-- [L] 192.168.2.4:49193
+offline0: i4pc-------rsFA- TCP [OR] 17.110.229.14:5223 <-- [L] 192.168.2.4:49193
         : Apple/Push.netify.apple-push
 

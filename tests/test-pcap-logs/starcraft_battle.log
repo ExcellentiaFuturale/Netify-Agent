@@ -21,7 +21,7 @@ offline0: i4pc-------r---- UDP [L] 192.168.1.254:38605 --> [OM] 239.255.255.250:
         : SSDP
         : H: 239.255.255.250
 
-offline0: i4p--------r-FA- TCP [OR] 173.194.113.224:80 <-- [L] 192.168.1.100:3506
+offline0: i4p--------r---- TCP [OR] 173.194.113.224:80 <-- [L] 192.168.1.100:3506
         : HTTP.netify.analytics
         : H: www.google-analytics.com
         : HTTP/UA: Battle.net/1.3.0.5952
@@ -31,7 +31,7 @@ offline0: i4p--------r---- UDP [L] 192.168.1.100:60026 --> [OL] 192.168.1.254:53
         : DNS.netify.blizzard
         : H: llnw.blizzard.com
 
-offline0: i4p-----d--r-FA- TCP [OR] 87.248.221.254:80 <-- [L] 192.168.1.100:3508
+offline0: i4p-----d--r---- TCP [OR] 87.248.221.254:80 <-- [L] 192.168.1.100:3508
         : HTTP.netify.blizzard
         : D: blizzard.vo.llnwd.net H: llnw.blizzard.com
         : HTTP/UA: Blizzard Web Client

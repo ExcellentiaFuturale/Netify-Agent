@@ -28,17 +28,17 @@ offline0: i4p--------r---- UDP [L] 10.0.0.227:62322 --> [OR] 75.75.76.76:53
         : DNS.netify.viasat
         : H: vco.pandion.viasat.com
 
-offline0: i4p-----d--r---- TCP [OR] 8.37.102.91:443 <-- [L] 10.0.0.227:56918
+offline0: i4p-----d--r-FA- TCP [OR] 8.37.102.91:443 <-- [L] 10.0.0.227:56918
         : HTTP/S.netify.viasat
         : D: vco.pandion.viasat.com
         : SNI: vco.pandion.viasat.com
 
-offline0: i4p-u---d--r---- TCP [OR] 8.37.102.91:443 <-- [L] 10.0.0.227:56918
+offline0: i4p-u---d--r-FA- TCP [OR] 8.37.102.91:443 <-- [L] 10.0.0.227:56918
         : HTTP/S.netify.viasat
         : D: vco.pandion.viasat.com
         : SNI: vco.pandion.viasat.com
 
-offline0: i4p-u---d--r---- TCP [OR] 8.37.102.91:443 <-- [L] 10.0.0.227:56918
+offline0: i4p-u---d--r-FA- TCP [OR] 8.37.102.91:443 <-- [L] 10.0.0.227:56918
         : HTTP/S.netify.viasat
         : D: vco.pandion.viasat.com
         : SNI: vco.pandion.viasat.com
@@ -103,7 +103,7 @@ offline0: i4p--------r---- UDP [L] 10.0.0.227:58155 --> [OR] 75.75.76.76:53
         : DNS.netify.slack
         : H: slack.com
 
-offline0: i4p-----d--r---- TCP [L] 10.0.0.227:56920 --> [OR] 99.86.34.156:443
+offline0: i4p-----d--r-FA- TCP [L] 10.0.0.227:56920 --> [OR] 99.86.34.156:443
         : HTTP/S.netify.slack
         : D: slack.com
         : SNI: slack.com
@@ -279,7 +279,7 @@ offline0: i4pc-gx-d----FA- TCP [OR] 8.37.103.196:443 <-- [L] 10.0.0.227:56871
 offline0: i4pc-gx--------- UDP [L] 10.0.0.1:192 <-- [OL] 10.0.0.227:52595
         : Unknown
 
-offline0: i4pc-gxX-----FA- TCP [L] 10.0.0.227:56885 --> [OR] 184.25.56.53:80
+offline0: i4pc-gx------FA- TCP [L] 10.0.0.227:56885 --> [OR] 184.25.56.53:80
         : HTTP
 
 offline0: i4pc-gx------FA- TCP [L] 10.0.0.149:8008 <-- [OL] 10.0.0.227:56865
