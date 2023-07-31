@@ -1,20 +1,20 @@
-offline0: i4p--------r---- TCP [OR] 91.143.93.242:443 <-- [L] 192.168.1.252:51110
+offline0: i4p--------r-FA- TCP [OR] 91.143.93.242:443 <-- [L] 192.168.1.252:51110
         : HTTP/S
         : H: www.ct7ctrgb6cr7.com
         : SNI: www.ct7ctrgb6cr7.com
 
-offline0: i4p-u------r---- TCP [OR] 91.143.93.242:443 <-- [L] 192.168.1.252:51110
+offline0: i4p-u------r-FA- TCP [OR] 91.143.93.242:443 <-- [L] 192.168.1.252:51110
         : HTTP/S
         : H: www.ct7ctrgb6cr7.com
         : SNI: www.ct7ctrgb6cr7.com CN: www.g6ghvisevf3ibuu5.net
         : IDN: CN=www.xkgk7fdx362yyyxib.com SDN: CN=www.g6ghvisevf3ibuu5.net
 
-offline0: i4p--------r---- TCP [OR] 46.59.52.31:443 <-- [L] 192.168.1.252:51111
+offline0: i4p--------r-FA- TCP [OR] 46.59.52.31:443 <-- [L] 192.168.1.252:51111
         : HTTP/S
         : H: www.e6r5p57kbafwrxj3plz.com
         : SNI: www.e6r5p57kbafwrxj3plz.com
 
-offline0: i4p-u------r---- TCP [OR] 46.59.52.31:443 <-- [L] 192.168.1.252:51111
+offline0: i4p-u------r-FA- TCP [OR] 46.59.52.31:443 <-- [L] 192.168.1.252:51111
         : HTTP/S
         : H: www.e6r5p57kbafwrxj3plz.com
         : SNI: www.e6r5p57kbafwrxj3plz.com CN: www.bpcau5b3haif5els.net

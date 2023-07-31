@@ -7,9 +7,9 @@ offline0: i4p--------r---- UDP [L] 192.168.1.1:53 <-- [OL] 192.168.1.6:60813
         : DNS.netify.azure
         : H: skypedataprdcolneu04.cloudapp.net
 
-offline0: i4p--------r---- TCP [OR] 52.113.194.132:443 <-- [L] 192.168.1.6:60533
+offline0: i4p-----d--r---- TCP [OR] 52.113.194.132:443 <-- [L] 192.168.1.6:60533
         : HTTP/S.netify.teams
-        : H: teams.microsoft.com
+        : D: s-0005.s-msedge.net H: teams.microsoft.com
         : SNI: teams.microsoft.com
 
 offline0: i4p-----d--r-FA- TCP [OR] 52.114.77.33:443 <-- [L] 192.168.1.6:60532
@@ -144,7 +144,7 @@ offline0: i4p-----d--r---- TCP [OR] 52.114.77.58:443 <-- [L] 192.168.1.6:60545
         : D: a-ups-presence4-prod.northeurope.cloudapp.azure.com H: presence.teams.microsoft.com
         : SNI: presence.teams.microsoft.com
 
-offline0: i4p--------r---- TCP [OR] 167.99.215.164:4434 <-- [L] 192.168.1.6:60546
+offline0: i4p--------r-FA- TCP [OR] 167.99.215.164:4434 <-- [L] 192.168.1.6:60546
         : TLS
         : H: dati.ntop.org
         : SNI: dati.ntop.org

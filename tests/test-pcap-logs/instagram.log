@@ -11,9 +11,9 @@ offline0: i4pcu------r---- TCP [OR] 173.252.107.4:443 <-- [L] 192.168.0.103:5638
         : H: telegraph-ash.instagram.com
         : SNI: telegraph-ash.instagram.com
 
-offline0: i4p--------r---- TCP [OR] 46.33.70.160:80 <-- [L] 192.168.0.103:38816
+offline0: i4p-----d--r---- TCP [OR] 46.33.70.160:80 <-- [L] 192.168.0.103:38816
         : HTTP.netify.instagram
-        : H: photos-h.ak.instagram.com
+        : D: a1408.dspw43.akamai.net H: photos-h.ak.instagram.com
         : HTTP/UA: Instagram 7.1.1 Android (19/4.4.2; 480dpi; 1080x1920; samsung; GT-I9505; jflte; qcom; it_IT)
         : URL: photos-h.ak.instagram.com/hphotos-ak-xap1/t51.2885-15/e35/10859994_1009433792434447_1627646062_n.jpg?se=7
 
@@ -23,7 +23,7 @@ offline0: i4p--------r---- TCP [OR] 82.85.26.162:80 <-- [L] 192.168.0.103:57936
         : HTTP/UA: Instagram 7.1.1 Android (19/4.4.2; 480dpi; 1080x1920; samsung; GT-I9505; jflte; qcom; it_IT)
         : URL: photos-g.ak.instagram.com/hphotos-ak-xaf1/t51.2885-15/e15/11386524_110257619317430_379513654_n.jpg
 
-offline0: i4p--------r---- TCP [OR] 82.85.26.186:80 <-- [L] 192.168.0.103:44379
+offline0: i4p--------r-FA- TCP [OR] 82.85.26.186:80 <-- [L] 192.168.0.103:44379
         : HTTP.netify.instagram
         : H: photos-e.ak.instagram.com
         : HTTP/UA: Instagram 7.1.1 Android (19/4.4.2; 480dpi; 1080x1920; samsung; GT-I9505; jflte; qcom; it_IT)
@@ -35,9 +35,9 @@ offline0: i4p--------r---- TCP [OR] 82.85.26.185:80 <-- [L] 192.168.0.103:57965
         : HTTP/UA: Instagram 7.1.1 Android (19/4.4.2; 480dpi; 1080x1920; samsung; GT-I9505; jflte; qcom; it_IT)
         : URL: photos-f.ak.instagram.com/hphotos-ak-xfa1/t51.2885-15/e35/11424623_1608163109450421_663315883_n.jpg?se=7
 
-offline0: i4p--------r---- TCP [OR] 82.85.26.153:80 <-- [L] 192.168.0.103:37350
+offline0: i4p-----d--r---- TCP [OR] 82.85.26.153:80 <-- [L] 192.168.0.103:37350
         : HTTP.netify.instagram
-        : H: photos-a.ak.instagram.com
+        : D: a1001.dspw40.akamai.net H: photos-a.ak.instagram.com
         : HTTP/UA: Instagram 7.1.1 Android (19/4.4.2; 480dpi; 1080x1920; samsung; GT-I9505; jflte; qcom; it_IT)
         : URL: photos-a.ak.instagram.com/hphotos-ak-xfa1/t51.2885-15/e35/11248829_853782121373976_909936934_n.jpg?se=7
 

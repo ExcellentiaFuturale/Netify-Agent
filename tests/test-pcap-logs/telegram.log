@@ -19,12 +19,12 @@ offline0: i4pc-------r---- UDP [L] 192.168.1.69:5353 --> [OM] 224.0.0.251:5353
 offline0: i4pc-------r---- UDP [L] 192.168.1.75:5353 --> [OM] 224.0.0.251:5353
         : MDNS.netify.internal-network
         : H: _dacp._tcp.local
-        : MDNS/DN: Gabrieles-iPad.local1EEFDEB3._dacp._tcp.local
+        : MDNS/DN: iTunes_Ctrl_4ABB39A41EEFDEB3._dacp._tcp.local
 
 offline0: i6pc-------r---- UDP [L] fe80::4ba:91a:7817:e318:5353 --> [OM] ff02::fb:5353
         : MDNS.netify.internal-network
         : H: _dacp._tcp.local
-        : MDNS/DN: Gabrieles-iPad.local1EEFDEB3._dacp._tcp.local
+        : MDNS/DN: iTunes_Ctrl_4ABB39A41EEFDEB3._dacp._tcp.local
 
 offline0: i4pc-------r---- UDP [L] 192.168.1.75:5353 <-- [OL] 192.168.1.77:5353
         : MDNS.netify.internal-network

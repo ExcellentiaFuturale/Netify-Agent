@@ -1,9 +1,9 @@
-offline0: i4p--------r---- TCP [OR] 185.60.216.53:443 <-- [L] 192.168.2.29:49674
+offline0: i4p--------r-FA- TCP [OR] 185.60.216.53:443 <-- [L] 192.168.2.29:49674
         : HTTP/S.netify.whatsapp
         : H: mmg-fna.whatsapp.net
         : SNI: mmg-fna.whatsapp.net
 
-offline0: i4p-u------r---- TCP [OR] 185.60.216.53:443 <-- [L] 192.168.2.29:49674
+offline0: i4p-u------r-FA- TCP [OR] 185.60.216.53:443 <-- [L] 192.168.2.29:49674
         : HTTP/S.netify.whatsapp
         : H: mmg-fna.whatsapp.net
         : SNI: mmg-fna.whatsapp.net

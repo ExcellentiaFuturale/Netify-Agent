@@ -33,7 +33,7 @@ offline0: i4p-u---d--r---- TCP [OR] 31.13.86.51:443 <-- [L] 192.168.2.12:50503
 offline0: i4pc-------r---- UDP [L] 192.168.2.1:17500 --> [OL] 192.168.2.255:17500
         : Dropbox
 
-offline0: i4pc-------r---- TCP [OR] 17.171.47.85:443 <-- [L] 192.168.2.12:50502
+offline0: i4pc-------r-FA- TCP [OR] 17.171.47.85:443 <-- [L] 192.168.2.12:50502
         : HTTP/S.netify.apple
 
 offline0: i4pc-------r---- UDP [L] 169.254.162.244:50384 --> [OM] 239.255.255.250:1900
@@ -75,12 +75,12 @@ offline0: i4p--------r---- UDP [L] 192.168.2.1:53 <-- [OL] 192.168.2.12:60549
         : DNS.netify.whatsapp
         : H: pps.whatsapp.net
 
-offline0: i4p-----d--r---- TCP [OR] 157.240.20.52:443 <-- [L] 192.168.2.12:50504
+offline0: i4p-----d--r-FA- TCP [OR] 157.240.20.52:443 <-- [L] 192.168.2.12:50504
         : HTTP/S.netify.whatsapp
         : D: mmx-ds.cdn.whatsapp.net H: pps.whatsapp.net
         : SNI: pps.whatsapp.net
 
-offline0: i4p-u---d--r---- TCP [OR] 157.240.20.52:443 <-- [L] 192.168.2.12:50504
+offline0: i4p-u---d--r-FA- TCP [OR] 157.240.20.52:443 <-- [L] 192.168.2.12:50504
         : HTTP/S.netify.whatsapp
         : D: mmx-ds.cdn.whatsapp.net H: pps.whatsapp.net
         : SNI: pps.whatsapp.net

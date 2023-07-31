@@ -13,7 +13,7 @@ offline0: i4p--------r-FA- TCP [OR] 8.8.4.4:853 <-- [L] 192.168.1.159:48048
 offline0: i4pc-------r---- ICMP [OR] 8.8.8.8:0 <-- [L] 192.168.1.159:0
         : ICMP.netify.google
 
-offline0: i4p--------r---- TCP [OR] 8.8.4.4:853 <-- [L] 192.168.1.159:48098
+offline0: i4p--------r-FA- TCP [OR] 8.8.4.4:853 <-- [L] 192.168.1.159:48098
         : DoT.netify.google-dns
         : H: dns.google
 
@@ -24,6 +24,6 @@ offline0: i4p--------r---- TCP [OR] 8.8.4.4:853 <-- [L] 192.168.1.159:48210
 offline0: i4pc-gx------FA- TCP [OR] 8.8.4.4:853 <-- [L] 192.168.1.159:47968
         : DoQ.netify.google
 
-offline0: i4pc-gxX-----FA- TCP [OR] 8.8.8.8:853 <-- [L] 192.168.1.159:55856
+offline0: i4pc-gx------FA- TCP [OR] 8.8.8.8:853 <-- [L] 192.168.1.159:55856
         : DoQ.netify.google
 

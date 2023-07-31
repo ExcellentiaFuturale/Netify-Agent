@@ -5,7 +5,7 @@ offline0: i4p--------r---- UDP [L] 192.168.2.1:53 <-- [OL] 192.168.2.4:61697
         : DNS.netify.whatsapp
         : H: e12.whatsapp.net
 
-offline0: i4pc----d--r---- TCP [OR] 158.85.58.15:5222 <-- [L] 192.168.2.4:49206
+offline0: i4pc----d--r-FA- TCP [OR] 158.85.58.15:5222 <-- [L] 192.168.2.4:49206
         : WhatsApp.netify.whatsapp
         : D: e12.whatsapp.net
 

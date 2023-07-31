@@ -1,4 +1,4 @@
-offline0: i4p--------r---- TCP [OR] 106.15.100.123:443 <-- [L] 192.168.1.60:55333
+offline0: i4p--------r-FA- TCP [OR] 106.15.100.123:443 <-- [L] 192.168.1.60:55333
         : HTTP/S.netify.alibaba-cloud
         : H: beacon-api.aliyuncs.com
         : SNI: beacon-api.aliyuncs.com

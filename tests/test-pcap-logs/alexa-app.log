@@ -58,17 +58,17 @@ offline0: i4p--------r---- UDP [L] 172.16.42.1:53 <-- [OL] 172.16.42.216:48155
         : DNS.netify.amazon
         : H: www.amazon.com
 
-offline0: i4p-----d--r---- TCP [OR] 52.85.209.197:443 <-- [L] 172.16.42.216:55242
+offline0: i4p-----d--r-FA- TCP [OR] 52.85.209.197:443 <-- [L] 172.16.42.216:55242
         : HTTP/S.netify.amazon
         : D: d3ag4hukkh62yn.cloudfront.net H: www.amazon.com
         : SNI: www.amazon.com
 
-offline0: i4p-u---d--r---- TCP [OR] 52.85.209.197:443 <-- [L] 172.16.42.216:55242
+offline0: i4p-u---d--r-FA- TCP [OR] 52.85.209.197:443 <-- [L] 172.16.42.216:55242
         : HTTP/S.netify.amazon
         : D: d3ag4hukkh62yn.cloudfront.net H: www.amazon.com
         : SNI: www.amazon.com
 
-offline0: i4p-u---d--r---- TCP [OR] 52.85.209.197:443 <-- [L] 172.16.42.216:55242
+offline0: i4p-u---d--r-FA- TCP [OR] 52.85.209.197:443 <-- [L] 172.16.42.216:55242
         : HTTP/S.netify.amazon
         : D: d3ag4hukkh62yn.cloudfront.net H: www.amazon.com
         : SNI: www.amazon.com CN: www.amazon.com
@@ -1168,7 +1168,7 @@ offline0: i4pc-gx-d----FA- TCP [OR] 54.231.72.88:443 <-- [L] 172.16.42.216:41821
         : D: s3-external-1.amazonaws.com
         : SNI: s3-external-1.amazonaws.com
 
-offline0: i4pc-gxX-------- TCP [L] 10.201.126.241:8080 <-- [OL] 172.16.42.216:40242
+offline0: i4pc-gx--------- TCP [L] 10.201.126.241:8080 <-- [OL] 172.16.42.216:40242
         : HTTP/Proxy
 
 offline0: i4pc-gx--------- TCP [L] 10.201.126.241:8080 <-- [OL] 172.16.42.216:40202

@@ -116,7 +116,7 @@ offline0: i4pc-gx-d------- TCP [OR] 47.89.65.229:443 <-- [L] 192.168.1.105:50831
         : D: g.alicdn.com.danuoyi.alicdn.com
         : SNI: g.alicdn.com.danuoyi.alicdn.com
 
-offline0: i4pc-gxX-------- TCP [L] 192.168.1.105:34699 --> [OR] 216.58.212.65:443
+offline0: i4pc-gx--------- TCP [L] 192.168.1.105:34699 --> [OR] 216.58.212.65:443
         : HTTP/S.netify.google
 
 offline0: i4pc-gx-d------- TCP [L] 192.168.1.105:42280 --> [OR] 222.73.28.96:80

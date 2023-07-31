@@ -1,10 +1,10 @@
 offline0: i4p--------r---- TCP [OR] 95.101.24.53:443 <-- [L] 192.168.2.17:50677
         : HTTP/S
 
-offline0: i4p--------r---- TCP [OR] 17.248.176.75:443 <-- [L] 192.168.2.17:50584
+offline0: i4p--------r-FA- TCP [OR] 17.248.176.75:443 <-- [L] 192.168.2.17:50584
         : HTTP/S.netify.apple
 
-offline0: i4p--------r---- TCP [OR] 17.248.176.75:443 <-- [L] 192.168.2.17:50580
+offline0: i4p--------r-FA- TCP [OR] 17.248.176.75:443 <-- [L] 192.168.2.17:50580
         : HTTP/S.netify.apple
 
 offline0: i4pc-------r---- UDP [L] 0.0.0.0:68 --> [OB] 255.255.255.255:67
@@ -12,7 +12,7 @@ offline0: i4pc-------r---- UDP [L] 0.0.0.0:68 --> [OB] 255.255.255.255:67
         : H: lucas-imac
         : DHCP/FP: 1,121,3,6,15,119,252,95,44,46
 
-offline0: i4pc-------r---- TCP [OR] 17.248.185.10:443 <-- [L] 192.168.2.17:50702
+offline0: i4pc-------r-FA- TCP [OR] 17.248.185.10:443 <-- [L] 192.168.2.17:50702
         : HTTP/S.netify.apple
 
 offline0: i4pc-------r---- UDP [L] 192.168.2.1:17500 --> [OL] 192.168.2.255:17500
@@ -63,7 +63,7 @@ offline0: i4p--------r---- UDP [L] 192.168.2.1:53 <-- [OL] 192.168.2.16:52953
         : DNS.netify.apple
         : H: captive.apple.com
 
-offline0: i4p-----d--r---- TCP [OR] 17.253.53.201:80 <-- [L] 192.168.2.16:58338
+offline0: i4p-----d--r-FA- TCP [OR] 17.253.53.201:80 <-- [L] 192.168.2.16:58338
         : HTTP.netify.apple
         : D: captive.g.aaplimg.com H: captive.apple.com
         : HTTP/UA: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.32 Safari/537.36
@@ -353,7 +353,7 @@ offline0: i4pc-gx-d---s--- TCP [L] 192.168.2.16:49510 --> [OR] 216.239.38.120:52
         : XMPP.netify.google-chat
         : D: clients1.google.com
 
-offline0: i4pc-gxXd------- TCP [OR] 172.217.20.76:443 <-- [L] 192.168.2.16:43652
+offline0: i4pc-gx-d------- TCP [OR] 172.217.20.76:443 <-- [L] 192.168.2.16:43652
         : HTTP/S.netify.google
         : D: proxy.googlezip.net
         : SNI: proxy.googlezip.net

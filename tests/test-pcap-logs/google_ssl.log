@@ -1,3 +1,3 @@
-offline0: i4pc-gxX-----FA- TCP [L] 172.31.3.224:42835 --> [OR] 216.58.212.100:443
+offline0: i4pc-gx------FA- TCP [L] 172.31.3.224:42835 --> [OR] 216.58.212.100:443
         : HTTP/S.netify.google
 

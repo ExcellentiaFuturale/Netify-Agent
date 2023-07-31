@@ -50,17 +50,17 @@ offline0: i4p--------r---- TCP [L] 10.0.0.227:56915 --> [OR] 52.37.243.173:443
 offline0: i4p--------r---- TCP [L] 10.0.0.227:56914 --> [OR] 52.37.243.173:443
         : HTTP/S
 
-offline0: i4p-----d--r---- TCP [OR] 8.37.102.91:443 <-- [L] 10.0.0.227:56919
+offline0: i4p-----d--r-FA- TCP [OR] 8.37.102.91:443 <-- [L] 10.0.0.227:56919
         : HTTP/S.netify.viasat
         : D: vco.pandion.viasat.com
         : SNI: vco.pandion.viasat.com
 
-offline0: i4p-u---d--r---- TCP [OR] 8.37.102.91:443 <-- [L] 10.0.0.227:56919
+offline0: i4p-u---d--r-FA- TCP [OR] 8.37.102.91:443 <-- [L] 10.0.0.227:56919
         : HTTP/S.netify.viasat
         : D: vco.pandion.viasat.com
         : SNI: vco.pandion.viasat.com
 
-offline0: i4p-u---d--r---- TCP [OR] 8.37.102.91:443 <-- [L] 10.0.0.227:56919
+offline0: i4p-u---d--r-FA- TCP [OR] 8.37.102.91:443 <-- [L] 10.0.0.227:56919
         : HTTP/S.netify.viasat
         : D: vco.pandion.viasat.com
         : SNI: vco.pandion.viasat.com

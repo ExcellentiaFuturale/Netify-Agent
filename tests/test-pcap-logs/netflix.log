@@ -6,7 +6,7 @@ offline0: i4p--------r---- UDP [L] 192.168.1.1:53 <-- [OL] 192.168.1.7:52116
         : DNS.netify.netflix
         : H: ichnaea.us-west-2.prodaa.netflix.com
 
-offline0: i4p-----d--r---- TCP [OR] 54.69.204.241:443 <-- [L] 192.168.1.7:53105
+offline0: i4p-----d--r-FA- TCP [OR] 54.69.204.241:443 <-- [L] 192.168.1.7:53105
         : HTTP/S.netify.netflix
         : D: ichnaea.us-west-2.prodaa.netflix.com H: ichnaea.netflix.com
         : SNI: ichnaea.netflix.com
@@ -16,12 +16,12 @@ offline0: i4p-----d--r-FA- TCP [OR] 54.191.17.51:443 <-- [L] 192.168.1.7:53114
         : D: ios.nccp.us-west-2.prodaa.netflix.com H: ios.nccp.netflix.com
         : SNI: ios.nccp.netflix.com
 
-offline0: i4p-u---d--r---- TCP [OR] 54.69.204.241:443 <-- [L] 192.168.1.7:53105
+offline0: i4p-u---d--r-FA- TCP [OR] 54.69.204.241:443 <-- [L] 192.168.1.7:53105
         : HTTP/S.netify.netflix
         : D: ichnaea.us-west-2.prodaa.netflix.com H: ichnaea.netflix.com
         : SNI: ichnaea.netflix.com
 
-offline0: i4p-u---d--r---- TCP [OR] 54.69.204.241:443 <-- [L] 192.168.1.7:53105
+offline0: i4p-u---d--r-FA- TCP [OR] 54.69.204.241:443 <-- [L] 192.168.1.7:53105
         : HTTP/S.netify.netflix
         : D: ichnaea.us-west-2.prodaa.netflix.com H: ichnaea.netflix.com
         : SNI: ichnaea.netflix.com CN: customerevents.netflix.com
@@ -38,7 +38,7 @@ offline0: i4p-u---d--r-FA- TCP [OR] 54.191.17.51:443 <-- [L] 192.168.1.7:53114
         : SNI: ios.nccp.netflix.com
         : IDN: CN=Primary Certificate Authority (2009), ST=California, C=US, O=Netflix Inc, OU=Electronic Delivery, L=Los Gatos SDN: CN=*.nccp.netflix.com, O=Netflix, Inc., OU=Operations, C=US, ST=California, L=Los Gatos
 
-offline0: i4p--------r---- TCP [OR] 52.32.196.36:443 <-- [L] 192.168.1.7:53115
+offline0: i4p--------r-FA- TCP [OR] 52.32.196.36:443 <-- [L] 192.168.1.7:53115
         : HTTP/S.netify.netflix
         : H: api-global.netflix.com
         : SNI: api-global.netflix.com
@@ -48,12 +48,12 @@ offline0: i4p--------r---- TCP [OR] 52.32.196.36:443 <-- [L] 192.168.1.7:53116
         : H: api-global.netflix.com
         : SNI: api-global.netflix.com
 
-offline0: i4p-u------r---- TCP [OR] 52.32.196.36:443 <-- [L] 192.168.1.7:53115
+offline0: i4p-u------r-FA- TCP [OR] 52.32.196.36:443 <-- [L] 192.168.1.7:53115
         : HTTP/S.netify.netflix
         : H: api-global.netflix.com
         : SNI: api-global.netflix.com
 
-offline0: i4p-u------r---- TCP [OR] 52.32.196.36:443 <-- [L] 192.168.1.7:53115
+offline0: i4p-u------r-FA- TCP [OR] 52.32.196.36:443 <-- [L] 192.168.1.7:53115
         : HTTP/S.netify.netflix
         : H: api-global.netflix.com
         : SNI: api-global.netflix.com CN: api.netflix.com
@@ -70,27 +70,27 @@ offline0: i4p-u------r---- TCP [OR] 52.32.196.36:443 <-- [L] 192.168.1.7:53116
         : SNI: api-global.netflix.com CN: api.netflix.com
         : IDN: C=US, O=Symantec Corporation, OU=Symantec Trust Network, CN=Symantec Class 3 Secure Server CA - G4 SDN: C=US, ST=California, L=los gatos, O=Netflix, Inc., OU=Ops, CN=api.netflix.com
 
-offline0: i4p--------r---- TCP [OR] 52.32.196.36:443 <-- [L] 192.168.1.7:53117
+offline0: i4p--------r-FA- TCP [OR] 52.32.196.36:443 <-- [L] 192.168.1.7:53117
         : HTTP/S.netify.netflix
         : H: api-global.netflix.com
         : SNI: api-global.netflix.com
 
-offline0: i4pcu------r---- TCP [OR] 52.32.196.36:443 <-- [L] 192.168.1.7:53117
+offline0: i4pcu------r-FA- TCP [OR] 52.32.196.36:443 <-- [L] 192.168.1.7:53117
         : HTTP/S.netify.netflix
         : H: api-global.netflix.com
         : SNI: api-global.netflix.com
 
-offline0: i4p-----d--r---- TCP [OR] 54.69.204.241:443 <-- [L] 192.168.1.7:53118
+offline0: i4p-----d--r-FA- TCP [OR] 54.69.204.241:443 <-- [L] 192.168.1.7:53118
         : HTTP/S.netify.netflix
         : D: ichnaea.us-west-2.prodaa.netflix.com H: ichnaea.netflix.com
         : SNI: ichnaea.netflix.com
 
-offline0: i4p-u---d--r---- TCP [OR] 54.69.204.241:443 <-- [L] 192.168.1.7:53118
+offline0: i4p-u---d--r-FA- TCP [OR] 54.69.204.241:443 <-- [L] 192.168.1.7:53118
         : HTTP/S.netify.netflix
         : D: ichnaea.us-west-2.prodaa.netflix.com H: ichnaea.netflix.com
         : SNI: ichnaea.netflix.com
 
-offline0: i4p-u---d--r---- TCP [OR] 54.69.204.241:443 <-- [L] 192.168.1.7:53118
+offline0: i4p-u---d--r-FA- TCP [OR] 54.69.204.241:443 <-- [L] 192.168.1.7:53118
         : HTTP/S.netify.netflix
         : D: ichnaea.us-west-2.prodaa.netflix.com H: ichnaea.netflix.com
         : SNI: ichnaea.netflix.com CN: customerevents.netflix.com
@@ -100,17 +100,17 @@ offline0: i4pc-------r---- UDP [L] 192.168.1.7:53776 --> [OM] 239.255.255.250:19
         : SSDP
         : H: 239.255.255.250
 
-offline0: i4p-----d--r---- TCP [OR] 54.69.204.241:443 <-- [L] 192.168.1.7:53119
+offline0: i4p-----d--r-FA- TCP [OR] 54.69.204.241:443 <-- [L] 192.168.1.7:53119
         : HTTP/S.netify.netflix
         : D: ichnaea.us-west-2.prodaa.netflix.com H: ichnaea.netflix.com
         : SNI: ichnaea.netflix.com
 
-offline0: i4p-u---d--r---- TCP [OR] 54.69.204.241:443 <-- [L] 192.168.1.7:53119
+offline0: i4p-u---d--r-FA- TCP [OR] 54.69.204.241:443 <-- [L] 192.168.1.7:53119
         : HTTP/S.netify.netflix
         : D: ichnaea.us-west-2.prodaa.netflix.com H: ichnaea.netflix.com
         : SNI: ichnaea.netflix.com
 
-offline0: i4p-u---d--r---- TCP [OR] 54.69.204.241:443 <-- [L] 192.168.1.7:53119
+offline0: i4p-u---d--r-FA- TCP [OR] 54.69.204.241:443 <-- [L] 192.168.1.7:53119
         : HTTP/S.netify.netflix
         : D: ichnaea.us-west-2.prodaa.netflix.com H: ichnaea.netflix.com
         : SNI: ichnaea.netflix.com CN: customerevents.netflix.com
@@ -123,44 +123,44 @@ offline0: i4p--------r---- UDP [L] 192.168.1.1:53 <-- [OL] 192.168.1.7:51949
         : DNS.netify.netflix
         : H: api-global.latency.prodaa.netflix.com
 
-offline0: i4p-----d--r---- TCP [OR] 52.89.39.139:443 <-- [L] 192.168.1.7:53132
+offline0: i4p-----d--r-FA- TCP [OR] 52.89.39.139:443 <-- [L] 192.168.1.7:53132
         : HTTP/S.netify.netflix
         : D: api-global.latency.prodaa.netflix.com H: api-global.netflix.com
         : SNI: api-global.netflix.com
 
-offline0: i4p-----d--r---- TCP [OR] 52.89.39.139:443 <-- [L] 192.168.1.7:53133
+offline0: i4p-----d--r-FA- TCP [OR] 52.89.39.139:443 <-- [L] 192.168.1.7:53133
         : HTTP/S.netify.netflix
         : D: api-global.latency.prodaa.netflix.com H: api-global.netflix.com
         : SNI: api-global.netflix.com
 
-offline0: i4p-u---d--r---- TCP [OR] 52.89.39.139:443 <-- [L] 192.168.1.7:53132
+offline0: i4p-u---d--r-FA- TCP [OR] 52.89.39.139:443 <-- [L] 192.168.1.7:53132
         : HTTP/S.netify.netflix
         : D: api-global.latency.prodaa.netflix.com H: api-global.netflix.com
         : SNI: api-global.netflix.com
 
-offline0: i4p-u---d--r---- TCP [OR] 52.89.39.139:443 <-- [L] 192.168.1.7:53132
+offline0: i4p-u---d--r-FA- TCP [OR] 52.89.39.139:443 <-- [L] 192.168.1.7:53132
         : HTTP/S.netify.netflix
         : D: api-global.latency.prodaa.netflix.com H: api-global.netflix.com
         : SNI: api-global.netflix.com CN: api.netflix.com
         : IDN: C=US, O=Symantec Corporation, OU=Symantec Trust Network, CN=Symantec Class 3 Secure Server CA - G4 SDN: C=US, ST=California, L=los gatos, O=Netflix, Inc., OU=Ops, CN=api.netflix.com
 
-offline0: i4p-u---d--r---- TCP [OR] 52.89.39.139:443 <-- [L] 192.168.1.7:53133
+offline0: i4p-u---d--r-FA- TCP [OR] 52.89.39.139:443 <-- [L] 192.168.1.7:53133
         : HTTP/S.netify.netflix
         : D: api-global.latency.prodaa.netflix.com H: api-global.netflix.com
         : SNI: api-global.netflix.com
 
-offline0: i4p-u---d--r---- TCP [OR] 52.89.39.139:443 <-- [L] 192.168.1.7:53133
+offline0: i4p-u---d--r-FA- TCP [OR] 52.89.39.139:443 <-- [L] 192.168.1.7:53133
         : HTTP/S.netify.netflix
         : D: api-global.latency.prodaa.netflix.com H: api-global.netflix.com
         : SNI: api-global.netflix.com CN: api.netflix.com
         : IDN: C=US, O=Symantec Corporation, OU=Symantec Trust Network, CN=Symantec Class 3 Secure Server CA - G4 SDN: C=US, ST=California, L=los gatos, O=Netflix, Inc., OU=Ops, CN=api.netflix.com
 
-offline0: i4p-----d--r---- TCP [OR] 52.89.39.139:443 <-- [L] 192.168.1.7:53134
+offline0: i4p-----d--r-FA- TCP [OR] 52.89.39.139:443 <-- [L] 192.168.1.7:53134
         : HTTP/S.netify.netflix
         : D: api-global.latency.prodaa.netflix.com H: api-global.netflix.com
         : SNI: api-global.netflix.com
 
-offline0: i4pcu---d--r---- TCP [OR] 52.89.39.139:443 <-- [L] 192.168.1.7:53134
+offline0: i4pcu---d--r-FA- TCP [OR] 52.89.39.139:443 <-- [L] 192.168.1.7:53134
         : HTTP/S.netify.netflix
         : D: api-global.latency.prodaa.netflix.com H: api-global.netflix.com
         : SNI: api-global.netflix.com
@@ -184,7 +184,7 @@ offline0: i4p--------r---- UDP [L] 192.168.1.1:53 <-- [OL] 192.168.1.7:59180
         : DNS.netify.netflix
         : H: artwork.akam.nflximg.net
 
-offline0: i4p-----d--r---- TCP [OR] 184.25.204.25:80 <-- [L] 192.168.1.7:53148
+offline0: i4p-----d--r-FA- TCP [OR] 184.25.204.25:80 <-- [L] 192.168.1.7:53148
         : HTTP.netify.netflix
         : D: a1907.dscg.akamai.net H: art-2.nflximg.net
         : HTTP/UA: Argo/9.1.0 (iPhone; iOS 10.2; Scale/2.00)
@@ -196,7 +196,7 @@ offline0: i4p-----d--r---- TCP [OR] 184.25.204.25:80 <-- [L] 192.168.1.7:53149
         : HTTP/UA: Argo/9.1.0 (iPhone; iOS 10.2; Scale/2.00)
         : URL: art-2.nflximg.net/5758c/bb636e44b87ef854c331ed7b7b6e157e4945758c.jpg
 
-offline0: i4p-----d--r---- TCP [OR] 184.25.204.25:80 <-- [L] 192.168.1.7:53150
+offline0: i4p-----d--r-FA- TCP [OR] 184.25.204.25:80 <-- [L] 192.168.1.7:53150
         : HTTP.netify.netflix
         : D: a1907.dscg.akamai.net H: art-2.nflximg.net
         : HTTP/UA: Argo/9.1.0 (iPhone; iOS 10.2; Scale/2.00)
@@ -206,13 +206,13 @@ offline0: i4p--------r---- UDP [L] 192.168.1.1:53 <-- [OL] 192.168.1.7:58102
         : DNS.netify.netflix
         : H: appboot.netflix.com
 
-offline0: i4p-----d--r---- TCP [OR] 54.201.191.132:80 <-- [L] 192.168.1.7:53151
+offline0: i4p-----d--r-FA- TCP [OR] 54.201.191.132:80 <-- [L] 192.168.1.7:53151
         : HTTP.netify.netflix
         : D: appboot.us-west-2.prodaa.netflix.com H: appboot.netflix.com
         : HTTP/UA: Argo/900 CFNetwork/808.2.16 Darwin/16.3.0
         : URL: appboot.netflix.com/appboot/NFAPPL-02-
 
-offline0: i4p-----d--r---- TCP [OR] 52.89.39.139:80 <-- [L] 192.168.1.7:53152
+offline0: i4p-----d--r-FA- TCP [OR] 52.89.39.139:80 <-- [L] 192.168.1.7:53152
         : HTTP.netify.netflix
         : D: api-global.latency.prodaa.netflix.com H: api-global.netflix.com
         : HTTP/UA: Argo/900 CFNetwork/808.2.16 Darwin/16.3.0

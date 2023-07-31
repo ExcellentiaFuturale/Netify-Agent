@@ -1,7 +1,7 @@
 offline0: i4pc-------rs--- UDP [L] 10.8.0.1:46214 --> [OR] 200.89.75.198:123
         : NTP.netify.ntp
 
-offline0: i4p--------r---- TCP [L] 10.8.0.1:54915 --> [OR] 65.39.128.135:80
+offline0: i4p--------r-FA- TCP [L] 10.8.0.1:54915 --> [OR] 65.39.128.135:80
         : HTTP
         : H: xtra1.gpsonextra.net
         : HTTP/UA: Android
@@ -13,13 +13,13 @@ offline0: i4p--------r-FA- TCP [L] 10.8.0.1:45529 --> [OR] 54.230.227.172:80
         : HTTP/UA: /3.9.4.0
         : URL: roadshields.waze.com/images/HD/CH2.png
 
-offline0: i4p--------r---- TCP [L] 10.8.0.1:36100 --> [OR] 46.51.173.182:443
+offline0: i4p--------r-FA- TCP [L] 10.8.0.1:36100 --> [OR] 46.51.173.182:443
         : HTTP/S
 
 offline0: i4p--------r---- TCP [L] 10.8.0.1:36585 --> [OR] 173.194.118.48:443
         : HTTP/S.netify.google
 
-offline0: i4p--------r---- TCP [L] 10.8.0.1:36102 --> [OR] 46.51.173.182:443
+offline0: i4p--------r-FA- TCP [L] 10.8.0.1:36102 --> [OR] 46.51.173.182:443
         : HTTP/S
 
 offline0: i4pcu------r---- TCP [L] 10.8.0.1:36585 --> [OR] 173.194.118.48:443
@@ -31,14 +31,14 @@ offline0: i4p--------r-FA- TCP [L] 10.8.0.1:45536 --> [OR] 54.230.227.172:80
         : HTTP/UA: /3.9.4.0
         : URL: cres.waze.com/lang_asr/lang.portuguese_br_asr
 
-offline0: i4p-u------r---- TCP [L] 10.8.0.1:36102 --> [OR] 46.51.173.182:443
+offline0: i4p-u------r-FA- TCP [L] 10.8.0.1:36102 --> [OR] 46.51.173.182:443
         : HTTP/S
 
-offline0: i4p-u------r---- TCP [L] 10.8.0.1:36100 --> [OR] 46.51.173.182:443
+offline0: i4p-u------r-FA- TCP [L] 10.8.0.1:36100 --> [OR] 46.51.173.182:443
         : HTTP/S
         : IDN: C=US, O=Google Inc, CN=Google Internet Authority G2 SDN: C=US, ST=California, L=Mountain View, O=Google Inc, CN=*.world.waze.com
 
-offline0: i4p-u------r---- TCP [L] 10.8.0.1:36102 --> [OR] 46.51.173.182:443
+offline0: i4p-u------r-FA- TCP [L] 10.8.0.1:36102 --> [OR] 46.51.173.182:443
         : HTTP/S
         : IDN: C=US, O=Google Inc, CN=Google Internet Authority G2 SDN: C=US, ST=California, L=Mountain View, O=Google Inc, CN=*.world.waze.com
 
@@ -169,7 +169,7 @@ offline0: i4p-u------r-FA- TCP [L] 10.8.0.1:36137 --> [OR] 46.51.173.182:443
 offline0: i4pc-gx------FA- TCP [L] 10.16.37.157:52746 --> [OR] 200.160.4.49:80
         : HTTP
 
-offline0: i4pc-gxX-----FA- TCP [L] 10.8.0.1:45169 --> [OR] 200.160.4.198:80
+offline0: i4pc-gx------FA- TCP [L] 10.8.0.1:45169 --> [OR] 200.160.4.198:80
         : HTTP
 
 offline0: i4pc-gx------FA- TCP [L] 10.16.37.157:41823 --> [OR] 200.160.4.49:80

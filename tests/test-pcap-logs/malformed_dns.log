@@ -2,7 +2,3 @@ offline0: i4p--------r---- UDP [L] 127.0.0.1:50435 --> [OL] 127.0.0.1:53
         : DNS
         : H: www.xt.com
 
-offline0: i4p--------r---- UDP [L] 127.0.0.1:50435 --> [OL] 127.0.0.1:53
-        : DNS
-        : H: www.xt.com
-
