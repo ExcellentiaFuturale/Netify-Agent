@@ -1119,7 +1119,7 @@ static void nd_process_flows(
 
                 if (i->second->tickets.load() == 0) {
 
-                    if (add_flows &&
+                    if ((add_flows || socket_queue) &&
                         (ND_UPLOAD_NAT_FLOWS || i->second->flags.ip_nat.load() == false)) {
 
                         json jf;
@@ -1131,7 +1131,7 @@ static void nd_process_flows(
                         jflows[iface_name].push_back(jf);
                     }
 
-                    if (socket_queue) {
+                    if ((add_flows || socket_queue)) {
 
                         if (ND_FLOW_DUMP_UNKNOWN &&
                             i->second->detected_protocol == ND_PROTO_UNKNOWN) {
@@ -1202,7 +1202,7 @@ static void nd_process_flows(
             else {
                 if (i->second->flags.detection_init.load()) {
 
-                    if (add_flows && i->second->ts_first_update &&
+                    if ((add_flows || socket_queue) && i->second->ts_first_update &&
                         (ND_UPLOAD_NAT_FLOWS || i->second->flags.ip_nat.load() == false)) {
 
                         json jf;
