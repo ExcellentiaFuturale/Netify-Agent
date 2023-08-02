@@ -67,6 +67,7 @@
 #include <libgen.h>
 #include <dirent.h>
 #include <glob.h>
+#include <signal.h>
 
 #include <arpa/inet.h>
 #include <netdb.h>
