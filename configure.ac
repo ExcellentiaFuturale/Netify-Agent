@@ -364,6 +364,9 @@ AC_CHECK_FUNC([pthread_attr_setaffinity_np], [
 AC_CHECK_FUNC([malloc_trim], [
     AC_DEFINE([HAVE_MALLOC_TRIM], [1], [Define if malloc_trim is available.])
 ])
+AC_CHECK_FUNC([getprotobynumber_r], [
+    AC_DEFINE([HAVE_GETPROTOBYNUMBER_R], [1], [Define if getprotobynumber_r is available.])
+])
 
 # Get git revision
 if test -e ".git"; then :

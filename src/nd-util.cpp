@@ -1489,12 +1489,20 @@ void nd_get_ip_protocol_name(int protocol, string &result)
         return;
     }
 
+    int rc = 0;
+    struct protoent *pe_result;
+#ifdef HAVE_GETPROTOBYNUMBER_R
 #define _ND_GET_PROTO_BUFSIZ    1024
+    struct protoent pe_buffer;
     uint8_t buffer[_ND_GET_PROTO_BUFSIZ];
-    struct protoent pe_buffer, *pe_result;
-    int rc = getprotobynumber_r(protocol, &pe_buffer,
-        (char *)buffer, _ND_GET_PROTO_BUFSIZ, &pe_result);
 
+    rc = getprotobynumber_r(protocol, &pe_buffer,
+        (char *)buffer, _ND_GET_PROTO_BUFSIZ, &pe_result);
+#else
+    // XXX: Fall back to non-reentrant version.
+    // We're holding a static mutex lock here anyway...
+    pe_result = getprotobynumber(protocol);
+#endif
     if (rc != 0 || pe_result == nullptr)
         result = to_string(protocol);
     else {
@@ -1508,7 +1516,6 @@ void nd_get_ip_protocol_name(int protocol, string &result)
             );
         }
         cache.insert(make_pair(protocol, result));
-        return;
     }
 }
 
