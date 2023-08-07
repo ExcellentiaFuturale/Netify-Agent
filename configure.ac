@@ -82,6 +82,8 @@ AS_IF([test "$ac_cv_lib_pcap_pcap_open_live" = "yes"], [
     AC_DEFINE([_ND_USE_LIBPCAP], [1], [Define if libpcap is available.])
     AS_VAR_APPEND([ND_DEFINES], [" -D_ND_USE_LIBPCAP=1"])
     AM_CONDITIONAL(USE_LIBPCAP, true)
+], [
+    AM_CONDITIONAL(USE_LIBPCAP, false)
 ])
 
 case "${host_os}" in
