@@ -21,13 +21,6 @@ PKG_SOURCE_DATE:=@GIT_LAST_COMMIT_DATE@
 PKG_SOURCE_VERSION:=@GIT_LAST_COMMIT_HASH@
 PKG_MIRROR_HASH:=whatever
 
-PKG_CONFIG_DEPENDS:= \
-	CONFIG_LIBCURL_GNUTLS \
-	CONFIG_LIBCURL_MBEDTLS \
-	CONFIG_LIBCURL_OPENSSL \
-	CONFIG_LIBCURL_WOLFSSL \
-	CONFIG_LIBCURL_NOSSL
-
 include $(INCLUDE_DIR)/package.mk
 
 define Package/@PACKAGE_TARNAME@
@@ -35,11 +28,7 @@ define Package/@PACKAGE_TARNAME@
   CATEGORY:=Network
   TITLE:=Netify Agent
   URL:=http://www.netify.ai/
-  DEPENDS:=+ca-bundle +libatomic +libmnl +libnetfilter-conntrack +libpcap +zlib +libpthread @!USE_UCLIBC
-  # Explicity depend on the various SSL engines as selected by the libCURL configuration.
-  # If these are not explicitly linked, all SSL engines crash deep in the TLS setup on a new connection,
-  # except for OpenSSL.
-  DEPENDS:=+libcurl +LIBCURL_WOLFSSL:libwolfssl +LIBCURL_OPENSSL:libopenssl +LIBCURL_GNUTLS:libgnutls +LIBCURL_MBEDTLS:libmbedtls
+  DEPENDS:=+ca-bundle +libatomic +libcurl +libmnl +libnetfilter-conntrack +libpcap +zlib +libpthread @!USE_UCLIBC
   # Explicitly depend on libstdcpp rather than $(CXX_DEPENDS).  At the moment
   # std::unordered_map is only available via libstdcpp which is required for
   # performance reasons.
