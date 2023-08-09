@@ -21,6 +21,9 @@ PKG_SOURCE_DATE:=@GIT_LAST_COMMIT_DATE@
 PKG_SOURCE_VERSION:=@GIT_LAST_COMMIT_HASH@
 PKG_MIRROR_HASH:=whatever
 
+PKG_CONFIG_DEPENDS:= \
+	CONFIG_NETIFYD_BUILD_SHARED_LIBRARY
+
 include $(INCLUDE_DIR)/package.mk
 
 define Package/@PACKAGE_TARNAME@
@@ -43,6 +46,10 @@ server.  Flow metadata, network statistics, and detection classifications are
 JSON encoded for easy consumption by third-party applications.
 endef
 
+define Package/@PACKAGE_TARNAME@/config
+	source "$(SOURCE)/Config.in"
+endef
+
 define Package/@PACKAGE_TARNAME@/conffiles
 /etc/@PACKAGE_TARNAME@.conf
 /etc/config/@PACKAGE_TARNAME@
@@ -56,6 +63,7 @@ TARGET_CXXFLAGS+=-std=c++11 -ffunction-sections -fdata-sections -Wno-psabi
 TARGET_LDFLAGS+=-Wl,--gc-sections
 
 CONFIGURE_ARGS+= \
+	$(if $(CONFIG_NETIFYD_BUILD_SHARED_LIBRARY),--enable-shared,--disable-shared) \
 	--sharedstatedir=/var/run \
 	--enable-lean-and-mean \
 	--disable-libtcmalloc \
@@ -80,7 +88,8 @@ define Build/InstallDev
 	$(INSTALL_DIR) $(1)/usr/include/ndpi
 	$(CP) $(PKG_INSTALL_DIR)/usr/include/ndpi/*.h $(1)/usr/include/ndpi
 	$(INSTALL_DIR) $(1)/usr/lib
-	$(CP) $(PKG_INSTALL_DIR)/usr/lib/lib@PACKAGE_TARNAME@.{a,so*} $(1)/usr/lib
+	$(CP) $(PKG_INSTALL_DIR)/usr/lib/lib@PACKAGE_TARNAME@.a $(1)/usr/lib
+	$(if $(CONFIG_NETIFYD_BUILD_SHARED_LIBRARY),$(CP) $(PKG_INSTALL_DIR)/usr/lib/lib@PACKAGE_TARNAME@.so.* $(1)/usr/lib,)
 	$(INSTALL_DIR) $(1)/usr/lib/pkgconfig
 	$(INSTALL_DATA) $(PKG_INSTALL_DIR)/usr/lib/pkgconfig/lib@PACKAGE_TARNAME@.pc $(1)/usr/lib/pkgconfig
 endef
@@ -95,7 +104,7 @@ define Package/@PACKAGE_TARNAME@/install
 	$(INSTALL_DIR) $(1)/usr/sbin
 	$(INSTALL_BIN) $(PKG_INSTALL_DIR)/usr/sbin/netifyd $(1)/usr/sbin
 	$(INSTALL_DIR) $(1)/usr/lib
-	$(CP) $(PKG_INSTALL_DIR)/usr/lib/lib@PACKAGE_TARNAME@.so.* $(1)/usr/lib
+	$(if $(CONFIG_NETIFYD_BUILD_SHARED_LIBRARY),$(CP) $(PKG_INSTALL_DIR)/usr/lib/lib@PACKAGE_TARNAME@.so.* $(1)/usr/lib,)
 	$(INSTALL_DIR) $(1)/etc/netifyd
 	$(INSTALL_DIR) $(1)/etc/netifyd/domains.d
 	$(INSTALL_DIR) $(1)/etc/netifyd/interfaces.d

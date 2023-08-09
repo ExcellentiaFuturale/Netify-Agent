@@ -1,0 +1,10 @@
+menu "Configuration"
+	depends on PACKAGE_netifyd
+
+config NETIFYD_BUILD_SHARED_LIBRARY
+	bool "Build the Agent as a shared library?"
+	default n
+	help
+		Build the Agent as a shared library when enabled, or statically link it otherwise.  Statically linking can make debugging easier.
+
+endmenu
