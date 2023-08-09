@@ -71,6 +71,8 @@ AS_VAR_APPEND([CXXFLAGS], [" -std=gnu++11"])
 # Checks for libraries.
 AC_CHECK_LIB([pthread],
     [pthread_create], [], [AC_MSG_ERROR([libpthread/pthread_create() not found.])])
+AC_CHECK_LIB([dl],
+    [dlopen], [], [AC_MSG_ERROR([libdl/dlopen() not found.])])
 AC_CHECK_LIB([rt],
     [timer_create], [], [AC_MSG_ERROR([librt/timer_create() not found.])])
 
