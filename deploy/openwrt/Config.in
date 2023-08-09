@@ -3,8 +3,14 @@ menu "Configuration"
 
 config NETIFYD_BUILD_SHARED_LIBRARY
 	bool "Build the Agent as a shared library?"
-	default n
+	default y
 	help
 		Build the Agent as a shared library when enabled, or statically link it otherwise.  Statically linking can make debugging easier.
+
+config NETIFYD_WITH_LOCAL_LIBGCRYPT
+	bool "Link nDPI with the local system libgcrypt?"
+	default n
+	help
+		Link the Agent (and nDPI) against the local system libgcrypt, or use the bundled gcrypt lite version.
 
 endmenu

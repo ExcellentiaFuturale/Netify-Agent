@@ -247,6 +247,17 @@ AS_IF([test "x$with_volatilestatedir" = "xyes" -o "x$with_volatilestatedir" = "x
     AC_SUBST([volatilestatedir], [$with_volatilestatedir])
 )
 
+AM_CONDITIONAL(USE_LIBGCRYPT_SYSTEM, false)
+
+AC_ARG_WITH([local-libgcrypt],
+    [AS_HELP_STRING([--with-local-libgcrypt], [Link nDPI against the local system libgcrypt instead of the bundled libgcrypt light])],,
+    [with_local_libgcrypt=no])
+
+AS_IF([test "x$with_local_libgcrypt" = "xyes"], [
+    AM_CONDITIONAL(USE_LIBGCRYPT_SYSTEM, true)
+    LIBS="${LIBS} -lgcrypt -lgpg-error"
+])
+
 # Parameters: --enable/disable
 
 AC_ARG_ENABLE([libtcmalloc],

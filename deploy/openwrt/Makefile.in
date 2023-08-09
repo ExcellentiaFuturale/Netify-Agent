@@ -22,7 +22,8 @@ PKG_SOURCE_VERSION:=@GIT_LAST_COMMIT_HASH@
 PKG_MIRROR_HASH:=whatever
 
 PKG_CONFIG_DEPENDS:= \
-	CONFIG_NETIFYD_BUILD_SHARED_LIBRARY
+	CONFIG_NETIFYD_BUILD_SHARED_LIBRARY \
+	CONFIG_NETIFYD_WITH_LOCAL_LIBGCRYPT
 
 include $(INCLUDE_DIR)/package.mk
 
@@ -36,6 +37,7 @@ define Package/@PACKAGE_TARNAME@
   # std::unordered_map is only available via libstdcpp which is required for
   # performance reasons.
   DEPENDS+=+libstdcpp
+  DEPENDS+=+NETIFYD_WITH_LOCAL_LIBGCRYPT:libgcrypt
 endef
 
 define Package/@PACKAGE_TARNAME@/description
@@ -64,6 +66,7 @@ TARGET_LDFLAGS+=-Wl,--gc-sections
 
 CONFIGURE_ARGS+= \
 	$(if $(CONFIG_NETIFYD_BUILD_SHARED_LIBRARY),--enable-shared,--disable-shared) \
+	$(if $(CONFIG_NETIFYD_WITH_LOCAL_LIBGCRYPT),--with-local-libgcrypt,--without-local-libgcrypt) \
 	--sharedstatedir=/var/run \
 	--enable-lean-and-mean \
 	--disable-libtcmalloc \
