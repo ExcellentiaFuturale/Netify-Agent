@@ -9,7 +9,7 @@ config NETIFYD_BUILD_SHARED_LIBRARY
 
 config NETIFYD_WITH_LOCAL_LIBGCRYPT
 	bool "Link nDPI with the local system libgcrypt?"
-	default n
+	default y
 	help
 		Link the Agent (and nDPI) against the local system libgcrypt, or use the bundled gcrypt lite version.
 
