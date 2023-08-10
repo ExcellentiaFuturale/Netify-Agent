@@ -711,7 +711,7 @@ uint32_t ndInstance::InitializeConfig(int argc, char * const argv[])
         (curl_version->version_num >> 8) & 0xff,
         curl_version->version_num & 0xff
     );
-
+#if (LIBCURL_VERSION_NUM >= 0x075600)
     const curl_ssl_backend **curl_ssl_backends;
     curl_global_sslset((curl_sslbackend)-1, NULL, &curl_ssl_backends);
 
@@ -721,7 +721,7 @@ uint32_t ndInstance::InitializeConfig(int argc, char * const argv[])
 	    curl_ssl_backends[i]->name, curl_ssl_backends[i]->id
 	);
     }
-
+#endif
     CURLcode cc;
     if ((cc = curl_global_init(CURL_GLOBAL_DEFAULT)) != 0) {
         fprintf(stderr,
