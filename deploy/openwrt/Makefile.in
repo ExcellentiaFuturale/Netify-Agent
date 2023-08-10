@@ -17,16 +17,13 @@ PKG_INSTALL:=1
 PKG_SOURCE_PROTO:=git
 PKG_SOURCE_URL:=@GIT_SOURCE_URL@
 PKG_SOURCE_DATE:=@GIT_LAST_COMMIT_DATE@
-PKG_SOURCE_VERSION:=v@PACKAGE_VERSION@
-#PKG_SOURCE_VERSION:=@GIT_LAST_COMMIT_HASH@
+#PKG_SOURCE_VERSION:=v@PACKAGE_VERSION@
+PKG_SOURCE_VERSION:=@GIT_LAST_COMMIT_HASH@
 PKG_MIRROR_HASH:=whatever
 
 PKG_CONFIG_DEPENDS:= \
-	CONFIG_LIBCURL_GNUTLS \
-	CONFIG_LIBCURL_MBEDTLS \
-	CONFIG_LIBCURL_OPENSSL \
-	CONFIG_LIBCURL_WOLFSSL \
-	CONFIG_LIBCURL_NOSSL
+	CONFIG_NETIFYD_BUILD_SHARED_LIBRARY \
+	CONFIG_NETIFYD_WITH_LOCAL_LIBGCRYPT
 
 include $(INCLUDE_DIR)/package.mk
 
@@ -35,15 +32,12 @@ define Package/@PACKAGE_TARNAME@
   CATEGORY:=Network
   TITLE:=Netify Agent
   URL:=http://www.netify.ai/
-  DEPENDS:=+ca-bundle +libmnl +libnetfilter-conntrack +libpcap +zlib +libpthread @!USE_UCLIBC
-  # Explicity depend on the various SSL engines as selected by the libCURL configuration.
-  # If these are not explicitly linked, all SSL engines crash deep in the TLS setup on a new connection,
-  # except for OpenSSL.
-  DEPENDS:=+libcurl +LIBCURL_WOLFSSL:libwolfssl +LIBCURL_OPENSSL:libopenssl +LIBCURL_GNUTLS:libgnutls +LIBCURL_MBEDTLS:libmbedtls
+  DEPENDS:=+ca-bundle +libatomic +libcurl +libmnl +libnetfilter-conntrack +libpcap +zlib +libpthread @!USE_UCLIBC
   # Explicitly depend on libstdcpp rather than $(CXX_DEPENDS).  At the moment
   # std::unordered_map is only available via libstdcpp which is required for
   # performance reasons.
   DEPENDS+=+libstdcpp
+  DEPENDS+=+NETIFYD_WITH_LOCAL_LIBGCRYPT:libgcrypt
 endef
 
 define Package/@PACKAGE_TARNAME@/description
@@ -52,6 +46,10 @@ protocols and applications.  These detections can be saved locally, served over
 a UNIX or TCP socket, and/or "pushed" (via HTTP POSTs) to a remote third-party
 server.  Flow metadata, network statistics, and detection classifications are
 JSON encoded for easy consumption by third-party applications.
+endef
+
+define Package/@PACKAGE_TARNAME@/config
+	source "$(SOURCE)/Config.in"
 endef
 
 define Package/@PACKAGE_TARNAME@/conffiles
@@ -63,10 +61,12 @@ define Package/@PACKAGE_TARNAME@/conffiles
 endef
 
 TARGET_CFLAGS+=-ffunction-sections -fdata-sections -Wno-psabi
-TARGET_CXXFLAGS+=-ffunction-sections -fdata-sections -Wno-psabi
+TARGET_CXXFLAGS+=-std=c++11 -ffunction-sections -fdata-sections -Wno-psabi
 TARGET_LDFLAGS+=-Wl,--gc-sections
 
 CONFIGURE_ARGS+= \
+	$(if $(CONFIG_NETIFYD_BUILD_SHARED_LIBRARY),--enable-shared,--disable-shared) \
+	$(if $(CONFIG_NETIFYD_WITH_LOCAL_LIBGCRYPT),--with-local-libgcrypt,--without-local-libgcrypt) \
 	--sharedstatedir=/var/run \
 	--enable-lean-and-mean \
 	--disable-libtcmalloc \
@@ -84,10 +84,6 @@ CONFIGURE_ARGS+= \
 	--without-libcurl-zlib
 endif
 
-define Build/Configure
-	$(call Build/Configure/Default)
-endef
-
 define Build/InstallDev
 	$(INSTALL_DIR) $(1)/usr/include/@PACKAGE_TARNAME@
 	$(CP) $(PKG_INSTALL_DIR)/usr/include/@PACKAGE_TARNAME@/*.h $(1)/usr/include/@PACKAGE_TARNAME@
@@ -100,7 +96,8 @@ define Build/InstallDev
 	$(INSTALL_DIR) $(1)/usr/include/ndpi
 	$(CP) $(PKG_INSTALL_DIR)/usr/include/ndpi/*.h $(1)/usr/include/ndpi
 	$(INSTALL_DIR) $(1)/usr/lib
-	$(CP) $(PKG_INSTALL_DIR)/usr/lib/lib@PACKAGE_TARNAME@.{a,so*} $(1)/usr/lib
+	$(CP) $(PKG_INSTALL_DIR)/usr/lib/lib@PACKAGE_TARNAME@.a $(1)/usr/lib
+	$(if $(CONFIG_NETIFYD_BUILD_SHARED_LIBRARY),$(CP) $(PKG_INSTALL_DIR)/usr/lib/lib@PACKAGE_TARNAME@.so.* $(1)/usr/lib,)
 	$(INSTALL_DIR) $(1)/usr/lib/pkgconfig
 	$(INSTALL_DATA) $(PKG_INSTALL_DIR)/usr/lib/pkgconfig/lib@PACKAGE_TARNAME@.pc $(1)/usr/lib/pkgconfig
 endef
@@ -115,7 +112,7 @@ define Package/@PACKAGE_TARNAME@/install
 	$(INSTALL_DIR) $(1)/usr/sbin
 	$(INSTALL_BIN) $(PKG_INSTALL_DIR)/usr/sbin/netifyd $(1)/usr/sbin
 	$(INSTALL_DIR) $(1)/usr/lib
-	$(CP) $(PKG_INSTALL_DIR)/usr/lib/lib@PACKAGE_TARNAME@.so.* $(1)/usr/lib
+	$(if $(CONFIG_NETIFYD_BUILD_SHARED_LIBRARY),$(CP) $(PKG_INSTALL_DIR)/usr/lib/lib@PACKAGE_TARNAME@.so.* $(1)/usr/lib,)
 	$(INSTALL_DIR) $(1)/etc/netify.d
 	$(INSTALL_DATA) $(PKG_BUILD_DIR)/deploy/netify-apps.conf $(1)/etc/netify.d
 	$(INSTALL_DATA) $(PKG_BUILD_DIR)/deploy/netify-categories.json $(1)/etc/netify.d

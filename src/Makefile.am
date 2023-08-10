@@ -37,7 +37,9 @@ libnetifyd_la_SOURCES = nd-addr.cpp nd-apps.cpp nd-base64.cpp nd-capture.cpp \
 
 # https://www.gnu.org/software/libtool/manual/html_node/Updating-version-info.html
 libnetifyd_la_LDFLAGS = -version-info 2:1:0
-libnetifyd_la_LIBADD = $(top_srcdir)/libs/ndpi/src/lib/libndpi.a $(LIBCURL_LIBS) $(ZLIB_LIBS)
+libnetifyd_la_LIBADD = -L$(top_srcdir)/libs/inih -lini \
+	-L$(top_srcdir)/libs/ndpi/src/lib -l:libndpi.a \
+	$(LIBCURL_LIBS) $(ZLIB_LIBS)
 
 if USE_INOTIFY
 libnetifyd_la_SOURCES += nd-inotify.cpp
@@ -66,7 +68,7 @@ endif
 
 sbin_PROGRAMS = netifyd
 netifyd_SOURCES = netifyd.cpp
-netifyd_LDADD = ./libnetifyd.la $(top_srcdir)/libs/inih/libini.la $(LIBCURL_LIBS) $(ZLIB_LIBS)
+netifyd_LDADD = ./libnetifyd.la $(LIBCURL_LIBS) $(ZLIB_LIBS)
 
 if USE_LIBTCMALLOC
 # XXX: Recommended compiler flags

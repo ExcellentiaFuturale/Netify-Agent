@@ -6,7 +6,7 @@ m4_include([m4/ax_cxx_compile_stdcxx_0x.m4])
 m4_include([m4/ax_cxx_compile_stdcxx_11.m4])
 
 AC_PREREQ([2.68])
-AC_INIT([Netify Agent], [4.4.6],
+AC_INIT([Netify Agent], [4.4.7],
     [https://gitlab.com/netify.ai/public/netify-agent/issues],
     [netifyd], [https://www.netify.ai/])
 AM_INIT_AUTOMAKE([1.9 tar-pax])
@@ -49,8 +49,12 @@ AS_IF([test "$HAVE_CXX11" = "0"], [AX_CXX_COMPILE_STDCXX_0X])
 # Checks for libraries.
 AC_CHECK_LIB([pthread],
     [pthread_create], [], [AC_MSG_ERROR([libpthread/pthread_create() not found.])])
+AC_CHECK_LIB([dl],
+    [dlopen], [], [AC_MSG_ERROR([libdl/dlopen() not found.])])
 AC_CHECK_LIB([rt],
     [timer_create], [], [AC_MSG_ERROR([librt/timer_create() not found.])])
+
+AC_CHECK_LIB([atomic], [__atomic_load_8])
 
 AC_CHECK_LIB([pcap], [pcap_open_live])
 
@@ -58,6 +62,8 @@ AS_IF([test "$ac_cv_lib_pcap_pcap_open_live" = "yes"], [
     AC_DEFINE([_ND_USE_LIBPCAP], [1], [Define if libpcap is available.])
     ND_DEFINES+=" -D_ND_USE_LIBPCAP=1"
     AM_CONDITIONAL(USE_LIBPCAP, true)
+], [
+    AM_CONDITIONAL(USE_LIBPCAP, false)
 ])
 
 case "${host_os}" in
@@ -88,6 +94,7 @@ PKG_CHECK_MODULES([ZLIB], [zlib])
 AC_ARG_WITH([systemdsystemunitdir],
      [AS_HELP_STRING([--with-systemdsystemunitdir=DIR], [Directory for systemd service files])],,
      [with_systemdsystemunitdir=auto])
+
 AS_IF([test "x$with_systemdsystemunitdir" = "xyes" -o "x$with_systemdsystemunitdir" = "xauto"], [
      def_systemdsystemunitdir=$($PKG_CONFIG --variable=systemdsystemunitdir systemd)
 
@@ -96,6 +103,7 @@ AS_IF([test "x$with_systemdsystemunitdir" = "xyes" -o "x$with_systemdsystemunitd
     [AC_MSG_ERROR([systemd support requested but pkg-config unable to query systemd package])])
     with_systemdsystemunitdir=no],
    [with_systemdsystemunitdir="$def_systemdsystemunitdir"])])
+
 AS_IF([test "x$with_systemdsystemunitdir" != "xno"],
       [AC_SUBST([systemdsystemunitdir], [$with_systemdsystemunitdir])])
 AM_CONDITIONAL([HAVE_SYSTEMD], [test "x$with_systemdsystemunitdir" != "xno"])
@@ -111,6 +119,7 @@ AS_IF([test "x$with_tmpfilesdir" = "xyes" -o "x$with_tmpfilesdir" = "xauto"], [
     [AC_MSG_ERROR([tmpfiles support requested but pkg-config unable to query systemd package])])
     with_tmpfilesdir=no],
    [with_tmpfilesdir="$def_tmpfilesdir"])])
+
 AS_IF([test "x$with_tmpfilesdir" != "xno"],
       [AC_SUBST([tmpfilesdir], [$with_tmpfilesdir])])
 
@@ -126,6 +135,7 @@ AS_IF([test "x$with_libcurl_zlib" != "xno"], [
 AC_ARG_WITH([persistentstatedir],
      [AS_HELP_STRING([--with-persistentstatedir=DIR], [Directory for persistent state files])],,
      [with_persistentstatedir=auto])
+
 AS_IF([test "x$with_persistentstatedir" = "xyes" -o "x$with_persistentstatedir" = "xauto"],
     AC_SUBST([persistentstatedir], [$sysconfdir/netify.d]),
     AC_SUBST([persistentstatedir], [$with_persistentstatedir])
@@ -134,10 +144,22 @@ AS_IF([test "x$with_persistentstatedir" = "xyes" -o "x$with_persistentstatedir" 
 AC_ARG_WITH([volatilestatedir],
      [AS_HELP_STRING([--with-volatilestatedir=DIR], [Directory for volatile state files])],,
      [with_volatilestatedir=auto])
+
 AS_IF([test "x$with_volatilestatedir" = "xyes" -o "x$with_volatilestatedir" = "xauto"],
     AC_SUBST([volatilestatedir], [$localstatedir/run/$PACKAGE_TARNAME]),
     AC_SUBST([volatilestatedir], [$with_volatilestatedir])
 )
+
+AC_ARG_WITH([local-libgcrypt],
+    [AS_HELP_STRING([--with-local-libgcrypt], [Link nDPI against the local system libgcrypt instead of the bundled libgcrypt light])],,
+    [with_local_libgcrypt=no])
+
+AS_IF([test "x$with_local_libgcrypt" = "xyes"], [
+    AM_CONDITIONAL(USE_LIBGCRYPT_SYSTEM, true)
+    LIBS="${LIBS} -lgcrypt -lgpg-error"
+], [
+    AM_CONDITIONAL(USE_LIBGCRYPT_SYSTEM, false)
+])
 
 # Parameters: --enable/disable
 
