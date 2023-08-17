@@ -53,11 +53,20 @@ public:
         lower_packets(0), upper_packets(0), total_packets(0),
         detection_packets(0)
 #ifdef _ND_EXTENDED_STATS
+        , lower_rate(0)
+        , upper_rate(0)
         , tcp_seq_errors(0)
         , tcp_resets(0)
         , tcp_retrans(0)
 #endif
-        { }
+        {
+#ifdef _ND_EXTENDED_STATS
+            for (unsigned i = 0; i < ndGC.update_interval; i++) {
+                lower_rate_samples.push_back(0);
+                upper_rate_samples.push_back(0);
+            }
+#endif
+        }
 
     ndFlowStats(const ndFlowStats &stats) :
         lower_bytes(stats.lower_bytes.load()),
@@ -68,11 +77,20 @@ public:
         total_packets(stats.total_packets.load()),
         detection_packets(stats.detection_packets.load())
 #ifdef _ND_EXTENDED_STATS
+        , lower_rate(stats.lower_rate.load())
+        , upper_rate(stats.upper_rate.load())
         , tcp_seq_errors(stats.tcp_seq_errors.load())
         , tcp_resets(stats.tcp_resets.load())
         , tcp_retrans(stats.tcp_retrans.load())
 #endif
-        { }
+        {
+#ifdef _ND_EXTENDED_STATS
+            for (unsigned i = 0; i < ndGC.update_interval; i++) {
+                lower_rate_samples.push_back(0);
+                upper_rate_samples.push_back(0);
+            }
+#endif
+        }
 
     inline ndFlowStats &operator=(const ndFlowStats &fs) {
         lower_bytes = fs.lower_bytes.load();
@@ -83,13 +101,15 @@ public:
         total_packets = fs.total_packets.load();
         detection_packets = fs.detection_packets.load();
 #ifdef _ND_EXTENDED_STATS
+        lower_rate = fs.lower_rate.load();
+        upper_rate = fs.upper_rate.load();
         tcp_seq_errors = fs.tcp_seq_errors.load();
         tcp_resets = fs.tcp_resets.load();
         tcp_retrans = fs.tcp_retrans.load();
 #endif
         return *this;
     };
-
+#if 0
     inline ndFlowStats& operator+=(const ndFlowStats &fs)
     {
         lower_bytes += fs.lower_bytes.load();
@@ -105,7 +125,7 @@ public:
 #endif
         return *this;
     }
-
+#endif
     inline void Reset(bool full_reset = false)
     {
         lower_bytes = 0;
@@ -113,6 +133,10 @@ public:
         lower_packets = 0;
         upper_packets = 0;
 #ifdef _ND_EXTENDED_STATS
+        for (unsigned i = 0; i < ndGC.update_interval; i++) {
+            lower_rate_samples[i] = 0;
+            upper_rate_samples[i] = 0;
+        }
         tcp_seq_errors = 0;
         tcp_resets = 0;
         tcp_retrans = 0;
@@ -134,6 +158,13 @@ public:
 
     atomic<uint8_t> detection_packets;
 #ifdef _ND_EXTENDED_STATS
+    vector<float> lower_rate_samples;
+    vector<float> upper_rate_samples;
+    atomic<float> lower_rate;
+    atomic<float> upper_rate;
+
+    void UpdateRate(bool lower, uint64_t timestamp, uint64_t bytes);
+
     atomic<uint32_t> tcp_seq_errors;
     atomic<uint32_t> tcp_resets;
     atomic<uint32_t> tcp_retrans;
@@ -257,6 +288,7 @@ public:
     };
 
     vector<string> tls_alpn, tls_alpn_server;
+    atomic<bool> tls_alpn_set, tls_alpn_server_set;
 
     struct {
         nd_flow_kvmap headers;
@@ -409,7 +441,10 @@ public:
         string _lower_gtp_port = "local_port", _upper_gtp_port = "other_port";
         string _lower_bytes = "local_bytes", _upper_bytes = "other_bytes";
         string _lower_packets = "local_packets", _upper_packets = "other_packets";
-
+#ifdef _ND_EXTENDED_STATS
+        string _lower_rate = "local_rate";
+        string _upper_rate = "other_rate";
+#endif
         string digest;
         if (! digest_mdata.empty()) {
             nd_sha1_to_string(digest_mdata, digest);
@@ -433,6 +468,10 @@ public:
             _upper_port = "other_port";
             _upper_bytes = "other_bytes";
             _upper_packets = "other_packets";
+#ifdef _ND_EXTENDED_STATS
+            _lower_rate = "local_rate";
+            _upper_rate = "other_rate";
+#endif
             break;
         case LOWER_OTHER:
             _lower_mac = "other_mac";
@@ -445,6 +484,10 @@ public:
             _upper_port = "local_port";
             _upper_bytes = "local_bytes";
             _upper_packets = "local_packets";
+#ifdef _ND_EXTENDED_STATS
+            _lower_rate = "other_rate";
+            _upper_rate = "local_rate";
+#endif
             break;
         }
 
@@ -610,8 +653,10 @@ public:
                     serialize(output, { "ssl", "fingerprint" }, digest);
                 }
 
-                serialize(output, { "ssl", "alpn" }, tls_alpn);
-                serialize(output, { "ssl", "alpn_server" }, tls_alpn_server);
+                if (tls_alpn_set.load())
+                    serialize(output, { "ssl", "alpn" }, tls_alpn);
+                if (tls_alpn_server_set.load())
+                    serialize(output, { "ssl", "alpn_server" }, tls_alpn_server);
             }
 
             if (HasBTInfoHash()) {
@@ -709,11 +754,18 @@ public:
 
 #ifdef _ND_EXTENDED_STATS
             serialize(output,
-                { "tcp", "seq_errors" }, stats.tcp_seq_errors.load());
+                { _lower_rate }, stats.lower_rate.load());
             serialize(output,
-                { "tcp", "resets" }, stats.tcp_resets.load());
-            serialize(output,
-                { "tcp", "retrans" }, stats.tcp_retrans.load());
+                { _upper_rate }, stats.upper_rate.load());
+
+            if (ip_protocol == IPPROTO_TCP) {
+                serialize(output,
+                    { "tcp", "seq_errors" }, stats.tcp_seq_errors.load());
+                serialize(output,
+                    { "tcp", "resets" }, stats.tcp_resets.load());
+                serialize(output,
+                    { "tcp", "retrans" }, stats.tcp_retrans.load());
+            }
 #endif
         }
     }

@@ -84,6 +84,7 @@ void ndpi_global_init(void)
     nd_ndpi_prefs |= ndpi_dont_load_azure_list;
     nd_ndpi_prefs |= ndpi_dont_load_cachefly_list;
     nd_ndpi_prefs |= ndpi_dont_load_cloudflare_list;
+    nd_ndpi_prefs |= ndpi_dont_load_crawlers_list;
     nd_ndpi_prefs |= ndpi_dont_load_ethereum_list;
     nd_ndpi_prefs |= ndpi_dont_load_google_cloud_list;
     nd_ndpi_prefs |= ndpi_dont_load_google_list;
@@ -93,6 +94,9 @@ void ndpi_global_init(void)
     nd_ndpi_prefs |= ndpi_dont_load_whatsapp_list;
     nd_ndpi_prefs |= ndpi_dont_load_zoom_list;
     nd_ndpi_prefs |= ndpi_enable_ja3_plus;
+
+    //nd_ndpi_prefs |= ndpi_enable_tcp_ack_payload_heuristic;
+    //nd_ndpi_prefs |= ndpi_track_flow_payload;
 
     NDPI_BITMASK_RESET(ndpi_protos);
 

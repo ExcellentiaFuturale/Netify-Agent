@@ -82,6 +82,34 @@ using namespace std;
 // Enable lower map debug output
 //#define _ND_DEBUG_LOWER_MAP	1
 
+void ndFlowStats::UpdateRate(
+    bool lower, uint64_t timestamp, uint64_t bytes)
+{
+    const unsigned interval = ndGC.update_interval;
+
+    unsigned index = (unsigned)fmod(
+        floor((double)timestamp / (double)1000),
+        (double)interval
+    );
+
+    atomic<float> &rate = (lower)
+        ? lower_rate : upper_rate;
+    vector<float> &samples = (lower)
+        ? lower_rate_samples : upper_rate_samples;
+
+    samples[index] += bytes;
+
+    uint64_t total = 0;
+    unsigned divisor = 0;
+    for (unsigned i = 0; i < interval; i++) {
+        if (samples[i] == 0) continue;
+        total += samples[i];
+        divisor++;
+    }
+
+    rate = (divisor > 0) ? ((float)total / (float)divisor) : 0.0f;
+}
+
 ndFlow::ndFlow(nd_iface_ptr& iface)
     : iface(iface), dpi_thread_id(-1),
     ip_version(0), ip_protocol(0), vlan_id(0), tcp_last_seq(0),

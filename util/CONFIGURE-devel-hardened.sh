@@ -13,6 +13,8 @@ echo " - PLUGINS: ${OPTION_PLUGINS}"
 echo " - LIBTCMALLOC: ${OPTION_LIBTCMALLOC}"
 echo " - NFQUEUE: ${OPTION_NFQUEUE}"
 
+if [ $# -gt 0 -a $1 = "help" ]; then exit 0; fi
+
 export CFLAGS="-fasynchronous-unwind-tables -fexceptions -fstack-clash-protection -fstack-protector-strong -g -grecord-gcc-switches -m64 -mtune=generic -O2 -pipe -specs=/usr/lib/rpm/redhat/redhat-hardened-cc1 -Wall -Werror=format-security -Wp,-D_FORTIFY_SOURCE=2 -Wp,-D_GLIBCXX_ASSERTIONS"
 export CXXFLAGS=${CFLAGS}
 

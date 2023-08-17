@@ -464,6 +464,7 @@ void ndDetectionThread::ProcessPacket(ndDetectionQueueEntry *entry)
                 ndEF->ssl.issuer_dn = strdup(ndEFNFP.tls_quic.issuerDN);
                 free(ndEFNFP.tls_quic.issuerDN);
                 ndEFNFP.tls_quic.issuerDN = NULL;
+
                 flow_update = true;
                 ndEF->flags.detection_updated = true;
             }
@@ -473,6 +474,7 @@ void ndDetectionThread::ProcessPacket(ndDetectionQueueEntry *entry)
                 ndEF->ssl.subject_dn = strdup(ndEFNFP.tls_quic.subjectDN);
                 free(ndEFNFP.tls_quic.subjectDN);
                 ndEFNFP.tls_quic.subjectDN = NULL;
+
                 flow_update = true;
                 ndEF->flags.detection_updated = true;
             }
@@ -481,6 +483,7 @@ void ndDetectionThread::ProcessPacket(ndDetectionQueueEntry *entry)
                 ndEFNFP.tls_quic.ja3_server[0] != '\0') {
                 snprintf(ndEF->ssl.server_ja3, ND_FLOW_TLS_JA3LEN, "%s",
                     ndEFNFP.tls_quic.ja3_server);
+
                 flow_update = true;
                 ndEF->flags.detection_updated = true;
             }
@@ -490,8 +493,10 @@ void ndDetectionThread::ProcessPacket(ndDetectionQueueEntry *entry)
                 memcpy(ndEF->ssl.cert_fingerprint,
                     ndEFNFP.tls_quic.sha1_certificate_fingerprint,
                     ND_FLOW_TLS_HASH_LEN);
-                flow_update = true;
+
                 ndEF->ssl.cert_fingerprint_found = true;
+
+                flow_update = true;
                 ndEF->flags.detection_updated = true;
             }
 
@@ -551,7 +556,7 @@ bool ndDetectionThread::ProcessALPN(ndDetectionQueueEntry *entry, bool client)
 //    nd_dprintf("%s: TLS %s ALPN: %s\n",
 //        tag.c_str(), (client) ? "client" : "server", detected_alpn);
 
-    if (client) {
+    if (client && ! ndEF->tls_alpn_set.load()) {
         stringstream ss(detected_alpn);
 
         while (ss.good()) {
@@ -562,9 +567,11 @@ bool ndDetectionThread::ProcessALPN(ndDetectionQueueEntry *entry, bool client)
         }
 
         flow_update = (ndEF->tls_alpn.size() > 0);
+        ndEF->tls_alpn_set = flow_update;
     }
-    else {
+    else if (! ndEF->tls_alpn_server_set.load()) {
         ndEF->tls_alpn_server.push_back(detected_alpn);
+        ndEF->tls_alpn_server_set = true;
 
         //nd_dprintf("%s: TLS ALPN: search for: %s\n", tag.c_str(),
         //    detected_alpn);

@@ -1084,10 +1084,16 @@ nd_process_ip:
     if (addr_cmp < 0) {
         nf->stats.lower_packets++;
         nf->stats.lower_bytes += packet->length;
+#ifdef _ND_EXTENDED_STATS
+        nf->stats.UpdateRate(true, ts_pkt, packet->length);
+#endif
     }
     else {
         nf->stats.upper_packets++;
         nf->stats.upper_bytes += packet->length;
+#ifdef _ND_EXTENDED_STATS
+        nf->stats.UpdateRate(false, ts_pkt, packet->length);
+#endif
     }
 
     nf->ts_last_seen = ts_pkt;
