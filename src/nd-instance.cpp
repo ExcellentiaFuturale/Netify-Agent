@@ -718,8 +718,8 @@ uint32_t ndInstance::InitializeConfig(int argc, char * const argv[])
     for(int i = 0; curl_ssl_backends[i]; i++) {
         fprintf(stdout, "%s: libCURL SSL backend #%d: %s (ID: %d)\n",
             tag.c_str(), i,
-	    curl_ssl_backends[i]->name, curl_ssl_backends[i]->id
-	);
+            curl_ssl_backends[i]->name, curl_ssl_backends[i]->id
+        );
     }
 #endif
     CURLcode cc;
