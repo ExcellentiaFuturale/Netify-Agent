@@ -5,7 +5,7 @@ m4_include([m4/ax_pkg_installdir.m4])
 m4_include([m4/ax_cxx_compile_stdcxx_11.m4])
 
 AC_PREREQ([2.69])
-AC_INIT([Netify Agent], [4.5.21],
+AC_INIT([Netify Agent], [4.5.22],
     [https://gitlab.com/netify.ai/public/netify-agent/issues],
     [netifyd], [https://www.netify.ai/])
 AM_INIT_AUTOMAKE([1.9 tar-pax])
@@ -116,7 +116,7 @@ case "${host_os}" in
         AC_ARG_ENABLE([conntrack-mdata],
             [AS_HELP_STRING([--enable-conntrack-mdata], [Enable connection tracking metadata [default=no]])],
             [],
-            [enable_conntrack=no])
+            [enable_conntrack_mdata=no])
 
         AS_IF([test "x$enable_conntrack_mdata" = "xyes"], [
             AC_DEFINE([_ND_WITH_CONNTRACK_MDATA], [1], [Enable to extract conntrack metadata.])
@@ -348,7 +348,7 @@ AC_CHECK_HEADERS([netinet/in.h netinet/ip.h netinet/tcp.h netinet/udp.h], [], AC
 
 # Check for optional header files.
 AC_CHECK_HEADERS([endian.h pthread_np.h sys/cpuset.h sys/endian.h linux/ppp_defs.h net/ppp_defs.h stdalign.h])
-AC_CHECK_HEADERS([pcap/sll.h pcap/vlan.h])
+AC_CHECK_HEADERS([pcap/sll.h pcap/vlan.h pcap/dlt.h])
 
 # Check for optional parameters
 
@@ -446,3 +446,21 @@ AC_CONFIG_FILES([util/generate-protocol-csv.sh],
     [chmod +x util/generate-protocol-csv.sh])
 
 AC_OUTPUT
+
+AS_BOX([${PACKAGE_NAME} v${PACKAGE_VERSION}])
+AC_MSG_NOTICE([Conntrack support: ${enable_conntrack}])
+AC_MSG_NOTICE([Conntrack meta-data: ${enable_conntrack_mdata}])
+AC_MSG_NOTICE([Netlink support: ${enable_netlink}])
+AC_MSG_NOTICE([TPv3 capture support: ${enable_tpacketv3}])
+AC_MSG_NOTICE([NFQUEUE capture support: ${enable_nfqueue}])
+AC_MSG_NOTICE([Use libCURL zlib support: ${with_libcurl_zlib}])
+AC_MSG_NOTICE([Use system libgcrypt: ${with_local_libgcrypt}])
+AC_MSG_NOTICE([Use thread-caching malloc: ${enable_libtcmalloc}])
+AC_MSG_NOTICE([Enable lean-and-mean build: ${enable_lean_and_mean}])
+AC_MSG_NOTICE([Enable extended flow stats: ${enable_extended_stats}])
+AC_MSG_NOTICE([Installation prefix directory: ${prefix}])
+AC_MSG_NOTICE([Persistent state directory: ${persistentstatedir}])
+AC_MSG_NOTICE([Volatile state directory: ${volatilestatedir}])
+AC_MSG_NOTICE([Shared data directory: ${datadir}/${PACKAGE_TARNAME}])
+AC_MSG_NOTICE([Default configuration filename: ${sysconfdir}/${PACKAGE_TARNAME}.conf])
+AC_MSG_NOTICE([Default PID filename: ${volatilestatedir}/${PACKAGE_TARNAME}.pid])

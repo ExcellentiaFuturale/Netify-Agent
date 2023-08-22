@@ -5,7 +5,7 @@
 
 %{
 // Netify Agent
-// Copyright (C) 2015-2022 eGloo Incorporated <http://www.egloo.ca>
+// Copyright (C) 2015-2023 eGloo Incorporated <http://www.egloo.ca>
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -24,8 +24,8 @@
 #include <stdbool.h>
 #include <string.h>
 
-#include "nd-flow-parser.h"
 #include "nd-flow-parser.hpp"
+#include "nd-flow-expr.hpp"
 %}
 
 %%
@@ -102,5 +102,3 @@ fwmark                  return FLOW_CT_MARK;
 [ \t\n]+                /* Skip whitespace */
 .                       return (int)yytext[0];
 %%
-
-// vi: expandtab shiftwidth=4 softtabstop=4 tabstop=4

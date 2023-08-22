@@ -7,7 +7,7 @@ AUTOMAKE_OPTIONS = foreign
 ACLOCAL_AMFLAGS = -I m4
 
 AM_YFLAGS = -dy --warnings=no-yacc
-BUILT_SOURCES = nd-flow-parser.cpp nd-flow-parser.hpp
+BUILT_SOURCES = nd-flow-expr.cpp nd-flow-expr.hpp
 
 AM_CPPFLAGS = $(CPPFLAGS) -D_GNU_SOURCE \
 	-I $(top_srcdir)/include \
@@ -33,8 +33,8 @@ endif
 
 lib_LTLIBRARIES = libnetifyd.la
 libnetifyd_la_SOURCES = nd-addr.cpp nd-apps.cpp nd-base64.cpp nd-capture.cpp \
-	nd-category.cpp nd-config.cpp nd-detection.cpp nd-dhc.cpp nd-fhc.cpp \
-	nd-flow.cpp nd-flow-criteria.l nd-flow-parser.ypp nd-flow-map.cpp \
+	nd-category.cpp nd-config.cpp nd-detection.cpp nd-except.cpp nd-dhc.cpp \
+	nd-fhc.cpp nd-flow.cpp nd-flow-criteria.l nd-flow-expr.ypp nd-flow-map.cpp \
 	nd-instance.cpp nd-json.cpp nd-napi.cpp nd-ndpi.cpp nd-plugin.cpp \
 	nd-protos.cpp nd-risks.cpp nd-sha1.c nd-thread.cpp nd-util.cpp
 
