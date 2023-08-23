@@ -177,10 +177,6 @@
 #define ND_SOCKET_PATH_USER "root"
 #define ND_SOCKET_PATH_GROUP "root"
 
-#ifndef PACKAGE_URL
-#define PACKAGE_URL "https://www.netify.ai/"
-#endif
-
 #define ND_CONF_APP_BASE "netify-apps.conf"
 #define ND_CONF_APP_PATH \
   ND_PERSISTENT_STATEDIR "/" ND_CONF_APP_BASE

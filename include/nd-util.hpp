@@ -18,6 +18,10 @@
 // License along with this program.  If not, see
 // <http://www.gnu.org/licenses/>.
 
+#ifdef HAVE_CONFIG_H
+#include "config.h"
+#endif
+
 #ifndef _ND_UTIL_H
 #define _ND_UTIL_H
 
@@ -164,6 +168,9 @@ void nd_seed_rng(void);
 
 void nd_generate_uuid(string &uuid);
 
+inline const char *nd_get_version(void) {
+  return PACKAGE_VERSION;
+};
 const string &nd_get_version_and_features(void);
 
 bool nd_parse_app_tag(const string &tag, unsigned &id,

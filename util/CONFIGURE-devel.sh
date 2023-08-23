@@ -106,6 +106,17 @@ esac
     --${OPTION_PLUGINS}-plugins \
     --${OPTION_LIBTCMALLOC}-libtcmalloc \
     --${OPTION_NFQUEUE}-nfqueue \
-    $@
+    $@ || exit $?
 
-exit $?
+cat << EOF > compile_flags.txt
+-std=gnu++11
+-DHAVE_CONFIG_H
+-I./
+-I../include/
+-I./include/
+-I./libs/inih/cpp/
+-I./libs/ndpi/src/include/
+-I./libs/gperftools/src/
+EOF
+
+exit 0
