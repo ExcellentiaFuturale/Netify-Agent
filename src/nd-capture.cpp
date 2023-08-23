@@ -26,10 +26,12 @@
 #include <pcap/pcap.h>
 #include <resolv.h>
 
-#ifdef HAVE_PCAP_DLT_H
+#if defined(HAVE_PCAP_DLT_H)
 #include <pcap/dlt.h>
 #else
+#ifdef _ND_DLT_NOT_IN_BPF
 #include "pcap-compat/dlt.h"
+#endif
 #endif
 
 #ifdef HAVE_PCAP_SLL_H
@@ -52,7 +54,7 @@
 #error Unable to find a usable ppp_defs include
 #endif
 
-#define __FAVOR_BSD 1
+#define __FAVOR_BSD
 #include <netinet/in.h>
 #include <netinet/ip.h>
 #include <netinet/ip6.h>

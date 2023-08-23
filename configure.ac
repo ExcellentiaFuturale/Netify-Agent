@@ -5,7 +5,7 @@ m4_include([m4/ax_pkg_installdir.m4])
 m4_include([m4/ax_cxx_compile_stdcxx_11.m4])
 
 AC_PREREQ([2.69])
-AC_INIT([Netify Agent], [4.5.22],
+AC_INIT([Netify Agent], [4.5.23],
     [https://gitlab.com/netify.ai/public/netify-agent/issues],
     [netifyd], [https://www.netify.ai/])
 AM_INIT_AUTOMAKE([1.9 tar-pax])
@@ -86,6 +86,18 @@ AS_IF([test "$ac_cv_lib_pcap_pcap_open_live" = "yes"], [
     AM_CONDITIONAL(USE_LIBPCAP, true)
 ], [
     AM_CONDITIONAL(USE_LIBPCAP, false)
+])
+
+AC_RUN_IFELSE([
+    AC_LANG_PROGRAM([
+        #include <pcap/bpf.h>
+    ], [
+        #ifndef DLT_EN10MB
+            exit(1);
+        #endif
+    ])
+], [
+    AC_DEFINE([_ND_DLT_NOT_IN_BPF], [1], [Define if DLT_* macros not defined in pcap/bpf.h.])
 ])
 
 case "${host_os}" in

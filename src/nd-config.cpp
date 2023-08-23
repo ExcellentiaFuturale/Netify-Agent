@@ -18,9 +18,6 @@
 // License along with this program.  If not, see
 // <http://www.gnu.org/licenses/>.
 
-#include <asm-generic/errno-base.h>
-
-#include <cstdio>
 #ifdef HAVE_CONFIG_H
 #include "config.h"
 #endif

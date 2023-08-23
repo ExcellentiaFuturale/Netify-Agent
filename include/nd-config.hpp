@@ -21,6 +21,7 @@
 #ifndef _ND_CONFIG_H
 #define _ND_CONFIG_H
 
+#include <map>
 #include <mutex>
 #include <regex>
 #include <set>

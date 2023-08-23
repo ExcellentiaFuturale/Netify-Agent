@@ -206,7 +206,7 @@ class ndFlow : public ndSerializer {
 
   uint16_t vlan_id;
 
-  tcp_seq tcp_last_seq;
+  uint32_t tcp_last_seq;
 
   uint64_t ts_first_seen;
   atomic<uint64_t> ts_first_update;
