@@ -197,195 +197,6 @@ class ndFlowStats {
 
 class ndFlow : public ndSerializer {
  public:
-  nd_iface_ptr iface;
-
-  int16_t dpi_thread_id;
-
-  uint8_t ip_version;
-  uint8_t ip_protocol;
-
-  uint16_t vlan_id;
-
-  uint32_t tcp_last_seq;
-
-  uint64_t ts_first_seen;
-  atomic<uint64_t> ts_first_update;
-  atomic<uint64_t> ts_last_seen;
-
-  enum {
-    LOWER_UNKNOWN = 0x00,
-    LOWER_LOCAL = 0x01,
-    LOWER_OTHER = 0x02
-  };
-
-  uint8_t lower_map;
-
-  enum {
-    OTHER_UNKNOWN = 0x00,
-    OTHER_UNSUPPORTED = 0x01,
-    OTHER_LOCAL = 0x02,
-    OTHER_MULTICAST = 0x03,
-    OTHER_BROADCAST = 0x04,
-    OTHER_REMOTE = 0x05,
-    OTHER_ERROR = 0x06
-  };
-
-  uint8_t other_type;
-
-  ndAddr lower_mac;
-  ndAddr upper_mac;
-
-  ndAddr lower_addr;
-  ndAddr upper_addr;
-
-  enum { TUNNEL_NONE = 0x00, TUNNEL_GTP = 0x01 };
-
-  uint8_t tunnel_type;
-
-  nd_proto_id_t detected_protocol;
-  nd_app_id_t detected_application;
-
-  string detected_protocol_name;
-  string detected_application_name;
-
-  struct {
-    nd_cat_id_t application;
-    nd_cat_id_t protocol;
-    nd_cat_id_t domain;
-  } category;
-
-  struct ndpi_flow_struct *ndpi_flow;
-
-  vector<uint8_t> digest_lower;
-  vector<uint8_t> digest_mdata;
-
-  string dns_host_name;
-  string host_server_name;
-
-  union {
-    struct {
-      char user_agent[ND_FLOW_UA_LEN];
-      char url[ND_FLOW_URL_LEN];
-    } http;
-
-    struct {
-      char fingerprint[ND_FLOW_DHCPFP_LEN];
-      char class_ident[ND_FLOW_DHCPCI_LEN];
-    } dhcp;
-
-    struct {
-      char client_agent[ND_FLOW_SSH_UALEN];
-      char server_agent[ND_FLOW_SSH_UALEN];
-    } ssh;
-
-    struct {
-      uint16_t version;
-      uint16_t cipher_suite;
-      char *subject_dn, *issuer_dn;
-      char server_cn[ND_FLOW_TLS_CNLEN];
-      char client_ja3[ND_FLOW_TLS_JA3LEN];
-      char server_ja3[ND_FLOW_TLS_JA3LEN];
-      bool cert_fingerprint_found;
-      char cert_fingerprint[ND_FLOW_TLS_HASH_LEN];
-    } ssl;
-
-    struct {
-      bool tls;
-    } smtp;
-
-    struct {
-      uint8_t info_hash_valid : 1;
-      char info_hash[ND_FLOW_BTIHASH_LEN];
-    } bt;
-#if 0
-        struct {
-            char variant[ND_FLOW_EXTRA_INFO];
-        } mining;
-#endif
-    struct {
-      char domain_name[ND_FLOW_HOSTNAME];
-    } mdns;
-  };
-
-  vector<string> tls_alpn, tls_alpn_server;
-  atomic<bool> tls_alpn_set, tls_alpn_server_set;
-
-  struct {
-    nd_flow_kvmap headers;
-  } ssdp;
-
-  enum {
-    TYPE_LOWER,
-    TYPE_UPPER,
-
-    TYPE_MAX
-  };
-
-  enum { PRIVATE_LOWER = 0x01, PRIVATE_UPPER = 0x02 };
-
-  uint8_t privacy_mask;
-
-  // Indicate flow origin.  This indicates which side sent
-  // the first packet.
-  // XXX: If the service has missed a flow's initial
-  // packets, the origin's accuracy would be 50%.
-  enum {
-    ORIGIN_UNKNOWN = 0x00,
-    ORIGIN_LOWER = 0x01,
-    ORIGIN_UPPER = 0x02
-  };
-
-  uint8_t origin;
-
-  int direction;
-
-  // Start of conditional members.  These must be at the end
-  // or else access from plugins compiled without various
-  // options will have incorrect addresses
-#if defined(_ND_USE_CONNTRACK) && \
-    defined(_ND_WITH_CONNTRACK_MDATA)
-  uint32_t ct_id;
-  uint32_t ct_mark;
-#endif
-  ndAddr::Type lower_type;
-  ndAddr::Type upper_type;
-
-  struct {
-    atomic<bool> detection_complete;
-    atomic<bool> detection_guessed;
-    atomic<bool> detection_init;
-    atomic<bool> detection_updated;
-    atomic<bool> dhc_hit;
-    atomic<bool> fhc_hit;
-    atomic<bool> expired;
-    atomic<bool> expiring;
-    atomic<bool> ip_nat;
-    atomic<bool> risk_checked;
-    atomic<bool> soft_dissector;
-    atomic<bool> tcp_fin;
-    atomic<uint8_t> tcp_fin_ack;
-  } flags;
-
-  union {
-    struct {
-      uint8_t version;
-      uint8_t ip_version;
-      uint32_t lower_teid;
-      uint32_t upper_teid;
-      ndAddr::Type lower_type;
-      ndAddr::Type upper_type;
-      ndAddr lower_addr;
-      ndAddr upper_addr;
-      uint8_t lower_map;
-      uint8_t other_type;
-    } gtp;
-  };
-
-  vector<nd_risk_id_t> risks;
-  uint16_t ndpi_risk_score;
-  uint16_t ndpi_risk_score_client;
-  uint16_t ndpi_risk_score_server;
-
   ndFlow(nd_iface_ptr &iface);
   ndFlow(const ndFlow &flow);
   virtual ~ndFlow();
@@ -843,6 +654,193 @@ class ndFlow : public ndSerializer {
 #endif
     }
   }
+
+  nd_iface_ptr iface;
+
+  int16_t dpi_thread_id;
+
+  uint8_t ip_version;
+  uint8_t ip_protocol;
+
+  uint16_t vlan_id;
+
+  uint32_t tcp_last_seq;
+
+  uint64_t ts_first_seen;
+  atomic<uint64_t> ts_first_update;
+  atomic<uint64_t> ts_last_seen;
+
+  enum {
+    LOWER_UNKNOWN = 0x00,
+    LOWER_LOCAL = 0x01,
+    LOWER_OTHER = 0x02
+  };
+
+  uint8_t lower_map;
+
+  enum {
+    OTHER_UNKNOWN = 0x00,
+    OTHER_UNSUPPORTED = 0x01,
+    OTHER_LOCAL = 0x02,
+    OTHER_MULTICAST = 0x03,
+    OTHER_BROADCAST = 0x04,
+    OTHER_REMOTE = 0x05,
+    OTHER_ERROR = 0x06
+  };
+
+  uint8_t other_type;
+
+  ndAddr lower_mac;
+  ndAddr upper_mac;
+
+  ndAddr lower_addr;
+  ndAddr upper_addr;
+
+  enum { TUNNEL_NONE = 0x00, TUNNEL_GTP = 0x01 };
+
+  uint8_t tunnel_type;
+
+  nd_proto_id_t detected_protocol;
+  nd_app_id_t detected_application;
+
+  string detected_protocol_name;
+  string detected_application_name;
+
+  struct {
+    nd_cat_id_t application;
+    nd_cat_id_t protocol;
+    nd_cat_id_t domain;
+  } category;
+
+  struct ndpi_flow_struct *ndpi_flow;
+
+  vector<uint8_t> digest_lower;
+  vector<uint8_t> digest_mdata;
+
+  string dns_host_name;
+  string host_server_name;
+
+  union {
+    struct {
+      char user_agent[ND_FLOW_UA_LEN];
+      char url[ND_FLOW_URL_LEN];
+    } http;
+
+    struct {
+      char fingerprint[ND_FLOW_DHCPFP_LEN];
+      char class_ident[ND_FLOW_DHCPCI_LEN];
+    } dhcp;
+
+    struct {
+      char client_agent[ND_FLOW_SSH_UALEN];
+      char server_agent[ND_FLOW_SSH_UALEN];
+    } ssh;
+
+    struct {
+      uint16_t version;
+      uint16_t cipher_suite;
+      char *subject_dn, *issuer_dn;
+      char server_cn[ND_FLOW_TLS_CNLEN];
+      char client_ja3[ND_FLOW_TLS_JA3LEN];
+      char server_ja3[ND_FLOW_TLS_JA3LEN];
+      bool cert_fingerprint_found;
+      char cert_fingerprint[ND_FLOW_TLS_HASH_LEN];
+    } ssl;
+
+    struct {
+      bool tls;
+    } smtp;
+
+    struct {
+      uint8_t info_hash_valid : 1;
+      char info_hash[ND_FLOW_BTIHASH_LEN];
+    } bt;
+#if 0
+        struct {
+            char variant[ND_FLOW_EXTRA_INFO];
+        } mining;
+#endif
+    struct {
+      char domain_name[ND_FLOW_HOSTNAME];
+    } mdns;
+  };
+
+  vector<string> tls_alpn, tls_alpn_server;
+  atomic<bool> tls_alpn_set, tls_alpn_server_set;
+
+  struct {
+    nd_flow_kvmap headers;
+  } ssdp;
+
+  enum {
+    TYPE_LOWER,
+    TYPE_UPPER,
+
+    TYPE_MAX
+  };
+
+  enum { PRIVATE_LOWER = 0x01, PRIVATE_UPPER = 0x02 };
+
+  uint8_t privacy_mask;
+
+  // Indicate flow origin.  This indicates which side sent
+  // the first packet.
+  // XXX: If the service has missed a flow's initial
+  // packets, the origin's accuracy would be 50%.
+  enum {
+    ORIGIN_UNKNOWN = 0x00,
+    ORIGIN_LOWER = 0x01,
+    ORIGIN_UPPER = 0x02
+  };
+
+  uint8_t origin;
+
+  int direction;
+
+  // Start of conditional members.  These must be at the end
+  // or else access from plugins compiled without various
+  // options will have incorrect addresses
+#if defined(_ND_USE_CONNTRACK) && \
+    defined(_ND_WITH_CONNTRACK_MDATA)
+  uint32_t ct_id;
+  uint32_t ct_mark;
+#endif
+  ndAddr::Type lower_type;
+  ndAddr::Type upper_type;
+
+  struct {
+    atomic<bool> detection_complete;
+    atomic<bool> detection_guessed;
+    atomic<bool> detection_init;
+    atomic<bool> detection_updated;
+    atomic<bool> dhc_hit;
+    atomic<bool> fhc_hit;
+    atomic<bool> expired;
+    atomic<bool> expiring;
+    atomic<bool> ip_nat;
+    atomic<bool> risk_checked;
+    atomic<bool> soft_dissector;
+    atomic<bool> tcp_fin;
+    atomic<uint8_t> tcp_fin_ack;
+  } flags;
+
+  struct {
+    uint8_t version;
+    uint8_t ip_version;
+    uint32_t lower_teid;
+    uint32_t upper_teid;
+    ndAddr::Type lower_type;
+    ndAddr::Type upper_type;
+    ndAddr lower_addr;
+    ndAddr upper_addr;
+    uint8_t lower_map;
+    uint8_t other_type;
+  } gtp;
+
+  vector<nd_risk_id_t> risks;
+  uint16_t ndpi_risk_score;
+  uint16_t ndpi_risk_score_client;
+  uint16_t ndpi_risk_score_server;
 
   ndFlowStats stats;
 };
