@@ -32,8 +32,6 @@
 
 void ndFlowHashCache::Push(const string &lower_hash,
                            const string &upper_hash) {
-  int rc;
-
   lock_guard<mutex> lg(lock);
 
   nd_fhc_map::const_iterator i = lookup.find(lower_hash);
@@ -76,7 +74,6 @@ void ndFlowHashCache::Push(const string &lower_hash,
 
 bool ndFlowHashCache::Pop(const string &lower_hash,
                           string &upper_hash) {
-  int rc;
   bool found = false;
 
   lock_guard<mutex> lg(lock);

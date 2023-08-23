@@ -1,45 +1,46 @@
+// Auto-generated, update with ./util/generate-alpn-include.sh
+
 #ifndef _ND_TLS_ALPN
 #define _ND_TLS_ALPN
 
-// Update with ./util/generate-tls-alpn.sh
+#include "nd-protos.hpp"
 
-#define ND_TLS_ALPN_MAX 19
+typedef unordered_map<const char *, nd_proto_id_t> nd_alpn_proto_map;
 
-struct nd_alpn_entry {
-    const char alpn[ND_TLS_ALPN_MAX];
-    nd_proto_id_t proto_id;
-};
-
-const struct nd_alpn_entry nd_alpn_proto_map[] = {
-    { { 0x68, 0x74, 0x74, 0x70, 0x2f, 0x30, 0x2e, 0x39 /* http/0.9 */, 0x00 }, ND_PROTO_HTTPS },
-    { { 0x68, 0x74, 0x74, 0x70, 0x2f, 0x31, 0x2e, 0x30 /* http/1.0 */, 0x00 }, ND_PROTO_HTTPS },
-    { { 0x68, 0x74, 0x74, 0x70, 0x2f, 0x31, 0x2e, 0x31 /* http/1.1 */, 0x00 }, ND_PROTO_HTTPS },
-    { { 0x73, 0x70, 0x64, 0x79, 0x2f, 0x31 /* spdy/1 */, 0x00 }, ND_PROTO_QUIC },
-    { { 0x73, 0x70, 0x64, 0x79, 0x2f, 0x32 /* spdy/2 */, 0x00 }, ND_PROTO_QUIC },
-    { { 0x73, 0x70, 0x64, 0x79, 0x2f, 0x33 /* spdy/3 */, 0x00 }, ND_PROTO_QUIC },
-    { { 0x73, 0x74, 0x75, 0x6E, 0x2E, 0x74, 0x75, 0x72, 0x6E /* stun.turn */, 0x00 }, ND_PROTO_STUN },
-    { { 0x73, 0x74, 0x75, 0x6E, 0x2E, 0x6e, 0x61, 0x74, 0x2d, 0x64, 0x69, 0x73, 0x63, 0x6f, 0x76, 0x65, 0x72, 0x79 /* stun.nat-discovery */, 0x00 }, ND_PROTO_STUN },
-    { { 0x68, 0x32 /* h2 */, 0x00 }, ND_PROTO_HTTPS },
-    { { 0x68, 0x32, 0x63 /* h2c */, 0x00 }, ND_PROTO_HTTPS },
-    { { 0x77, 0x65, 0x62, 0x72, 0x74, 0x63 /* webrtc */, 0x00 }, ND_PROTO_TLS },
-    { { 0x63, 0x2d, 0x77, 0x65, 0x62, 0x72, 0x74, 0x63 /* c-webrtc */, 0x00 }, ND_PROTO_TLS },
-    { { 0x66, 0x74, 0x70 /* ftp */, 0x00 }, ND_PROTO_FTP_DATA },
-    { { 0x69, 0x6d, 0x61, 0x70 /* imap */, 0x00 }, ND_PROTO_MAIL_IMAPS },
-    { { 0x70, 0x6f, 0x70, 0x33 /* pop3 */, 0x00 }, ND_PROTO_MAIL_POPS },
-    { { 0x6d, 0x61, 0x6e, 0x61, 0x67, 0x65, 0x73, 0x69, 0x65, 0x76, 0x65 /* managesieve */, 0x00 }, ND_PROTO_TLS },
-    { { 0x63, 0x6f, 0x61, 0x70 /* coap */, 0x00 }, ND_PROTO_COAP },
-    { { 0x78, 0x6d, 0x70, 0x70, 0x2d, 0x63, 0x6c, 0x69, 0x65, 0x6e, 0x74 /* xmpp-client */, 0x00 }, ND_PROTO_TLS },
-    { { 0x78, 0x6d, 0x70, 0x70, 0x2d, 0x73, 0x65, 0x72, 0x76, 0x65, 0x72 /* xmpp-server */, 0x00 }, ND_PROTO_TLS },
-    { { 0x61, 0x63, 0x6d, 0x65, 0x2d, 0x74, 0x6c, 0x73, 0x2f, 0x31 /* acme-tls/1 */, 0x00 }, ND_PROTO_TLS },
-    { { 0x6d, 0x71, 0x74, 0x74 /* mqtt */, 0x00 }, ND_PROTO_MQTTS },
-    { { 0x64, 0x6F, 0x74 /* dot */, 0x00 }, ND_PROTO_DOH },
-    { { 0x64, 0x6F, 0x71 /* doq */, 0x00 }, ND_PROTO_DOQ },
-    { { 0x6E, 0x74, 0x73, 0x6B, 0x65, 0x2F, 0x31 /* ntske/1 */, 0x00 }, ND_PROTO_TLS },
-    { { 0x73, 0x75, 0x6e, 0x72, 0x70, 0x63 /* sunrpc */, 0x00 }, ND_PROTO_TLS },
-    { { 0x68, 0x33 /* h3 */, 0x00 }, ND_PROTO_QUIC },
-    { { 0x73, 0x6D, 0x62 /* smb */, 0x00 }, ND_PROTO_SMBV23 },
-    { { 0x69, 0x72, 0x63 /* irc */, 0x00 }, ND_PROTO_IRCS },
-    { { 0x00 }, ND_PROTO_UNKNOWN }
+const nd_alpn_proto_map nd_alpn_protos = {
+  { "http/0.9" /* HTTP/0.9 */, ND_PROTO_HTTPS },
+  { "http/1.0" /* HTTP/1.0 */, ND_PROTO_HTTPS },
+  { "http/1.1" /* HTTP/1.1 */, ND_PROTO_HTTPS },
+  { "spdy/1" /* SPDY/1 */, ND_PROTO_QUIC },
+  { "spdy/2" /* SPDY/2 */, ND_PROTO_QUIC },
+  { "spdy/3" /* SPDY/3 */, ND_PROTO_QUIC },
+  { "stun.turn" /* Traversal Using Relays around NAT (TURN) */, ND_PROTO_STUN },
+  { "stun.nat-discovery" /* NAT discovery using Session Traversal Utilities for NAT (STUN) */, ND_PROTO_STUN },
+  { "h2" /* HTTP/2 over TLS */, ND_PROTO_HTTPS },
+  { "h2c" /* HTTP/2 over TCP */, ND_PROTO_HTTPS },
+  { "webrtc" /* WebRTC Media and Data */, ND_PROTO_TLS },
+  { "c-webrtc" /* Confidential WebRTC Media and Data */, ND_PROTO_TLS },
+  { "ftp" /* FTP */, ND_PROTO_FTPS },
+  { "imap" /* IMAP */, ND_PROTO_MAIL_IMAPS },
+  { "pop3" /* POP3 */, ND_PROTO_MAIL_POPS },
+  { "managesieve" /* ManageSieve */, ND_PROTO_TLS },
+  { "coap" /* CoAP */, ND_PROTO_COAP },
+  { "xmpp-client" /* XMPP jabber:client namespace */, ND_PROTO_XMPPS },
+  { "xmpp-server" /* XMPP jabber:server namespace */, ND_PROTO_XMPPS },
+  { "acme-tls/1" /* acme-tls/1 */, ND_PROTO_TLS },
+  { "mqtt" /* OASIS Message Queuing Telemetry Transport (MQTT) */, ND_PROTO_MQTTS },
+  { "dot" /* DNS-over-TLS */, ND_PROTO_DOT },
+  { "ntske/1" /* Network Time Security Key Establishment, version 1 */, ND_PROTO_TLS },
+  { "sunrpc" /* SunRPC */, ND_PROTO_TLS },
+  { "h3" /* HTTP/3 */, ND_PROTO_HTTPS },
+  { "smb" /* SMB2 */, ND_PROTO_SMBV23 },
+  { "irc" /* IRC */, ND_PROTO_IRCS },
+  { "nntp" /* NNTP (reading) */, ND_PROTO_NNTPS },
+  { "nnsp" /* NNTP (transit) */, ND_PROTO_NNTPS },
+  { "doq" /* DoQ */, ND_PROTO_DOQ },
+  { "sip/2" /* SIP */, ND_PROTO_SIPS },
+  { "tds/8.0" /* TDS/8.0 */, ND_PROTO_MSSQL_TDS },
+  { "dicom" /* DICOM */, ND_PROTO_TLS },
 };
 
 #endif // _ND_TLS_ALPN

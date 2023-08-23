@@ -1276,10 +1276,9 @@ bool ndInstance::DisplayAgentStatus(void) {
             (unsigned long)jstatus["flows_expired"]
                 .get<unsigned>());
 
-    fprintf(stderr, "%s minimum flow size: %lu\n",
-            ND_I_INFO,
-            sizeof(struct ndFlow) +
-                sizeof(struct ndpi_flow_struct));
+    fprintf(
+        stderr, "%s minimum flow size: %lu\n", ND_I_INFO,
+        sizeof(ndFlow) + sizeof(struct ndpi_flow_struct));
 
     fprintf(stderr, "%s CPU cores: %u\n", ND_I_INFO,
             jstatus["cpu_cores"].get<unsigned>());

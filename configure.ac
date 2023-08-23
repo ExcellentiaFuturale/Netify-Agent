@@ -38,7 +38,6 @@ AC_PROG_CXX
 AC_PROG_INSTALL
 AM_PROG_LEX
 AC_PROG_YACC
-AC_PROG_LEX
 AC_PROG_EGREP
 AC_CHECK_TOOL([STRIP], [strip])
 LT_INIT
@@ -49,7 +48,8 @@ AC_PATH_PROG([bash], [bash], [false])
 AS_IF([test "x$ac_cv_path_bash" != "xfalse"], [
     AC_SUBST([ND_PATH_BASH], [$ac_cv_path_bash])
 ], [
-    AC_MSG_ERROR([bash not found.])
+    AC_MSG_WARN([bash not found.])
+    AC_SUBST([ND_PATH_BASH], [sh])
 ])
 
 case "${host_os}" in
@@ -428,12 +428,6 @@ AC_DEFINE_UNQUOTED(GIT_DATE, "${GIT_DATE}", [Last GIT change])
 AC_SUBST([GIT_SOURCE_URL], [https://gitlab.com/netify.ai/public/netify-agent.git])
 
 # Defines substitution for pkg-config
-AS_VAR_APPEND([ND_DEFINES], [" -D'ND_CONF_FILE_NAME=\"$sysconfdir/$PACKAGE_TARNAME.conf\"'"])
-AS_VAR_APPEND([ND_DEFINES], [" -D'ND_DATADIR=\"$datadir/$PACKAGE_TARNAME\"'"])
-AS_VAR_APPEND([ND_DEFINES], [" -D'ND_PERSISTENT_STATEDIR=\"$persistentstatedir\"'"])
-AS_VAR_APPEND([ND_DEFINES], [" -D'ND_PID_FILE_NAME=\"$volatilestatedir/$PACKAGE_TARNAME.pid\"'"])
-AS_VAR_APPEND([ND_DEFINES], [" -D'ND_VOLATILE_STATEDIR=\"$volatilestatedir\"'"])
-
 AC_SUBST([ND_DEFINES], [$ND_DEFINES])
 
 # Output files
@@ -456,6 +450,8 @@ AC_CONFIG_FILES([deploy/ubios/Makefile])
 AC_CONFIG_FILES([doc/netifyd.8 doc/netifyd.conf.5])
 AC_CONFIG_FILES([util/generate-protocol-csv.sh],
     [chmod +x util/generate-protocol-csv.sh])
+AC_CONFIG_FILES([util/generate-alpn-include.sh],
+    [chmod +x util/generate-alpn-include.sh])
 
 AC_OUTPUT
 

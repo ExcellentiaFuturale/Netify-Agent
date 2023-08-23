@@ -1,6 +1,6 @@
 *.o
 .deps/
-generate-json-include.sh
+generate-alpn-include.sh
 generate-protocol-csv.sh
 nd-match-export
 Makefile.in

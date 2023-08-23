@@ -381,6 +381,7 @@ typedef enum {
   ND_PROTO_SOURCE_ENGINE = 319,  // Source Engine
   ND_PROTO_OICQ = 320,           // OICQ Chat
   ND_PROTO_SRTP = 321,           // SRTP
+  ND_PROTO_XMPPS = 322,          // XMPPS over TLS
 
   ND_PROTO_MAX,
   ND_PROTO_TODO = 0xffffffff
@@ -605,6 +606,7 @@ const nd_protos_t nd_protos = {
     {ND_PROTO_XBOX, "Xbox"},
     {ND_PROTO_XDMCP, "XDMCP"},
     {ND_PROTO_XIAOMI, "Xiaomi"},
+    {ND_PROTO_XMPPS, "XMPP/S"},
     {ND_PROTO_XMPP, "XMPP"},
     {ND_PROTO_Z3950, "Z39/50"},
     {ND_PROTO_ZABBIX, "Zabbix"},

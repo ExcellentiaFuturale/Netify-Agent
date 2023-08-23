@@ -56,7 +56,7 @@ ndDetectionThread::ndDetectionThread(
 #ifdef _ND_USE_CONNTRACK
       thread_conntrack(thread_conntrack),
 #endif
-      ndpi(NULL),
+      ndpi(nullptr),
       dhc(dhc),
       fhc(fhc),
       flows(0) {
@@ -80,7 +80,7 @@ ndDetectionThread::ndDetectionThread(
   pthread_condattr_destroy(&cond_attr);
 
   if ((rc = pthread_mutex_init(&pkt_queue_cond_mutex,
-                               NULL)) != 0)
+                               nullptr)) != 0)
     throw ndDetectionThreadException(strerror(rc));
 
   nd_dprintf("%s: detection thread created on CPU: %hu\n",
@@ -102,7 +102,7 @@ ndDetectionThread::~ndDetectionThread() {
     delete entry;
   }
 
-  if (ndpi != NULL) nd_ndpi_free(ndpi);
+  if (ndpi != nullptr) nd_ndpi_free(ndpi);
 
   nd_dprintf(
       "%s: detection thread destroyed, %u flows "
@@ -111,7 +111,7 @@ ndDetectionThread::~ndDetectionThread() {
 }
 
 void ndDetectionThread::Reload(void) {
-  if (ndpi != NULL) nd_ndpi_free(ndpi);
+  if (ndpi != nullptr) nd_ndpi_free(ndpi);
   ndpi = nd_ndpi_init();
 }
 
@@ -122,7 +122,7 @@ void ndDetectionThread::QueuePacket(nd_flow_ptr &flow,
   ndDetectionQueueEntry *entry =
       new ndDetectionQueueEntry(flow, packet, data, length);
 
-  if (entry == NULL)
+  if (entry == nullptr)
     throw ndDetectionThreadException(strerror(ENOMEM));
 
   Lock();
@@ -169,7 +169,7 @@ void *ndDetectionThread::Entry(void) {
   nd_dprintf("%s: detection thread ended on CPU: %hu\n",
              tag.c_str(), cpu);
 
-  return NULL;
+  return nullptr;
 }
 
 void ndDetectionThread::ProcessPacketQueue(void) {
@@ -182,11 +182,11 @@ void ndDetectionThread::ProcessPacketQueue(void) {
       entry = pkt_queue.front();
       pkt_queue.pop();
     } else
-      entry = NULL;
+      entry = nullptr;
 
     Unlock();
 
-    if (entry != NULL) {
+    if (entry != nullptr) {
       if (ndEF->stats.detection_packets.load() == 0 ||
           (ndEF->flags.detection_complete.load() == false &&
            ndEF->flags.expiring.load() == false &&
@@ -225,19 +225,19 @@ void ndDetectionThread::ProcessPacketQueue(void) {
 
       delete entry;
     }
-  } while (entry != NULL);
+  } while (entry != nullptr);
 }
 
 void ndDetectionThread::ProcessPacket(
     ndDetectionQueueEntry *entry) {
   bool flow_update = false;
 
-  if (ndEFNF == NULL) {
+  if (ndEFNF == nullptr) {
     flows++;
 
     ndEFNF = (ndpi_flow_struct *)ndpi_malloc(
         sizeof(ndpi_flow_struct));
-    if (ndEFNF == NULL)
+    if (ndEFNF == nullptr)
       throw ndDetectionThreadException(strerror(ENOMEM));
 
     memset(ndEFNF, 0, sizeof(ndpi_flow_struct));
@@ -245,7 +245,7 @@ void ndDetectionThread::ProcessPacket(
 
   ndpi_protocol ndpi_rc = ndpi_detection_process_packet(
       ndpi, ndEFNF, entry->data, entry->length,
-      ndEF->ts_last_seen.load(), NULL);
+      ndEF->ts_last_seen.load(), nullptr);
 
   if (ndEF->detected_protocol == ND_PROTO_UNKNOWN &&
       ndpi_rc.master_protocol != NDPI_PROTOCOL_UNKNOWN) {
@@ -282,7 +282,7 @@ void ndDetectionThread::ProcessPacket(
   }
 
   bool check_extra_packets =
-      (ndEFNF->extra_packets_func != NULL);
+      (ndEFNF->extra_packets_func != nullptr);
 
   if (!ndEF->flags.risk_checked.load()) {
     if (ndEFNF->risk_checked) {
@@ -323,12 +323,12 @@ void ndDetectionThread::ProcessPacket(
         }
 
         if (ndEF->ssl.server_cn[0] == '\0' &&
-            ndEFNFP.tls_quic.serverCN != NULL) {
+            ndEFNFP.tls_quic.serverCN != nullptr) {
           nd_set_hostname(ndEF->ssl.server_cn,
                           ndEFNFP.tls_quic.serverCN,
                           ND_FLOW_TLS_CNLEN);
           free(ndEFNFP.tls_quic.serverCN);
-          ndEFNFP.tls_quic.serverCN = NULL;
+          ndEFNFP.tls_quic.serverCN = nullptr;
 
           // Detect application by server CN if still
           // unknown.
@@ -339,23 +339,23 @@ void ndDetectionThread::ProcessPacket(
           ndEF->flags.detection_updated = true;
         }
 
-        if (ndEF->ssl.issuer_dn == NULL &&
-            ndEFNFP.tls_quic.issuerDN != NULL) {
+        if (ndEF->ssl.issuer_dn == nullptr &&
+            ndEFNFP.tls_quic.issuerDN != nullptr) {
           ndEF->ssl.issuer_dn =
               strdup(ndEFNFP.tls_quic.issuerDN);
           free(ndEFNFP.tls_quic.issuerDN);
-          ndEFNFP.tls_quic.issuerDN = NULL;
+          ndEFNFP.tls_quic.issuerDN = nullptr;
 
           flow_update = true;
           ndEF->flags.detection_updated = true;
         }
 
-        if (ndEF->ssl.subject_dn == NULL &&
-            ndEFNFP.tls_quic.subjectDN != NULL) {
+        if (ndEF->ssl.subject_dn == nullptr &&
+            ndEFNFP.tls_quic.subjectDN != nullptr) {
           ndEF->ssl.subject_dn =
               strdup(ndEFNFP.tls_quic.subjectDN);
           free(ndEFNFP.tls_quic.subjectDN);
-          ndEFNFP.tls_quic.subjectDN = NULL;
+          ndEFNFP.tls_quic.subjectDN = nullptr;
 
           flow_update = true;
           ndEF->flags.detection_updated = true;
@@ -387,14 +387,14 @@ void ndDetectionThread::ProcessPacket(
           ProcessALPN(entry, true);
 
           free(ndEFNFP.tls_quic.advertised_alpns);
-          ndEFNFP.tls_quic.advertised_alpns = NULL;
+          ndEFNFP.tls_quic.advertised_alpns = nullptr;
         }
 
         if (ndEFNFP.tls_quic.negotiated_alpn) {
           flow_update = ProcessALPN(entry, false);
 
           free(ndEFNFP.tls_quic.negotiated_alpn);
-          ndEFNFP.tls_quic.negotiated_alpn = NULL;
+          ndEFNFP.tls_quic.negotiated_alpn = nullptr;
         }
         break;
       case ND_PROTO_DNS:
@@ -454,40 +454,29 @@ bool ndDetectionThread::ProcessALPN(
 
     flow_update = (ndEF->tls_alpn.size() > 0);
     ndEF->tls_alpn_set = flow_update;
+
   } else if (!ndEF->tls_alpn_server_set.load()) {
     ndEF->tls_alpn_server.push_back(detected_alpn);
     ndEF->tls_alpn_server_set = true;
 
-    // nd_dprintf("%s: TLS ALPN: search for: %s\n",
-    // tag.c_str(),
-    //     detected_alpn);
-
-    for (unsigned i = 0;; i++) {
-      if (nd_alpn_proto_map[i].alpn[0] == '\0') break;
-      if (strncmp(detected_alpn, nd_alpn_proto_map[i].alpn,
-                  ND_TLS_ALPN_MAX))
-        continue;
-      if (nd_alpn_proto_map[i].proto_id ==
-          ndEF->detected_protocol)
-        continue;
-
-      if ((ndGC_DEBUG && ndGC_VERBOSE)) {
-        nd_dprintf("%s: TLS ALPN: refined: %s: %s -> %s\n",
-                   tag.c_str(), detected_alpn,
-                   ndEF->detected_protocol_name.c_str(),
-                   nd_proto_get_name(
-                       nd_alpn_proto_map[i].proto_id));
-      }
-
-      ndEF->detected_protocol =
-          nd_alpn_proto_map[i].proto_id;
-      ndEF->detected_protocol_name =
-          nd_proto_get_name(nd_alpn_proto_map[i].proto_id);
-
-      flow_update = true;
-      ndEF->flags.detection_updated = true;
-      break;
+    auto alpn = nd_alpn_protos.find(detected_alpn);
+    if (alpn != nd_alpn_protos.end() &&
+        alpn->second != ndEF->detected_protocol) {
     }
+
+    if ((ndGC_DEBUG && ndGC_VERBOSE)) {
+      nd_dprintf("%s: TLS ALPN: refined: %s: %s -> %s\n",
+                 tag.c_str(), detected_alpn,
+                 ndEF->detected_protocol_name.c_str(),
+                 nd_proto_get_name(alpn->second));
+    }
+
+    ndEF->detected_protocol = alpn->second;
+    ndEF->detected_protocol_name =
+        nd_proto_get_name(alpn->second);
+
+    flow_update = true;
+    ndEF->flags.detection_updated = true;
   }
 
   return flow_update;
@@ -500,7 +489,7 @@ void ndDetectionThread::ProcessFlow(
   ndi.addr_types.Classify(ndEF->upper_type,
                           ndEF->upper_addr);
 
-  if (dhc != NULL &&
+  if (dhc != nullptr &&
       ndEF->GetMasterProtocol() != ND_PROTO_DNS) {
     string hostname;
 
@@ -649,12 +638,12 @@ void ndDetectionThread::ProcessFlow(
           ndEFNFP.tls_quic.server_cipher;
 
       if (ndEF->ssl.server_cn[0] == '\0' &&
-          ndEFNFP.tls_quic.serverCN != NULL) {
+          ndEFNFP.tls_quic.serverCN != nullptr) {
         nd_set_hostname(ndEF->ssl.server_cn,
                         ndEFNFP.tls_quic.serverCN,
                         ND_FLOW_TLS_CNLEN);
         free(ndEFNFP.tls_quic.serverCN);
-        ndEFNFP.tls_quic.serverCN = NULL;
+        ndEFNFP.tls_quic.serverCN = nullptr;
 
         // Detect application by server CN if still unknown.
         if (ndEF->detected_application == ND_APP_UNKNOWN)
@@ -662,25 +651,25 @@ void ndDetectionThread::ProcessFlow(
               entry, ndi.apps.Find(ndEF->ssl.server_cn));
       }
 
-      if (ndEF->ssl.issuer_dn == NULL &&
-          ndEFNFP.tls_quic.issuerDN != NULL) {
+      if (ndEF->ssl.issuer_dn == nullptr &&
+          ndEFNFP.tls_quic.issuerDN != nullptr) {
         ndEF->ssl.issuer_dn =
             strdup(ndEFNFP.tls_quic.issuerDN);
         free(ndEFNFP.tls_quic.issuerDN);
-        ndEFNFP.tls_quic.issuerDN = NULL;
+        ndEFNFP.tls_quic.issuerDN = nullptr;
       }
 
-      if (ndEF->ssl.subject_dn == NULL &&
-          ndEFNFP.tls_quic.subjectDN != NULL) {
+      if (ndEF->ssl.subject_dn == nullptr &&
+          ndEFNFP.tls_quic.subjectDN != nullptr) {
         ndEF->ssl.subject_dn =
             strdup(ndEFNFP.tls_quic.subjectDN);
         free(ndEFNFP.tls_quic.subjectDN);
-        ndEFNFP.tls_quic.subjectDN = NULL;
+        ndEFNFP.tls_quic.subjectDN = nullptr;
       }
 
       break;
     case ND_PROTO_HTTP:
-      if (ndEFNF->http.user_agent != NULL) {
+      if (ndEFNF->http.user_agent != nullptr) {
         for (size_t i = 0;
              i <
              strlen((const char *)ndEFNF->http.user_agent);
@@ -697,7 +686,7 @@ void ndDetectionThread::ProcessFlow(
                  "%s", ndEFNF->http.user_agent);
       }
 
-      if (ndEFNF->http.url != NULL) {
+      if (ndEFNF->http.url != nullptr) {
         snprintf(ndEF->http.url, ND_FLOW_URL_LEN, "%s",
                  ndEFNF->http.url);
       }
@@ -716,7 +705,7 @@ void ndDetectionThread::ProcessFlow(
                "%s", ndEFNFP.ssh.server_signature);
       break;
     case ND_PROTO_SSDP:
-      if (ndEFNF->http.user_agent != NULL &&
+      if (ndEFNF->http.user_agent != nullptr &&
           strnlen(ndEFNF->http.user_agent,
                   ND_FLOW_UA_LEN) != 0) {
         ndEF->ssdp.headers["user-agent"].assign(
@@ -741,7 +730,8 @@ void ndDetectionThread::ProcessFlow(
       break;
   }
 
-  if (fhc != NULL && ndEF->lower_addr.GetPort(false) != 0 &&
+  if (fhc != nullptr &&
+      ndEF->lower_addr.GetPort(false) != 0 &&
       ndEF->upper_addr.GetPort(false) != 0) {
     flow_digest.assign(ndEF->digest_lower.begin(),
                        ndEF->digest_lower.end());
@@ -809,7 +799,7 @@ void ndDetectionThread::ProcessFlow(
   }
 
 #ifdef _ND_USE_CONNTRACK
-  if (thread_conntrack != NULL &&
+  if (thread_conntrack != nullptr &&
       ndEF->iface->role != ndIR_LAN) {
     if ((ndEF->lower_type == ndAddr::atLOCAL &&
          ndEF->upper_type == ndAddr::atOTHER) ||

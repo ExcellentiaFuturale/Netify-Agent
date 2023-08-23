@@ -70,21 +70,23 @@ class ndAddr {
       PrivatePair;
 
   ndAddr(uint8_t prefix = 0)
-      : addr{0}, prefix(prefix), comparison_flags(cfALL) {}
+      : addr{{0}},
+        prefix(prefix),
+        comparison_flags(cfALL) {}
 
   ndAddr(const string &addr)
-      : addr{0}, prefix(0), comparison_flags(cfALL) {
+      : addr{{0}}, prefix(0), comparison_flags(cfALL) {
     Create(*this, addr);
   }
 
   ndAddr(const uint8_t *hw_addr, size_t length = ETH_ALEN)
-      : addr{0}, prefix(0), comparison_flags(cfALL) {
+      : addr{{0}}, prefix(0), comparison_flags(cfALL) {
     Create(*this, hw_addr, length);
   }
 
   ndAddr(const struct sockaddr_storage *ss_addr,
          uint8_t prefix = 0)
-      : addr{0}, prefix(0), comparison_flags(cfALL) {
+      : addr{{0}}, prefix(0), comparison_flags(cfALL) {
     Create(*this, ss_addr, prefix);
   }
   ndAddr(const struct sockaddr_storage &ss_addr,
@@ -93,7 +95,7 @@ class ndAddr {
 
   ndAddr(const struct sockaddr_in *ss_in,
          uint8_t prefix = _ND_ADDR_BITSv4)
-      : addr{0}, prefix(0), comparison_flags(cfALL) {
+      : addr{{0}}, prefix(0), comparison_flags(cfALL) {
     Create(*this, ss_in, prefix);
   }
   ndAddr(const struct sockaddr_in &ss_in,
@@ -102,7 +104,7 @@ class ndAddr {
 
   ndAddr(const struct sockaddr_in6 *ss_in6,
          uint8_t prefix = _ND_ADDR_BITSv6)
-      : addr{0}, prefix(0), comparison_flags(cfALL) {
+      : addr{{0}}, prefix(0), comparison_flags(cfALL) {
     Create(*this, ss_in6, prefix);
   }
   ndAddr(const struct sockaddr_in6 &ss_in6,
@@ -111,7 +113,7 @@ class ndAddr {
 
   ndAddr(const struct in_addr *in_addr,
          uint8_t prefix = _ND_ADDR_BITSv4)
-      : addr{0}, prefix(0), comparison_flags(cfALL) {
+      : addr{{0}}, prefix(0), comparison_flags(cfALL) {
     Create(*this, in_addr, prefix);
   }
   ndAddr(const struct in_addr &in_addr,
@@ -120,7 +122,7 @@ class ndAddr {
 
   ndAddr(const struct in6_addr *in6_addr,
          uint8_t prefix = _ND_ADDR_BITSv6)
-      : addr{0}, prefix(0), comparison_flags(cfALL) {
+      : addr{{0}}, prefix(0), comparison_flags(cfALL) {
     Create(*this, in6_addr, prefix);
   }
   ndAddr(const struct in6_addr &in6_addr,
