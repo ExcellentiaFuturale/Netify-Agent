@@ -44,3 +44,4 @@ const nd_alpn_proto_map nd_alpn_protos = {
 };
 
 #endif // _ND_TLS_ALPN
+// vi: ei=all
