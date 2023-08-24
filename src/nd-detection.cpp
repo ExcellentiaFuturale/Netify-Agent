@@ -257,6 +257,7 @@ void ndDetectionThread::ProcessPacket(
       ndpi_rc.app_protocol != NDPI_PROTOCOL_UNKNOWN) {
     ndEF->detected_protocol =
         nd_ndpi_proto_find(ndpi_rc.app_protocol, ndEF);
+
 #if _ND_LOG_PROTO_UNKNOWN
     if (ndEF->detected_protocol != ND_PROTO_UNKNOWN) {
       char proto_name[64];

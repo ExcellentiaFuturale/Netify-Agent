@@ -22,6 +22,9 @@
 #include "config.h"
 #endif
 
+#include <iomanip>
+#include <locale>
+
 #include "nd-flow.hpp"
 
 // Enable lower map debug output
@@ -631,6 +634,22 @@ void ndFlow::Print(uint8_t pflags) const {
           dls << " SSH/CA: " << ssh.server_agent;
       }
 
+      if ((GetMasterProtocol() == ND_PROTO_TLS ||
+           detected_protocol == ND_PROTO_QUIC) &&
+          (ssl.version || ssl.cipher_suite)) {
+        dls << endl
+            << setw(iface->ifname.size()) << " "
+            << ": ";
+        dls << "V: 0x" << setfill('0') << setw(4) << hex
+            << ssl.version << setfill(' ') << dec;
+
+        if (ssl.cipher_suite) {
+          dls << " "
+              << "CS: 0x" << setfill('0') << setw(4) << hex
+              << ssl.cipher_suite << setfill(' ') << dec;
+        }
+      }
+
       if (HasTLSClientSNI() || HasTLSServerCN()) {
         dls << endl
             << setw(iface->ifname.size()) << " "
@@ -655,6 +674,8 @@ void ndFlow::Print(uint8_t pflags) const {
     if ((pflags & PRINTF_STATS)) {
       multiline = true;
 
+      dls.imbue(locale(""));
+
       dls << endl
           << setw(iface->ifname.size()) << " "
           << ": "
@@ -663,6 +684,8 @@ void ndFlow::Print(uint8_t pflags) const {
           << "TP: " << (int)stats.total_packets.load()
           << " "
           << "TB: " << (int)stats.total_bytes.load();
+
+      dls.imbue(locale("C"));
     }
 
     if (multiline) dls << endl;
