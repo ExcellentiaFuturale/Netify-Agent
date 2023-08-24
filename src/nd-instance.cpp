@@ -570,6 +570,7 @@ uint32_t ndInstance::InitializeConfig(int argc,
         ndGC_SetFlag(ndGF_VERBOSE, true);
         break;
       case 'x':
+        ndGC_SetFlag(ndGF_VERBOSE, false);
         ndGC.debug_flow_print_exprs.push_back(optarg);
         break;
       default:
@@ -956,6 +957,8 @@ void ndInstance::CommandLineHelp(bool version_only) {
         "nDPI debug message when enabled (compile-time).\n"
         "  -D, --debug-curl\n    In debug mode, display "
         "debug output from libCURL.\n"
+        "  -x, --debug-flow-expression <expr>\n    In debug mode, filter "
+        "flow detections by expression.\n"
         "  -v, --verbose\n    In debug mode, display "
         "real-time flow detections.\n"
         "  -R, --remain-in-foreground\n    Remain in "
