@@ -28,7 +28,7 @@
 
 export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig
 
-if [ "x${ENABLE_SANITIZER}" == "xtrue" ]; then
+if [ "x${ENABLE_SANITIZER}" != "xfalse" ]; then
   if [ "x${COMPILER}" == "xgcc" ]; then
     echo "Overriding COMPILER to clang, sanitizer enabled."
     COMPILER=clang
@@ -42,14 +42,14 @@ fi
 if [ "x${COMPILER}" == "xgcc" ]; then
   export CC=gcc
   export CXX=g++
-  CPPFLAGS="${CPPFLAGS} -grecord-gcc-switches"
+  CPPFLAGS+=" -grecord-gcc-switches"
 elif [ "x${COMPILER}" == "xclang" ]; then
   export CC=clang
   export CXX=clang++
 
   if [ "x${ENABLE_SANITIZER}" != "xfalse" ]; then
-    CPPFLAGS+="-fsanitize=${ENABLE_SANITIZER} -fno-omit-frame-pointer"
-    LDFLAGS+="-fsanitize=${ENABLE_SANITIZER}"
+    CPPFLAGS+=" -fsanitize=${ENABLE_SANITIZER} -fno-omit-frame-pointer"
+    LDFLAGS+=" -fsanitize=${ENABLE_SANITIZER}"
   fi
 else
   echo "ERROR: Unsupported COMPILER: ${COMPILER}"
@@ -57,7 +57,7 @@ else
 fi
 
 if [ "x${ENABLE_STACK_PROTECTION}" == "xtrue" ]; then
-  CPPFLAGS="${CPPFLAGS} -fstack-clash-protection \
+  CPPFLAGS+=" -fstack-clash-protection \
     -fstack-protector-strong -Werror=format-security -Wp,-D_FORTIFY_SOURCE=2"
 fi
 
