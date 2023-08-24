@@ -7,7 +7,7 @@
 : ${OPTION_PLUGINS:=enable}
 : ${OPTION_LIBTCMALLOC:=enable}
 : ${OPTION_NFQUEUE:=enable}
-: ${ENABLE_ADDRESS_SANITIZER:=false}
+: ${ENABLE_SANITIZER:=false}
 : ${ENABLE_STACK_PROTECTION:=false}
 
 : ${prefix:=/usr}
@@ -24,32 +24,33 @@
 : ${mandir:=${prefix}/share/man}
 : ${infodir:=${prefix}/share/info}
 
-if [ "x${ENABLE_ADDRESS_SANITIZER}" == "xtrue" ]; then
+export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig
+
+CPPFLAGS_COMMON="-pipe -g -O1 -fexceptions -Wall"
+
+case "x${ENABLE_SANITIZER}" in
+xaddress)
+  ;;
+xthread)
+  ;;
+xfalse)
+  ;;
+*)
+  echo "ERROR: Unsupported SANITIZER: ${ENABLE_SANITIZER}"
+  exit 1
+  ;;
+esac
+
+if [ "x${ENABLE_SANITIZER}" != "xfalse" ]; then
   if [ "x${COMPILER}" == "xgcc" ]; then
-    echo "Overriding COMPILER to clang, address sanitzer enabled."
+    echo "Overriding COMPILER to clang, sanitzer enabled."
     COMPILER=clang
-    export LDFLAGS=-fsanitize=address
   fi
   if [ "x${OPTION_LIBTCMALLOC}" == "xenable" ]; then
-    echo "Disabling OPTION_LIBTCMALLOC, address sanitzer enabled."
+    echo "Disabling OPTION_LIBTCMALLOC, sanitizer enabled."
     OPTION_LIBTCMALLOC=disable
   fi
 fi
-
-echo "Options:"
-echo " COMPILER: ${COMPILER}"
-echo " VARIANT: ${VARIANT}"
-echo " OPTION_CONNTRACK: ${OPTION_CONNTRACK}"
-echo " OPTION_NETLINK: ${OPTION_NETLINK}"
-echo " OPTION_PLUGINS: ${OPTION_PLUGINS}"
-echo " OPTION_LIBTCMALLOC: ${OPTION_LIBTCMALLOC}"
-echo " OPTION_NFQUEUE: ${OPTION_NFQUEUE}"
-echo " ENABLE_ADDRESS_SANITIZER: ${ENABLE_ADDRESS_SANITIZER}"
-echo " ENABLE_STACK_PROTECTION: ${ENABLE_STACK_PROTECTION}"
-
-if [ $# -gt 0 -a "x$1" == "xhelp" ]; then exit 0; fi
-
-CPPFLAGS_COMMON="-pipe -g -O1 -fexceptions -Wall"
 
 if [ "x${COMPILER}" == "xgcc" ]; then
   export CC=gcc
@@ -58,7 +59,10 @@ if [ "x${COMPILER}" == "xgcc" ]; then
 elif [ "x${COMPILER}" == "xclang" ]; then
   export CC=clang
   export CXX=clang++
-  CPPFLAGS_COMMON="${CPPFLAGS_COMMON} -fsanitize=address -fno-omit-frame-pointer"
+  if [ "x${ENABLE_SANITIZER}" != "xfalse" ]; then
+    export LDFLAGS="-fsanitize=${ENABLE_SANITIZER}"
+    CPPFLAGS_COMMON="${CPPFLAGS_COMMON} -fsanitize=${ENABLE_SANITIZER} -fno-omit-frame-pointer"
+  fi
 else
   echo "ERROR: Unsupported COMPILER: ${COMPILER}"
   exit 1
@@ -71,7 +75,20 @@ fi
 
 export CPPFLAGS="${CPPFLAGS_COMMON}"
 
-export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig
+echo "Options:"
+echo " COMPILER: ${COMPILER}"
+echo " VARIANT: ${VARIANT}"
+echo " OPTION_CONNTRACK: ${OPTION_CONNTRACK}"
+echo " OPTION_NETLINK: ${OPTION_NETLINK}"
+echo " OPTION_PLUGINS: ${OPTION_PLUGINS}"
+echo " OPTION_LIBTCMALLOC: ${OPTION_LIBTCMALLOC}"
+echo " OPTION_NFQUEUE: ${OPTION_NFQUEUE}"
+echo " ENABLE_SANITIZER: ${ENABLE_SANITIZER}"
+echo " ENABLE_STACK_PROTECTION: ${ENABLE_STACK_PROTECTION}"
+echo " CPPFLAGS: ${CPPFLAGS}"
+echo " LDFLAGS: ${LDFLAGS}"
+
+if [ $# -gt 0 -a "x$1" == "xhelp" ]; then exit 0; fi
 
 case "x${VARIANT}" in
 xgeneric)
