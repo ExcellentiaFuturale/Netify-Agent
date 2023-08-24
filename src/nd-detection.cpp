@@ -462,7 +462,6 @@ bool ndDetectionThread::ProcessALPN(
     auto alpn = nd_alpn_protos.find(detected_alpn);
     if (alpn != nd_alpn_protos.end() &&
         alpn->second != ndEF->detected_protocol) {
-
       if ((ndGC_DEBUG && ndGC_VERBOSE)) {
         nd_dprintf("%s: TLS ALPN: refined: %s: %s -> %s\n",
                    tag.c_str(), detected_alpn,
@@ -472,7 +471,7 @@ bool ndDetectionThread::ProcessALPN(
 
       ndEF->detected_protocol = alpn->second;
       ndEF->detected_protocol_name =
-        nd_proto_get_name(alpn->second);
+          nd_proto_get_name(alpn->second);
 
       flow_update = true;
       ndEF->flags.detection_updated = true;
