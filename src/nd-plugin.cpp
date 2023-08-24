@@ -113,6 +113,7 @@ ndPluginSinkPayload *ndPluginSinkPayload::Create(
 
 void ndPluginSink::QueuePayload(
     ndPluginSinkPayload *payload) {
+
   Lock();
 
   plq_public.push(payload);
@@ -128,6 +129,7 @@ void ndPluginSink::QueuePayload(
 }
 
 size_t ndPluginSink::PullPayloadQueue(void) {
+
   if (plq_public.size() == 0) return 0;
 
   ndPluginSinkPayload *p;
@@ -264,6 +266,7 @@ void ndPluginProcessor::DispatchSinkPayload(
     const string &target,
     const ndPlugin::Channels &channels, size_t length,
     const uint8_t *payload, uint8_t flags) {
+
   ndInstance &ndi = ndInstance::GetInstance();
 
   ndPluginSinkPayload *sp = ndPluginSinkPayload::Create(
@@ -279,6 +282,7 @@ void ndPluginProcessor::DispatchSinkPayload(
     const string &target,
     const ndPlugin::Channels &channels, const json &j,
     uint8_t flags) {
+
   if ((flags & ndPlugin::DF_FORMAT_MSGPACK)) {
     vector<uint8_t> output;
     output = json::to_msgpack(j);
