@@ -24,6 +24,9 @@
 
 #include <getopt.h>
 #include <sys/resource.h>
+#include <unistd.h>
+
+#include <cerrno>
 
 #if defined(_ND_USE_LIBTCMALLOC) && \
     defined(HAVE_GPERFTOOLS_MALLOC_EXTENSION_H)
@@ -32,6 +35,7 @@
 #include <malloc.h>
 #endif
 
+#include "nd-config.hpp"
 #include "nd-detection.hpp"
 #include "nd-instance.hpp"
 #include "nd-napi.hpp"
@@ -277,6 +281,10 @@ uint32_t ndInstance::InitializeConfig(int argc,
       {"export-apps", 0, 0, _ND_LO_EXPORT_APPS},
 #define _ND_LO_LOOKUP_IP 18
       {"lookup-ip", 1, 0, _ND_LO_LOOKUP_IP},
+#define _ND_LO_CAPTURE_DELAY 19
+      {"capture-delay", 1, 0, _ND_LO_CAPTURE_DELAY},
+#define _ND_LO_ALLOW_UNPRIV 20
+      {"allow-unprivileged", 0, 0, _ND_LO_ALLOW_UNPRIV},
 
       {NULL, 0, 0, 0}};
 
@@ -432,6 +440,12 @@ uint32_t ndInstance::InitializeConfig(int argc,
       case _ND_LO_LOOKUP_IP:
         rc = LookupAddress(optarg);
         return ndCR_Pack(ndCR_LOOKUP_ADDR, (rc) ? 0 : 1);
+      case _ND_LO_CAPTURE_DELAY:
+        ndGC.ttl_capture_delay = atoi(optarg);
+        break;
+      case _ND_LO_ALLOW_UNPRIV:
+        ndGC_SetFlag(ndGF_ALLOW_UNPRIV, true);
+        break;
       case '?':
         fprintf(stderr,
                 "Try `--help' for more information.\n");
@@ -576,6 +590,16 @@ uint32_t ndInstance::InitializeConfig(int argc,
       default:
         CommandLineHelp();
         return ndCR_INVALID_OPTION;
+    }
+  }
+
+  if (!ndGC_ALLOW_UNPRIV) {
+    // Require UID 0 from this point on...
+    if (geteuid() != 0) {
+      fprintf(stderr,
+              "Error starting Agent: %s (not root)\n",
+              strerror(EPERM));
+      return ndCR_INVALID_PERMS;
     }
   }
 
@@ -957,12 +981,15 @@ void ndInstance::CommandLineHelp(bool version_only) {
         "nDPI debug message when enabled (compile-time).\n"
         "  -D, --debug-curl\n    In debug mode, display "
         "debug output from libCURL.\n"
-        "  -x, --debug-flow-expression <expr>\n    In debug mode, filter "
-        "flow detections by expression.\n"
+        "  -x, --debug-flow-expression <expr>\n    In "
+        "debug mode, filter flow detections by "
+        "expression.\n"
         "  -v, --verbose\n    In debug mode, display "
         "real-time flow detections.\n"
         "  -R, --remain-in-foreground\n    Remain in "
         "foreground, don't daemonize (OpenWrt).\n"
+        "  --allow-unprivileged\n    Allow executing the "
+        "Agent as a non-root user.\n"
 
         "\nConfiguration options:\n"
         "  -u, --uuid\n    Display configured Agent UUID.\n"
@@ -1006,6 +1033,9 @@ void ndInstance::CommandLineHelp(bool version_only) {
         "  --lookup-ip <addr>\n    Perform application "
         "query by IP address.\n"
         "\nCapture options:\n"
+        "  --capture-delay <seconds>\n    In debug mode, "
+        "wait <seconds> before starting capture "
+        "thread(s).\n"
         "  -I, --internal [<interface>|<file>]\n    "
         "Specify an internal (LAN) interface, or file, to "
         "capture from.\n"
@@ -1652,6 +1682,16 @@ void *ndInstance::ndInstance::Entry(void) {
   }
 
   try {
+    if (ndGC_DEBUG && ndGC.ttl_capture_delay != 0) {
+      for (unsigned i = 0; i < ndGC.ttl_capture_delay;
+           i++) {
+        nd_dprintf(
+            "%s: starting capture thread(s) in %us...\n",
+            tag.c_str(), ndGC.ttl_capture_delay - i);
+        sleep(1);
+      }
+    }
+
     // Create and start capture threads
     if (!ReloadCaptureThreads(thread_capture))
       return nullptr;

@@ -99,7 +99,7 @@ enum nd_global_flags {
   ndGF_VERBOSE = 0x10000,
   ndGF_REPLAY_DELAY = 0x20000,
   ndGF_REMAIN_IN_FOREGROUND = 0x40000,
-  ndGF_UNUSED_0x80000 = 0x80000,
+  ndGF_ALLOW_UNPRIV = 0x80000,
   ndGF_UNUSED_0x100000 = 0x100000,
   ndGF_UPLOAD_ENABLED = 0x200000,
   ndGF_UPLOAD_NAT_FLOWS = 0x400000,
@@ -148,6 +148,8 @@ enum nd_global_flags {
 #define ndGC_REMAIN_IN_FOREGROUND        \
   (ndGlobalConfig::GetInstance().flags & \
    ndGF_REMAIN_IN_FOREGROUND)
+#define ndGC_ALLOW_UNPRIV \
+  (ndGlobalConfig::GetInstance().flags & ndGF_ALLOW_UNPRIV)
 #define ndGC_UPLOAD_ENABLED              \
   (ndGlobalConfig::GetInstance().flags & \
    ndGF_UPLOAD_ENABLED)
@@ -252,6 +254,7 @@ class ndGlobalConfig {
   unsigned max_detection_pkts;
   unsigned max_fhc;
   unsigned max_flows;
+  unsigned ttl_capture_delay;
   unsigned ttl_dns_entry;
   unsigned ttl_idle_flow;
   unsigned ttl_idle_tcp_flow;

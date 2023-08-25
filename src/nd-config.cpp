@@ -55,7 +55,7 @@ ndGlobalConfig::ndGlobalConfig()
       path_uuid(ND_AGENT_UUID_PATH),
       path_uuid_serial(ND_AGENT_SERIAL_PATH),
       path_uuid_site(ND_SITE_UUID_PATH),
-      url_napi(ND_API_UPDATE_URL),
+      url_napi(ND_URL_API_UPDATE),
       dhc_save(ndDHC_PERSISTENT),
       fhc_save(ndFHC_PERSISTENT),
       capture_type(ndCT_NONE),
@@ -75,10 +75,11 @@ ndGlobalConfig::ndGlobalConfig()
       max_detection_pkts(ND_MAX_DETECTION_PKTS),
       max_fhc(ND_MAX_FHC_ENTRIES),
       max_flows(0),
+      ttl_capture_delay(0),
       ttl_dns_entry(ND_TTL_IDLE_DHC_ENTRY),
       ttl_idle_flow(ND_TTL_IDLE_FLOW),
       ttl_idle_tcp_flow(ND_TTL_IDLE_TCP_FLOW),
-      ttl_napi_update(ND_API_UPDATE_TTL),
+      ttl_napi_update(ND_TTL_API_UPDATE),
       update_imf(1),
       update_interval(ND_STATS_INTERVAL),
       reader(nullptr) {
@@ -445,10 +446,10 @@ bool ndGlobalConfig::Load(const string &filename) {
       r->GetBoolean("netify-api", "enable_updates", true));
 
   ttl_napi_update = r->GetInteger(
-      "netify-api", "update_interval", ND_API_UPDATE_TTL);
+      "netify-api", "update_interval", ND_TTL_API_UPDATE);
 
   url_napi =
-      r->Get("netify-api", "url_api", ND_API_UPDATE_URL);
+      r->Get("netify-api", "url_api", ND_URL_API_UPDATE);
 
   napi_vendor =
       r->Get("netify-api", "vendor", ND_API_VENDOR);

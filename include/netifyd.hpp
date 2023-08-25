@@ -194,8 +194,8 @@
 #define ND_PRIVATE_IPV4 "127.255.0."
 #define ND_PRIVATE_IPV6 "fe:80::ffff:7fff:"
 
-#define ND_API_UPDATE_TTL (3600 * 24)
-#define ND_API_UPDATE_URL "https://api.netify.ai/api/v1"
+#define ND_TTL_API_UPDATE (3600 * 24)
+#define ND_URL_API_UPDATE "https://api.netify.ai/api/v1"
 #define ND_API_VENDOR "EG"
 
 #endif  // _NETIFYD_H

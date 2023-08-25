@@ -165,6 +165,7 @@ class ndInstance : public ndThread, public ndSerializer {
     ndCR_INVALID_INTERFACE,
     ndCR_INVALID_INTERFACES,
     ndCR_INVALID_OPTION,
+    ndCR_INVALID_PERMS,
     ndCR_INVALID_VALUE,
     ndCR_LIBCURL_FAILURE,
     ndCR_LOAD_FAILURE,
