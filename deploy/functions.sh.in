@@ -17,12 +17,12 @@ load_defaults()
     options=$NETIFYD_EXTRA_OPTS
 
     for entry in $NETIFYD_INTNET; do
-        if [ "$entry" == "${entry/,/}" ]; then
+        if [ "$entry" = "${entry/,/}" ]; then
             options="$options -I $entry"
             continue
         fi
         for net in ${entry//,/ }; do
-            if [ "$net" == "${entry/,*/}" ]; then
+            if [ "$net" = "${entry/,*/}" ]; then
                 options="$options -I $net"
             else
                 options="$options -A $net"
@@ -31,12 +31,12 @@ load_defaults()
     done
 
     for entry in $NETIFYD_EXTNET; do
-        if [ "$entry" == "${entry/,/}" ]; then
+        if [ "$entry" = "${entry/,/}" ]; then
             options="$options -E $entry"
             continue
         fi
         for ifn in ${entry//,/ }; do
-            if [ "$ifn" == "${entry/,*/}" ]; then
+            if [ "$ifn" = "${entry/,*/}" ]; then
                 options="$options -E $ifn"
             else
                 options="$options -N $ifn"
@@ -163,7 +163,7 @@ load_pfsense()
             $xmllint --xpath "$xpath/enable" $conf >/dev/null 2>&1 || break
             enabled=$($xmllint --xpath "boolean($xpath/enable)" $conf)
 
-            if [ "$enabled" == "true" ]; then
+            if [ "$enabled" = "true" ]; then
                 ifn=$($xmllint --xpath "$xpath/if/text()" $conf)
                 case "$role" in
                     lan)
@@ -256,7 +256,7 @@ auto_detect_options()
 
     options=$(load_defaults)
 
-    if [ "$NETIFYD_AUTODETECT" == "yes" ]; then
+    if [ "$NETIFYD_AUTODETECT" = "yes" ]; then
         case "$(detect_os)" in
             clearos)
                 options=$(load_clearos)
