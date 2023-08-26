@@ -1209,7 +1209,13 @@ bool nd_scan_dotd(const string &path,
 #endif
         !isdigit(result->d_name[0]))
       continue;
-    files.push_back(result->d_name);
+
+    string name(result->d_name);
+    size_t p = name.find_last_of('.');
+    if (p == string::npos || name.substr(p + 1) != "conf")
+      continue;
+
+    files.push_back(name);
   }
 
   closedir(dh);

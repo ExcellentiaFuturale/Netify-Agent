@@ -100,7 +100,7 @@ enum nd_global_flags {
   ndGF_REPLAY_DELAY = 0x20000,
   ndGF_REMAIN_IN_FOREGROUND = 0x40000,
   ndGF_ALLOW_UNPRIV = 0x80000,
-  ndGF_UNUSED_0x100000 = 0x100000,
+  ndGF_IGNORE_IFACE_CONFIGS = 0x100000,
   ndGF_UPLOAD_ENABLED = 0x200000,
   ndGF_UPLOAD_NAT_FLOWS = 0x400000,
   ndGF_UNUSED_0x800000 = 0x800000,
@@ -150,6 +150,9 @@ enum nd_global_flags {
    ndGF_REMAIN_IN_FOREGROUND)
 #define ndGC_ALLOW_UNPRIV \
   (ndGlobalConfig::GetInstance().flags & ndGF_ALLOW_UNPRIV)
+#define ndGC_IGNORE_IFACE_CONFIGS        \
+  (ndGlobalConfig::GetInstance().flags & \
+   ndGF_IGNORE_IFACE_CONFIGS)
 #define ndGC_UPLOAD_ENABLED              \
   (ndGlobalConfig::GetInstance().flags & \
    ndGF_UPLOAD_ENABLED)

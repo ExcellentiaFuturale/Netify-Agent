@@ -285,6 +285,9 @@ uint32_t ndInstance::InitializeConfig(int argc,
       {"capture-delay", 1, 0, _ND_LO_CAPTURE_DELAY},
 #define _ND_LO_ALLOW_UNPRIV 20
       {"allow-unprivileged", 0, 0, _ND_LO_ALLOW_UNPRIV},
+#define _ND_LO_IGNORE_IFACE_CONFIGS 21
+      {"ignore-interface-configs", 0, 0,
+       _ND_LO_IGNORE_IFACE_CONFIGS},
 
       {NULL, 0, 0, 0}};
 
@@ -305,6 +308,9 @@ uint32_t ndInstance::InitializeConfig(int argc,
         break;
       case _ND_LO_DUMP_WITH_CATS:
         dump_flags |= ndDUMP_WITH_CATS;
+        break;
+      case _ND_LO_IGNORE_IFACE_CONFIGS:
+        ndGC_SetFlag(ndGF_IGNORE_IFACE_CONFIGS, true);
         break;
       case '?':
         fprintf(stderr,
@@ -445,6 +451,10 @@ uint32_t ndInstance::InitializeConfig(int argc,
         break;
       case _ND_LO_ALLOW_UNPRIV:
         ndGC_SetFlag(ndGF_ALLOW_UNPRIV, true);
+        break;
+      case _ND_LO_IGNORE_IFACE_CONFIGS:
+        // XXX: Set in first getopt pass prior to loading
+        // configuration file.
         break;
       case '?':
         fprintf(stderr,
@@ -1032,10 +1042,14 @@ void ndInstance::CommandLineHelp(bool version_only) {
         "  --dump-risks\n    Dump flow security risks.\n"
         "  --lookup-ip <addr>\n    Perform application "
         "query by IP address.\n"
+
         "\nCapture options:\n"
-        "  --capture-delay <seconds>\n    In debug mode, "
-        "wait <seconds> before starting capture "
-        "thread(s).\n"
+        "  --capture-delay <seconds>\n     Wait <seconds> "
+        "before starting capture thread(s).\n"
+        "  --ignore-interface-configs\n    Don't load "
+        "capture interface configuration file entries.  "
+        "Only configure capture interfaces set using "
+        "command-line options.\n"
         "  -I, --internal [<interface>|<file>]\n    "
         "Specify an internal (LAN) interface, or file, to "
         "capture from.\n"
@@ -1682,10 +1696,10 @@ void *ndInstance::ndInstance::Entry(void) {
   }
 
   try {
-    if (ndGC_DEBUG && ndGC.ttl_capture_delay != 0) {
+    if (ndGC.ttl_capture_delay != 0) {
       for (unsigned i = 0; i < ndGC.ttl_capture_delay;
            i++) {
-        nd_dprintf(
+        nd_printf(
             "%s: starting capture thread(s) in %us...\n",
             tag.c_str(), ndGC.ttl_capture_delay - i);
         sleep(1);

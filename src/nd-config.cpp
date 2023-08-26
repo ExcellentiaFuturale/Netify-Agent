@@ -626,6 +626,8 @@ bool ndGlobalConfig::ForceReset(void) {
 
 bool ndGlobalConfig::LoadInterfaces(
     const string &filename) {
+  if (ndGC_IGNORE_IFACE_CONFIGS) return true;
+
   ClearInterfaces();
 
   if (!Open(filename)) return false;
