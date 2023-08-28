@@ -1066,8 +1066,8 @@ nd_process_ip:
   }
 
   nf->ts_last_seen = ts_pkt;
-  if (!nf->ts_first_update.load())
-    nf->ts_first_update = ts_pkt;
+  if (!nf->stats.ts_first_update.load())
+    nf->stats.ts_first_update = ts_pkt;
 
   if (nf->ip_protocol == IPPROTO_TCP) {
     if (hdr_tcp->th_seq <= nf->tcp_last_seq) {

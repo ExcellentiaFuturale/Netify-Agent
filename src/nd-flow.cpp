@@ -64,7 +64,6 @@ ndFlow::ndFlow(nd_iface_ptr &iface)
       vlan_id(0),
       tcp_last_seq(0),
       ts_first_seen(0),
-      ts_first_update(0),
       ts_last_seen(0),
       lower_map(LOWER_UNKNOWN),
       other_type(OTHER_UNKNOWN),
@@ -108,7 +107,6 @@ ndFlow::ndFlow(const ndFlow &flow)
       vlan_id(flow.vlan_id),
       tcp_last_seq(flow.tcp_last_seq),
       ts_first_seen(flow.ts_first_seen),
-      ts_first_update(flow.ts_first_update.load()),
       ts_last_seen(flow.ts_last_seen.load()),
       lower_map(LOWER_UNKNOWN),
       other_type(OTHER_UNKNOWN),
@@ -242,8 +240,6 @@ void ndFlow::Hash(const string &device, bool hash_mdata,
 }
 
 void ndFlow::Reset(bool full_reset) {
-  ts_first_update = 0;
-
   stats.Reset(full_reset);
 
   if (full_reset) {

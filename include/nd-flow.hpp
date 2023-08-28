@@ -73,7 +73,8 @@ class ndFlowStats {
         lower_packets(0),
         upper_packets(0),
         total_packets(0),
-        detection_packets(0)
+        detection_packets(0),
+        ts_first_update(0)
 #ifdef _ND_EXTENDED_STATS
         ,
         lower_rate(0),
@@ -98,7 +99,8 @@ class ndFlowStats {
         lower_packets(stats.lower_packets.load()),
         upper_packets(stats.upper_packets.load()),
         total_packets(stats.total_packets.load()),
-        detection_packets(stats.detection_packets.load())
+        detection_packets(stats.detection_packets.load()),
+        ts_first_update(stats.ts_first_update.load())
 #ifdef _ND_EXTENDED_STATS
         ,
         lower_rate(stats.lower_rate.load()),
@@ -124,6 +126,7 @@ class ndFlowStats {
     upper_packets = fs.upper_packets.load();
     total_packets = fs.total_packets.load();
     detection_packets = fs.detection_packets.load();
+    ts_first_update = fs.ts_first_update.load();
 #ifdef _ND_EXTENDED_STATS
     lower_rate = fs.lower_rate.load();
     upper_rate = fs.upper_rate.load();
@@ -133,28 +136,13 @@ class ndFlowStats {
 #endif
     return *this;
   };
-#if 0
-    inline ndFlowStats& operator+=(const ndFlowStats &fs)
-    {
-        lower_bytes += fs.lower_bytes.load();
-        upper_bytes += fs.upper_bytes.load();
-        total_bytes += fs.total_bytes.load();
-        lower_packets += fs.lower_packets.load();
-        upper_packets += fs.upper_packets.load();
-        total_packets += fs.total_packets.load();
-#ifdef _ND_EXTENDED_STATS
-        tcp_seq_errors += fs.tcp_seq_errors.load();
-        tcp_resets += fs.tcp_resets.load();
-        tcp_retrans += fs.tcp_retrans.load();
-#endif
-        return *this;
-    }
-#endif
+
   inline void Reset(bool full_reset = false) {
     lower_bytes = 0;
     upper_bytes = 0;
     lower_packets = 0;
     upper_packets = 0;
+    ts_first_update = 0;
 #ifdef _ND_EXTENDED_STATS
     for (unsigned i = 0; i < ndGC.update_interval; i++) {
       lower_rate_samples[i] = 0;
@@ -180,6 +168,8 @@ class ndFlowStats {
   atomic<uint32_t> total_packets;
 
   atomic<uint8_t> detection_packets;
+
+  atomic<uint64_t> ts_first_update;
 #ifdef _ND_EXTENDED_STATS
   vector<float> lower_rate_samples;
   vector<float> upper_rate_samples;
@@ -546,7 +536,7 @@ class ndFlow : public ndSerializer {
 
       serialize(output, {"first_seen_at"}, ts_first_seen);
       serialize(output, {"first_update_at"},
-                ts_first_update.load());
+                stats.ts_first_update.load());
 
       serialize(output, {"risks", "risks"}, risks);
       serialize(output, {"risks", "ndpi_risk_score"},
@@ -667,7 +657,6 @@ class ndFlow : public ndSerializer {
   uint32_t tcp_last_seq;
 
   uint64_t ts_first_seen;
-  atomic<uint64_t> ts_first_update;
   atomic<uint64_t> ts_last_seen;
 
   enum {
