@@ -265,28 +265,30 @@ const ndPacket *ndCaptureThread::ProcessPacket(
       ((uint64_t)packet->tv_sec) * ND_DETECTION_TICKS +
       packet->tv_usec / (1000000 / ND_DETECTION_TICKS);
 
-  if (ndGC_REPLAY_DELAY) {
+  if (ndCT_TYPE(iface->capture_type) == ndCT_PCAP_OFFLINE) {
     if (ts_pkt_first == 0) ts_pkt_first = ts_pkt;
 
     ts_pkt = (ts_pkt - ts_pkt_first) + (tv_epoch * 1000);
 
     if (ts_pkt_last > ts_pkt) ts_pkt = ts_pkt_last;
 
-    if (ts_pkt_last) {
-      useconds_t delay =
-          useconds_t(ts_pkt - ts_pkt_last) * 1000;
+    if (ndGC_REPLAY_DELAY) {
+      if (ts_pkt_last) {
+        useconds_t delay =
+            useconds_t(ts_pkt - ts_pkt_last) * 1000;
 #ifdef _ND_LOG_PKT_DELAY_TIME
-      nd_dprintf("%s: pkt delay: %lu\n", tag.c_str(),
-                 delay);
+        nd_dprintf("%s: pkt delay: %lu\n", tag.c_str(),
+                   delay);
 #endif
-      if (delay) {
-        pthread_mutex_unlock(&lock);
-        usleep(delay);
-        pthread_mutex_lock(&lock);
+        if (delay) {
+          pthread_mutex_unlock(&lock);
+          usleep(delay);
+          pthread_mutex_lock(&lock);
+        }
       }
-    }
-  } else if (ts_pkt_last > ts_pkt)
-    ts_pkt = ts_pkt_last;
+    } else if (ts_pkt_last > ts_pkt)
+      ts_pkt = ts_pkt_last;
+  }
 
   ts_pkt_last = ts_pkt;
 

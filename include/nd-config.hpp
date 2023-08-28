@@ -103,7 +103,7 @@ enum nd_global_flags {
   ndGF_IGNORE_IFACE_CONFIGS = 0x100000,
   ndGF_UPLOAD_ENABLED = 0x200000,
   ndGF_UPLOAD_NAT_FLOWS = 0x400000,
-  ndGF_UNUSED_0x800000 = 0x800000,
+  ndGF_AUTO_FLOW_EXPIRY = 0x800000,
   ndGF_SOFT_DISSECTORS = 0x1000000,
   ndGF_LOAD_DOMAINS = 0x2000000,
 };
@@ -159,6 +159,9 @@ enum nd_global_flags {
 #define ndGC_UPLOAD_NAT_FLOWS            \
   (ndGlobalConfig::GetInstance().flags & \
    ndGF_UPLOAD_NAT_FLOWS)
+#define ndGC_AUTO_FLOW_EXPIRY            \
+  (ndGlobalConfig::GetInstance().flags & \
+   ndGF_AUTO_FLOW_EXPIRY)
 #define ndGC_SOFT_DISSECTORS             \
   (ndGlobalConfig::GetInstance().flags & \
    ndGF_SOFT_DISSECTORS)

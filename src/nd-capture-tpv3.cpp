@@ -82,7 +82,7 @@ class ndPacketRing {
 
   inline int GetDescriptor(void) { return sd; }
 
-  bool SetFilter(const string &expr);
+  void SetFilter(const string &expr);
   bool ApplyFilter(const uint8_t *pkt, size_t snaplen,
                    size_t length) const;
 
@@ -414,16 +414,28 @@ ndPacketRing::~ndPacketRing() {
   for (auto &i : blocks) delete i;
 }
 
-bool ndPacketRing::SetFilter(const string &expr) {
-  if (pcap_compile_nopcap(ND_PCAP_SNAPLEN, DLT_EN10MB,
-                          &filter, expr.c_str(), 1,
-                          PCAP_NETMASK_UNKNOWN) == -1) {
-    nd_dprintf("pcap_compile_nopcap: %s: failed.\n",
-               expr.c_str());
-    return false;
+void ndPacketRing::SetFilter(const string &expr) {
+#ifdef HAVE_PCAP_OPEN_DEAD
+  pcap_t *pcap =
+      pcap_open_dead(DLT_EN10MB, ndGC.max_capture_length);
+  if (pcap == nullptr) {
+    throw ndCaptureThreadException(
+        "error creating PCAP context");
+  }
+  if (pcap_compile(pcap, &filter, expr.c_str(), 1,
+                   PCAP_NETMASK_UNKNOWN) == -1) {
+#else
+  if (pcap_compile_nopcap(ndGC.max_capture_length,
+                          DLT_EN10MB, &filter, expr.c_str(),
+                          1, PCAP_NETMASK_UNKNOWN) == -1) {
+#endif
+    throw ndCaptureThreadException(
+        "error compiling BPF filter");
   }
 
-  return true;
+#ifdef HAVE_PCAP_OPEN_DEAD
+  pcap_close(pcap);
+#endif
 }
 
 bool ndPacketRing::ApplyFilter(const uint8_t *pkt,

@@ -79,6 +79,9 @@ AC_CHECK_LIB([rt],
 AC_CHECK_LIB([atomic], [__atomic_load_8])
 
 AC_CHECK_LIB([pcap], [pcap_open_live])
+AC_CHECK_FUNC([pcap_open_dead], [
+    AC_DEFINE([HAVE_PCAP_OPEN_DEAD], [1], [Define if pcap_open_dead is available.])
+])
 
 AS_IF([test "$ac_cv_lib_pcap_pcap_open_live" = "yes"], [
     AC_DEFINE([_ND_USE_LIBPCAP], [1], [Define if libpcap is available.])

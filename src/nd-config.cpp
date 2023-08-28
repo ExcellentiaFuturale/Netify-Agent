@@ -84,6 +84,7 @@ ndGlobalConfig::ndGlobalConfig()
       update_interval(ND_STATS_INTERVAL),
       reader(nullptr) {
   flags |= ndGF_SSL_VERIFY;
+  flags |= ndGF_AUTO_FLOW_EXPIRY;
 #ifdef _ND_USE_CONNTRACK
   flags |= ndGF_USE_CONNTRACK;
 #endif
@@ -242,6 +243,9 @@ bool ndGlobalConfig::Load(const string &filename) {
   ndGC_SetFlag(ndGF_SYN_SCAN_PROTECTION,
                r->GetBoolean("netifyd",
                              "syn_scan_protection", false));
+  ndGC_SetFlag(
+      ndGF_AUTO_FLOW_EXPIRY,
+      r->GetBoolean("netifyd", "auto_flow_expiry", true));
 
   ttl_idle_flow = (unsigned)r->GetInteger(
       "netifyd", "ttl_idle_flow", ND_TTL_IDLE_FLOW);
@@ -441,9 +445,8 @@ bool ndGlobalConfig::Load(const string &filename) {
                     "private_external_addresses", false));
 
   // Netify API section
-  ndGC_SetFlag(
-      ndGF_USE_NAPI,
-      r->GetBoolean("netify-api", "enable_updates", true));
+  ndGC_SetFlag(ndGF_USE_NAPI,
+               r->GetBoolean("netify-api", "enable", true));
 
   ttl_napi_update = r->GetInteger(
       "netify-api", "update_interval", ND_TTL_API_UPDATE);

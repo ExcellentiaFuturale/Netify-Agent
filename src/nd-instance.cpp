@@ -288,6 +288,9 @@ uint32_t ndInstance::InitializeConfig(int argc,
 #define _ND_LO_IGNORE_IFACE_CONFIGS 21
       {"ignore-interface-configs", 0, 0,
        _ND_LO_IGNORE_IFACE_CONFIGS},
+#define _ND_LO_DISABLE_AUTO_FLOW_EXPIRY 22
+      {"disable-auto-flow-expiry", 0, 0,
+       _ND_LO_DISABLE_AUTO_FLOW_EXPIRY},
 
       {NULL, 0, 0, 0}};
 
@@ -455,6 +458,9 @@ uint32_t ndInstance::InitializeConfig(int argc,
       case _ND_LO_IGNORE_IFACE_CONFIGS:
         // XXX: Set in first getopt pass prior to loading
         // configuration file.
+        break;
+      case _ND_LO_DISABLE_AUTO_FLOW_EXPIRY:
+        ndGC_SetFlag(ndGF_AUTO_FLOW_EXPIRY, false);
         break;
       case '?':
         fprintf(stderr,
@@ -1050,6 +1056,8 @@ void ndInstance::CommandLineHelp(bool version_only) {
         "capture interface configuration file entries.  "
         "Only configure capture interfaces set using "
         "command-line options.\n"
+        "  --disable-auto-flow-expiry\n    Don't "
+        "auto-expire flows on exit.\n"
         "  -I, --internal [<interface>|<file>]\n    "
         "Specify an internal (LAN) interface, or file, to "
         "capture from.\n"
@@ -1753,7 +1761,7 @@ void *ndInstance::ndInstance::Entry(void) {
     goto ndInstance_EntryReturn;
   }
 
-  do {
+  for (;;) {
     int ipc = ndIPC_NONE;
 
     switch ((ipc = WaitForIPC(1))) {
@@ -1818,9 +1826,11 @@ void *ndInstance::ndInstance::Entry(void) {
       exit_code = EXIT_FAILURE;
       break;
     }
-  } while ((terminate_force.load() == false &&
-            ShouldTerminate() && status.flows_active > 0) ||
-           ShouldTerminate() == false);
+
+    if (terminate_force.load()) break;
+
+    if (ShouldTerminate() && status.flows == 0) break;
+  };
 
   proc_plugins = plugins.Terminate(ndPlugin::TYPE_PROC);
 
@@ -2075,7 +2085,7 @@ size_t ndInstance::ReapCaptureThreads(
         "%s: Exiting, no remaining capture threads.\n",
         tag.c_str());
 
-    DestroyCaptureThreads(threads, true);
+    DestroyCaptureThreads(threads, ndGC_AUTO_FLOW_EXPIRY);
     Terminate();
   }
 
