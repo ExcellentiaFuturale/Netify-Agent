@@ -82,6 +82,7 @@ endif
 define Build/InstallDev
 	$(INSTALL_DIR) $(1)/usr/include/@PACKAGE_TARNAME@
 	$(CP) $(PKG_INSTALL_DIR)/usr/include/@PACKAGE_TARNAME@/*.h $(1)/usr/include/@PACKAGE_TARNAME@
+	$(CP) $(PKG_INSTALL_DIR)/usr/include/@PACKAGE_TARNAME@/*.hpp $(1)/usr/include/@PACKAGE_TARNAME@
 	$(INSTALL_DIR) $(1)/usr/include/netifyd/pcap-compat
 	$(CP) $(PKG_INSTALL_DIR)/usr/include/netifyd/pcap-compat/*.h $(1)/usr/include/netifyd/pcap-compat
 	$(INSTALL_DIR) $(1)/usr/include/netifyd/nlohmann
