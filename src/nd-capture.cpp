@@ -28,10 +28,10 @@
 
 #if defined(HAVE_PCAP_DLT_H)
 #include <pcap/dlt.h>
+#elif defined(_ND_PCAP_DLT_IN_BPF_H)
+#include <pcap/bpf.h>
 #else
-#ifdef _ND_DLT_NOT_IN_BPF
 #include "pcap-compat/dlt.h"
-#endif
 #endif
 
 #ifdef HAVE_PCAP_SLL_H

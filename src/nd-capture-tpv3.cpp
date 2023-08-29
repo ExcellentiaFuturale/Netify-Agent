@@ -28,6 +28,14 @@
 #include <sys/mman.h>
 #include <sys/socket.h>
 
+#if defined(HAVE_PCAP_DLT_H)
+#include <pcap/dlt.h>
+#elif defined(_ND_PCAP_DLT_IN_BPF_H)
+#include <pcap/bpf.h>
+#else
+#include "pcap-compat/dlt.h"
+#endif
+
 #ifdef HAVE_PCAP_VLAN_H
 #include <pcap/vlan.h>
 #else

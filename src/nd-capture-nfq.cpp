@@ -30,8 +30,11 @@
 #endif
 
 #include <libnfnetlink/libnfnetlink.h>
-#ifdef HAVE_PCAP_DLT_H
+
+#if defined(HAVE_PCAP_DLT_H)
 #include <pcap/dlt.h>
+#elif defined(_ND_PCAP_DLT_IN_BPF_H)
+#include <pcap/bpf.h>
 #else
 #include "pcap-compat/dlt.h"
 #endif

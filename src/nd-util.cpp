@@ -27,6 +27,7 @@
 #include <fcntl.h>
 #include <glob.h>
 #include <grp.h>
+#include <libgen.h>
 #include <net/if.h>
 #include <netdb.h>
 #include <pwd.h>
@@ -38,6 +39,7 @@
 #include <unistd.h>
 #include <zlib.h>
 
+#include <csignal>
 #include <cstdarg>
 #include <cstring>
 #include <deque>
