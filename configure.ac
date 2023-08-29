@@ -91,16 +91,20 @@ AS_IF([test "$ac_cv_lib_pcap_pcap_open_live" = "yes"], [
     AM_CONDITIONAL(USE_LIBPCAP, false)
 ])
 
-AC_RUN_IFELSE([
+AC_MSG_CHECKING([for DLT_* macros in pcap/bpf.h])
+AC_COMPILE_IFELSE([
     AC_LANG_PROGRAM([
         #include <pcap/bpf.h>
     ], [
         #ifndef DLT_EN10MB
-            exit(1);
+        #error "DLT_EN10MB not defined"
         #endif
     ])
 ], [
-    AC_DEFINE([_ND_DLT_NOT_IN_BPF], [1], [Define if DLT_* macros not defined in pcap/bpf.h.])
+    AC_MSG_RESULT([no])
+], [
+    AC_MSG_RESULT([yes])
+    AC_DEFINE([_ND_PCAP_DLT_IN_BPF_H], [1], [Define if DLT_* macros are defined in pcap/bpf.h.])
 ])
 
 case "${host_os}" in
