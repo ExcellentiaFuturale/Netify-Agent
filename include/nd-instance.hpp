@@ -29,6 +29,7 @@
 #endif
 
 #include <atomic>
+#include <csignal>
 
 #include "nd-apps.hpp"
 #include "nd-category.hpp"
