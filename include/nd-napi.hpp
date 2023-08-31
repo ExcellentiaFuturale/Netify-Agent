@@ -21,24 +21,28 @@
 #ifndef _ND_NAPI_H
 #define _ND_NAPI_H
 
-#define _ND_NAPI_RETRY_TTL 5
-
 #include <curl/curl.h>
+#include <unistd.h>
 
-#include "nd-instance.hpp"
+#include <map>
+#include <nlohmann/json.hpp>
+
+using json = nlohmann::json;
+
 #include "nd-thread.hpp"
 
-class ndNetifyApiThread : public ndThread,
-                          public ndInstanceClient {
+class ndNetifyApiManager;
+
+class ndNetifyApiThread : public ndThread {
  public:
   ndNetifyApiThread();
   virtual ~ndNetifyApiThread();
 
   virtual void *Entry(void) = 0;
 
-  void AppendData(const char *data, size_t length) {
+  void AppendContent(const char *data, size_t length) {
     try {
-      body_data.append(data, length);
+      content.append(data, length);
     } catch (exception &e) {
       throw ndThreadException(e.what());
     }
@@ -46,43 +50,89 @@ class ndNetifyApiThread : public ndThread,
 
   void ParseHeader(const string &header_raw);
 
+  enum Method {
+    METHOD_GET,
+    METHOD_POST,
+  };
+
+  typedef map<string, string> Headers;
+
  protected:
-  unsigned Get(const string &url);
+  friend class ndNetifyApiManager;
+
+  void CreateHeaders(const Headers &headers);
+  void DestroyHeaders(void);
+
+  void Perform(Method method, const string &url,
+               const Headers &headers);
 
   CURL *ch;
+  long http_rc;
+  Headers headers_rx;
   struct curl_slist *headers_tx;
-  map<string, string> headers_rx;
-  string body_data;
+  string content;
+  string content_type;
 };
 
-class ndNetifyApiProvision : public ndNetifyApiThread {
+class ndNetifyApiBootstrap : public ndNetifyApiThread {
  public:
-  ndNetifyApiProvision() : ndNetifyApiThread() {}
+  ndNetifyApiBootstrap() : ndNetifyApiThread() {}
 
   virtual void *Entry(void);
 
  protected:
+  friend class ndNetifyApiManager;
 };
 
-class ndNetifyApiRefreshApplications
-    : public ndNetifyApiThread {
+class ndNetifyApiDownload : public ndNetifyApiThread {
  public:
-  ndNetifyApiRefreshApplications() : ndNetifyApiThread() {}
+  ndNetifyApiDownload(const string &token,
+                      const string &url)
+      : ndNetifyApiThread(), token(token), url(url) {}
+
+  virtual ~ndNetifyApiDownload() {
+    if (!temp_file.empty()) unlink(temp_file.c_str());
+  }
 
   virtual void *Entry(void);
 
  protected:
+  friend class ndNetifyApiManager;
+
+  string token;
+  string url;
+  string temp_file;
 };
 
-class ndNetifyApiRefreshCategories
-    : public ndNetifyApiThread {
+class ndNetifyApiManager {
  public:
-  ndNetifyApiRefreshCategories() : ndNetifyApiThread() {}
+  ndNetifyApiManager() {}
+  virtual ~ndNetifyApiManager() { Terminate(); }
 
-  virtual void *Entry(void);
+  bool Update(void);
+  void Terminate(void);
 
  protected:
-  ndCategories categories;
+  enum Request {
+    REQUEST_NONE,
+    REQUEST_BOOTSTRAP,
+    REQUEST_DOWNLOAD_CONFIG,
+    REQUEST_DOWNLOAD_CATEGORIES,
+  };
+
+  typedef unordered_map<Request, ndNetifyApiThread *>
+      Requests;
+
+  Requests requests;
+
+  typedef unordered_map<Request, string> Urls;
+
+  Urls urls;
+
+  string token;
+
+  bool ProcessBootstrapRequest(
+      ndNetifyApiBootstrap *bootstrap);
 };
 
 #endif  // _ND_NAPI_H

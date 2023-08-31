@@ -18,19 +18,23 @@
 // License along with this program.  If not, see
 // <http://www.gnu.org/licenses/>.
 
+#include "nd-except.hpp"
+#include "nd-thread.hpp"
+#include "nlohmann/json.hpp"
 #ifdef HAVE_CONFIG_H
 #include "config.h"
 #endif
 
+#include "nd-config.hpp"
+#include "nd-except.hpp"
 #include "nd-napi.hpp"
-
-#define _ND_DEBUG_CURL 1
+#include "nd-util.hpp"
 
 static int ndNetifyApiThread_curl_debug(
     CURL *ch __attribute__((unused)), curl_infotype type,
     char *data, size_t size, void *param) {
   string buffer;
-  if (!_ND_DEBUG_CURL) return 0;
+  if (!ndGC_DEBUG_CURL) return 0;
 
   ndThread *thread = reinterpret_cast<ndThread *>(param);
 
@@ -81,7 +85,7 @@ static size_t ndNetifyApiThread_read_data(char *data,
   ndNetifyApiThread *thread_napi =
       reinterpret_cast<ndNetifyApiThread *>(user);
 
-  thread_napi->AppendData((const char *)data, length);
+  thread_napi->AppendContent((const char *)data, length);
 
   return length;
 }
@@ -133,17 +137,18 @@ static int ndNetifyApiThread_progress(
 }
 
 ndNetifyApiThread::ndNetifyApiThread()
-    : ndThread("nap-api-update"),
+    : ndThread("netify-api"),
       ch(nullptr),
+      http_rc(0),
       headers_tx(nullptr) {
   if ((ch = curl_easy_init()) == nullptr)
     throw ndThreadException("curl_easy_init");
 
-  curl_easy_setopt(ch, CURLOPT_MAXREDIRS, 3L);
-  curl_easy_setopt(ch, CURLOPT_FOLLOWLOCATION, 1L);
-  curl_easy_setopt(ch, CURLOPT_CONNECTTIMEOUT, 20L);
-  curl_easy_setopt(ch, CURLOPT_TIMEOUT, 60L);
-  curl_easy_setopt(ch, CURLOPT_NOSIGNAL, 1L);
+  curl_easy_setopt(ch, CURLOPT_MAXREDIRS, 3);
+  curl_easy_setopt(ch, CURLOPT_FOLLOWLOCATION, 1);
+  curl_easy_setopt(ch, CURLOPT_CONNECTTIMEOUT, 20);
+  curl_easy_setopt(ch, CURLOPT_TIMEOUT, 60);
+  curl_easy_setopt(ch, CURLOPT_NOSIGNAL, 1);
 
   curl_easy_setopt(ch, CURLOPT_WRITEFUNCTION,
                    ndNetifyApiThread_read_data);
@@ -155,7 +160,7 @@ ndNetifyApiThread::ndNetifyApiThread()
   curl_easy_setopt(ch, CURLOPT_HEADERDATA,
                    static_cast<void *>(this));
 
-  curl_easy_setopt(ch, CURLOPT_NOPROGRESS, 0L);
+  curl_easy_setopt(ch, CURLOPT_NOPROGRESS, 0);
 #if (LIBCURL_VERSION_NUM < 0x073200)
   curl_easy_setopt(ch, CURLOPT_PROGRESSFUNCTION,
                    ndNetifyApiThread_progress);
@@ -172,44 +177,18 @@ ndNetifyApiThread::ndNetifyApiThread()
   curl_easy_setopt(ch, CURLOPT_ACCEPT_ENCODING, "gzip");
 #endif
 #endif  // _ND_WITH_LIBCURL_ZLIB
-  if (_ND_DEBUG_CURL) {
-    curl_easy_setopt(ch, CURLOPT_VERBOSE, 1L);
+  if (ndGC_DEBUG_CURL) {
+    curl_easy_setopt(ch, CURLOPT_VERBOSE, 1);
     curl_easy_setopt(ch, CURLOPT_DEBUGFUNCTION,
                      ndNetifyApiThread_curl_debug);
     curl_easy_setopt(ch, CURLOPT_DEBUGDATA,
                      static_cast<void *>(this));
   }
 
-  //    curl_easy_setopt(ch, CURLOPT_SSL_VERIFYPEER, 0L);
-  //    curl_easy_setopt(ch, CURLOPT_SSL_VERIFYHOST, 0L);
+  //    curl_easy_setopt(ch, CURLOPT_SSL_VERIFYPEER, 0);
+  //    curl_easy_setopt(ch, CURLOPT_SSL_VERIFYHOST, 0);
   //    curl_easy_setopt(ch, CURLOPT_SSLVERSION,
   //    CURL_SSLVERSION_TLSv1);
-
-  ostringstream header;
-  header << "User-Agent: " << nd_get_version_and_features();
-
-  headers_tx =
-      curl_slist_append(headers_tx, header.str().c_str());
-  headers_tx = curl_slist_append(
-      headers_tx, "Content-Type: application/json");
-
-  header.str("");
-
-  string uuid;
-  ndGC.LoadUUID(ndGlobalConfig::UUID_AGENT, uuid);
-  header << "X-UUID: " << uuid;
-
-  headers_tx =
-      curl_slist_append(headers_tx, header.str().c_str());
-  header.str("");
-
-  ndGC.LoadUUID(ndGlobalConfig::UUID_SERIAL, uuid);
-  header << "X-UUID-Serial: " << uuid;
-
-  headers_tx =
-      curl_slist_append(headers_tx, header.str().c_str());
-
-  curl_easy_setopt(ch, CURLOPT_HTTPHEADER, headers_tx);
 }
 
 ndNetifyApiThread::~ndNetifyApiThread() {
@@ -222,10 +201,7 @@ ndNetifyApiThread::~ndNetifyApiThread() {
     ch = nullptr;
   }
 
-  if (headers_tx != nullptr) {
-    curl_slist_free_all(headers_tx);
-    headers_tx = nullptr;
-  }
+  DestroyHeaders();
 }
 
 void ndNetifyApiThread::ParseHeader(
@@ -246,7 +222,7 @@ void ndNetifyApiThread::ParseHeader(
 
     if (headers_rx.find(key) == headers_rx.end()) {
       headers_rx[key] = value;
-      if (_ND_DEBUG_CURL) {
+      if (ndGC_DEBUG_CURL) {
         nd_dprintf("%s: header: %s: %s\n", tag.c_str(),
                    key.c_str(), value.c_str());
       }
@@ -254,175 +230,281 @@ void ndNetifyApiThread::ParseHeader(
   }
 }
 
-unsigned ndNetifyApiThread::Get(const string &url) {
+void ndNetifyApiThread::CreateHeaders(
+    const Headers &headers) {
+  DestroyHeaders();
+
+  string header("User-Agent: ");
+  header.append(nd_get_version_and_features());
+  headers_tx =
+      curl_slist_append(headers_tx, header.c_str());
+
+  headers_tx = curl_slist_append(
+      headers_tx, "Content-Type: application/json");
+
+  for (auto &h : headers) {
+    header = h.first;
+    header.append(": ");
+    header.append(h.second);
+    headers_tx =
+        curl_slist_append(headers_tx, header.c_str());
+  }
+
+  curl_easy_setopt(ch, CURLOPT_HTTPHEADER, headers_tx);
+}
+
+void ndNetifyApiThread::DestroyHeaders(void) {
+  if (headers_tx != nullptr) {
+    curl_slist_free_all(headers_tx);
+    headers_tx = nullptr;
+  }
+}
+
+void ndNetifyApiThread::Perform(Method method,
+                                const string &url,
+                                const Headers &headers) {
   CURLcode curl_rc;
 
   curl_easy_setopt(ch, CURLOPT_URL, url.c_str());
 
-  body_data.clear();
+  http_rc = 0;
+  content.clear();
   headers_rx.clear();
 
-  nd_dprintf("%s: GET: %s\n", tag.c_str(), url.c_str());
+  CreateHeaders(headers);
+
+  switch (method) {
+    case METHOD_GET:
+      curl_easy_setopt(ch, CURLOPT_POST, 0);
+      nd_dprintf("%s: %s: %s\n", tag.c_str(), "GET",
+                 url.c_str());
+      break;
+    case METHOD_POST:
+      curl_easy_setopt(ch, CURLOPT_POST, 1);
+      curl_easy_setopt(ch, CURLOPT_POSTFIELDSIZE, 0);
+#if 0
+      curl_easy_setopt(ch, CURLOPT_POSTFIELDS,
+                       payload.c_str());
+#endif
+      nd_dprintf("%s: %s: %s\n", tag.c_str(), "POST",
+                 url.c_str());
+      break;
+  }
 
   if ((curl_rc = curl_easy_perform(ch)) != CURLE_OK)
     throw curl_rc;
 
-  long http_rc = 0;
   if ((curl_rc = curl_easy_getinfo(
            ch, CURLINFO_RESPONSE_CODE, &http_rc)) !=
       CURLE_OK)
     throw curl_rc;
 
-  char *content_type = nullptr;
-  curl_easy_getinfo(ch, CURLINFO_CONTENT_TYPE,
-                    &content_type);
-
-  double content_length = 0.0f;
-#if (LIBCURL_VERSION_NUM < 0x075500)
-  curl_easy_getinfo(ch, CURLINFO_CONTENT_LENGTH_DOWNLOAD,
-                    &content_length);
-#else
-  curl_easy_getinfo(ch, CURLINFO_CONTENT_LENGTH_DOWNLOAD_T,
-                    &content_length);
-#endif
-
-  if (http_rc == 200) {
-    if (content_type == nullptr)
-      throw string("Content-type is nullptr");
-
-    if (content_length == 0.0f)
-      throw string("Zero-length content length");
+  char *ct = nullptr;
+  curl_easy_getinfo(ch, CURLINFO_CONTENT_TYPE, &ct);
+  if (ct != nullptr)
+    content_type = ct;
+  else {
+    auto i = headers_rx.find("content-type");
+    if (i == headers_rx.end())
+      content_type.clear();
+    else {
+      content_type = i->second;
+    }
   }
-
-  return (unsigned)http_rc;
 }
 
-void *ndNetifyApiProvision::Entry(void) { return nullptr; }
+void *ndNetifyApiBootstrap::Entry(void) {
+  static map<ndGlobalConfig::UUID, string> uuids = {
+      {ndGlobalConfig::UUID_AGENT, "X-UUID"},
+      {ndGlobalConfig::UUID_SERIAL, "X-UUID-Serial"},
+      {ndGlobalConfig::UUID_SITE, "X-UUID-Site"}};
 
-void *ndNetifyApiRefreshApplications::Entry(void) {
+  Headers headers;
+
+  for (auto &uuid : uuids) {
+    string value("-");
+
+    if (!ndGC.LoadUUID(uuid.first, value)) {
+      nd_dprintf("%s: no UUID set for: %s\n", tag.c_str(),
+                 uuid.second.c_str());
+    }
+    headers.insert(make_pair(uuid.second, value));
+  }
+
+  string url = ndGC.url_napi;
+
+  Perform(ndNetifyApiThread::METHOD_POST, url, headers);
+
   return nullptr;
 }
 
-void *ndNetifyApiRefreshCategories::Entry(void) {
-  unsigned page = 0, pages = 1;
+void *ndNetifyApiDownload::Entry(void) {
+  string bearer("Bearer ");
+  bearer.append(token);
 
-  unordered_map<unsigned, string> requests;
+  Headers headers;
+  headers.insert(make_pair("Authorization", bearer));
 
-  requests[ndCAT_TYPE_APP] = "/lookup/applications";
-  requests[ndCAT_TYPE_PROTO] = "/lookup/protocols";
+  Perform(ndNetifyApiThread::METHOD_GET, url, headers);
 
-  queue<ndCategoryType> cqueue;
-  cqueue.push(ndCAT_TYPE_PROTO);
-  cqueue.push(ndCAT_TYPE_MAX);
+  return nullptr;
+}
 
-  ndCategoryType cid = ndCAT_TYPE_APP;
+bool ndNetifyApiManager::Update(void) {
+  bool result = false;
 
-  while (!ShouldTerminate()) {
-    unsigned rc = 0;
+  if (token.empty()) {
+    auto request = requests.find(REQUEST_BOOTSTRAP);
 
-    // Done?
-    if (cid == ndCAT_TYPE_MAX || cqueue.size() == 0) {
-      if (categories.Save())
-        ndi.SendIPC(ndInstance::ndIPC_UPDATE_NAPI_DONE);
-      break;
-    }
+    if (request != requests.end()) {
+      ndNetifyApiBootstrap *bootstrap =
+          dynamic_cast<ndNetifyApiBootstrap *>(
+              request->second);
 
-    ostringstream url;
-    url << ndGC.url_napi << requests[cid];
-    url << "?vendor=" << ndGC.napi_vendor;
-    url << "&settings_limit=100";
+      if (bootstrap->HasTerminated()) {
+        ProcessBootstrapRequest(bootstrap);
 
-    if (page > 0) url << "&page=" << page;
-
-    try {
-      rc = Get(url.str().c_str());
-    } catch (CURLcode &rc) {
-      nd_printf("%s: Error: %s\n", tag.c_str(),
-                curl_easy_strerror(rc));
-      break;
-    } catch (const string &es) {
-      nd_printf("%s: Error: %s\n", tag.c_str(), es.c_str());
-      break;
-    } catch (exception &e) {
-      nd_printf("%s: Unknown error: %s.\n", tag.c_str(),
-                e.what());
-      break;
-    } catch (...) {
-      nd_printf("%s: Unknown error.\n", tag.c_str());
-      break;
-    }
-
-    if (rc == 429) {
-      unsigned ttl = 0;
-      if (headers_rx.find("retry-after") !=
-          headers_rx.end()) {
-        string retry_value = headers_rx["retry-after"];
-        if (isdigit(retry_value[0]))
-          ttl = (unsigned)strtoul(retry_value.c_str(),
-                                  nullptr, 0);
+        requests.erase(request);
+        delete bootstrap;
+      }
+    } else {
+      ndNetifyApiBootstrap *bootstrap =
+          new ndNetifyApiBootstrap();
+      if (bootstrap == nullptr) {
+        throw ndSystemException(__PRETTY_FUNCTION__,
+                                "new ndNetifyApiBootstrap",
+                                ENOMEM);
       }
 
-      if (ttl == 0) ttl = _ND_NAPI_RETRY_TTL;
-      while (!ShouldTerminate() && ttl != 0) {
-        sleep(1);
-        ttl--;
-      }
+      auto request = requests.insert(
+          make_pair(REQUEST_BOOTSTRAP, bootstrap));
 
-      continue;
-    }
-
-    if (rc != 200) {
-      nd_printf("%s: HTTP return code: %u\n", tag.c_str(),
-                rc);
-      break;
-    }
-
-    try {
-      json j = json::parse(body_data);
-
-      unsigned code = j["status_code"].get<unsigned>();
-      string message = j["status_message"].get<string>();
-
-      if (code != 0) {
-        nd_dprintf("%s: result: %s [%u]\n", tag.c_str(),
-                   message.c_str(), code);
-        break;
-      }
-
-      auto it_data = j.find("data");
-
-      if (it_data != j.end())
-        categories.Load(cid, (*it_data));
+      if (request.second != true)
+        delete bootstrap;
       else {
-        nd_printf("%s: Missing element: data\n",
-                  tag.c_str());
-        nd_dprintf("%s\n", body_data.c_str());
-        break;
+        try {
+          request.first->second->Create();
+        } catch (ndThreadException &e) {
+          nd_printf(
+              "netify-api: Error creating bootstrap "
+              "request: %s\n",
+              e.what());
+          delete bootstrap;
+          requests.erase(request.first);
+        }
       }
-
-      auto it_di = j.find("data_info");
-
-      if (it_di != j.end()) {
-        if (page == 0) {
-          page = 2;
-          pages = (*it_di)["total_pages"].get<unsigned>();
-        } else if (page == pages) {
-          page = 0;
-          cid = cqueue.front();
-          cqueue.pop();
-        } else
-          page++;
-      } else {
-        page = 0;
-        pages = 1;
-        cid = cqueue.front();
-        cqueue.pop();
-      }
-    } catch (...) {
-      nd_printf("%s: JSON decode error.\n", tag.c_str());
-      break;
     }
   }
 
-  return nullptr;
+  if (!token.empty()) {
+    nd_dprintf(
+        "netify-api: TODO: check if it's time to refresh "
+        "configuration.\n");
+  }
+
+  return result;
+}
+
+void ndNetifyApiManager::Terminate(void) {
+  for (auto &request : requests)
+    request.second->Terminate();
+  for (auto &request : requests) delete request.second;
+  requests.clear();
+}
+
+bool ndNetifyApiManager::ProcessBootstrapRequest(
+    ndNetifyApiBootstrap *bootstrap) {
+  if (bootstrap->http_rc == 0) {
+    nd_printf("netify-api: Bootstrap request failed.\n");
+    return false;
+  }
+
+  if (bootstrap->content.length() == 0) {
+    nd_printf("netify-api: Empty bootstrap content.\n");
+    return false;
+  }
+
+  if (bootstrap->content_type != "application/json") {
+    nd_printf(
+        "netify-api: Invalid bootstrap content "
+        "type.\n");
+    return false;
+  }
+
+  try {
+    json content = json::parse(bootstrap->content);
+
+    int code = -1;
+    string message("Unknown");
+
+    static vector<string> status_codes = {"status_code",
+                                          "resp_code"};
+
+    for (auto &key : status_codes) {
+      auto ji = content.find(key);
+      if (ji != content.end() &&
+          (ji->type() == json::value_t::number_integer ||
+           ji->type() == json::value_t::number_unsigned)) {
+        code = ji->get<int>();
+        break;
+      }
+    }
+
+    static vector<string> status_messages = {
+        "status_message", "resp_message"};
+
+    for (auto &key : status_messages) {
+      auto ji = content.find(key);
+      if (ji != content.end() &&
+          ji->type() == json::value_t::string) {
+        message = ji->get<string>();
+        break;
+      }
+    }
+
+    if (bootstrap->http_rc != 200 || code != 0) {
+      nd_printf(
+          "netify-api: Bootstrap request failed: HTTP %ld: "
+          "%s [%d]\n",
+          bootstrap->http_rc, message.c_str(), code);
+      return false;
+    }
+
+    auto jdata = content.find("data");
+    if (jdata == content.end()) {
+      nd_dprintf(
+          "netify-api: Malformed bootstrap content: %s\n",
+          "data not found");
+      return false;
+    }
+
+    auto jsigs = jdata->find("signatures");
+    if (jsigs == jdata->end()) {
+      nd_dprintf(
+          "netify-api: Malformed bootstrap content: %s\n",
+          "signatures not found");
+      return false;
+    }
+
+    auto jtoken = jsigs->find("token");
+    if (jtoken == jsigs->end() ||
+        jtoken->type() != json::value_t::string) {
+      nd_dprintf(
+          "netify-api: Malformed bootstrap content: %s\n",
+          "token not found or invalid type");
+      return false;
+    }
+
+    token = jtoken->get<string>();
+
+    nd_dprintf("netify-api: new API token set.\n");
+  } catch (exception &e) {
+    nd_printf(
+        "netify-api: Failed to decode bootstrap "
+        "content.\n");
+    nd_dprintf("netify-api: Exception: %s\n", e.what());
+    return false;
+  }
+
+  return true;
 }

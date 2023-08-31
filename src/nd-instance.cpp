@@ -38,13 +38,6 @@
 #include "nd-config.hpp"
 #include "nd-detection.hpp"
 #include "nd-instance.hpp"
-#include "nd-napi.hpp"
-#ifdef _ND_USE_NETLINK
-#include "nd-netlink.hpp"
-#endif
-#ifdef _ND_USE_CONNTRACK
-#include "nd-conntrack.hpp"
-#endif
 #ifdef _ND_USE_LIBPCAP
 #include "nd-capture-pcap.hpp"
 #endif
@@ -95,7 +88,6 @@ ndInstance::ndInstance(const string &tag)
 #ifdef _ND_USE_NETLINK
       netlink(nullptr),
 #endif
-      thread_napi(nullptr),
 #ifdef _ND_USE_CONNTRACK
       thread_conntrack(nullptr),
 #endif
@@ -111,16 +103,9 @@ ndInstance::~ndInstance() {
 
   Join();
 
-  for (unsigned p = 0; p < 2; p++) {
-    if (thread_napi) {
-      if (p == 0)
-        thread_napi->Terminate();
-      else {
-        delete thread_napi;
-        thread_napi = nullptr;
-      }
-    }
+  api_manager.Terminate();
 
+  for (unsigned p = 0; p < 2; p++) {
 #ifdef _ND_USE_CONNTRACK
     if (ndGC_USE_CONNTRACK && thread_conntrack) {
       if (p == 0)
@@ -478,7 +463,7 @@ uint32_t ndInstance::InitializeConfig(int argc,
       case 'd':
         break;
       case 'D':
-        ndGC.flags |= ndGF_DEBUG_UPLOAD;
+        ndGC.flags |= ndGF_DEBUG_CURL;
         break;
       case 'c':
         break;
@@ -1737,19 +1722,9 @@ void *ndInstance::ndInstance::Entry(void) {
     timer_update.Set(itspec);
 
     if (ndGC_USE_NAPI) {
-      time_t ttl = 3;  // Delay first signal...
-      if (categories.GetLastUpdate() > 0) {
-        time_t age =
-            time(NULL) - categories.GetLastUpdate();
-        if (age < ndGC.ttl_napi_update)
-          ttl = ndGC.ttl_napi_update - age;
-        else if (age == ndGC.ttl_napi_update)
-          ttl = ndGC.ttl_napi_update;
-      }
-
-      itspec.it_value.tv_sec = ttl;
+      itspec.it_value.tv_sec = 3;
       itspec.it_value.tv_nsec = 0;
-      itspec.it_interval.tv_sec = ndGC.ttl_napi_update;
+      itspec.it_interval.tv_sec = 15;
       itspec.it_interval.tv_nsec = 0;
 
       timer_update_napi.Set(itspec);
@@ -1802,19 +1777,27 @@ void *ndInstance::ndInstance::Entry(void) {
       case ndIPC_UPDATE_NAPI:
         nd_dprintf("%s: received IPC: [%d] %s\n",
                    tag.c_str(), ipc, "Netify API update");
-        if (ndGC_USE_NAPI && thread_napi == NULL) {
-          thread_napi = new ndNetifyApiRefreshCategories();
-          thread_napi->Create();
-        }
-        break;
-      case ndIPC_UPDATE_NAPI_DONE:
-        nd_dprintf("%s: received IPC: [%d] %s\n",
-                   tag.c_str(), ipc,
-                   "Netify API update complete");
-        Reload();
-        if (thread_napi != nullptr) {
-          delete thread_napi;
-          thread_napi = nullptr;
+        if (ndGC_USE_NAPI) {
+          if (api_manager.Update()) {
+            Reload(false);
+
+            struct itimerspec itspec;
+            itspec.it_value.tv_sec = ndGC.ttl_napi_update;
+            itspec.it_value.tv_nsec = 0;
+            itspec.it_interval.tv_sec =
+                ndGC.ttl_napi_update;
+            itspec.it_interval.tv_nsec = 0;
+
+            timer_update_napi.Set(itspec);
+          } else {
+            struct itimerspec itspec;
+            itspec.it_value.tv_sec = 15;
+            itspec.it_value.tv_nsec = 0;
+            itspec.it_interval.tv_sec = 15;
+            itspec.it_interval.tv_nsec = 0;
+
+            timer_update_napi.Set(itspec);
+          }
         }
         break;
       default:

@@ -81,7 +81,7 @@ enum nd_tpv3_fanout_flags {
 
 enum nd_global_flags {
   ndGF_DEBUG = 0x1,
-  ndGF_DEBUG_UPLOAD = 0x2,
+  ndGF_DEBUG_CURL = 0x2,
   ndGF_UNUSED_0x4 = 0x4,
   ndGF_DEBUG_NDPI = 0x8,
   ndGF_QUIET = 0x10,
@@ -110,8 +110,8 @@ enum nd_global_flags {
 
 #define ndGC_DEBUG \
   (ndGlobalConfig::GetInstance().flags & ndGF_DEBUG)
-#define ndGC_DEBUG_UPLOAD \
-  (ndGlobalConfig::GetInstance().flags & ndGF_DEBUG_UPLOAD)
+#define ndGC_DEBUG_CURL \
+  (ndGlobalConfig::GetInstance().flags & ndGF_DEBUG_CURL)
 #define ndGC_DEBUG_NDPI \
   (ndGlobalConfig::GetInstance().flags & ndGF_DEBUG_NDPI)
 #define ndGC_QUIET \

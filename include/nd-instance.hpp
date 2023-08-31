@@ -38,6 +38,7 @@
 #include "nd-except.hpp"
 #include "nd-fhc.hpp"
 #include "nd-flow-map.hpp"
+#include "nd-napi.hpp"
 #include "nd-packet.hpp"
 #include "nd-plugin.hpp"
 #include "nd-protos.hpp"
@@ -120,7 +121,7 @@ class ndInstanceStatus : public ndSerializer {
 
 class ndCaptureThread;
 class ndDetectionThread;
-class ndNetifyApiRefreshCategories;
+class ndNetifyApiManager;
 #ifdef _ND_USE_CONNTRACK
 class ndConntrackThread;
 #endif
@@ -283,7 +284,6 @@ class ndInstance : public ndThread, public ndSerializer {
     ndIPC_TERMINATE,
     ndIPC_UPDATE,
     ndIPC_UPDATE_NAPI,
-    ndIPC_UPDATE_NAPI_DONE,
   };
 
   inline void SendIPC(enum ndIPCMessage id) {
@@ -341,7 +341,7 @@ class ndInstance : public ndThread, public ndSerializer {
 #ifdef _ND_USE_NETLINK
   ndNetlink *netlink;
 #endif
-  ndNetifyApiRefreshCategories *thread_napi;
+  ndNetifyApiManager api_manager;
 #ifdef _ND_USE_CONNTRACK
   ndConntrackThread *thread_conntrack;
 #endif
