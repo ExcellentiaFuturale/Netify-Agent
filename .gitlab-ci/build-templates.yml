@@ -113,7 +113,7 @@
     - (cd openwrt; ./scripts/feeds install -p netify -d m netifyd)
     - (cd openwrt; wget https://downloads.openwrt.org/releases/$OPENWRT_RELEASE/targets/$OPENWRT_ARCH/config.buildinfo -O .config)
     - make -C openwrt defconfig
-    - grep -i netify .config
+    - grep -i netify openwrt/.config
     - make -j
   artifacts:
     when: always
