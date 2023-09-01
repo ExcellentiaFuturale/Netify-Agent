@@ -1490,6 +1490,7 @@ time_t nd_time_monotonic(void) {
 
 void nd_tmpfile(const string &prefix, string &filename) {
   int fd;
+  string path;
   vector<char> buffer;
 
   size_t p = prefix.find_last_of("/");
@@ -1498,11 +1499,18 @@ void nd_tmpfile(const string &prefix, string &filename) {
     buffer.assign(temp.begin(), temp.end());
   } else {
     // XXX: Old glibc mkstemp can not include a path!
-    const string path = prefix.substr(0, p);
+    path = prefix.substr(0, p);
     const string base = prefix.substr(p + 1) + "XXXXXX";
-    chdir(path.c_str());
+    if (chdir(path.c_str()) != 0) {
+      nd_dprintf(
+          "WARNING: unable to change working directory to: "
+          "%s\n",
+          path.c_str());
+    }
     buffer.assign(base.begin(), base.end());
   }
+
+  buffer.push_back('\0');
 
   filename.clear();
 
@@ -1512,7 +1520,9 @@ void nd_tmpfile(const string &prefix, string &filename) {
   }
 
   close(fd);
-  filename.assign(buffer.begin(), buffer.end());
+
+  if (!path.empty()) filename = path + "/";
+  filename.append(buffer.begin(), buffer.end());
 }
 
 bool nd_copy_file(const string &src, const string &dst) {

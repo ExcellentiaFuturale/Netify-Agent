@@ -407,54 +407,54 @@ bool ndNetifyApiManager::Update(void) {
     }
   }
 
+  size_t downloads = 0;
+  static vector<Request> types = {
+      REQUEST_DOWNLOAD_CONFIG,
+      REQUEST_DOWNLOAD_CATEGORIES,
+  };
+
+  for (auto &type : types) {
+    auto request = requests.find(type);
+
+    if (request != requests.end()) {
+      downloads++;
+      ndNetifyApiDownload *download =
+          dynamic_cast<ndNetifyApiDownload *>(
+              request->second);
+
+      if (download->HasTerminated()) {
+        download_results[type] =
+            ProcessDownloadRequest(download, type);
+
+        requests.erase(request);
+        delete download;
+      }
+    }
+  }
+
+  if (downloads == 0 && download_results.size()) {
+    bool reload = false;
+    size_t successful = 0;
+
+    for (auto &r : download_results) {
+      if (!r.second) continue;
+      reload = true;
+      successful++;
+    }
+
+    nd_dprintf(
+        "netify-api: %lu of %lu download(s) "
+        "successful.\n",
+        successful, download_results.size());
+
+    download_results.clear();
+    return reload;
+  }
+
   if (!token.empty()) {
-    size_t downloads = 0;
-    static vector<Request> types = {
-        REQUEST_DOWNLOAD_CONFIG,
-        REQUEST_DOWNLOAD_CATEGORIES,
-    };
-
-    for (auto &type : types) {
-      auto request = requests.find(type);
-
-      if (request != requests.end()) {
-        downloads++;
-        ndNetifyApiDownload *download =
-            dynamic_cast<ndNetifyApiDownload *>(
-                request->second);
-
-        if (download->HasTerminated()) {
-          download_results[type] =
-              ProcessDownloadRequest(download, type);
-
-          requests.erase(request);
-          delete download;
-        }
-      }
-    }
-
-    if (downloads == 0 && download_results.size()) {
-      bool reload = false;
-      size_t successful = 0;
-
-      for (auto &r : download_results) {
-        if (!r.second) continue;
-        reload = true;
-        successful++;
-      }
-
-      nd_dprintf(
-          "netify-api: %lu of %lu download(s) "
-          "successful.\n",
-          successful, download_results.size());
-
-      download_results.clear();
-      return reload;
-    }
-
     time_t now = nd_time_monotonic();
 
-    if (downloads == 0 && !token.empty() &&
+    if (downloads == 0 &&
         now > (ttl_last_update + ndGC.ttl_napi_update)) {
       ttl_last_update = now;
 
@@ -620,6 +620,22 @@ bool ndNetifyApiManager::ProcessBootstrapRequest(
 
 bool ndNetifyApiManager::ProcessDownloadRequest(
     ndNetifyApiDownload *download, Request type) {
+  if (download->http_rc != 200) {
+    nd_printf(
+        "netify-api: Download request failed: HTTP %ld: "
+        "type: %d\n",
+        download->http_rc, type);
+    if (download->http_rc == 401 ||
+        download->http_rc == 403) {
+      nd_dprintf(
+          "netify-api: cleared token on authorization "
+          "failure.\n");
+      token.clear();
+      ttl_last_update = 0;
+    }
+    return false;
+  }
+
   if (type == REQUEST_DOWNLOAD_CONFIG) {
     return nd_copy_file(download->content_filename,
                         ndGC.path_app_config);
