@@ -72,9 +72,9 @@ class ndCategories {
     categories[ndCAT_TYPE_PROTO] = ndCategory();
   };
 
-  bool Load(void);
+  bool Load(const string &filename);
   bool Load(ndCategoryType type, json &jdata);
-  bool Save(void);
+  bool Save(const string &filename);
   void Dump(ndCategoryType type = ndCAT_TYPE_MAX);
 
   time_t GetLastUpdate(void) { return last_update; }
@@ -84,14 +84,15 @@ class ndCategories {
   bool IsMember(ndCategoryType type, const string &cat_tag,
                 unsigned id);
 
-  nd_cat_id_t Lookup(ndCategoryType type, unsigned id);
+  nd_cat_id_t Lookup(ndCategoryType type,
+                     unsigned id) const;
   nd_cat_id_t LookupTag(ndCategoryType type,
-                        const string &tag);
+                        const string &tag) const;
   nd_cat_id_t ResolveTag(ndCategoryType type, unsigned id,
-                         string &tag);
+                         string &tag) const;
 
   bool GetTagIndex(ndCategoryType type,
-                   ndCategory::index_tag &index) {
+                   ndCategory::index_tag &index) const {
     lock_guard<mutex> ul(lock);
 
     auto it = categories.find(type);
@@ -102,16 +103,17 @@ class ndCategories {
   }
 
  protected:
-  mutex lock;
+  mutable mutex lock;
   time_t last_update;
   map<ndCategoryType, ndCategory> categories;
 
-  bool LoadLegacy(json &jdata);
+  bool LoadLegacy(const json &jdata);
 };
 
 class ndDomains {
  public:
-  bool Load(const string &path_domains);
+  bool Load(const ndCategories &categories,
+            const string &path_domains);
   nd_cat_id_t Lookup(const string &domain);
 
  protected:

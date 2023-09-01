@@ -18,24 +18,22 @@
 // License along with this program.  If not, see
 // <http://www.gnu.org/licenses/>.
 
-#include "nd-except.hpp"
-#include "nd-thread.hpp"
-#include "nlohmann/json.hpp"
 #ifdef HAVE_CONFIG_H
 #include "config.h"
 #endif
 
+#include <fstream>
+
 #include "nd-config.hpp"
 #include "nd-except.hpp"
 #include "nd-napi.hpp"
-#include "nd-util.hpp"
 
 static int ndNetifyApiThread_curl_debug(
     CURL *ch __attribute__((unused)), curl_infotype type,
     char *data, size_t size, void *param) {
-  string buffer;
   if (!ndGC_DEBUG_CURL) return 0;
 
+  string buffer;
   ndThread *thread = reinterpret_cast<ndThread *>(param);
 
   switch (type) {
@@ -95,11 +93,6 @@ static size_t ndNetifyApiThread_parse_header(char *data,
                                              size_t nmemb,
                                              void *user) {
   size_t length = size * nmemb;
-
-  // size_t ndNetifyApiThread_parse_header(char*, size_t,
-  // size_t, void*): HTTP/1.1 200 OK, 1, 17
-  // nd_dprintf("%s: %s, %u, %u\n", __PRETTY_FUNCTION__,
-  // data, size, nmemb);
 
   if (size != 1 || length == 0) return 0;
 
@@ -204,6 +197,24 @@ ndNetifyApiThread::~ndNetifyApiThread() {
   DestroyHeaders();
 }
 
+void ndNetifyApiThread::AppendContent(const char *data,
+                                      size_t length) {
+  try {
+    if (content_filename.empty())
+      content.append(data, length);
+    else {
+      ofstream ofs(content_filename, ofstream::app);
+      if (!ofs.is_open())
+        throw ndSystemException(__PRETTY_FUNCTION__,
+                                content_filename, EINVAL);
+      string buffer;
+      buffer.assign(data, length);
+      ofs << buffer;
+    }
+  } catch (exception &e) {
+    throw ndThreadException(e.what());
+  }
+}
 void ndNetifyApiThread::ParseHeader(
     const string &header_raw) {
   string key, value;
@@ -331,7 +342,7 @@ void *ndNetifyApiBootstrap::Entry(void) {
     headers.insert(make_pair(uuid.second, value));
   }
 
-  string url = ndGC.url_napi;
+  string url = ndGC.url_napi_bootstrap;
 
   Perform(ndNetifyApiThread::METHOD_POST, url, headers);
 
@@ -345,14 +356,14 @@ void *ndNetifyApiDownload::Entry(void) {
   Headers headers;
   headers.insert(make_pair("Authorization", bearer));
 
+  nd_tmpfile("/tmp/nd-napi", content_filename);
+
   Perform(ndNetifyApiThread::METHOD_GET, url, headers);
 
   return nullptr;
 }
 
 bool ndNetifyApiManager::Update(void) {
-  bool result = false;
-
   if (token.empty()) {
     auto request = requests.find(REQUEST_BOOTSTRAP);
 
@@ -397,12 +408,87 @@ bool ndNetifyApiManager::Update(void) {
   }
 
   if (!token.empty()) {
-    nd_dprintf(
-        "netify-api: TODO: check if it's time to refresh "
-        "configuration.\n");
+    size_t downloads = 0;
+    static vector<Request> types = {
+        REQUEST_DOWNLOAD_CONFIG,
+        REQUEST_DOWNLOAD_CATEGORIES,
+    };
+
+    for (auto &type : types) {
+      auto request = requests.find(type);
+
+      if (request != requests.end()) {
+        downloads++;
+        ndNetifyApiDownload *download =
+            dynamic_cast<ndNetifyApiDownload *>(
+                request->second);
+
+        if (download->HasTerminated()) {
+          download_results[type] =
+              ProcessDownloadRequest(download, type);
+
+          requests.erase(request);
+          delete download;
+        }
+      }
+    }
+
+    if (downloads == 0 && download_results.size()) {
+      bool reload = false;
+      size_t successful = 0;
+
+      for (auto &r : download_results) {
+        if (!r.second) continue;
+        reload = true;
+        successful++;
+      }
+
+      nd_dprintf(
+          "netify-api: %lu of %lu download(s) "
+          "successful.\n",
+          successful, download_results.size());
+
+      download_results.clear();
+      return reload;
+    }
+
+    time_t now = nd_time_monotonic();
+
+    if (downloads == 0 && !token.empty() &&
+        now > (ttl_last_update + ndGC.ttl_napi_update)) {
+      ttl_last_update = now;
+
+      for (auto &url : urls) {
+        ndNetifyApiDownload *download =
+            new ndNetifyApiDownload(token, url.second);
+        if (download == nullptr) {
+          throw ndSystemException(__PRETTY_FUNCTION__,
+                                  "new ndNetifyApidownload",
+                                  ENOMEM);
+        }
+
+        auto request =
+            requests.insert(make_pair(url.first, download));
+
+        if (request.second != true)
+          delete download;
+        else {
+          try {
+            request.first->second->Create();
+          } catch (ndThreadException &e) {
+            nd_printf(
+                "netify-api: Error creating download "
+                "request: %s\n",
+                e.what());
+            delete download;
+            requests.erase(request.first);
+          }
+        }
+      }
+    }
   }
 
-  return result;
+  return false;
 }
 
 void ndNetifyApiManager::Terminate(void) {
@@ -464,7 +550,8 @@ bool ndNetifyApiManager::ProcessBootstrapRequest(
 
     if (bootstrap->http_rc != 200 || code != 0) {
       nd_printf(
-          "netify-api: Bootstrap request failed: HTTP %ld: "
+          "netify-api: Bootstrap request failed: HTTP "
+          "%ld: "
           "%s [%d]\n",
           bootstrap->http_rc, message.c_str(), code);
       return false;
@@ -486,6 +573,25 @@ bool ndNetifyApiManager::ProcessBootstrapRequest(
       return false;
     }
 
+    auto japps = jsigs->find("applications_endpoint");
+    if (japps == jsigs->end() ||
+        japps->type() != json::value_t::string) {
+      nd_dprintf(
+          "netify-api: Malformed bootstrap content: %s\n",
+          "applications_endpoint not found or invalid "
+          "type");
+      return false;
+    }
+
+    auto jcats = jsigs->find("categories_endpoint");
+    if (jcats == jsigs->end() ||
+        jcats->type() != json::value_t::string) {
+      nd_dprintf(
+          "netify-api: Malformed bootstrap content: %s\n",
+          "categories_endpoint not found or invalid type");
+      return false;
+    }
+
     auto jtoken = jsigs->find("token");
     if (jtoken == jsigs->end() ||
         jtoken->type() != json::value_t::string) {
@@ -496,6 +602,9 @@ bool ndNetifyApiManager::ProcessBootstrapRequest(
     }
 
     token = jtoken->get<string>();
+    urls[REQUEST_DOWNLOAD_CONFIG] = japps->get<string>();
+    urls[REQUEST_DOWNLOAD_CATEGORIES] =
+        jcats->get<string>();
 
     nd_dprintf("netify-api: new API token set.\n");
   } catch (exception &e) {
@@ -507,4 +616,16 @@ bool ndNetifyApiManager::ProcessBootstrapRequest(
   }
 
   return true;
+}
+
+bool ndNetifyApiManager::ProcessDownloadRequest(
+    ndNetifyApiDownload *download, Request type) {
+  if (type == REQUEST_DOWNLOAD_CONFIG) {
+    return nd_copy_file(download->content_filename,
+                        ndGC.path_app_config);
+  } else if (type == REQUEST_DOWNLOAD_CATEGORIES) {
+    return nd_copy_file(download->content_filename,
+                        ndGC.path_cat_config);
+  }
+  return false;
 }

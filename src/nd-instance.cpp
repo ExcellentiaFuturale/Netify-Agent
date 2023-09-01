@@ -26,6 +26,7 @@
 #include <sys/resource.h>
 #include <unistd.h>
 
+#include <algorithm>
 #include <cerrno>
 
 #if defined(_ND_USE_LIBTCMALLOC) && \
@@ -1722,9 +1723,9 @@ void *ndInstance::ndInstance::Entry(void) {
     timer_update.Set(itspec);
 
     if (ndGC_USE_NAPI) {
-      itspec.it_value.tv_sec = 3;
+      itspec.it_value.tv_sec = min(5u, ndGC.ttl_napi_tick);
       itspec.it_value.tv_nsec = 0;
-      itspec.it_interval.tv_sec = 15;
+      itspec.it_interval.tv_sec = ndGC.ttl_napi_tick;
       itspec.it_interval.tv_nsec = 0;
 
       timer_update_napi.Set(itspec);
@@ -1780,23 +1781,6 @@ void *ndInstance::ndInstance::Entry(void) {
         if (ndGC_USE_NAPI) {
           if (api_manager.Update()) {
             Reload(false);
-
-            struct itimerspec itspec;
-            itspec.it_value.tv_sec = ndGC.ttl_napi_update;
-            itspec.it_value.tv_nsec = 0;
-            itspec.it_interval.tv_sec =
-                ndGC.ttl_napi_update;
-            itspec.it_interval.tv_nsec = 0;
-
-            timer_update_napi.Set(itspec);
-          } else {
-            struct itimerspec itspec;
-            itspec.it_value.tv_sec = 15;
-            itspec.it_value.tv_nsec = 0;
-            itspec.it_interval.tv_sec = 15;
-            itspec.it_interval.tv_nsec = 0;
-
-            timer_update_napi.Set(itspec);
           }
         }
         break;
@@ -1854,9 +1838,9 @@ bool ndInstance::Reload(bool broadcast) {
   if (!(result = apps.Load(ndGC.path_app_config)))
     result = apps.LoadLegacy(ndGC.path_legacy_config);
 
-  result = categories.Load();
+  result = categories.Load(ndGC.path_cat_config);
   if (ndGC_LOAD_DOMAINS) {
-    result = domains.Load(ndGC.path_domains);
+    result = domains.Load(categories, ndGC.path_domains);
   }
 
   if (broadcast) {

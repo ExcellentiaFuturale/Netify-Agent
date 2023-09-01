@@ -41,8 +41,10 @@
 
 #include <csignal>
 #include <cstdarg>
+#include <cstdlib>
 #include <cstring>
 #include <deque>
+#include <fstream>
 #include <iomanip>
 #include <mutex>
 #include <stdexcept>
@@ -191,12 +193,14 @@ void nd_print_address(const struct sockaddr_storage *addr) {
     case AF_INET:
       rc = getnameinfo((const struct sockaddr *)addr,
                        sizeof(struct sockaddr_in), _addr,
-                       NI_MAXHOST, NULL, 0, NI_NUMERICHOST);
+                       NI_MAXHOST, nullptr, 0,
+                       NI_NUMERICHOST);
       break;
     case AF_INET6:
       rc = getnameinfo((const struct sockaddr *)addr,
                        sizeof(struct sockaddr_in6), _addr,
-                       NI_MAXHOST, NULL, 0, NI_NUMERICHOST);
+                       NI_MAXHOST, nullptr, 0,
+                       NI_NUMERICHOST);
       break;
     default:
       nd_dprintf("(unsupported AF:%x)", addr->ss_family);
@@ -483,7 +487,7 @@ bool nd_load_uuid(string &uuid, const string &path,
   if (sb.st_mode & S_IXUSR) {
     FILE *ph = popen(path.c_str(), "r");
 
-    if (ph == NULL) {
+    if (ph == nullptr) {
       if (ndGC_DEBUG || errno != ENOENT) {
         nd_printf("Error loading uuid from pipe: %s: %s\n",
                   path.c_str(), strerror(errno));
@@ -508,7 +512,7 @@ bool nd_load_uuid(string &uuid, const string &path,
   } else {
     FILE *fh = fopen(path.c_str(), "r");
 
-    if (fh == NULL) {
+    if (fh == nullptr) {
       if (ndGC_DEBUG || errno != ENOENT) {
         nd_printf("Error loading uuid from file: %s: %s\n",
                   path.c_str(), strerror(errno));
@@ -539,7 +543,7 @@ bool nd_save_uuid(const string &uuid, const string &path,
                   size_t length) {
   FILE *fh = fopen(path.c_str(), "w");
 
-  if (fh == NULL) {
+  if (fh == nullptr) {
     nd_printf("Error saving uuid: %s: %s\n", path.c_str(),
               strerror(errno));
     return false;
@@ -559,9 +563,9 @@ bool nd_save_uuid(const string &uuid, const string &path,
 
 void nd_seed_rng(void) {
   FILE *fh = fopen("/dev/urandom", "r");
-  unsigned int seed = (unsigned int)time(NULL);
+  unsigned int seed = (unsigned int)time(nullptr);
 
-  if (fh == NULL)
+  if (fh == nullptr)
     nd_printf("Error opening random device: %s\n",
               strerror(errno));
   else {
@@ -654,8 +658,8 @@ bool nd_parse_app_tag(const string &tag, unsigned &id,
 
   size_t p;
   if ((p = tag.find_first_of(".")) != string::npos) {
-    id = (unsigned)strtoul(tag.substr(0, p).c_str(), NULL,
-                           0);
+    id = (unsigned)strtoul(tag.substr(0, p).c_str(),
+                           nullptr, 0);
     name = tag.substr(p + 1);
 
     return true;
@@ -690,9 +694,10 @@ int nd_file_load(const string &filename, string &data) {
   int fd = open(filename.c_str(), O_RDONLY);
 
   if (fd < 0) {
-    if (errno != ENOENT)
-      throw runtime_error(strerror(errno));
-    else {
+    if (errno != ENOENT) {
+      throw ndSystemException(__PRETTY_FUNCTION__, filename,
+                              errno);
+    } else {
       nd_dprintf("Unable to load file: %s: %s\n",
                  filename.c_str(), strerror(errno));
       return -1;
@@ -701,20 +706,24 @@ int nd_file_load(const string &filename, string &data) {
 
   if (flock(fd, LOCK_SH) < 0) {
     close(fd);
-    throw runtime_error(strerror(errno));
+    throw ndSystemException(__PRETTY_FUNCTION__, filename,
+                            errno);
   }
 
   if (fstat(fd, &sb) < 0) {
     close(fd);
-    throw runtime_error(strerror(errno));
+    throw ndSystemException(__PRETTY_FUNCTION__, filename,
+                            errno);
   }
 
   if (sb.st_size == 0)
     data.clear();
   else {
     auto buffer = make_shared<vector<uint8_t>>(sb.st_size);
-    if (read(fd, (void *)buffer->data(), sb.st_size) < 0)
-      throw runtime_error(strerror(errno));
+    if (read(fd, (void *)buffer->data(), sb.st_size) < 0) {
+      throw ndSystemException(__PRETTY_FUNCTION__, filename,
+                              errno);
+    }
     data.assign((const char *)buffer->data(), sb.st_size);
   }
 
@@ -729,47 +738,66 @@ void nd_file_save(const string &filename,
                   mode_t mode, const char *user,
                   const char *group) {
   int fd = open(filename.c_str(), O_WRONLY);
-  struct passwd *owner_user = NULL;
-  struct group *owner_group = NULL;
+  struct passwd *owner_user = nullptr;
+  struct group *owner_group = nullptr;
 
   if (fd < 0) {
-    if (errno != ENOENT)
-      throw runtime_error(strerror(errno));
+    if (errno != ENOENT) {
+      throw ndSystemException(__PRETTY_FUNCTION__, filename,
+                              errno);
+    }
     fd = open(filename.c_str(), O_WRONLY | O_CREAT, mode);
-    if (fd < 0) throw runtime_error(strerror(errno));
+    if (fd < 0) {
+      throw ndSystemException(__PRETTY_FUNCTION__, filename,
+                              errno);
+    }
 
-    if (user != NULL) {
+    if (user != nullptr) {
       owner_user = getpwnam(user);
-      if (owner_user == NULL)
-        throw runtime_error(strerror(errno));
+      if (owner_user == nullptr) {
+        throw ndSystemException(__PRETTY_FUNCTION__,
+                                filename, errno);
+      }
     }
 
-    if (group != NULL) {
+    if (group != nullptr) {
       owner_group = getgrnam(group);
-      if (owner_group == NULL)
-        throw runtime_error(strerror(errno));
+      if (owner_group == nullptr) {
+        throw ndSystemException(__PRETTY_FUNCTION__,
+                                filename, errno);
+      }
     }
 
-    if (fchown(
-            fd,
-            (owner_user != NULL) ? owner_user->pw_uid : -1,
-            (owner_group != NULL) ? owner_group->gr_gid
-                                  : -1) < 0)
-      throw runtime_error(strerror(errno));
+    if (fchown(fd,
+               (owner_user != nullptr) ? owner_user->pw_uid
+                                       : -1,
+               (owner_group != nullptr)
+                   ? owner_group->gr_gid
+                   : -1) < 0)
+      throw ndSystemException(__PRETTY_FUNCTION__, filename,
+                              errno);
   }
 
-  if (flock(fd, LOCK_EX) < 0)
-    throw runtime_error(strerror(errno));
+  if (flock(fd, LOCK_EX) < 0) {
+    throw ndSystemException(__PRETTY_FUNCTION__, filename,
+                            errno);
+  }
 
-  if (lseek(fd, 0, (!append) ? SEEK_SET : SEEK_END) < 0)
-    throw runtime_error(strerror(errno));
+  if (lseek(fd, 0, (!append) ? SEEK_SET : SEEK_END) < 0) {
+    throw ndSystemException(__PRETTY_FUNCTION__, filename,
+                            errno);
+  }
 
-  if (!append && ftruncate(fd, 0) < 0)
-    throw runtime_error(strerror(errno));
+  if (!append && ftruncate(fd, 0) < 0) {
+    throw ndSystemException(__PRETTY_FUNCTION__, filename,
+                            errno);
+  }
 
   if (write(fd, (const void *)data.c_str(), data.length()) <
-      0)
-    throw runtime_error(strerror(errno));
+      0) {
+    throw ndSystemException(__PRETTY_FUNCTION__, filename,
+                            errno);
+  }
 
   flock(fd, LOCK_UN);
   close(fd);
@@ -862,7 +890,7 @@ pid_t nd_is_running(pid_t pid, const string &exe_base) {
   mib[3] = pid;
   length = sizeof(pathname);
 
-  if (sysctl(mib, 4, pathname, &length, NULL, 0) == -1) {
+  if (sysctl(mib, 4, pathname, &length, nullptr, 0) == -1) {
     nd_printf("%s: sysctl: %s(%ld): %s\n",
               __PRETTY_FUNCTION__, "kern.proc.pathname",
               pid, strerror(errno));
@@ -888,10 +916,10 @@ int nd_load_pid(const string &pidfile) {
   pid_t pid = -1;
   FILE *hpid = fopen(pidfile.c_str(), "r");
 
-  if (hpid != NULL) {
+  if (hpid != nullptr) {
     char _pid[32];
     if (fgets(_pid, sizeof(_pid), hpid))
-      pid = (pid_t)strtol(_pid, NULL, 0);
+      pid = (pid_t)strtol(_pid, nullptr, 0);
     fclose(hpid);
   } else if (errno == ENOENT) {
     pid = 0;
@@ -903,7 +931,7 @@ int nd_load_pid(const string &pidfile) {
 int nd_save_pid(const string &pidfile, pid_t pid) {
   FILE *hpid = fopen(pidfile.c_str(), "w+");
 
-  if (hpid == NULL) {
+  if (hpid == nullptr) {
     nd_printf("Error opening PID file: %s: %s\n",
               pidfile.c_str(), strerror(errno));
 
@@ -964,7 +992,7 @@ void nd_uptime(time_t ut, string &uptime) {
   }
 
   ostringstream os;
-  ios os_state(NULL);
+  ios os_state(nullptr);
   os_state.copyfmt(os);
 
   os << days << "d";
@@ -988,7 +1016,7 @@ int nd_functions_exec(const string &func, const string &arg,
   int rc = -1;
   FILE *ph = popen(os.str().c_str(), "r");
 
-  if (ph != NULL) {
+  if (ph != nullptr) {
     char buffer[64];
     size_t bytes = 0;
 
@@ -1024,7 +1052,7 @@ ndLogDirectory::ndLogDirectory(const string &path,
       prefix(prefix),
       suffix(suffix),
       overwrite(overwrite),
-      hf_cur(NULL) {
+      hf_cur(nullptr) {
   struct stat sb;
 
   if (stat(path.c_str(), &sb) == -1) {
@@ -1045,16 +1073,16 @@ ndLogDirectory::ndLogDirectory(const string &path,
 ndLogDirectory::~ndLogDirectory() { Close(); }
 
 FILE *ndLogDirectory::Open(const string &ext) {
-  if (hf_cur != NULL) {
+  if (hf_cur != nullptr) {
     nd_dprintf(
         "Log file already open; close or discard first: "
         "%s\n",
         filename.c_str());
-    return NULL;
+    return nullptr;
   }
 
   if (!overwrite) {
-    time_t now = time(NULL);
+    time_t now = time(nullptr);
     struct tm tm_now;
 
     tzset();
@@ -1073,14 +1101,14 @@ FILE *ndLogDirectory::Open(const string &ext) {
   if (!(hf_cur = fopen(full_path.c_str(), "w"))) {
     nd_dprintf("Error opening log file: %s: %s\n",
                full_path.c_str(), strerror(errno));
-    return NULL;
+    return nullptr;
   }
 
   return hf_cur;
 }
 
 void ndLogDirectory::Close(void) {
-  if (hf_cur != NULL) {
+  if (hf_cur != nullptr) {
     fclose(hf_cur);
 
     string src = path + "/." + filename;
@@ -1093,12 +1121,12 @@ void ndLogDirectory::Close(void) {
                  src.c_str(), dst.c_str(), strerror(errno));
     }
 
-    hf_cur = NULL;
+    hf_cur = nullptr;
   }
 }
 
 void ndLogDirectory::Discard(void) {
-  if (hf_cur != NULL) {
+  if (hf_cur != nullptr) {
     string full_path = path + "/." + filename;
 
     nd_dprintf("Discarding log file: %s\n",
@@ -1108,7 +1136,7 @@ void ndLogDirectory::Discard(void) {
 
     unlink(full_path.c_str());
 
-    hf_cur = NULL;
+    hf_cur = nullptr;
   }
 }
 
@@ -1188,7 +1216,7 @@ bool nd_scan_dotd(const string &path,
                   vector<string> &files) {
   DIR *dh = opendir(path.c_str());
 
-  if (dh == NULL) {
+  if (dh == nullptr) {
     nd_printf("Error opening directory: %s: %s\n",
               path.c_str(), strerror(errno));
     return false;
@@ -1196,8 +1224,8 @@ bool nd_scan_dotd(const string &path,
 
   files.clear();
 
-  struct dirent *result = NULL;
-  while ((result = readdir(dh)) != NULL) {
+  struct dirent *result = nullptr;
+  while ((result = readdir(dh)) != nullptr) {
     if (
 #ifdef _DIRENT_HAVE_D_RECLEN
         result->d_reclen == 0 ||
@@ -1425,7 +1453,7 @@ int nd_glob(const string &pattern,
             vector<string> &results) {
   int rc;
   glob_t gr = {0};
-  if ((rc = glob(pattern.c_str(), 0, NULL, &gr)) == 0) {
+  if ((rc = glob(pattern.c_str(), 0, nullptr, &gr)) == 0) {
     for (size_t i = 0; i < gr.gl_pathc; i++)
       results.push_back(gr.gl_pathv[i]);
     globfree(&gr);
@@ -1447,4 +1475,48 @@ int nd_glob(const string &pattern,
   }
 
   return rc;
+}
+
+time_t nd_time_monotonic(void) {
+  struct timespec ts;
+
+  if (clock_gettime(CLOCK_MONOTONIC, &ts) < 0) {
+    throw ndSystemException(__PRETTY_FUNCTION__,
+                            "clock_gettime", errno);
+  }
+
+  return ts.tv_sec;
+}
+
+void nd_tmpfile(const string &prefix, string &filename) {
+  int fd;
+  const string temp = prefix + "XXXXXX";
+
+  vector<char> buffer;
+  buffer.assign(temp.begin(), temp.end());
+
+  filename.clear();
+
+  if ((fd = mkstemp(&buffer[0])) < 0) {
+    throw ndSystemException(__PRETTY_FUNCTION__, temp,
+                            errno);
+  }
+
+  close(fd);
+  filename.assign(buffer.begin(), buffer.end());
+}
+
+bool nd_copy_file(const string &src, const string &dst) {
+  ifstream ifs(src, ios::binary);
+  if (!ifs.is_open()) return false;
+
+  ofstream ofs(dst, ofstream::trunc | ios::binary);
+  if (!ofs.is_open()) return false;
+
+  ofs << ifs.rdbuf();
+
+  nd_dprintf("copied file: %s -> %s\n", src.c_str(),
+             dst.c_str());
+
+  return true;
 }

@@ -72,7 +72,8 @@ class ndConntrackFlow {
   inline uint32_t GetId(void) { return id; }
 
   inline bool HasExpired(void) {
-    return (updated_at + _ND_CT_FLOW_TTL <= time(NULL))
+    return (updated_at + _ND_CT_FLOW_TTL <=
+            nd_time_monotonic())
                ? true
                : false;
   }

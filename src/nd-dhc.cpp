@@ -24,6 +24,7 @@
 
 #include "nd-dhc.hpp"
 #include "nd-instance.hpp"
+#include "nd-util.hpp"
 
 ndDNSHintCache::ndDNSHintCache() {
 #ifdef HAVE_CXX11
@@ -66,13 +67,15 @@ void ndDNSHintCache::Insert(const ndAddr &addr,
 
   lock_guard<mutex> ul(lock);
 
-  nd_dns_tuple ar(time_t(time(NULL) + ndGC.ttl_dns_entry),
-                  hostname);
+  nd_dns_tuple ar(
+      time_t(nd_time_monotonic() + ndGC.ttl_dns_entry),
+      hostname);
   nd_dhc_insert i =
       map_ar.insert(nd_dhc_insert_pair(digest, ar));
 
   if (!i.second)
-    i.first->second.first = time(NULL) + ndGC.ttl_dns_entry;
+    i.first->second.first =
+        nd_time_monotonic() + ndGC.ttl_dns_entry;
 }
 
 void ndDNSHintCache::Insert(const string &digest,
@@ -93,8 +96,9 @@ void ndDNSHintCache::Insert(const string &digest,
 
   if (_digest.size() != SHA1_DIGEST_LENGTH) return;
 
-  nd_dns_tuple ar(time_t(time(NULL) + ndGC.ttl_dns_entry),
-                  hostname);
+  nd_dns_tuple ar(
+      time_t(nd_time_monotonic() + ndGC.ttl_dns_entry),
+      hostname);
   map_ar.insert(nd_dhc_insert_pair(_digest, ar));
 }
 
@@ -136,7 +140,8 @@ bool ndDNSHintCache::Lookup(const string &digest,
   if (i != map_ar.end()) {
     found = true;
     hostname = i->second.second;
-    i->second.first = time(NULL) + ndGC.ttl_dns_entry;
+    i->second.first =
+        nd_time_monotonic() + ndGC.ttl_dns_entry;
   }
 
   return found;
@@ -148,7 +153,7 @@ size_t ndDNSHintCache::Purge(void) {
 
   nd_dns_ar::iterator i = map_ar.begin();
   while (i != map_ar.end()) {
-    if (i->second.first < time(NULL)) {
+    if (i->second.first < nd_time_monotonic()) {
       i = map_ar.erase(i);
       purged++;
     } else
@@ -253,8 +258,8 @@ void ndDNSHintCache::Save(void) {
 
     if (fprintf(hf, "\"%s\",%s,%u\n",
                 i->second.second.c_str(), digest.c_str(),
-                (unsigned)(i->second.first - time(NULL))) >
-        0)
+                (unsigned)(i->second.first -
+                           nd_time_monotonic())) > 0)
       saved++;
   }
 

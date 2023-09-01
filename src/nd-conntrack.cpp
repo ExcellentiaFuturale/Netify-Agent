@@ -37,7 +37,7 @@ static int nd_ct_event_callback(
 
   thread->ProcessConntrackEvent(type, ct);
 
-  time_t now = time(NULL);
+  time_t now = nd_time_monotonic();
 
   if (now > nd_ct_last_flow_purge_ttl) {
     thread->PurgeFlows();
@@ -152,7 +152,7 @@ void ndConntrackThread::DumpConntrackTable(void) {
   nlh->nlmsg_type =
       (NFNL_SUBSYS_CTNETLINK << 8) | IPCTNL_MSG_CT_GET;
   nlh->nlmsg_flags = NLM_F_REQUEST | NLM_F_DUMP;
-  nlh->nlmsg_seq = seq = time(NULL);
+  nlh->nlmsg_seq = seq = nd_time_monotonic();
 
   nfh = (struct nfgenmsg *)mnl_nlmsg_put_extra_header(
       nlh, sizeof(struct nfgenmsg));
@@ -194,7 +194,8 @@ void *ndConntrackThread::Entry(void) {
   int rc;
   fd_set fds_read;
 
-  nd_ct_last_flow_purge_ttl = time(NULL) + _ND_CT_FLOW_TTL;
+  nd_ct_last_flow_purge_ttl =
+      nd_time_monotonic() + _ND_CT_FLOW_TTL;
 
   while (!ShouldTerminate()) {
     FD_ZERO(&fds_read);
@@ -543,7 +544,7 @@ void ndConntrackThread::UpdateFlow(nd_flow_ptr &flow) {
       flow_iter->second->repl_addr_valid[ndCT_DIR_DST]) {
     ndConntrackFlow *ct_flow = flow_iter->second;
 
-    ct_flow->updated_at = time(NULL);
+    ct_flow->updated_at = nd_time_monotonic();
 
 #if defined(_ND_WITH_CONNTRACK_MDATA)
     flow->ct_id = ct_flow->id;
@@ -656,7 +657,7 @@ ndConntrackFlow::ndConntrackFlow(uint32_t id,
 }
 
 void ndConntrackFlow::Update(struct nf_conntrack *ct) {
-  updated_at = time(NULL);
+  updated_at = nd_time_monotonic();
 
   mark = nfct_get_attr_u32(ct, ATTR_MARK);
 

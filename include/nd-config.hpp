@@ -239,7 +239,7 @@ class ndGlobalConfig {
   string path_uuid;
   string path_uuid_serial;
   string path_uuid_site;
-  string url_napi;
+  string url_napi_bootstrap;
   enum nd_dhc_save dhc_save;
   enum nd_fhc_save fhc_save;
   enum nd_capture_type capture_type;
@@ -264,6 +264,7 @@ class ndGlobalConfig {
   unsigned ttl_dns_entry;
   unsigned ttl_idle_flow;
   unsigned ttl_idle_tcp_flow;
+  unsigned ttl_napi_tick;
   unsigned ttl_napi_update;
   unsigned update_imf;
   unsigned update_interval;

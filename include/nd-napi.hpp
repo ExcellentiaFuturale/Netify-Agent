@@ -24,12 +24,15 @@
 #include <curl/curl.h>
 #include <unistd.h>
 
+#include <ctime>
 #include <map>
 #include <nlohmann/json.hpp>
 
 using json = nlohmann::json;
 
+#include "nd-config.hpp"
 #include "nd-thread.hpp"
+#include "nd-util.hpp"
 
 class ndNetifyApiManager;
 
@@ -40,13 +43,7 @@ class ndNetifyApiThread : public ndThread {
 
   virtual void *Entry(void) = 0;
 
-  void AppendContent(const char *data, size_t length) {
-    try {
-      content.append(data, length);
-    } catch (exception &e) {
-      throw ndThreadException(e.what());
-    }
-  }
+  void AppendContent(const char *data, size_t length);
 
   void ParseHeader(const string &header_raw);
 
@@ -72,6 +69,7 @@ class ndNetifyApiThread : public ndThread {
   struct curl_slist *headers_tx;
   string content;
   string content_type;
+  string content_filename;
 };
 
 class ndNetifyApiBootstrap : public ndNetifyApiThread {
@@ -91,7 +89,8 @@ class ndNetifyApiDownload : public ndNetifyApiThread {
       : ndNetifyApiThread(), token(token), url(url) {}
 
   virtual ~ndNetifyApiDownload() {
-    if (!temp_file.empty()) unlink(temp_file.c_str());
+    if (!content_filename.empty())
+      unlink(content_filename.c_str());
   }
 
   virtual void *Entry(void);
@@ -101,12 +100,11 @@ class ndNetifyApiDownload : public ndNetifyApiThread {
 
   string token;
   string url;
-  string temp_file;
 };
 
 class ndNetifyApiManager {
  public:
-  ndNetifyApiManager() {}
+  ndNetifyApiManager() : ttl_last_update(0) {}
   virtual ~ndNetifyApiManager() { Terminate(); }
 
   bool Update(void);
@@ -130,9 +128,16 @@ class ndNetifyApiManager {
   Urls urls;
 
   string token;
+  time_t ttl_last_update;
+
+  typedef unordered_map<Request, bool> Results;
+
+  Results download_results;
 
   bool ProcessBootstrapRequest(
       ndNetifyApiBootstrap *bootstrap);
+  bool ProcessDownloadRequest(ndNetifyApiDownload *download,
+                              Request type);
 };
 
 #endif  // _ND_NAPI_H

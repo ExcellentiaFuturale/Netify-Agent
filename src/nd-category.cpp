@@ -31,16 +31,15 @@
 
 // #define _ND_LOG_DOMAINS   1
 
-bool ndCategories::Load(void) {
+bool ndCategories::Load(const string &filename) {
   lock_guard<mutex> ul(lock);
 
   json jdata;
 
-  ifstream ifs(ndGC.path_cat_config);
+  ifstream ifs(filename);
   if (!ifs.is_open()) {
     nd_printf("Error opening categories: %s: %s\n",
-              ndGC.path_cat_config.c_str(),
-              strerror(ENOENT));
+              filename.c_str(), strerror(ENOENT));
     return false;
   }
 
@@ -49,9 +48,8 @@ bool ndCategories::Load(void) {
   } catch (exception &e) {
     nd_printf(
         "Error loading categories: %s: JSON parse error\n",
-        ndGC.path_cat_config.c_str());
-    nd_dprintf("%s: %s\n", ndGC.path_cat_config.c_str(),
-               e.what());
+        filename.c_str());
+    nd_dprintf("%s: %s\n", filename.c_str(), e.what());
 
     return false;
   }
@@ -88,9 +86,8 @@ bool ndCategories::Load(void) {
   return true;
 }
 
-bool ndCategories::LoadLegacy(json &jdata) {
-  nd_printf("Legacy category format detected: %s\n",
-            ndGC.path_cat_config.c_str());
+bool ndCategories::LoadLegacy(const json &jdata) {
+  nd_printf("Legacy category format detected.\n");
 
   for (auto &ci : categories) {
     string key;
@@ -172,7 +169,7 @@ bool ndCategories::Load(ndCategoryType type, json &jdata) {
   return true;
 }
 
-bool ndCategories::Save(void) {
+bool ndCategories::Save(const string &filename) {
   lock_guard<mutex> ul(lock);
 
   json j;
@@ -196,19 +193,17 @@ bool ndCategories::Save(void) {
     }
   } catch (exception &e) {
     nd_printf("Error JSON encoding categories: %s\n",
-              ndGC.path_cat_config.c_str());
-    nd_dprintf("%s: %s\n", ndGC.path_cat_config.c_str(),
-               e.what());
+              filename.c_str());
+    nd_dprintf("%s: %s\n", filename.c_str(), e.what());
 
     return false;
   }
 
-  ofstream ofs(ndGC.path_cat_config);
+  ofstream ofs(filename);
 
   if (!ofs.is_open()) {
     nd_printf("Error opening categories: %s: %s\n",
-              ndGC.path_cat_config.c_str(),
-              strerror(ENOENT));
+              filename.c_str(), strerror(ENOENT));
     return false;
   }
 
@@ -217,9 +212,8 @@ bool ndCategories::Save(void) {
   } catch (exception &e) {
     nd_printf(
         "Error saving categories: %s: JSON parse error\n",
-        ndGC.path_cat_config.c_str());
-    nd_dprintf("%s: %s\n", ndGC.path_cat_config.c_str(),
-               e.what());
+        filename.c_str());
+    nd_dprintf("%s: %s\n", filename.c_str(), e.what());
 
     return false;
   }
@@ -305,12 +299,15 @@ bool ndCategories::IsMember(ndCategoryType type,
 }
 
 nd_cat_id_t ndCategories::Lookup(ndCategoryType type,
-                                 unsigned id) {
+                                 unsigned id) const {
   if (type >= ndCAT_TYPE_MAX) return ND_CAT_UNKNOWN;
 
   lock_guard<mutex> ul(lock);
 
-  for (auto &it : categories[type].index) {
+  const auto index = categories.find(type);
+  if (index == categories.end()) return ND_CAT_UNKNOWN;
+
+  for (const auto &it : index->second.index) {
     if (it.second.find(id) == it.second.end()) continue;
     return it.first;
   }
@@ -318,22 +315,24 @@ nd_cat_id_t ndCategories::Lookup(ndCategoryType type,
   return ND_CAT_UNKNOWN;
 }
 
-nd_cat_id_t ndCategories::LookupTag(ndCategoryType type,
-                                    const string &tag) {
+nd_cat_id_t ndCategories::LookupTag(
+    ndCategoryType type, const string &tag) const {
   if (type >= ndCAT_TYPE_MAX) return ND_CAT_UNKNOWN;
 
   lock_guard<mutex> ul(lock);
 
-  ndCategory::index_tag::const_iterator it =
-      categories[type].tag.find(tag);
-  if (it != categories[type].tag.end()) return it->second;
+  const auto &index = categories.find(type);
+  if (index == categories.end()) return ND_CAT_UNKNOWN;
+
+  const auto &it = index->second.tag.find(tag);
+  if (it != index->second.tag.end()) return it->second;
 
   return ND_CAT_UNKNOWN;
 }
 
 nd_cat_id_t ndCategories::ResolveTag(ndCategoryType type,
                                      unsigned id,
-                                     string &tag) {
+                                     string &tag) const {
   if (type >= ndCAT_TYPE_MAX) return ND_CAT_UNKNOWN;
 
   nd_cat_id_t cat_id = Lookup(type, id);
@@ -342,7 +341,11 @@ nd_cat_id_t ndCategories::ResolveTag(ndCategoryType type,
 
   lock_guard<mutex> ul(lock);
 
-  for (auto &i : categories[type].tag) {
+  const auto &index = categories.find(type);
+
+  if (index == categories.end()) return cat_id;
+
+  for (const auto &i : index->second.tag) {
     if (i.second != cat_id) continue;
     tag = i.first;
     break;
@@ -351,11 +354,9 @@ nd_cat_id_t ndCategories::ResolveTag(ndCategoryType type,
   return cat_id;
 }
 
-bool ndDomains::Load(const string &path_domains) {
+bool ndDomains::Load(const ndCategories &categories,
+                     const string &path_domains) {
   lock_guard<mutex> ul(lock);
-
-  ndCategories categories;
-  categories.Load();
 
   if (!categories.GetTagIndex(ndCAT_TYPE_APP, index_tag))
     return false;

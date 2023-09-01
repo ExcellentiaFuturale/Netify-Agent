@@ -29,6 +29,7 @@
 #include <sys/stat.h>
 
 #include <cstddef>
+#include <ctime>
 #include <map>
 #include <regex>
 #include <sstream>
@@ -269,5 +270,11 @@ class ndTimer {
 void nd_get_ip_protocol_name(int protocol, string &result);
 
 int nd_glob(const string &pattern, vector<string> &results);
+
+time_t nd_time_monotonic(void);
+
+void nd_tmpfile(const string &prefix, string &filename);
+
+bool nd_copy_file(const string &src, const string &dst);
 
 #endif  // _ND_UTIL_H
