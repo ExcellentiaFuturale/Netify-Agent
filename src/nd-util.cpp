@@ -1490,15 +1490,24 @@ time_t nd_time_monotonic(void) {
 
 void nd_tmpfile(const string &prefix, string &filename) {
   int fd;
-  const string temp = prefix + "XXXXXX";
-
   vector<char> buffer;
-  buffer.assign(temp.begin(), temp.end());
+
+  size_t p = prefix.find_last_of("/");
+  if (p == string::npos) {
+    const string temp = prefix + "XXXXXX";
+    buffer.assign(temp.begin(), temp.end());
+  } else {
+    // XXX: Old glibc mkstemp can not include a path!
+    const string path = prefix.substr(0, p);
+    const string base = prefix.substr(p + 1) + "XXXXXX";
+    chdir(path.c_str());
+    buffer.assign(base.begin(), base.end());
+  }
 
   filename.clear();
 
   if ((fd = mkstemp(&buffer[0])) < 0) {
-    throw ndSystemException(__PRETTY_FUNCTION__, temp,
+    throw ndSystemException(__PRETTY_FUNCTION__, &buffer[0],
                             errno);
   }
 
