@@ -3,7 +3,7 @@
 #
 # This is free software, licensed under the GNU General Public License v3.
 
-SUBDIRS = debian edgeos systemd ubios
+SUBDIRS = debian systemd
 
 TEMPLATEFILES = functions.sh netifyd.conf netifyd.init watchdog.cron watchdog.sh
 TEMPLATEFILES_IN = functions.sh.in netifyd.conf.in netifyd.init.in watchdog.cron.in watchdog.sh.in
@@ -13,7 +13,7 @@ sharedata_DATA = functions.sh watchdog.sh
 
 sysconf_DATA = netifyd.conf
 
-persistentstate_DATA = netify-apps.conf netify-categories.json netify-sink.conf
+persistentstate_DATA = netify-apps.conf netify-categories.json
 
 interfacesdir = $(persistentstatedir)/interfaces.d
 interfaces_DATA = ./interfaces.d/10-example-nfq.conf \
@@ -21,7 +21,7 @@ interfaces_DATA = ./interfaces.d/10-example-nfq.conf \
 
 BUILT_SOURCES = $(TEMPLATEFILES)
 CLEANFILES = $(TEMPLATEFILES)
-EXTRA_DIST = $(TEMPLATEFILES_IN) freebsd netifyd.default netify-apps.conf netify-categories.json netify-sink.conf pfsense
+EXTRA_DIST = $(TEMPLATEFILES_IN) freebsd netifyd.default netify-apps.conf netify-categories.json pfsense
 
 %: %.in
 	$(SED) \

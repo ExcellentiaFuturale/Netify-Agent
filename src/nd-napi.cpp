@@ -637,11 +637,13 @@ bool ndNetifyApiManager::ProcessDownloadRequest(
   }
 
   if (type == REQUEST_DOWNLOAD_CONFIG) {
-    return nd_copy_file(download->content_filename,
-                        ndGC.path_app_config);
+    return nd_copy_file(
+        download->content_filename, ndGC.path_app_config,
+        S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
   } else if (type == REQUEST_DOWNLOAD_CATEGORIES) {
-    return nd_copy_file(download->content_filename,
-                        ndGC.path_cat_config);
+    return nd_copy_file(
+        download->content_filename, ndGC.path_cat_config,
+        S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
   }
   return false;
 }

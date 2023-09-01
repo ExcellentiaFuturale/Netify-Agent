@@ -275,6 +275,7 @@ time_t nd_time_monotonic(void);
 
 void nd_tmpfile(const string &prefix, string &filename);
 
-bool nd_copy_file(const string &src, const string &dst);
-
+bool nd_copy_file(const string &src, const string &dst,
+                  mode_t mode = S_IRUSR | S_IWUSR |
+                                S_IRGRP);
 #endif  // _ND_UTIL_H

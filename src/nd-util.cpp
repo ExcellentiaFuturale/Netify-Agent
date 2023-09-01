@@ -1525,7 +1525,8 @@ void nd_tmpfile(const string &prefix, string &filename) {
   filename.append(buffer.begin(), buffer.end());
 }
 
-bool nd_copy_file(const string &src, const string &dst) {
+bool nd_copy_file(const string &src, const string &dst,
+                  mode_t mode) {
   ifstream ifs(src, ios::binary);
   if (!ifs.is_open()) return false;
 
@@ -1536,6 +1537,13 @@ bool nd_copy_file(const string &src, const string &dst) {
 
   nd_dprintf("copied file: %s -> %s\n", src.c_str(),
              dst.c_str());
+
+  if (chmod(dst.c_str(), mode) != 0) {
+    nd_dprintf(
+        "WARNING: unable to change file permissions: %s: "
+        "%s\n",
+        dst.c_str(), strerror(errno));
+  }
 
   return true;
 }

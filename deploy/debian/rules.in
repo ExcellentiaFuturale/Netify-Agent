@@ -31,8 +31,6 @@ override_dh_install:
 	install -d -m 0755 $(DESTDIR)@persistentstatedir@/interfaces.d
 	install -d -m 0755 $(DESTDIR)@persistentstatedir@/plugins.d
 
-	rm -f $(DESTDIR)@sysconfdir@/netifyd/netify-sink.conf
-
 	chmod a+x $(DESTDIR)@datadir@/*.sh
 
 	dh_systemd_enable

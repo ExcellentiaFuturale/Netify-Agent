@@ -446,14 +446,12 @@ AC_CONFIG_FILES(
      tests/Makefile deploy/Makefile])
 AC_CONFIG_FILES([deploy/buildroot/package/netifyd/netifyd.mk])
 AC_CONFIG_FILES([deploy/debian/Makefile])
-AC_CONFIG_FILES([deploy/edgeos/Makefile])
 AC_CONFIG_FILES(
     [deploy/freebsd/Makefile-10x deploy/freebsd/Makefile-11x \
      deploy/freebsd/Makefile-11x-debug deploy/freebsd/Makefile-12x])
 AC_CONFIG_FILES([deploy/pfsense/Makefile])
 AC_CONFIG_FILES([deploy/rpm/Makefile])
 AC_CONFIG_FILES([deploy/systemd/Makefile])
-AC_CONFIG_FILES([deploy/ubios/Makefile])
 AC_CONFIG_FILES([doc/netifyd.8 doc/netifyd.conf.5])
 AC_CONFIG_FILES([util/generate-protocol-csv.sh],
     [chmod +x util/generate-protocol-csv.sh])
