@@ -97,7 +97,7 @@
     # Build environment
     - apt update
     - env DEBIAN_FRONTEND=noninteractive apt install -y rsync autoconf automake bc bison build-essential flex libtool wget pkg-config git ncurses-dev gawk
-    - git clone https://github.com/openwrt/openwrt --depth --branch ${OPENWRT_BRANCH}
+    - git clone https://github.com/openwrt/openwrt --depth 1 --branch $OPENWRT_BRANCH
   artifacts:
     when: always
     paths:
