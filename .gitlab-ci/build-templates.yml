@@ -79,3 +79,27 @@
     paths:
     - builds
     expire_in: 1 day
+
+# OpenWrt build
+#--------------
+
+.openwrt_build:
+  stage: build
+  image: $OS_IMAGE
+  before_script:
+    # Manually pull in submodules, the GIT_SUBMODULE_STRATEGY variable in GitLab is quirky
+    - apt update
+    - env DEBIAN_FRONTEND=noninteractive apt install -y git
+    - git submodule sync --recursive
+    - git submodule update --init --recursive
+    - find . -name '\.git*' -print0 | xargs -0 rm -rf
+  script:
+    # Build environment
+    - apt update
+    - env DEBIAN_FRONTEND=noninteractive apt install -y rsync autoconf automake bc bison build-essential flex libtool wget pkg-config git ncurses-dev gawk
+    - git clone https://github.com/openwrt/openwrt --depth --branch ${OPENWRT_BRANCH}
+  artifacts:
+    when: always
+    paths:
+    - builds
+    expire_in: 1 day
