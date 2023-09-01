@@ -111,6 +111,13 @@ class ndNetifyApiManager {
   void Terminate(void);
 
  protected:
+  struct RequestHash {
+    template <typename T>
+    size_t operator()(T t) const {
+      return static_cast<std::size_t>(t);
+    }
+  };
+
   enum Request {
     REQUEST_NONE,
     REQUEST_BOOTSTRAP,
@@ -118,19 +125,20 @@ class ndNetifyApiManager {
     REQUEST_DOWNLOAD_CATEGORIES,
   };
 
-  typedef unordered_map<Request, ndNetifyApiThread *>
+  typedef unordered_map<Request, ndNetifyApiThread *,
+                        RequestHash>
       Requests;
 
   Requests requests;
 
-  typedef unordered_map<Request, string> Urls;
+  typedef unordered_map<Request, string, RequestHash> Urls;
 
   Urls urls;
 
   string token;
   time_t ttl_last_update;
 
-  typedef unordered_map<Request, bool> Results;
+  typedef unordered_map<Request, bool, RequestHash> Results;
 
   Results download_results;
 
