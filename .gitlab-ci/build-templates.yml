@@ -101,7 +101,6 @@
     - git clone https://github.com/openwrt/openwrt --depth 1 --branch $OPENWRT_BRANCH
     - ./autogen.sh
     - ./configure --prefix=/usr --includedir=\${prefix}/include --mandir=\${prefix}/share/man --sysconfdir=/etc --localstatedir=/var
-    - make -C deploy/openwrt
     - cp openwrt/feeds.conf.default openwrt/feeds.conf
     - mkdir -p openwrt-feed/net openwrt-feed/libs
     - ln -s $(pwd)/deploy/openwrt $(pwd)/openwrt-feed/net/netifyd
