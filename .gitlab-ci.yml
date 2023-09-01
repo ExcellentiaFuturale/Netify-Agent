@@ -167,6 +167,7 @@ openwrt 19.07 build:
     OS_VERSION: "11"
     OS_ARCH: "amd64"
     OPENWRT_BRANCH: "v19.07.7"
+    OPENWRT_PACKAGES: "ncurses-dev gawk unzip python"
 
 # -------------------------------------------------------------------------
 # Test stage
