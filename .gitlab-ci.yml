@@ -166,7 +166,7 @@ openwrt 19.07 build:
     OS_NAME: "debian"
     OS_VERSION: "11"
     OS_ARCH: "amd64"
-    OPENWRT_BRANCH: 19.07.7
+    OPENWRT_BRANCH: "v19.07.7"
 
 # -------------------------------------------------------------------------
 # Test stage
