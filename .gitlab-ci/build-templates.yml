@@ -107,10 +107,11 @@
     - ln -s $(pwd)/deploy/openwrt $(pwd)/openwrt-feed/net/netifyd
     - echo "src-link netify $(pwd)/openwrt-feed" >> openwrt/feeds.conf
     - (cd openwrt; ./scripts/feeds update -a)
+    - test -f ./openwrt/logs/feeds/netify/net/netifyd/dump.txt && cat openwrt/logs/feeds/netify/net/netifyd/dump.txt
     - (cd openwrt; ./scripts/feeds install -a)
     - (cd openwrt; ./scripts/feeds uninstall netifyd)
     - (cd openwrt; ./scripts/feeds install -p netify -d m netifyd)
-    - (cd openwrt; wget https://downloads.openwrt.org/releases/$OPENWRT_RELEASE/targets/$OPENWRT_ARCH/config.buildinfo -O .config"
+    - (cd openwrt; wget https://downloads.openwrt.org/releases/$OPENWRT_RELEASE/targets/$OPENWRT_ARCH/config.buildinfo -O .config)
     - make -C openwrt defconfig
   artifacts:
     when: always
