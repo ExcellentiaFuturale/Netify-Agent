@@ -157,7 +157,7 @@ almalinux 9 build:
 # OpenWrt OS Targets
 #-------------------
 
-openwrt 19.07 build:
+openwrt 19.07 x86_64 build:
   extends: .openwrt_build
   tags:
     - docker
@@ -166,7 +166,8 @@ openwrt 19.07 build:
     OS_NAME: "debian"
     OS_VERSION: "11"
     OS_ARCH: "amd64"
-    OPENWRT_BRANCH: "v19.07.7"
+    OPENWRT_ARCH: "x86/64"
+    OPENWRT_RELEASE: "19.07.10"
     OPENWRT_PACKAGES: "ncurses-dev gawk unzip python"
 
 # -------------------------------------------------------------------------

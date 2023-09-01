@@ -99,7 +99,7 @@
     - env DEBIAN_FRONTEND=noninteractive apt install -y rsync autoconf automake bc bison build-essential flex libtool wget pkg-config git
     - env DEBIAN_FRONTEND=noninteractive apt install -y libcurl4-openssl-dev libmnl-dev libncurses5-dev libnetfilter-conntrack-dev libpcap-dev libgoogle-perftools-dev libtool zlib1g-dev systemd $OS_EXTRA_PACKAGES
     - env DEBIAN_FRONTEND=noninteractive apt install -y $OPENWRT_PACKAGES
-    - git clone https://github.com/openwrt/openwrt --depth 1 --branch $OPENWRT_BRANCH
+    - git clone https://github.com/openwrt/openwrt --depth 1 --branch v$OPENWRT_RELEASE
     - ./autogen.sh
     - ./configure --prefix=/usr --includedir=\${prefix}/include --mandir=\${prefix}/share/man --sysconfdir=/etc --localstatedir=/var
     - cp openwrt/feeds.conf.default openwrt/feeds.conf
@@ -110,6 +110,7 @@
     - (cd openwrt; ./scripts/feeds install -a)
     - (cd openwrt; ./scripts/feeds uninstall netifyd)
     - (cd openwrt; ./scripts/feeds install -p netify -d m netifyd)
+    - (cd openwrt; wget https://downloads.openwrt.org/releases/$OPENWRT_RELEASE/targets/$OPENWRT_ARCH/config.buildinfo -O .config"
     - make -C openwrt defconfig
   artifacts:
     when: always
