@@ -27,6 +27,8 @@
 #include "nd-config.hpp"
 #include "nd-except.hpp"
 #include "nd-napi.hpp"
+#include "nd-sha1.h"
+#include "nd-util.hpp"
 
 static int ndNetifyApiThread_curl_debug(
     CURL *ch __attribute__((unused)), curl_infotype type,
@@ -284,10 +286,18 @@ void ndNetifyApiThread::Perform(Method method,
 
   CreateHeaders(headers);
 
+  curl_easy_setopt(ch, CURLOPT_NOBODY, 0);
+
   switch (method) {
     case METHOD_GET:
       curl_easy_setopt(ch, CURLOPT_POST, 0);
       nd_dprintf("%s: %s: %s\n", tag.c_str(), "GET",
+                 url.c_str());
+      break;
+    case METHOD_HEAD:
+      curl_easy_setopt(ch, CURLOPT_POST, 0);
+      curl_easy_setopt(ch, CURLOPT_NOBODY, 1);
+      nd_dprintf("%s: %s: %s\n", tag.c_str(), "HEAD",
                  url.c_str());
       break;
     case METHOD_POST:
@@ -349,6 +359,39 @@ void *ndNetifyApiBootstrap::Entry(void) {
   return nullptr;
 }
 
+ndNetifyApiDownload::ndNetifyApiDownload(
+    const string &token, const string &url,
+    const string &filename)
+    : ndNetifyApiThread(),
+      tag("api-download"),
+      token(token),
+      url(url),
+      digest(nullptr) {
+  if (!filename.empty()) {
+    digest = new uint8_t[SHA1_DIGEST_LENGTH];
+    if (digest == nullptr) {
+      throw ndSystemException(__PRETTY_FUNCTION__,
+                              "new SHA1 digest", ENOMEM);
+    }
+    if (nd_sha1_file(filename, digest) < 0) {
+      delete[] digest;
+      digest = nullptr;
+    }
+
+    nd_basename(filename, tag);
+  }
+}
+
+ndNetifyApiDownload::~ndNetifyApiDownload() {
+  if (digest != nullptr) {
+    delete[] digest;
+    digest = nullptr;
+  }
+
+  if (!content_filename.empty())
+    unlink(content_filename.c_str());
+}
+
 void *ndNetifyApiDownload::Entry(void) {
   string bearer("Bearer ");
   bearer.append(token);
@@ -358,7 +401,39 @@ void *ndNetifyApiDownload::Entry(void) {
 
   nd_tmpfile("/tmp/nd-napi", content_filename);
 
-  Perform(ndNetifyApiThread::METHOD_GET, url, headers);
+  Perform(ndNetifyApiThread::METHOD_HEAD, url, headers);
+
+  if (digest != nullptr && http_rc == 200) {
+    auto hdr_sha1 = headers_rx.find("x-sha1-hash");
+    if (hdr_sha1 == headers_rx.end()) {
+      nd_dprintf(
+          "%s: no SHA1 hash found in headers, "
+          "can't compare.\n",
+          tag.c_str());
+
+      Perform(ndNetifyApiThread::METHOD_GET, url, headers);
+    } else {
+      string old_hash;
+      nd_sha1_to_string(digest, old_hash);
+
+      if (old_hash == hdr_sha1->second) {
+        nd_dprintf("%s: file has not changed.\n",
+                   tag.c_str());
+        http_rc = 304;
+        content =
+            "{\"status_code\":304, "
+            "\"status_message\":\"Not "
+            "modified\"}";
+      } else {
+        nd_dprintf(
+            "%s: file has changed, downloadig "
+            "update...\n",
+            tag.c_str());
+        Perform(ndNetifyApiThread::METHOD_GET, url,
+                headers);
+      }
+    }
+  }
 
   return nullptr;
 }
@@ -459,8 +534,16 @@ bool ndNetifyApiManager::Update(void) {
       ttl_last_update = now;
 
       for (auto &url : urls) {
+        string filename;
+
+        if (url.first == REQUEST_DOWNLOAD_CONFIG)
+          filename = ndGC.path_app_config;
+        else if (url.first == REQUEST_DOWNLOAD_CATEGORIES)
+          filename = ndGC.path_cat_config;
+
         ndNetifyApiDownload *download =
-            new ndNetifyApiDownload(token, url.second);
+            new ndNetifyApiDownload(token, url.second,
+                                    filename);
         if (download == nullptr) {
           throw ndSystemException(__PRETTY_FUNCTION__,
                                   "new ndNetifyApidownload",

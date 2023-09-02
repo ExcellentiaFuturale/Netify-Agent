@@ -25,12 +25,20 @@ path_state_persistent = @persistentstatedir@
 # Where to save our PID for: netifyd --status
 path_pid_file = ${path_state_volatile}/netifyd.pid
 
+# Netify Informatics/API Integration
+# https://www.netify.ai/products/netify-informatics
+##############################################################################
+[netify-api]
+
+# Enable/disable integration with Netify Informatices
+enable = no
+
 # Protocol Dissector Options
 ##############################################################################
 [protocols]
 
 # Enable all DPI protocol dissectors
-all=include
+all = include
 
 # Capture Defaults
 ##############################################################################

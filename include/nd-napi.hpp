@@ -49,6 +49,7 @@ class ndNetifyApiThread : public ndThread {
 
   enum Method {
     METHOD_GET,
+    METHOD_HEAD,
     METHOD_POST,
   };
 
@@ -85,21 +86,20 @@ class ndNetifyApiBootstrap : public ndNetifyApiThread {
 class ndNetifyApiDownload : public ndNetifyApiThread {
  public:
   ndNetifyApiDownload(const string &token,
-                      const string &url)
-      : ndNetifyApiThread(), token(token), url(url) {}
+                      const string &url,
+                      const string &filename = "");
 
-  virtual ~ndNetifyApiDownload() {
-    if (!content_filename.empty())
-      unlink(content_filename.c_str());
-  }
+  virtual ~ndNetifyApiDownload();
 
   virtual void *Entry(void);
 
  protected:
   friend class ndNetifyApiManager;
 
+  string tag;
   string token;
   string url;
+  uint8_t *digest;
 };
 
 class ndNetifyApiManager {
