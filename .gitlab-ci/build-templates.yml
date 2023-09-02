@@ -116,6 +116,8 @@
     - (cd openwrt; wget $OPENWRT_CONFIG -O .config)
     - make -C openwrt defconfig
     - grep -i netify openwrt/.config
+    - time make -j $[ $(grep processor /proc/cpuinfo | wc -l) + 1 ]
+    - ls -lR openwrt/bin
   artifacts:
     when: always
     paths:
