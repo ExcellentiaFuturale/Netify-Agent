@@ -21,9 +21,9 @@
 #ifndef _ND_ADDR_H
 #define _ND_ADDR_H
 
+#include <sys/socket.h>
 #include <arpa/inet.h>
 #include <net/if_arp.h>
-#include <sys/socket.h>
 #if defined(__linux__)
 #include <linux/if_packet.h>
 #elif defined(__FreeBSD__)

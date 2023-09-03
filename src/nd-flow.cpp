@@ -388,13 +388,14 @@ bool ndFlow::HasMDNSDomainName(void) const {
 
 #ifdef __FreeBSD__
 void ndFlow::Print(uint8_t pflags) const {
+#if 0
   string digest;
   nd_sha1_to_string((const uint8_t *)bt.info_hash, digest);
 
     nd_flow_printf(
         "%s: [%c%c%c%c%c%c%c%c] %s%s%s %s %s:%hu %c%c%c %s %s:%hu%s%s%s%s%s\n",
-        iface.ifname.c_str(),
-        (iface.role == ndIR_LAN) ? 'i' : 'e',
+        iface->ifname.c_str(),
+        (iface->role == ndIR_LAN) ? 'i' : 'e',
         (ip_version == 4) ? '4' : (ip_version == 6) ? '6' : '-',
         flags.ip_nat.load() ? 'n' : '-',
         (flags.detection_updated.load()) ? 'u' : '-',
@@ -406,8 +407,8 @@ void ndFlow::Print(uint8_t pflags) const {
             '-',
         (flags.soft_dissector.load()) ? 's' : '-',
         detected_protocol_name,
-        (detected_application_name != NULL) ? "." : "",
-        (detected_application_name != NULL) ? detected_application_name : "",
+        (! detected_application_name.empty()) ? "." : "",
+        (! detected_application_name.empty()) ? detected_application_name.c_str() : "",
         (pflags & PRINTF_MACS) ? lower_mac.GetString().c_str() : "",
         lower_addr.GetString().c_str(), lower_addr.GetPort(),
         (origin == ORIGIN_LOWER || origin == ORIGIN_UNKNOWN) ? '-' : '<',
@@ -423,6 +424,7 @@ void ndFlow::Print(uint8_t pflags) const {
         (HasBTInfoHash()) ? " BT-IH: " : "",
         (HasBTInfoHash()) ? digest.c_str() : ""
     );
+#endif
 #if 0
     if (ndGC_DEBUG &&
         detected_protocol == ND_PROTO_TLS &&

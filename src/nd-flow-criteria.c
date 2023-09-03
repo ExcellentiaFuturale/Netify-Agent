@@ -1,5 +1,5 @@
 
-#line 3 "nd-flow-criteria.c"
+#line 2 "nd-flow-criteria.c"
 
 #define  YY_INT_ALIGNED short int
 
@@ -54,7 +54,8 @@
 
 /* C99 systems have <inttypes.h>. Non-C99 systems may or may not. */
 
-#if defined (__STDC_VERSION__) && __STDC_VERSION__ >= 199901L
+#if defined(__FreeBSD__) || \
+    (defined (__STDC_VERSION__) && __STDC_VERSION__ >= 199901L)
 
 /* C99 says to define __STDC_LIMIT_MACROS before including stdint.h,
  * if you want the limit (max/min) macros for int types. 
@@ -310,6 +311,7 @@ struct yy_buffer_state
 #define YY_CURRENT_BUFFER ( yyg->yy_buffer_stack \
                           ? yyg->yy_buffer_stack[yyg->yy_buffer_stack_top] \
                           : NULL)
+#define yy_current_buffer YY_CURRENT_BUFFER
 /* Same as previous macro, but useful when we know that the buffer stack is not
  * NULL or when we need an lvalue. For internal use only.
  */
@@ -786,8 +788,8 @@ static const flex_int32_t yy_rule_can_match_eol[74] =
 
 #include "nd-flow-parser.hpp"
 #include "nd-flow-expr.hpp"
-#line 790 "nd-flow-criteria.c"
 #line 791 "nd-flow-criteria.c"
+#line 792 "nd-flow-criteria.c"
 
 #define INITIAL 0
 
@@ -1071,7 +1073,7 @@ YY_DECL
 	{
 #line 31 "nd-flow-criteria.l"
 
-#line 1075 "nd-flow-criteria.c"
+#line 1076 "nd-flow-criteria.c"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -1506,7 +1508,7 @@ YY_RULE_SETUP
 #line 104 "nd-flow-criteria.l"
 YY_FATAL_ERROR( "flex scanner jammed" );
 	YY_BREAK
-#line 1510 "nd-flow-criteria.c"
+#line 1511 "nd-flow-criteria.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -1897,7 +1899,11 @@ static int yy_get_next_buffer (yyscan_t yyscanner)
 				case EOB_ACT_END_OF_FILE:
 					{
 					if ( yywrap( yyscanner ) )
+#ifdef YY_FLEX_LEX_COMPAT
 						return 0;
+#else
+						return EOF;
+#endif
 
 					if ( ! yyg->yy_did_buffer_switch_on_eof )
 						YY_NEW_FILE;

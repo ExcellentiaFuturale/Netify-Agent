@@ -30,11 +30,16 @@
 #include <libgen.h>
 #include <net/if.h>
 #include <netdb.h>
+#include <netinet/in.h>
 #include <pwd.h>
 #include <sys/file.h>
 #include <sys/ioctl.h>
 #include <sys/socket.h>
 #include <sys/types.h>
+#if defined(__FreeBSD__)
+#include <sys/user.h>
+#include <sys/sysctl.h>
+#endif
 #include <syslog.h>
 #include <unistd.h>
 #include <zlib.h>
