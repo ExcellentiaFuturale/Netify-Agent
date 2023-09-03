@@ -47,7 +47,7 @@ To build a debug version with AddressSanitizer:
 1. Configure (cd netify-agent):
 
 ```
-  # ./autogen.sh && ./configure MAKE=gmake YACC=bison --disable-libtcmalloc --with-pic=inih
+  # ./autogen.sh && ./configure MAKE=gmake YACC=bison --with-pic=inih
 ```
 
 2. Install required build packages:
