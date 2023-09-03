@@ -22,11 +22,13 @@
 #define _ND_ADDR_H
 
 #include <arpa/inet.h>
-#include <net/if_arp.h>
 #include <sys/socket.h>
 #if defined(__linux__)
 #include <linux/if_packet.h>
+#include <net/if_arp.h>
 #elif defined(__FreeBSD__)
+// XXX: net/if_arp.h must be included after sys/socket.h
+#include <net/if_arp.h>
 #include <net/if_dl.h>
 #endif
 

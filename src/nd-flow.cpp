@@ -386,52 +386,6 @@ bool ndFlow::HasMDNSDomainName(void) const {
           mdns.domain_name[0] != '\0');
 }
 
-#ifdef __FreeBSD__
-void ndFlow::Print(uint8_t pflags) const {
-  string digest;
-  nd_sha1_to_string((const uint8_t *)bt.info_hash, digest);
-
-    nd_flow_printf(
-        "%s: [%c%c%c%c%c%c%c%c] %s%s%s %s %s:%hu %c%c%c %s %s:%hu%s%s%s%s%s\n",
-        iface.ifname.c_str(),
-        (iface.role == ndIR_LAN) ? 'i' : 'e',
-        (ip_version == 4) ? '4' : (ip_version == 6) ? '6' : '-',
-        flags.ip_nat.load() ? 'n' : '-',
-        (flags.detection_updated.load()) ? 'u' : '-',
-        (flags.detection_guessed.load()) ? 'g' : '-',
-        (flags.dhc_hit.load()) ? 'd' : '-',
-        (privacy_mask & PRIVATE_LOWER) ? 'p' :
-            (privacy_mask & PRIVATE_UPPER) ? 'P' :
-            (privacy_mask & (PRIVATE_LOWER | PRIVATE_UPPER)) ? 'X' :
-            '-',
-        (flags.soft_dissector.load()) ? 's' : '-',
-        detected_protocol_name,
-        (detected_application_name != NULL) ? "." : "",
-        (detected_application_name != NULL) ? detected_application_name : "",
-        (pflags & PRINTF_MACS) ? lower_mac.GetString().c_str() : "",
-        lower_addr.GetString().c_str(), lower_addr.GetPort(),
-        (origin == ORIGIN_LOWER || origin == ORIGIN_UNKNOWN) ? '-' : '<',
-        (origin == ORIGIN_UNKNOWN) ? '?' : '-',
-        (origin == ORIGIN_UPPER || origin == ORIGIN_UNKNOWN) ? '-' : '>',
-        (pflags & PRINTF_MACS) ? upper_mac.GetString().c_str() ? "",
-        upper_addr.GetString().c_str(), upper_addr.GetPort(),
-        (! dns_host_name.empty() || ! host_server_name.empty()) ? " H: " : "",
-        (! host_server_name.empty()) ? host_server_name.c_str() : (
-            (! dns_host_name.empty()) ? dns_host_name.c_str() : ""
-        ),
-        (HasTLSClientSNI()) ? " SSL" : "",
-        (HasBTInfoHash()) ? " BT-IH: " : "",
-        (HasBTInfoHash()) ? digest.c_str() : ""
-    );
-#if 0
-    if (ndGC_DEBUG &&
-        detected_protocol == ND_PROTO_TLS &&
-        flags.detection_guessed.load() == false && ssl.version == 0x0000) {
-        nd_dprintf("%s: SSL with no SSL/TLS verison.\n", iface.ifname.c_str());
-    }
-#endif
-}
-#else
 void ndFlow::Print(uint8_t pflags) const {
   ndDebugLogStream dls(ndDebugLogStream::DLT_FLOW);
 
@@ -696,116 +650,115 @@ void ndFlow::Print(uint8_t pflags) const {
 
   nd_output_unlock();
 }
-#endif
 
 void ndFlow::UpdateLowerMaps(void) {
-    if (lower_map == LOWER_UNKNOWN)
-      GetLowerMap(lower_type, upper_type, lower_map,
-                  other_type);
+  if (lower_map == LOWER_UNKNOWN)
+    GetLowerMap(lower_type, upper_type, lower_map,
+                other_type);
 
-    switch (tunnel_type) {
-      case TUNNEL_GTP:
-        if (gtp.lower_map == LOWER_UNKNOWN) {
-          GetLowerMap(gtp.lower_type, gtp.upper_type,
-                      gtp.lower_map, gtp.other_type);
-        }
-        break;
-    }
+  switch (tunnel_type) {
+    case TUNNEL_GTP:
+      if (gtp.lower_map == LOWER_UNKNOWN) {
+        GetLowerMap(gtp.lower_type, gtp.upper_type,
+                    gtp.lower_map, gtp.other_type);
+      }
+      break;
+  }
 }
 
 void ndFlow::GetLowerMap(ndAddr::Type lt, ndAddr::Type ut,
                          uint8_t &lm, uint8_t &ot) {
-    if (lt == ndAddr::atERROR || ut == ndAddr::atERROR) {
-      ot = OTHER_ERROR;
-    } else if (lt == ndAddr::atLOCAL &&
-               ut == ndAddr::atLOCAL) {
-      lm = LOWER_LOCAL;
-      ot = OTHER_LOCAL;
-    } else if (lt == ndAddr::atLOCAL &&
-               ut == ndAddr::atLOCAL) {
-      lm = LOWER_LOCAL;
-      ot = OTHER_LOCAL;
-    } else if (lt == ndAddr::atLOCAL &&
-               ut == ndAddr::atLOCALNET) {
-      lm = LOWER_LOCAL;
-      ot = OTHER_LOCAL;
-    } else if (lt == ndAddr::atLOCALNET &&
-               ut == ndAddr::atLOCAL) {
-      lm = LOWER_LOCAL;
-      ot = OTHER_LOCAL;
-    } else if (lt == ndAddr::atMULTICAST) {
-      lm = LOWER_OTHER;
-      ot = OTHER_MULTICAST;
-    } else if (ut == ndAddr::atMULTICAST) {
-      lm = LOWER_LOCAL;
-      ot = OTHER_MULTICAST;
-    } else if (lt == ndAddr::atBROADCAST) {
-      lm = LOWER_OTHER;
-      ot = OTHER_BROADCAST;
-    } else if (ut == ndAddr::atBROADCAST) {
-      lm = LOWER_LOCAL;
-      ot = OTHER_BROADCAST;
-    } else if (lt == ndAddr::atRESERVED &&
-               ut == ndAddr::atLOCALNET) {
-      lm = LOWER_OTHER;
-      ot = OTHER_LOCAL;
-    } else if (lt == ndAddr::atLOCALNET &&
-               ut == ndAddr::atRESERVED) {
-      lm = LOWER_LOCAL;
-      ot = OTHER_LOCAL;
-    }
-    // TODO: Further investigation required!
-    // This appears to catch corrupted IPv6 headers.
-    // Spend some time to figure out if there are any
-    // possible over-matches for different methods of
-    // deployment (gateway/port mirror modes).
-    else if (ip_version != 6 && lt == ndAddr::atRESERVED &&
+  if (lt == ndAddr::atERROR || ut == ndAddr::atERROR) {
+    ot = OTHER_ERROR;
+  } else if (lt == ndAddr::atLOCAL &&
+             ut == ndAddr::atLOCAL) {
+    lm = LOWER_LOCAL;
+    ot = OTHER_LOCAL;
+  } else if (lt == ndAddr::atLOCAL &&
+             ut == ndAddr::atLOCAL) {
+    lm = LOWER_LOCAL;
+    ot = OTHER_LOCAL;
+  } else if (lt == ndAddr::atLOCAL &&
+             ut == ndAddr::atLOCALNET) {
+    lm = LOWER_LOCAL;
+    ot = OTHER_LOCAL;
+  } else if (lt == ndAddr::atLOCALNET &&
+             ut == ndAddr::atLOCAL) {
+    lm = LOWER_LOCAL;
+    ot = OTHER_LOCAL;
+  } else if (lt == ndAddr::atMULTICAST) {
+    lm = LOWER_OTHER;
+    ot = OTHER_MULTICAST;
+  } else if (ut == ndAddr::atMULTICAST) {
+    lm = LOWER_LOCAL;
+    ot = OTHER_MULTICAST;
+  } else if (lt == ndAddr::atBROADCAST) {
+    lm = LOWER_OTHER;
+    ot = OTHER_BROADCAST;
+  } else if (ut == ndAddr::atBROADCAST) {
+    lm = LOWER_LOCAL;
+    ot = OTHER_BROADCAST;
+  } else if (lt == ndAddr::atRESERVED &&
+             ut == ndAddr::atLOCALNET) {
+    lm = LOWER_OTHER;
+    ot = OTHER_LOCAL;
+  } else if (lt == ndAddr::atLOCALNET &&
              ut == ndAddr::atRESERVED) {
-      lm = LOWER_LOCAL;
-      ot = OTHER_LOCAL;
-    } else if (lt == ndAddr::atRESERVED &&
-               ut == ndAddr::atLOCAL) {
-      lm = LOWER_OTHER;
-      ot = OTHER_REMOTE;
-    } else if (lt == ndAddr::atLOCAL &&
-               ut == ndAddr::atRESERVED) {
-      lm = LOWER_LOCAL;
-      ot = OTHER_REMOTE;
-    } else if (lt == ndAddr::atLOCALNET &&
-               ut == ndAddr::atLOCALNET) {
-      lm = LOWER_LOCAL;
-      ot = OTHER_LOCAL;
-    } else if (lt == ndAddr::atOTHER) {
-      lm = LOWER_OTHER;
-      ot = OTHER_REMOTE;
-    } else if (ut == ndAddr::atOTHER) {
-      lm = LOWER_LOCAL;
-      ot = OTHER_REMOTE;
-    }
+    lm = LOWER_LOCAL;
+    ot = OTHER_LOCAL;
+  }
+  // TODO: Further investigation required!
+  // This appears to catch corrupted IPv6 headers.
+  // Spend some time to figure out if there are any
+  // possible over-matches for different methods of
+  // deployment (gateway/port mirror modes).
+  else if (ip_version != 6 && lt == ndAddr::atRESERVED &&
+           ut == ndAddr::atRESERVED) {
+    lm = LOWER_LOCAL;
+    ot = OTHER_LOCAL;
+  } else if (lt == ndAddr::atRESERVED &&
+             ut == ndAddr::atLOCAL) {
+    lm = LOWER_OTHER;
+    ot = OTHER_REMOTE;
+  } else if (lt == ndAddr::atLOCAL &&
+             ut == ndAddr::atRESERVED) {
+    lm = LOWER_LOCAL;
+    ot = OTHER_REMOTE;
+  } else if (lt == ndAddr::atLOCALNET &&
+             ut == ndAddr::atLOCALNET) {
+    lm = LOWER_LOCAL;
+    ot = OTHER_LOCAL;
+  } else if (lt == ndAddr::atOTHER) {
+    lm = LOWER_OTHER;
+    ot = OTHER_REMOTE;
+  } else if (ut == ndAddr::atOTHER) {
+    lm = LOWER_LOCAL;
+    ot = OTHER_REMOTE;
+  }
 #if _ND_DEBUG_LOWER_MAP
-    const static vector<string> lower_maps = {
-        "LOWER_UNKNOWN", "LOWER_LOCAL", "LOWER_OTHER"};
-    const static vector<string> other_types = {
-        "OTHER_UNKNOWN",   "OTHER_UNSUPPORTED",
-        "OTHER_LOCAL",     "OTHER_MULTICAST",
-        "OTHER_BROADCAST", "OTHER_REMOTE",
-        "OTHER_ERROR"};
-    const static vector<string> at = {
-        "atNONE",     "atLOCAL",     "atLOCALNET",
-        "atRESERVED", "atMULTICAST", "atBROADCAST",
-        "atOTHER"};
+  const static vector<string> lower_maps = {
+      "LOWER_UNKNOWN", "LOWER_LOCAL", "LOWER_OTHER"};
+  const static vector<string> other_types = {
+      "OTHER_UNKNOWN",   "OTHER_UNSUPPORTED",
+      "OTHER_LOCAL",     "OTHER_MULTICAST",
+      "OTHER_BROADCAST", "OTHER_REMOTE",
+      "OTHER_ERROR"};
+  const static vector<string> at = {
+      "atNONE",     "atLOCAL",     "atLOCALNET",
+      "atRESERVED", "atMULTICAST", "atBROADCAST",
+      "atOTHER"};
 
-    if (lm == LOWER_UNKNOWN) {
-      nd_dprintf("lower map: %s, other type: %s\n",
-                 lower_maps[lm].c_str(),
-                 other_types[ot].c_str());
-      nd_dprintf("lower type: %s: %s, upper_type: %s: %s\n",
-                 lower_addr.GetString().c_str(),
-                 (lt == ndAddr::atERROR) ? "atERROR"
-                                         : at[lt].c_str(),
-                 upper_addr.GetString().c_str(),
-                 (ut == ndAddr::atERROR) ? "atERROR"
-                                         : at[ut].c_str());
-    }
+  if (lm == LOWER_UNKNOWN) {
+    nd_dprintf("lower map: %s, other type: %s\n",
+               lower_maps[lm].c_str(),
+               other_types[ot].c_str());
+    nd_dprintf("lower type: %s: %s, upper_type: %s: %s\n",
+               lower_addr.GetString().c_str(),
+               (lt == ndAddr::atERROR) ? "atERROR"
+                                       : at[lt].c_str(),
+               upper_addr.GetString().c_str(),
+               (ut == ndAddr::atERROR) ? "atERROR"
+                                       : at[ut].c_str());
+  }
 #endif
 }

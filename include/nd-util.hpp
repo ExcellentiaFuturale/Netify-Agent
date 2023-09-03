@@ -55,7 +55,6 @@ void *nd_mem_alloc(size_t size);
 
 void nd_mem_free(void *ptr);
 
-#ifndef __FreeBSD__
 class ndLogBuffer : public streambuf {
  public:
   int overflow(int ch = EOF);
@@ -108,7 +107,6 @@ class ndDebugLogStream : public ostream {
 
   virtual ~ndDebugLogStream() { delete rdbuf(); }
 };
-#endif
 
 void nd_output_lock(void);
 void nd_output_unlock(void);

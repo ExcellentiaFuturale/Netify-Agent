@@ -30,11 +30,16 @@
 #include <libgen.h>
 #include <net/if.h>
 #include <netdb.h>
+#include <netinet/in.h>
 #include <pwd.h>
 #include <sys/file.h>
 #include <sys/ioctl.h>
 #include <sys/socket.h>
 #include <sys/types.h>
+#if defined(__FreeBSD__)
+#include <sys/sysctl.h>
+#include <sys/user.h>
+#endif
 #include <syslog.h>
 #include <unistd.h>
 #include <zlib.h>
@@ -138,7 +143,6 @@ void nd_ndpi_debug_printf(uint32_t protocol, void *ndpi,
 }
 #endif  // NDPI_ENABLE_DEBUG_MESSAGES
 
-#ifndef __FreeBSD__
 int ndLogBuffer::overflow(int ch) {
   if (ch != EOF) os << (char)ch;
 
@@ -183,7 +187,6 @@ int ndDebugLogBufferFlow::sync() {
 
   return 0;
 }
-#endif
 
 void nd_print_address(const struct sockaddr_storage *addr) {
   int rc;
@@ -1230,9 +1233,7 @@ bool nd_scan_dotd(const string &path,
 #ifdef _DIRENT_HAVE_D_RECLEN
         result->d_reclen == 0 ||
 #endif
-#ifndef _DIRENT_HAVE_D_TYPE
-#warning "struct dirent doesn't have a type!"
-#else
+#ifdef _DIRENT_HAVE_D_TYPE
         (result->d_type != DT_LNK &&
          result->d_type != DT_REG &&
          result->d_type != DT_UNKNOWN) ||

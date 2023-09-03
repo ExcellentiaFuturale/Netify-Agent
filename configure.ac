@@ -461,11 +461,16 @@ AC_CONFIG_FILES([util/generate-alpn-include.sh],
 AC_OUTPUT
 
 AS_BOX([${PACKAGE_NAME} v${PACKAGE_VERSION}])
-AC_MSG_NOTICE([Conntrack support: ${enable_conntrack}])
-AC_MSG_NOTICE([Conntrack meta-data: ${enable_conntrack_mdata}])
-AC_MSG_NOTICE([Netlink support: ${enable_netlink}])
-AC_MSG_NOTICE([TPv3 capture support: ${enable_tpacketv3}])
-AC_MSG_NOTICE([NFQUEUE capture support: ${enable_nfqueue}])
+case "${host_os}" in
+    linux*)
+        AC_MSG_NOTICE([Conntrack support: ${enable_conntrack}])
+        AC_MSG_NOTICE([Conntrack meta-data: ${enable_conntrack_mdata}])
+        AC_MSG_NOTICE([Netlink support: ${enable_netlink}])
+        AC_MSG_NOTICE([TPv3 capture support: ${enable_tpacketv3}])
+        AC_MSG_NOTICE([NFQUEUE capture support: ${enable_nfqueue}])
+    ;;
+esac
+
 AC_MSG_NOTICE([Use libCURL zlib support: ${with_libcurl_zlib}])
 AC_MSG_NOTICE([Use system libgcrypt: ${with_local_libgcrypt}])
 AC_MSG_NOTICE([Use thread-caching malloc: ${enable_libtcmalloc}])
