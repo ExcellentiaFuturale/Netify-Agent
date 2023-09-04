@@ -64,6 +64,8 @@
 #include <netinet/udp.h>
 #undef __FAVOR_BSD
 
+#include <cstddef>
+
 #if !defined(ETHERTYPE_MPLS_UC)
 #if defined(ETHERTYPE_MPLS)
 #define ETHERTYPE_MPLS_UC ETHERTYPE_MPLS
@@ -614,11 +616,11 @@ nd_process_ip:
       return packet;
     }
 
-    addr_cmp = memcmp(&hdr_ip->ip_src, &hdr_ip->ip_dst, 4);
+    addr_cmp = memcmp((const uint8_t *)(hdr_ip + offsetof(struct ip, ip_src)), (const uint8_t *)(hdr_ip + offsetof(struct ip, ip_dst)), sizeof(struct in_addr));
 
     if (addr_cmp < 0) {
-      ndAddr::Create(flow.lower_addr, &hdr_ip->ip_src);
-      ndAddr::Create(flow.upper_addr, &hdr_ip->ip_dst);
+      ndAddr::Create(flow.lower_addr, (const struct in_addr *)(hdr_ip + offsetof(struct ip, ip_src)));
+      ndAddr::Create(flow.upper_addr, (const struct in_addr *)(hdr_ip + offsetof(struct ip, ip_dst)));
       if (dl_type == DLT_EN10MB) {
         ndAddr::Create(flow.lower_mac, (const uint8_t *)hdr_eth->ether_shost,
                        ETH_ALEN);
@@ -626,8 +628,8 @@ nd_process_ip:
                        ETH_ALEN);
       }
     } else {
-      ndAddr::Create(flow.lower_addr, &hdr_ip->ip_dst);
-      ndAddr::Create(flow.upper_addr, &hdr_ip->ip_src);
+      ndAddr::Create(flow.lower_addr, (const struct in_addr *)(hdr_ip + offsetof(struct ip, ip_dst)));
+      ndAddr::Create(flow.upper_addr, (const struct in_addr *)(hdr_ip + offsetof(struct ip, ip_src)));
       if (dl_type == DLT_EN10MB) {
         ndAddr::Create(flow.lower_mac, (const uint8_t *)hdr_eth->ether_dhost,
                        ETH_ALEN);
@@ -668,14 +670,15 @@ nd_process_ip:
       do {
         addr_cmp =
             memcmp(&hdr_ip6->ip6_src.s6_addr32[i],
-                   &hdr_ip6->ip6_dst.s6_addr32[i], 4);
+                   &hdr_ip6->ip6_dst.s6_addr32[i],
+		   sizeof(uint32_t));
         i++;
       } while (addr_cmp == 0);
     }
 
     if (addr_cmp < 0) {
-      ndAddr::Create(flow.lower_addr, &hdr_ip6->ip6_src);
-      ndAddr::Create(flow.upper_addr, &hdr_ip6->ip6_dst);
+      ndAddr::Create(flow.lower_addr, (const struct in6_addr *)(hdr_ip6 + offsetof(struct ip6_hdr, ip6_src)));
+      ndAddr::Create(flow.upper_addr, (const struct in6_addr *)(hdr_ip6 + offsetof(struct ip6_hdr, ip6_dst)));
       if (dl_type == DLT_EN10MB) {
         ndAddr::Create(flow.lower_mac, hdr_eth->ether_shost,
                        ETH_ALEN);
@@ -683,8 +686,8 @@ nd_process_ip:
                        ETH_ALEN);
       }
     } else {
-      ndAddr::Create(flow.lower_addr, &hdr_ip6->ip6_dst);
-      ndAddr::Create(flow.upper_addr, &hdr_ip6->ip6_src);
+      ndAddr::Create(flow.lower_addr, (const struct in6_addr *)(hdr_ip6 + offsetof(struct ip6_hdr, ip6_dst)));
+      ndAddr::Create(flow.upper_addr, (const struct in6_addr *)(hdr_ip6 + offsetof(struct ip6_hdr, ip6_src)));
       if (dl_type == DLT_EN10MB) {
         ndAddr::Create(flow.lower_mac, hdr_eth->ether_dhost,
                        ETH_ALEN);
