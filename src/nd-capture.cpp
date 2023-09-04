@@ -22,7 +22,9 @@
 #include "config.h"
 #endif
 
+#if defined(__FreeBSD__)
 #include <sys/types.h>
+#endif
 
 #include <net/ethernet.h>
 #include <pcap/pcap.h>
