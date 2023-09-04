@@ -22,6 +22,8 @@
 #include "config.h"
 #endif
 
+#include <sys/types.h>
+
 #include <net/ethernet.h>
 #include <pcap/pcap.h>
 #include <resolv.h>
@@ -618,18 +620,18 @@ nd_process_ip:
       ndAddr::Create(flow.lower_addr, &hdr_ip->ip_src);
       ndAddr::Create(flow.upper_addr, &hdr_ip->ip_dst);
       if (dl_type == DLT_EN10MB) {
-        ndAddr::Create(flow.lower_mac, hdr_eth->ether_shost,
+        ndAddr::Create(flow.lower_mac, (const uint8_t *)hdr_eth->ether_shost,
                        ETH_ALEN);
-        ndAddr::Create(flow.upper_mac, hdr_eth->ether_dhost,
+        ndAddr::Create(flow.upper_mac, (const uint8_t *)hdr_eth->ether_dhost,
                        ETH_ALEN);
       }
     } else {
       ndAddr::Create(flow.lower_addr, &hdr_ip->ip_dst);
       ndAddr::Create(flow.upper_addr, &hdr_ip->ip_src);
       if (dl_type == DLT_EN10MB) {
-        ndAddr::Create(flow.lower_mac, hdr_eth->ether_dhost,
+        ndAddr::Create(flow.lower_mac, (const uint8_t *)hdr_eth->ether_dhost,
                        ETH_ALEN);
-        ndAddr::Create(flow.upper_mac, hdr_eth->ether_shost,
+        ndAddr::Create(flow.upper_mac, (const uint8_t *)hdr_eth->ether_shost,
                        ETH_ALEN);
       }
     }

@@ -44,15 +44,26 @@ To build a debug version with AddressSanitizer:
 
 ## FreeBSD 14
 
-1. Configure (cd netify-agent):
+1. Install required build packages:
+```
+  # pkg install
+autoconf
+automake
+bison
+curl
+flex
+git
+gmake
+libltdl
+libpcap
+libtool
+pkgconf
+```
+
+2. Configure (cd netify-agent):
 
 ```
-  # ./autogen.sh && ./configure MAKE=gmake YACC=bison --with-pic=inih
-```
-
-2. Install required build packages:
-```
-  # pkg install auto-tools bison curl flex git gmake google-perftools libtool pkgconf
+  # ./autogen.sh && ./configure MAKE=gmake YACC=bison --with-pic=inih --disable-libtcmalloc
 ```
 
 3. Build (optionally adjust jobs for number of CPUs + 1):
