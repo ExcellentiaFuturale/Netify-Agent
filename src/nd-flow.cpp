@@ -386,54 +386,6 @@ bool ndFlow::HasMDNSDomainName(void) const {
           mdns.domain_name[0] != '\0');
 }
 
-#ifdef __FreeBSD__
-void ndFlow::Print(uint8_t pflags) const {
-#if 0
-  string digest;
-  nd_sha1_to_string((const uint8_t *)bt.info_hash, digest);
-
-    nd_flow_printf(
-        "%s: [%c%c%c%c%c%c%c%c] %s%s%s %s %s:%hu %c%c%c %s %s:%hu%s%s%s%s%s\n",
-        iface->ifname.c_str(),
-        (iface->role == ndIR_LAN) ? 'i' : 'e',
-        (ip_version == 4) ? '4' : (ip_version == 6) ? '6' : '-',
-        flags.ip_nat.load() ? 'n' : '-',
-        (flags.detection_updated.load()) ? 'u' : '-',
-        (flags.detection_guessed.load()) ? 'g' : '-',
-        (flags.dhc_hit.load()) ? 'd' : '-',
-        (privacy_mask & PRIVATE_LOWER) ? 'p' :
-            (privacy_mask & PRIVATE_UPPER) ? 'P' :
-            (privacy_mask & (PRIVATE_LOWER | PRIVATE_UPPER)) ? 'X' :
-            '-',
-        (flags.soft_dissector.load()) ? 's' : '-',
-        detected_protocol_name,
-        (! detected_application_name.empty()) ? "." : "",
-        (! detected_application_name.empty()) ? detected_application_name.c_str() : "",
-        (pflags & PRINTF_MACS) ? lower_mac.GetString().c_str() : "",
-        lower_addr.GetString().c_str(), lower_addr.GetPort(),
-        (origin == ORIGIN_LOWER || origin == ORIGIN_UNKNOWN) ? '-' : '<',
-        (origin == ORIGIN_UNKNOWN) ? '?' : '-',
-        (origin == ORIGIN_UPPER || origin == ORIGIN_UNKNOWN) ? '-' : '>',
-        (pflags & PRINTF_MACS) ? upper_mac.GetString().c_str() ? "",
-        upper_addr.GetString().c_str(), upper_addr.GetPort(),
-        (! dns_host_name.empty() || ! host_server_name.empty()) ? " H: " : "",
-        (! host_server_name.empty()) ? host_server_name.c_str() : (
-            (! dns_host_name.empty()) ? dns_host_name.c_str() : ""
-        ),
-        (HasTLSClientSNI()) ? " SSL" : "",
-        (HasBTInfoHash()) ? " BT-IH: " : "",
-        (HasBTInfoHash()) ? digest.c_str() : ""
-    );
-#endif
-#if 0
-    if (ndGC_DEBUG &&
-        detected_protocol == ND_PROTO_TLS &&
-        flags.detection_guessed.load() == false && ssl.version == 0x0000) {
-        nd_dprintf("%s: SSL with no SSL/TLS verison.\n", iface.ifname.c_str());
-    }
-#endif
-}
-#else
 void ndFlow::Print(uint8_t pflags) const {
   ndDebugLogStream dls(ndDebugLogStream::DLT_FLOW);
 
@@ -698,7 +650,6 @@ void ndFlow::Print(uint8_t pflags) const {
 
   nd_output_unlock();
 }
-#endif
 
 void ndFlow::UpdateLowerMaps(void) {
   if (lower_map == LOWER_UNKNOWN)
