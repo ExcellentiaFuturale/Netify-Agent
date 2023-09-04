@@ -621,21 +621,21 @@ nd_process_ip:
     }
 
     addr_cmp = memcmp(
-        (const uint8_t *)(hdr_ip +
+        (const uint8_t *)((size_t)hdr_ip +
                           offsetof(struct ip, ip_src)),
-        (const uint8_t *)(hdr_ip +
+        (const uint8_t *)((size_t)hdr_ip +
                           offsetof(struct ip, ip_dst)),
         sizeof(struct in_addr));
 
     if (addr_cmp < 0) {
       ndAddr::Create(
           flow.lower_addr,
-          (const struct in_addr *)(hdr_ip +
+          (const struct in_addr *)((size_t)hdr_ip +
                                    offsetof(struct ip,
                                             ip_src)));
       ndAddr::Create(
           flow.upper_addr,
-          (const struct in_addr *)(hdr_ip +
+          (const struct in_addr *)((size_t)hdr_ip +
                                    offsetof(struct ip,
                                             ip_dst)));
       if (dl_type == DLT_EN10MB) {
@@ -651,12 +651,12 @@ nd_process_ip:
     } else {
       ndAddr::Create(
           flow.lower_addr,
-          (const struct in_addr *)(hdr_ip +
+          (const struct in_addr *)((size_t)hdr_ip +
                                    offsetof(struct ip,
                                             ip_dst)));
       ndAddr::Create(
           flow.upper_addr,
-          (const struct in_addr *)(hdr_ip +
+          (const struct in_addr *)((size_t)hdr_ip +
                                    offsetof(struct ip,
                                             ip_src)));
       if (dl_type == DLT_EN10MB) {
@@ -711,12 +711,12 @@ nd_process_ip:
     if (addr_cmp < 0) {
       ndAddr::Create(
           flow.lower_addr,
-          (const struct in6_addr *)(hdr_ip6 +
+          (const struct in6_addr *)((size_t)hdr_ip6 +
                                     offsetof(struct ip6_hdr,
                                              ip6_src)));
       ndAddr::Create(
           flow.upper_addr,
-          (const struct in6_addr *)(hdr_ip6 +
+          (const struct in6_addr *)((size_t)hdr_ip6 +
                                     offsetof(struct ip6_hdr,
                                              ip6_dst)));
       if (dl_type == DLT_EN10MB) {
@@ -728,12 +728,12 @@ nd_process_ip:
     } else {
       ndAddr::Create(
           flow.lower_addr,
-          (const struct in6_addr *)(hdr_ip6 +
+          (const struct in6_addr *)((size_t)hdr_ip6 +
                                     offsetof(struct ip6_hdr,
                                              ip6_dst)));
       ndAddr::Create(
           flow.upper_addr,
-          (const struct in6_addr *)(hdr_ip6 +
+          (const struct in6_addr *)((size_t)hdr_ip6 +
                                     offsetof(struct ip6_hdr,
                                              ip6_src)));
       if (dl_type == DLT_EN10MB) {
