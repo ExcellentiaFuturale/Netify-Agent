@@ -69,15 +69,14 @@
 #undef __FAVOR_BSD
 
 #if defined(__linux__)
-#define _ND_ADDROF(ptr, typeof, member) \
-  (const uint8_t *)&ptr->member
+#define _ND_ADDROFF(ptr, typeof, member) \
+  &ptr->member
 #elif defined(__FreeBSD__)
 #include <cstddef>
 // XXX: FreeBSD network structures such as 'struct ip' are
 // packed.  Eliminate unaligned address warnings.
-#define _ND_ADDROF(ptr, typeof, member) \
-  (const uint8_t *)((size_t)ptr +
-    offsetof(typeof, member))
+#define _ND_ADDROFF(ptr, typeof, member) \
+  ((size_t)ptr + offsetof(typeof, member))
 #endif
 
 #if !defined(ETHERTYPE_MPLS_UC)
@@ -630,28 +629,17 @@ nd_process_ip:
       return packet;
     }
 
-    addr_cmp = memcmp(_ND_ADDROF(hdr_ip, struct ip, ip_src),
-                      _ND_ADDROF(hdr_ip, struct ip, ip_dst),
+    addr_cmp = memcmp((const uint8_t *)_ND_ADDROFF(hdr_ip, struct ip, ip_src),
+                      (const uint8_t *)_ND_ADDROFF(hdr_ip, struct ip, ip_dst),
                       sizeof(struct in_addr));
-
-    addr_cmp = memcmp(
-        (const uint8_t *)((size_t)hdr_ip +
-                          offsetof(struct ip, ip_src)),
-        (const uint8_t *)((size_t)hdr_ip +
-                          offsetof(struct ip, ip_dst)),
-        sizeof(struct in_addr));
 
     if (addr_cmp < 0) {
       ndAddr::Create(
           flow.lower_addr,
-          (const struct in_addr *)((size_t)hdr_ip +
-                                   offsetof(struct ip,
-                                            ip_src)));
+          (const struct in_addr *)_ND_ADDROFF(hdr_ip, struct ip, ip_src));
       ndAddr::Create(
           flow.upper_addr,
-          (const struct in_addr *)((size_t)hdr_ip +
-                                   offsetof(struct ip,
-                                            ip_dst)));
+          (const struct in_addr *)_ND_ADDROFF(hdr_ip, struct ip, ip_dst));
       if (dl_type == DLT_EN10MB) {
         ndAddr::Create(
             flow.lower_mac,
@@ -665,14 +653,10 @@ nd_process_ip:
     } else {
       ndAddr::Create(
           flow.lower_addr,
-          (const struct in_addr *)((size_t)hdr_ip +
-                                   offsetof(struct ip,
-                                            ip_dst)));
+          (const struct in_addr *)_ND_ADDROFF(hdr_ip, struct ip, ip_dst));
       ndAddr::Create(
           flow.upper_addr,
-          (const struct in_addr *)((size_t)hdr_ip +
-                                   offsetof(struct ip,
-                                            ip_src)));
+          (const struct in_addr *)_ND_ADDROFF(hdr_ip, struct ip, ip_src));
       if (dl_type == DLT_EN10MB) {
         ndAddr::Create(
             flow.lower_mac,
@@ -725,14 +709,10 @@ nd_process_ip:
     if (addr_cmp < 0) {
       ndAddr::Create(
           flow.lower_addr,
-          (const struct in6_addr *)((size_t)hdr_ip6 +
-                                    offsetof(struct ip6_hdr,
-                                             ip6_src)));
+          (const struct in6_addr *)_ND_ADDROFF(hdr_ip6, struct ip6_hdr, ip6_src));
       ndAddr::Create(
           flow.upper_addr,
-          (const struct in6_addr *)((size_t)hdr_ip6 +
-                                    offsetof(struct ip6_hdr,
-                                             ip6_dst)));
+          (const struct in6_addr *)_ND_ADDROFF(hdr_ip6, struct ip6_hdr, ip6_dst));
       if (dl_type == DLT_EN10MB) {
         ndAddr::Create(flow.lower_mac, hdr_eth->ether_shost,
                        ETH_ALEN);
@@ -742,14 +722,10 @@ nd_process_ip:
     } else {
       ndAddr::Create(
           flow.lower_addr,
-          (const struct in6_addr *)((size_t)hdr_ip6 +
-                                    offsetof(struct ip6_hdr,
-                                             ip6_dst)));
+          (const struct in6_addr *)_ND_ADDROFF(hdr_ip6, struct ip6_hdr, ip6_dst));
       ndAddr::Create(
           flow.upper_addr,
-          (const struct in6_addr *)((size_t)hdr_ip6 +
-                                    offsetof(struct ip6_hdr,
-                                             ip6_src)));
+          (const struct in6_addr *)_ND_ADDROFF(hdr_ip6, struct ip6_hdr, ip6_src));
       if (dl_type == DLT_EN10MB) {
         ndAddr::Create(flow.lower_mac, hdr_eth->ether_dhost,
                        ETH_ALEN);
