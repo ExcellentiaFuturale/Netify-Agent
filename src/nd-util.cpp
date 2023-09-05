@@ -37,8 +37,8 @@
 #include <sys/socket.h>
 #include <sys/types.h>
 #if defined(__FreeBSD__)
-#include <sys/user.h>
 #include <sys/sysctl.h>
+#include <sys/user.h>
 #endif
 #include <syslog.h>
 #include <unistd.h>
