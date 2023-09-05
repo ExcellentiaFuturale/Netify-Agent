@@ -68,7 +68,17 @@
 #include <netinet/udp.h>
 #undef __FAVOR_BSD
 
+#if defined(__linux__)
+#define _ND_ADDROF(ptr, typeof, member) \
+  (const uint8_t *)&ptr->member
+#elif defined(__FreeBSD__)
 #include <cstddef>
+// XXX: FreeBSD network structures such as 'struct ip' are
+// packed.  Eliminate unaligned address warnings.
+#define _ND_ADDROF(ptr, typeof, member) \
+  (const uint8_t *)((size_t)ptr +
+    offsetof(typeof, member))
+#endif
 
 #if !defined(ETHERTYPE_MPLS_UC)
 #if defined(ETHERTYPE_MPLS)
@@ -146,7 +156,7 @@ struct __attribute__((packed)) nd_mpls_header_t {
 #if __BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__
   uint32_t ttl : 8, s : 1, exp : 3, label : 20;
 #elif __BYTE_ORDER__ == __ORDER_BIG_ENDIAN__
-  uint32_t label : 20, exp : 3, s : 1, ttl : 8;
+      uint32_t label : 20, exp : 3, s : 1, ttl : 8;
 #else
 #error Endianess not defined (__BYTE_ORDER__).
 #endif
@@ -619,6 +629,10 @@ nd_process_ip:
 #endif
       return packet;
     }
+
+    addr_cmp = memcmp(_ND_ADDROF(hdr_ip, struct ip, ip_src),
+                      _ND_ADDROF(hdr_ip, struct ip, ip_dst),
+                      sizeof(struct in_addr));
 
     addr_cmp = memcmp(
         (const uint8_t *)((size_t)hdr_ip +
