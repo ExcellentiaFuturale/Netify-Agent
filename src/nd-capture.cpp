@@ -23,6 +23,8 @@
 #endif
 
 #if defined(__FreeBSD__)
+// XXX: Needed for u_char.  Must be included before
+// net/ethernet.h below
 #include <sys/types.h>
 #endif
 

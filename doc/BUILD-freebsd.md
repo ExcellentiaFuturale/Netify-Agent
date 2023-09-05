@@ -46,18 +46,7 @@ To build a debug version with AddressSanitizer:
 
 1. Install required build packages:
 ```
-  # pkg install
-autoconf
-automake
-bison
-curl
-flex
-git
-gmake
-libltdl
-libpcap
-libtool
-pkgconf
+  # pkg install autoconf automake bison curl flex git gmake libltdl libpcap libtool pkgconf
 ```
 
 2. Configure (cd netify-agent):
