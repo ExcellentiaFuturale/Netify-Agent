@@ -1,6 +1,8 @@
 *.pc
+*.sum
 *.swp
 *bak
+*.distinfo
 *orig
 *rej
 *~

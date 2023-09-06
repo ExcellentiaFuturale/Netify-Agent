@@ -49,6 +49,14 @@ dist-git:
 		); \
 	done
 	gzip $(PACKAGE)-$(VERSION).tar
+	echo -n "TIMESTAMP = " > $(PACKAGE)-$(VERSION).distinfo
+	date '+%s' >> $(PACKAGE)-$(VERSION).distinfo
+	echo -n "SHA256 ($(PACKAGE)-$(VERSION).tar.gz) = " >> $(PACKAGE)-$(VERSION).distinfo
+	sha256sum $(PACKAGE)-$(VERSION).tar.gz | cut -d' ' -f1 >> $(PACKAGE)-$(VERSION).distinfo
+	echo -n "SIZE ($(PACKAGE)-$(VERSION).tar.gz) = " >> $(PACKAGE)-$(VERSION).distinfo
+	stat --format='%s' $(PACKAGE)-$(VERSION).tar.gz >> $(PACKAGE)-$(VERSION).distinfo
+	sha256sum $(PACKAGE)-$(VERSION).tar.gz > $(PACKAGE)-$(VERSION)-sha256.sum
+	sha512sum $(PACKAGE)-$(VERSION).tar.gz > $(PACKAGE)-$(VERSION)-sha512.sum
 
 netifyd-CentOS_8.spec: netifyd.spec
 	grep -v 'gperftools-devel' netifyd.spec > netifyd-CentOS_8.spec
