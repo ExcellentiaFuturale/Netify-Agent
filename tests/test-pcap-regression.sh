@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 set -euo pipefail
 
@@ -7,11 +7,9 @@ if [ -z "${TESTDIR:-}" ]; then
     export TESTDIR
 fi
 
-VALGRIND=/usr/loca/bin/valgrind
-
 ND_PCAPS=$(find "${TESTDIR}/pcap/" -name '*.cap.gz' | sort)
 NDPI_PCAPS=$(sort "${TESTDIR}/ndpi-pcap-files.txt" | egrep -v '^#' |\
-    xargs -n 1 -i find "${TESTDIR}/../libs/ndpi/tests/cfgs/default/pcap" -name '{}*cap*' |\
+    xargs -n 1 -I {} find "${TESTDIR}/../libs/ndpi/tests/cfgs/default/pcap" -name '{}*cap*' |\
     egrep -v -- '-test.cap$')
 
 PCAPS="$(echo ${ND_PCAPS} ${NDPI_PCAPS} | sort)"
@@ -19,8 +17,10 @@ PCAPS="$(echo ${ND_PCAPS} ${NDPI_PCAPS} | sort)"
 CONF="${TESTDIR}/netifyd-test-pcap.conf"
 NETIFYD="${TESTDIR}/../src/.libs/netifyd"
 NETWORK=192.168.242.0/24
-BOLD=$(tput bold)
-NORMAL=$(tput sgr0)
+#BOLD=$(tput bold)
+#BOLD=$(tput smso)
+#NORMAL=$(tput sgr0)
+#NORMAL=$(tput rmso)
 
 export LD_LIBRARY_PATH="${TESTDIR}/../src/.libs/"
 
@@ -35,13 +35,11 @@ run_test() {
     else
         cat $1 > ${BASE}-test.cap || exit $?
     fi
-    echo -e "\n${BOLD}>>> ${NAME}${NORMAL}"
+    #echo -e "\n${BOLD}>>> ${NAME}${NORMAL}"
+    #echo -e "\n>>> ${NAME}${NORMAL}"
+    echo -e "\n>>> ${NAME}"
     CMD="${NETIFYD} -t -c $CONF --thread-detection-cores=1 -I ${BASE}-test.cap -A $NETWORK -T ${LOG}"
-    if [ "x${WITH_VALGRIND}" == "xyes" ]; then
-        CMD="/usr/local/bin/valgrind --tool=memcheck --leak-check=full --track-origins=yes --log-file=/tmp/${NAME}.log ${CMD}"
-    else
-        ulimit -c unlimited
-    fi
+    ulimit -c unlimited
     echo $CMD
     $CMD || exit $?
     rm -f ${BASE}-test.cap
