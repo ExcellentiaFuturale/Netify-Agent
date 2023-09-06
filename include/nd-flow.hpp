@@ -62,8 +62,6 @@ using namespace std;
 // Extra protocol info text
 #define ND_FLOW_EXTRA_INFO 16
 
-typedef unordered_map<string, string> nd_flow_kvmap;
-
 class ndFlowStats {
  public:
   ndFlowStats()
@@ -187,6 +185,8 @@ class ndFlowStats {
 
 class ndFlow : public ndSerializer {
  public:
+  typedef unordered_map<string, string> KeyValueMap;
+
   ndFlow(nd_iface_ptr &iface);
   ndFlow(const ndFlow &flow);
   virtual ~ndFlow();
@@ -758,7 +758,7 @@ class ndFlow : public ndSerializer {
   atomic<bool> tls_alpn_set, tls_alpn_server_set;
 
   struct {
-    nd_flow_kvmap headers;
+    KeyValueMap headers;
   } ssdp;
 
   enum {
