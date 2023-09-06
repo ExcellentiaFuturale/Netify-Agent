@@ -634,8 +634,7 @@ bool ndNetifyApiManager::ProcessBootstrapRequest(
     if (bootstrap->http_rc != 200 || code != 0) {
       nd_printf(
           "netify-api: Bootstrap request failed: HTTP "
-          "%ld: "
-          "%s [%d]\n",
+          "%ld: %s [%d]\n",
           bootstrap->http_rc, message.c_str(), code);
       return false;
     }
@@ -703,6 +702,9 @@ bool ndNetifyApiManager::ProcessBootstrapRequest(
 
 bool ndNetifyApiManager::ProcessDownloadRequest(
     ndNetifyApiDownload *download, Request type) {
+  if (download->http_rc == 304) {
+    return false;
+  }
   if (download->http_rc != 200) {
     nd_printf(
         "netify-api: Download request failed: HTTP %ld: "

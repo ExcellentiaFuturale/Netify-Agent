@@ -11,7 +11,7 @@ VALGRIND=/usr/loca/bin/valgrind
 
 ND_PCAPS=$(find "${TESTDIR}/pcap/" -name '*.cap.gz' | sort)
 NDPI_PCAPS=$(sort "${TESTDIR}/ndpi-pcap-files.txt" | egrep -v '^#' |\
-    xargs -n 1 -i find "${TESTDIR}/../libs/ndpi/tests/cfgs/default/pcap" -name '{}*cap*' |\
+    xargs -I{} find "${TESTDIR}/../libs/ndpi/tests/cfgs/default/pcap" -name '{}*cap*' |\
     egrep -v -- '-test.cap$')
 
 PCAPS="$(echo ${ND_PCAPS} ${NDPI_PCAPS} | sort)"
@@ -40,7 +40,7 @@ run_test() {
     if [ "x${WITH_VALGRIND}" == "xyes" ]; then
         CMD="/usr/local/bin/valgrind --tool=memcheck --leak-check=full --track-origins=yes --log-file=/tmp/${NAME}.log ${CMD}"
     else
-        ulimit -c unlimited
+        ulimit -c unlimited || true
     fi
     echo $CMD
     $CMD || exit $?

@@ -35,7 +35,7 @@ ndFlowMap::ndFlowMap(size_t buckets) : buckets(buckets) {
     b->reserve(ND_HASH_BUCKETS_FLOWS);
 #endif
     bucket.push_back(b);
-    bucket_lock.emplace_back();
+    bucket_lock.emplace_back(new mutex);
   }
 
   nd_dprintf("Created %lu flow map buckets.\n", buckets);
