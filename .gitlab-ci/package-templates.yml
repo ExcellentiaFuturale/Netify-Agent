@@ -19,8 +19,6 @@
     - ./autogen.sh
     - ./configure --prefix=/usr --includedir=\${prefix}/include --mandir=\${prefix}/share/man --sysconfdir=/etc --localstatedir=/var
     - make dist-git
-    - sha256sum > sha256.sum
-    - sha512sum > sha512.sum
     # Copy packages to mirror
     - mkdir -p builds/netify/source/
     - mv -v *.tar.gz *.sum *.distinfo builds/netify/source/
