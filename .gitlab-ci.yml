@@ -177,7 +177,7 @@ almalinux 9 build:
 # -------------------------------------------------------------------------
 #
 package source:
-  extends: .package_source
+  extends: .pkg_source
   tags:
     - docker
   variables:
