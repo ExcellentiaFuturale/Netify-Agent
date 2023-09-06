@@ -22,6 +22,8 @@
 #define _ND_FLOW_MAP_H
 
 #include <map>
+#include <memory>
+#include <mutex>
 #include <unordered_map>
 #include <utility>
 #include <vector>
@@ -33,7 +35,7 @@ using namespace std;
 typedef shared_ptr<ndFlow> nd_flow_ptr;
 typedef unordered_map<string, nd_flow_ptr> nd_flow_map;
 typedef vector<nd_flow_map *> nd_flow_bucket;
-typedef vector<pthread_mutex_t *> nd_flow_bucket_lock;
+typedef vector<unique_ptr<mutex>> nd_flow_bucket_lock;
 typedef map<string, nd_flow_map *> nd_flows;
 typedef pair<string, nd_flow_ptr> nd_flow_pair;
 typedef pair<nd_flow_map::iterator, bool> nd_flow_insert;
@@ -80,7 +82,7 @@ class ndFlowMap {
 
   size_t buckets;
   nd_flow_bucket bucket;
-  nd_flow_bucket_lock bucket_lock;
+  mutable nd_flow_bucket_lock bucket_lock;
 };
 
 #endif  // _ND_FLOW_MAP_H

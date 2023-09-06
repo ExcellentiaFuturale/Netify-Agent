@@ -464,7 +464,7 @@ uint32_t ndInstance::InitializeConfig(int argc,
       case 'd':
         break;
       case 'D':
-        ndGC.flags |= ndGF_DEBUG_CURL;
+        ndGC_SetFlag(ndGF_DEBUG_CURL, true);
         break;
       case 'c':
         break;
@@ -621,25 +621,28 @@ uint32_t ndInstance::InitializeConfig(int argc,
   }
 
   // Global libCURL initialization
-  curl_version_info_data *curl_version =
-      curl_version_info(CURLVERSION_NOW);
-  fprintf(stdout, "%s: libCURL version %u.%u.%u\n",
-          tag.c_str(),
-          (curl_version->version_num >> 16) & 0xff,
-          (curl_version->version_num >> 8) & 0xff,
-          curl_version->version_num & 0xff);
+  if (ndGC_DEBUG_CURL) {
+    curl_version_info_data *curl_version =
+        curl_version_info(CURLVERSION_NOW);
+    fprintf(stdout, "%s: libCURL version %u.%u.%u\n",
+            tag.c_str(),
+            (curl_version->version_num >> 16) & 0xff,
+            (curl_version->version_num >> 8) & 0xff,
+            curl_version->version_num & 0xff);
 #if (LIBCURL_VERSION_NUM >= 0x075600)
-  const curl_ssl_backend **curl_ssl_backends;
-  curl_global_sslset((curl_sslbackend)-1, NULL,
-                     &curl_ssl_backends);
+    const curl_ssl_backend **curl_ssl_backends;
+    curl_global_sslset((curl_sslbackend)-1, NULL,
+                       &curl_ssl_backends);
 
-  for (int i = 0; curl_ssl_backends[i]; i++) {
-    fprintf(stdout,
-            "%s: libCURL SSL backend #%d: %s (ID: %d)\n",
-            tag.c_str(), i, curl_ssl_backends[i]->name,
-            curl_ssl_backends[i]->id);
-  }
+    for (int i = 0; curl_ssl_backends[i]; i++) {
+      fprintf(stdout,
+              "%s: libCURL SSL backend #%d: %s (ID: %d)\n",
+              tag.c_str(), i, curl_ssl_backends[i]->name,
+              curl_ssl_backends[i]->id);
+    }
 #endif
+  }
+
   CURLcode cc;
   if ((cc = curl_global_init(CURL_GLOBAL_DEFAULT)) != 0) {
     fprintf(stderr,
