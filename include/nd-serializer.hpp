@@ -18,8 +18,7 @@
 // License along with this program.  If not, see
 // <http://www.gnu.org/licenses/>.
 
-#ifndef _ND_SERIALIZER_H
-#define _ND_SERIALIZER_H
+#pragma once
 
 #include <nlohmann/json.hpp>
 #include <string>
@@ -293,5 +292,3 @@ class ndSerializer {
                   }));
   }
 };
-
-#endif  // _ND_SERIALIZER_H

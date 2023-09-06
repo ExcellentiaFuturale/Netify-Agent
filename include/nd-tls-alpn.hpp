@@ -1,7 +1,6 @@
 // Auto-generated, update with ./util/generate-alpn-include.sh
 
-#ifndef _ND_TLS_ALPN
-#define _ND_TLS_ALPN
+#pragma once
 
 #include "nd-protos.hpp"
 
@@ -43,5 +42,4 @@ const nd_alpn_proto_map nd_alpn_protos = {
   { "dicom" /* DICOM */, ND_PROTO_TLS },
 };
 
-#endif // _ND_TLS_ALPN
 // vi: ei=all

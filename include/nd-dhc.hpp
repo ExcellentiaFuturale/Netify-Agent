@@ -18,8 +18,7 @@
 // License along with this program.  If not, see
 // <http://www.gnu.org/licenses/>.
 
-#ifndef _ND_DHC_H
-#define _ND_DHC_H
+#pragma once
 
 #include <ctime>
 #include <string>
@@ -61,5 +60,3 @@ class ndDNSHintCache {
   mutex lock;
   nd_dns_ar map_ar;
 };
-
-#endif  // _ND_DHC_H

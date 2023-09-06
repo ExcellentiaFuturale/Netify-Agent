@@ -18,8 +18,7 @@
 // License along with this program.  If not, see
 // <http://www.gnu.org/licenses/>.
 
-#ifndef _ND_THREAD_H
-#define _ND_THREAD_H
+#pragma once
 
 #include <atomic>
 
@@ -89,5 +88,3 @@ class ndThread {
   atomic<bool> terminate;
   atomic<bool> terminated;
 };
-
-#endif  // _ND_THREAD_H

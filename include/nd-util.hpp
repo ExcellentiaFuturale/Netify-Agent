@@ -18,12 +18,7 @@
 // License along with this program.  If not, see
 // <http://www.gnu.org/licenses/>.
 
-#ifdef HAVE_CONFIG_H
-#include "config.h"
-#endif
-
-#ifndef _ND_UTIL_H
-#define _ND_UTIL_H
+#pragma once
 
 #include <sys/socket.h>
 #include <sys/stat.h>
@@ -276,4 +271,3 @@ void nd_tmpfile(const string &prefix, string &filename);
 bool nd_copy_file(const string &src, const string &dst,
                   mode_t mode = S_IRUSR | S_IWUSR |
                                 S_IRGRP);
-#endif  // _ND_UTIL_H

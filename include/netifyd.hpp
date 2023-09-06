@@ -18,8 +18,7 @@
 // License along with this program.  If not, see
 // <http://www.gnu.org/licenses/>.
 
-#ifndef _NETIFYD_H
-#define _NETIFYD_H
+#pragma once
 
 #ifndef AF_LINK
 #define AF_LINK AF_PACKET
@@ -199,5 +198,3 @@
 #define ND_URL_API_BOOTSTRAP \
   "https://manager.netify.ai/api/v2/netifyd/bootstrap"
 #define ND_API_VENDOR "EG"
-
-#endif  // _NETIFYD_H

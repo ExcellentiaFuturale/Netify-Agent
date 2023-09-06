@@ -18,8 +18,7 @@
 // License along with this program.  If not, see
 // <http://www.gnu.org/licenses/>.
 
-#ifndef _ND_FLOW_HASH_CACHE_H
-#define _ND_FLOW_HASH_CACHE_H
+#pragma once
 
 #include <list>
 #include <mutex>
@@ -57,5 +56,3 @@ class ndFlowHashCache {
   nd_fhc_list index;
   nd_fhc_map lookup;
 };
-
-#endif  // _ND_FLOW_HASH_CACHE_H

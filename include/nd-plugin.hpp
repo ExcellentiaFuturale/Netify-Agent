@@ -18,8 +18,7 @@
 // License along with this program.  If not, see
 // <http://www.gnu.org/licenses/>.
 
-#ifndef _ND_PLUGIN_H
-#define _ND_PLUGIN_H
+#pragma once
 
 #include <queue>
 #include <set>
@@ -369,5 +368,3 @@ class ndPluginManager : public ndSerializer {
   map_plugin processors;
   map_plugin sinks;
 };
-
-#endif  // _ND_PLUGIN_H

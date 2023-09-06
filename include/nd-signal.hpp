@@ -18,10 +18,7 @@
 // License along with this program.  If not, see
 // <http://www.gnu.org/licenses/>.
 
-#ifndef _ND_SIGNAL_H
-#define _ND_SIGNAL_H
+#pragma once
 
 #define ND_SIG_UPDATE (SIGRTMIN + 0)
 #define ND_SIG_UPDATE_NAPI (SIGRTMIN + 1)
-
-#endif  // _ND_SIGNAL_H

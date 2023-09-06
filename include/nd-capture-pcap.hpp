@@ -18,8 +18,7 @@
 // License along with this program.  If not, see
 // <http://www.gnu.org/licenses/>.
 
-#ifndef _ND_CAPTURE_PCAP_H
-#define _ND_CAPTURE_PCAP_H
+#pragma once
 
 #include <pcap/pcap.h>
 
@@ -50,5 +49,3 @@ class ndCapturePcap : public ndCaptureThread {
 
   pcap_t *OpenCapture(void);
 };
-
-#endif  // _ND_CAPTURE_PCAP_H

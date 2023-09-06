@@ -18,8 +18,7 @@
 // License along with this program.  If not, see
 // <http://www.gnu.org/licenses/>.
 
-#ifndef _ND_DETECTION_THREAD_H
-#define _ND_DETECTION_THREAD_H
+#pragma once
 
 #include "nd-except.hpp"
 #include "nd-flow-parser.hpp"
@@ -121,5 +120,3 @@ class ndDetectionThread : public ndThread,
 
   void FlowUpdate(ndDetectionQueueEntry *entry);
 };
-
-#endif  // _ND_DETECTION_THREAD_H

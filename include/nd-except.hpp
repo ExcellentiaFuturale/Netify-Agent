@@ -18,8 +18,7 @@
 // License along with this program.  If not, see
 // <http://www.gnu.org/licenses/>.
 
-#ifndef _ND_EXCEPT_H
-#define _ND_EXCEPT_H
+#pragma once
 
 #include <stdexcept>
 #include <string>
@@ -53,5 +52,3 @@ class ndSystemException : public runtime_error {
   int why_arg;
   const char *message;
 };
-
-#endif  // _ND_EXCEPT_H

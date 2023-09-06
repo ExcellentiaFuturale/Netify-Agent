@@ -18,8 +18,7 @@
 // License along with this program.  If not, see
 // <http://www.gnu.org/licenses/>.
 
-#ifndef _ND_CAPTURE_TPV3_H
-#define _ND_CAPTURE_TPV3_H
+#pragma once
 
 #include "nd-capture.hpp"
 
@@ -40,5 +39,3 @@ class ndCaptureTPv3 : public ndCaptureThread {
   // Private, opaque ndPacketRing
   void *ring;
 };
-
-#endif  // _ND_CAPTURE_PCAP_H

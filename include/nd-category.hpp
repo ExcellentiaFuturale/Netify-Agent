@@ -18,8 +18,7 @@
 // License along with this program.  If not, see
 // <http://www.gnu.org/licenses/>.
 
-#ifndef _ND_CATEGORY_H
-#define _ND_CATEGORY_H
+#pragma once
 
 #include <map>
 #include <mutex>
@@ -123,5 +122,3 @@ class ndDomains {
       cat_domain_map;
   cat_domain_map domains;
 };
-
-#endif  // _ND_CATEGORY_H

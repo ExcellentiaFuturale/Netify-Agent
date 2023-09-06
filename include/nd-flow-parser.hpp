@@ -18,8 +18,7 @@
 // License along with this program.  If not, see
 // <http://www.gnu.org/licenses/>.
 
-#ifndef _ND_FLOW_PARSER_H
-#define _ND_FLOW_PARSER_H
+#pragma once
 
 #define _NDFP_MAX_NAMELEN 64
 
@@ -100,5 +99,3 @@ class ndFlowParser : public ndInstanceClient {
 };
 
 #endif
-
-#endif  // _ND_FLOW_PARSER_H

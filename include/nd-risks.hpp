@@ -18,8 +18,7 @@
 // License along with this program.  If not, see
 // <http://www.gnu.org/licenses/>.
 
-#ifndef _ND_RISKS_H
-#define _ND_RISKS_H
+#pragma once
 
 #include <cstdint>
 #include <unordered_map>
@@ -270,5 +269,3 @@ inline nd_risk_id_t nd_ndpi_risk_find(uint16_t id) {
 }
 
 nd_risk_id_t nd_risk_lookup(const string &name);
-
-#endif  // _ND_RISKS_H

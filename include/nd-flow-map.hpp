@@ -18,8 +18,7 @@
 // License along with this program.  If not, see
 // <http://www.gnu.org/licenses/>.
 
-#ifndef _ND_FLOW_MAP_H
-#define _ND_FLOW_MAP_H
+#pragma once
 
 #include <map>
 #include <memory>
@@ -84,5 +83,3 @@ class ndFlowMap {
   nd_flow_bucket bucket;
   mutable nd_flow_bucket_lock bucket_lock;
 };
-
-#endif  // _ND_FLOW_MAP_H

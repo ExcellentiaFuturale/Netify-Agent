@@ -18,8 +18,7 @@
 // License along with this program.  If not, see
 // <http://www.gnu.org/licenses/>.
 
-#ifndef _ND_JSON_H
-#define _ND_JSON_H
+#pragma once
 
 #include <nlohmann/json.hpp>
 #include <string>
@@ -29,5 +28,3 @@ using namespace std;
 
 void nd_json_to_string(const json &j, string &output,
                        bool pretty = false);
-
-#endif  // _ND_JSON_H

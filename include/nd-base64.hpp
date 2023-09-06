@@ -9,8 +9,7 @@
 // 2016-12-12 - Gaspard Petit : Slightly modified to return
 // a std::string instead of a buffer allocated with malloc.
 
-#ifndef _ND_BASE64_H
-#define _ND_BASE64_H
+#pragma once
 
 #include <cstddef>
 #include <string>
@@ -20,5 +19,3 @@ using namespace std;
 string base64_encode(const unsigned char* src, size_t len);
 
 string base64_decode(const void* data, const size_t len);
-
-#endif  // _ND_BASE64_H

@@ -18,8 +18,7 @@
 // License along with this program.  If not, see
 // <http://www.gnu.org/licenses/>.
 
-#ifndef _ND_NETLINK_H
-#define _ND_NETLINK_H
+#pragma once
 
 #include <linux/netlink.h>
 
@@ -62,5 +61,3 @@ class ndNetlink {
   struct sockaddr_nl sa;
   uint8_t buffer[ND_NETLINK_BUFSIZ];
 };
-
-#endif  // _ND_NETLINK_H

@@ -18,8 +18,7 @@
 // License along with this program.  If not, see
 // <http://www.gnu.org/licenses/>.
 
-#ifndef _ND_CAPTURE_H
-#define _ND_CAPTURE_H
+#pragma once
 
 #include "nd-except.hpp"
 #include "nd-instance.hpp"
@@ -85,5 +84,3 @@ class ndCaptureThread : public ndThread,
                         const uint8_t *pkt,
                         uint16_t pkt_len, uint16_t proto);
 };
-
-#endif  // _ND_CAPTURE_H

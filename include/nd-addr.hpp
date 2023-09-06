@@ -18,8 +18,7 @@
 // License along with this program.  If not, see
 // <http://www.gnu.org/licenses/>.
 
-#ifndef _ND_ADDR_H
-#define _ND_ADDR_H
+#pragma once
 
 #include <arpa/inet.h>
 #include <sys/socket.h>
@@ -992,5 +991,3 @@ class ndInterface : public ndSerializer {
 };
 
 typedef shared_ptr<ndInterface> nd_iface_ptr;
-
-#endif  // _ND_ADDR_H

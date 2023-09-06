@@ -18,8 +18,7 @@
 // License along with this program.  If not, see
 // <http://www.gnu.org/licenses/>.
 
-#ifndef _ND_NAPI_H
-#define _ND_NAPI_H
+#pragma once
 
 #include <curl/curl.h>
 #include <unistd.h>
@@ -147,5 +146,3 @@ class ndNetifyApiManager {
   bool ProcessDownloadRequest(ndNetifyApiDownload *download,
                               Request type);
 };
-
-#endif  // _ND_NAPI_H

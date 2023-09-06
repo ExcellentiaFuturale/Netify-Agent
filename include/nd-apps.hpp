@@ -18,8 +18,7 @@
 // License along with this program.  If not, see
 // <http://www.gnu.org/licenses/>.
 
-#ifndef _ND_APPS_H
-#define _ND_APPS_H
+#pragma once
 
 #include <cstdint>
 #include <map>
@@ -144,5 +143,3 @@ class ndApplications : public ndSerializer {
  private:
   void *app_networks4, *app_networks6;
 };
-
-#endif  // _ND_APPS_H

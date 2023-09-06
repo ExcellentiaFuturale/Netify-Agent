@@ -18,8 +18,7 @@
 // License along with this program.  If not, see
 // <http://www.gnu.org/licenses/>.
 
-#ifndef _ND_PACKET_H
-#define _ND_PACKET_H
+#pragma once
 
 #include <cstdint>
 #include <cstring>
@@ -191,5 +190,3 @@ class ndPacketStats : public ndSerializer {
               pkt.capture_filtered);
   }
 };
-
-#endif  // _ND_H

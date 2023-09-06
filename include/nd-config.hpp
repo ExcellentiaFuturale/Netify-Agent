@@ -18,8 +18,7 @@
 // License along with this program.  If not, see
 // <http://www.gnu.org/licenses/>.
 
-#ifndef _ND_CONFIG_H
-#define _ND_CONFIG_H
+#pragma once
 
 #include <map>
 #include <mutex>
@@ -383,5 +382,3 @@ class ndGlobalConfig {
   ndGlobalConfig();
   virtual ~ndGlobalConfig();
 };
-
-#endif  // _ND_CONFIG_H

@@ -18,8 +18,7 @@
 // License along with this program.  If not, see
 // <http://www.gnu.org/licenses/>.
 
-#ifndef _ND_PROTOS_H
-#define _ND_PROTOS_H
+#pragma once
 
 #include <cstdint>
 #include <memory>
@@ -1158,5 +1157,3 @@ typedef shared_ptr<ndFlow> nd_flow_ptr;
 const nd_proto_id_t nd_ndpi_proto_find(
     uint16_t id, nd_flow_ptr const &flow);
 const uint16_t nd_ndpi_proto_find(unsigned id);
-
-#endif  // _ND_PROTOS_H

@@ -18,8 +18,7 @@
 // License along with this program.  If not, see
 // <http://www.gnu.org/licenses/>.
 
-#ifndef _ND_CONNTRACK_H
-#define _ND_CONNTRACK_H
+#pragma once
 
 #include <libmnl/libmnl.h>
 #include <libnetfilter_conntrack/libnetfilter_conntrack.h>
@@ -136,5 +135,3 @@ class ndConntrackThread : public ndThread {
   nd_ct_id_map ct_id_map;
   nd_ct_flow_map ct_flow_map;
 };
-
-#endif  // _ND_CONNTRACK_H

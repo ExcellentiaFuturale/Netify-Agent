@@ -18,8 +18,7 @@
 // License along with this program.  If not, see
 // <http://www.gnu.org/licenses/>.
 
-#ifndef _ND_NDPI_H
-#define _ND_NDPI_H
+#pragma once
 
 #include <string>
 
@@ -35,5 +34,3 @@ struct ndpi_detection_module_struct *nd_ndpi_init(void);
 
 void nd_ndpi_free(
     struct ndpi_detection_module_struct *ndpi);
-
-#endif  // _ND_NDPI_H

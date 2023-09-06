@@ -18,8 +18,7 @@
 // License along with this program.  If not, see
 // <http://www.gnu.org/licenses/>.
 
-#ifndef _ND_CAPTURE_NFQ_H
-#define _ND_CAPTURE_NFQ_H
+#pragma once
 
 #include "nd-capture.hpp"
 
@@ -54,5 +53,3 @@ class ndCaptureNFQueue : public ndCaptureThread {
   size_t dropped;
   vector<ndPacket *> pkt_queue;
 };
-
-#endif  // _ND_CAPTURE_NFQ_H

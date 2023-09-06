@@ -18,8 +18,7 @@
 // License along with this program.  If not, see
 // <http://www.gnu.org/licenses/>.
 
-#ifndef _ND_INSTANCE_H
-#define _ND_INSTANCE_H
+#pragma once
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -400,5 +399,3 @@ class ndInstanceClient {
 
   ndInstance &ndi;
 };
-
-#endif  // _ND_INSTANCE_H

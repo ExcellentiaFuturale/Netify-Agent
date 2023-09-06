@@ -18,8 +18,7 @@
 // License along with this program.  If not, see
 // <http://www.gnu.org/licenses/>.
 
-#ifndef _ND_FLOW_H
-#define _ND_FLOW_H
+#pragma once
 
 #include <atomic>
 #include <string>
@@ -839,5 +838,3 @@ typedef unordered_map<string, nd_flow_ptr> nd_flow_map;
 typedef map<string, nd_flow_map *> nd_flows;
 typedef pair<string, nd_flow_ptr> nd_flow_pair;
 typedef pair<nd_flow_map::iterator, bool> nd_flow_insert;
-
-#endif  // _ND_FLOW_H
