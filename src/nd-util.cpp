@@ -614,6 +614,8 @@ void nd_generate_uuid(string &uuid) {
   uuid = os.str();
 }
 
+const char *nd_get_version(void) { return PACKAGE_VERSION; }
+
 const string &nd_get_version_and_features(void) {
   static mutex lock;
   static string version;

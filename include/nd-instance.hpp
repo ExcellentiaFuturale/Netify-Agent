@@ -20,13 +20,6 @@
 
 #pragma once
 
-#ifdef HAVE_CONFIG_H
-#include "config.h"
-#ifndef PACKAGE_VERSION
-#error "PACKAGE_VERSION not defined"
-#endif
-#endif
-
 #include <atomic>
 #include <csignal>
 
@@ -209,8 +202,7 @@ class ndInstance : public ndThread, public ndSerializer {
   void Encode(T &output) const {
     serialize(output, {"build_version"},
               nd_get_version_and_features());
-    serialize(output, {"agent_version"},
-              strtod(PACKAGE_VERSION, NULL));
+    serialize(output, {"agent_version"}, nd_get_version());
     serialize(
         output, {"json_version"},
         1.9  // XXX: Deprecated, keep for compatibility
