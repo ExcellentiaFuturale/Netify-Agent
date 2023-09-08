@@ -34,12 +34,21 @@ USES=\
 USE_RC_SUBR=@PACKAGE_TARNAME@
 USE_LDCONFIG=yes
 
+OPTIONS_DEFINE=MAKE_JOBS LOCAL_GCRYPT
+OPTIONS_DEFAULT=MAKE_JOBS LOCAL_GCRYPT
+
+LOCAL_GCRYPT_DESC=Use system libgcrypt/libgpg-error libraries
+LOCAL_GCRYPT_CONFIGURE_WITH=local-libcrypt
+
+MAKE_JOBS_DESC=Enable parallel build
+MAKE_JOBS_VARS_OFF=MAKE_JOBS_UNSAFE=yes
+
 SUB_LIST=PACKAGE_TARNAME=@PACKAGE_TARNAME@
 
 GNU_CONFIGURE=yes
 CONFIGURE_ARGS=\
 	MAKE=gmake YACC=bison \
-	--with-pic=inih --with-local-libgcrypt --disable-libtcmalloc
+	--with-pic=inih --disable-libtcmalloc
 
 INSTALL_TARGET=install-strip
 
