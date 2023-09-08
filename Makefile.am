@@ -44,7 +44,7 @@ dist-git:
 		[ "$$path" = "" ] && continue; \
 		(cd $$path && \
 			git archive --prefix=$(PACKAGE)-$(VERSION)/$$path/ --output=/tmp/$(PACKAGE)-submodule.tar HEAD && \
-			$(GTAR) --concatenate --file="$$p/$(PACKAGE)-$(VERSION).tar" /tmp/$(PACKAGE)-submodule.tar && \
+			$(TAR) --concatenate --file="$$p/$(PACKAGE)-$(VERSION).tar" /tmp/$(PACKAGE)-submodule.tar && \
 			rm -f /tmp/$(PACKAGE)-submodule.tar \
 		); \
 	done

@@ -58,7 +58,10 @@ case "${host_os}" in
     AS_IF([test "x$ac_cv_path_gmake" == "xfalse"], [
         AC_MSG_ERROR([gmake not found.])
     ])
-    AC_PATH_PROG([GTAR], [gtar], [false])
+    AC_PATH_PROG([TAR], [gtar], [false])
+    AS_IF([test "x$ac_cv_path_gtar" == "xfalse"], [
+    	AC_PATH_PROG([TAR], [tar], [tar])
+    ])
     ;;
 esac
 
