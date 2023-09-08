@@ -1,13 +1,15 @@
 %%DATADIR%%/functions.sh
-%%DATADIR%%/netifyd.conf-sample
-%%DATADIR%%/watchdog.sh
-@dir /var/run/netifyd
+%%DATADIR%%/netifyd-sample.conf
 @sample %%ETCDIR%%.conf.sample
 @sample etc/netifyd/netify-apps.conf.sample
 @sample etc/netifyd/netify-categories.json.sample
+@dir /var/run/netifyd
+@dir etc/netifyd/domains.d
+@dir etc/netifyd/plugins.d
+etc/netifyd/interfaces.d/10-example-pcap.conf
 lib/libnetifyd.so
-lib/libnetifyd.so.2
-lib/libnetifyd.so.2.0.1
+lib/libnetifyd.so.4
+lib/libnetifyd.so.4.0.0
 man/man5/netifyd.conf.5.gz
 man/man8/netifyd.8.gz
 sbin/netifyd

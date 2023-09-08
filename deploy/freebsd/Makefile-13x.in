@@ -24,7 +24,7 @@ LIB_DEPENDS=\
 USES=\
 	autoreconf \
 	bison \
-	compiler:c++1-lang \
+	compiler:c++11-lang \
 	gmake \
 	libtool \
 	localbase:ldflags \
@@ -39,7 +39,7 @@ SUB_LIST=PACKAGE_TARNAME=@PACKAGE_TARNAME@
 GNU_CONFIGURE=yes
 CONFIGURE_ARGS=\
 	MAKE=gmake YACC=bison \
-	--with-pic=inih --disable-libtcmalloc
+	--with-pic=inih --with-local-libgcrypt --disable-libtcmalloc
 
 INSTALL_TARGET=install-strip
 

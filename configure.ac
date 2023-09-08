@@ -448,7 +448,8 @@ AC_CONFIG_FILES([deploy/buildroot/package/netifyd/netifyd.mk])
 AC_CONFIG_FILES([deploy/debian/Makefile])
 AC_CONFIG_FILES(
     [deploy/freebsd/Makefile-10x deploy/freebsd/Makefile-11x \
-     deploy/freebsd/Makefile-11x-debug deploy/freebsd/Makefile-12x])
+     deploy/freebsd/Makefile-11x-debug deploy/freebsd/Makefile-12x \
+     deploy/freebsd/Makefile-13x])
 AC_CONFIG_FILES([deploy/pfsense/Makefile])
 AC_CONFIG_FILES([deploy/rpm/Makefile])
 AC_CONFIG_FILES([deploy/systemd/Makefile])
