@@ -3,6 +3,8 @@
 
 m4_include([m4/ax_pkg_installdir.m4])
 m4_include([m4/ax_cxx_compile_stdcxx_11.m4])
+m4_include([m4/ax_git_vars.m4])
+m4_include([m4/ax_check_progs.m4])
 
 AC_PREREQ([2.69])
 AC_INIT([Netify Agent], [4.5.26],
@@ -43,34 +45,7 @@ AC_CHECK_TOOL([STRIP], [strip])
 LT_INIT
 PKG_PROG_PKG_CONFIG([0.23])
 AX_PKG_INSTALLDIR
-
-AC_PATH_PROG([BASH], [bash], [false])
-AS_IF([test "x$ac_cv_path_BASH" != "xfalse"], [
-    AC_SUBST([ND_PATH_BASH], [$ac_cv_path_BASH])
-], [
-    AC_MSG_WARN([bash not found.])
-    AC_SUBST([ND_PATH_BASH], [sh])
-])
-
-case "${host_os}" in
-    linux*)
-    AC_PATH_PROG([TAR], [tar], [false])
-    AS_IF([test "x$ac_cv_path_TAR" = "xfalse"], [
-        AC_MSG_ERROR([tar not found.])
-    ])
-    ;;
-    freebsd*)
-    AC_PATH_PROG([GMAKE], [gmake], [false])
-    AS_IF([test "x$ac_cv_path_GMAKE" = "xfalse"], [
-        AC_MSG_ERROR([gmake not found.])
-    ])
-    AC_PATH_PROG([TAR], [gtar], [false])
-    AS_IF([test "x$ac_cv_path_TAR" = "xfalse"], [
-      AC_MSG_WARN([gtar not found.])
-    	AC_PATH_PROG([TAR], [tar], [false])
-    ])
-    ;;
-esac
+AX_CHECK_PROGS
 
 # Defines we will pass to pkg-config:
 ND_DEFINES=""
@@ -413,36 +388,8 @@ AC_CHECK_FUNC([getprotobynumber_r], [
     AC_DEFINE([HAVE_GETPROTOBYNUMBER_R], [1], [Define if getprotobynumber_r is available.])
 ])
 
-# Get git revision
-if test -e ".git"; then :
-    GIT_TAG=`git log -1 --format=%h`
-    GIT_DATE=`git log -1 --format=%cd`
-    GIT_DATE_UNIX=`git log -1 --format=%ct`
+AX_GIT_VARS
 
-    GIT_LAST_COMMIT_HASH=`git log -1 --format=%H`
-    case "${host_os}" in
-        linux*)
-            GIT_LAST_COMMIT_DATE=`date -d "@${GIT_DATE_UNIX}" '+%F'`
-        ;;
-    *)
-            GIT_LAST_COMMIT_DATE=`date -r "${GIT_DATE_UNIX}" '+%F'`
-        ;;
-    esac
-
-    AC_SUBST([GIT_LAST_COMMIT_HASH], [$GIT_LAST_COMMIT_HASH])
-    AC_SUBST([GIT_LAST_COMMIT_DATE], [$GIT_LAST_COMMIT_DATE])
-
-    # On CentOS 6 `git rev-list HEAD --count` does not work
-    GIT_NUM=`git log --pretty=oneline | wc -l | tr -d '[[:space:]]'`
-    GIT_BRANCH=`git rev-parse --abbrev-ref HEAD`
-    GIT_RELEASE="${PACKAGE_VERSION}-${GIT_BRANCH}-${GIT_NUM}-${GIT_TAG}"
-else
-    GIT_RELEASE="${PACKAGE_VERSION}"
-    GIT_DATE=`date`
-fi
-
-AC_DEFINE_UNQUOTED(GIT_RELEASE, "${GIT_RELEASE}", [GIT Release])
-AC_DEFINE_UNQUOTED(GIT_DATE, "${GIT_DATE}", [Last GIT change])
 AC_SUBST([GIT_SOURCE_URL], [https://gitlab.com/netify.ai/public/netify-agent.git])
 
 # Defines substitution for pkg-config
