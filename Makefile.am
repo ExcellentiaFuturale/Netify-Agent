@@ -34,32 +34,6 @@ uninstall-local:
 	rmdir $(DESTDIR)$(persistentstatedir)/domains.d
 	rmdir $(DESTDIR)$(persistentstatedir)/plugins.d
 
-dist-git:
-	rm -f $(PACKAGE)-$(VERSION).tar*
-	git archive --prefix=$(PACKAGE)-$(VERSION)/ --output=$(PACKAGE)-$(VERSION).tar HEAD
-	p=`pwd`; (echo .; git submodule foreach) | while read entering path; do \
-		temp="$${path%\'}"; \
-		temp="$${temp#\'}"; \
-		path=$$temp; \
-		[ "$$path" = "" ] && continue; \
-		(cd $$path && \
-			git archive --prefix=$(PACKAGE)-$(VERSION)/$$path/ --output=/tmp/$(PACKAGE)-submodule.tar HEAD && \
-			$(TAR) --concatenate --file="$$p/$(PACKAGE)-$(VERSION).tar" /tmp/$(PACKAGE)-submodule.tar && \
-			rm -f /tmp/$(PACKAGE)-submodule.tar \
-		); \
-	done
-	gzip $(PACKAGE)-$(VERSION).tar
-	echo -n "TIMESTAMP = " > $(PACKAGE)-$(VERSION).distinfo
-	date '+%s' >> $(PACKAGE)-$(VERSION).distinfo
-	echo -n "SHA256 ($(PACKAGE)-$(VERSION).tar.gz) = " >> $(PACKAGE)-$(VERSION).distinfo
-	sha256sum $(PACKAGE)-$(VERSION).tar.gz | cut -d' ' -f1 >> $(PACKAGE)-$(VERSION).distinfo
-	echo -n "SIZE ($(PACKAGE)-$(VERSION).tar.gz) = " >> $(PACKAGE)-$(VERSION).distinfo
-	stat --format='%s' $(PACKAGE)-$(VERSION).tar.gz >> $(PACKAGE)-$(VERSION).distinfo 2>/dev/null ||\
-		stat -f '%z' $(PACKAGE)-$(VERSION).tar.gz >> $(PACKAGE)-$(VERSION).distinfo
-	cp -v $(PACKAGE)-$(VERSION).distinfo deploy/freebsd/distinfo
-	sha256sum $(PACKAGE)-$(VERSION).tar.gz > $(PACKAGE)-$(VERSION)-sha256.sum
-	sha512sum $(PACKAGE)-$(VERSION).tar.gz > $(PACKAGE)-$(VERSION)-sha512.sum
-
 netifyd-CentOS_8.spec: netifyd.spec
 	grep -v 'gperftools-devel' netifyd.spec > netifyd-CentOS_8.spec
 
@@ -77,3 +51,5 @@ deploy-debug-archive: all
 	cp src/.libs/netifyd /tmp/netifyd-debug/usr/sbin/
 	cp src/.libs/libnetifyd.so.0.0.0 /tmp/netifyd-debug/usr/lib64/
 	cd /tmp/netifyd-debug && tar -cvzf ../netifyd-debug.tar.gz *
+
+include $(abs_top_srcdir)/automake/deploy-git.am
