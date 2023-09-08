@@ -1,5 +1,5 @@
 # Netify Agent Utility Functions
-# Copyright (C) 2016-2022 eGloo Incorporated
+# Copyright (C) 2016-2023 eGloo Incorporated
 #
 # This is free software, licensed under the GNU General Public License v3.
 
@@ -50,42 +50,8 @@ load_defaults()
     echo "$options"
 }
 
-# ClearOS: Dynamically add all configured LAN/WAN interfaces.
-load_clearos()
-{
-    local options=""
-
-    [ -f @sysconfdir@/clearos/network.conf ] && . @sysconfdir@/clearos/network.conf
-
-    for ifn in $LANIF; do
-        [ -z "$ifn" ] && break
-        options="$options -I $ifn"
-    done
-
-    for ifn in $HOTIF; do
-        [ -z "$ifn" ] && break
-        options="$options -I $ifn"
-    done
-
-    for ifn in $EXTIF; do
-        [ -z "$ifn" ] && break
-        [ -f "@sysconfdir@/sysconfig/network-scripts/ifcfg-${ifn}" ] &&
-            . "@sysconfdir@/sysconfig/network-scripts/ifcfg-${ifn}"
-        if [ ! -z "$ETH" ]; then
-            options="$options -E $ETH -N $ifn"
-            unset ETH
-        else
-            options="$options -E $ifn"
-        fi
-    done
-
-    options=$(echo "$options" |\
-        sed -e 's/^[[:space:]]*//g' -e 's/[[:space:]]*$$//g')
-
-    echo "$options"
-}
-
-# NethServer: Dynamically add all configured LAN/WAN interfaces.
+# NethServer
+# - Dynamically add all configured LAN/WAN interfaces.
 load_nethserver()
 {
     local options=""
@@ -126,7 +92,8 @@ load_nethserver()
     echo "$options"
 }
 
-# OpenWrt: Dynamically add all configured LAN/WAN interfaces.
+# OpenWrt:
+# - Dynamically add all configured LAN/WAN interfaces.
 load_openwrt()
 {
     local options="-I br-lan"
@@ -144,47 +111,6 @@ load_openwrt()
     echo "$options"
 }
 
-# EdgeOS: Dynamically add all configured LAN/WAN interfaces.
-load_edgeos()
-{
-    echo "$(/usr/share/netifyd/netify_edgeos/options.py)"
-}
-
-# pfSense: Dynamically add all configured LAN/WAN interfaces.
-load_pfsense()
-{
-    local conf="$1"
-    local xpath_ifaces="$2"
-    local xmllint="/usr/local/bin/xmllint"
-
-    for role in lan wan; do
-        i=1; while true; do
-            xpath="$xpath_ifaces/$role[$i]"
-            $xmllint --xpath "$xpath/enable" $conf >/dev/null 2>&1 || break
-            enabled=$($xmllint --xpath "boolean($xpath/enable)" $conf)
-
-            if [ "$enabled" = "true" ]; then
-                ifn=$($xmllint --xpath "$xpath/if/text()" $conf)
-                case "$role" in
-                    lan)
-                        options="$options -I $ifn"
-                        ;;
-                    wan)
-                        options="$options -E $ifn"
-                        ;;
-                    esac
-            fi
-
-            i=$(expr $i + 1)
-        done
-    done
-
-    options=$(echo "$options" |\
-        sed -e 's/^[[:space:]]*//g' -e 's/[[:space:]]*$$//g')
-
-    echo "$options"
-}
-
 load_modules()
 {
     modprobe nfnetlink >/dev/null 2>&1
@@ -193,20 +119,6 @@ load_modules()
 
 detect_os()
 {
-    if [ -f /etc/version ]; then
-        if grep -E -q '^UniFiSecurityGateway' /etc/version; then
-            echo "edgeos"
-            return
-        fi
-    fi
-
-    if [ -f /etc/os-release ]; then
-        if grep -E -q '^NAME=UbiOS' /etc/os-release; then
-            echo "ubios"
-            return
-        fi
-    fi
-
     if [ -f /etc/issue ]; then
         if grep -E -q '^Ubuntu' /etc/issue; then
             echo "ubuntu"
@@ -221,22 +133,14 @@ detect_os()
         fi
     fi
 
-    if [ -f /etc/clearos-release ]; then
-        echo "clearos"
-    elif [ -f /etc/nethserver-release ]; then
+    if [ -f /etc/nethserver-release ]; then
         echo "nethserver"
     elif [ -f /etc/gentoo-release ]; then
         echo "gentoo"
     elif [ -f /etc/openwrt_release ]; then
         echo "openwrt"
-    elif [ -f /usr/local/sbin/opnsense-version ]; then
-            echo "opnsense"
     elif [ -x /bin/freebsd-version ]; then
-        if [ -f /etc/version ]; then
-            echo "pfsense"
-        else
-            echo "freebsd"
-        fi
+        echo "freebsd"
     elif [ -f /etc/debian_version ]; then
         echo "debian"
     elif [ -f /etc/centos-release ]; then
@@ -258,23 +162,11 @@ auto_detect_options()
 
     if [ "$NETIFYD_AUTODETECT" = "yes" ]; then
         case "$(detect_os)" in
-            clearos)
-                options=$(load_clearos)
-            ;;
             nethserver)
                 options=$(load_nethserver)
             ;;
             openwrt)
                 options=$(load_openwrt)
-            ;;
-            opnsense)
-                options=$(load_pfsense "/conf/config.xml" "/opnsense/interfaces")
-            ;;
-            pfsense)
-                options=$(load_pfsense "/cf/conf/config.xml" "/pfsense/interfaces")
-            ;;
-            edgeos)
-                options=$(load_edgeos)
             ;;
         esac
     fi
@@ -288,20 +180,11 @@ restart_netifyd()
         centos)
             systemctl try-restart netifyd
         ;;
-        clearos)
-            systemctl try-restart netifyd
-        ;;
         nethserver)
             systemctl try-restart netifyd
         ;;
         freebsd)
             @sysconfdir@/rc.d/@PACKAGE_TARNAME@ restart
-        ;;
-        opnsense)
-            @sysconfdir@/rc.d/@PACKAGE_TARNAME@ restart
-        ;;
-        pfsense)
-            @sysconfdir@/rc.d/@PACKAGE_TARNAME@.sh restart
         ;;
         *)
             @sysconfdir@/init.d/@PACKAGE_TARNAME@ restart
