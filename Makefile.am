@@ -44,7 +44,7 @@ dist-git:
 		[ "$$path" = "" ] && continue; \
 		(cd $$path && \
 			git archive --prefix=$(PACKAGE)-$(VERSION)/$$path/ --output=/tmp/$(PACKAGE)-submodule.tar HEAD && \
-			$(AMTAR) --concatenate --file="$$p/$(PACKAGE)-$(VERSION).tar" /tmp/$(PACKAGE)-submodule.tar && \
+			$(GTAR) --concatenate --file="$$p/$(PACKAGE)-$(VERSION).tar" /tmp/$(PACKAGE)-submodule.tar && \
 			rm -f /tmp/$(PACKAGE)-submodule.tar \
 		); \
 	done
@@ -54,7 +54,9 @@ dist-git:
 	echo -n "SHA256 ($(PACKAGE)-$(VERSION).tar.gz) = " >> $(PACKAGE)-$(VERSION).distinfo
 	sha256sum $(PACKAGE)-$(VERSION).tar.gz | cut -d' ' -f1 >> $(PACKAGE)-$(VERSION).distinfo
 	echo -n "SIZE ($(PACKAGE)-$(VERSION).tar.gz) = " >> $(PACKAGE)-$(VERSION).distinfo
-	stat --format='%s' $(PACKAGE)-$(VERSION).tar.gz >> $(PACKAGE)-$(VERSION).distinfo
+	stat --format='%s' $(PACKAGE)-$(VERSION).tar.gz >> $(PACKAGE)-$(VERSION).distinfo 2>/dev/null ||\
+		stat -f '%z' $(PACKAGE)-$(VERSION).tar.gz >> $(PACKAGE)-$(VERSION).distinfo
+	cp -v $(PACKAGE)-$(VERSION).distinfo deploy/freebsd/distinfo
 	sha256sum $(PACKAGE)-$(VERSION).tar.gz > $(PACKAGE)-$(VERSION)-sha256.sum
 	sha512sum $(PACKAGE)-$(VERSION).tar.gz > $(PACKAGE)-$(VERSION)-sha512.sum
 
@@ -65,46 +67,6 @@ deploy-rpm:
 	$(MAKE) dist-gzip
 	cp -v $(PACKAGE)-$(VERSION).tar.gz ~/rpmbuild/SOURCES/
 	rpmbuild -ba $(PACKAGE).spec
-
-deploy-freebsd-common:
-	./autogen.sh \
-		./configure \
-			--disable-conntrack \
-			--disable-inotify
-	$(MAKE) -C deploy
-	rm -rf deploy/freebsd/work
-	$(MAKE) dist-gzip
-	sudo cp -v $(PACKAGE)-$(VERSION).tar.gz /usr/ports/distfiles/
-
-deploy-freebsd-build:
-	make -C deploy/freebsd clean
-	make -C deploy/freebsd makesum
-	make -C deploy/freebsd package DISABLE_VULNERABILITIES=yes
-	-ls -lh deploy/freebsd/work/pkg/*.{txz,pkg}
-
-deploy-freebsd-10x: deploy-freebsd-common
-	cp deploy/freebsd/Makefile-10x deploy/freebsd/Makefile
-	$(MAKE) deploy-freebsd-build
-
-deploy-freebsd-11x: deploy-freebsd-common
-	cp deploy/freebsd/Makefile-11x deploy/freebsd/Makefile
-	$(MAKE) deploy-freebsd-build
-
-deploy-freebsd-11x-debug: deploy-freebsd-common
-	cp deploy/freebsd/Makefile-11x-debug deploy/freebsd/Makefile
-	$(MAKE) deploy-freebsd-build
-
-deploy-freebsd-12x: deploy-freebsd-common
-	cp deploy/freebsd/Makefile-12x deploy/freebsd/Makefile
-	$(MAKE) deploy-freebsd-build
-
-deploy-freebsd: deploy-freebsd-11x
-deploy-freebsd-debug: deploy-freebsd-11x-debug
-
-deploy-pfsense:
-	make -C deploy/pfsense clean
-	make -C deploy/pfsense package DISABLE_VULNERABILITIES=yes
-	-ls -lh deploy/freebsd/work/pkg/*.{txz,pkg}
 
 deploy-debug: all
 	rsync -av --progress --inplace src/.libs/netifyd $(DEBUG_HOST):/usr/sbin/

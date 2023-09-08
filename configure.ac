@@ -58,6 +58,7 @@ case "${host_os}" in
     AS_IF([test "x$ac_cv_path_gmake" == "xfalse"], [
         AC_MSG_ERROR([gmake not found.])
     ])
+    AC_PATH_PROG([GTAR], [gtar], [false])
     ;;
 esac
 
@@ -446,11 +447,7 @@ AC_CONFIG_FILES(
      tests/Makefile deploy/Makefile])
 AC_CONFIG_FILES([deploy/buildroot/package/netifyd/netifyd.mk])
 AC_CONFIG_FILES([deploy/debian/Makefile])
-AC_CONFIG_FILES(
-    [deploy/freebsd/Makefile-10x deploy/freebsd/Makefile-11x \
-     deploy/freebsd/Makefile-11x-debug deploy/freebsd/Makefile-12x \
-     deploy/freebsd/Makefile-13x])
-AC_CONFIG_FILES([deploy/pfsense/Makefile])
+AC_CONFIG_FILES([deploy/freebsd/Makefile])
 AC_CONFIG_FILES([deploy/rpm/Makefile])
 AC_CONFIG_FILES([deploy/systemd/Makefile])
 AC_CONFIG_FILES([doc/netifyd.8 doc/netifyd.conf.5])

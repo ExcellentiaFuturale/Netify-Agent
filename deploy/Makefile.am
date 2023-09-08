@@ -21,7 +21,7 @@ interfaces_DATA = ./interfaces.d/10-example-nfq.conf \
 
 BUILT_SOURCES = $(TEMPLATEFILES)
 CLEANFILES = $(TEMPLATEFILES)
-EXTRA_DIST = $(TEMPLATEFILES_IN) freebsd netifyd.default netify-apps.conf netify-categories.json pfsense
+EXTRA_DIST = $(TEMPLATEFILES_IN) freebsd netifyd.default netify-apps.conf netify-categories.json
 
 %: %.in
 	$(SED) \
