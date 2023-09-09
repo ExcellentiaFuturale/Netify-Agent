@@ -52,4 +52,4 @@ deploy-debug-archive: all
 	cp src/.libs/libnetifyd.so.0.0.0 /tmp/netifyd-debug/usr/lib64/
 	cd /tmp/netifyd-debug && tar -cvzf ../netifyd-debug.tar.gz *
 
-include $(abs_top_srcdir)/automake/deploy-git.am
+include $(abs_top_srcdir)/automake/dist-git.am
