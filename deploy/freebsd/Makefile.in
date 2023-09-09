@@ -35,7 +35,7 @@ USE_RC_SUBR=@PACKAGE_TARNAME@
 USE_LDCONFIG=yes
 
 OPTIONS_DEFINE=MAKE_JOBS LOCAL_GCRYPT DEVEL
-OPTIONS_DEFAULT=MAKE_JOBS LOCAL_GCRYPT
+OPTIONS_DEFAULT=MAKE_JOBS LOCAL_GCRYPT DEVEL
 OPTIONS_SUB=yes
 
 LOCAL_GCRYPT_DESC=Use system libgcrypt/libgpg-error libraries
@@ -57,8 +57,11 @@ INSTALL_TARGET=install-strip
 
 post-install:
 	${MKDIR} ${STAGEDIR}/var/run/netifyd
-	${MV} ${STAGEDIR}/usr/local/etc/netifyd.conf ${STAGEDIR}/usr/local/etc/netifyd.conf.sample
-	${MV} ${STAGEDIR}/usr/local/etc/netifyd/netify-apps.conf ${STAGEDIR}/usr/local/etc/netifyd/netify-apps.conf.sample
-	${MV} ${STAGEDIR}/usr/local/etc/netifyd/netify-categories.json ${STAGEDIR}/usr/local/etc/netifyd/netify-categories.json.sample
+	${MV} ${STAGEDIR}${PREFIX}/etc/netifyd.conf ${STAGEDIR}${PREFIX}/etc/netifyd.conf.sample
+	${MV} ${STAGEDIR}${PREFIX}/etc/netifyd/netify-apps.conf ${STAGEDIR}${PREFIX}/etc/netifyd/netify-apps.conf.sample
+	${MV} ${STAGEDIR}${PREFIX}/etc/netifyd/netify-categories.json ${STAGEDIR}${PREFIX}/etc/netifyd/netify-categories.json.sample
+
+post-install-DEVEL-on:
+	${MV} ${STAGEDIR}${PREFIX}/include/ndpi ${STAGEDIR}${PREFIX}/include/netifyd
 
 .include <bsd.port.mk>
