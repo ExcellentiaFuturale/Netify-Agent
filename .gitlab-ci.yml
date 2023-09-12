@@ -15,10 +15,13 @@ variables:
 
 # Incude templates
 include:
-  - '/.gitlab-ci/build-templates.yml'
-  - '/.gitlab-ci/test-templates.yml'
-  - '/.gitlab-ci/package-templates.yml'
-  - '/.gitlab-ci/variants-templates.yml'
+  - project: 'netify.ai/public/netify-development-support/netify-ci-templates'
+    ref: master
+    file:
+      - '/gitlab/agent/build-templates.yml'
+      - '/gitlab/agent/test-templates.yml'
+      - '/gitlab/common/package-templates.yml'
+      - '/gitlab/agent/variants-templates.yml'
 
 # -------------------------------------------------------------------------
 # Build stage
