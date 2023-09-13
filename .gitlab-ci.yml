@@ -3,10 +3,10 @@
 # -----------------------------------------------------------
 
 stages:
-  - build
-  - test
-  - package
-  - variants
+  - Build
+  - Test
+  - Package
+  - Variants
 
 include:
   - project: "netify.ai/public/netify-development-support/\
