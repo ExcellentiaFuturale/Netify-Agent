@@ -28,7 +28,7 @@ variables:
 
 # Debian OS Targets
 
-debian 10 build:
+Debian/10/x86-64:
   extends: .debian_build
   tags:
     - docker
@@ -45,7 +45,7 @@ debian 10 build:
       expand: true
     OS_EXTRA_PACKAGES: "flex"
 
-debian 11 build:
+Debian/11/x86-64:
   extends: .debian_build
   tags:
     - docker
@@ -59,7 +59,7 @@ debian 11 build:
       expand: true
     OS_EXTRA_PACKAGES: ""
 
-debian 11 i386 build:
+Debian/11/x86-32:
   extends: .debian_build
   tags:
     - docker
@@ -78,7 +78,7 @@ debian 11 i386 build:
 
 # Ubuntu OS Targets
 
-ubuntu 20.04 build:
+Ubuntu/20.04/x86-64:
   extends: .debian_build
   tags:
     - docker
@@ -95,7 +95,7 @@ ubuntu 20.04 build:
       expand: true
     OS_EXTRA_PACKAGES: "byacc"
 
-ubuntu 22.04 build:
+Ubuntu/22.04/x86-64:
   extends: .debian_build
   tags:
     - docker
@@ -114,7 +114,7 @@ ubuntu 22.04 build:
 
 # RPM OS Targets
 
-centos 7 build:
+CentOS/7/x86-64:
   extends: .rpmos_build
   tags:
     - docker
@@ -129,7 +129,7 @@ centos 7 build:
     OS_REPOS: ""
     OS_EXTRA_PACKAGES: ""
 
-rockylinux 8 build:
+Rocky Linux/8/x86-64:
   extends: .rpmos_build
   tags:
     - docker
@@ -144,7 +144,7 @@ rockylinux 8 build:
     OS_REPOS: "--enablerepo=powertools,epel"
     OS_EXTRA_PACKAGES: ""
 
-almalinux 8 build:
+AlmaLinux/8/x86-64:
   extends: .rpmos_build
   tags:
     - docker
@@ -159,7 +159,7 @@ almalinux 8 build:
     OS_REPOS: "--enablerepo=powertools,epel"
     OS_EXTRA_PACKAGES: ""
 
-almalinux 9 build:
+AlmaLinux/9/x86-64:
   extends: .rpmos_build
   tags:
     - docker
@@ -176,7 +176,7 @@ almalinux 9 build:
 
 # OpenWrt OS Targets
 
-openwrt 19.07 x86_64 build:
+OpenWrt/19.07/x86-64:
   extends: .openwrt_build
   tags:
     - docker
@@ -204,7 +204,7 @@ openwrt 19.07 x86_64 build:
 # Package stage
 # -----------------------------------------------------------
 
-package source:
+Archive Source:
   extends: .pkg_source
   tags:
     - docker
@@ -222,7 +222,7 @@ package source:
 
 # CentOS
 
-centos 7 test:
+CentOS/7/Test:
   extends: .rpmos_test
   tags:
     - docker
@@ -237,7 +237,7 @@ centos 7 test:
     OS_UUID: "NE-CE-07-X1"
   needs: ["centos 7 build"]
 
-almalinux 8 test:
+AlmaLinux/8/Test:
   extends: .rpmos_test
   tags:
     - docker
@@ -258,7 +258,7 @@ almalinux 8 test:
 
 # CentOS
 
-clearos 7 variant:
+ClearOS/7/x86-64:
   extends: .rpmos_variants
   tags:
     - docker
@@ -273,7 +273,7 @@ clearos 7 variant:
     OS_ARCH: "x86_64"
   needs: ["centos 7 test"]
 
-nethserver 7 variant:
+NethServer/7/x86-64:
   extends: .rpmos_variants
   tags:
     - docker
@@ -288,7 +288,7 @@ nethserver 7 variant:
     OS_ARCH: "x86_64"
   needs: ["centos 7 test"]
 
-rhel 7 variant:
+RHEL/7/x86-64:
   extends: .rpmos_variants
   tags:
     - docker
@@ -303,7 +303,7 @@ rhel 7 variant:
     OS_ARCH: "x86_64"
   needs: ["centos 7 test"]
 
-rhel 8 variant:
+RHEL/8/x86-64:
   extends: .rpmos_variants
   tags:
     - docker
