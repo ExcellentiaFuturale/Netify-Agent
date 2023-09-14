@@ -18,10 +18,10 @@ include:
       - /gitlab/common/variants-templates.yml
 
 variables:
-  CI_DEBUG_TRACE: false
+  CI_DEBUG_TRACE: 'false'
   GIT_SUBMODULE_STRATEGY: recursive
-  OS_EXTRA_PACKAGES:
-  OS_REPOS:
+  OS_EXTRA_PACKAGES: ''
+  OS_REPOS: ''
 
 # -----------------------------------------------------------
 # Build
