@@ -5,7 +5,6 @@
 stages:
   - Build
   - Test
-  - Package
   - Variants
 
 include:
@@ -15,8 +14,8 @@ include:
     file:
       - /gitlab/agent/build-templates.yml
       - /gitlab/agent/test-templates.yml
-      - /gitlab/common/package-templates.yml
       - /gitlab/agent/variants-templates.yml
+      - /gitlab/common/variants-templates.yml
 
 variables:
   GIT_SUBMODULE_STRATEGY: recursive
