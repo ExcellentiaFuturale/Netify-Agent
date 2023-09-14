@@ -22,10 +22,10 @@ variables:
 #  CI_DEBUG_TRACE: "true"
 
 # -----------------------------------------------------------
-# Build stage
+# Build
 # -----------------------------------------------------------
 
-# Debian OS Targets
+# Debian Targets
 
 Debian/10/x86-64:
   extends: .debian_build
@@ -75,7 +75,7 @@ Debian/11/x86-32:
       expand: true
     OS_EXTRA_PACKAGES: "byacc flex"
 
-# Ubuntu OS Targets
+# Ubuntu Targets
 
 Ubuntu/20.04/x86-64:
   extends: .debian_build
@@ -111,7 +111,7 @@ Ubuntu/22.04/x86-64:
       expand: true
     OS_EXTRA_PACKAGES: "byacc flex"
 
-# RPM OS Targets
+# RedHat Targets
 
 CentOS/7/x86-64:
   extends: .rpmos_build
@@ -173,7 +173,7 @@ AlmaLinux/9/x86-64:
     OS_REPOS: "--enablerepo=crb"
     OS_EXTRA_PACKAGES: ""
 
-# OpenWrt OS Targets
+# OpenWrt Targets
 
 OpenWrt/19.07/x86-64:
   extends: .openwrt_build
@@ -200,10 +200,10 @@ OpenWrt/19.07/x86-64:
                      ${OPENWRT_ARCH1}/config.buildinfo"
 
 # -----------------------------------------------------------
-# Test stage
+# Test
 # -----------------------------------------------------------
 
-# CentOS
+# RedHat Targets
 
 CentOS/7/Test:
   extends: .rpmos_test
@@ -236,10 +236,10 @@ AlmaLinux/8/Test:
   needs: ["AlmaLinux/8/x86-64"]
 
 # -----------------------------------------------------------
-# Variants stage
+# Variants
 # -----------------------------------------------------------
 
-# CentOS
+# RedHat Targets
 
 ClearOS/7/x86-64:
   extends: .rpmos_variants
@@ -300,6 +300,8 @@ RHEL/8/x86-64:
     OS_IMAGE: "almalinux:8"
     OS_ARCH: "x86_64"
   needs: ["AlmaLinux/8/Test"]
+
+# Source Code Archive
 
 Source Archive:
   extends: .pkg_source
