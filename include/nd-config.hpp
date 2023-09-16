@@ -105,6 +105,7 @@ enum nd_global_flags {
   ndGF_AUTO_FLOW_EXPIRY = 0x800000,
   ndGF_SOFT_DISSECTORS = 0x1000000,
   ndGF_LOAD_DOMAINS = 0x2000000,
+  ndGF_RUN_WITHOUT_SOURCES = 0x4000000,
 };
 
 #define ndGC_DEBUG \
@@ -166,6 +167,9 @@ enum nd_global_flags {
    ndGF_SOFT_DISSECTORS)
 #define ndGC_LOAD_DOMAINS \
   (ndGlobalConfig::GetInstance().flags & ndGF_LOAD_DOMAINS)
+#define ndGC_RUN_WITHOUT_SOURCES         \
+  (ndGlobalConfig::GetInstance().flags & \
+   ndGF_RUN_WITHOUT_SOURCES)
 
 #define ndGC ndGlobalConfig::GetInstance()
 

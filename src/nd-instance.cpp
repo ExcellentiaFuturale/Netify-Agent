@@ -277,6 +277,9 @@ uint32_t ndInstance::InitializeConfig(int argc,
 #define _ND_LO_DISABLE_AUTO_FLOW_EXPIRY 22
       {"disable-auto-flow-expiry", 0, 0,
        _ND_LO_DISABLE_AUTO_FLOW_EXPIRY},
+#define _ND_LO_RUN_WITHOUT_SOURCES 23
+      {"run-without-sources", 0, 0,
+       _ND_LO_RUN_WITHOUT_SOURCES},
 
       {NULL, 0, 0, 0}};
 
@@ -447,6 +450,9 @@ uint32_t ndInstance::InitializeConfig(int argc,
         break;
       case _ND_LO_DISABLE_AUTO_FLOW_EXPIRY:
         ndGC_SetFlag(ndGF_AUTO_FLOW_EXPIRY, false);
+        break;
+      case _ND_LO_RUN_WITHOUT_SOURCES:
+        ndGC_SetFlag(ndGF_RUN_WITHOUT_SOURCES, true);
         break;
       case '?':
         fprintf(stderr,
@@ -995,6 +1001,8 @@ void ndInstance::CommandLineHelp(bool version_only) {
         "foreground, don't daemonize (OpenWrt).\n"
         "  --allow-unprivileged\n    Allow executing the "
         "Agent as a non-root user.\n"
+        "  --run-without-sources\n    Continue running "
+        "with no capture sources.\n"
 
         "\nConfiguration options:\n"
         "  -u, --uuid\n    Display configured Agent UUID.\n"
@@ -2050,7 +2058,8 @@ size_t ndInstance::ReapCaptureThreads(
     }
   }
 
-  if (ShouldTerminate() == false && count == 0) {
+  if (ShouldTerminate() == false && count == 0 &&
+      !ndGC_RUN_WITHOUT_SOURCES) {
     nd_printf(
         "%s: Exiting, no remaining capture threads.\n",
         tag.c_str());
