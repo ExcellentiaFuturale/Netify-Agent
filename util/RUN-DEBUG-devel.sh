@@ -4,7 +4,7 @@ set -euo pipefail
 
 : ${NETIFYD_PREFIX:=/tmp/netify-agent}
 : ${NETIFYD_OPTIONS:=-d --run-without-sources}
-: ${NETIFYD_CONF:=netifyd.conf}
+: ${NETIFYD_CONF:=$(pwd)/netifyd.conf}
 
 if [ -z "${NETIFYD_CONF}" -a -f netifyd.conf ]; then
   NETIFYD_CONF="$(pwd)/netifyd.conf"
