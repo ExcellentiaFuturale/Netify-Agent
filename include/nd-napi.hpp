@@ -109,6 +109,10 @@ class ndNetifyApiManager {
   bool Update(void);
   void Terminate(void);
 
+  inline const json &GetStatus(void) const {
+    return jstatus;
+  }
+
  protected:
   struct RequestHash {
     template <typename T>
@@ -145,4 +149,6 @@ class ndNetifyApiManager {
       ndNetifyApiBootstrap *bootstrap);
   bool ProcessDownloadRequest(ndNetifyApiDownload *download,
                               Request type);
+
+  json jstatus;
 };

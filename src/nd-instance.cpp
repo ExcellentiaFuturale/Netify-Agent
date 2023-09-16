@@ -39,6 +39,7 @@
 #include "nd-config.hpp"
 #include "nd-detection.hpp"
 #include "nd-instance.hpp"
+#include "nd-util.hpp"
 #ifdef _ND_USE_LIBPCAP
 #include "nd-capture-pcap.hpp"
 #endif
@@ -1155,6 +1156,11 @@ bool ndInstance::SaveAgentStatus(
     plugins.Encode(jstatus);
     status.Encode(jstatus);
 
+    if (ndGC_USE_NAPI) {
+      json jnetify_api;
+      jstatus["netify_api"] = api_manager.GetStatus();
+    }
+
     for (auto &i : stats) {
       json jstats;
       i.second.second.Encode(jstats);
@@ -1490,13 +1496,26 @@ bool ndInstance::DisplayAgentStatus(void) {
               jstatus["dhc_size"].get<unsigned>());
     }
 
+    fprintf(stderr, "%s%s%s API access: %s%s%s\n",
+            (ndGC_USE_NAPI) ? ND_C_GREEN : ND_C_YELLOW,
+            (ndGC_USE_NAPI) ? ND_I_INFO : ND_I_WARN,
+            ND_C_RESET,
+            (ndGC_USE_NAPI) ? ND_C_GREEN : ND_C_YELLOW,
+            (ndGC_USE_NAPI) ? "enabled" : "disabled",
+            ND_C_RESET);
+    if (!ndGC_USE_NAPI) {
+      fprintf(stderr,
+              "  %s Netify API access can be enabled from "
+              "the configuration file:\n    %s\n",
+              ND_I_NOTE, conf_filename.c_str());
+    }
+
     string uuid;
     ndGC.LoadUUID(ndGlobalConfig::UUID_AGENT, uuid);
 
     if (uuid.size() != ND_AGENT_UUID_LEN ||
         uuid == ND_AGENT_UUID_NULL) {
-      fprintf(stderr,
-              "%s%s%s sink agent UUID is not set.\n",
+      fprintf(stderr, "%s%s%s agent UUID is not set.\n",
               ND_C_RED, ND_I_FAIL, ND_C_RESET);
       fprintf(stderr,
               "  %s To generate a new one, run the "
@@ -1505,15 +1524,14 @@ bool ndInstance::DisplayAgentStatus(void) {
       fprintf(stderr, "  %s # netifyd --provision\n",
               ND_I_NOTE);
     } else {
-      fprintf(stderr, "%s%s%s sink agent UUID: %s\n",
-              ND_C_GREEN, ND_I_OK, ND_C_RESET,
-              uuid.c_str());
+      fprintf(stderr, "%s%s%s agent UUID: %s\n", ND_C_GREEN,
+              ND_I_OK, ND_C_RESET, uuid.c_str());
     }
 
     ndGC.LoadUUID(ndGlobalConfig::UUID_SERIAL, uuid);
 
     if (!uuid.empty() && uuid != ND_AGENT_SERIAL_NULL) {
-      fprintf(stderr, "%s%s%s sink serial UUID: %s\n",
+      fprintf(stderr, "%s%s%s agent serial UUID: %s\n",
               ND_C_GREEN, ND_I_INFO, ND_C_RESET,
               uuid.c_str());
     }
@@ -1521,16 +1539,16 @@ bool ndInstance::DisplayAgentStatus(void) {
     ndGC.LoadUUID(ndGlobalConfig::UUID_SITE, uuid);
 
     if (uuid.empty() || uuid == ND_SITE_UUID_NULL) {
-      fprintf(stderr, "%s%s%s sink site UUID is not set.\n",
+      fprintf(stderr,
+              "%s%s%s agent site UUID is not set.\n",
               ND_C_YELLOW, ND_I_WARN, ND_C_RESET);
       fprintf(
           stderr,
           "  %s A new site UUID will be automatically set "
-          "after this agent has been provisioned by a sink "
-          "server.\n",
+          "after this agent has been provisioned.\n",
           ND_I_NOTE);
     } else {
-      fprintf(stderr, "%s%s%s sink site UUID: %s\n",
+      fprintf(stderr, "%s%s%s agent site UUID: %s\n",
               ND_C_GREEN, ND_I_OK, ND_C_RESET,
               uuid.c_str());
     }
