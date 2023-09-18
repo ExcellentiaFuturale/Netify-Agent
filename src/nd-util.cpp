@@ -28,6 +28,7 @@
 #include <glob.h>
 #include <grp.h>
 #include <libgen.h>
+#include <math.h>
 #include <net/if.h>
 #include <netdb.h>
 #include <netinet/in.h>
@@ -1549,4 +1550,31 @@ bool nd_copy_file(const string &src, const string &dst,
   }
 
   return true;
+}
+
+void nd_time_ago(time_t seconds, string &ago) {
+  string unit = "second";
+  bool plural = false;
+  double days = 0, hours = 0, minutes = 0;
+  double value = seconds;
+
+  if (seconds >= 86400) {
+    unit = "day";
+    value = days = round(seconds / 86400);
+  } else if (seconds >= 3600) {
+    unit = "hour";
+    value = hours = round(seconds / 3600);
+  } else if (seconds >= 60) {
+    unit = "minute";
+    value = minutes = round(seconds / 60);
+  }
+
+  if ((days && days > 1) || (hours && hours > 1) ||
+      (minutes && minutes > 1))
+    plural = true;
+  else if (!days && !hours && !minutes && seconds != 1)
+    plural = true;
+
+  ago = to_string((time_t)value) + " " + unit +
+        ((plural) ? "s" : "");
 }

@@ -1191,6 +1191,71 @@ bool ndInstance::SaveAgentStatus(
   return false;
 }
 
+static void DisplayApiStatus(json &jstatus,
+                             const string &key,
+                             const string &label) {
+  int code = -10;
+  time_t last_update = 0;
+  string updated_ago = "last update unknown";
+  string message = "No update data";
+  const char *icon = ND_I_INFO;
+  const char *color = ND_C_RESET;
+
+  auto jnetify_api = jstatus.find("netify_api");
+  if (jnetify_api != jstatus.end() &&
+      jnetify_api->is_object()) {
+    auto jbootstrap = jnetify_api->find(key);
+
+    if (jbootstrap != jnetify_api->end() &&
+        jbootstrap->is_object()) {
+      auto jcode = jbootstrap->find("code");
+
+      if (jcode != jbootstrap->end() &&
+          jcode->is_number()) {
+        code = jcode->get<int>();
+      }
+
+      auto jmessage = jbootstrap->find("message");
+
+      if (jmessage != jbootstrap->end() &&
+          jmessage->is_string()) {
+        message = jmessage->get<string>();
+      }
+
+      auto jlast_update = jbootstrap->find("last_update");
+      if (jlast_update != jbootstrap->end() &&
+          jlast_update->is_number()) {
+        last_update = jlast_update->get<time_t>();
+      }
+    }
+  }
+
+  switch (code) {
+    case -1:
+      icon = ND_I_FAIL;
+      color = ND_C_RED;
+      break;
+    case -10:
+      icon = ND_I_WARN;
+      color = ND_C_YELLOW;
+      break;
+    default:
+      icon = ND_I_OK;
+      color = ND_C_GREEN;
+      break;
+  }
+
+  if (last_update != 0) {
+    nd_time_ago(time(nullptr) - last_update, updated_ago);
+    updated_ago.append(" ago");
+  }
+
+  fprintf(stderr, "%s%s%s API %s (%s): [%d] %s%s%s\n",
+          color, icon, ND_C_RESET, label.c_str(),
+          updated_ago.c_str(), code, color, message.c_str(),
+          ND_C_RESET);
+}
+
 bool ndInstance::DisplayAgentStatus(void) {
   const char *icon = ND_I_INFO;
   const char *color = ND_C_RESET;
@@ -1496,18 +1561,26 @@ bool ndInstance::DisplayAgentStatus(void) {
               jstatus["dhc_size"].get<unsigned>());
     }
 
-    fprintf(stderr, "%s%s%s API access: %s%s%s\n",
+    fprintf(stderr, "%s%s%s API updates: %s%s%s\n",
             (ndGC_USE_NAPI) ? ND_C_GREEN : ND_C_YELLOW,
             (ndGC_USE_NAPI) ? ND_I_INFO : ND_I_WARN,
             ND_C_RESET,
             (ndGC_USE_NAPI) ? ND_C_GREEN : ND_C_YELLOW,
             (ndGC_USE_NAPI) ? "enabled" : "disabled",
             ND_C_RESET);
+
     if (!ndGC_USE_NAPI) {
       fprintf(stderr,
-              "  %s Netify API access can be enabled from "
+              "  %s Netify API updates can be enabled from "
               "the configuration file:\n    %s\n",
               ND_I_NOTE, conf_filename.c_str());
+    } else {
+      DisplayApiStatus(jstatus, "bootstrap",
+                       "provision status");
+      DisplayApiStatus(jstatus, "applications",
+                       "applications update");
+      DisplayApiStatus(jstatus, "categories",
+                       "categories update");
     }
 
     string uuid;
@@ -1531,7 +1604,7 @@ bool ndInstance::DisplayAgentStatus(void) {
     ndGC.LoadUUID(ndGlobalConfig::UUID_SERIAL, uuid);
 
     if (!uuid.empty() && uuid != ND_AGENT_SERIAL_NULL) {
-      fprintf(stderr, "%s%s%s agent serial UUID: %s\n",
+      fprintf(stderr, "%s%s%s serial UUID: %s\n",
               ND_C_GREEN, ND_I_INFO, ND_C_RESET,
               uuid.c_str());
     }
@@ -1539,8 +1612,7 @@ bool ndInstance::DisplayAgentStatus(void) {
     ndGC.LoadUUID(ndGlobalConfig::UUID_SITE, uuid);
 
     if (uuid.empty() || uuid == ND_SITE_UUID_NULL) {
-      fprintf(stderr,
-              "%s%s%s agent site UUID is not set.\n",
+      fprintf(stderr, "%s%s%s site UUID is not set.\n",
               ND_C_YELLOW, ND_I_WARN, ND_C_RESET);
       fprintf(
           stderr,

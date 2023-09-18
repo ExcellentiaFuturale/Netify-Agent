@@ -269,3 +269,5 @@ void nd_tmpfile(const string &prefix, string &filename);
 bool nd_copy_file(const string &src, const string &dst,
                   mode_t mode = S_IRUSR | S_IWUSR |
                                 S_IRGRP);
+
+void nd_time_ago(time_t seconds, string &ago);

@@ -581,6 +581,10 @@ void ndNetifyApiManager::Terminate(void) {
 
 bool ndNetifyApiManager::ProcessBootstrapRequest(
     ndNetifyApiBootstrap *bootstrap) {
+  jstatus["bootstrap"]["code"] = -1;
+  jstatus["bootstrap"]["message"] = "Unknown result";
+  jstatus["bootstrap"]["last_update"] = time(nullptr);
+
   if (bootstrap->http_rc == 0) {
     jstatus["bootstrap"]["code"] = -1;
     jstatus["bootstrap"]["message"] = "Request failure";
@@ -728,14 +732,50 @@ bool ndNetifyApiManager::ProcessBootstrapRequest(
 
 bool ndNetifyApiManager::ProcessDownloadRequest(
     ndNetifyApiDownload *download, Request type) {
-  if (download->http_rc == 304) {
-    return false;
+  string status_type;
+
+  switch (type) {
+    case REQUEST_DOWNLOAD_CONFIG:
+      status_type = "applications";
+      break;
+    case REQUEST_DOWNLOAD_CATEGORIES:
+      status_type = "categories";
+      break;
+    default:
+      nd_dprintf("netify-api: invalid download type: %d",
+                 type);
+      return false;
   }
+
+  jstatus[status_type]["code"] = download->http_rc;
+  jstatus[status_type]["last_update"] = time(nullptr);
+
+  switch (download->http_rc) {
+    case 200:
+      jstatus[status_type]["message"] = "Updated";
+      break;
+    case 304:
+      jstatus[status_type]["message"] =
+          "Up-to-date (not modified)";
+      return false;
+    case 401:
+      jstatus[status_type]["message"] =
+          "Authorization failure";
+      break;
+    case 403:
+      jstatus[status_type]["message"] = "Forbidden request";
+      break;
+    default:
+      jstatus[status_type]["message"] = "Request failure";
+      break;
+  }
+
   if (download->http_rc != 200) {
     nd_printf(
         "netify-api: Download request failed: HTTP %ld: "
         "type: %d\n",
         download->http_rc, type);
+
     if (download->http_rc == 401 ||
         download->http_rc == 403) {
       nd_dprintf(
@@ -744,6 +784,7 @@ bool ndNetifyApiManager::ProcessDownloadRequest(
       token.clear();
       ttl_last_update = 0;
     }
+
     return false;
   }
 
@@ -756,5 +797,6 @@ bool ndNetifyApiManager::ProcessDownloadRequest(
         download->content_filename, ndGC.path_cat_config,
         S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
   }
+
   return false;
 }
