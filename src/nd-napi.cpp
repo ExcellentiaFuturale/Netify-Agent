@@ -709,12 +709,17 @@ bool ndNetifyApiManager::ProcessBootstrapRequest(
       return false;
     }
 
-    token = jtoken->get<string>();
+    string new_token = jtoken->get<string>();
+
+    if (token.empty() || new_token != token) {
+      token = new_token;
+      nd_dprintf("netify-api: new API token set.\n");
+    }
+
     urls[REQUEST_DOWNLOAD_CONFIG] = japps->get<string>();
     urls[REQUEST_DOWNLOAD_CATEGORIES] =
         jcats->get<string>();
 
-    nd_dprintf("netify-api: new API token set.\n");
   } catch (exception &e) {
     jstatus["bootstrap"]["code"] = -1;
     jstatus["bootstrap"]["message"] =
