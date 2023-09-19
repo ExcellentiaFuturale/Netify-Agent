@@ -64,6 +64,7 @@ class ndNetifyApiThread : public ndThread {
                const Headers &headers);
 
   CURL *ch;
+  CURLcode curl_rc;
   long http_rc;
   Headers headers_rx;
   struct curl_slist *headers_tx;
