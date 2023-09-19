@@ -359,7 +359,7 @@ void *ndNetifyApiBootstrap::Entry(void) {
     Perform(ndNetifyApiThread::METHOD_POST, url, headers);
   } catch (CURLcode &rc) {
     nd_dprintf("%s: bootstrap request error: %s\n",
-      tag.c_str(), curl_easy_strerror(rc));
+               tag.c_str(), curl_easy_strerror(rc));
   }
 
   return nullptr;
@@ -408,42 +408,43 @@ void *ndNetifyApiDownload::Entry(void) {
   nd_tmpfile("/tmp/nd-napi", content_filename);
 
   try {
-	  Perform(ndNetifyApiThread::METHOD_HEAD, url, headers);
+    Perform(ndNetifyApiThread::METHOD_HEAD, url, headers);
 
-	  if (digest != nullptr && http_rc == 200) {
-	    auto hdr_sha1 = headers_rx.find("x-sha1-hash");
-	    if (hdr_sha1 == headers_rx.end()) {
-	      nd_dprintf(
-		  "%s: no SHA1 hash found in headers, "
-		  "can't compare.\n",
-		  tag.c_str());
+    if (digest != nullptr && http_rc == 200) {
+      auto hdr_sha1 = headers_rx.find("x-sha1-hash");
+      if (hdr_sha1 == headers_rx.end()) {
+        nd_dprintf(
+            "%s: no SHA1 hash found in headers, "
+            "can't compare.\n",
+            tag.c_str());
 
-	      Perform(ndNetifyApiThread::METHOD_GET, url, headers);
-	    } else {
-	      string old_hash;
-	      nd_sha1_to_string(digest, old_hash);
+        Perform(ndNetifyApiThread::METHOD_GET, url,
+                headers);
+      } else {
+        string old_hash;
+        nd_sha1_to_string(digest, old_hash);
 
-	      if (old_hash == hdr_sha1->second) {
-		nd_dprintf("%s: file has not changed.\n",
-			   tag.c_str());
-		http_rc = 304;
-		content =
-		    "{\"status_code\":304, "
-		    "\"status_message\":\"Not "
-		    "modified\"}";
-	      } else {
-		nd_dprintf(
-		    "%s: file has changed, downloadig "
-		    "update...\n",
-		    tag.c_str());
-		Perform(ndNetifyApiThread::METHOD_GET, url,
-			headers);
-	      }
-	    }
-	  }
+        if (old_hash == hdr_sha1->second) {
+          nd_dprintf("%s: file has not changed.\n",
+                     tag.c_str());
+          http_rc = 304;
+          content =
+              "{\"status_code\":304, "
+              "\"status_message\":\"Not "
+              "modified\"}";
+        } else {
+          nd_dprintf(
+              "%s: file has changed, downloadig "
+              "update...\n",
+              tag.c_str());
+          Perform(ndNetifyApiThread::METHOD_GET, url,
+                  headers);
+        }
+      }
+    }
   } catch (CURLcode &rc) {
     nd_dprintf("%s: download request error: %s\n",
-      tag.c_str(), curl_easy_strerror(rc));
+               tag.c_str(), curl_easy_strerror(rc));
   }
 
   return nullptr;
@@ -596,10 +597,10 @@ bool ndNetifyApiManager::ProcessBootstrapRequest(
   jstatus["bootstrap"]["last_update"] = time(nullptr);
 
   if (bootstrap->curl_rc != CURLE_OK) {
-    jstatus["bootstrap"]["message"] = curl_easy_strerror(bootstrap->curl_rc);
+    jstatus["bootstrap"]["message"] =
+        curl_easy_strerror(bootstrap->curl_rc);
     return false;
-  }
-  else {
+  } else {
     jstatus["bootstrap"]["message"] = "Unknown result";
   }
 
@@ -774,7 +775,8 @@ bool ndNetifyApiManager::ProcessDownloadRequest(
   jstatus[status_type]["last_update"] = time(nullptr);
 
   if (download->curl_rc != CURLE_OK) {
-    jstatus[status_type]["message"] = curl_easy_strerror(download->curl_rc);
+    jstatus[status_type]["message"] =
+        curl_easy_strerror(download->curl_rc);
     return false;
   }
 
