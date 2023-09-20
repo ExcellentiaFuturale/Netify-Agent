@@ -28,63 +28,67 @@ using namespace std;
 
 #define ND_THREAD_MAX_PROCNAMELEN 16
 
-class ndThreadException : public runtime_error {
- public:
-  explicit ndThreadException(const string &what_arg)
-      : runtime_error(what_arg) {}
+class ndThreadException : public runtime_error
+{
+public:
+    explicit ndThreadException(const string &what_arg)
+      : runtime_error(what_arg) { }
 };
 
-class ndThreadSystemException : public ndSystemException {
- public:
-  explicit ndThreadSystemException(const string &where_arg,
-                                   const string &what_arg,
-                                   int why_arg) throw()
-      : ndSystemException(where_arg, what_arg, why_arg) {}
+class ndThreadSystemException : public ndSystemException
+{
+public:
+    explicit ndThreadSystemException(const string &where_arg,
+      const string &what_arg,
+      int why_arg) throw()
+      : ndSystemException(where_arg, what_arg, why_arg) { }
 };
 
-class ndThread {
- public:
-  ndThread(const string &tag, long cpu = -1,
-           bool ipc = false);
-  virtual ~ndThread();
+class ndThread
+{
+public:
+    ndThread(const string &tag, long cpu = -1, bool ipc = false);
+    virtual ~ndThread();
 
-  const string &GetTag(void) { return tag; }
-  pthread_t GetId(void) { return id; }
+    const string &GetTag(void) { return tag; }
+    pthread_t GetId(void) { return id; }
 
-  void SetProcName(void);
+    void SetProcName(void);
 
-  virtual void Create(void);
-  virtual void *Entry(void) = 0;
+    virtual void Create(void);
+    virtual void *Entry(void) = 0;
 
-  virtual inline void Terminate(void) { terminate = true; }
-  inline bool ShouldTerminate(void) {
-    return terminate.load();
-  }
+    virtual inline void Terminate(void) {
+        terminate = true;
+    }
+    inline bool ShouldTerminate(void) {
+        return terminate.load();
+    }
 
-  inline void SetTerminated(void) { terminated = true; }
-  inline bool HasTerminated(void) {
-    return terminated.load();
-  }
+    inline void SetTerminated(void) { terminated = true; }
+    inline bool HasTerminated(void) {
+        return terminated.load();
+    }
 
-  void Lock(void);
-  void Unlock(void);
+    void Lock(void);
+    void Unlock(void);
 
-  void SendIPC(uint32_t id);
-  uint32_t RecvIPC(void);
+    void SendIPC(uint32_t id);
+    uint32_t RecvIPC(void);
 
- protected:
-  string tag;
-  pthread_t id;
-  long cpu;
-  pthread_attr_t attr;
-  pthread_mutex_t lock;
+protected:
+    string tag;
+    pthread_t id;
+    long cpu;
+    pthread_attr_t attr;
+    pthread_mutex_t lock;
 
-  enum { IPC_PE_READ, IPC_PE_WRITE, IPC_PE_MAX };
-  int fd_ipc[IPC_PE_MAX];
+    enum { IPC_PE_READ, IPC_PE_WRITE, IPC_PE_MAX };
+    int fd_ipc[IPC_PE_MAX];
 
-  int Join(void);
+    int Join(void);
 
- private:
-  atomic<bool> terminate;
-  atomic<bool> terminated;
+private:
+    atomic<bool> terminate;
+    atomic<bool> terminated;
 };

@@ -33,109 +33,111 @@
 #include "nd-netlink.hpp"
 
 ndNetlink::ndNetlink(void)
-    : nd(-1), seq(0), sa{0}, buffer{0} {
-  int rc;
+  : nd(-1), seq(0), sa{ 0 }, buffer{ 0 } {
+    int rc;
 
-  sa.nl_family = AF_NETLINK;
-  sa.nl_pid = getpid();
-  sa.nl_groups = RTMGRP_IPV4_ROUTE | RTMGRP_IPV6_ROUTE |
-                 RTMGRP_IPV4_IFADDR | RTMGRP_IPV6_IFADDR;
+    sa.nl_family = AF_NETLINK;
+    sa.nl_pid    = getpid();
+    sa.nl_groups = RTMGRP_IPV4_ROUTE | RTMGRP_IPV6_ROUTE |
+      RTMGRP_IPV4_IFADDR | RTMGRP_IPV6_IFADDR;
 
-  nd = socket(AF_NETLINK, SOCK_RAW, NETLINK_ROUTE);
-  if (nd < 0) {
-    rc = errno;
-    nd_printf("Error creating netlink socket: %s\n",
-              strerror(rc));
-    throw ndNetlinkException(strerror(rc));
-  }
+    nd = socket(AF_NETLINK, SOCK_RAW, NETLINK_ROUTE);
+    if (nd < 0) {
+        rc = errno;
+        nd_printf("Error creating netlink socket: %s\n",
+          strerror(rc));
+        throw ndNetlinkException(strerror(rc));
+    }
 
-  if (::bind(nd, (struct sockaddr *)&sa,
-             sizeof(struct sockaddr_nl)) < 0) {
-    rc = errno;
-    nd_printf("Error binding netlink socket: %s\n",
-              strerror(rc));
-    throw ndNetlinkException(strerror(rc));
-  }
+    if (::bind(nd, (struct sockaddr *)&sa,
+          sizeof(struct sockaddr_nl)) < 0)
+    {
+        rc = errno;
+        nd_printf("Error binding netlink socket: %s\n",
+          strerror(rc));
+        throw ndNetlinkException(strerror(rc));
+    }
 
-  if (fcntl(nd, F_SETOWN, getpid()) < 0) {
-    rc = errno;
-    nd_printf("Error setting netlink socket owner: %s\n",
-              strerror(rc));
-    throw ndNetlinkException(strerror(errno));
-  }
+    if (fcntl(nd, F_SETOWN, getpid()) < 0) {
+        rc = errno;
+        nd_printf(
+          "Error setting netlink socket owner: %s\n", strerror(rc));
+        throw ndNetlinkException(strerror(errno));
+    }
 
-  if (fcntl(nd, F_SETSIG, SIGIO) < 0) {
-    rc = errno;
-    nd_printf("Error setting netlink I/O signal: %s\n",
-              strerror(rc));
-    throw ndNetlinkException(strerror(errno));
-  }
+    if (fcntl(nd, F_SETSIG, SIGIO) < 0) {
+        rc = errno;
+        nd_printf("Error setting netlink I/O signal: %s\n",
+          strerror(rc));
+        throw ndNetlinkException(strerror(errno));
+    }
 
-  int flags = fcntl(nd, F_GETFL);
-  if (fcntl(nd, F_SETFL, flags | O_ASYNC | O_NONBLOCK) <
-      0) {
-    rc = errno;
-    nd_printf("Error setting netlink socket flags: %s\n",
-              strerror(rc));
-    throw ndNetlinkException(strerror(rc));
-  }
+    int flags = fcntl(nd, F_GETFL);
+    if (fcntl(nd, F_SETFL, flags | O_ASYNC | O_NONBLOCK) < 0)
+    {
+        rc = errno;
+        nd_printf(
+          "Error setting netlink socket flags: %s\n", strerror(rc));
+        throw ndNetlinkException(strerror(rc));
+    }
 }
 
 ndNetlink::~ndNetlink() {
-  if (nd >= 0) close(nd);
+    if (nd >= 0) close(nd);
 }
 
 void ndNetlink::Refresh(void) {
-  int rc;
-  struct nlmsghdr *nlh;
+    int rc;
+    struct nlmsghdr *nlh;
 
-  nlh = (struct nlmsghdr *)buffer;
+    nlh = (struct nlmsghdr *)buffer;
 
-  nlh->nlmsg_len = NLMSG_LENGTH(sizeof(struct rtmsg));
-  nlh->nlmsg_type = RTM_GETROUTE;
-  nlh->nlmsg_flags = NLM_F_REQUEST | NLM_F_DUMP;
-  nlh->nlmsg_pid = 0;
-  nlh->nlmsg_seq = seq++;
+    nlh->nlmsg_len   = NLMSG_LENGTH(sizeof(struct rtmsg));
+    nlh->nlmsg_type  = RTM_GETROUTE;
+    nlh->nlmsg_flags = NLM_F_REQUEST | NLM_F_DUMP;
+    nlh->nlmsg_pid   = 0;
+    nlh->nlmsg_seq   = seq++;
 
-  if (send(nd, nlh, nlh->nlmsg_len, 0) < 0) {
-    rc = errno;
-    nd_printf("Error refreshing interface routes: %s\n",
-              strerror(rc));
-    throw ndNetlinkException(strerror(rc));
-  }
+    if (send(nd, nlh, nlh->nlmsg_len, 0) < 0) {
+        rc = errno;
+        nd_printf("Error refreshing interface routes: %s\n",
+          strerror(rc));
+        throw ndNetlinkException(strerror(rc));
+    }
 
-  ProcessEvent();
+    ProcessEvent();
 
-  nlh = (struct nlmsghdr *)buffer;
+    nlh = (struct nlmsghdr *)buffer;
 
-  nlh->nlmsg_len = NLMSG_LENGTH(sizeof(struct ifaddrmsg));
-  nlh->nlmsg_type = RTM_GETADDR;
-  nlh->nlmsg_flags = NLM_F_REQUEST | NLM_F_DUMP;
-  nlh->nlmsg_pid = 0;
-  nlh->nlmsg_seq = seq++;
+    nlh->nlmsg_len = NLMSG_LENGTH(sizeof(struct ifaddrmsg));
+    nlh->nlmsg_type  = RTM_GETADDR;
+    nlh->nlmsg_flags = NLM_F_REQUEST | NLM_F_DUMP;
+    nlh->nlmsg_pid   = 0;
+    nlh->nlmsg_seq   = seq++;
 
-  if (send(nd, nlh, nlh->nlmsg_len, 0) < 0) {
-    rc = errno;
-    nd_printf("Error refreshing interface addresses: %s\n",
-              strerror(rc));
-    throw ndNetlinkException(strerror(rc));
-  }
+    if (send(nd, nlh, nlh->nlmsg_len, 0) < 0) {
+        rc = errno;
+        nd_printf(
+          "Error refreshing interface addresses: %s\n",
+          strerror(rc));
+        throw ndNetlinkException(strerror(rc));
+    }
 
-  ProcessEvent();
+    ProcessEvent();
 }
 
 bool ndNetlink::ProcessEvent(void) {
-  ssize_t bytes;
-  struct nlmsghdr *nlh;
-  struct nlmsgerr *nlerror;
-  unsigned added_net = 0, removed_net = 0, added_addr = 0,
-           removed_addr = 0;
+    ssize_t bytes;
+    struct nlmsghdr *nlh;
+    struct nlmsgerr *nlerror;
+    unsigned added_net = 0, removed_net = 0, added_addr = 0,
+             removed_addr = 0;
 
-  while ((bytes = recv(nd, buffer, ND_NETLINK_BUFSIZ, 0)) >
-         0) {
-    for (nlh = (struct nlmsghdr *)buffer;
-         NLMSG_OK(nlh, bytes);
-         nlh = NLMSG_NEXT(nlh, bytes)) {
+    while ((bytes = recv(nd, buffer, ND_NETLINK_BUFSIZ, 0)) > 0)
+    {
+        for (nlh = (struct nlmsghdr *)buffer; NLMSG_OK(nlh, bytes);
+             nlh = NLMSG_NEXT(nlh, bytes))
+        {
 #if 0
             nd_dprintf(
                 "NLMSG: %hu, len: %u (%u, %u), flags: 0x%x, seq: %u, pid: %u\n",
@@ -143,144 +145,142 @@ bool ndNetlink::ProcessEvent(void) {
                 NLMSG_HDRLEN, NLMSG_LENGTH(nlh->nlmsg_len),
                 nlh->nlmsg_flags, nlh->nlmsg_seq, nlh->nlmsg_pid);
 #endif
-      switch (nlh->nlmsg_type) {
-        case NLMSG_DONE:
-          break;
-        case RTM_NEWROUTE:
-          if (AddRemoveNetwork(nlh)) added_net++;
-          break;
-        case RTM_DELROUTE:
-          if (AddRemoveNetwork(nlh, false)) removed_net++;
-          break;
-        case RTM_NEWADDR:
-          if (AddRemoveAddress(nlh)) added_addr++;
-          break;
-        case RTM_DELADDR:
-          if (AddRemoveAddress(nlh, false)) removed_addr++;
-          break;
-        case NLMSG_ERROR:
-          nlerror = static_cast<struct nlmsgerr *>(
-              NLMSG_DATA(nlh));
-          if (nlerror->error != 0) {
-            nd_printf("Netlink error: %d\n",
+            switch (nlh->nlmsg_type) {
+            case NLMSG_DONE: break;
+            case RTM_NEWROUTE:
+                if (AddRemoveNetwork(nlh)) added_net++;
+                break;
+            case RTM_DELROUTE:
+                if (AddRemoveNetwork(nlh, false))
+                    removed_net++;
+                break;
+            case RTM_NEWADDR:
+                if (AddRemoveAddress(nlh)) added_addr++;
+                break;
+            case RTM_DELADDR:
+                if (AddRemoveAddress(nlh, false))
+                    removed_addr++;
+                break;
+            case NLMSG_ERROR:
+                nlerror = static_cast<struct nlmsgerr *>(
+                  NLMSG_DATA(nlh));
+                if (nlerror->error != 0) {
+                    nd_printf("Netlink error: %d\n",
                       -nlerror->error);
-            return false;
-          }
-          break;
-        case NLMSG_OVERRUN:
-          nd_printf("Netlink overrun!\n");
-          return false;
-        default:
-          nd_dprintf("Ignored netlink message: %04x\n",
-                     nlh->nlmsg_type);
-      }
+                    return false;
+                }
+                break;
+            case NLMSG_OVERRUN:
+                nd_printf("Netlink overrun!\n");
+                return false;
+            default:
+                nd_dprintf(
+                  "Ignored netlink message: %04x\n", nlh->nlmsg_type);
+            }
+        }
     }
-  }
 #ifndef _ND_LEAN_AND_MEAN
-  if (ndGC_DEBUG) {
-    if (added_net || removed_net) {
-      nd_dprintf("Networks added: %d, removed: %d\n",
-                 added_net, removed_net);
+    if (ndGC_DEBUG) {
+        if (added_net || removed_net) {
+            nd_dprintf("Networks added: %d, removed: %d\n",
+              added_net, removed_net);
+        }
+        if (added_addr || removed_addr) {
+            nd_dprintf("Addresses added: %d, removed: %d\n",
+              added_addr, removed_addr);
+        }
     }
-    if (added_addr || removed_addr) {
-      nd_dprintf("Addresses added: %d, removed: %d\n",
-                 added_addr, removed_addr);
-    }
-  }
 #endif
-  return (added_net || removed_net || added_addr ||
-          removed_addr)
-             ? true
-             : false;
+    return (added_net || removed_net || added_addr || removed_addr) ?
+      true :
+      false;
 }
 
 bool ndNetlink::CopyAddress(sa_family_t family, ndAddr &dst,
-                            void *src, uint8_t prefix) {
-  switch (family) {
+  void *src, uint8_t prefix) {
+    switch (family) {
     case AF_INET:
-      return ndAddr::Create(dst, (struct in_addr *)src,
-                            prefix);
+        return ndAddr::Create(dst, (struct in_addr *)src, prefix);
     case AF_INET6:
-      return ndAddr::Create(dst, (struct in6_addr *)src,
-                            prefix);
-  }
+        return ndAddr::Create(dst, (struct in6_addr *)src, prefix);
+    }
 
-  return false;
+    return false;
 }
 
-bool ndNetlink::AddRemoveNetwork(struct nlmsghdr *nlh,
-                                 bool add) {
-  ndAddr addr;
-  char ifname[IFNAMSIZ] = {'\0'};
-  size_t offset = RTM_PAYLOAD(nlh);
+bool ndNetlink::AddRemoveNetwork(struct nlmsghdr *nlh, bool add) {
+    ndAddr addr;
+    char ifname[IFNAMSIZ] = { '\0' };
+    size_t offset         = RTM_PAYLOAD(nlh);
 
-  struct rtmsg *rtm;
-  rtm = static_cast<struct rtmsg *>(NLMSG_DATA(nlh));
+    struct rtmsg *rtm;
+    rtm = static_cast<struct rtmsg *>(NLMSG_DATA(nlh));
 
-  if (rtm->rtm_type != RTN_UNICAST) return false;
+    if (rtm->rtm_type != RTN_UNICAST) return false;
 
-  struct rtattr *rta =
-      static_cast<struct rtattr *>(RTM_RTA(rtm));
-  for (; RTA_OK(rta, offset); rta = RTA_NEXT(rta, offset)) {
-    switch (rta->rta_type) {
-      case RTA_DST:
-        CopyAddress(rtm->rtm_family, addr, RTA_DATA(rta),
-                    rtm->rtm_dst_len);
-        break;
-      case RTA_OIF:
-        if_indextoname(*(int *)RTA_DATA(rta), ifname);
-        break;
+    struct rtattr *rta = static_cast<struct rtattr *>(RTM_RTA(rtm));
+    for (; RTA_OK(rta, offset); rta = RTA_NEXT(rta, offset)) {
+        switch (rta->rta_type) {
+        case RTA_DST:
+            CopyAddress(rtm->rtm_family, addr,
+              RTA_DATA(rta), rtm->rtm_dst_len);
+            break;
+        case RTA_OIF:
+            if_indextoname(*(int *)RTA_DATA(rta), ifname);
+            break;
+        }
     }
-  }
 
-  if (addr.IsValid() && ifname[0] != '\0') {
-    ndInstance &ndi = ndInstance::GetInstance();
-    if (add) {
-      return ndi.addr_types.AddAddress(ndAddr::atLOCAL,
-                                       addr, ifname);
-    } else {
-      return ndi.addr_types.RemoveAddress(addr, ifname);
+    if (addr.IsValid() && ifname[0] != '\0') {
+        ndInstance &ndi = ndInstance::GetInstance();
+        if (add) {
+            return ndi.addr_types.AddAddress(ndAddr::atLOCAL,
+              addr, ifname);
+        }
+        else {
+            return ndi.addr_types.RemoveAddress(addr, ifname);
+        }
     }
-  }
 
-  return false;
+    return false;
 }
 
-bool ndNetlink::AddRemoveAddress(struct nlmsghdr *nlh,
-                                 bool add) {
-  ndAddr addr;
-  ndAddr::Type type = ndAddr::atLOCAL;
+bool ndNetlink::AddRemoveAddress(struct nlmsghdr *nlh, bool add) {
+    ndAddr addr;
+    ndAddr::Type type = ndAddr::atLOCAL;
 
-  struct ifaddrmsg *addrm;
-  addrm = static_cast<struct ifaddrmsg *>(NLMSG_DATA(nlh));
+    struct ifaddrmsg *addrm;
+    addrm = static_cast<struct ifaddrmsg *>(NLMSG_DATA(nlh));
 
-  size_t offset = IFA_PAYLOAD(nlh);
+    size_t offset = IFA_PAYLOAD(nlh);
 
-  char ifname[IFNAMSIZ] = {'\0'};
-  if_indextoname(addrm->ifa_index, ifname);
+    char ifname[IFNAMSIZ] = { '\0' };
+    if_indextoname(addrm->ifa_index, ifname);
 
-  struct rtattr *rta;
-  for (rta = static_cast<struct rtattr *>(IFA_RTA(addrm));
-       RTA_OK(rta, offset); rta = RTA_NEXT(rta, offset)) {
-    switch (rta->rta_type) {
-      case IFA_ADDRESS:
-      case IFA_LOCAL:
-        CopyAddress(addrm->ifa_family, addr, RTA_DATA(rta));
-        break;
-      case IFA_BROADCAST:
-        type = ndAddr::atBROADCAST;
-        CopyAddress(addrm->ifa_family, addr, RTA_DATA(rta));
-        break;
+    struct rtattr *rta;
+    for (rta = static_cast<struct rtattr *>(IFA_RTA(addrm));
+         RTA_OK(rta, offset);
+         rta = RTA_NEXT(rta, offset))
+    {
+        switch (rta->rta_type) {
+        case IFA_ADDRESS:
+        case IFA_LOCAL:
+            CopyAddress(addrm->ifa_family, addr, RTA_DATA(rta));
+            break;
+        case IFA_BROADCAST:
+            type = ndAddr::atBROADCAST;
+            CopyAddress(addrm->ifa_family, addr, RTA_DATA(rta));
+            break;
+        }
     }
-  }
 
-  if (addr.IsValid() && ifname[0] != '\0') {
-    ndInstance &ndi = ndInstance::GetInstance();
-    if (add)
-      return ndi.addr_types.AddAddress(type, addr, ifname);
-    else
-      return ndi.addr_types.RemoveAddress(addr, ifname);
-  }
+    if (addr.IsValid() && ifname[0] != '\0') {
+        ndInstance &ndi = ndInstance::GetInstance();
+        if (add)
+            return ndi.addr_types.AddAddress(type, addr, ifname);
+        else
+            return ndi.addr_types.RemoveAddress(addr, ifname);
+    }
 
-  return false;
+    return false;
 }

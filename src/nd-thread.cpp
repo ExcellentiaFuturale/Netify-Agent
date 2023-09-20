@@ -36,145 +36,144 @@
 #include "nd-util.hpp"
 
 static void *nd_thread_entry(void *param) {
-  void *rv = NULL;
-  ndThread *thread = NULL;
+    void *rv         = NULL;
+    ndThread *thread = NULL;
 
-  sigset_t signal_set;
-  sigfillset(&signal_set);
-  sigdelset(&signal_set, SIGPROF);
+    sigset_t signal_set;
+    sigfillset(&signal_set);
+    sigdelset(&signal_set, SIGPROF);
 
-  try {
-    if (pthread_sigmask(SIG_BLOCK, &signal_set, NULL) != 0)
-      throw ndThreadException("pthread_sigmask");
+    try {
+        if (pthread_sigmask(SIG_BLOCK, &signal_set, NULL) != 0)
+            throw ndThreadException("pthread_sigmask");
 
-    thread = reinterpret_cast<ndThread *>(param);
-    thread->SetProcName();
-    rv = thread->Entry();
-  } catch (exception &e) {
-    nd_printf("%s: Exception: %s\n",
-              thread->GetTag().c_str(), e.what());
-  }
+        thread = reinterpret_cast<ndThread *>(param);
+        thread->SetProcName();
+        rv = thread->Entry();
+    }
+    catch (exception &e) {
+        nd_printf("%s: Exception: %s\n",
+          thread->GetTag().c_str(), e.what());
+    }
 
-  thread->SetTerminated();
+    thread->SetTerminated();
 
-  return rv;
+    return rv;
 }
 
 ndThread::ndThread(const string &tag, long cpu, bool ipc)
-    : tag(tag), id(0), cpu(cpu), fd_ipc{-1, -1} {
-  terminate = false;
-  terminated = false;
+  : tag(tag), id(0), cpu(cpu), fd_ipc{ -1, -1 } {
+    terminate  = false;
+    terminated = false;
 
-  int rc;
+    int rc;
 
-  if ((rc = pthread_attr_init(&attr)) != 0)
-    throw ndThreadException(strerror(rc));
+    if ((rc = pthread_attr_init(&attr)) != 0)
+        throw ndThreadException(strerror(rc));
 
-  if ((rc = pthread_mutex_init(&lock, NULL)) != 0)
-    throw ndThreadException(strerror(rc));
+    if ((rc = pthread_mutex_init(&lock, NULL)) != 0)
+        throw ndThreadException(strerror(rc));
 
-  if (ipc &&
-      socketpair(AF_LOCAL, SOCK_STREAM | SOCK_NONBLOCK, 0,
-                 fd_ipc) < 0)
-    throw ndThreadSystemException(__PRETTY_FUNCTION__,
-                                  "socketpair", errno);
+    if (ipc &&
+      socketpair(AF_LOCAL, SOCK_STREAM | SOCK_NONBLOCK, 0, fd_ipc) < 0)
+        throw ndThreadSystemException(__PRETTY_FUNCTION__,
+          "socketpair", errno);
 
-  if (cpu == -1) return;
+    if (cpu == -1) return;
 #if defined(HAVE_PTHREAD_ATTR_SETAFFINITY_NP)
 #ifdef HAVE_SYS_CPUSET_H
-  typedef cpuset_t cpu_set_t;
+    typedef cpuset_t cpu_set_t;
 #endif
-  cpu_set_t cpuset;
+    cpu_set_t cpuset;
 
-  CPU_ZERO(&cpuset);
-  CPU_SET(cpu, &cpuset);
+    CPU_ZERO(&cpuset);
+    CPU_SET(cpu, &cpuset);
 
-  rc = pthread_attr_setaffinity_np(&attr, sizeof(cpuset),
-                                   &cpuset);
+    rc = pthread_attr_setaffinity_np(&attr, sizeof(cpuset), &cpuset);
 #endif
 }
 
 ndThread::~ndThread(void) {
-  pthread_attr_destroy(&attr);
-  pthread_mutex_destroy(&lock);
+    pthread_attr_destroy(&attr);
+    pthread_mutex_destroy(&lock);
 
-  if (fd_ipc[0] != -1) close(fd_ipc[0]);
-  if (fd_ipc[1] != -1) close(fd_ipc[1]);
+    if (fd_ipc[0] != -1) close(fd_ipc[0]);
+    if (fd_ipc[1] != -1) close(fd_ipc[1]);
 }
 
 void ndThread::SetProcName(void) {
-#if defined(HAVE_PTHREAD_SETNAME_NP) && \
-    !defined(_ND_LEAN_AND_MEAN)
-  char name[ND_THREAD_MAX_PROCNAMELEN];
+#if defined(HAVE_PTHREAD_SETNAME_NP) && ! defined(_ND_LEAN_AND_MEAN)
+    char name[ND_THREAD_MAX_PROCNAMELEN];
 
-  snprintf(name, ND_THREAD_MAX_PROCNAMELEN, "%s",
-           tag.c_str());
-  if (tag.length() >= ND_THREAD_MAX_PROCNAMELEN - 1)
-    name[ND_THREAD_MAX_PROCNAMELEN - 2] = '+';
+    snprintf(name, ND_THREAD_MAX_PROCNAMELEN, "%s", tag.c_str());
+    if (tag.length() >= ND_THREAD_MAX_PROCNAMELEN - 1)
+        name[ND_THREAD_MAX_PROCNAMELEN - 2] = '+';
 
-  pthread_setname_np(id, name);
+    pthread_setname_np(id, name);
 #endif
 }
 
 void ndThread::Create(void) {
-  int rc;
+    int rc;
 
-  if (id != 0)
-    throw ndThreadException("Thread previously created");
-  if ((rc = pthread_create(&id, &attr, nd_thread_entry,
-                           static_cast<void *>(this))) != 0)
-    throw ndThreadException(strerror(rc));
+    if (id != 0)
+        throw ndThreadException(
+          "Thread previously created");
+    if ((rc = pthread_create(&id, &attr, nd_thread_entry,
+           static_cast<void *>(this))) != 0)
+        throw ndThreadException(strerror(rc));
 }
 
 int ndThread::Join(void) {
-  int rc = -1;
+    int rc = -1;
 
-  if (id == 0) {
-    nd_dprintf("%s: Thread ID invalid.\n", tag.c_str());
+    if (id == 0) {
+        nd_dprintf("%s: Thread ID invalid.\n", tag.c_str());
+        return rc;
+    }
+
+    rc = pthread_join(id, NULL);
+    id = 0;
+
     return rc;
-  }
-
-  rc = pthread_join(id, NULL);
-  id = 0;
-
-  return rc;
 }
 
 void ndThread::Lock(void) {
-  int rc = pthread_mutex_lock(&lock);
+    int rc = pthread_mutex_lock(&lock);
 
-  if (rc != 0) throw ndThreadException(strerror(rc));
+    if (rc != 0) throw ndThreadException(strerror(rc));
 }
 
 void ndThread::Unlock(void) {
-  int rc = pthread_mutex_unlock(&lock);
+    int rc = pthread_mutex_unlock(&lock);
 
-  if (rc != 0) throw ndThreadException(strerror(rc));
+    if (rc != 0) throw ndThreadException(strerror(rc));
 }
 
 void ndThread::SendIPC(uint32_t id) {
-  ssize_t bytes_wrote = 0;
+    ssize_t bytes_wrote = 0;
 
-  bytes_wrote =
-      send(fd_ipc[IPC_PE_WRITE], &id, sizeof(uint32_t), 0);
+    bytes_wrote = send(fd_ipc[IPC_PE_WRITE], &id,
+      sizeof(uint32_t), 0);
 
-  if (bytes_wrote != sizeof(uint32_t)) {
-    nd_dprintf("%s: Failed to send IPC message: %s\n",
-               tag.c_str(), strerror(errno));
-  }
+    if (bytes_wrote != sizeof(uint32_t)) {
+        nd_dprintf("%s: Failed to send IPC message: %s\n",
+          tag.c_str(), strerror(errno));
+    }
 }
 
 uint32_t ndThread::RecvIPC(void) {
-  uint32_t id = 0;
-  ssize_t bytes_read = 0;
+    uint32_t id        = 0;
+    ssize_t bytes_read = 0;
 
-  bytes_read =
-      recv(fd_ipc[IPC_PE_READ], &id, sizeof(uint32_t), 0);
+    bytes_read = recv(fd_ipc[IPC_PE_READ], &id,
+      sizeof(uint32_t), 0);
 
-  if (bytes_read != sizeof(uint32_t)) {
-    nd_dprintf("%s: Failed to receive IPC message: %s\n",
-               tag.c_str(), strerror(errno));
-  }
+    if (bytes_read != sizeof(uint32_t)) {
+        nd_dprintf(
+          "%s: Failed to receive IPC message: %s\n",
+          tag.c_str(), strerror(errno));
+    }
 
-  return id;
+    return id;
 }

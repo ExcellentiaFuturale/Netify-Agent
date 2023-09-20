@@ -39,47 +39,48 @@ typedef map<string, nd_flow_map *> nd_flows;
 typedef pair<string, nd_flow_ptr> nd_flow_pair;
 typedef pair<nd_flow_map::iterator, bool> nd_flow_insert;
 
-class ndFlowMap {
- public:
-  ndFlowMap(size_t buckets = ND_FLOW_MAP_BUCKETS);
-  virtual ~ndFlowMap();
+class ndFlowMap
+{
+public:
+    ndFlowMap(size_t buckets = ND_FLOW_MAP_BUCKETS);
+    virtual ~ndFlowMap();
 
-  nd_flow_ptr Lookup(const string &digest,
-                     bool acquire_lock = false);
-  bool Insert(const string &digest, nd_flow_ptr &flow,
-              bool unlocked = false);
-  inline bool InsertUnlocked(const string &digest,
-                             nd_flow_ptr &flow) {
-    return Insert(digest, flow, true);
-  }
+    nd_flow_ptr
+    Lookup(const string &digest, bool acquire_lock = false);
+    bool Insert(const string &digest, nd_flow_ptr &flow,
+      bool unlocked = false);
+    inline bool
+    InsertUnlocked(const string &digest, nd_flow_ptr &flow) {
+        return Insert(digest, flow, true);
+    }
 
-  bool Delete(const string &digest);
+    bool Delete(const string &digest);
 
-  nd_flow_map &Acquire(size_t b);
-  const nd_flow_map &AcquireConst(size_t b) const;
+    nd_flow_map &Acquire(size_t b);
+    const nd_flow_map &AcquireConst(size_t b) const;
 
-  void Release(size_t b) const;
+    void Release(size_t b) const;
 #if 0
     inline void Release(const string &digest) const {
         Release(HashToBucket(digest));
     }
 #else
-  void Release(const string &digest) const;
+    void Release(const string &digest) const;
 #endif
 #ifndef _ND_LEAN_AND_MEAN
-  void DumpBucketStats(void);
+    void DumpBucketStats(void);
 #endif
 
-  inline size_t GetBuckets(void) const { return buckets; }
+    inline size_t GetBuckets(void) const { return buckets; }
 
- protected:
-  unsigned HashToBucket(const string &digest) const {
-    const char *p = digest.c_str();
-    const uint64_t *b = (const uint64_t *)&p[0];
-    return (*b % buckets);
-  }
+protected:
+    unsigned HashToBucket(const string &digest) const {
+        const char *p     = digest.c_str();
+        const uint64_t *b = (const uint64_t *)&p[0];
+        return (*b % buckets);
+    }
 
-  size_t buckets;
-  nd_flow_bucket bucket;
-  mutable nd_flow_bucket_lock bucket_lock;
+    size_t buckets;
+    nd_flow_bucket bucket;
+    mutable nd_flow_bucket_lock bucket_lock;
 };

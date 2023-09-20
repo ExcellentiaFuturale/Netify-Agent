@@ -24,28 +24,28 @@
 
 #include "nd-capture.hpp"
 
-class ndCapturePcap : public ndCaptureThread {
- public:
-  ndCapturePcap(int16_t cpu, nd_iface_ptr &iface,
-                const nd_detection_threads &threads_dpi,
-                ndDNSHintCache *dhc = NULL,
-                uint8_t private_addr = 0);
-  virtual ~ndCapturePcap();
+class ndCapturePcap : public ndCaptureThread
+{
+public:
+    ndCapturePcap(int16_t cpu, nd_iface_ptr &iface,
+      const nd_detection_threads &threads_dpi,
+      ndDNSHintCache *dhc = NULL, uint8_t private_addr = 0);
+    virtual ~ndCapturePcap();
 
-  virtual void *Entry(void);
+    virtual void *Entry(void);
 
-  // XXX: Ensure thread is locked before calling!
-  virtual void GetCaptureStats(ndPacketStats &stats);
+    // XXX: Ensure thread is locked before calling!
+    virtual void GetCaptureStats(ndPacketStats &stats);
 
- protected:
-  pcap_t *pcap;
-  int pcap_fd;
-  struct bpf_program pcap_filter;
-  char pcap_errbuf[PCAP_ERRBUF_SIZE];
-  int pcap_snaplen;
-  struct pcap_pkthdr *pkt_header;
-  const uint8_t *pkt_data;
-  struct pcap_stat pcs_last;
+protected:
+    pcap_t *pcap;
+    int pcap_fd;
+    struct bpf_program pcap_filter;
+    char pcap_errbuf[PCAP_ERRBUF_SIZE];
+    int pcap_snaplen;
+    struct pcap_pkthdr *pkt_header;
+    const uint8_t *pkt_data;
+    struct pcap_stat pcs_last;
 
-  pcap_t *OpenCapture(void);
+    pcap_t *OpenCapture(void);
 };

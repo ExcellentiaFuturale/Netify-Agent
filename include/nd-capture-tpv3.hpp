@@ -22,20 +22,20 @@
 
 #include "nd-capture.hpp"
 
-class ndCaptureTPv3 : public ndCaptureThread {
- public:
-  ndCaptureTPv3(int16_t cpu, nd_iface_ptr &iface,
-                const nd_detection_threads &threads_dpi,
-                ndDNSHintCache *dhc = NULL,
-                uint8_t private_addr = 0);
-  virtual ~ndCaptureTPv3();
+class ndCaptureTPv3 : public ndCaptureThread
+{
+public:
+    ndCaptureTPv3(int16_t cpu, nd_iface_ptr &iface,
+      const nd_detection_threads &threads_dpi,
+      ndDNSHintCache *dhc = NULL, uint8_t private_addr = 0);
+    virtual ~ndCaptureTPv3();
 
-  virtual void *Entry(void);
+    virtual void *Entry(void);
 
-  // XXX: Ensure thread is locked before calling!
-  virtual void GetCaptureStats(ndPacketStats &stats);
+    // XXX: Ensure thread is locked before calling!
+    virtual void GetCaptureStats(ndPacketStats &stats);
 
- protected:
-  // Private, opaque ndPacketRing
-  void *ring;
+protected:
+    // Private, opaque ndPacketRing
+    void *ring;
 };

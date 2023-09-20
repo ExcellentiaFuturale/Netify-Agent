@@ -31,33 +31,33 @@ using namespace std;
 
 #define ND_NETLINK_BUFSIZ 4096
 
-class ndNetlinkException : public runtime_error {
- public:
-  explicit ndNetlinkException(const string &what_arg)
-      : runtime_error(what_arg) {}
+class ndNetlinkException : public runtime_error
+{
+public:
+    explicit ndNetlinkException(const string &what_arg)
+      : runtime_error(what_arg) { }
 };
 
-class ndNetlink {
- public:
-  ndNetlink(void);
-  virtual ~ndNetlink();
+class ndNetlink
+{
+public:
+    ndNetlink(void);
+    virtual ~ndNetlink();
 
-  int GetDescriptor(void) { return nd; }
-  void Refresh(void);
-  bool ProcessEvent(void);
+    int GetDescriptor(void) { return nd; }
+    void Refresh(void);
+    bool ProcessEvent(void);
 
- protected:
-  bool CopyAddress(sa_family_t family, ndAddr &dst,
-                   void *src, uint8_t prefix = 0);
+protected:
+    bool CopyAddress(sa_family_t family, ndAddr &dst,
+      void *src, uint8_t prefix = 0);
 
-  bool AddRemoveNetwork(struct nlmsghdr *nlh,
-                        bool add = true);
+    bool AddRemoveNetwork(struct nlmsghdr *nlh, bool add = true);
 
-  bool AddRemoveAddress(struct nlmsghdr *nlh,
-                        bool add = true);
+    bool AddRemoveAddress(struct nlmsghdr *nlh, bool add = true);
 
-  int nd;
-  unsigned seq;
-  struct sockaddr_nl sa;
-  uint8_t buffer[ND_NETLINK_BUFSIZ];
+    int nd;
+    unsigned seq;
+    struct sockaddr_nl sa;
+    uint8_t buffer[ND_NETLINK_BUFSIZ];
 };

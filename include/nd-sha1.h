@@ -30,11 +30,11 @@ extern "C" {
 /* Structure to save state of computation between the single
  * steps.  */
 typedef struct sha1_t {
-  uint32_t A, B, C, D, E;
+    uint32_t A, B, C, D, E;
 
-  uint32_t total[2];
-  uint32_t buflen;     /* ≥ 0, ≤ 128 */
-  uint32_t buffer[32]; /* 128 bytes; the first buflen bytes
+    uint32_t total[2];
+    uint32_t buflen; /* ≥ 0, ≤ 128 */
+    uint32_t buffer[32]; /* 128 bytes; the first buflen bytes
                           are in use */
 } sha1;
 
@@ -45,15 +45,14 @@ extern void sha1_init(sha1 *ctx);
    (or the initialization function update the context for
    the next LEN bytes starting at BUFFER. It is necessary
    that LEN is a multiple of 64!!! */
-extern void sha1_write_block(sha1 *ctx, const void *buffer,
-                             size_t len);
+extern void
+sha1_write_block(sha1 *ctx, const void *buffer, size_t len);
 
 /* Starting with the result of former calls of this function
    (or the initialization function update the context for
    the next LEN bytes starting at BUFFER. It is NOT required
    that LEN is a multiple of 64.  */
-extern void sha1_write(sha1 *ctx, const void *buffer,
-                       size_t len);
+extern void sha1_write(sha1 *ctx, const void *buffer, size_t len);
 
 /* Put result from CTX in first 20 bytes following RESBUF.
    The result is always in little endian byte order, so that

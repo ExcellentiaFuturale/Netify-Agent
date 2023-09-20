@@ -26,120 +26,120 @@
 #include "nd-flow-map.hpp"
 
 ndFlowMap::ndFlowMap(size_t buckets) : buckets(buckets) {
-  for (size_t i = 0; i < buckets; i++) {
-    nd_flow_map *b = new nd_flow_map;
-    if (b == NULL)
-      throw ndSystemException(__PRETTY_FUNCTION__,
-                              "new nd_flow_map", ENOMEM);
+    for (size_t i = 0; i < buckets; i++) {
+        nd_flow_map *b = new nd_flow_map;
+        if (b == NULL)
+            throw ndSystemException(__PRETTY_FUNCTION__,
+              "new nd_flow_map", ENOMEM);
 #ifdef HAVE_CXX11
-    b->reserve(ND_HASH_BUCKETS_FLOWS);
+        b->reserve(ND_HASH_BUCKETS_FLOWS);
 #endif
-    bucket.push_back(b);
-    bucket_lock.emplace_back(new mutex);
-  }
+        bucket.push_back(b);
+        bucket_lock.emplace_back(new mutex);
+    }
 
-  nd_dprintf("Created %lu flow map buckets.\n", buckets);
+    nd_dprintf("Created %lu flow map buckets.\n", buckets);
 }
 
 ndFlowMap::~ndFlowMap() {
-  for (size_t i = 0; i < buckets; i++) {
-    lock_guard<mutex> lock(*bucket_lock[i]);
+    for (size_t i = 0; i < buckets; i++) {
+        lock_guard<mutex> lock(*bucket_lock[i]);
 
-    delete bucket[i];
-  }
+        delete bucket[i];
+    }
 
-  bucket.clear();
-  bucket_lock.clear();
+    bucket.clear();
+    bucket_lock.clear();
 }
 
-nd_flow_ptr ndFlowMap::Lookup(const string &digest,
-                              bool acquire_lock) {
-  nd_flow_ptr f;
-  size_t b = HashToBucket(digest);
+nd_flow_ptr
+ndFlowMap::Lookup(const string &digest, bool acquire_lock) {
+    nd_flow_ptr f;
+    size_t b = HashToBucket(digest);
 
-  bucket_lock[b]->lock();
+    bucket_lock[b]->lock();
 
-  auto fi = bucket[b]->find(digest);
-  if (fi != bucket[b]->end()) f = fi->second;
+    auto fi = bucket[b]->find(digest);
+    if (fi != bucket[b]->end()) f = fi->second;
 
-  if (!acquire_lock) bucket_lock[b]->unlock();
+    if (! acquire_lock) bucket_lock[b]->unlock();
 
-  return f;
+    return f;
 }
 
 bool ndFlowMap::Insert(const string &digest,
-                       nd_flow_ptr &flow, bool unlocked) {
-  bool result = false;
-  size_t b = HashToBucket(digest);
+  nd_flow_ptr &flow, bool unlocked) {
+    bool result = false;
+    size_t b    = HashToBucket(digest);
 
-  if (!unlocked) bucket_lock[b]->lock();
+    if (! unlocked) bucket_lock[b]->lock();
 
-  nd_flow_pair fp(digest, flow);
-  nd_flow_insert fi = bucket[b]->insert(fp);
+    nd_flow_pair fp(digest, flow);
+    nd_flow_insert fi = bucket[b]->insert(fp);
 
-  result = fi.second;
+    result = fi.second;
 
-  if (!unlocked) bucket_lock[b]->unlock();
+    if (! unlocked) bucket_lock[b]->unlock();
 
-  return result;
+    return result;
 }
 
 bool ndFlowMap::Delete(const string &digest) {
-  bool deleted = false;
-  size_t b = HashToBucket(digest);
-  lock_guard<mutex> lock(*bucket_lock[b]);
+    bool deleted = false;
+    size_t b     = HashToBucket(digest);
+    lock_guard<mutex> lock(*bucket_lock[b]);
 
-  auto fi = bucket[b]->find(digest);
-  if (fi != bucket[b]->end()) {
-    deleted = true;
-    bucket[b]->erase(fi);
-  }
+    auto fi = bucket[b]->find(digest);
+    if (fi != bucket[b]->end()) {
+        deleted = true;
+        bucket[b]->erase(fi);
+    }
 
-  return deleted;
+    return deleted;
 }
 
 nd_flow_map &ndFlowMap::Acquire(size_t b) {
-  if (b >= buckets)
-    throw ndSystemException(__PRETTY_FUNCTION__, "bucket",
-                            EINVAL);
+    if (b >= buckets)
+        throw ndSystemException(__PRETTY_FUNCTION__,
+          "bucket", EINVAL);
 
-  bucket_lock[b]->lock();
+    bucket_lock[b]->lock();
 
-  return *bucket[b];
+    return *bucket[b];
 }
 
 const nd_flow_map &ndFlowMap::AcquireConst(size_t b) const {
-  if (b >= buckets)
-    throw ndSystemException(__PRETTY_FUNCTION__, "bucket",
-                            EINVAL);
+    if (b >= buckets)
+        throw ndSystemException(__PRETTY_FUNCTION__,
+          "bucket", EINVAL);
 
-  bucket_lock[b]->lock();
+    bucket_lock[b]->lock();
 
-  return *bucket[b];
+    return *bucket[b];
 }
 
 void ndFlowMap::Release(size_t b) const {
-  if (b >= buckets)
-    throw ndSystemException(__PRETTY_FUNCTION__, "bucket",
-                            EINVAL);
+    if (b >= buckets)
+        throw ndSystemException(__PRETTY_FUNCTION__,
+          "bucket", EINVAL);
 
-  bucket_lock[b]->unlock();
+    bucket_lock[b]->unlock();
 }
 
 void ndFlowMap::Release(const string &digest) const {
-  Release(HashToBucket(digest));
+    Release(HashToBucket(digest));
 }
 
 #ifndef _ND_LEAN_AND_MEAN
 void ndFlowMap::DumpBucketStats(void) {
-  for (size_t i = 0; i < buckets; i++) {
-    if (bucket_lock[i]->try_lock()) {
-      nd_dprintf("ndFlowMap: %4u: %u flow(s).\n", i,
-                 bucket[i]->size());
+    for (size_t i = 0; i < buckets; i++) {
+        if (bucket_lock[i]->try_lock()) {
+            nd_dprintf("ndFlowMap: %4u: %u flow(s).\n", i,
+              bucket[i]->size());
 
-      bucket_lock[i]->unlock();
-    } else
-      nd_dprintf("ndFlowMap: %4u: locked.\n", i);
-  }
+            bucket_lock[i]->unlock();
+        }
+        else nd_dprintf("ndFlowMap: %4u: locked.\n", i);
+    }
 }
 #endif

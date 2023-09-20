@@ -24,63 +24,61 @@
 #include "nd-instance.hpp"
 #include "nd-thread.hpp"
 
-class ndCaptureThreadException : public runtime_error {
- public:
-  explicit ndCaptureThreadException(const string &what_arg)
-      : runtime_error(what_arg) {}
+class ndCaptureThreadException : public runtime_error
+{
+public:
+    explicit ndCaptureThreadException(const string &what_arg)
+      : runtime_error(what_arg) { }
 };
 
-class ndCaptureThread : public ndThread,
-                        public ndInstanceClient {
- public:
-  ndCaptureThread(unsigned cs_type, int16_t cpu,
-                  nd_iface_ptr &iface,
-                  const nd_detection_threads &threads_dpi,
-                  ndDNSHintCache *dhc = NULL,
-                  uint8_t private_addr = 0);
+class ndCaptureThread : public ndThread, public ndInstanceClient
+{
+public:
+    ndCaptureThread(unsigned cs_type, int16_t cpu,
+      nd_iface_ptr &iface, const nd_detection_threads &threads_dpi,
+      ndDNSHintCache *dhc = NULL, uint8_t private_addr = 0);
 
-  virtual ~ndCaptureThread() {}
+    virtual ~ndCaptureThread() { }
 
-  virtual void *Entry(void) = 0;
+    virtual void *Entry(void) = 0;
 
-  // XXX: Ensure thread is locked before calling!
-  virtual void GetCaptureStats(ndPacketStats &stats) {
-    this->stats.AddAndReset(stats);
-  }
+    // XXX: Ensure thread is locked before calling!
+    virtual void GetCaptureStats(ndPacketStats &stats) {
+        this->stats.AddAndReset(stats);
+    }
 
-  enum nd_capture_states {
-    STATE_INIT,
-    STATE_ONLINE,
-    STATE_OFFLINE,
-  };
+    enum nd_capture_states {
+        STATE_INIT,
+        STATE_ONLINE,
+        STATE_OFFLINE,
+    };
 
-  atomic_uchar capture_state;
+    atomic_uchar capture_state;
 
- protected:
-  int dl_type;
-  unsigned cs_type;
+protected:
+    int dl_type;
+    unsigned cs_type;
 
-  nd_iface_ptr iface;
-  ndFlow flow;
+    nd_iface_ptr iface;
+    ndFlow flow;
 
-  time_t tv_epoch;
-  uint64_t ts_pkt_first;
-  uint64_t ts_pkt_last;
+    time_t tv_epoch;
+    uint64_t ts_pkt_first;
+    uint64_t ts_pkt_last;
 
-  ndAddr::PrivatePair private_addrs;
+    ndAddr::PrivatePair private_addrs;
 
-  ndPacketStats stats;
+    ndPacketStats stats;
 
-  string flow_digest;
+    string flow_digest;
 
-  ndDNSHintCache *dhc;
+    ndDNSHintCache *dhc;
 
-  const nd_detection_threads &threads_dpi;
-  int16_t dpi_thread_id;
+    const nd_detection_threads &threads_dpi;
+    int16_t dpi_thread_id;
 
-  const ndPacket *ProcessPacket(const ndPacket *packet);
+    const ndPacket *ProcessPacket(const ndPacket *packet);
 
-  bool ProcessDNSPacket(nd_flow_ptr &flow,
-                        const uint8_t *pkt,
-                        uint16_t pkt_len, uint16_t proto);
+    bool ProcessDNSPacket(nd_flow_ptr &flow,
+      const uint8_t *pkt, uint16_t pkt_len, uint16_t proto);
 };

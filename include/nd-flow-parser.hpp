@@ -20,50 +20,51 @@
 
 #pragma once
 
-#define _NDFP_MAX_NAMELEN 64
+#define _NDFP_MAX_NAMELEN       64
 
-#define _NDFP_OTHER_UNKNOWN 0
+#define _NDFP_OTHER_UNKNOWN     0
 #define _NDFP_OTHER_UNSUPPORTED 1
-#define _NDFP_OTHER_LOCAL 2
-#define _NDFP_OTHER_MULTICAST 3
-#define _NDFP_OTHER_BROADCAST 4
-#define _NDFP_OTHER_REMOTE 5
-#define _NDFP_OTHER_ERROR 6
+#define _NDFP_OTHER_LOCAL       2
+#define _NDFP_OTHER_MULTICAST   3
+#define _NDFP_OTHER_BROADCAST   4
+#define _NDFP_OTHER_REMOTE      5
+#define _NDFP_OTHER_ERROR       6
 
-#define _NDFP_TUNNEL_NONE 0
-#define _NDFP_TUNNEL_GTP 1
+#define _NDFP_TUNNEL_NONE       0
+#define _NDFP_TUNNEL_GTP        1
 
-#define _NDFP_ORIGIN_UNKNOWN 0
-#define _NDFP_ORIGIN_LOCAL 1
-#define _NDFP_ORIGIN_OTHER 2
+#define _NDFP_ORIGIN_UNKNOWN    0
+#define _NDFP_ORIGIN_LOCAL      1
+#define _NDFP_ORIGIN_OTHER      2
 
 #define _NDFP_flow \
-  ((ndFlowParser *)yyget_extra(scanner))->flow
+    ((ndFlowParser *)yyget_extra(scanner))->flow
 #define _NDFP_local_mac \
-  ((ndFlowParser *)yyget_extra(scanner))->local_mac
+    ((ndFlowParser *)yyget_extra(scanner))->local_mac
 #define _NDFP_other_mac \
-  ((ndFlowParser *)yyget_extra(scanner))->other_mac
+    ((ndFlowParser *)yyget_extra(scanner))->other_mac
 #define _NDFP_local_ip \
-  ((ndFlowParser *)yyget_extra(scanner))->local_ip
+    ((ndFlowParser *)yyget_extra(scanner))->local_ip
 #define _NDFP_other_ip \
-  ((ndFlowParser *)yyget_extra(scanner))->other_ip
+    ((ndFlowParser *)yyget_extra(scanner))->other_ip
 #define _NDFP_local_port \
-  ((ndFlowParser *)yyget_extra(scanner))->local_port
+    ((ndFlowParser *)yyget_extra(scanner))->local_port
 #define _NDFP_other_port \
-  ((ndFlowParser *)yyget_extra(scanner))->other_port
+    ((ndFlowParser *)yyget_extra(scanner))->other_port
 #define _NDFP_origin \
-  ((ndFlowParser *)yyget_extra(scanner))->origin
+    ((ndFlowParser *)yyget_extra(scanner))->origin
 #define _NDFP_result \
-  ((ndFlowParser *)yyget_extra(scanner))->expr_result
+    ((ndFlowParser *)yyget_extra(scanner))->expr_result
 #define _NDFP_categories \
-  ((ndFlowParser *)yyget_extra(scanner))->ndi.categories
+    ((ndFlowParser *)yyget_extra(scanner))->ndi.categories
 
 #if 0
 #define _NDFP_debugf(f, ...) nd_dprintf(f, __VA_ARGS__)
 #else
 #define _NDFP_debugf(f, ...) \
-  do {                       \
-  } while (0)
+    do { \
+    } \
+    while (0)
 #endif
 
 #if defined __cplusplus
@@ -76,26 +77,27 @@
 
 using namespace std;
 
-class ndFlowParser : public ndInstanceClient {
- public:
-  ndFlowParser();
-  virtual ~ndFlowParser();
+class ndFlowParser : public ndInstanceClient
+{
+public:
+    ndFlowParser();
+    virtual ~ndFlowParser();
 
-  bool Parse(nd_flow_ptr const &flow, const string &expr);
+    bool Parse(nd_flow_ptr const &flow, const string &expr);
 
-  nd_flow_ptr flow;
-  const char *local_mac;
-  const char *other_mac;
-  const char *local_ip;
-  const char *other_ip;
-  uint16_t local_port;
-  uint16_t other_port;
-  uint16_t origin;
+    nd_flow_ptr flow;
+    const char *local_mac;
+    const char *other_mac;
+    const char *local_ip;
+    const char *other_ip;
+    uint16_t local_port;
+    uint16_t other_port;
+    uint16_t origin;
 
-  bool expr_result;
+    bool expr_result;
 
- protected:
-  void *scanner;
+protected:
+    void *scanner;
 };
 
 #endif

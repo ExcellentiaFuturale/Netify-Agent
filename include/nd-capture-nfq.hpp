@@ -22,34 +22,34 @@
 
 #include "nd-capture.hpp"
 
-class ndCaptureNFQueue : public ndCaptureThread {
- public:
-  ndCaptureNFQueue(int16_t cpu, nd_iface_ptr &iface,
-                   const nd_detection_threads &threads_dpi,
-                   unsigned instance_id = 0,
-                   ndDNSHintCache *dhc = NULL,
-                   uint8_t private_addr = 0);
+class ndCaptureNFQueue : public ndCaptureThread
+{
+public:
+    ndCaptureNFQueue(int16_t cpu, nd_iface_ptr &iface,
+      const nd_detection_threads &threads_dpi,
+      unsigned instance_id = 0, ndDNSHintCache *dhc = NULL,
+      uint8_t private_addr = 0);
 
-  virtual ~ndCaptureNFQueue();
+    virtual ~ndCaptureNFQueue();
 
-  virtual void *Entry(void);
+    virtual void *Entry(void);
 
-  // XXX: Ensure thread is locked before calling!
-  virtual void GetCaptureStats(ndPacketStats &stats);
+    // XXX: Ensure thread is locked before calling!
+    virtual void GetCaptureStats(ndPacketStats &stats);
 
-  inline struct mnl_socket *GetSocket(void) { return nl; }
+    inline struct mnl_socket *GetSocket(void) { return nl; }
 
-  inline void PushPacket(ndPacket *pkt) {
-    pkt_queue.push_back(pkt);
-  }
+    inline void PushPacket(ndPacket *pkt) {
+        pkt_queue.push_back(pkt);
+    }
 
- protected:
-  // struct bpf_program pcap_filter;
-  unsigned queue_id;
-  struct mnl_socket *nl;
-  unsigned int port_id;
-  size_t buffer_size;
-  uint8_t *buffer;
-  size_t dropped;
-  vector<ndPacket *> pkt_queue;
+protected:
+    // struct bpf_program pcap_filter;
+    unsigned queue_id;
+    struct mnl_socket *nl;
+    unsigned int port_id;
+    size_t buffer_size;
+    uint8_t *buffer;
+    size_t dropped;
+    vector<ndPacket *> pkt_queue;
 };

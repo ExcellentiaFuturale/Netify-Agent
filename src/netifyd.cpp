@@ -32,76 +32,77 @@
 #include "netifyd.hpp"
 
 int main(int argc, char* argv[]) {
-  int rc = 0;
-  uint32_t result;
+    int rc = 0;
+    uint32_t result;
 
-  setlocale(LC_ALL, "");
+    setlocale(LC_ALL, "");
 
-  openlog(PACKAGE_TARNAME,
-          LOG_NDELAY | LOG_PID | LOG_PERROR, LOG_DAEMON);
+    openlog(PACKAGE_TARNAME,
+      LOG_NDELAY | LOG_PID | LOG_PERROR, LOG_DAEMON);
 
-  nd_seed_rng();
+    nd_seed_rng();
 
-  sigset_t sigset;
-  sigfillset(&sigset);
+    sigset_t sigset;
+    sigfillset(&sigset);
 
-  // sigdelset(&sigset, SIGPROF);
-  // sigdelset(&sigset, SIGINT);
-  sigdelset(&sigset, SIGQUIT);
+    // sigdelset(&sigset, SIGPROF);
+    // sigdelset(&sigset, SIGINT);
+    sigdelset(&sigset, SIGQUIT);
 
-  sigprocmask(SIG_BLOCK, &sigset, NULL);
+    sigprocmask(SIG_BLOCK, &sigset, NULL);
 
-  sigemptyset(&sigset);
-  sigaddset(&sigset, ND_SIG_UPDATE);
-  sigaddset(&sigset, ND_SIG_UPDATE_NAPI);
-  sigaddset(&sigset, SIGHUP);
-  sigaddset(&sigset, SIGINT);
-  sigaddset(&sigset, SIGIO);
+    sigemptyset(&sigset);
+    sigaddset(&sigset, ND_SIG_UPDATE);
+    sigaddset(&sigset, ND_SIG_UPDATE_NAPI);
+    sigaddset(&sigset, SIGHUP);
+    sigaddset(&sigset, SIGINT);
+    sigaddset(&sigset, SIGIO);
 #ifdef SIGPWR
-  sigaddset(&sigset, SIGPWR);
+    sigaddset(&sigset, SIGPWR);
 #endif
-  sigaddset(&sigset, SIGTERM);
-  sigaddset(&sigset, SIGUSR1);
-  sigaddset(&sigset, SIGUSR2);
+    sigaddset(&sigset, SIGTERM);
+    sigaddset(&sigset, SIGUSR1);
+    sigaddset(&sigset, SIGUSR2);
 
-  ndInstance& instance = ndInstance::Create();
+    ndInstance& instance = ndInstance::Create();
 
-  result = instance.InitializeConfig(argc, argv);
+    result = instance.InitializeConfig(argc, argv);
 
-  if (ndCR_Result(result) != ndInstance::ndCR_OK)
-    return ndCR_Code(result);
+    if (ndCR_Result(result) != ndInstance::ndCR_OK)
+        return ndCR_Code(result);
 
-  if (instance.Daemonize() == false) return 1;
+    if (instance.Daemonize() == false) return 1;
 
-  // When using provided timers, ensure they initialized
-  // after Daemonize() is called, otherwise on some
-  // platforms, timer IDs are not maintained after fork(2).
-  if (instance.InitializeTimers() == false) return 1;
+    // When using provided timers, ensure they initialized
+    // after Daemonize() is called, otherwise on some
+    // platforms, timer IDs are not maintained after fork(2).
+    if (instance.InitializeTimers() == false) return 1;
 
-  rc = instance.Run();
+    rc = instance.Run();
 
-  if (rc == 0) {
-    int sig;
-    siginfo_t si;
-    const struct timespec tspec_sigwait = {1, 0};
+    if (rc == 0) {
+        int sig;
+        siginfo_t si;
+        const struct timespec tspec_sigwait = { 1, 0 };
 
-    while (!instance.HasTerminated()) {
-      if ((sig = sigtimedwait(&sigset, &si,
-                              &tspec_sigwait)) < 0) {
-        if (errno == EAGAIN || errno == EINTR) continue;
+        while (! instance.HasTerminated()) {
+            if ((sig = sigtimedwait(&sigset, &si, &tspec_sigwait)) < 0)
+            {
+                if (errno == EAGAIN || errno == EINTR)
+                    continue;
 
-        nd_printf("sigwaitinfo: %s\n", strerror(errno));
+                nd_printf("sigwaitinfo: %s\n", strerror(errno));
 
-        rc = -1;
-        instance.Terminate();
-        continue;
-      }
+                rc = -1;
+                instance.Terminate();
+                continue;
+            }
 
-      instance.SendSignal(si);
+            instance.SendSignal(si);
+        }
     }
-  }
 
-  ndInstance::Destroy();
+    ndInstance::Destroy();
 
-  return rc;
+    return rc;
 }

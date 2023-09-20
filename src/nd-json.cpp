@@ -28,16 +28,17 @@
 #include "nd-json.hpp"
 #include "netifyd.hpp"
 
-void nd_json_to_string(const json &j, string &output,
-                       bool pretty) {
-  output = j.dump(pretty ? ND_JSON_INDENT : -1, ' ', true,
-                  json::error_handler_t::replace);
+void nd_json_to_string(const json &j, string &output, bool pretty) {
+    output = j.dump(pretty ? ND_JSON_INDENT : -1, ' ', true,
+      json::error_handler_t::replace);
 
-  vector<pair<regex *, string> >::const_iterator i;
-  for (i = ndGC.privacy_regex.begin();
-       i != ndGC.privacy_regex.end(); i++) {
-    string result =
-        regex_replace(output, *((*i).first), (*i).second);
-    if (result.size()) output = result;
-  }
+    vector<pair<regex *, string> >::const_iterator i;
+    for (i = ndGC.privacy_regex.begin();
+         i != ndGC.privacy_regex.end();
+         i++)
+    {
+        string result = regex_replace(output, *((*i).first),
+          (*i).second);
+        if (result.size()) output = result;
+    }
 }

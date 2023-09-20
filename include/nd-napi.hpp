@@ -35,121 +35,122 @@ using json = nlohmann::json;
 
 class ndNetifyApiManager;
 
-class ndNetifyApiThread : public ndThread {
- public:
-  ndNetifyApiThread();
-  virtual ~ndNetifyApiThread();
+class ndNetifyApiThread : public ndThread
+{
+public:
+    ndNetifyApiThread();
+    virtual ~ndNetifyApiThread();
 
-  virtual void *Entry(void) = 0;
+    virtual void *Entry(void) = 0;
 
-  void AppendContent(const char *data, size_t length);
+    void AppendContent(const char *data, size_t length);
 
-  void ParseHeader(const string &header_raw);
+    void ParseHeader(const string &header_raw);
 
-  enum Method {
-    METHOD_GET,
-    METHOD_HEAD,
-    METHOD_POST,
-  };
+    enum Method {
+        METHOD_GET,
+        METHOD_HEAD,
+        METHOD_POST,
+    };
 
-  typedef map<string, string> Headers;
+    typedef map<string, string> Headers;
 
- protected:
-  friend class ndNetifyApiManager;
+protected:
+    friend class ndNetifyApiManager;
 
-  void CreateHeaders(const Headers &headers);
-  void DestroyHeaders(void);
+    void CreateHeaders(const Headers &headers);
+    void DestroyHeaders(void);
 
-  void Perform(Method method, const string &url,
-               const Headers &headers);
+    void Perform(Method method, const string &url,
+      const Headers &headers);
 
-  CURL *ch;
-  CURLcode curl_rc;
-  long http_rc;
-  Headers headers_rx;
-  struct curl_slist *headers_tx;
-  string content;
-  string content_type;
-  string content_filename;
+    CURL *ch;
+    CURLcode curl_rc;
+    long http_rc;
+    Headers headers_rx;
+    struct curl_slist *headers_tx;
+    string content;
+    string content_type;
+    string content_filename;
 };
 
-class ndNetifyApiBootstrap : public ndNetifyApiThread {
- public:
-  ndNetifyApiBootstrap() : ndNetifyApiThread() {}
+class ndNetifyApiBootstrap : public ndNetifyApiThread
+{
+public:
+    ndNetifyApiBootstrap() : ndNetifyApiThread() { }
 
-  virtual void *Entry(void);
+    virtual void *Entry(void);
 
- protected:
-  friend class ndNetifyApiManager;
+protected:
+    friend class ndNetifyApiManager;
 };
 
-class ndNetifyApiDownload : public ndNetifyApiThread {
- public:
-  ndNetifyApiDownload(const string &token,
-                      const string &url,
-                      const string &filename = "");
+class ndNetifyApiDownload : public ndNetifyApiThread
+{
+public:
+    ndNetifyApiDownload(const string &token,
+      const string &url,
+      const string &filename = "");
 
-  virtual ~ndNetifyApiDownload();
+    virtual ~ndNetifyApiDownload();
 
-  virtual void *Entry(void);
+    virtual void *Entry(void);
 
- protected:
-  friend class ndNetifyApiManager;
+protected:
+    friend class ndNetifyApiManager;
 
-  string tag;
-  string token;
-  string url;
-  uint8_t *digest;
+    string tag;
+    string token;
+    string url;
+    uint8_t *digest;
 };
 
-class ndNetifyApiManager {
- public:
-  ndNetifyApiManager() : ttl_last_update(0) {}
-  virtual ~ndNetifyApiManager() { Terminate(); }
+class ndNetifyApiManager
+{
+public:
+    ndNetifyApiManager() : ttl_last_update(0) { }
+    virtual ~ndNetifyApiManager() { Terminate(); }
 
-  bool Update(void);
-  void Terminate(void);
+    bool Update(void);
+    void Terminate(void);
 
-  inline const json &GetStatus(void) const {
-    return jstatus;
-  }
-
- protected:
-  struct RequestHash {
-    template <typename T>
-    size_t operator()(T t) const {
-      return static_cast<std::size_t>(t);
+    inline const json &GetStatus(void) const {
+        return jstatus;
     }
-  };
 
-  enum Request {
-    REQUEST_NONE,
-    REQUEST_BOOTSTRAP,
-    REQUEST_DOWNLOAD_CONFIG,
-    REQUEST_DOWNLOAD_CATEGORIES,
-  };
+protected:
+    struct RequestHash {
+        template <typename T>
+        size_t operator()(T t) const {
+            return static_cast<std::size_t>(t);
+        }
+    };
 
-  typedef unordered_map<Request, ndNetifyApiThread *,
-                        RequestHash>
-      Requests;
+    enum Request {
+        REQUEST_NONE,
+        REQUEST_BOOTSTRAP,
+        REQUEST_DOWNLOAD_CONFIG,
+        REQUEST_DOWNLOAD_CATEGORIES,
+    };
 
-  Requests requests;
+    typedef unordered_map<Request, ndNetifyApiThread *, RequestHash> Requests;
 
-  typedef unordered_map<Request, string, RequestHash> Urls;
+    Requests requests;
 
-  Urls urls;
+    typedef unordered_map<Request, string, RequestHash> Urls;
 
-  string token;
-  time_t ttl_last_update;
+    Urls urls;
 
-  typedef unordered_map<Request, bool, RequestHash> Results;
+    string token;
+    time_t ttl_last_update;
 
-  Results download_results;
+    typedef unordered_map<Request, bool, RequestHash> Results;
 
-  bool ProcessBootstrapRequest(
-      ndNetifyApiBootstrap *bootstrap);
-  bool ProcessDownloadRequest(ndNetifyApiDownload *download,
-                              Request type);
+    Results download_results;
 
-  json jstatus;
+    bool ProcessBootstrapRequest(ndNetifyApiBootstrap *bootstrap);
+    bool ProcessDownloadRequest(ndNetifyApiDownload *download,
+      Request type);
+
+    json jstatus;
 };
