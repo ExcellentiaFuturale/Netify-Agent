@@ -1,33 +1,35 @@
-# -------------------------------------------------------------------------
+# -----------------------------------------------------------
 # Definitions
-# -------------------------------------------------------------------------
+# -----------------------------------------------------------
 
 stages:
-  - build
-  - test
-  - package
-  - variants
+  - Build
+  - Test
+  - Variants
+
+include:
+  - project: "netify.ai/public/netify-development-support/\
+              netify-ci-templates"
+    ref: master
+    file:
+      - /gitlab/agent/build-templates.yml
+      - /gitlab/agent/test-templates.yml
+      - /gitlab/agent/variants-templates.yml
+      - /gitlab/common/variants-templates.yml
 
 variables:
+  CI_DEBUG_TRACE: 'false'
   GIT_SUBMODULE_STRATEGY: recursive
-#  CI_DEBUG_TRACE: "true"
+  OS_EXTRA_PACKAGES: ''
+  OS_REPOS: ''
 
+# -----------------------------------------------------------
+# Build
+# -----------------------------------------------------------
 
-# Incude templates
-include:
-  - '/.gitlab-ci/build-templates.yml'
-  - '/.gitlab-ci/test-templates.yml'
-  - '/.gitlab-ci/package-templates.yml'
-  - '/.gitlab-ci/variants-templates.yml'
+# Debian Targets
 
-# -------------------------------------------------------------------------
-# Build stage
-# -------------------------------------------------------------------------
-
-# Debian OS Targets
-#------------------
-
-debian 10 build:
+Debian/10/x86-64:
   extends: .debian_build
   tags:
     - docker
@@ -35,24 +37,29 @@ debian 10 build:
     - tags
     - web
   variables:
+    OS_NAME: debian
+    OS_VERSION: 10
     OS_IMAGE: "debian:10"
-    OS_NAME: "debian"
-    OS_VERSION: "10"
-    OS_ARCH: "amd64"
-    OS_EXTRA_PACKAGES: "flex"
+    OS_ARCH: amd64
+    OS_ARCH_PATH:
+      value: $OS_ARCH
+      expand: true
+    OS_EXTRA_PACKAGES: flex
 
-debian 11 build:
+Debian/11/x86-64:
   extends: .debian_build
   tags:
     - docker
   variables:
+    OS_NAME: debian
+    OS_VERSION: 11
     OS_IMAGE: "debian:11"
-    OS_NAME: "debian"
-    OS_VERSION: "11"
-    OS_ARCH: "amd64"
-    OS_EXTRA_PACKAGES: ""
+    OS_ARCH: amd64
+    OS_ARCH_PATH:
+      value: $OS_ARCH
+      expand: true
 
-debian 11 i386 build:
+Debian/11/x86-32:
   extends: .debian_build
   tags:
     - docker
@@ -60,16 +67,18 @@ debian 11 i386 build:
     - tags
     - web
   variables:
+    OS_NAME: debian
+    OS_VERSION: 11
     OS_IMAGE: "i386/debian:11"
-    OS_NAME: "debian"
-    OS_VERSION: "11"
-    OS_ARCH: "i386"
-    OS_EXTRA_PACKAGES: "byacc flex"
+    OS_ARCH: i386
+    OS_ARCH_PATH:
+      value: $OS_ARCH
+      expand: true
+    OS_EXTRA_PACKAGES: byacc flex
 
-# Ubuntu OS Targets
-#------------------
+# Ubuntu Targets
 
-ubuntu 20.04 build:
+Ubuntu/20.04/x86-64:
   extends: .debian_build
   tags:
     - docker
@@ -77,13 +86,16 @@ ubuntu 20.04 build:
     - tags
     - web
   variables:
+    OS_NAME: ubuntu
+    OS_VERSION: focal
     OS_IMAGE: "ubuntu:20.04"
-    OS_NAME: "ubuntu"
-    OS_VERSION: "focal"
-    OS_ARCH: "binary-amd64"
-    OS_EXTRA_PACKAGES: "byacc"
+    OS_ARCH: amd64
+    OS_ARCH_PATH:
+      value: binary-$OS_ARCH
+      expand: true
+    OS_EXTRA_PACKAGES: byacc
 
-ubuntu 22.04 build:
+Ubuntu/22.04/x86-64:
   extends: .debian_build
   tags:
     - docker
@@ -91,16 +103,18 @@ ubuntu 22.04 build:
     - tags
     - web
   variables:
+    OS_NAME: ubuntu
+    OS_VERSION: jammy
     OS_IMAGE: "ubuntu:22.04"
-    OS_NAME: "ubuntu"
-    OS_VERSION: "jammy"
-    OS_ARCH: "binary-amd64"
-    OS_EXTRA_PACKAGES: "byacc flex"
+    OS_ARCH: amd64
+    OS_ARCH_PATH:
+      value: binary-$OS_ARCH
+      expand: true
+    OS_EXTRA_PACKAGES: byacc flex
 
-# RPM OS Targets
-#---------------
+# RedHat Targets
 
-centos 7 build:
+CentOS/7/x86-64:
   extends: .rpmos_build
   tags:
     - docker
@@ -108,13 +122,12 @@ centos 7 build:
     - tags
     - web
   variables:
-    RPMOS_IMAGE: "centos:7.9.2009"
-    RPMOS_OS: "centos"
-    RPMOS_VERSION: "7"
-    RPMOS_ARCH: "x86_64"
-    RPMOS_REPOS: ""
+    OS_NAME: centos
+    OS_VERSION: 7
+    OS_IMAGE: "centos:7.9.2009"
+    OS_ARCH: x86_64
 
-rockylinux 8 build:
+Rocky Linux/8/x86-64:
   extends: .rpmos_build
   tags:
     - docker
@@ -122,13 +135,13 @@ rockylinux 8 build:
     - tags
     - web
   variables:
-    RPMOS_IMAGE: "rockylinux:8"
-    RPMOS_OS: "rockylinux"
-    RPMOS_VERSION: "8"
-    RPMOS_ARCH: "x86_64"
-    RPMOS_REPOS: "--enablerepo=powertools,epel"
+    OS_NAME: rockylinux
+    OS_VERSION: 8
+    OS_IMAGE: "rockylinux:8"
+    OS_ARCH: x86_64
+    OS_REPOS: --enablerepo=powertools,epel
 
-almalinux 8 build:
+AlmaLinux/8/x86-64:
   extends: .rpmos_build
   tags:
     - docker
@@ -136,13 +149,13 @@ almalinux 8 build:
     - tags
     - web
   variables:
-    RPMOS_IMAGE: "almalinux:8"
-    RPMOS_OS: "almalinux"
-    RPMOS_VERSION: "8"
-    RPMOS_ARCH: "x86_64"
-    RPMOS_REPOS: "--enablerepo=powertools,epel"
+    OS_NAME: almalinux
+    OS_VERSION: 8
+    OS_IMAGE: "almalinux:8"
+    OS_ARCH: x86_64
+    OS_REPOS: --enablerepo=powertools,epel
 
-almalinux 9 build:
+AlmaLinux/9/x86-64:
   extends: .rpmos_build
   tags:
     - docker
@@ -150,144 +163,160 @@ almalinux 9 build:
     - tags
     - web
   variables:
-    RPMOS_IMAGE: "almalinux:9"
-    RPMOS_OS: "almalinux"
-    RPMOS_VERSION: "9"
-    RPMOS_ARCH: "x86_64"
-    RPMOS_REPOS: "--enablerepo=crb"
+    OS_NAME: almalinux
+    OS_VERSION: 9
+    OS_IMAGE: "almalinux:9"
+    OS_ARCH: x86_64
+    OS_REPOS: --enablerepo=crb
 
-# OpenWrt OS Targets
-#-------------------
+# OpenWrt Targets
 
-      #openwrt 19.07 x86_64 build:
-      #  extends: .openwrt_build
-      #  tags:
-      #    - docker
-      #  variables:
-      #    OS_IMAGE: "debian:11"
-      #    OS_NAME: "debian"
-      #    OS_VERSION: "11"
-      #    OS_ARCH: "amd64"
-      #    OPENWRT_PACKAGES: "ncurses-dev gawk unzip python"
-      #    OPENWRT_SDK: "https://downloads.openwrt.org/releases/19.07.10/targets/x86/64/openwrt-sdk-19.07.10-x86-64_gcc-7.5.0_musl.Linux-x86_64.tar.xz"
-      #    OPENWRT_CONFIG: "https://downloads.openwrt.org/releases/19.07.10/targets/x86/64/config.buildinfo"
+OpenWrt/19.07/x86-64:
+  extends: .openwrt_build
+  tags:
+    - docker
+  variables:
+    OS_NAME: debian
+    OS_VERSION: 11
+    OS_IMAGE: "debian:11"
+    OS_ARCH: amd64
+    OS_EXTRA_PACKAGES: ncurses-dev gawk unzip python
+    OPENWRT_VERSION: 19.07.10
+    OPENWRT_ARCH1: x86/64
+    OPENWRT_ARCH2: x86-64
+    OPENWRT_ARCH3: x86_64
+    OPENWRT_SDK:
+      value: "https://downloads.openwrt.org/releases/\
+              ${OPENWRT_VERSION}/targets/${OPENWRT_ARCH1}/\
+              openwrt-sdk-${OPENWRT_VERSION}-${OPENWRT_ARCH2}\
+              _gcc-7.5.0_musl.Linux-${OPENWRT_ARCH3}.tar.xz"
+      expand: true
+    OPENWRT_CONFIG:
+      value: "https://downloads.openwrt.org/releases/\
+              ${OPENWRT_VERSION}/targets/${OPENWRT_ARCH1}/\
+              config.buildinfo"
+      expand: true
 
-# -------------------------------------------------------------------------
-# Package stage
-# -------------------------------------------------------------------------
-#
-package source:
+# -----------------------------------------------------------
+# Test
+# -----------------------------------------------------------
+
+# RedHat Targets
+
+CentOS/7/Test:
+  extends: .rpmos_test
+  tags:
+    - docker
+  only:
+    - tags
+    - web
+  needs:
+    - CentOS/7/x86-64
+  variables:
+    OS_NAME: centos
+    OS_VERSION: 7
+    OS_IMAGE: "centos:7.9.2009"
+    OS_ARCH: x86_64
+    OS_UUID: NE-CE-07-X1
+
+AlmaLinux/8/Test:
+  extends: .rpmos_test
+  tags:
+    - docker
+  only:
+    - tags
+    - web
+  needs:
+    - AlmaLinux/8/x86-64
+  variables:
+    OS_NAME: almalinux
+    OS_VERSION: 8
+    OS_IMAGE: "almalinux:8"
+    OS_ARCH: x86_64
+    OS_UUID: NE-CE-08-X1
+
+# -----------------------------------------------------------
+# Variants
+# -----------------------------------------------------------
+
+# RedHat Targets
+
+ClearOS/7/x86-64:
+  extends: .rpmos_variants
+  tags:
+    - docker
+  only:
+    - tags
+    - web
+  needs:
+    - CentOS/7/Test
+  variables:
+    OS_NAME: clearos
+    OS_SOURCE: centos
+    OS_VERSION: 7
+    OS_IMAGE: "centos:7"
+    OS_ARCH: x86_64
+
+NethServer/7/x86-64:
+  extends: .rpmos_variants
+  tags:
+    - docker
+  only:
+    - tags
+    - web
+  needs:
+    - CentOS/7/Test
+  variables:
+    OS_NAME: nethserver
+    OS_SOURCE: centos
+    OS_VERSION: 7
+    OS_IMAGE: "centos:7"
+    OS_ARCH: x86_64
+
+RHEL/7/x86-64:
+  extends: .rpmos_variants
+  tags:
+    - docker
+  only:
+    - tags
+    - web
+  needs:
+    - CentOS/7/Test
+  variables:
+    OS_NAME: rhel
+    OS_SOURCE: centos
+    OS_VERSION: 7
+    OS_IMAGE: "centos:7.9.2009"
+    OS_ARCH: x86_64
+
+RHEL/8/x86-64:
+  extends: .rpmos_variants
+  tags:
+    - docker
+  only:
+    - tags
+    - web
+  needs:
+    - AlmaLinux/8/Test
+  variables:
+    OS_NAME: rhel
+    OS_SOURCE: almalinux
+    OS_VERSION: 8
+    OS_IMAGE: "almalinux:8"
+    OS_ARCH: x86_64
+
+# Source Code Archive
+
+Source Archive:
   extends: .pkg_source
   tags:
     - docker
+  needs:
+    - Debian/11/x86-64
   variables:
+    OS_NAME: debian
+    OS_VERSION: 11
     OS_IMAGE: "debian:11"
-    OS_NAME: "debian"
-    OS_VERSION: "11"
-    OS_ARCH: "amd64"
-    OS_EXTRA_PACKAGES: ""
-  needs: ["debian 11 build"]
-
-# -------------------------------------------------------------------------
-# Test stage
-# -------------------------------------------------------------------------
-
-# CentOS
-#-------
-
-centos 7 test:
-  extends: .rpmos_test
-  tags:
-    - docker
-  only:
-    - tags
-    - web
-  variables:
-    RPMOS_OS: "centos"
-    RPMOS_VERSION: "7"
-    RPMOS_IMAGE: "centos:7"
-    RPMOS_ARCH: "x86_64"
-    RPMOS_UUID: "NE-CE-07-X1"
-  needs: ["centos 7 build"]
-
-almalinux 8 test:
-  extends: .rpmos_test
-  tags:
-    - docker
-  only:
-    - tags
-    - web
-  variables:
-    RPMOS_OS: "almalinux"
-    RPMOS_VERSION: "8"
-    RPMOS_IMAGE: "almalinux:8"
-    RPMOS_ARCH: "x86_64"
-    RPMOS_UUID: "NE-CE-08-X1"
-  needs: ["almalinux 8 build"]
-
-# -------------------------------------------------------------------------
-# Variants stage
-# -------------------------------------------------------------------------
-
-# CentOS
-#-------
-
-clearos 7 variant:
-  extends: .rpmos_variants
-  tags:
-    - docker
-  only:
-    - tags
-    - web
-  variables:
-    RPMOS_OS_SOURCE: "centos"
-    RPMOS_OS: "clearos"
-    RPMOS_VERSION: "7"
-    RPMOS_IMAGE: "centos:7"
-    RPMOS_ARCH: "x86_64"
-  needs: ["centos 7 test"]
-
-nethserver 7 variant:
-  extends: .rpmos_variants
-  tags:
-    - docker
-  only:
-    - tags
-    - web
-  variables:
-    RPMOS_OS_SOURCE: "centos"
-    RPMOS_OS: "nethserver"
-    RPMOS_VERSION: "7"
-    RPMOS_IMAGE: "centos:7"
-    RPMOS_ARCH: "x86_64"
-  needs: ["centos 7 test"]
-
-rhel 7 variant:
-  extends: .rpmos_variants
-  tags:
-    - docker
-  only:
-    - tags
-    - web
-  variables:
-    RPMOS_OS_SOURCE: "centos"
-    RPMOS_OS: "rhel"
-    RPMOS_VERSION: "7"
-    RPMOS_IMAGE: "centos:7"
-    RPMOS_ARCH: "x86_64"
-  needs: ["centos 7 test"]
-
-rhel 8 variant:
-  extends: .rpmos_variants
-  tags:
-    - docker
-  only:
-    - tags
-    - web
-  variables:
-    RPMOS_OS_SOURCE: "almalinux"
-    RPMOS_OS: "rhel"
-    RPMOS_VERSION: "8"
-    RPMOS_IMAGE: "almalinux:8"
-    RPMOS_ARCH: "x86_64"
-  needs: ["almalinux 8 test"]
+    OS_ARCH: amd64
+    OS_EXTRA_PACKAGES: zlib1g-dev libpcap-dev
+      libgoogle-perftools-dev

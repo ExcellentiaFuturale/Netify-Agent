@@ -30,95 +30,95 @@
 using json = nlohmann::json;
 using namespace std;
 
-#define ND_CAT_UNKNOWN 0
+#define ND_CAT_UNKNOWN    0
 #define ND_DOMAIN_UNKNOWN 0
 
 typedef enum {
-  ndCAT_TYPE_APP,
-  ndCAT_TYPE_PROTO,
+    ndCAT_TYPE_APP,
+    ndCAT_TYPE_PROTO,
 
-  ndCAT_TYPE_MAX
+    ndCAT_TYPE_MAX
 } ndCategoryType;
 
 class ndCategories;
 
 typedef unsigned nd_cat_id_t;
 
-class ndCategory {
- public:
-  typedef map<string, nd_cat_id_t> index_tag;
-  typedef set<unsigned> set_id;
-  typedef map<nd_cat_id_t, set_id> index_cat;
-  typedef pair<nd_cat_id_t, set_id> index_cat_insert;
+class ndCategory
+{
+public:
+    typedef map<string, nd_cat_id_t> index_tag;
+    typedef set<unsigned> set_id;
+    typedef map<nd_cat_id_t, set_id> index_cat;
+    typedef pair<nd_cat_id_t, set_id> index_cat_insert;
 
- protected:
-  friend class ndCategories;
+protected:
+    friend class ndCategories;
 
-  index_tag tag;
-  index_cat index;
+    index_tag tag;
+    index_cat index;
 
-  bool Load(json &jdata);
+    bool Load(json &jdata);
 
-  ndCategoryType type;
+    ndCategoryType type;
 };
 
-class ndCategories {
- public:
-  ndCategories() : last_update(0) {
-    // XXX: Must be in order of enum ndCategoryType, without
-    // gaps.
-    categories[ndCAT_TYPE_APP] = ndCategory();
-    categories[ndCAT_TYPE_PROTO] = ndCategory();
-  };
+class ndCategories
+{
+public:
+    ndCategories() : last_update(0) {
+        // XXX: Must be in order of enum ndCategoryType, without
+        // gaps.
+        categories[ndCAT_TYPE_APP]   = ndCategory();
+        categories[ndCAT_TYPE_PROTO] = ndCategory();
+    };
 
-  bool Load(const string &filename);
-  bool Load(ndCategoryType type, json &jdata);
-  bool Save(const string &filename);
-  void Dump(ndCategoryType type = ndCAT_TYPE_MAX);
+    bool Load(const string &filename);
+    bool Load(ndCategoryType type, json &jdata);
+    bool Save(const string &filename);
+    void Dump(ndCategoryType type = ndCAT_TYPE_MAX);
 
-  time_t GetLastUpdate(void) { return last_update; }
+    time_t GetLastUpdate(void) { return last_update; }
 
-  bool IsMember(ndCategoryType type, nd_cat_id_t cat_id,
-                unsigned id);
-  bool IsMember(ndCategoryType type, const string &cat_tag,
-                unsigned id);
+    bool IsMember(ndCategoryType type, nd_cat_id_t cat_id,
+      unsigned id);
+    bool IsMember(ndCategoryType type,
+      const string &cat_tag, unsigned id);
 
-  nd_cat_id_t Lookup(ndCategoryType type,
-                     unsigned id) const;
-  nd_cat_id_t LookupTag(ndCategoryType type,
-                        const string &tag) const;
-  nd_cat_id_t ResolveTag(ndCategoryType type, unsigned id,
-                         string &tag) const;
+    nd_cat_id_t Lookup(ndCategoryType type, unsigned id) const;
+    nd_cat_id_t
+    LookupTag(ndCategoryType type, const string &tag) const;
+    nd_cat_id_t ResolveTag(ndCategoryType type, unsigned id,
+      string &tag) const;
 
-  bool GetTagIndex(ndCategoryType type,
-                   ndCategory::index_tag &index) const {
-    lock_guard<mutex> ul(lock);
+    bool GetTagIndex(ndCategoryType type,
+      ndCategory::index_tag &index) const {
+        lock_guard<mutex> ul(lock);
 
-    auto it = categories.find(type);
-    if (it == categories.end()) return false;
-    index.insert(it->second.tag.begin(),
-                 it->second.tag.end());
-    return true;
-  }
+        auto it = categories.find(type);
+        if (it == categories.end()) return false;
+        index.insert(it->second.tag.begin(), it->second.tag.end());
+        return true;
+    }
 
- protected:
-  mutable mutex lock;
-  time_t last_update;
-  map<ndCategoryType, ndCategory> categories;
+protected:
+    mutable mutex lock;
+    time_t last_update;
+    map<ndCategoryType, ndCategory> categories;
 
-  bool LoadLegacy(const json &jdata);
+    bool LoadLegacy(const json &jdata);
 };
 
-class ndDomains {
- public:
-  bool Load(const ndCategories &categories,
-            const string &path_domains);
-  nd_cat_id_t Lookup(const string &domain);
+class ndDomains
+{
+public:
+    bool Load(const ndCategories &categories,
+      const string &path_domains);
+    nd_cat_id_t Lookup(const string &domain);
 
- protected:
-  mutex lock;
-  ndCategory::index_tag index_tag;
-  typedef unordered_map<nd_cat_id_t, unordered_set<string>>
-      cat_domain_map;
-  cat_domain_map domains;
+protected:
+    mutex lock;
+    ndCategory::index_tag index_tag;
+    typedef unordered_map<nd_cat_id_t, unordered_set<string>> cat_domain_map;
+    cat_domain_map domains;
 };

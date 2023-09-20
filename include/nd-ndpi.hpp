@@ -32,5 +32,4 @@ void ndpi_global_init(void);
 
 struct ndpi_detection_module_struct *nd_ndpi_init(void);
 
-void nd_ndpi_free(
-    struct ndpi_detection_module_struct *ndpi);
+void nd_ndpi_free(struct ndpi_detection_module_struct *ndpi);

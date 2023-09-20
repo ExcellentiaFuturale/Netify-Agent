@@ -27,4 +27,4 @@ using json = nlohmann::json;
 using namespace std;
 
 void nd_json_to_string(const json &j, string &output,
-                       bool pretty = false);
+  bool pretty = false);

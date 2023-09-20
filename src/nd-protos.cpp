@@ -25,35 +25,36 @@
 #include "nd-flow.hpp"
 #include "nd-protos.hpp"
 
-const nd_proto_id_t nd_ndpi_proto_find(
-    uint16_t id, nd_flow_ptr const &flow) {
-  if (id == NDPI_PROTOCOL_UNKNOWN) return ND_PROTO_UNKNOWN;
+const nd_proto_id_t
+nd_ndpi_proto_find(uint16_t id, nd_flow_ptr const &flow) {
+    if (id == NDPI_PROTOCOL_UNKNOWN)
+        return ND_PROTO_UNKNOWN;
 
-  auto it_pm = nd_ndpi_portmap.find(id);
-  if (it_pm != nd_ndpi_portmap.end()) {
-    for (auto &it_entry : it_pm->second) {
-      if (flow->lower_addr.GetPort() != it_entry.first &&
-          flow->upper_addr.GetPort() != it_entry.first)
-        continue;
-      return it_entry.second;
+    auto it_pm = nd_ndpi_portmap.find(id);
+    if (it_pm != nd_ndpi_portmap.end()) {
+        for (auto &it_entry : it_pm->second) {
+            if (flow->lower_addr.GetPort() != it_entry.first &&
+              flow->upper_addr.GetPort() != it_entry.first)
+                continue;
+            return it_entry.second;
+        }
     }
-  }
 
-  nd_ndpi_proto_t::const_iterator it;
-  if ((it = nd_ndpi_protos.find(id)) ==
-      nd_ndpi_protos.end())
-    return ND_PROTO_TODO;
+    nd_ndpi_proto_t::const_iterator it;
+    if ((it = nd_ndpi_protos.find(id)) == nd_ndpi_protos.end())
+        return ND_PROTO_TODO;
 
-  return it->second;
+    return it->second;
 }
 
 const uint16_t nd_ndpi_proto_find(unsigned id) {
-  if (id == ND_PROTO_UNKNOWN) return NDPI_PROTOCOL_UNKNOWN;
+    if (id == ND_PROTO_UNKNOWN)
+        return NDPI_PROTOCOL_UNKNOWN;
 
-  for (auto &it : nd_ndpi_protos) {
-    if (it.second != id) continue;
-    return it.first;
-  }
+    for (auto &it : nd_ndpi_protos) {
+        if (it.second != id) continue;
+        return it.first;
+    }
 
-  return NDPI_PROTOCOL_UNKNOWN;
+    return NDPI_PROTOCOL_UNKNOWN;
 }

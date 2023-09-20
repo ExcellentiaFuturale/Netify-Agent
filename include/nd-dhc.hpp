@@ -36,27 +36,28 @@ typedef unordered_map<string, nd_dns_tuple> nd_dns_ar;
 typedef pair<nd_dns_ar::iterator, bool> nd_dhc_insert;
 typedef pair<string, nd_dns_tuple> nd_dhc_insert_pair;
 
-class ndDNSHintCache {
- public:
-  ndDNSHintCache();
+class ndDNSHintCache
+{
+public:
+    ndDNSHintCache();
 
-  void Insert(const ndAddr &addr, const string &hostname);
-  void Insert(const string &digest, const string &hostname);
+    void Insert(const ndAddr &addr, const string &hostname);
+    void Insert(const string &digest, const string &hostname);
 
-  bool Lookup(const ndAddr &addr, string &hostname);
-  bool Lookup(const string &digest, string &hostname);
+    bool Lookup(const ndAddr &addr, string &hostname);
+    bool Lookup(const string &digest, string &hostname);
 
-  size_t Purge(void);
+    size_t Purge(void);
 
-  void Load(void);
-  void Save(void);
+    void Load(void);
+    void Save(void);
 
-  size_t GetSize(void) {
-    lock_guard<mutex> ul(lock);
-    return map_ar.size();
-  };
+    size_t GetSize(void) {
+        lock_guard<mutex> ul(lock);
+        return map_ar.size();
+    };
 
- protected:
-  mutex lock;
-  nd_dns_ar map_ar;
+protected:
+    mutex lock;
+    nd_dns_ar map_ar;
 };

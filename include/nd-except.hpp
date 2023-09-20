@@ -25,30 +25,32 @@
 
 using namespace std;
 
-class ndException : public runtime_error {
- public:
-  explicit ndException(const string &where_arg,
-                       const string &what_arg) throw();
-  virtual ~ndException() throw();
+class ndException : public runtime_error
+{
+public:
+    explicit ndException(const string &where_arg,
+      const string &what_arg) throw();
+    virtual ~ndException() throw();
 
-  virtual const char *what() const throw();
+    virtual const char *what() const throw();
 
-  string where_arg;
-  string what_arg;
-  const char *message;
+    string where_arg;
+    string what_arg;
+    const char *message;
 };
 
-class ndSystemException : public runtime_error {
- public:
-  explicit ndSystemException(const string &where_arg,
-                             const string &what_arg,
-                             int why_arg) throw();
-  virtual ~ndSystemException() throw();
+class ndSystemException : public runtime_error
+{
+public:
+    explicit ndSystemException(const string &where_arg,
+      const string &what_arg,
+      int why_arg) throw();
+    virtual ~ndSystemException() throw();
 
-  virtual const char *what() const throw();
+    virtual const char *what() const throw();
 
-  string where_arg;
-  string what_arg;
-  int why_arg;
-  const char *message;
+    string where_arg;
+    string what_arg;
+    int why_arg;
+    const char *message;
 };

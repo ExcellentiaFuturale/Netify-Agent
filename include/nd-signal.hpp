@@ -20,5 +20,5 @@
 
 #pragma once
 
-#define ND_SIG_UPDATE (SIGRTMIN + 0)
+#define ND_SIG_UPDATE      (SIGRTMIN + 0)
 #define ND_SIG_UPDATE_NAPI (SIGRTMIN + 1)

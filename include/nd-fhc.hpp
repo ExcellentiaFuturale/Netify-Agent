@@ -34,25 +34,24 @@ using namespace std;
 #define ND_FLOW_HC_FILE_NAME "/flow-hash-cache.dat"
 
 typedef list<pair<string, string>> nd_fhc_list;
-typedef unordered_map<string, nd_fhc_list::iterator>
-    nd_fhc_map;
+typedef unordered_map<string, nd_fhc_list::iterator> nd_fhc_map;
 
-class ndFlowHashCache {
- public:
-  ndFlowHashCache(size_t cache_size = ND_MAX_FHC_ENTRIES)
-      : cache_size(cache_size) {}
+class ndFlowHashCache
+{
+public:
+    ndFlowHashCache(size_t cache_size = ND_MAX_FHC_ENTRIES)
+      : cache_size(cache_size) { }
 
-  void Push(const string &lower_hash,
-            const string &upper_hash);
-  bool Pop(const string &lower_hash, string &upper_hash);
+    void Push(const string &lower_hash, const string &upper_hash);
+    bool Pop(const string &lower_hash, string &upper_hash);
 
-  void Load(void);
-  void Save(void);
+    void Load(void);
+    void Save(void);
 
- protected:
-  mutex lock;
+protected:
+    mutex lock;
 
-  size_t cache_size;
-  nd_fhc_list index;
-  nd_fhc_map lookup;
+    size_t cache_size;
+    nd_fhc_list index;
+    nd_fhc_map lookup;
 };
