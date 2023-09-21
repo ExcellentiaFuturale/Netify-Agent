@@ -932,8 +932,6 @@ const nd_ndpi_disabled_protos_t nd_ndpi_disabled_protos = {
     // dissector): ID# 259
     // (FortiClient)
     NDPI_PROTOCOL_FUZE,  // Not a protocol: ID# 270 (Fuze)
-    NDPI_PROTOCOL_GAMBLING,  // Not a protocol: ID# 339
-    // (Gambling)
     NDPI_PROTOCOL_GEFORCENOW,  // Not a protocol: ID# 341
     // (GeForceNow)
     NDPI_PROTOCOL_GITHUB,  // Not a protocol: ID# 203

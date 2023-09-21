@@ -56,13 +56,18 @@ void ndpi_global_init(void) {
     nd_ndpi_prefs |= ndpi_dont_load_google_list;
     nd_ndpi_prefs |= ndpi_dont_load_icloud_private_relay_list;
     nd_ndpi_prefs |= ndpi_dont_load_microsoft_list;
+    nd_ndpi_prefs |= ndpi_dont_load_mullvad_list;
+    nd_ndpi_prefs |= ndpi_dont_load_protonvpn_exit_nodes_list;
+    nd_ndpi_prefs |= ndpi_dont_load_protonvpn_list;
     nd_ndpi_prefs |= ndpi_dont_load_tor_list;
     nd_ndpi_prefs |= ndpi_dont_load_whatsapp_list;
     nd_ndpi_prefs |= ndpi_dont_load_zoom_list;
     nd_ndpi_prefs |= ndpi_enable_ja3_plus;
 
-    // nd_ndpi_prefs |= ndpi_enable_tcp_ack_payload_heuristic;
-    // nd_ndpi_prefs |= ndpi_track_flow_payload;
+    // ndpi_disable_fully_encrypted_heuristic
+    // ndpi_dont_init_libgcrypt
+    // ndpi_enable_tcp_ack_payload_heuristic;
+    // ndpi_track_flow_payload;
 
     NDPI_BITMASK_RESET(ndpi_protos);
 
