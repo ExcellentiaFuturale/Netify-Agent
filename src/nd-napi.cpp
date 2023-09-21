@@ -675,6 +675,23 @@ bool ndNetifyApiManager::ProcessBootstrapRequest(
             return false;
         }
 
+        auto juuid_site = jdata->find("uuid-site");
+        if (juuid_site != jdata->end() &&
+          juuid_site->type() == json::value_t::string)
+        {
+            string new_uuid = juuid_site->get<string>();
+            if (ndGC.SaveUUID(ndGlobalConfig::UUID_SITE, new_uuid))
+            {
+                jstatus["bootstrap"]["code"] = 0;
+                jstatus["bootstrap"]["message"] =
+                  "Site UUID provisioned";
+                nd_dprintf(
+                  "netify-api: Site UUID provisioned: %s\n",
+                  new_uuid.c_str());
+            }
+            return false;
+        }
+
         auto jsigs = jdata->find("signatures");
         if (jsigs == jdata->end()) {
             jstatus["bootstrap"]["code"] = -1;
