@@ -1,11 +1,12 @@
+# Created by: Darryl Sokoloski <darryl@egloo.ca>
 # $FreeBSD$
 
 PORTNAME=@PACKAGE_TARNAME@
 PORTVERSION=@PACKAGE_VERSION@
 PORTEPOCH=1
 CATEGORIES=security
-MAINTAINER=team@netify.ai
-COMMENT=Netify Agent - Deep-packet Inspection Server
+MAINTAINER=darryl@egloo.ca
+COMMENT=The Netify Agent Deep-packet Inspection Processor
 WWW=https://netify.ai/
 MASTER_SITES=http://download.netify.ai/netify/source/
 LICENSE=GPLv3+
