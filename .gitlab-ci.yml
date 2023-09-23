@@ -115,6 +115,24 @@ Debian/11/ARM32v7:
       expand: true
     OS_EXTRA_PACKAGES: byacc flex
 
+Debian/11/ARM64v8:
+  extends: .debian_build
+  when: manual
+  tags:
+    - docker
+  only:
+    - tags
+    - web
+  variables:
+    OS_NAME: debian
+    OS_VERSION: 11
+    OS_IMAGE: "arm64v8/debian:11"
+    OS_ARCH: "arm64"
+    OS_ARCH_PATH:
+      value: $OS_ARCH
+      expand: true
+    OS_EXTRA_PACKAGES: byacc flex
+
 # Ubuntu Targets
 
 Ubuntu/20.04/x86-64:
