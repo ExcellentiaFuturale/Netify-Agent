@@ -79,7 +79,7 @@ Debian/11/x86-32:
       expand: true
     OS_EXTRA_PACKAGES: byacc flex
 
-Debian/11/ARM32v5:
+Debian/11/ARM-32v5:
   extends: .debian_build
   when: manual
   tags:
@@ -97,7 +97,7 @@ Debian/11/ARM32v5:
       expand: true
     OS_EXTRA_PACKAGES: byacc flex
 
-Debian/11/ARM32v7:
+Debian/11/ARM-32v7:
   extends: .debian_build
   when: manual
   tags:
@@ -115,7 +115,7 @@ Debian/11/ARM32v7:
       expand: true
     OS_EXTRA_PACKAGES: byacc flex
 
-Debian/11/ARM64v8:
+Debian/11/ARM-64v8:
   extends: .debian_build
   when: manual
   tags:
