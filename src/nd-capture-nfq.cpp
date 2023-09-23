@@ -41,6 +41,9 @@
 
 #include "nd-capture-nfq.hpp"
 
+#define _ND_LOG_WARNINGS 1
+//#define _ND_LOG_DEBUG    1
+
 static int ndCaptureNFQueue_Callback(
   const struct nlmsghdr *nlh, void *user) {
     ndCaptureNFQueue *nfq = static_cast<ndCaptureNFQueue *>(user);
@@ -78,6 +81,7 @@ static int ndCaptureNFQueue_Callback(
     if (attr[NFQA_HWADDR] != nullptr) {
         pkt_hwaddr = static_cast<struct nfqnl_msg_packet_hw *>(
           mnl_attr_get_payload(attr[NFQA_HWADDR]));
+#ifdef _ND_LOG_DEBUG
         if (pkt_hwaddr != nullptr) {
             nd_dprintf(
               "%s: hwaddr[%hu]: "
@@ -87,6 +91,7 @@ static int ndCaptureNFQueue_Callback(
               pkt_hwaddr->hw_addr[2], pkt_hwaddr->hw_addr[3],
               pkt_hwaddr->hw_addr[4], pkt_hwaddr->hw_addr[5]);
         }
+#endif
     }
 #ifdef _ND_LOG_WARNINGS
     else
