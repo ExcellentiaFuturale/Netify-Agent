@@ -79,6 +79,42 @@ Debian/11/x86-32:
       expand: true
     OS_EXTRA_PACKAGES: byacc flex
 
+Debian/11/ARM32v5:
+  extends: .debian_build
+  when: manual
+  tags:
+    - docker
+  only:
+    - tags
+    - web
+  variables:
+    OS_NAME: debian
+    OS_VERSION: 11
+    OS_IMAGE: "arm32v5/debian:11"
+    OS_ARCH: "armel"
+    OS_ARCH_PATH:
+      value: $OS_ARCH
+      expand: true
+    OS_EXTRA_PACKAGES: byacc flex
+
+Debian/11/ARM32v7:
+  extends: .debian_build
+  when: manual
+  tags:
+    - docker
+  only:
+    - tags
+    - web
+  variables:
+    OS_NAME: debian
+    OS_VERSION: 11
+    OS_IMAGE: "arm32v7/debian:11"
+    OS_ARCH: "armhf"
+    OS_ARCH_PATH:
+      value: $OS_ARCH
+      expand: true
+    OS_EXTRA_PACKAGES: byacc flex
+
 # Ubuntu Targets
 
 Ubuntu/20.04/x86-64:
@@ -129,6 +165,9 @@ CentOS/7/x86-64:
     OS_VERSION: 7
     OS_IMAGE: "centos:7.9.2009"
     OS_ARCH: x86_64
+    OS_ARCH_PATH:
+      value: $OS_ARCH
+      expand: true
 
 Rocky Linux/8/x86-64:
   extends: .rhel_build
@@ -142,6 +181,9 @@ Rocky Linux/8/x86-64:
     OS_VERSION: 8
     OS_IMAGE: "rockylinux:8"
     OS_ARCH: x86_64
+    OS_ARCH_PATH:
+      value: $OS_ARCH
+      expand: true
     OS_REPOS: --enablerepo=powertools,epel
 
 AlmaLinux/8/x86-64:
@@ -156,6 +198,9 @@ AlmaLinux/8/x86-64:
     OS_VERSION: 8
     OS_IMAGE: "almalinux:8"
     OS_ARCH: x86_64
+    OS_ARCH_PATH:
+      value: $OS_ARCH
+      expand: true
     OS_REPOS: --enablerepo=powertools,epel
 
 AlmaLinux/9/x86-64:
@@ -170,12 +215,16 @@ AlmaLinux/9/x86-64:
     OS_VERSION: 9
     OS_IMAGE: "almalinux:9"
     OS_ARCH: x86_64
+    OS_ARCH_PATH:
+      value: $OS_ARCH
+      expand: true
     OS_REPOS: --enablerepo=crb
 
 # OpenWrt Targets
 
 OpenWrt/19.07/x86-64:
   extends: .openwrt_build
+  when: manual
   tags:
     - docker
   variables:
@@ -220,6 +269,9 @@ CentOS/7/Test:
     OS_VERSION: 7
     OS_IMAGE: "centos:7.9.2009"
     OS_ARCH: x86_64
+    OS_ARCH_PATH:
+      value: $OS_ARCH
+      expand: true
     OS_UUID: NE-CE-07-X1
 
 AlmaLinux/8/Test:
@@ -236,6 +288,9 @@ AlmaLinux/8/Test:
     OS_VERSION: 8
     OS_IMAGE: "almalinux:8"
     OS_ARCH: x86_64
+    OS_ARCH_PATH:
+      value: $OS_ARCH
+      expand: true
     OS_UUID: NE-CE-08-X1
 
 # -----------------------------------------------------------
@@ -259,6 +314,9 @@ ClearOS/7/x86-64:
     OS_VERSION: 7
     OS_IMAGE: "centos:7"
     OS_ARCH: x86_64
+    OS_ARCH_PATH:
+      value: $OS_ARCH
+      expand: true
 
 NethServer/7/x86-64:
   extends: .rhel_variants
@@ -275,6 +333,9 @@ NethServer/7/x86-64:
     OS_VERSION: 7
     OS_IMAGE: "centos:7"
     OS_ARCH: x86_64
+    OS_ARCH_PATH:
+      value: $OS_ARCH
+      expand: true
 
 RHEL/7/x86-64:
   extends: .rhel_variants
@@ -291,6 +352,9 @@ RHEL/7/x86-64:
     OS_VERSION: 7
     OS_IMAGE: "centos:7.9.2009"
     OS_ARCH: x86_64
+    OS_ARCH_PATH:
+      value: $OS_ARCH
+      expand: true
 
 RHEL/8/x86-64:
   extends: .rhel_variants
@@ -307,6 +371,9 @@ RHEL/8/x86-64:
     OS_VERSION: 8
     OS_IMAGE: "almalinux:8"
     OS_ARCH: x86_64
+    OS_ARCH_PATH:
+      value: $OS_ARCH
+      expand: true
 
 # Source Code Archive
 
@@ -321,5 +388,8 @@ Source Archive:
     OS_VERSION: 11
     OS_IMAGE: "debian:11"
     OS_ARCH: amd64
+    OS_ARCH_PATH:
+      value: $OS_ARCH
+      expand: true
     OS_EXTRA_PACKAGES: zlib1g-dev libpcap-dev
       libgoogle-perftools-dev
