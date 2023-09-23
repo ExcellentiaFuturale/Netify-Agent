@@ -12,6 +12,9 @@ include:
               netify-ci-templates"
     ref: master
     file:
+      - /gitlab/common/global-variables.yml
+      - /gitlab/agent/debian-variables.yml
+      - /gitlab/agent/rhel-variables.yml
       - /gitlab/agent/build-templates.yml
       - /gitlab/agent/test-templates.yml
       - /gitlab/agent/variants-templates.yml
@@ -115,7 +118,7 @@ Ubuntu/22.04/x86-64:
 # RedHat Targets
 
 CentOS/7/x86-64:
-  extends: .rpmos_build
+  extends: .rhel_build
   tags:
     - docker
   only:
@@ -128,7 +131,7 @@ CentOS/7/x86-64:
     OS_ARCH: x86_64
 
 Rocky Linux/8/x86-64:
-  extends: .rpmos_build
+  extends: .rhel_build
   tags:
     - docker
   only:
@@ -142,7 +145,7 @@ Rocky Linux/8/x86-64:
     OS_REPOS: --enablerepo=powertools,epel
 
 AlmaLinux/8/x86-64:
-  extends: .rpmos_build
+  extends: .rhel_build
   tags:
     - docker
   only:
@@ -156,7 +159,7 @@ AlmaLinux/8/x86-64:
     OS_REPOS: --enablerepo=powertools,epel
 
 AlmaLinux/9/x86-64:
-  extends: .rpmos_build
+  extends: .rhel_build
   tags:
     - docker
   only:
@@ -204,7 +207,7 @@ OpenWrt/19.07/x86-64:
 # RedHat Targets
 
 CentOS/7/Test:
-  extends: .rpmos_test
+  extends: .rhel_test
   tags:
     - docker
   only:
@@ -220,7 +223,7 @@ CentOS/7/Test:
     OS_UUID: NE-CE-07-X1
 
 AlmaLinux/8/Test:
-  extends: .rpmos_test
+  extends: .rhel_test
   tags:
     - docker
   only:
@@ -242,7 +245,7 @@ AlmaLinux/8/Test:
 # RedHat Targets
 
 ClearOS/7/x86-64:
-  extends: .rpmos_variants
+  extends: .rhel_variants
   tags:
     - docker
   only:
@@ -258,7 +261,7 @@ ClearOS/7/x86-64:
     OS_ARCH: x86_64
 
 NethServer/7/x86-64:
-  extends: .rpmos_variants
+  extends: .rhel_variants
   tags:
     - docker
   only:
@@ -274,7 +277,7 @@ NethServer/7/x86-64:
     OS_ARCH: x86_64
 
 RHEL/7/x86-64:
-  extends: .rpmos_variants
+  extends: .rhel_variants
   tags:
     - docker
   only:
@@ -290,7 +293,7 @@ RHEL/7/x86-64:
     OS_ARCH: x86_64
 
 RHEL/8/x86-64:
-  extends: .rpmos_variants
+  extends: .rhel_variants
   tags:
     - docker
   only:
