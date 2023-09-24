@@ -65,8 +65,8 @@ class ndFlowStats
 public:
     ndFlowStats()
       : lower_bytes(0), upper_bytes(0), total_bytes(0),
-        lower_packets(0), upper_packets(0), total_packets(0),
-        detection_packets(0), ts_first_update(0)
+        lower_packets(0), upper_packets(0),
+        total_packets(0), detection_packets(0)
 #ifdef _ND_EXTENDED_STATS
         ,
         lower_rate(0), upper_rate(0), tcp_seq_errors(0),
@@ -88,8 +88,7 @@ public:
         lower_packets(stats.lower_packets.load()),
         upper_packets(stats.upper_packets.load()),
         total_packets(stats.total_packets.load()),
-        detection_packets(stats.detection_packets.load()),
-        ts_first_update(stats.ts_first_update.load())
+        detection_packets(stats.detection_packets.load())
 #ifdef _ND_EXTENDED_STATS
         ,
         lower_rate(stats.lower_rate.load()),
@@ -115,7 +114,6 @@ public:
         upper_packets     = fs.upper_packets.load();
         total_packets     = fs.total_packets.load();
         detection_packets = fs.detection_packets.load();
-        ts_first_update   = fs.ts_first_update.load();
 #ifdef _ND_EXTENDED_STATS
         lower_rate     = fs.lower_rate.load();
         upper_rate     = fs.upper_rate.load();
@@ -127,11 +125,10 @@ public:
     };
 
     inline void Reset(bool full_reset = false) {
-        lower_bytes     = 0;
-        upper_bytes     = 0;
-        lower_packets   = 0;
-        upper_packets   = 0;
-        ts_first_update = 0;
+        lower_bytes   = 0;
+        upper_bytes   = 0;
+        lower_packets = 0;
+        upper_packets = 0;
 #ifdef _ND_EXTENDED_STATS
         for (unsigned i = 0; i < ndGC.update_interval; i++) {
             lower_rate_samples[i] = 0;
@@ -158,7 +155,6 @@ public:
 
     atomic<uint8_t> detection_packets;
 
-    atomic<uint64_t> ts_first_update;
 #ifdef _ND_EXTENDED_STATS
     vector<float> lower_rate_samples;
     vector<float> upper_rate_samples;
@@ -519,8 +515,6 @@ public:
                   mdns.domain_name);
 
             serialize(output, { "first_seen_at" }, ts_first_seen);
-            serialize(output, { "first_update_at" },
-              stats.ts_first_update.load());
 
             serialize(output, { "risks", "risks" }, risks);
             serialize(output, { "risks", "ndpi_risk_score" },
