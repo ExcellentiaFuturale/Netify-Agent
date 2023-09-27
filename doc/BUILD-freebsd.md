@@ -78,7 +78,7 @@ To build a debug version with AddressSanitizer:
   # gmake dist-git
 ```
 
-3. Create requires ports directories:
+3. Create required ports directories:
 ```sh
   # mkdir -vp /usr/ports/distfiles /usr/ports/security/netify-agent
 ```
