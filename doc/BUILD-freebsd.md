@@ -1,6 +1,11 @@
 # FreeBSD Build Notes
 
-1. Clone source (recursive):
+1. Clone source (recursive) via HTTP/S:
+```sh
+  # git clone --recursive https://gitlab.com/netify.ai/public/netify-agent.git
+```
+
+2. [ALTERNATIVE] Clone source (recursive) via SSH:
 
 ```sh
   # git clone --recursive git@gitlab.com:netify.ai/public/netify-agent.git
@@ -31,7 +36,7 @@ To build a debug version with AddressSanitizer:
 
 ### Package (txz)
 
-1. Follow steps 1 - 3 if not already done.
+1. Follow manual build steps 1 - 3 above if not already done.
 
 2. Build package:
 ```sh
@@ -64,7 +69,7 @@ To build a debug version with AddressSanitizer:
 
 ### Package (pkg)
 
-1. Follow steps 1 - 2 if not already done.
+1. Follow manual build steps 1 - 2 above if not already done.
 
 2. Create full source archive:
 ```sh
