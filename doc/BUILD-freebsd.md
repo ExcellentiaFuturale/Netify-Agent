@@ -94,10 +94,10 @@ cp netifyd-*.tar.gz /usr/ports/distfiles
 ```sh
 cd /usr/ports/security/netify-agent
 ln -s $HOME/netify-agent/deploy/freebsd/Makefile .
+ln -s $HOME/netify-agent/deploy/freebsd/distinfo .
 ln -s $HOME/netify-agent/deploy/freebsd/files .
 ln -s $HOME/netify-agent/deploy/freebsd/pkg-descr .
 ln -s $HOME/netify-agent/deploy/freebsd/pkg-plist .
-ln -s $HOME/netify-agent/deploy/freebsd/distinfo .
 ```
 
 6. Make package
