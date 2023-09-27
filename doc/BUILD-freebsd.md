@@ -32,6 +32,7 @@ To build a debug version with AddressSanitizer:
 ```
 3. Build (optionally adjust jobs for number of CPUs + 1):
 ```sh
+# Assuming 4 CPUs...
 gmake -j 5
 ```
 
