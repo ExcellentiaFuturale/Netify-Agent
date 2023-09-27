@@ -20,9 +20,10 @@
   # pkg add http://pkg.freebsd.org/freebsd:11:x86:64/release_2/All/json-c-0.13.txz
   # pkg install auto-tools git gmake pkgconf google-perftools
 ```
-2. Configure (cd netify-agent):
+2. Configure source:
 
 ```sh
+  # cd netify-agent
   # ./autogen.sh && ./configure --disable-conntrack --disable-inotify CC=clang CXX=clang++ MAKE=gmake
 ```
 To build a debug version with AddressSanitizer:
@@ -56,9 +57,10 @@ To build a debug version with AddressSanitizer:
   # pkg install autoconf automake bison curl flex git gmake gtar libltdl libpcap libtool pkgconf
 ```
 
-2. Configure (cd netify-agent):
+2. Configure source:
 
 ```sh
+  # cd netify-agent
   # ./autogen.sh && ./configure MAKE=gmake YACC=bison --with-pic=inih --disable-libtcmalloc
 ```
 
