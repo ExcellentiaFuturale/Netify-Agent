@@ -1,4 +1,15 @@
 # FreeBSD Build Notes
+```
+1. Clone source (recursive) via HTTP/S:
+```sh
+git clone --recursive https://gitlab.com/netify.ai/public/netify-agent.git
+```
+
+2. [ALTERNATIVE] Clone source (recursive) via SSH:
+
+```sh
+git clone --recursive git@gitlab.com:netify.ai/public/netify-agent.git
+```
 
 ## FreeBSD 13.x, 14.x+
 
@@ -54,17 +65,6 @@ ln -s $HOME/netify-agent/deploy/freebsd/pkg-plist .
 6. Make package
 ```sh
 make package
-```
-1. Clone source (recursive) via HTTP/S:
-```sh
-git clone --recursive https://gitlab.com/netify.ai/public/netify-agent.git
-```
-
-2. [ALTERNATIVE] Clone source (recursive) via SSH:
-
-```sh
-git clone --recursive git@gitlab.com:netify.ai/public/netify-agent.git
-```
 
 ## FreeBSD 10.x, 11.x
 
