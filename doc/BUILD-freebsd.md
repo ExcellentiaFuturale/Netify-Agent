@@ -1,11 +1,11 @@
 # FreeBSD Build Notes
 
-1. Clone source (recursive) via HTTP/S:
+1. Clone source (recursively) via HTTP/S:
 ```sh
 git clone --recursive https://gitlab.com/netify.ai/public/netify-agent.git
 ```
 
-2. [ALTERNATIVE] Clone source (recursive) via SSH:
+2. [ALTERNATIVE] Clone source (recursively) via SSH:
 
 ```sh
 git clone --recursive git@gitlab.com:netify.ai/public/netify-agent.git
