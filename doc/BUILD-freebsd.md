@@ -69,7 +69,7 @@ make package
 
 ## FreeBSD 10.x, 11.x
 
-Deprecated.  These instructions are for older Netify Agent versions < v4.0.0.
+Deprecated.  These instructions are for older Netify Agent versions (`< v4.0.0`).
 
 ### Manual Builds
 
