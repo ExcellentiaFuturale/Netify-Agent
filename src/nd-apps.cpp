@@ -30,8 +30,8 @@
 #include "nd-except.hpp"
 #include "nd-flow-parser.hpp"
 
-typedef radix_tree<ndRadixNetworkEntry<32>, nd_app_id_t> nd_rn4_app;
-typedef radix_tree<ndRadixNetworkEntry<128>, nd_app_id_t> nd_rn6_app;
+typedef radix_tree<ndRadixNetworkEntry<_ND_ADDR_BITSv4>, nd_app_id_t> nd_rn4_app;
+typedef radix_tree<ndRadixNetworkEntry<_ND_ADDR_BITSv6>, nd_app_id_t> nd_rn6_app;
 
 ndApplications::ndApplications()
   : stats{ 0 }, app_networks4(NULL), app_networks6(NULL) {
@@ -291,8 +291,8 @@ nd_app_id_t ndApplications::Find(const ndAddr &addr) {
         return ND_APP_UNKNOWN;
 
     if (addr.IsIPv4()) {
-        ndRadixNetworkEntry<32> entry;
-        if (ndRadixNetworkEntry<32>::CreateQuery(entry, addr))
+        ndRadixNetworkEntry<_ND_ADDR_BITSv4> entry;
+        if (ndRadixNetworkEntry<_ND_ADDR_BITSv4>::CreateQuery(entry, addr))
         {
             lock_guard<mutex> ul(lock);
 
@@ -304,8 +304,8 @@ nd_app_id_t ndApplications::Find(const ndAddr &addr) {
     }
 
     if (addr.IsIPv6()) {
-        ndRadixNetworkEntry<128> entry;
-        if (ndRadixNetworkEntry<128>::CreateQuery(entry, addr))
+        ndRadixNetworkEntry<_ND_ADDR_BITSv6> entry;
+        if (ndRadixNetworkEntry<_ND_ADDR_BITSv6>::CreateQuery(entry, addr))
         {
             lock_guard<mutex> ul(lock);
 
@@ -485,8 +485,8 @@ bool ndApplications::AddNetwork(nd_app_id_t id,
 
     try {
         if (addr.addr.ss.ss_family == AF_INET) {
-            ndRadixNetworkEntry<32> entry;
-            if (ndRadixNetworkEntry<32>::Create(entry, addr))
+            ndRadixNetworkEntry<_ND_ADDR_BITSv4> entry;
+            if (ndRadixNetworkEntry<_ND_ADDR_BITSv4>::Create(entry, addr))
             {
                 nd_rn4_app *rn4 = static_cast<nd_rn4_app *>(
                   app_networks4);
@@ -495,8 +495,8 @@ bool ndApplications::AddNetwork(nd_app_id_t id,
             }
         }
         else {
-            ndRadixNetworkEntry<128> entry;
-            if (ndRadixNetworkEntry<128>::Create(entry, addr))
+            ndRadixNetworkEntry<_ND_ADDR_BITSv6> entry;
+            if (ndRadixNetworkEntry<_ND_ADDR_BITSv6>::Create(entry, addr))
             {
                 nd_rn6_app *rn6 = static_cast<nd_rn6_app *>(
                   app_networks6);

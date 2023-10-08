@@ -208,6 +208,11 @@ public:
         return cached_addr;
     }
 
+    friend ostream &operator<<(ostream &stream, const ndAddr &addr) {
+        stream << addr.cached_addr;
+        return stream;
+    }
+
     enum ComparisonFlags {
         cfADDR   = 0x1,
         cfPORT   = 0x2,

@@ -18,13 +18,14 @@ confdefs.h
 config.*
 configure
 depcomp
+distinfo
 install-sh
 libtool
 ltmain.sh
 missing
+netifyd-CentOS_8.spec
 netifyd-*.tar.gz
 netifyd-*.txz
-netifyd-CentOS_8.spec
 stamp-h1
 test-driver
 ylwrap

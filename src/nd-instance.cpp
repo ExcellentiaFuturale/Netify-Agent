@@ -18,6 +18,7 @@
 // License along with this program.  If not, see
 // <http://www.gnu.org/licenses/>.
 
+#include <ios>
 #ifdef HAVE_CONFIG_H
 #include "config.h"
 #endif
@@ -26,6 +27,7 @@
 #include <sys/resource.h>
 #include <unistd.h>
 
+#include <iostream>
 #include <algorithm>
 #include <cerrno>
 
@@ -272,8 +274,7 @@ ndInstance::InitializeConfig(int argc, char * const argv[]) {
             ndGC_SetFlag(ndGF_IGNORE_IFACE_CONFIGS, true);
             break;
         case '?':
-            fprintf(stderr,
-              "Try `--help' for more information.\n");
+            cerr << "Try `--help' for more information.\n";
             return ndCR_INVALID_OPTION;
         case 'c': conf_filename = optarg; break;
         case 'd': ndGC_SetFlag(ndGF_DEBUG, true); break;
@@ -283,9 +284,8 @@ ndInstance::InitializeConfig(int argc, char * const argv[]) {
 
     if (conf_filename != "/dev/null") {
         if (ndGC.Load(conf_filename) == false) {
-            fprintf(stderr,
-              "Error while loading configuration: %s\n",
-              conf_filename.c_str());
+            cerr << "Error while loading configuration: "
+                 << conf_filename << endl;
             return ndCR_Pack(ndCR_LOAD_FAILURE, 1);
         }
 
@@ -314,36 +314,32 @@ ndInstance::InitializeConfig(int argc, char * const argv[]) {
         case _ND_LO_CA_CAPTURE_BASE:
             ndGC.ca_capture_base = (int16_t)atoi(optarg);
             if (ndGC.ca_capture_base > status.cpus) {
-                fprintf(stderr,
-                  "Capture thread base greater than online "
-                  "cores.\n");
+                cerr << "Capture thread base greater than "
+                        "online cores.\n";
                 return ndCR_INVALID_VALUE;
             }
             break;
         case _ND_LO_CA_CONNTRACK:
             ndGC.ca_conntrack = (int16_t)atoi(optarg);
             if (ndGC.ca_conntrack > status.cpus) {
-                fprintf(stderr,
-                  "Conntrack thread ID greater than online "
-                  "cores.\n");
+                cerr << "Conntrack thread ID greater than "
+                        "online cores.\n";
                 return ndCR_INVALID_VALUE;
             }
             break;
         case _ND_LO_CA_DETECTION_BASE:
             ndGC.ca_detection_base = (int16_t)atoi(optarg);
             if (ndGC.ca_detection_base > status.cpus) {
-                fprintf(stderr,
-                  "Detection thread base greater than "
-                  "online cores.\n");
+                cerr << "Detection thread base greater "
+                        "than online cores.\n";
                 return ndCR_INVALID_VALUE;
             }
             break;
         case _ND_LO_CA_DETECTION_CORES:
             ndGC.ca_detection_cores = (int16_t)atoi(optarg);
             if (ndGC.ca_detection_cores > status.cpus) {
-                fprintf(stderr,
-                  "Detection cores greater than online "
-                  "cores.\n");
+                cerr << "Detection cores greater than "
+                        "online cores.\n";
                 return ndCR_INVALID_VALUE;
             }
             break;
@@ -352,9 +348,8 @@ ndInstance::InitializeConfig(int argc, char * const argv[]) {
             rc = apps.Save("/dev/stdout");
             return ndCR_Pack(ndCR_EXPORT_APPS, (rc) ? 0 : 1);
 #else
-            fprintf(stderr,
-              "Sorry, this feature was disabled "
-              "(embedded).\n");
+            cerr << "Sorry, this feature was disabled "
+                    "(embedded).\n";
             return ndCR_DISABLED_OPTION;
 #endif
         case _ND_LO_DUMP_SORT_BY_TAG:
@@ -377,11 +372,9 @@ ndInstance::InitializeConfig(int argc, char * const argv[]) {
             else if (strncasecmp("protocol", optarg, 8) == 0)
                 rc = DumpList(ndDUMP_TYPE_CAT_PROTO | dump_flags);
             else {
-                fprintf(stderr,
-                  "Invalid catetory type \"%s\", valid "
-                  "types: "
-                  "applications, protocols\n",
-                  optarg);
+                cerr << "Invalid catetory type \"" << optarg
+                     << "\", valid types: applications, "
+                        "protocols\n";
                 rc = 0;
             }
             return ndCR_Pack(ndCR_DUMP_LIST, (rc) ? 0 : 1);
@@ -411,14 +404,12 @@ ndInstance::InitializeConfig(int argc, char * const argv[]) {
             ndGC_SetFlag(ndGF_RUN_WITHOUT_SOURCES, true);
             break;
         case '?':
-            fprintf(stderr,
-              "Try `--help' for more information.\n");
+            cerr << "Try `--help' for more information.\n";
             return ndCR_INVALID_OPTION;
         case 'A':
             if (last_iface.size() == 0) {
-                fprintf(stderr,
-                  "You must specify an interface first "
-                  "(-I/E).\n");
+                cerr << "You must specify an interface "
+                        "first (-I/E).\n";
                 return ndCR_INVALID_OPTION;
             }
             ndGC.AddInterfaceAddress(last_iface, optarg);
@@ -435,9 +426,8 @@ ndInstance::InitializeConfig(int argc, char * const argv[]) {
             break;
         case 'F':
             if (last_iface.size() == 0) {
-                fprintf(stderr,
-                  "You must specify an interface first "
-                  "(-I/E).\n");
+                cerr << "You must specify an interface "
+                        "first (-I/E).\n";
                 return ndCR_INVALID_OPTION;
             }
             ndGC.AddInterfaceFilter(last_iface, optarg);
@@ -463,9 +453,8 @@ ndInstance::InitializeConfig(int argc, char * const argv[]) {
             break;
         case 'N':
             if (last_iface.size() == 0) {
-                fprintf(stderr,
-                  "You must specify an interface first "
-                  "(-I/E).\n");
+                cerr << "You must specify an interface "
+                        "first (-I/E).\n";
                 return ndCR_INVALID_OPTION;
             }
             ndGC.AddInterfacePeer(last_iface, optarg);
@@ -477,7 +466,7 @@ ndInstance::InitializeConfig(int argc, char * const argv[]) {
             if ((rc = CheckAgentUUID())) {
                 string uuid;
                 ndGC.GetUUID(ndGlobalConfig::UUID_AGENT, uuid);
-                fprintf(stdout, "Agent UUID: %s\n", uuid.c_str());
+                cout << "Agent UUID: " << uuid << endl;
             }
             return ndCR_Pack(ndCR_PROVISION_UUID, (rc) ? 0 : 1);
         case 'R':
@@ -494,14 +483,13 @@ ndInstance::InitializeConfig(int argc, char * const argv[]) {
             if ((rc = nd_sha1_file(optarg, digest)) == 0) {
                 string sha1;
                 nd_sha1_to_string(digest, sha1);
-                fprintf(stdout, "%s  %s\n", sha1.c_str(), optarg);
+                cout << sha1 << " " << optarg << endl;
             }
             return ndCR_Pack(ndCR_HASH_TEST, rc);
         }
 #else
-            fprintf(stderr,
-              "Sorry, this feature was disabled "
-              "(embedded).\n");
+            cerr << "Sorry, this feature was disabled "
+                    "(embedded).\n";
             return ndCR_DISABLED_OPTION;
 #endif
         case 's':
@@ -513,10 +501,9 @@ ndInstance::InitializeConfig(int argc, char * const argv[]) {
             break;
         case 'T':
             if ((ndGC.h_flow = fopen(optarg, "w")) == NULL) {
-                fprintf(stderr,
-                  "Error while opening test output log: "
-                  "%s: %s\n",
-                  optarg, strerror(errno));
+                cerr
+                  << "Error while opening test output log: " << optarg
+                  << ": " << strerror(errno) << endl;
                 return ndCR_INVALID_VALUE;
             }
             break;
@@ -524,7 +511,7 @@ ndInstance::InitializeConfig(int argc, char * const argv[]) {
         {
             string uuid;
             nd_generate_uuid(uuid);
-            fprintf(stdout, "%s\n", uuid.c_str());
+            cout << uuid << endl;
         }
             return ndCR_GENERATE_UUID;
         case 'u':
@@ -551,9 +538,8 @@ ndInstance::InitializeConfig(int argc, char * const argv[]) {
     if (! ndGC_ALLOW_UNPRIV) {
         // Require UID 0 from this point on...
         if (geteuid() != 0) {
-            fprintf(stderr,
-              "Error starting Agent: %s (not root)\n",
-              strerror(EPERM));
+            cerr << "Error starting Agent: " << strerror(EPERM)
+                 << " (not root)\n";
             return ndCR_INVALID_PERMS;
         }
     }
@@ -577,29 +563,27 @@ ndInstance::InitializeConfig(int argc, char * const argv[]) {
     if (ndGC_DEBUG_CURL) {
         curl_version_info_data *curl_version =
           curl_version_info(CURLVERSION_NOW);
-        fprintf(stdout, "%s: libCURL version %u.%u.%u\n",
-          tag.c_str(), (curl_version->version_num >> 16) & 0xff,
-          (curl_version->version_num >> 8) & 0xff,
-          curl_version->version_num & 0xff);
+        cout << tag << ": libCURL version "
+             << ((curl_version->version_num >> 16) & 0xff) << "."
+             << ((curl_version->version_num >> 8) & 0xff) << "."
+             << (curl_version->version_num & 0xff) << endl;
 #if (LIBCURL_VERSION_NUM >= 0x075600)
         const curl_ssl_backend **curl_ssl_backends;
         curl_global_sslset((curl_sslbackend)-1, NULL,
           &curl_ssl_backends);
 
         for (int i = 0; curl_ssl_backends[i]; i++) {
-            fprintf(stdout,
-              "%s: libCURL SSL backend #%d: %s (ID: %d)\n",
-              tag.c_str(), i, curl_ssl_backends[i]->name,
-              curl_ssl_backends[i]->id);
+            cout << tag << ": libCURL SSL backend #" << i
+                 << ": " << curl_ssl_backends[i]->name
+                 << " (ID: " << curl_ssl_backends[i]->id << endl;
         }
 #endif
     }
 
     CURLcode cc;
     if ((cc = curl_global_init(CURL_GLOBAL_DEFAULT)) != 0) {
-        fprintf(stderr,
-          "%s: Unable to initialize libCURL: %d\n",
-          tag.c_str(), cc);
+        cerr << tag << ": Unable to initialize libCURL: " << cc
+             << endl;
         return ndCR_LIBCURL_FAILURE;
     }
 
@@ -625,8 +609,8 @@ bool ndInstance::InitializeTimers(int sig_update, int sig_update_napi) {
             timer_update_napi.Create(sig_update_napi);
     }
     catch (exception &e) {
-        nd_printf("%s: Error creating timer(s): %s\n",
-          tag.c_str(), e.what());
+        cout << tag << ": Error creating timer(s): " << tag
+             << ": " << e.what() << endl;
 
         exit_code = EXIT_FAILURE;
 
@@ -639,8 +623,8 @@ bool ndInstance::InitializeTimers(int sig_update, int sig_update_napi) {
 bool ndInstance::Daemonize(void) {
     if (! ndGC_DEBUG && ! ndGC_REMAIN_IN_FOREGROUND) {
         if (daemon(1, 0) != 0) {
-            nd_printf("%s: Error while daemonizing: %s\n",
-              tag.c_str(), strerror(errno));
+            cerr << tag << ": Error while daemonizing: "
+                 << strerror(errno) << endl;
             return false;
         }
     }
@@ -649,7 +633,8 @@ bool ndInstance::Daemonize(void) {
         if (mkdir(ndGC.path_state_volatile.c_str(), 0755) != 0)
         {
             nd_printf(
-              "%s: Error creating volatile state path: %s: "
+              "%s: Error creating volatile state path: "
+              "%s: "
               "%s\n",
               tag.c_str(), ndGC.path_state_volatile.c_str(),
               strerror(errno));
@@ -679,7 +664,7 @@ bool ndInstance::SetConfigOption(int option, const string &arg) {
 
     switch (option) {
     case _ND_LO_ENABLE_SINK:
-        fprintf(stdout, "Enabling Netify Cloud Sink.\n");
+        cout << "Enabling Netify Cloud Sink.\n";
         func     = "config_enable_plugin";
         filename = ndGC.path_plugins;
         filename.append("/\?\?-netify-sink-mqtt.conf");
@@ -692,7 +677,7 @@ bool ndInstance::SetConfigOption(int option, const string &arg) {
         filename.append(".conf");
         break;
     case _ND_LO_DISABLE_SINK:
-        fprintf(stdout, "Disabling Netify Cloud Sink.\n");
+        cout << "Disabling Netify Cloud Sink.\n";
         func     = "config_disable_plugin";
         filename = ndGC.path_plugins;
         filename.append("/\?\?-netify-sink-mqtt.conf");
@@ -705,8 +690,8 @@ bool ndInstance::SetConfigOption(int option, const string &arg) {
         filename.append(".conf");
         break;
     default:
-        fprintf(stderr,
-          "Unrecognized configuration option: %d\n", option);
+        cerr << "Unrecognized configuration option: " << option
+             << endl;
         return false;
     }
 
@@ -714,45 +699,40 @@ bool ndInstance::SetConfigOption(int option, const string &arg) {
     vector<string> files;
 
     if ((rc = nd_glob(filename, files)) != 0) {
-        fprintf(stderr,
-          "Error locating configuration file: %s: %s\n",
-          filename.c_str(), strerror(rc));
+        cerr << "Error locating configuration file: " << filename
+             << ": " << strerror(errno) << endl;
         return false;
     }
 
     for (string &file : files) {
         rc = nd_functions_exec(func, file, output);
         if (rc != 0) {
-            fprintf(stderr,
-              "Error while modifying configuration file.\n"
-              "Manually edit configuration file: %s\n",
-              filename.c_str());
+            cerr << "Error while modifying configuration "
+                    "file.\n";
+            cerr << "Manually edit configuration file: " << filename
+                 << endl;
 
-            if (ndGC_DEBUG)
-                fprintf(stderr, "%s", output.c_str());
+            if (ndGC_DEBUG) cerr << output;
 
             return false;
         }
         else {
-            fprintf(stdout, "Configuration modified: %s\n",
-              filename.c_str());
+            cout << "Configuration modified: " << filename << endl;
         }
     }
 
     if (files.size() && rc == 0) {
         rc = nd_functions_exec("restart_netifyd", string(), output);
         if (rc != 0) {
-            fprintf(stderr,
-              "Error while restarting agent.\n"
-              "A manual restart is required to apply "
-              "changes.\n");
+            cerr << "Error while restarting agent.\nA "
+                    "manual restart is required to apply "
+                    "changes.\n";
 
-            if (ndGC_DEBUG)
-                fprintf(stderr, "%s", output.c_str());
+            if (ndGC_DEBUG) cerr << output;
 
             return false;
         }
-        else fprintf(stdout, "Configuration applied.\n");
+        else cout << "Configuration applied.\n";
     }
 
     return true;
@@ -763,9 +743,8 @@ bool ndInstance::DumpList(uint8_t type) {
       ! (type & ndDUMP_TYPE_APPS) && ! (type & ndDUMP_TYPE_CATS) &&
       ! (type & ndDUMP_TYPE_RISKS))
     {
-        fprintf(stderr,
-          "No filter type specified (application, "
-          "protocol).\n");
+        cerr << "No filter type specified (application, "
+                "protocol).\n";
         return false;
     }
 
@@ -826,12 +805,16 @@ bool ndInstance::DumpList(uint8_t type) {
             if (cat_id == ND_CAT_UNKNOWN || tag.empty())
                 tag = "unknown/" + to_string(cat_id);
 
-            printf("%6u: %s: %s\n", entry.first,
-              entry.second.c_str(), tag.c_str());
+            cout << right << setw(6) << entry.first << left
+                 << setw(0) << ": " << entry.second << ": "
+                 << tag << endl;
         }
-        else
-            printf("%6u: %s\n", entry.first, entry.second.c_str());
+        else {
+            cout << right << setw(6) << entry.first << left
+                 << setw(0) << ": " << entry.second << endl;
+        }
     }
+
     for (auto &entry : entries_by_tag) {
         if (type & ndDUMP_WITH_CATS &&
           (type & ndDUMP_TYPE_PROTOS || type & ndDUMP_TYPE_APPS))
@@ -844,11 +827,14 @@ bool ndInstance::DumpList(uint8_t type) {
             if (cat_id == ND_CAT_UNKNOWN || tag.empty())
                 tag = "unknown/" + to_string(cat_id);
 
-            printf("%6u: %s: %s\n", entry.second,
-              entry.first.c_str(), tag.c_str());
+            cout << right << setw(6) << entry.second << left
+                 << setw(0) << ": " << entry.first << ": "
+                 << tag << endl;
         }
-        else
-            printf("%6u: %s\n", entry.second, entry.first.c_str());
+        else {
+            cout << right << setw(6) << entry.second << left
+                 << setw(0) << ": " << entry.first << endl;
+        }
     }
 
     return true;
@@ -858,13 +844,14 @@ bool ndInstance::LookupAddress(const string &ip) {
     ndAddr addr(ip);
 
     if (! addr.IsValid() || ! addr.IsIP()) {
-        fprintf(stderr, "Invalid IP address: %s\n", ip.c_str());
+        cerr << "Invalid IP address: " << ip << endl;
         return false;
     }
 
     nd_app_id_t id = apps.Find(addr);
 
-    fprintf(stdout, "%6u: %s\n", id, apps.Lookup(id));
+    cout << right << setw(6) << id << left << setw(0)
+         << apps.Lookup(id) << endl;
 
     return true;
 }
@@ -926,8 +913,7 @@ void ndInstance::CommandLineHelp(bool version_only) {
 
           "\nGlobal options:\n"
           "  -d, --debug\n    Enable debug output and "
-          "remain "
-          "in foreground.\n"
+          "remain in foreground.\n"
           "  -n, --debug-ndpi\n    In debug mode, display "
           "nDPI debug message when enabled "
           "(compile-time).\n"
@@ -949,11 +935,9 @@ void ndInstance::CommandLineHelp(bool version_only) {
           "  -u, --uuid\n    Display configured Agent "
           "UUID.\n"
           "  -U, --uuidgen\n    Generate (but don't save) "
-          "a "
-          "new Agent UUID.\n"
+          "a new Agent UUID.\n"
           "  -p, --provision\n    Provision Agent "
-          "(generate "
-          "and save Agent UUID).\n"
+          "(generate and save Agent UUID).\n"
           "  -c, --config <filename>\n    Specify an "
           "alternate Agent configuration.\n"
           "    Default: %s\n"
@@ -1088,8 +1072,7 @@ bool ndInstance::CheckAgentUUID(void) {
         {
             nd_generate_uuid(uuid);
 
-            fprintf(stdout,
-              "Generated a new Agent UUID: %s\n", uuid.c_str());
+            cout << "Generated a new Agent UUID: " << uuid << endl;
             if (! ndGC.SaveUUID(ndGlobalConfig::UUID_AGENT, uuid))
                 return false;
         }
@@ -1276,7 +1259,8 @@ bool ndInstance::DisplayAgentStatus(void) {
 
         if (nd_pid <= 0) {
             fprintf(stderr,
-              "%s%s The following run-time information is "
+              "%s%s The following run-time information "
+              "is "
               "likely out-dated.%s\n",
               ND_C_YELLOW, ND_I_WARN, ND_C_RESET);
         }
@@ -1521,7 +1505,8 @@ bool ndInstance::DisplayAgentStatus(void) {
 
         if (! ndGC_USE_NAPI) {
             fprintf(stderr,
-              "  %s Netify API updates can be enabled from "
+              "  %s Netify API updates can be enabled "
+              "from "
               "the configuration file:\n    %s\n",
               ND_I_NOTE, conf_filename.c_str());
         }
@@ -1566,7 +1551,8 @@ bool ndInstance::DisplayAgentStatus(void) {
             fprintf(stderr, "%s%s%s site UUID is not set.\n",
               ND_C_YELLOW, ND_I_WARN, ND_C_RESET);
             fprintf(stderr,
-              "  %s A new site UUID will be automatically "
+              "  %s A new site UUID will be "
+              "automatically "
               "set "
               "after this agent has been provisioned.\n",
               ND_I_NOTE);
@@ -2024,7 +2010,8 @@ bool ndInstance::CreateCaptureThreads(ndInterfaces &ifaces,
 #endif
         default:
             nd_printf(
-              "%s: WARNING: Unsupported capture type: %s: "
+              "%s: WARNING: Unsupported capture type: "
+              "%s: "
               "%hu",
               tag.c_str(), it.second->ifname.c_str(),
               it.second->capture_type);

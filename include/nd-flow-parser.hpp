@@ -88,8 +88,8 @@ public:
     nd_flow_ptr flow;
     const char *local_mac;
     const char *other_mac;
-    const char *local_ip;
-    const char *other_ip;
+    const ndAddr *local_ip;
+    const ndAddr *other_ip;
     uint16_t local_port;
     uint16_t other_port;
     uint16_t origin;

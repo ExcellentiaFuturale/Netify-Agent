@@ -23,6 +23,8 @@
 #include "config.h"
 #endif
 
+#include <radix/radix_tree.hpp>
+
 #include "nd-flow-parser.hpp"
 #include "nd-flow-expr.hpp"
 
@@ -32,10 +34,62 @@ extern "C" {
     void yyerror(YYLTYPE *yyllocp, yyscan_t scanner, const char *message);
 }
 
-void yyerror(YYLTYPE *yyllocp, yyscan_t scanner, const char *message)
-{
+void yyerror(YYLTYPE *yyllocp, yyscan_t scanner, const char *message) {
     throw string(message);
 }
+
+static bool is_addr_equal(const ndAddr *flow_addr, const string &compr_addr) {
+  typedef radix_tree<ndRadixNetworkEntry<_ND_ADDR_BITSv4>, bool> nd_rn4_addr;
+  typedef radix_tree<ndRadixNetworkEntry<_ND_ADDR_BITSv6>, bool> nd_rn6_addr;
+
+  ndAddr addr(compr_addr);
+  if (! addr.IsValid() || ! addr.IsIP()) return false;
+  if (! (flow_addr->IsIPv4() == addr.IsIPv4())) return false;
+  if (! (flow_addr->IsIPv6() == addr.IsIPv6())) return false;
+
+  addr.SetComparisonFlags(ndAddr::cfADDR);
+
+  if (! addr.IsNetwork())
+    return (addr == *flow_addr);
+
+  try {
+    if (addr.IsIPv4()) {
+      nd_rn4_addr rn;
+      ndRadixNetworkEntry<_ND_ADDR_BITSv4> entry;
+      if (! ndRadixNetworkEntry<_ND_ADDR_BITSv4>::Create(entry, addr))
+        return false;
+
+      rn[entry] = true;
+
+      nd_rn4_addr::iterator it;
+      if (ndRadixNetworkEntry<_ND_ADDR_BITSv4>::CreateQuery(entry, *flow_addr)) {
+        if ((it = rn.longest_match(entry)) != rn.end())
+          return true;
+      }
+    }
+    else {
+      nd_rn6_addr rn;
+      ndRadixNetworkEntry<_ND_ADDR_BITSv6> entry;
+      if (! ndRadixNetworkEntry<_ND_ADDR_BITSv6>::Create(entry, addr))
+        return false;
+
+      rn[entry] = true;
+
+      nd_rn6_addr::iterator it;
+      if (ndRadixNetworkEntry<_ND_ADDR_BITSv6>::CreateQuery(entry, *flow_addr)) {
+        if ((it = rn.longest_match(entry)) != rn.end())
+          return true;
+      }
+    }
+  }
+  catch (runtime_error &e) {
+      nd_dprintf("Error adding network: %s: %s\n",
+        compr_addr.c_str(), e.what());
+  }
+
+  return false;
+}
+
 }
 
 %code requires {
@@ -403,13 +457,13 @@ expr_other_mac:
 expr_local_ip:
       FLOW_LOCAL_IP CMP_EQUAL value_addr_ip {
         _NDFP_result = ($$ = (
-            strncasecmp(_NDFP_local_ip, $3, INET6_ADDRSTRLEN) == 0
+            is_addr_equal(_NDFP_local_ip, $3) == true
         ));
         _NDFP_debugf("Local IP == %s? %s\n", $3, (_NDFP_result) ? "yes" : "no");
     }
     | FLOW_LOCAL_IP CMP_NOTEQUAL value_addr_ip {
         _NDFP_result = ($$ = (
-            strncasecmp(_NDFP_local_ip, $3, INET6_ADDRSTRLEN) != 0
+            is_addr_equal(_NDFP_local_ip, $3) == false
         ));
         _NDFP_debugf("Local IP != %s? %s\n", $3, (_NDFP_result) ? "yes" : "no");
     }
@@ -418,13 +472,13 @@ expr_local_ip:
 expr_other_ip:
       FLOW_OTHER_IP CMP_EQUAL value_addr_ip {
         _NDFP_result = ($$ = (
-            strncasecmp(_NDFP_other_ip, $3, INET6_ADDRSTRLEN) == 0
+            is_addr_equal(_NDFP_other_ip, $3) == true
         ));
         _NDFP_debugf("Other IP == %s? %s\n", $3, (_NDFP_result) ? "yes" : "no");
     }
     | FLOW_OTHER_IP CMP_NOTEQUAL value_addr_ip {
         _NDFP_result = ($$ = (
-            strncasecmp(_NDFP_other_ip, $3, INET6_ADDRSTRLEN) != 0
+            is_addr_equal(_NDFP_other_ip, $3) == false
         ));
         _NDFP_debugf("Other IP != %s? %s\n", $3, (_NDFP_result) ? "yes" : "no");
     }
@@ -1416,8 +1470,8 @@ bool ndFlowParser::Parse(nd_flow_ptr const& flow, const string &expr)
         local_mac = flow->lower_mac.GetString().c_str();
         other_mac = flow->upper_mac.GetString().c_str();
 
-        local_ip = flow->lower_addr.GetString().c_str();
-        other_ip = flow->upper_addr.GetString().c_str();
+        local_ip = &flow->lower_addr;
+        other_ip = &flow->upper_addr;
 
         local_port = flow->lower_addr.GetPort();
         other_port = flow->upper_addr.GetPort();
@@ -1437,8 +1491,8 @@ bool ndFlowParser::Parse(nd_flow_ptr const& flow, const string &expr)
         local_mac = flow->upper_mac.GetString().c_str();
         other_mac = flow->lower_mac.GetString().c_str();
 
-        local_ip = flow->upper_addr.GetString().c_str();
-        other_ip = flow->lower_addr.GetString().c_str();
+        local_ip = &flow->upper_addr;
+        other_ip = &flow->lower_addr;
 
         local_port = flow->upper_addr.GetPort();
         other_port = flow->lower_addr.GetPort();
