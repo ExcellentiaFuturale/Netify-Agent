@@ -135,7 +135,9 @@ typedef void* yyscan_t;
 
 %token VALUE_ADDR_IPMASK
 %token <bool_number> VALUE_TRUE VALUE_FALSE
-%token <string> VALUE_ADDR_MAC VALUE_ADDR_IPV4 VALUE_ADDR_IPV6 VALUE_NAME VALUE_REGEX
+%token <string> VALUE_ADDR_MAC VALUE_NAME VALUE_REGEX
+%token <string> VALUE_ADDR_IPV4 VALUE_ADDR_IPV4_CIDR
+%token <string> VALUE_ADDR_IPV6 VALUE_ADDR_IPV6_CIDR
 %token <ul_number> VALUE_NUMBER
 
 %type <us_number> value_other_type value_origin_type
@@ -486,7 +488,9 @@ expr_other_ip:
 
 value_addr_ip:
       VALUE_ADDR_IPV4 { strncpy($$, $1, _NDFP_MAX_NAMELEN); }
+    | VALUE_ADDR_IPV4_CIDR { strncpy($$, $1, _NDFP_MAX_NAMELEN); }
     | VALUE_ADDR_IPV6 { strncpy($$, $1, _NDFP_MAX_NAMELEN); }
+    | VALUE_ADDR_IPV6_CIDR { strncpy($$, $1, _NDFP_MAX_NAMELEN); }
     ;
 
 expr_local_port:
