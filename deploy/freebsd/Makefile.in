@@ -1,21 +1,18 @@
 # Created by: Darryl Sokoloski <darryl@egloo.ca>
-# $FreeBSD$
 
 PORTNAME=@PACKAGE_TARNAME@
 PORTVERSION=@PACKAGE_VERSION@
-PORTEPOCH=1
 CATEGORIES=security
-MAINTAINER=darryl@egloo.ca
-COMMENT=The Netify Agent Deep-packet Inspection Processor
-WWW=https://netify.ai/
 MASTER_SITES=http://download.netify.ai/netify/source/
+
+MAINTAINER=darryl@egloo.ca
+COMMENT=Netify Agent Deep-packet Inspection Processor
+WWW=https://netify.ai/
+
 LICENSE=GPLv3+
 LICENSE_FILE=${WRKSRC}/LICENSE
 
-BUILD_DEPENDS=\
-	bison:devel/bison \
-	flex:textproc/flex
-
+BUILD_DEPENDS=flex:textproc/flex
 LIB_DEPENDS=\
 	libcurl.so:ftp/curl \
 	libpcap.so:net/libpcap \
@@ -30,10 +27,18 @@ USES=\
 	libtool \
 	localbase:ldflags \
 	pathfix \
-	pkgconfig
+	pkgconfig \
+	shebangfix
+
+GNU_CONFIGURE=yes
 
 USE_RC_SUBR=@PACKAGE_TARNAME@
 USE_LDCONFIG=yes
+
+SHEBANG_FILES=\
+	doc/json-socket-example.sh
+
+INSTALL_TARGET=install-strip
 
 OPTIONS_DEFINE=MAKE_JOBS LOCAL_GCRYPT DEVEL
 OPTIONS_DEFAULT=MAKE_JOBS LOCAL_GCRYPT DEVEL
@@ -49,9 +54,8 @@ DEVEL_DESC=Install development files
 
 SUB_LIST=PACKAGE_TARNAME=@PACKAGE_TARNAME@
 
-GNU_CONFIGURE=yes
 CONFIGURE_ARGS=\
-	MAKE=gmake YACC=bison \
+	MAKE=${GMAKE} YACC=bison \
 	--with-pic=inih --disable-libtcmalloc
 
 INSTALL_TARGET=install-strip
@@ -61,6 +65,20 @@ post-install:
 	${MV} ${STAGEDIR}${PREFIX}/etc/netifyd.conf ${STAGEDIR}${PREFIX}/etc/netifyd.conf.sample
 	${MV} ${STAGEDIR}${PREFIX}/etc/netifyd/netify-apps.conf ${STAGEDIR}${PREFIX}/etc/netifyd/netify-apps.conf.sample
 	${MV} ${STAGEDIR}${PREFIX}/etc/netifyd/netify-categories.json ${STAGEDIR}${PREFIX}/etc/netifyd/netify-categories.json.sample
+	${RM} ${STAGEDIR}/lib/libndpi.*
+	${RM} ${STAGEDIR}${PREFIX}/bin/check-protocols
+	${RM} ${STAGEDIR}${PREFIX}/bin/check-risks
+	${RM} ${STAGEDIR}${PREFIX}/bin/ndpiReader
+	${RM} ${STAGEDIR}${ETCDIR}/interfaces.d/10-example-nfq.conf
+	${RM} ${STAGEDIR}${ETCDIR}/interfaces.d/10-example-tpv3.conf
+	${RM} ${STAGEDIR}${PREFIX}/libdata/pkgconfig/libndpi.pc
+	${RM} ${STAGEDIR}${DATADIR}/../ndpi/ndpiCustomCategory.txt
+	${RM} ${STAGEDIR}${DATADIR}/../ndpi/ndpiProtos.txt
+	${RMDIR} ${STAGEDIR}${DATADIR}/../ndpi
+	${RM} ${STAGEDIR}${DATADIR}/README-JSON-socket-example.md
+	${RM} ${STAGEDIR}${DATADIR}/json-socket-example.sh
+	${RM} ${STAGEDIR}${DATADIR}/json-socket-filter.jq
+	${RM} ${STAGEDIR}${PREFIX}/share/netifyd/watchdog.sh
 
 post-install-DEVEL-on:
 	${MV} ${STAGEDIR}${PREFIX}/include/ndpi ${STAGEDIR}${PREFIX}/include/netifyd
