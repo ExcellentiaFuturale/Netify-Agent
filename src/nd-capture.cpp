@@ -1127,9 +1127,7 @@ nd_process_ip:
             stats.pkt.tcp_seq_errors++;
         }
 
-        if (hdr_tcp->th_flags & TH_FIN)
-            nf->flags.tcp_fin = true;
-        if (hdr_tcp->th_flags & TH_ACK && nf->flags.tcp_fin)
+        if ((hdr_tcp->th_flags & TH_FIN) && (hdr_tcp->th_flags & TH_ACK))
             nf->flags.tcp_fin_ack++;
         if (hdr_tcp->th_flags & TH_RST) {
 #ifdef _ND_EXTENDED_STATS

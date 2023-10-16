@@ -785,7 +785,6 @@ public:
         atomic<bool> ip_nat;
         atomic<bool> risk_checked;
         atomic<bool> soft_dissector;
-        atomic<bool> tcp_fin;
         atomic<uint8_t> tcp_fin_ack;
     } flags;
 
