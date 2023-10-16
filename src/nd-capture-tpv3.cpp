@@ -162,8 +162,8 @@ ndPacketRing::ndPacketRing(const string &ifname,
   const nd_config_tpv3 &config,
   ndPacketStats *stats)
   : ifname(ifname), sd(-1), buffer(nullptr), tp_hdr_len(0),
-    tp_reserved(0), tp_frame_size(0), tp_ring_size(0),
-    tp_req{ 0 }, filter{ 0 }, stats(stats) {
+    tp_reserved(0), tp_frame_size(0),
+    tp_ring_size(0), tp_req{ 0 }, filter{ 0 }, stats(stats) {
     unsigned so_uintval;
 
     struct ifreq ifr;
@@ -183,7 +183,7 @@ ndPacketRing::ndPacketRing(const string &ifname,
     nd_dprintf("%s: AF_PACKET socket created: %d\n",
       ifname.c_str(), sd);
 
-    so_uintval          = TPACKET_V3;
+    so_uintval = TPACKET_V3;
     socklen_t so_vallen = sizeof(so_uintval);
     if (getsockopt(sd, SOL_PACKET, PACKET_HDRLEN,
           (void *)&so_uintval, &so_vallen) < 0)
@@ -212,9 +212,9 @@ ndPacketRing::ndPacketRing(const string &ifname,
 
     struct sockaddr_ll sa_ll_bind;
     memset(&sa_ll_bind, 0, sizeof(struct sockaddr_ll));
-    sa_ll_bind.sll_family   = AF_PACKET;
+    sa_ll_bind.sll_family = AF_PACKET;
     sa_ll_bind.sll_protocol = htons(ETH_P_ALL);
-    sa_ll_bind.sll_ifindex  = ifr.ifr_ifindex;
+    sa_ll_bind.sll_ifindex = ifr.ifr_ifindex;
 
     if (bind(sd, (const struct sockaddr *)&sa_ll_bind,
           sizeof(struct sockaddr_ll)) < 0)
@@ -348,7 +348,7 @@ ndPacketRing::ndPacketRing(const string &ifname,
     }
 
     so_uintval = 0;
-    so_vallen  = sizeof(so_uintval);
+    so_vallen = sizeof(so_uintval);
     if (getsockopt(sd, SOL_PACKET, PACKET_RESERVE,
           (void *)&so_uintval, &so_vallen) < 0)
     {
@@ -370,7 +370,7 @@ ndPacketRing::ndPacketRing(const string &ifname,
 
     tp_req.tp_block_size = config.rb_block_size;
     tp_req.tp_frame_size = config.rb_frame_size;
-    tp_req.tp_block_nr   = config.rb_blocks;
+    tp_req.tp_block_nr = config.rb_blocks;
     tp_req.tp_frame_nr = (tp_req.tp_block_size * tp_req.tp_block_nr) /
       tp_req.tp_frame_size;
     tp_req.tp_retire_blk_tov = ndGC.capture_read_timeout;
@@ -444,8 +444,8 @@ void ndPacketRing::SetFilter(const string &expr) {
 #endif
 }
 
-bool ndPacketRing::ApplyFilter(
-  const uint8_t *pkt, size_t length, size_t snaplen) const {
+bool ndPacketRing::ApplyFilter(const uint8_t *pkt,
+  size_t length, size_t snaplen) const {
     return (filter.bf_insns &&
       bpf_filter(filter.bf_insns, pkt, length, snaplen) == 0);
 }
@@ -494,8 +494,8 @@ ndPacket *ndPacketRing::CopyPacket(const void *entry,
     const struct tpacket3_hdr *hdr = (const struct tpacket3_hdr *)entry;
 
     unsigned int tp_len, tp_mac, tp_snaplen;
-    tp_len     = hdr->tp_len;
-    tp_mac     = hdr->tp_mac;
+    tp_len = hdr->tp_len;
+    tp_mac = hdr->tp_mac;
     tp_snaplen = hdr->tp_snaplen;
 
     struct timeval tv = { hdr->tp_sec, hdr->tp_nsec / 1000 };
@@ -656,8 +656,8 @@ void *ndCaptureTPv3::Entry(void) {
             continue;
         }
         else if (warnings == false && rc == 1) {
-            rc            = 0;
-            warnings      = true;
+            rc = 0;
+            warnings = true;
             capture_state = STATE_ONLINE;
         }
 

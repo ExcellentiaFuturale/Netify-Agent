@@ -130,8 +130,8 @@ public:
 
     static void Destroy(void);
 
-    ndInstance()                              = delete;
-    ndInstance(const ndInstance &)            = delete;
+    ndInstance() = delete;
+    ndInstance(const ndInstance &) = delete;
     ndInstance &operator=(const ndInstance &) = delete;
 
     static inline ndInstance &GetInstance() {
@@ -180,15 +180,15 @@ public:
     bool Daemonize(void);
 
     enum ndDumpFlags {
-        ndDUMP_NONE           = 0x00,
-        ndDUMP_TYPE_PROTOS    = 0x01,
-        ndDUMP_TYPE_APPS      = 0x02,
-        ndDUMP_TYPE_CAT_APP   = 0x04,
+        ndDUMP_NONE = 0x00,
+        ndDUMP_TYPE_PROTOS = 0x01,
+        ndDUMP_TYPE_APPS = 0x02,
+        ndDUMP_TYPE_CAT_APP = 0x04,
         ndDUMP_TYPE_CAT_PROTO = 0x08,
-        ndDUMP_TYPE_RISKS     = 0x10,
-        ndDUMP_TYPE_VALID     = 0x20,
-        ndDUMP_SORT_BY_TAG    = 0x40,
-        ndDUMP_WITH_CATS      = 0x80,
+        ndDUMP_TYPE_RISKS = 0x10,
+        ndDUMP_TYPE_VALID = 0x20,
+        ndDUMP_SORT_BY_TAG = 0x40,
+        ndDUMP_WITH_CATS = 0x80,
         ndDUMP_TYPE_CATS = (ndDUMP_TYPE_CAT_APP | ndDUMP_TYPE_CAT_PROTO),
         ndDUMP_TYPE_ALL = (ndDUMP_TYPE_PROTOS | ndDUMP_TYPE_APPS)
     };
@@ -243,7 +243,7 @@ public:
         for (auto &app : entries) {
             T jo;
 
-            jo["id"]  = app.second;
+            jo["id"] = app.second;
             jo["tag"] = app.first;
 
             output.push_back(jo);
@@ -254,7 +254,7 @@ public:
         for (auto &proto : nd_protos) {
             T jo;
 
-            jo["id"]  = proto.first;
+            jo["id"] = proto.first;
             jo["tag"] = proto.second;
 
             output.push_back(jo);

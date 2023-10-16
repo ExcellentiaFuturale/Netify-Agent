@@ -111,10 +111,10 @@ public:
 
     enum DispatchFlags {
         DF_NONE,
-        DF_FORMAT_JSON    = 0x01,
+        DF_FORMAT_JSON = 0x01,
         DF_FORMAT_MSGPACK = 0x02,
-        DF_ADD_HEADER     = 0x04,
-        DF_GZ_DEFLATE     = 0x08,
+        DF_ADD_HEADER = 0x04,
+        DF_GZ_DEFLATE = 0x08,
     };
 
 protected:
@@ -162,8 +162,8 @@ public:
         this->data = new uint8_t[length];
 
         if (this->data == nullptr) {
-            throw ndSystemException(
-              __PRETTY_FUNCTION__, "new sink payload data", ENOMEM);
+            throw ndSystemException(__PRETTY_FUNCTION__,
+              "new sink payload data", ENOMEM);
         }
 
         memcpy(this->data, data, length);
@@ -301,7 +301,7 @@ public:
     virtual ~ndPluginManager() { Destroy(); }
 
     void Load(ndPlugin::Type type = ndPlugin::TYPE_BASE,
-      bool create                 = true);
+      bool create = true);
 
     bool Create(ndPlugin::Type type = ndPlugin::TYPE_BASE);
 

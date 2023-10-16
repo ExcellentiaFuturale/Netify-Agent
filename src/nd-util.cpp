@@ -366,7 +366,7 @@ void nd_sha1_to_string(const vector<uint8_t> &digest_bin,
 bool nd_string_to_mac(const string &src, uint8_t *mac) {
     if (src.size() != ND_STR_ETHALEN) return false;
 
-    uint8_t *p    = mac;
+    uint8_t *p = mac;
     const char *s = src.c_str();
 
     for (int i = 0; i < ND_STR_ETHALEN; i += 3, p++) {
@@ -565,7 +565,7 @@ bool nd_save_uuid(const string &uuid, const string &path,
 }
 
 void nd_seed_rng(void) {
-    FILE *fh          = fopen("/dev/urandom", "r");
+    FILE *fh = fopen("/dev/urandom", "r");
     unsigned int seed = (unsigned int)time(nullptr);
 
     if (fh == nullptr)
@@ -585,7 +585,7 @@ void nd_seed_rng(void) {
 void nd_generate_uuid(string &uuid) {
     int digit = 0;
     deque<char> result;
-    uint64_t input    = 623714775;
+    uint64_t input = 623714775;
     const char *clist = {
         "0123456789abcdefghijklmnpqrstuvwxyz"
     };
@@ -663,8 +663,8 @@ bool nd_parse_app_tag(const string &tag, unsigned &id, string &name) {
 
     size_t p;
     if ((p = tag.find_first_of(".")) != string::npos) {
-        id   = (unsigned)strtoul(tag.substr(0, p).c_str(),
-            nullptr, 0);
+        id = (unsigned)strtoul(tag.substr(0, p).c_str(),
+          nullptr, 0);
         name = tag.substr(p + 1);
 
         return true;
@@ -822,7 +822,7 @@ int nd_ifreq(const string &name, unsigned long request,
 }
 
 void nd_basename(const string &path, string &base) {
-    base     = path;
+    base = path;
     size_t p = path.find_last_of("/");
     if (p == string::npos) return;
     base = path.substr(p + 1);
@@ -871,7 +871,7 @@ pid_t nd_is_running(pid_t pid, const string &exe_base) {
 #elif defined(__FreeBSD__)
 pid_t nd_is_running(pid_t pid, const string &exe_base) {
     int mib[4];
-    pid_t rc      = -1;
+    pid_t rc = -1;
     size_t length = 4;
     char pathname[PATH_MAX];
 
@@ -891,7 +891,7 @@ pid_t nd_is_running(pid_t pid, const string &exe_base) {
     }
     else if (length > 0) {
         char *pathname_base = basename(pathname);
-        length              = strlen(pathname_base);
+        length = strlen(pathname_base);
         if (exe_base.size() < length)
             length = exe_base.size();
 
@@ -909,7 +909,7 @@ pid_t nd_is_running(pid_t pid, const string &exe_base) {
 #endif
 
 int nd_load_pid(const string &pidfile) {
-    pid_t pid  = -1;
+    pid_t pid = -1;
     FILE *hpid = fopen(pidfile.c_str(), "r");
 
     if (hpid != nullptr) {
@@ -1009,7 +1009,7 @@ int nd_functions_exec(const string &func, const string &arg,
     if (! arg.empty()) os << " " << arg;
     os << "\" 2>&1";
 
-    int rc   = -1;
+    int rc = -1;
     FILE *ph = popen(os.str().c_str(), "r");
 
     if (ph != nullptr) {
@@ -1280,8 +1280,8 @@ void nd_set_hostname(char *dst, const char *src,
     strncpy(dst, buffer.c_str(), min(length, buffer.length()));
 }
 
-void nd_expand_variables(
-  const string &input, string &output, map<string, string> &vars) {
+void nd_expand_variables(const string &input,
+  string &output, map<string, string> &vars) {
     output = input;
 
     for (auto &var : vars) {
@@ -1313,7 +1313,7 @@ void nd_gz_deflate(size_t length, const uint8_t *data,
     output.clear();
 
     zs.zalloc = Z_NULL;
-    zs.zfree  = Z_NULL;
+    zs.zfree = Z_NULL;
     zs.opaque = Z_NULL;
 
     if (deflateInit2(&zs, Z_DEFAULT_COMPRESSION, Z_DEFLATED,
@@ -1324,12 +1324,12 @@ void nd_gz_deflate(size_t length, const uint8_t *data,
           "deflateInit2", EINVAL);
     }
 
-    zs.next_in  = (uint8_t *)data;
+    zs.next_in = (uint8_t *)data;
     zs.avail_in = length;
 
     do {
         zs.avail_out = ND_ZLIB_CHUNK_SIZE;
-        zs.next_out  = chunk;
+        zs.next_out = chunk;
         if ((rc = deflate(&zs, Z_FINISH)) == Z_STREAM_ERROR) {
             throw ndSystemException(__PRETTY_FUNCTION__,
               "deflate", EINVAL);
@@ -1367,7 +1367,7 @@ void ndTimer::Create(int sig) {
     struct sigevent sigev;
     memset(&sigev, 0, sizeof(struct sigevent));
     sigev.sigev_notify = SIGEV_SIGNAL;
-    sigev.sigev_signo  = sig;
+    sigev.sigev_signo = sig;
 
     if (timer_create(CLOCK_MONOTONIC, &sigev, &id) < 0) {
         throw ndSystemException(__PRETTY_FUNCTION__,
@@ -1480,7 +1480,7 @@ void nd_tmpfile(const string &prefix, string &filename) {
     }
     else {
         // XXX: Old glibc mkstemp can not include a path!
-        path              = prefix.substr(0, p);
+        path = prefix.substr(0, p);
         const string base = prefix.substr(p + 1) + "XXXXXX";
         if (chdir(path.c_str()) != 0) {
             nd_dprintf(
@@ -1535,15 +1535,15 @@ void nd_time_ago(time_t seconds, string &ago) {
     double value = seconds;
 
     if (seconds >= 86400) {
-        unit  = "day";
+        unit = "day";
         value = days = round(seconds / 86400);
     }
     else if (seconds >= 3600) {
-        unit  = "hour";
+        unit = "hour";
         value = hours = round(seconds / 3600);
     }
     else if (seconds >= 60) {
-        unit  = "minute";
+        unit = "minute";
         value = minutes = round(seconds / 60);
     }
 

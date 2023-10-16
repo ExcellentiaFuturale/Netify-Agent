@@ -69,7 +69,7 @@ public:
     ndCategories() : last_update(0) {
         // XXX: Must be in order of enum ndCategoryType, without
         // gaps.
-        categories[ndCAT_TYPE_APP]   = ndCategory();
+        categories[ndCAT_TYPE_APP] = ndCategory();
         categories[ndCAT_TYPE_PROTO] = ndCategory();
     };
 

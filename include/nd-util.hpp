@@ -222,8 +222,8 @@ void nd_set_hostname(string &dst, const char *src,
 void nd_set_hostname(char *dst, const char *src,
   size_t length, bool strict = true);
 
-void nd_expand_variables(
-  const string &input, string &output, map<string, string> &vars);
+void nd_expand_variables(const string &input,
+  string &output, map<string, string> &vars);
 
 void nd_gz_deflate(size_t length, const uint8_t *data,
   vector<uint8_t> &output);

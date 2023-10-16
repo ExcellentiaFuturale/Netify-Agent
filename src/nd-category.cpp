@@ -172,7 +172,7 @@ bool ndCategories::Save(const string &filename) {
                 break;
             case ndCAT_TYPE_PROTO:
                 j["protocol_tag_index"] = ci.second.tag;
-                j["protocol_index"]     = ci.second.index;
+                j["protocol_index"] = ci.second.index;
                 break;
             default: break;
             }
@@ -239,8 +239,8 @@ void ndCategories::Dump(ndCategoryType type) {
     }
 }
 
-bool ndCategories::IsMember(
-  ndCategoryType type, nd_cat_id_t cat_id, unsigned id) {
+bool ndCategories::IsMember(ndCategoryType type,
+  nd_cat_id_t cat_id, unsigned id) {
     lock_guard<mutex> ul(lock);
     auto ci = categories.find(type);
 
@@ -260,8 +260,8 @@ bool ndCategories::IsMember(
     return false;
 }
 
-bool ndCategories::IsMember(
-  ndCategoryType type, const string &cat_tag, unsigned id) {
+bool ndCategories::IsMember(ndCategoryType type,
+  const string &cat_tag, unsigned id) {
     lock_guard<mutex> ul(lock);
     auto ci = categories.find(type);
 
@@ -317,8 +317,8 @@ nd_cat_id_t ndCategories::LookupTag(ndCategoryType type,
     return ND_CAT_UNKNOWN;
 }
 
-nd_cat_id_t ndCategories::ResolveTag(
-  ndCategoryType type, unsigned id, string &tag) const {
+nd_cat_id_t ndCategories::ResolveTag(ndCategoryType type,
+  unsigned id, string &tag) const {
     if (type >= ndCAT_TYPE_MAX) return ND_CAT_UNKNOWN;
 
     nd_cat_id_t cat_id = Lookup(type, id);

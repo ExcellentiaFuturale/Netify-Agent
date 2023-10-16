@@ -35,9 +35,9 @@ public:
     enum {
         STATUS_INIT = 0,
 
-        STATUS_OK                = 0x01,
-        STATUS_CORRUPTED         = 0x02,
-        STATUS_FILTERED          = 0x04,
+        STATUS_OK = 0x01,
+        STATUS_CORRUPTED = 0x02,
+        STATUS_FILTERED = 0x04,
         STATUS_VLAN_TAG_RESTORED = 0x08,
 
         STATUS_ENOMEM = 0x40,
@@ -64,7 +64,7 @@ public:
     }
     inline const uint8_t *GetData(void) { return data; }
     inline void GetTime(struct timeval &tv) {
-        tv.tv_sec  = tv_sec;
+        tv.tv_sec = tv_sec;
         tv.tv_usec = tv_usec;
     }
 

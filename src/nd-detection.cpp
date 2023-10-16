@@ -141,8 +141,8 @@ void *ndDetectionThread::Entry(void) {
 
         ts_cond.tv_sec += 1;
 
-        if ((rc = pthread_cond_timedwait(
-               &pkt_queue_cond, &pkt_queue_cond_mutex, &ts_cond)) != 0 &&
+        if ((rc = pthread_cond_timedwait(&pkt_queue_cond,
+               &pkt_queue_cond_mutex, &ts_cond)) != 0 &&
           rc != ETIMEDOUT)
         {
             throw ndDetectionThreadException(strerror(rc));
@@ -316,7 +316,7 @@ void ndDetectionThread::ProcessPacket(ndDetectionQueueEntry *entry) {
             {
                 ndEF->ssl.cipher_suite = ndEFNFP.tls_quic.server_cipher;
 
-                flow_update                   = true;
+                flow_update = true;
                 ndEF->flags.detection_updated = true;
             }
 
@@ -334,7 +334,7 @@ void ndDetectionThread::ProcessPacket(ndDetectionQueueEntry *entry) {
                 SetDetectedApplication(entry,
                   ndi.apps.Find(ndEF->ssl.server_cn));
 
-                flow_update                   = true;
+                flow_update = true;
                 ndEF->flags.detection_updated = true;
             }
 
@@ -346,7 +346,7 @@ void ndDetectionThread::ProcessPacket(ndDetectionQueueEntry *entry) {
                 free(ndEFNFP.tls_quic.issuerDN);
                 ndEFNFP.tls_quic.issuerDN = nullptr;
 
-                flow_update                   = true;
+                flow_update = true;
                 ndEF->flags.detection_updated = true;
             }
 
@@ -358,7 +358,7 @@ void ndDetectionThread::ProcessPacket(ndDetectionQueueEntry *entry) {
                 free(ndEFNFP.tls_quic.subjectDN);
                 ndEFNFP.tls_quic.subjectDN = nullptr;
 
-                flow_update                   = true;
+                flow_update = true;
                 ndEF->flags.detection_updated = true;
             }
 
@@ -368,7 +368,7 @@ void ndDetectionThread::ProcessPacket(ndDetectionQueueEntry *entry) {
                 snprintf(ndEF->ssl.server_ja3, ND_FLOW_TLS_JA3LEN,
                   "%s", ndEFNFP.tls_quic.ja3_server);
 
-                flow_update                   = true;
+                flow_update = true;
                 ndEF->flags.detection_updated = true;
             }
 
@@ -381,7 +381,7 @@ void ndDetectionThread::ProcessPacket(ndDetectionQueueEntry *entry) {
 
                 ndEF->ssl.cert_fingerprint_found = true;
 
-                flow_update                   = true;
+                flow_update = true;
                 ndEF->flags.detection_updated = true;
             }
 
@@ -404,7 +404,7 @@ void ndDetectionThread::ProcessPacket(ndDetectionQueueEntry *entry) {
             break;
         case ND_PROTO_MDNS:
             if (ndEF->HasMDNSDomainName()) {
-                flow_update                   = true;
+                flow_update = true;
                 ndEF->flags.detection_updated = true;
             }
             // nd_dprintf("mDNS flow updated: %s, %s, %s\n",
@@ -434,7 +434,7 @@ void ndDetectionThread::ProcessPacket(ndDetectionQueueEntry *entry) {
 
 bool ndDetectionThread::ProcessALPN(
   ndDetectionQueueEntry *entry, bool client) {
-    bool flow_update          = false;
+    bool flow_update = false;
     const char *detected_alpn = (client) ?
       ndEFNFP.tls_quic.advertised_alpns :
       ndEFNFP.tls_quic.negotiated_alpn;
@@ -452,7 +452,7 @@ bool ndDetectionThread::ProcessALPN(
             ndEF->tls_alpn.push_back(alpn);
         }
 
-        flow_update        = (ndEF->tls_alpn.size() > 0);
+        flow_update = (ndEF->tls_alpn.size() > 0);
         ndEF->tls_alpn_set = flow_update;
     }
     else if (! ndEF->tls_alpn_server_set.load()) {
@@ -475,7 +475,7 @@ bool ndDetectionThread::ProcessALPN(
             ndEF->detected_protocol_name = nd_proto_get_name(
               alpn->second);
 
-            flow_update                   = true;
+            flow_update = true;
             ndEF->flags.detection_updated = true;
         }
     }
@@ -782,7 +782,7 @@ void ndDetectionThread::ProcessFlow(ndDetectionQueueEntry *entry) {
             ndi.addr_types.Classify(type, ndEF->lower_mac);
 
             mac = &ndEF->lower_mac;
-            ip  = &ndEF->lower_addr;
+            ip = &ndEF->lower_addr;
         }
         else if (t == ndFlow::TYPE_UPPER &&
           (ndEF->upper_type == ndAddr::atLOCAL ||
@@ -792,7 +792,7 @@ void ndDetectionThread::ProcessFlow(ndDetectionQueueEntry *entry) {
             ndi.addr_types.Classify(type, ndEF->upper_mac);
 
             mac = &ndEF->upper_mac;
-            ip  = &ndEF->upper_addr;
+            ip = &ndEF->upper_addr;
         }
         else continue;
 
@@ -934,7 +934,7 @@ void ndDetectionThread::FlowUpdate(ndDetectionQueueEntry *entry) {
         ndSoftDissector nsd;
 
         if (ndi.apps.SoftDissectorMatch(ndEF, &parser, nsd)) {
-            ndEF->flags.soft_dissector     = true;
+            ndEF->flags.soft_dissector = true;
             ndEF->flags.detection_complete = true;
 
             if (nsd.aid > -1) {
@@ -987,7 +987,7 @@ void ndDetectionThread::FlowUpdate(ndDetectionQueueEntry *entry) {
 
 void ndDetectionThread::SetGuessedProtocol(
   ndDetectionQueueEntry *entry) {
-    uint8_t guessed       = 0;
+    uint8_t guessed = 0;
     ndpi_protocol ndpi_rc = ndpi_detection_giveup(ndpi,
       ndEFNF, 1, &guessed);
 
@@ -1001,7 +1001,7 @@ void ndDetectionThread::SetGuessedProtocol(
         }
     }
 
-    ndEF->flags.detection_init     = true;
-    ndEF->flags.detection_guessed  = true;
+    ndEF->flags.detection_init = true;
+    ndEF->flags.detection_guessed = true;
     ndEF->flags.detection_complete = true;
 }

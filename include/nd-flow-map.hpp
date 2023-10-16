@@ -75,7 +75,7 @@ public:
 
 protected:
     unsigned HashToBucket(const string &digest) const {
-        const char *p     = digest.c_str();
+        const char *p = digest.c_str();
         const uint64_t *b = (const uint64_t *)&p[0];
         return (*b % buckets);
     }

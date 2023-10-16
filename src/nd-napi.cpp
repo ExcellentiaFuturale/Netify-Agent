@@ -217,7 +217,7 @@ void ndNetifyApiThread::ParseHeader(const string &header_raw) {
     string key, value;
     size_t p = string::npos;
     if ((p = header_raw.find_first_of(":")) != string::npos) {
-        key   = header_raw.substr(0, p);
+        key = header_raw.substr(0, p);
         value = header_raw.substr(p + 1);
     }
 
@@ -477,7 +477,7 @@ bool ndNetifyApiManager::Update(void) {
         }
     }
 
-    size_t downloads             = 0;
+    size_t downloads = 0;
     static vector<Request> types = {
         REQUEST_DOWNLOAD_CONFIG,
         REQUEST_DOWNLOAD_CATEGORIES,
@@ -502,7 +502,7 @@ bool ndNetifyApiManager::Update(void) {
     }
 
     if (downloads == 0 && download_results.size()) {
-        bool reload       = false;
+        bool reload = false;
         size_t successful = 0;
 
         for (auto &r : download_results) {
@@ -578,7 +578,7 @@ void ndNetifyApiManager::Terminate(void) {
 
 bool ndNetifyApiManager::ProcessBootstrapRequest(
   ndNetifyApiBootstrap *bootstrap) {
-    jstatus["bootstrap"]["code"]        = -1;
+    jstatus["bootstrap"]["code"] = -1;
     jstatus["bootstrap"]["last_update"] = time(nullptr);
 
     if (bootstrap->curl_rc != CURLE_OK) {
@@ -591,7 +591,7 @@ bool ndNetifyApiManager::ProcessBootstrapRequest(
     }
 
     if (bootstrap->http_rc == 0) {
-        jstatus["bootstrap"]["code"]    = -1;
+        jstatus["bootstrap"]["code"] = -1;
         jstatus["bootstrap"]["message"] = "Request failure";
         nd_printf(
           "netify-api: Bootstrap request failed.\n");
@@ -599,7 +599,7 @@ bool ndNetifyApiManager::ProcessBootstrapRequest(
     }
 
     if (bootstrap->content.length() == 0) {
-        jstatus["bootstrap"]["code"]    = -1;
+        jstatus["bootstrap"]["code"] = -1;
         jstatus["bootstrap"]["message"] = "Empty response";
         nd_printf("netify-api: Empty bootstrap content.\n");
         return false;
@@ -653,7 +653,7 @@ bool ndNetifyApiManager::ProcessBootstrapRequest(
         }
 
         nd_rtrim(message, '.');
-        jstatus["bootstrap"]["code"]    = code;
+        jstatus["bootstrap"]["code"] = code;
         jstatus["bootstrap"]["message"] = message;
 
         if (bootstrap->http_rc != 200 || code != 0) {
@@ -790,7 +790,7 @@ bool ndNetifyApiManager::ProcessDownloadRequest(
         return false;
     }
 
-    jstatus[status_type]["code"]        = download->http_rc;
+    jstatus[status_type]["code"] = download->http_rc;
     jstatus[status_type]["last_update"] = time(nullptr);
 
     if (download->curl_rc != CURLE_OK) {

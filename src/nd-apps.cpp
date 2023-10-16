@@ -102,7 +102,7 @@ bool ndApplications::Load(const string &filename) {
                 continue;
 
             string expr = line.substr(p + 1);
-            line        = line.substr(0, p);
+            line = line.substr(0, p);
             if ((p = line.find_last_of(":")) == string::npos)
                 continue;
 
@@ -292,7 +292,8 @@ nd_app_id_t ndApplications::Find(const ndAddr &addr) {
 
     if (addr.IsIPv4()) {
         ndRadixNetworkEntry<_ND_ADDR_BITSv4> entry;
-        if (ndRadixNetworkEntry<_ND_ADDR_BITSv4>::CreateQuery(entry, addr))
+        if (ndRadixNetworkEntry<_ND_ADDR_BITSv4>::CreateQuery(
+              entry, addr))
         {
             lock_guard<mutex> ul(lock);
 
@@ -305,7 +306,8 @@ nd_app_id_t ndApplications::Find(const ndAddr &addr) {
 
     if (addr.IsIPv6()) {
         ndRadixNetworkEntry<_ND_ADDR_BITSv6> entry;
-        if (ndRadixNetworkEntry<_ND_ADDR_BITSv6>::CreateQuery(entry, addr))
+        if (ndRadixNetworkEntry<_ND_ADDR_BITSv6>::CreateQuery(
+              entry, addr))
         {
             lock_guard<mutex> ul(lock);
 
@@ -451,8 +453,8 @@ bool ndApplications::AddDomainTransform(const string &search,
         return false;
 
     try {
-        regex *rx             = new regex(search,
-                      regex::extended | regex::icase | regex::optimize);
+        regex *rx = new regex(search,
+          regex::extended | regex::icase | regex::optimize);
         domain_xforms[search] = make_pair(rx, replace);
         return true;
     }

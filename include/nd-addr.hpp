@@ -194,9 +194,9 @@ public:
     }
 
     enum MakeFlags {
-        mfNONE   = 0x0,
+        mfNONE = 0x0,
         mfPREFIX = 0x1,
-        mfPORT   = 0x2,
+        mfPORT = 0x2,
 
         mfALL = (mfPREFIX | mfPORT)
     };
@@ -214,8 +214,8 @@ public:
     }
 
     enum ComparisonFlags {
-        cfADDR   = 0x1,
-        cfPORT   = 0x2,
+        cfADDR = 0x1,
+        cfPORT = 0x2,
         cfPREFIX = 0x4,
 
         cfALL = (cfADDR | cfPORT | cfPREFIX)
@@ -589,21 +589,21 @@ bitset<N> &operator-=(bitset<N> &x, const size_t y) {
     for (size_t i = 0; i < N; i++) {
         if (borrow) {
             if (x[i]) {
-                x[i]   = _y[i];
+                x[i] = _y[i];
                 borrow = _y[i];
             }
             else {
-                x[i]   = ! _y[i];
+                x[i] = ! _y[i];
                 borrow = true;
             }
         }
         else {
             if (x[i]) {
-                x[i]   = ! _y[i];
+                x[i] = ! _y[i];
                 borrow = false;
             }
             else {
-                x[i]   = _y[i];
+                x[i] = _y[i];
                 borrow = _y[i];
             }
         }
@@ -632,7 +632,7 @@ ndRadixNetworkEntry<N> radix_substr(
     mask <<= N - length - offset;
 
     ndRadixNetworkEntry<N> result;
-    result.addr       = (entry.addr & mask) << offset;
+    result.addr = (entry.addr & mask) << offset;
     result.prefix_len = length;
 
     return result;

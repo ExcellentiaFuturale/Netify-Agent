@@ -252,11 +252,11 @@ ndCaptureThread::ProcessPacket(const ndPacket *packet) {
     nd_flow_ptr nf;
 
     const struct ether_header *hdr_eth = NULL;
-    const struct sll_header *hdr_sll   = NULL;
-    const struct ip *hdr_ip            = NULL;
-    const struct ip6_hdr *hdr_ip6      = NULL;
-    const struct tcphdr *hdr_tcp       = NULL;
-    const struct udphdr *hdr_udp       = NULL;
+    const struct sll_header *hdr_sll = NULL;
+    const struct ip *hdr_ip = NULL;
+    const struct ip6_hdr *hdr_ip6 = NULL;
+    const struct tcphdr *hdr_tcp = NULL;
+    const struct udphdr *hdr_udp = NULL;
 #ifdef _ND_DISSECT_GTP
     const struct nd_gtpv1_header_t *hdr_gtpv1 = NULL;
     const struct nd_gtpv2_header_t *hdr_gtpv2 = NULL;
@@ -265,9 +265,9 @@ ndCaptureThread::ProcessPacket(const ndPacket *packet) {
     uint16_t l2_len, l3_len, l4_len = 0, pkt_len = 0;
     uint16_t type = 0;
     uint16_t ppp_proto;
-    uint16_t frag_off   = 0;
+    uint16_t frag_off = 0;
     uint8_t vlan_packet = 0;
-    int addr_cmp        = 0;
+    int addr_cmp = 0;
 
     uint64_t ts_pkt = ((uint64_t)packet->tv_sec) * ND_DETECTION_TICKS +
       packet->tv_usec / (1000000 / ND_DETECTION_TICKS);
@@ -349,7 +349,7 @@ ndCaptureThread::ProcessPacket(const ndPacket *packet) {
 
         hdr_eth = reinterpret_cast<const struct ether_header *>(
           packet->data);
-        type   = ntohs(hdr_eth->ether_type);
+        type = ntohs(hdr_eth->ether_type);
         l2_len = sizeof(struct ether_header);
         stats.pkt.eth++;
 
@@ -384,7 +384,7 @@ ndCaptureThread::ProcessPacket(const ndPacket *packet) {
 
         hdr_sll = reinterpret_cast<const struct sll_header *>(
           packet->data);
-        type   = hdr_sll->sll_protocol;
+        type = hdr_sll->sll_protocol;
         l2_len = SLL_HDR_LEN;
         break;
 
@@ -434,7 +434,7 @@ ndCaptureThread::ProcessPacket(const ndPacket *packet) {
             // TODO: Replace with struct vlan_tag from
             // <pcap/vlan.h> See:
             // https://en.wikipedia.org/wiki/IEEE_802.1Q
-            vlan_packet  = 1;
+            vlan_packet = 1;
             flow.vlan_id = ((packet->data[l2_len] << 8) +
                              packet->data[l2_len + 1]) &
               0xFFF;
@@ -566,8 +566,8 @@ nd_process_ip:
     if (flow.ip_version == 4) {
         if (type == 0) type = ETHERTYPE_IP;
 
-        l3_len           = ((uint16_t)hdr_ip->ip_hl * 4);
-        l4_len           = ntohs(hdr_ip->ip_len) - l3_len;
+        l3_len = ((uint16_t)hdr_ip->ip_hl * 4);
+        l4_len = ntohs(hdr_ip->ip_len) - l3_len;
         flow.ip_protocol = hdr_ip->ip_p;
         l3 = reinterpret_cast<const uint8_t *>(hdr_ip);
 
@@ -670,7 +670,7 @@ nd_process_ip:
         hdr_ip6 = reinterpret_cast<const struct ip6_hdr *>(
           &packet->data[l2_len]);
 
-        l3     = reinterpret_cast<const uint8_t *>(hdr_ip6);
+        l3 = reinterpret_cast<const uint8_t *>(hdr_ip6);
         l3_len = sizeof(struct ip6_hdr);
         l4 = reinterpret_cast<const uint8_t *>(l3 + l3_len);
         l4_len = ntohs(hdr_ip6->ip6_ctlun.ip6_un1.ip6_un1_plen);
@@ -1127,7 +1127,8 @@ nd_process_ip:
             stats.pkt.tcp_seq_errors++;
         }
 
-        if ((hdr_tcp->th_flags & TH_FIN) && (hdr_tcp->th_flags & TH_ACK))
+        if ((hdr_tcp->th_flags & TH_FIN) &&
+          (hdr_tcp->th_flags & TH_ACK))
             nf->flags.tcp_fin_ack++;
         if (hdr_tcp->th_flags & TH_RST) {
 #ifdef _ND_EXTENDED_STATS
@@ -1210,7 +1211,7 @@ bool ndCaptureThread::ProcessDNSPacket(nd_flow_ptr &flow,
     ns_rr rr;
     ns_msg ns_h;
     const char *host = NULL;
-    int rc           = ns_initparse(pkt, pkt_len, &ns_h);
+    int rc = ns_initparse(pkt, pkt_len, &ns_h);
 
     if (rc < 0) {
 #ifdef _ND_LOG_DHC

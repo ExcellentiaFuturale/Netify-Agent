@@ -71,8 +71,8 @@ public:
 
     void QueuePacket(nd_flow_ptr &flow,
       const ndPacket *packet = nullptr,
-      const uint8_t *data    = nullptr,
-      uint16_t length        = 0);
+      const uint8_t *data = nullptr,
+      uint16_t length = 0);
 
     struct ndpi_detection_module_struct *GetDetectionModule(void) {
         return ndpi;

@@ -46,7 +46,7 @@ string base64_encode(const unsigned char *src, size_t len) {
     out = (unsigned char *)&outStr[0];
 
     end = src + len;
-    in  = src;
+    in = src;
     pos = out;
     while (end - in >= 3) {
         *pos++ = base64_table[in[0] >> 2];

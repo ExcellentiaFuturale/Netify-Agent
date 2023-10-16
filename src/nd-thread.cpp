@@ -36,7 +36,7 @@
 #include "nd-util.hpp"
 
 static void *nd_thread_entry(void *param) {
-    void *rv         = NULL;
+    void *rv = NULL;
     ndThread *thread = NULL;
 
     sigset_t signal_set;
@@ -63,7 +63,7 @@ static void *nd_thread_entry(void *param) {
 
 ndThread::ndThread(const string &tag, long cpu, bool ipc)
   : tag(tag), id(0), cpu(cpu), fd_ipc{ -1, -1 } {
-    terminate  = false;
+    terminate = false;
     terminated = false;
 
     int rc;
@@ -163,7 +163,7 @@ void ndThread::SendIPC(uint32_t id) {
 }
 
 uint32_t ndThread::RecvIPC(void) {
-    uint32_t id        = 0;
+    uint32_t id = 0;
     ssize_t bytes_read = 0;
 
     bytes_read = recv(fd_ipc[IPC_PE_READ], &id,

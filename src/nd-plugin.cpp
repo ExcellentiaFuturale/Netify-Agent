@@ -545,8 +545,8 @@ size_t ndPluginManager::Reap(ndPlugin::Type type) {
     return count;
 }
 
-void ndPluginManager::BroadcastEvent(
-  ndPlugin::Type type, ndPlugin::Event event, void *param) {
+void ndPluginManager::BroadcastEvent(ndPlugin::Type type,
+  ndPlugin::Event event, void *param) {
     lock_guard<mutex> ul(lock);
 
     for (auto &t : ndPlugin::types) {

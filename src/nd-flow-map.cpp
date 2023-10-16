@@ -70,7 +70,7 @@ ndFlowMap::Lookup(const string &digest, bool acquire_lock) {
 bool ndFlowMap::Insert(const string &digest,
   nd_flow_ptr &flow, bool unlocked) {
     bool result = false;
-    size_t b    = HashToBucket(digest);
+    size_t b = HashToBucket(digest);
 
     if (! unlocked) bucket_lock[b]->lock();
 
@@ -86,7 +86,7 @@ bool ndFlowMap::Insert(const string &digest,
 
 bool ndFlowMap::Delete(const string &digest) {
     bool deleted = false;
-    size_t b     = HashToBucket(digest);
+    size_t b = HashToBucket(digest);
     lock_guard<mutex> lock(*bucket_lock[b]);
 
     auto fi = bucket[b]->find(digest);

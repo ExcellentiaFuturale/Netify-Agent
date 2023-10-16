@@ -61,8 +61,8 @@ ndGlobalConfig::ndGlobalConfig()
     h_flow(stderr), ca_capture_base(0), ca_conntrack(-1),
     ca_detection_base(0), ca_detection_cores(-1),
     max_packet_queue(ND_MAX_PKT_QUEUE_KB * 1024),
-    max_capture_length(ND_PCAP_SNAPLEN), flags(0),
-    digest_app_config{ 0 }, digest_legacy_config{ 0 },
+    max_capture_length(ND_PCAP_SNAPLEN),
+    flags(0), digest_app_config{ 0 }, digest_legacy_config{ 0 },
     fhc_purge_divisor(ND_FHC_PURGE_DIVISOR),
     fm_buckets(ND_FLOW_MAP_BUCKETS),
     max_detection_pkts(ND_MAX_DETECTION_PKTS),
@@ -222,8 +222,8 @@ bool ndGlobalConfig::Load(const string &filename) {
     ndGC_SetFlag(ndGF_AUTO_FLOW_EXPIRY,
       r->GetBoolean("netifyd", "auto_flow_expiry", true));
 
-    ttl_idle_flow     = (unsigned)r->GetInteger("netifyd",
-          "ttl_idle_flow", ND_TTL_IDLE_FLOW);
+    ttl_idle_flow = (unsigned)r->GetInteger("netifyd",
+      "ttl_idle_flow", ND_TTL_IDLE_FLOW);
     ttl_idle_tcp_flow = (unsigned)r->GetInteger("netifyd",
       "ttl_idle_tcp_flow", ND_TTL_IDLE_TCP_FLOW);
 
@@ -239,12 +239,12 @@ bool ndGlobalConfig::Load(const string &filename) {
       "flow_map_buckets", ND_FLOW_MAP_BUCKETS);
 
     // Threading section
-    ca_capture_base    = (int16_t)r->GetInteger("threads",
-         "capture_base", this->ca_capture_base);
-    ca_conntrack       = (int16_t)r->GetInteger("threads",
-            "conntrack", this->ca_conntrack);
-    ca_detection_base  = (int16_t)r->GetInteger("threads",
-       "detection_base", this->ca_detection_base);
+    ca_capture_base = (int16_t)r->GetInteger("threads",
+      "capture_base", this->ca_capture_base);
+    ca_conntrack = (int16_t)r->GetInteger("threads",
+      "conntrack", this->ca_conntrack);
+    ca_detection_base = (int16_t)r->GetInteger("threads",
+      "detection_base", this->ca_detection_base);
     ca_detection_cores = (int16_t)r->GetInteger("threads",
       "detection_cores", this->ca_detection_cores);
 
@@ -415,10 +415,10 @@ bool ndGlobalConfig::Load(const string &filename) {
     // Netify API section
     ndGC_SetFlag(ndGF_USE_NAPI,
       r->GetBoolean("netify-api", "enable", false));
-    ttl_napi_tick      = r->GetInteger("netify-api",
-           "tick_interval", ND_TTL_API_TICK);
-    ttl_napi_update    = r->GetInteger("netify-api",
-         "update_interval", ND_TTL_API_UPDATE);
+    ttl_napi_tick = r->GetInteger("netify-api",
+      "tick_interval", ND_TTL_API_TICK);
+    ttl_napi_update = r->GetInteger("netify-api",
+      "update_interval", ND_TTL_API_UPDATE);
     url_napi_bootstrap = r->Get("netify-api",
       "bootstrap_url", ND_URL_API_BOOTSTRAP);
     napi_vendor = r->Get("netify-api", "vendor", ND_API_VENDOR);
@@ -440,7 +440,7 @@ bool ndGlobalConfig::Load(const string &filename) {
 
 bool ndGlobalConfig::LoadUUID(UUID which, string &uuid) {
     size_t length = 0;
-    string *dest  = nullptr, path;
+    string *dest = nullptr, path;
     lock_guard<mutex> ul(lock_uuid);
 
     uuid.clear();
@@ -451,8 +451,8 @@ bool ndGlobalConfig::LoadUUID(UUID which, string &uuid) {
             uuid = ndGC.uuid;
             return true;
         }
-        dest   = &ndGC.uuid;
-        path   = ndGC.path_uuid;
+        dest = &ndGC.uuid;
+        path = ndGC.path_uuid;
         length = ND_AGENT_UUID_LEN;
         break;
     case UUID_SITE:
@@ -460,8 +460,8 @@ bool ndGlobalConfig::LoadUUID(UUID which, string &uuid) {
             uuid = ndGC.uuid_site;
             return true;
         }
-        dest   = &ndGC.uuid_site;
-        path   = ndGC.path_uuid_site;
+        dest = &ndGC.uuid_site;
+        path = ndGC.path_uuid_site;
         length = ND_SITE_UUID_LEN;
         break;
     case UUID_SERIAL:
@@ -469,8 +469,8 @@ bool ndGlobalConfig::LoadUUID(UUID which, string &uuid) {
             uuid = ndGC.uuid_serial;
             return true;
         }
-        dest   = &ndGC.uuid_serial;
-        path   = ndGC.path_uuid_serial;
+        dest = &ndGC.uuid_serial;
+        path = ndGC.path_uuid_serial;
         length = ND_AGENT_SERIAL_LEN;
         break;
     }
@@ -480,7 +480,7 @@ bool ndGlobalConfig::LoadUUID(UUID which, string &uuid) {
         if (nd_load_uuid(_uuid, path, length)) {
             if (_uuid.empty()) return false;
             *dest = _uuid;
-            uuid  = _uuid;
+            uuid = _uuid;
             return true;
         }
     }
@@ -490,23 +490,23 @@ bool ndGlobalConfig::LoadUUID(UUID which, string &uuid) {
 
 bool ndGlobalConfig::SaveUUID(UUID which, const string &uuid) {
     size_t length = 0;
-    string *dest  = nullptr, path;
+    string *dest = nullptr, path;
     lock_guard<mutex> ul(lock_uuid);
 
     switch (which) {
     case UUID_AGENT:
-        dest   = &ndGC.uuid;
-        path   = ndGC.path_uuid;
+        dest = &ndGC.uuid;
+        path = ndGC.path_uuid;
         length = ND_AGENT_UUID_LEN;
         break;
     case UUID_SITE:
-        dest   = &ndGC.uuid_site;
-        path   = ndGC.path_uuid_site;
+        dest = &ndGC.uuid_site;
+        path = ndGC.path_uuid_site;
         length = ND_SITE_UUID_LEN;
         break;
     case UUID_SERIAL:
-        dest   = &ndGC.uuid_serial;
-        path   = ndGC.path_uuid_serial;
+        dest = &ndGC.uuid_serial;
+        path = ndGC.path_uuid_serial;
         length = ND_AGENT_SERIAL_LEN;
         break;
     }
@@ -677,8 +677,8 @@ bool ndGlobalConfig::AddInterface(const string &iface,
         case ndCT_NFQ:
             config = static_cast<void *>(new nd_config_nfq);
             if (config == nullptr) {
-                throw ndSystemException(
-                  __PRETTY_FUNCTION__, "new nd_config_nfq", ENOMEM);
+                throw ndSystemException(__PRETTY_FUNCTION__,
+                  "new nd_config_nfq", ENOMEM);
             }
         default: break;
         }
@@ -765,7 +765,7 @@ bool ndGlobalConfig::LoadInterfaces(void *config_reader) {
     r->GetSections(sections);
 
     for (auto &s : sections) {
-        static const char *key      = "capture-interface-";
+        static const char *key = "capture-interface-";
         static const size_t key_len = strlen(key);
 
         if (strncasecmp(s.c_str(), key, key_len)) continue;
@@ -923,13 +923,13 @@ enum nd_capture_type ndGlobalConfig::LoadCaptureType(
     INIReader *r = static_cast<INIReader *>(config_reader);
 
     enum nd_capture_type ct = ndCT_NONE;
-    string capture_type     = r->Get(section, key, "auto");
+    string capture_type = r->Get(section, key, "auto");
 
     if (capture_type == "auto") {
 #if defined(_ND_USE_LIBPCAP)
         ct = ndCT_PCAP;
 #elif defined(_ND_USE_TPACKETV3)
-        ct           = ndCT_TPV3;
+        ct = ndCT_TPV3;
 #else
 #error "No available capture types!"
 #endif
@@ -1025,7 +1025,7 @@ bool ndGlobalConfig::LoadCaptureSettings(void *config_reader,
         if (tpv3->fanout_mode != ndFOM_DISABLED &&
           tpv3->fanout_instances < 2)
         {
-            tpv3->fanout_mode      = ndFOM_DISABLED;
+            tpv3->fanout_mode = ndFOM_DISABLED;
             tpv3->fanout_instances = 0;
         }
 
@@ -1072,16 +1072,16 @@ bool ndGlobalConfig::AddPlugin(const string &filename) {
     r.GetSections(sections);
 
     for (auto &tag : sections) {
-        size_t p            = string::npos;
-        Plugins *mpi        = nullptr;
+        size_t p = string::npos;
+        Plugins *mpi = nullptr;
         ndPlugin::Type type = ndPlugin::TYPE_BASE;
 
         if ((p = tag.find("proc-")) != string::npos) {
-            mpi  = &plugin_processors;
+            mpi = &plugin_processors;
             type = ndPlugin::TYPE_PROC;
         }
         else if ((p = tag.find("sink-")) != string::npos) {
-            mpi  = &plugin_sinks;
+            mpi = &plugin_sinks;
             type = ndPlugin::TYPE_SINK;
         }
 

@@ -107,26 +107,26 @@ public:
     }
 
     inline ndFlowStats &operator=(const ndFlowStats &fs) {
-        lower_bytes       = fs.lower_bytes.load();
-        upper_bytes       = fs.upper_bytes.load();
-        total_bytes       = fs.total_bytes.load();
-        lower_packets     = fs.lower_packets.load();
-        upper_packets     = fs.upper_packets.load();
-        total_packets     = fs.total_packets.load();
+        lower_bytes = fs.lower_bytes.load();
+        upper_bytes = fs.upper_bytes.load();
+        total_bytes = fs.total_bytes.load();
+        lower_packets = fs.lower_packets.load();
+        upper_packets = fs.upper_packets.load();
+        total_packets = fs.total_packets.load();
         detection_packets = fs.detection_packets.load();
 #ifdef _ND_EXTENDED_STATS
-        lower_rate     = fs.lower_rate.load();
-        upper_rate     = fs.upper_rate.load();
+        lower_rate = fs.lower_rate.load();
+        upper_rate = fs.upper_rate.load();
         tcp_seq_errors = fs.tcp_seq_errors.load();
-        tcp_resets     = fs.tcp_resets.load();
-        tcp_retrans    = fs.tcp_retrans.load();
+        tcp_resets = fs.tcp_resets.load();
+        tcp_retrans = fs.tcp_retrans.load();
 #endif
         return *this;
     };
 
     inline void Reset(bool full_reset = false) {
-        lower_bytes   = 0;
-        upper_bytes   = 0;
+        lower_bytes = 0;
+        upper_bytes = 0;
         lower_packets = 0;
         upper_packets = 0;
 #ifdef _ND_EXTENDED_STATS
@@ -135,8 +135,8 @@ public:
             upper_rate_samples[i] = 0;
         }
         tcp_seq_errors = 0;
-        tcp_resets     = 0;
-        tcp_retrans    = 0;
+        tcp_resets = 0;
+        tcp_retrans = 0;
 #endif
         if (full_reset) {
             detection_packets = 0;
@@ -207,12 +207,12 @@ public:
     bool HasMDNSDomainName(void) const;
 
     enum PrintFlags {
-        PRINTF_NONE     = 0x00,
-        PRINTF_HASHES   = 0x01,
-        PRINTF_MACS     = 0x02,
+        PRINTF_NONE = 0x00,
+        PRINTF_HASHES = 0x01,
+        PRINTF_MACS = 0x02,
         PRINTF_METADATA = 0x04,
-        PRINTF_STATS    = 0x08,
-        PRINTF_ALL      = (PRINTF_HASHES | PRINTF_MACS |
+        PRINTF_STATS = 0x08,
+        PRINTF_ALL = (PRINTF_HASHES | PRINTF_MACS |
           PRINTF_METADATA | PRINTF_STATS)
     };
 
@@ -223,31 +223,31 @@ public:
       uint8_t &lm, uint8_t &ot);
 
     enum EncodeFlags {
-        ENCODE_NONE     = 0x00,
+        ENCODE_NONE = 0x00,
         ENCODE_METADATA = 0x01,
-        ENCODE_TUNNELS  = 0x02,
-        ENCODE_STATS    = 0x04,
+        ENCODE_TUNNELS = 0x02,
+        ENCODE_STATS = 0x04,
         ENCODE_ALL = (ENCODE_METADATA | ENCODE_TUNNELS | ENCODE_STATS)
     };
 
     template <class T>
     void Encode(T &output, const ndFlowStats &stats,
       uint8_t encode_includes = ENCODE_ALL) const {
-        string _other_type     = "unknown";
-        string _lower_mac      = "local_mac",
-               _upper_mac      = "other_mac";
-        string _lower_ip       = "local_ip",
-               _upper_ip       = "other_ip";
-        string _lower_gtp_ip   = "local_ip",
-               _upper_gtp_ip   = "other_ip";
-        string _lower_port     = "local_port",
-               _upper_port     = "other_port";
+        string _other_type = "unknown";
+        string _lower_mac = "local_mac",
+               _upper_mac = "other_mac";
+        string _lower_ip = "local_ip",
+               _upper_ip = "other_ip";
+        string _lower_gtp_ip = "local_ip",
+               _upper_gtp_ip = "other_ip";
+        string _lower_port = "local_port",
+               _upper_port = "other_port";
         string _lower_gtp_port = "local_port",
                _upper_gtp_port = "other_port";
-        string _lower_bytes    = "local_bytes",
-               _upper_bytes    = "other_bytes";
-        string _lower_packets  = "local_packets",
-               _upper_packets  = "other_packets";
+        string _lower_bytes = "local_bytes",
+               _upper_bytes = "other_bytes";
+        string _lower_packets = "local_packets",
+               _upper_packets = "other_packets";
 #ifdef _ND_EXTENDED_STATS
         string _lower_rate = "local_rate";
         string _upper_rate = "other_rate";
@@ -266,15 +266,15 @@ public:
 
         switch (lower_map) {
         case LOWER_LOCAL:
-            _lower_mac     = "local_mac";
-            _lower_ip      = "local_ip";
-            _lower_port    = "local_port";
-            _lower_bytes   = "local_bytes";
+            _lower_mac = "local_mac";
+            _lower_ip = "local_ip";
+            _lower_port = "local_port";
+            _lower_bytes = "local_bytes";
             _lower_packets = "local_packets";
-            _upper_mac     = "other_mac";
-            _upper_ip      = "other_ip";
-            _upper_port    = "other_port";
-            _upper_bytes   = "other_bytes";
+            _upper_mac = "other_mac";
+            _upper_ip = "other_ip";
+            _upper_port = "other_port";
+            _upper_bytes = "other_bytes";
             _upper_packets = "other_packets";
 #ifdef _ND_EXTENDED_STATS
             _lower_rate = "local_rate";
@@ -282,15 +282,15 @@ public:
 #endif
             break;
         case LOWER_OTHER:
-            _lower_mac     = "other_mac";
-            _lower_ip      = "other_ip";
-            _lower_port    = "other_port";
-            _lower_bytes   = "other_bytes";
+            _lower_mac = "other_mac";
+            _lower_ip = "other_ip";
+            _lower_port = "other_port";
+            _lower_bytes = "other_bytes";
             _lower_packets = "other_packets";
-            _upper_mac     = "local_mac";
-            _upper_ip      = "local_ip";
-            _upper_port    = "local_port";
-            _upper_bytes   = "local_bytes";
+            _upper_mac = "local_mac";
+            _upper_ip = "local_ip";
+            _upper_port = "local_port";
+            _upper_bytes = "local_bytes";
             _upper_packets = "local_packets";
 #ifdef _ND_EXTENDED_STATS
             _lower_rate = "other_rate";
@@ -535,18 +535,18 @@ public:
             case TUNNEL_GTP:
                 switch (gtp.lower_map) {
                 case LOWER_LOCAL:
-                    _lower_ip   = "local_ip";
+                    _lower_ip = "local_ip";
                     _lower_port = "local_port";
                     _lower_teid = "local_teid";
-                    _upper_ip   = "other_ip";
+                    _upper_ip = "other_ip";
                     _upper_port = "other_port";
                     _upper_teid = "other_teid";
                     break;
                 case LOWER_OTHER:
-                    _lower_ip   = "other_ip";
+                    _lower_ip = "other_ip";
                     _lower_port = "other_port";
                     _lower_teid = "other_teid";
-                    _upper_ip   = "local_ip";
+                    _upper_ip = "local_ip";
                     _upper_port = "local_port";
                     _upper_teid = "local_teid";
                     break;
@@ -638,20 +638,20 @@ public:
 
     enum {
         LOWER_UNKNOWN = 0x00,
-        LOWER_LOCAL   = 0x01,
-        LOWER_OTHER   = 0x02
+        LOWER_LOCAL = 0x01,
+        LOWER_OTHER = 0x02
     };
 
     uint8_t lower_map;
 
     enum {
-        OTHER_UNKNOWN     = 0x00,
+        OTHER_UNKNOWN = 0x00,
         OTHER_UNSUPPORTED = 0x01,
-        OTHER_LOCAL       = 0x02,
-        OTHER_MULTICAST   = 0x03,
-        OTHER_BROADCAST   = 0x04,
-        OTHER_REMOTE      = 0x05,
-        OTHER_ERROR       = 0x06
+        OTHER_LOCAL = 0x02,
+        OTHER_MULTICAST = 0x03,
+        OTHER_BROADCAST = 0x04,
+        OTHER_REMOTE = 0x05,
+        OTHER_ERROR = 0x06
     };
 
     uint8_t other_type;
@@ -755,8 +755,8 @@ public:
     // packets, the origin's accuracy would be 50%.
     enum {
         ORIGIN_UNKNOWN = 0x00,
-        ORIGIN_LOWER   = 0x01,
-        ORIGIN_UPPER   = 0x02
+        ORIGIN_LOWER = 0x01,
+        ORIGIN_UPPER = 0x02
     };
 
     uint8_t origin;

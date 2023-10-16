@@ -145,7 +145,7 @@ static int ndCaptureNFQueue_Callback(
         gettimeofday(&tv, NULL);
     }
     else {
-        tv.tv_sec  = (time_t)pkt_ts->sec;
+        tv.tv_sec = (time_t)pkt_ts->sec;
         tv.tv_usec = (time_t)pkt_ts->usec;
     };
 

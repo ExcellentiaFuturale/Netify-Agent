@@ -37,7 +37,7 @@ ndNetlink::ndNetlink(void)
     int rc;
 
     sa.nl_family = AF_NETLINK;
-    sa.nl_pid    = getpid();
+    sa.nl_pid = getpid();
     sa.nl_groups = RTMGRP_IPV4_ROUTE | RTMGRP_IPV6_ROUTE |
       RTMGRP_IPV4_IFADDR | RTMGRP_IPV6_IFADDR;
 
@@ -92,11 +92,11 @@ void ndNetlink::Refresh(void) {
 
     nlh = (struct nlmsghdr *)buffer;
 
-    nlh->nlmsg_len   = NLMSG_LENGTH(sizeof(struct rtmsg));
-    nlh->nlmsg_type  = RTM_GETROUTE;
+    nlh->nlmsg_len = NLMSG_LENGTH(sizeof(struct rtmsg));
+    nlh->nlmsg_type = RTM_GETROUTE;
     nlh->nlmsg_flags = NLM_F_REQUEST | NLM_F_DUMP;
-    nlh->nlmsg_pid   = 0;
-    nlh->nlmsg_seq   = seq++;
+    nlh->nlmsg_pid = 0;
+    nlh->nlmsg_seq = seq++;
 
     if (send(nd, nlh, nlh->nlmsg_len, 0) < 0) {
         rc = errno;
@@ -110,10 +110,10 @@ void ndNetlink::Refresh(void) {
     nlh = (struct nlmsghdr *)buffer;
 
     nlh->nlmsg_len = NLMSG_LENGTH(sizeof(struct ifaddrmsg));
-    nlh->nlmsg_type  = RTM_GETADDR;
+    nlh->nlmsg_type = RTM_GETADDR;
     nlh->nlmsg_flags = NLM_F_REQUEST | NLM_F_DUMP;
-    nlh->nlmsg_pid   = 0;
-    nlh->nlmsg_seq   = seq++;
+    nlh->nlmsg_pid = 0;
+    nlh->nlmsg_seq = seq++;
 
     if (send(nd, nlh, nlh->nlmsg_len, 0) < 0) {
         rc = errno;
@@ -211,7 +211,7 @@ bool ndNetlink::CopyAddress(sa_family_t family, ndAddr &dst,
 bool ndNetlink::AddRemoveNetwork(struct nlmsghdr *nlh, bool add) {
     ndAddr addr;
     char ifname[IFNAMSIZ] = { '\0' };
-    size_t offset         = RTM_PAYLOAD(nlh);
+    size_t offset = RTM_PAYLOAD(nlh);
 
     struct rtmsg *rtm;
     rtm = static_cast<struct rtmsg *>(NLMSG_DATA(nlh));

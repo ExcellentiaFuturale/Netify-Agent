@@ -109,7 +109,7 @@ bool ndDNSHintCache::Lookup(const ndAddr &addr, string &hostname) {
     }
 
     const uint8_t *sa = addr.GetAddress();
-    size_t sa_length  = addr.GetAddressSize();
+    size_t sa_length = addr.GetAddressSize();
 
     if (sa == nullptr || sa_length == 0) {
         nd_dprintf("Invalid DHC address data.\n");
@@ -135,7 +135,7 @@ bool ndDNSHintCache::Lookup(const string &digest, string &hostname) {
 
     nd_dns_ar::iterator i = map_ar.find(digest);
     if (i != map_ar.end()) {
-        found    = true;
+        found = true;
         hostname = i->second.second;
         i->second.first = nd_time_monotonic() + ndGC.ttl_dns_entry;
     }
@@ -242,7 +242,8 @@ void ndDNSHintCache::Save(void) {
 
     fprintf(hf, "\"host\",\"addr_digest\",\"ttl\"\n");
 
-    for (nd_dns_ar::iterator i = map_ar.begin(); i != map_ar.end(); i++)
+    for (nd_dns_ar::iterator i = map_ar.begin();
+         i != map_ar.end(); i++)
     {
         nd_sha1_to_string((const uint8_t *)i->first.c_str(), digest);
 

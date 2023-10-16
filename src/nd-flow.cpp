@@ -42,7 +42,7 @@ void ndFlowStats::UpdateRate(bool lower, uint64_t timestamp,
 
     samples[index] += bytes;
 
-    uint64_t total   = 0;
+    uint64_t total = 0;
     unsigned divisor = 0;
     for (unsigned i = 0; i < interval; i++) {
         if (samples[i] == 0) continue;
@@ -60,16 +60,17 @@ ndFlow::ndFlow(nd_iface_ptr &iface)
     other_type(OTHER_UNKNOWN), tunnel_type(TUNNEL_NONE),
     detected_protocol(ND_PROTO_UNKNOWN),
     detected_application(ND_APP_UNKNOWN),
-    detected_protocol_name("Unknown"),
-    category{ ND_CAT_UNKNOWN, ND_CAT_UNKNOWN, ND_CAT_UNKNOWN },
+    detected_protocol_name("Unknown"), category{ ND_CAT_UNKNOWN,
+        ND_CAT_UNKNOWN, ND_CAT_UNKNOWN },
     ndpi_flow(NULL), http{ { 0 } }, privacy_mask(0),
     origin(0), direction(0),
 #if defined(_ND_USE_CONNTRACK) && defined(_ND_WITH_CONNTRACK_MDATA)
     ct_id(0), ct_mark(0),
 #endif
-    lower_type(ndAddr::atNONE), upper_type(ndAddr::atNONE),
-    flags{}, gtp{ 0 }, risks{}, ndpi_risk_score(0),
-    ndpi_risk_score_client(0), ndpi_risk_score_server(0) {
+    lower_type(ndAddr::atNONE),
+    upper_type(ndAddr::atNONE), flags{}, gtp{ 0 }, risks{},
+    ndpi_risk_score(0), ndpi_risk_score_client(0),
+    ndpi_risk_score_server(0) {
     gtp.version = 0xFF;
 
     digest_lower.reserve(SHA1_DIGEST_LENGTH);
@@ -90,15 +91,16 @@ ndFlow::ndFlow(const ndFlow &flow)
     tunnel_type(flow.tunnel_type),
     detected_protocol(ND_PROTO_UNKNOWN),
     detected_application(ND_APP_UNKNOWN),
-    detected_protocol_name("Unknown"),
-    category{ ND_CAT_UNKNOWN, ND_CAT_UNKNOWN, ND_CAT_UNKNOWN },
+    detected_protocol_name("Unknown"), category{ ND_CAT_UNKNOWN,
+        ND_CAT_UNKNOWN, ND_CAT_UNKNOWN },
     ndpi_flow(NULL), http{ { 0 } }, privacy_mask(0),
     origin(0), direction(0),
 #if defined(_ND_USE_CONNTRACK) && defined(_ND_WITH_CONNTRACK_MDATA)
     ct_id(0), ct_mark(0),
 #endif
-    lower_type(ndAddr::atNONE), upper_type(ndAddr::atNONE),
-    flags{}, gtp(flow.gtp), risks{ 0 }, ndpi_risk_score(0),
+    lower_type(ndAddr::atNONE),
+    upper_type(ndAddr::atNONE), flags{},
+    gtp(flow.gtp), risks{ 0 }, ndpi_risk_score(0),
     ndpi_risk_score_client(0), ndpi_risk_score_server(0) {
     digest_lower.assign(flow.digest_lower.begin(),
       flow.digest_lower.end());
@@ -199,14 +201,14 @@ void ndFlow::Reset(bool full_reset) {
 
     if (full_reset) {
         flags.detection_complete = false;
-        flags.detection_guessed  = false;
-        flags.detection_init     = false;
-        flags.detection_updated  = false;
-        flags.dhc_hit            = false;
-        flags.expired            = false;
-        flags.expiring           = false;
-        flags.risk_checked       = false;
-        flags.soft_dissector     = false;
+        flags.detection_guessed = false;
+        flags.detection_init = false;
+        flags.detection_updated = false;
+        flags.dhc_hit = false;
+        flags.expired = false;
+        flags.expiring = false;
+        flags.risk_checked = false;
+        flags.soft_dissector = false;
 
         risks.clear();
     }

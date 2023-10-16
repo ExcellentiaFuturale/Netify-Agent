@@ -151,8 +151,8 @@ void ndConntrackThread::DumpConntrackTable(void) {
     nfh = (struct nfgenmsg *)mnl_nlmsg_put_extra_header(nlh,
       sizeof(struct nfgenmsg));
     nfh->nfgen_family = AF_UNSPEC;
-    nfh->version      = NFNETLINK_V0;
-    nfh->res_id       = 0;
+    nfh->version = NFNETLINK_V0;
+    nfh->res_id = 0;
 
     rc = mnl_socket_sendto(nl, nlh, nlh->nlmsg_len);
     if (rc == -1) {
@@ -287,7 +287,7 @@ void ndConntrackThread::ProcessConntrackEvent(
             ct_flow_map.erase(flow_iter);
 
             ct_flow_map[ct_flow->digest] = ct_flow;
-            ct_id_map[id]                = ct_flow->digest;
+            ct_id_map[id] = ct_flow->digest;
         }
         break;
 
@@ -324,8 +324,8 @@ Unlock_ProcessConntrackEvent:
     Unlock();
 }
 
-void ndConntrackThread::PrintFlow(
-  ndConntrackFlow *flow, string &text, bool reorder, bool withreply) {
+void ndConntrackThread::PrintFlow(ndConntrackFlow *flow,
+  string &text, bool reorder, bool withreply) {
     int addr_cmp = 0;
     ostringstream os;
     char ip[INET6_ADDRSTRLEN];
@@ -528,7 +528,7 @@ void ndConntrackThread::UpdateFlow(nd_flow_ptr &flow) {
         ct_flow->updated_at = nd_time_monotonic();
 
 #if defined(_ND_WITH_CONNTRACK_MDATA)
-        flow->ct_id   = ct_flow->id;
+        flow->ct_id = ct_flow->id;
         flow->ct_mark = ct_flow->mark;
 #endif
 
@@ -762,12 +762,12 @@ void ndConntrackFlow::Hash(void) {
 
     switch (orig_addr[ndCT_DIR_SRC].ss_family) {
     case AF_INET:
-        sa_src   = repl_addr_valid[ndCT_DIR_SRC] ?
-            (struct sockaddr_in *)&repl_addr[ndCT_DIR_SRC] :
-            (struct sockaddr_in *)&orig_addr[ndCT_DIR_SRC];
-        sa_dst   = repl_addr_valid[ndCT_DIR_DST] ?
-            (struct sockaddr_in *)&repl_addr[ndCT_DIR_DST] :
-            (struct sockaddr_in *)&orig_addr[ndCT_DIR_DST];
+        sa_src = repl_addr_valid[ndCT_DIR_SRC] ?
+          (struct sockaddr_in *)&repl_addr[ndCT_DIR_SRC] :
+          (struct sockaddr_in *)&orig_addr[ndCT_DIR_SRC];
+        sa_dst = repl_addr_valid[ndCT_DIR_DST] ?
+          (struct sockaddr_in *)&repl_addr[ndCT_DIR_DST] :
+          (struct sockaddr_in *)&orig_addr[ndCT_DIR_DST];
         addr_cmp = memcmp(&sa_src->sin_addr,
           &sa_dst->sin_addr, sizeof(in_addr));
         if (addr_cmp < 0) {
@@ -784,12 +784,12 @@ void ndConntrackFlow::Hash(void) {
         }
         break;
     case AF_INET6:
-        sa6_src  = repl_addr_valid[ndCT_DIR_SRC] ?
-           (struct sockaddr_in6 *)&repl_addr[ndCT_DIR_SRC] :
-           (struct sockaddr_in6 *)&orig_addr[ndCT_DIR_SRC];
-        sa6_dst  = repl_addr_valid[ndCT_DIR_DST] ?
-           (struct sockaddr_in6 *)&repl_addr[ndCT_DIR_DST] :
-           (struct sockaddr_in6 *)&orig_addr[ndCT_DIR_DST];
+        sa6_src = repl_addr_valid[ndCT_DIR_SRC] ?
+          (struct sockaddr_in6 *)&repl_addr[ndCT_DIR_SRC] :
+          (struct sockaddr_in6 *)&orig_addr[ndCT_DIR_SRC];
+        sa6_dst = repl_addr_valid[ndCT_DIR_DST] ?
+          (struct sockaddr_in6 *)&repl_addr[ndCT_DIR_DST] :
+          (struct sockaddr_in6 *)&orig_addr[ndCT_DIR_DST];
         addr_cmp = memcmp(&sa6_src->sin6_addr,
           &sa6_dst->sin6_addr, sizeof(struct in6_addr));
         if (addr_cmp < 0) {

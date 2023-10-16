@@ -69,7 +69,7 @@ void *ndCapturePcap::Entry(void) {
             //            FD_SET(fd_ipc[0], &fds_read);
             FD_SET(pcap_fd, &fds_read);
 
-            tv.tv_sec  = 1;
+            tv.tv_sec = 1;
             tv.tv_usec = 0;
             rc = select(sd_max + 1, &fds_read, nullptr,
               nullptr, &tv);
@@ -163,7 +163,7 @@ void *ndCapturePcap::Entry(void) {
             }
 
             dl_type = pcap_datalink(pcap);
-            sd_max  = pcap_fd;
+            sd_max = pcap_fd;
             //            sd_max = max(fd_ipc[0], pcap_fd);
 
             nd_dprintf(

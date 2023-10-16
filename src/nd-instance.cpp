@@ -27,9 +27,9 @@
 #include <sys/resource.h>
 #include <unistd.h>
 
-#include <iostream>
 #include <algorithm>
 #include <cerrno>
+#include <iostream>
 
 #if defined(_ND_USE_LIBTCMALLOC) && \
   defined(HAVE_GPERFTOOLS_MALLOC_EXTENSION_H)
@@ -68,7 +68,7 @@ ndInstanceStatus::ndInstanceStatus()
 #endif
     dhc_status(false), dhc_size(0) {
     flows = 0;
-    cpus  = sysconf(_SC_NPROCESSORS_ONLN);
+    cpus = sysconf(_SC_NPROCESSORS_ONLN);
 }
 
 ndInstance::ndInstance(const string &tag)
@@ -665,12 +665,12 @@ bool ndInstance::SetConfigOption(int option, const string &arg) {
     switch (option) {
     case _ND_LO_ENABLE_SINK:
         cout << "Enabling Netify Cloud Sink.\n";
-        func     = "config_enable_plugin";
+        func = "config_enable_plugin";
         filename = ndGC.path_plugins;
         filename.append("/\?\?-netify-sink-mqtt.conf");
         break;
     case _ND_LO_ENABLE_PLUGIN:
-        func     = "config_enable_plugin";
+        func = "config_enable_plugin";
         filename = ndGC.path_plugins;
         filename.append("/\?\?-netify-");
         filename.append(arg);
@@ -678,12 +678,12 @@ bool ndInstance::SetConfigOption(int option, const string &arg) {
         break;
     case _ND_LO_DISABLE_SINK:
         cout << "Disabling Netify Cloud Sink.\n";
-        func     = "config_disable_plugin";
+        func = "config_disable_plugin";
         filename = ndGC.path_plugins;
         filename.append("/\?\?-netify-sink-mqtt.conf");
         break;
     case _ND_LO_DISABLE_PLUGIN:
-        func     = "config_disable_plugin";
+        func = "config_disable_plugin";
         filename = ndGC.path_plugins;
         filename.append("/\?\?-netify-");
         filename.append(arg);
@@ -1085,7 +1085,7 @@ bool ndInstance::SaveAgentStatus(const nd_interface_stats &stats) {
     json jstatus;
 
     try {
-        jstatus["type"]          = "agent_status";
+        jstatus["type"] = "agent_status";
         jstatus["agent_version"] = PACKAGE_VERSION;
 
         apps.Encode(jstatus);
@@ -1131,12 +1131,12 @@ bool ndInstance::SaveAgentStatus(const nd_interface_stats &stats) {
 
 static void DisplayApiStatus(json &jstatus,
   const string &key, const string &label) {
-    int code           = -10;
+    int code = -10;
     time_t last_update = 0;
     string updated_ago = "last update unknown";
-    string message     = "No update data";
-    const char *icon   = ND_I_INFO;
-    const char *color  = ND_C_RESET;
+    string message = "No update data";
+    const char *icon = ND_I_INFO;
+    const char *color = ND_C_RESET;
 
     auto jnetify_api = jstatus.find("netify_api");
     if (jnetify_api != jstatus.end() && jnetify_api->is_object())
@@ -1173,15 +1173,15 @@ static void DisplayApiStatus(json &jstatus,
 
     switch (code) {
     case -1:
-        icon  = ND_I_FAIL;
+        icon = ND_I_FAIL;
         color = ND_C_RED;
         break;
     case -10:
-        icon  = ND_I_WARN;
+        icon = ND_I_WARN;
         color = ND_C_YELLOW;
         break;
     default:
-        icon  = ND_I_OK;
+        icon = ND_I_OK;
         color = ND_C_GREEN;
         break;
     }
@@ -1197,7 +1197,7 @@ static void DisplayApiStatus(json &jstatus,
 }
 
 bool ndInstance::DisplayAgentStatus(void) {
-    const char *icon  = ND_I_INFO;
+    const char *icon = ND_I_INFO;
     const char *color = ND_C_RESET;
 
     fprintf(stderr, "%s\n", nd_get_version_and_features().c_str());
@@ -1212,7 +1212,7 @@ bool ndInstance::DisplayAgentStatus(void) {
     }
 
     pid_t nd_pid = nd_load_pid(ndGC.path_pid_file);
-    nd_pid       = nd_is_running(nd_pid, self);
+    nd_pid = nd_is_running(nd_pid, self);
 
     fprintf(stderr, "%s%s%s agent %s: PID %d\n",
       (nd_pid < 0)    ? ND_C_YELLOW :
@@ -1280,32 +1280,32 @@ bool ndInstance::DisplayAgentStatus(void) {
         double flow_utilization = (ndGC.max_flows > 0) ?
           flows * 100.0 / (double)ndGC.max_flows :
           0;
-        string max_flows        = (ndGC.max_flows == 0) ?
-                 "unlimited" :
-                 to_string(ndGC.max_flows);
+        string max_flows = (ndGC.max_flows == 0) ?
+          "unlimited" :
+          to_string(ndGC.max_flows);
 
         if (flows > 0) {
             if (ndGC.max_flows) {
                 if (flow_utilization < 75) {
-                    icon  = ND_I_OK;
+                    icon = ND_I_OK;
                     color = ND_C_GREEN;
                 }
                 else if (flow_utilization < 90) {
-                    icon  = ND_I_WARN;
+                    icon = ND_I_WARN;
                     color = ND_C_YELLOW;
                 }
                 else {
-                    icon  = ND_I_FAIL;
+                    icon = ND_I_FAIL;
                     color = ND_C_RED;
                 }
             }
             else {
-                icon  = ND_I_OK;
+                icon = ND_I_OK;
                 color = ND_C_GREEN;
             }
         }
         else {
-            icon  = ND_I_WARN;
+            icon = ND_I_WARN;
             color = ND_C_YELLOW;
         }
 
@@ -1324,7 +1324,7 @@ bool ndInstance::DisplayAgentStatus(void) {
         //            color = ND_C_YELLOW;
         //        }
         //        else {
-        icon  = ND_I_INFO;
+        icon = ND_I_INFO;
         color = ND_C_RESET;
         //        }
 
@@ -1361,15 +1361,15 @@ bool ndInstance::DisplayAgentStatus(void) {
         double cpu_total = cpu_user_percent + cpu_system_percent;
 
         if (cpu_total < 33.34) {
-            icon  = ND_I_OK;
+            icon = ND_I_OK;
             color = ND_C_GREEN;
         }
         else if (cpu_total < 66.67) {
-            icon  = ND_I_WARN;
+            icon = ND_I_WARN;
             color = ND_C_YELLOW;
         }
         else {
-            icon  = ND_I_FAIL;
+            icon = ND_I_FAIL;
             color = ND_C_RED;
         }
 
@@ -1394,12 +1394,12 @@ bool ndInstance::DisplayAgentStatus(void) {
 
         if (jstatus.find("interfaces") != jstatus.end()) {
             for (auto &i : jstatus["interfaces"].items()) {
-                const json &j          = i.value();
-                const string &iface    = i.key();
+                const json &j = i.value();
+                const string &iface = i.key();
                 double dropped_percent = 0;
 
-                icon         = ND_I_FAIL;
-                color        = ND_C_RED;
+                icon = ND_I_FAIL;
+                color = ND_C_RED;
                 string state = "unknown";
 
                 const char *colors[2] = { ND_C_RED, ND_C_RESET };
@@ -1410,14 +1410,14 @@ bool ndInstance::DisplayAgentStatus(void) {
                     if (jstate != j.end()) {
                         switch (jstate->get<unsigned>()) {
                         case ndCaptureThread::STATE_INIT:
-                            icon      = ND_I_WARN;
+                            icon = ND_I_WARN;
                             colors[0] = color = ND_C_YELLOW;
                             state = "initializing";
                             break;
                         case ndCaptureThread::STATE_ONLINE:
-                            icon      = ND_I_OK;
+                            icon = ND_I_OK;
                             colors[0] = color = ND_C_GREEN;
-                            state             = "online";
+                            state = "online";
                             break;
                         case ndCaptureThread::STATE_OFFLINE:
                             state = "offline";
@@ -1437,7 +1437,7 @@ bool ndInstance::DisplayAgentStatus(void) {
                                         .get<unsigned>();
 
                     if (pkts == 0) {
-                        icon      = ND_I_WARN;
+                        icon = ND_I_WARN;
                         colors[1] = color = ND_C_YELLOW;
                     }
                     else {
@@ -1445,11 +1445,11 @@ bool ndInstance::DisplayAgentStatus(void) {
                           100 / (double)pkts;
 
                         if (dropped_percent > 0.001) {
-                            icon      = ND_I_WARN;
+                            icon = ND_I_WARN;
                             colors[1] = color = ND_C_YELLOW;
                         }
                         else if (dropped_percent > 5.0) {
-                            icon      = ND_I_FAIL;
+                            icon = ND_I_FAIL;
                             colors[1] = color = ND_C_RED;
                         }
                     }
@@ -1759,17 +1759,17 @@ void *ndInstance::ndInstance::Entry(void) {
 
     try {
         struct itimerspec itspec;
-        itspec.it_value.tv_sec     = ndGC.update_interval;
-        itspec.it_value.tv_nsec    = 0;
-        itspec.it_interval.tv_sec  = ndGC.update_interval;
+        itspec.it_value.tv_sec = ndGC.update_interval;
+        itspec.it_value.tv_nsec = 0;
+        itspec.it_interval.tv_sec = ndGC.update_interval;
         itspec.it_interval.tv_nsec = 0;
 
         timer_update.Set(itspec);
 
         if (ndGC_USE_NAPI) {
             itspec.it_value.tv_sec = min(5u, ndGC.ttl_napi_tick);
-            itspec.it_value.tv_nsec    = 0;
-            itspec.it_interval.tv_sec  = ndGC.ttl_napi_tick;
+            itspec.it_value.tv_nsec = 0;
+            itspec.it_interval.tv_sec = ndGC.ttl_napi_tick;
             itspec.it_interval.tv_nsec = 0;
 
             timer_update_napi.Set(itspec);
@@ -2274,7 +2274,7 @@ void ndInstance::UpdateStatus(void) {
     MallocExtension::instance()->GetNumericProperty(
       "generic.current_allocated_bytes", &tcm_alloc_bytes);
     status.tcm_alloc_kb_prev = status.tcm_alloc_kb;
-    status.tcm_alloc_kb      = tcm_alloc_bytes / 1024;
+    status.tcm_alloc_kb = tcm_alloc_bytes / 1024;
 #endif
     struct rusage rusage_data;
     getrusage(RUSAGE_SELF, &rusage_data);
@@ -2287,7 +2287,7 @@ void ndInstance::UpdateStatus(void) {
       ((double)rusage_data.ru_stime.tv_usec / 1000000.0);
 
     status.maxrss_kb_prev = status.maxrss_kb;
-    status.maxrss_kb      = rusage_data.ru_maxrss;
+    status.maxrss_kb = rusage_data.ru_maxrss;
 
     if (clock_gettime(CLOCK_MONOTONIC_RAW, &status.ts_now) != 0)
     {
@@ -2297,7 +2297,7 @@ void ndInstance::UpdateStatus(void) {
 
     if (ndGC_USE_DHC) {
         status.dhc_status = true;
-        status.dhc_size   = dns_hint_cache->GetSize();
+        status.dhc_size = dns_hint_cache->GetSize();
     }
     else status.dhc_status = false;
 }
@@ -2387,7 +2387,7 @@ void ndInstance::ProcessUpdate(nd_capture_threads &threads) {
 }
 
 void ndInstance::ProcessFlows(void) {
-    time_t now     = time(NULL);
+    time_t now = time(NULL);
     size_t buckets = flow_buckets->GetBuckets();
 #ifdef _ND_PROCESS_FLOW_DEBUG
     size_t tcp = 0, tcp_fin = 0, tcp_fin_ack_1 = 0,
@@ -2395,17 +2395,17 @@ void ndInstance::ProcessFlows(void) {
 #endif
     size_t flows_pre_init = 0, flows_total = 0;
 
-    status.flows_purged   = 0;
+    status.flows_purged = 0;
     status.flows_expiring = 0;
-    status.flows_expired  = 0;
-    status.flows_active   = 0;
-    status.flows_in_use   = 0;
+    status.flows_expired = 0;
+    status.flows_active = 0;
+    status.flows_in_use = 0;
 
     // flow_buckets->DumpBucketStats();
 
     for (size_t b = 0; b < buckets; b++) {
         auto &fm = flow_buckets->Acquire(b);
-        auto i   = fm.begin();
+        auto i = fm.begin();
 
         flows_total += fm.size();
 

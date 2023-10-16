@@ -107,15 +107,15 @@ bool ndAddr::Create(ndAddr &a, const uint8_t *hw_addr, size_t length) {
     switch (length) {
     case ETH_ALEN:
 #if defined(__linux__)
-        a.addr.ss.ss_family  = AF_PACKET;
+        a.addr.ss.ss_family = AF_PACKET;
         a.addr.ll.sll_hatype = ARPHRD_ETHER;
-        a.addr.ll.sll_halen  = ETH_ALEN;
+        a.addr.ll.sll_halen = ETH_ALEN;
         memcpy(a.addr.ll.sll_addr, hw_addr, ETH_ALEN);
 #elif defined(__FreeBSD__)
         a.addr.ss.ss_family = AF_LINK;
-        a.addr.dl.sdl_type  = ARPHRD_ETHER;
-        a.addr.dl.sdl_nlen  = 0;
-        a.addr.dl.sdl_alen  = ETH_ALEN;
+        a.addr.dl.sdl_type = ARPHRD_ETHER;
+        a.addr.dl.sdl_nlen = 0;
+        a.addr.dl.sdl_alen = ETH_ALEN;
         memcpy(a.addr.dl.sdl_data, hw_addr, ETH_ALEN);
 #endif
         return ndAddr::MakeString(a, a.cached_addr, mfNONE);
@@ -167,8 +167,8 @@ bool ndAddr::Create(ndAddr &a,
     return ndAddr::MakeString(a, a.cached_addr, mfNONE);
 }
 
-bool ndAddr::Create(
-  ndAddr &a, const struct sockaddr_in *ss_in, uint8_t prefix) {
+bool ndAddr::Create(ndAddr &a,
+  const struct sockaddr_in *ss_in, uint8_t prefix) {
     if (ss_in->sin_family != AF_INET) {
         nd_dprintf("Unsupported address family: %hu\n",
           ss_in->sin_family);
@@ -189,8 +189,8 @@ bool ndAddr::Create(
     return ndAddr::MakeString(a, a.cached_addr, mfNONE);
 }
 
-bool ndAddr::Create(
-  ndAddr &a, const struct sockaddr_in6 *ss_in6, uint8_t prefix) {
+bool ndAddr::Create(ndAddr &a,
+  const struct sockaddr_in6 *ss_in6, uint8_t prefix) {
     if (ss_in6->sin6_family != AF_INET6) {
         nd_dprintf("Unsupported address family: %hu\n",
           ss_in6->sin6_family);
@@ -211,16 +211,16 @@ bool ndAddr::Create(
     return ndAddr::MakeString(a, a.cached_addr, mfNONE);
 }
 
-bool ndAddr::Create(
-  ndAddr &a, const struct in_addr *in_addr, uint8_t prefix) {
+bool ndAddr::Create(ndAddr &a,
+  const struct in_addr *in_addr, uint8_t prefix) {
     if (prefix > _ND_ADDR_BITSv4) {
         nd_dprintf(
           "Invalid IP address prefix length: %hhu\n", prefix);
         return false;
     }
 
-    a.addr.in.sin_family      = AF_INET;
-    a.addr.in.sin_port        = 0;
+    a.addr.in.sin_family = AF_INET;
+    a.addr.in.sin_port = 0;
     a.addr.in.sin_addr.s_addr = in_addr->s_addr;
 
     if (prefix) a.prefix = prefix;
@@ -229,8 +229,8 @@ bool ndAddr::Create(
     return ndAddr::MakeString(a, a.cached_addr, mfNONE);
 }
 
-bool ndAddr::Create(
-  ndAddr &a, const struct in6_addr *in6_addr, uint8_t prefix) {
+bool ndAddr::Create(ndAddr &a,
+  const struct in6_addr *in6_addr, uint8_t prefix) {
     if (prefix > _ND_ADDR_BITSv6) {
         nd_dprintf(
           "Invalid IP address prefix length: %hhu\n", prefix);
@@ -238,7 +238,7 @@ bool ndAddr::Create(
     }
 
     a.addr.in6.sin6_family = AF_INET6;
-    a.addr.in6.sin6_port   = 0;
+    a.addr.in6.sin6_port = 0;
     memcpy(&a.addr.in6.sin6_addr, in6_addr, sizeof(struct in6_addr));
 
     if (prefix) a.prefix = prefix;
@@ -428,8 +428,8 @@ ndAddrType::ndAddrType() {
     AddAddress(ndAddr::atBROADCAST, "169.254.255.255");
 }
 
-bool ndAddrType::AddAddress(
-  ndAddr::Type type, const ndAddr &addr, const string &ifname) {
+bool ndAddrType::AddAddress(ndAddr::Type type,
+  const ndAddr &addr, const string &ifname) {
     if (! addr.IsValid()) {
         nd_printf("Invalid address: %s\n",
           addr.GetString().c_str());
@@ -446,7 +446,7 @@ bool ndAddrType::AddAddress(
     try {
         if (addr.IsEthernet()) {
             string mac = addr.GetString();
-            auto it    = ether_reserved.find(mac);
+            auto it = ether_reserved.find(mac);
             if (it != ether_reserved.end()) {
                 nd_dprintf(
                   "Reserved MAC address exists: %s\n", mac.c_str());
@@ -521,7 +521,7 @@ bool ndAddrType::RemoveAddress(const ndAddr &addr,
     try {
         if (addr.IsEthernet()) {
             string mac = addr.GetString();
-            auto it    = ether_reserved.find(mac);
+            auto it = ether_reserved.find(mac);
             if (it != ether_reserved.end()) {
                 ether_reserved.erase(it);
                 return true;
@@ -775,7 +775,7 @@ size_t ndInterface::UpdateAddrs(ndInterfaces &interfaces) {
 }
 
 size_t ndInterface::UpdateAddrs(const struct ifaddrs *if_addrs) {
-    size_t count                   = 0;
+    size_t count = 0;
     const struct ifaddrs *ifa_addr = if_addrs;
 #if defined(__linux__)
     struct sockaddr_ll *sa_ll;
