@@ -45,13 +45,14 @@ enum nd_fhc_save {
 };
 
 enum nd_capture_type {
-    ndCT_NONE = 0x00,
-    ndCT_CMDLINE = 0x01,
-    ndCT_PCAP = 0x02,
-    ndCT_PCAP_OFFLINE = 0x04,
-    ndCT_TPV3 = 0x08,
-    ndCT_NFQ = 0x10,
-    ndCT_USER = 0x80,
+    ndCT_NONE = 0,
+    ndCT_CMDLINE = (1 << 0),
+    ndCT_PCAP = (1 << 1),
+    ndCT_PCAP_OFFLINE = (1 << 2),
+    ndCT_TPV3 = (1 << 3),
+    ndCT_NFQ = (1 << 4),
+
+    ndCT_USER = (1 << 31),
 };
 
 #define ndCT_TYPE(t) (t & 0xfffffffe)
@@ -79,33 +80,34 @@ enum nd_tpv3_fanout_flags {
 };
 
 enum nd_global_flags {
-    ndGF_DEBUG = 0x1,
-    ndGF_DEBUG_CURL = 0x2,
-    ndGF_UNUSED_0x4 = 0x4,
-    ndGF_DEBUG_NDPI = 0x8,
-    ndGF_QUIET = 0x10,
-    ndGF_SYN_SCAN_PROTECTION = 0x20,
-    ndGF_PRIVATE_EXTADDR = 0x40,
-    ndGF_SSL_USE_TLSv1 = 0x80,
-    ndGF_SSL_VERIFY = 0x100,
-    ndGF_USE_CONNTRACK = 0x200,
-    ndGF_USE_NETLINK = 0x400,
-    ndGF_USE_NAPI = 0x800,
-    ndGF_UNUSED_0x1000 = 0x1000,
-    ndGF_USE_DHC = 0x2000,
-    ndGF_USE_FHC = 0x4000,
-    ndGF_EXPORT_JSON = 0x8000,
-    ndGF_VERBOSE = 0x10000,
-    ndGF_REPLAY_DELAY = 0x20000,
-    ndGF_REMAIN_IN_FOREGROUND = 0x40000,
-    ndGF_ALLOW_UNPRIV = 0x80000,
-    ndGF_IGNORE_IFACE_CONFIGS = 0x100000,
-    ndGF_UPLOAD_ENABLED = 0x200000,
-    ndGF_UPLOAD_NAT_FLOWS = 0x400000,
-    ndGF_AUTO_FLOW_EXPIRY = 0x800000,
-    ndGF_SOFT_DISSECTORS = 0x1000000,
-    ndGF_LOAD_DOMAINS = 0x2000000,
-    ndGF_RUN_WITHOUT_SOURCES = 0x4000000,
+    ndGF_NONE = 0,
+    ndGF_DEBUG = (1 << 0),
+    ndGF_DEBUG_CURL = (1 << 1),
+    ndGF_FREE_BIT3 = (1 << 2),
+    ndGF_DEBUG_NDPI = (1 << 3),
+    ndGF_QUIET = (1 << 4),
+    ndGF_SYN_SCAN_PROTECTION = (1 << 5),
+    ndGF_PRIVATE_EXTADDR = (1 << 6),
+    ndGF_SSL_USE_TLSv1 = (1 << 7),
+    ndGF_SSL_VERIFY = (1 << 8),
+    ndGF_USE_CONNTRACK = (1 << 9),
+    ndGF_USE_NETLINK = (1 << 10),
+    ndGF_USE_NAPI = (1 << 11),
+    ndGF_FREE_BIT13 = (1 << 12),
+    ndGF_USE_DHC = (1 << 13),
+    ndGF_USE_FHC = (1 << 14),
+    ndGF_EXPORT_JSON = (1 << 15),
+    ndGF_VERBOSE = (1 << 16),
+    ndGF_REPLAY_DELAY = (1 << 17),
+    ndGF_REMAIN_IN_FOREGROUND = (1 << 18),
+    ndGF_ALLOW_UNPRIV = (1 << 19),
+    ndGF_IGNORE_IFACE_CONFIGS = (1 << 20),
+    ndGF_UPLOAD_ENABLED = (1 << 21),
+    ndGF_UPLOAD_NAT_FLOWS = (1 << 22),
+    ndGF_AUTO_FLOW_EXPIRY = (1 << 23),
+    ndGF_SOFT_DISSECTORS = (1 << 24),
+    ndGF_LOAD_DOMAINS = (1 << 25),
+    ndGF_RUN_WITHOUT_SOURCES = (1 << 26),
 };
 
 #define ndGC_DEBUG \
@@ -316,6 +318,7 @@ public:
     bool Load(const string &filename);
 
     enum UUID {
+        UUID_NONE,
         UUID_AGENT,
         UUID_SITE,
         UUID_SERIAL,

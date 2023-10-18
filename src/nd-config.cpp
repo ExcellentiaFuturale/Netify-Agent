@@ -61,8 +61,8 @@ ndGlobalConfig::ndGlobalConfig()
     h_flow(stderr), ca_capture_base(0), ca_conntrack(-1),
     ca_detection_base(0), ca_detection_cores(-1),
     max_packet_queue(ND_MAX_PKT_QUEUE_KB * 1024),
-    max_capture_length(ND_PCAP_SNAPLEN),
-    flags(0), digest_app_config{ 0 }, digest_legacy_config{ 0 },
+    max_capture_length(ND_PCAP_SNAPLEN), flags(0),
+    digest_app_config{ 0 }, digest_legacy_config{ 0 },
     fhc_purge_divisor(ND_FHC_PURGE_DIVISOR),
     fm_buckets(ND_FLOW_MAP_BUCKETS),
     max_detection_pkts(ND_MAX_DETECTION_PKTS),
@@ -446,6 +446,7 @@ bool ndGlobalConfig::LoadUUID(UUID which, string &uuid) {
     uuid.clear();
 
     switch (which) {
+    case UUID_NONE: return false;
     case UUID_AGENT:
         if (ndGC.uuid != ND_AGENT_UUID_NULL) {
             uuid = ndGC.uuid;
@@ -494,6 +495,7 @@ bool ndGlobalConfig::SaveUUID(UUID which, const string &uuid) {
     lock_guard<mutex> ul(lock_uuid);
 
     switch (which) {
+    case UUID_NONE: return false;
     case UUID_AGENT:
         dest = &ndGC.uuid;
         path = ndGC.path_uuid;
