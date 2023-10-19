@@ -1,198 +1,232 @@
-offline0: i4pc-------rs--- UDP [L] 10.8.0.1:46214 --> [OR] 200.89.75.198:123
+offline0: i4pc-------rs-- UDP [L] 10.8.0.1:46214 --> [OR] 200.89.75.198:123
         : NTP.netify.ntp
 
-offline0: i4p--------r-FA- TCP [L] 10.8.0.1:54915 --> [OR] 65.39.128.135:80
+offline0: i4p--------r--- TCP [L] 10.8.0.1:54915 --> [OR] 65.39.128.135:80
         : HTTP
         : H: xtra1.gpsonextra.net
         : HTTP/UA: Android
         : URL: xtra1.gpsonextra.net/xtra2.bin
 
-offline0: i4p--------r-FA- TCP [L] 10.8.0.1:45529 --> [OR] 54.230.227.172:80
+offline0: i4p--------r-F- TCP [L] 10.8.0.1:45529 --> [OR] 54.230.227.172:80
         : HTTP.netify.waze
         : H: roadshields.waze.com
         : HTTP/UA: /3.9.4.0
         : URL: roadshields.waze.com/images/HD/CH2.png
 
-offline0: i4p--------r-FA- TCP [L] 10.8.0.1:36100 --> [OR] 46.51.173.182:443
+offline0: i4p--------r--- TCP [L] 10.8.0.1:36100 --> [OR] 46.51.173.182:443
         : HTTP/S
+        : V: 0x0301
 
-offline0: i4p--------r---- TCP [L] 10.8.0.1:36585 --> [OR] 173.194.118.48:443
+offline0: i4p--------r--- TCP [L] 10.8.0.1:36585 --> [OR] 173.194.118.48:443
         : HTTP/S.netify.google
+        : V: 0x0301
 
-offline0: i4p--------r-FA- TCP [L] 10.8.0.1:36102 --> [OR] 46.51.173.182:443
+offline0: i4p--------r--- TCP [L] 10.8.0.1:36102 --> [OR] 46.51.173.182:443
         : HTTP/S
+        : V: 0x0301
 
-offline0: i4pcu------r---- TCP [L] 10.8.0.1:36585 --> [OR] 173.194.118.48:443
+offline0: i4pcu------r--- TCP [L] 10.8.0.1:36585 --> [OR] 173.194.118.48:443
         : HTTP/S.netify.google
+        : V: 0x0301 CS: 0xc011
 
-offline0: i4p--------r-FA- TCP [L] 10.8.0.1:45536 --> [OR] 54.230.227.172:80
+offline0: i4p--------r-F- TCP [L] 10.8.0.1:45536 --> [OR] 54.230.227.172:80
         : HTTP.netify.waze
         : H: cres.waze.com
         : HTTP/UA: /3.9.4.0
         : URL: cres.waze.com/lang_asr/lang.portuguese_br_asr
 
-offline0: i4p-u------r-FA- TCP [L] 10.8.0.1:36102 --> [OR] 46.51.173.182:443
+offline0: i4p-u------r--- TCP [L] 10.8.0.1:36102 --> [OR] 46.51.173.182:443
         : HTTP/S
+        : V: 0x0301 CS: 0x0035
 
-offline0: i4p-u------r-FA- TCP [L] 10.8.0.1:36100 --> [OR] 46.51.173.182:443
+offline0: i4p-u------r--- TCP [L] 10.8.0.1:36100 --> [OR] 46.51.173.182:443
         : HTTP/S
+        : V: 0x0301 CS: 0x0035
         : IDN: C=US, O=Google Inc, CN=Google Internet Authority G2 SDN: C=US, ST=California, L=Mountain View, O=Google Inc, CN=*.world.waze.com
 
-offline0: i4p-u------r-FA- TCP [L] 10.8.0.1:36102 --> [OR] 46.51.173.182:443
+offline0: i4p-u------r--- TCP [L] 10.8.0.1:36102 --> [OR] 46.51.173.182:443
         : HTTP/S
+        : V: 0x0301 CS: 0x0035
         : IDN: C=US, O=Google Inc, CN=Google Internet Authority G2 SDN: C=US, ST=California, L=Mountain View, O=Google Inc, CN=*.world.waze.com
 
-offline0: i4p--------r-FA- TCP [L] 10.8.0.1:45538 --> [OR] 54.230.227.172:80
+offline0: i4p--------r-F- TCP [L] 10.8.0.1:45538 --> [OR] 54.230.227.172:80
         : HTTP.netify.waze
         : H: cres.waze.com
         : HTTP/UA: /3.9.4.0
         : URL: cres.waze.com/lang_tts/lang.portuguese_br_tts?rtserver-id=15
 
-offline0: i4p--------r-FA- TCP [L] 10.8.0.1:45540 --> [OR] 54.230.227.172:80
+offline0: i4p--------r-F- TCP [L] 10.8.0.1:45540 --> [OR] 54.230.227.172:80
         : HTTP.netify.waze
         : H: roadshields.waze.com
         : HTTP/UA: /3.9.4.0
         : URL: roadshields.waze.com/shields_conf_new_latam?rtserver-id=15
 
-offline0: i4p--------r---- TCP [L] 10.8.0.1:51049 --> [OR] 176.34.103.105:443
+offline0: i4p--------r--- TCP [L] 10.8.0.1:51049 --> [OR] 176.34.103.105:443
         : HTTP/S
+        : V: 0x0301
 
-offline0: i4p--------r---- TCP [L] 10.8.0.1:51050 --> [OR] 176.34.103.105:443
+offline0: i4p--------r--- TCP [L] 10.8.0.1:51050 --> [OR] 176.34.103.105:443
         : HTTP/S
+        : V: 0x0301
 
-offline0: i4p--------r---- TCP [L] 10.8.0.1:51051 --> [OR] 176.34.103.105:443
+offline0: i4p--------r--- TCP [L] 10.8.0.1:51051 --> [OR] 176.34.103.105:443
         : HTTP/S
+        : V: 0x0301
 
-offline0: i4p--------r---- TCP [L] 10.8.0.1:39010 --> [OR] 52.17.114.219:443
+offline0: i4p--------r--- TCP [L] 10.8.0.1:39010 --> [OR] 52.17.114.219:443
         : HTTP/S
+        : V: 0x0301
 
-offline0: i4p--------r-FA- TCP [L] 10.8.0.1:45546 --> [OR] 54.230.227.172:80
+offline0: i4p--------r-F- TCP [L] 10.8.0.1:45546 --> [OR] 54.230.227.172:80
         : HTTP.netify.waze
         : H: cres.waze.com
         : HTTP/UA: /3.9.4.0
         : URL: cres.waze.com/newVconfig/1.0/3/prompts_conf.buf?rtserver-id=15
 
-offline0: i4p--------r-FA- TCP [L] 10.8.0.1:45552 --> [OR] 54.230.227.172:80
+offline0: i4p--------r-F- TCP [L] 10.8.0.1:45552 --> [OR] 54.230.227.172:80
         : HTTP.netify.waze
         : H: cres.waze.com
         : HTTP/UA: /3.9.4.0
         : URL: cres.waze.com/langs/1.0/lang.portuguese_br?rtserver-id=15
 
-offline0: i4p-u------r---- TCP [L] 10.8.0.1:51051 --> [OR] 176.34.103.105:443
+offline0: i4p-u------r--- TCP [L] 10.8.0.1:51051 --> [OR] 176.34.103.105:443
         : HTTP/S
+        : V: 0x0301 CS: 0xc013
 
-offline0: i4p-u------r---- TCP [L] 10.8.0.1:51049 --> [OR] 176.34.103.105:443
+offline0: i4p-u------r--- TCP [L] 10.8.0.1:51049 --> [OR] 176.34.103.105:443
         : HTTP/S
+        : V: 0x0301 CS: 0xc013
 
-offline0: i4p-u------r---- TCP [L] 10.8.0.1:39010 --> [OR] 52.17.114.219:443
+offline0: i4p-u------r--- TCP [L] 10.8.0.1:39010 --> [OR] 52.17.114.219:443
         : HTTP/S
+        : V: 0x0301 CS: 0xc013
         : IDN: C=US, O=Google Inc, CN=Google Internet Authority G2 SDN: C=US, ST=California, L=Mountain View, O=Google Inc, CN=*.world.waze.com
 
-offline0: i4p--------r-FA- TCP [L] 10.8.0.1:45554 --> [OR] 54.230.227.172:80
+offline0: i4p--------r-F- TCP [L] 10.8.0.1:45554 --> [OR] 54.230.227.172:80
         : HTTP.netify.waze
         : H: cres.waze.com
         : HTTP/UA: /3.9.4.0
         : URL: cres.waze.com/newVconfig/1.0/3/lang.conf?rtserver-id=15
 
-offline0: i4p-u------r---- TCP [L] 10.8.0.1:51050 --> [OR] 176.34.103.105:443
+offline0: i4p-u------r--- TCP [L] 10.8.0.1:51050 --> [OR] 176.34.103.105:443
         : HTTP/S
+        : V: 0x0301 CS: 0xc013
 
-offline0: i4p-u------r---- TCP [L] 10.8.0.1:51051 --> [OR] 176.34.103.105:443
+offline0: i4p-u------r--- TCP [L] 10.8.0.1:51051 --> [OR] 176.34.103.105:443
         : HTTP/S
+        : V: 0x0301 CS: 0xc013
         : IDN: C=US, O=Google Inc, CN=Google Internet Authority G2 SDN: C=US, ST=California, L=Mountain View, O=Google Inc, CN=*.waze.com
 
-offline0: i4p-u------r---- TCP [L] 10.8.0.1:51050 --> [OR] 176.34.103.105:443
+offline0: i4p-u------r--- TCP [L] 10.8.0.1:51050 --> [OR] 176.34.103.105:443
         : HTTP/S
+        : V: 0x0301 CS: 0xc013
         : IDN: C=US, O=Google Inc, CN=Google Internet Authority G2 SDN: C=US, ST=California, L=Mountain View, O=Google Inc, CN=*.waze.com
 
-offline0: i4p-u------r---- TCP [L] 10.8.0.1:51049 --> [OR] 176.34.103.105:443
+offline0: i4p-u------r--- TCP [L] 10.8.0.1:51049 --> [OR] 176.34.103.105:443
         : HTTP/S
+        : V: 0x0301 CS: 0xc013
         : IDN: C=US, O=Google Inc, CN=Google Internet Authority G2 SDN: C=US, ST=California, L=Mountain View, O=Google Inc, CN=*.waze.com
 
-offline0: i4p--------r-FA- TCP [L] 10.8.0.1:39021 --> [OR] 52.17.114.219:443
+offline0: i4p--------r-F- TCP [L] 10.8.0.1:39021 --> [OR] 52.17.114.219:443
         : HTTP/S
+        : V: 0x0301
 
-offline0: i4p-u------r-FA- TCP [L] 10.8.0.1:39021 --> [OR] 52.17.114.219:443
+offline0: i4p-u------r-F- TCP [L] 10.8.0.1:39021 --> [OR] 52.17.114.219:443
         : HTTP/S
+        : V: 0x0301 CS: 0xc013
 
-offline0: i4p-u------r-FA- TCP [L] 10.8.0.1:39021 --> [OR] 52.17.114.219:443
+offline0: i4p-u------r-F- TCP [L] 10.8.0.1:39021 --> [OR] 52.17.114.219:443
         : HTTP/S
+        : V: 0x0301 CS: 0xc013
         : IDN: C=US, O=Google Inc, CN=Google Internet Authority G2 SDN: C=US, ST=California, L=Mountain View, O=Google Inc, CN=*.world.waze.com
 
-offline0: i4p--------r---- TCP [L] 10.8.0.1:36312 --> [OR] 176.34.186.180:443
+offline0: i4p--------r--- TCP [L] 10.8.0.1:36312 --> [OR] 176.34.186.180:443
         : HTTP/S
+        : V: 0x0301
 
-offline0: i4p-u------r---- TCP [L] 10.8.0.1:36312 --> [OR] 176.34.186.180:443
+offline0: i4p-u------r--- TCP [L] 10.8.0.1:36312 --> [OR] 176.34.186.180:443
         : HTTP/S
+        : V: 0x0301 CS: 0xc013
 
-offline0: i4p-u------r---- TCP [L] 10.8.0.1:36312 --> [OR] 176.34.186.180:443
+offline0: i4p-u------r--- TCP [L] 10.8.0.1:36312 --> [OR] 176.34.186.180:443
         : HTTP/S
+        : V: 0x0301 CS: 0xc013
         : IDN: C=US, O=Google Inc, CN=Google Internet Authority G2 SDN: C=US, ST=California, L=Mountain View, O=Google Inc, CN=*.world.waze.com
 
-offline0: i4p--------r---- TCP [L] 10.8.0.1:36314 --> [OR] 176.34.186.180:443
+offline0: i4p--------r--- TCP [L] 10.8.0.1:36314 --> [OR] 176.34.186.180:443
         : HTTP/S
+        : V: 0x0301
 
-offline0: i4p-u------r---- TCP [L] 10.8.0.1:36314 --> [OR] 176.34.186.180:443
+offline0: i4p-u------r--- TCP [L] 10.8.0.1:36314 --> [OR] 176.34.186.180:443
         : HTTP/S
+        : V: 0x0301 CS: 0xc013
 
-offline0: i4p-u------r---- TCP [L] 10.8.0.1:36314 --> [OR] 176.34.186.180:443
+offline0: i4p-u------r--- TCP [L] 10.8.0.1:36314 --> [OR] 176.34.186.180:443
         : HTTP/S
+        : V: 0x0301 CS: 0xc013
         : IDN: C=US, O=Google Inc, CN=Google Internet Authority G2 SDN: C=US, ST=California, L=Mountain View, O=Google Inc, CN=*.world.waze.com
 
-offline0: i4p--------r---- TCP [L] 10.8.0.1:36316 --> [OR] 176.34.186.180:443
+offline0: i4p--------r--- TCP [L] 10.8.0.1:36316 --> [OR] 176.34.186.180:443
         : HTTP/S
+        : V: 0x0301
 
-offline0: i4p-u------r---- TCP [L] 10.8.0.1:36316 --> [OR] 176.34.186.180:443
+offline0: i4p-u------r--- TCP [L] 10.8.0.1:36316 --> [OR] 176.34.186.180:443
         : HTTP/S
+        : V: 0x0301 CS: 0xc013
         : IDN: C=US, O=Google Inc, CN=Google Internet Authority G2 SDN: C=US, ST=California, L=Mountain View, O=Google Inc, CN=*.world.waze.com
 
-offline0: i4p--------r-FA- TCP [L] 10.8.0.1:36134 --> [OR] 46.51.173.182:443
+offline0: i4p--------r-F- TCP [L] 10.8.0.1:36134 --> [OR] 46.51.173.182:443
         : HTTP/S
+        : V: 0x0301
 
-offline0: i4p-u------r-FA- TCP [L] 10.8.0.1:36134 --> [OR] 46.51.173.182:443
+offline0: i4p-u------r-F- TCP [L] 10.8.0.1:36134 --> [OR] 46.51.173.182:443
         : HTTP/S
+        : V: 0x0301 CS: 0x0035
         : IDN: C=US, O=Google Inc, CN=Google Internet Authority G2 SDN: C=US, ST=California, L=Mountain View, O=Google Inc, CN=*.world.waze.com
 
-offline0: i4pc-------r---- TCP [L] 10.8.0.1:50828 --> [OR] 108.168.176.228:443
+offline0: i4pc-------r--- TCP [L] 10.8.0.1:50828 --> [OR] 108.168.176.228:443
         : WhatsApp
 
-offline0: i4p--------r-FA- TCP [L] 10.8.0.1:36137 --> [OR] 46.51.173.182:443
+offline0: i4p--------r-F- TCP [L] 10.8.0.1:36137 --> [OR] 46.51.173.182:443
         : HTTP/S
+        : V: 0x0301
 
-offline0: i4p-u------r-FA- TCP [L] 10.8.0.1:36137 --> [OR] 46.51.173.182:443
+offline0: i4p-u------r-F- TCP [L] 10.8.0.1:36137 --> [OR] 46.51.173.182:443
         : HTTP/S
+        : V: 0x0301 CS: 0x0035
 
-offline0: i4p-u------r-FA- TCP [L] 10.8.0.1:36137 --> [OR] 46.51.173.182:443
+offline0: i4p-u------r-F- TCP [L] 10.8.0.1:36137 --> [OR] 46.51.173.182:443
         : HTTP/S
+        : V: 0x0301 CS: 0x0035
         : IDN: C=US, O=Google Inc, CN=Google Internet Authority G2 SDN: C=US, ST=California, L=Mountain View, O=Google Inc, CN=*.world.waze.com
 
-offline0: i4pc-gx------FA- TCP [L] 10.16.37.157:52746 --> [OR] 200.160.4.49:80
+offline0: i4pc-gx------F- TCP [L] 10.16.37.157:52746 --> [OR] 200.160.4.49:80
         : HTTP
 
-offline0: i4pc-gx------FA- TCP [L] 10.8.0.1:45169 --> [OR] 200.160.4.198:80
+offline0: i4pc-gx------F- TCP [L] 10.8.0.1:45169 --> [OR] 200.160.4.198:80
         : HTTP
 
-offline0: i4pc-gx------FA- TCP [L] 10.16.37.157:41823 --> [OR] 200.160.4.49:80
+offline0: i4pc-gx------F- TCP [L] 10.16.37.157:41823 --> [OR] 200.160.4.49:80
         : HTTP
 
-offline0: i4pc-gx------FA- TCP [L] 10.16.37.157:46473 --> [OR] 200.160.4.49:80
+offline0: i4pc-gx------F- TCP [L] 10.16.37.157:46473 --> [OR] 200.160.4.49:80
         : HTTP
 
-offline0: i4pc-gx------FA- TCP [L] 10.16.37.157:42256 --> [OR] 174.37.231.81:5222
+offline0: i4pc-gx------F- TCP [L] 10.16.37.157:42256 --> [OR] 174.37.231.81:5222
         : Unknown
 
-offline0: i4pc-gx------FA- TCP [L] 10.16.37.157:52953 --> [OR] 200.160.4.49:80
+offline0: i4pc-gx------F- TCP [L] 10.16.37.157:52953 --> [OR] 200.160.4.49:80
         : HTTP
 
-offline0: i4pc-gx------FA- TCP [L] 10.8.0.1:43089 --> [OR] 200.160.4.198:443
+offline0: i4pc-gx------F- TCP [L] 10.8.0.1:43089 --> [OR] 200.160.4.198:443
         : HTTP/S
 
-offline0: i4pc-gx------FA- TCP [L] 10.16.37.157:43991 --> [OR] 200.160.4.31:80
+offline0: i4pc-gx------F- TCP [L] 10.16.37.157:43991 --> [OR] 200.160.4.31:80
         : HTTP
 
-offline0: i4pc-gx------FA- TCP [L] 10.8.0.1:60479 --> [OR] 200.160.4.49:443
+offline0: i4pc-gx------F- TCP [L] 10.8.0.1:60479 --> [OR] 200.160.4.49:443
         : HTTP/S
 
-offline0: i4pc-gx------FA- TCP [L] 10.8.0.1:60574 --> [OR] 200.160.4.49:80
+offline0: i4pc-gx------F- TCP [L] 10.8.0.1:60574 --> [OR] 200.160.4.49:80
         : HTTP
 

@@ -1,4 +1,4 @@
-offline0: i4p--------r-FA- TCP [OR] 40.77.167.36:64768 --> [L] 89.31.72.220:80
+offline0: i4p--------r--- TCP [OR] 40.77.167.36:64768 --> [L] 89.31.72.220:80
         : HTTP
         : H: atlanteditorino.it
         : HTTP/UA: Mozilla/5.0 (compatible; bingbot/2.0; +http://www.bing.com/bingbot.htm)

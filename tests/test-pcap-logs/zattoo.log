@@ -1,15 +1,17 @@
-offline0: i4p--------r---- TCP [L] 10.101.0.2:2930 --> [OL] 10.102.0.2:443
+offline0: i4p--------r--- TCP [L] 10.101.0.2:2930 --> [OL] 10.102.0.2:443
         : HTTP/S.netify.zattoo
         : H: zattoo.com
+        : V: 0x0303
         : SNI: zattoo.com
 
-offline0: i4p-u------r---- TCP [L] 10.101.0.2:2930 --> [OL] 10.102.0.2:443
+offline0: i4p-u------r--- TCP [L] 10.101.0.2:2930 --> [OL] 10.102.0.2:443
         : HTTP/S.netify.zattoo
         : H: zattoo.com
+        : V: 0x0303 CS: 0x009c
         : SNI: zattoo.com CN: zattoo.com
         : IDN: C=US, ST=California, L=San Jose, O=Spirent Communications Inc., OU=IT, CN=www.spirent.com SDN: C=US, ST=California, L=San Jose, O=zattoo.com, OU=Marketing, CN=zattoo.com
 
-offline0: i4p--------r---- TCP [L] 10.101.0.2:2936 --> [OL] 10.102.0.2:80
+offline0: i4p--------r--- TCP [L] 10.101.0.2:2936 --> [OL] 10.102.0.2:80
         : HTTP.netify.akamai
         : H: zattosecurehd2-f.akamaihd.net
         : HTTP/UA: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.6; rv:6.0) Gecko/20100101 Firefox/6.0

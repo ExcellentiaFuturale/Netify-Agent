@@ -1,57 +1,71 @@
-offline0: i4p--------r-FA- TCP [OR] 104.16.249.249:443 <-- [L] 192.168.1.119:51331
+offline0: i4p--------r-F- TCP [OR] 104.16.249.249:443 <-- [L] 192.168.1.119:51331
         : HTTP/S
 
-offline0: i4p--------r---- TCP [OR] 104.16.249.249:443 <-- [L] 192.168.1.119:51606
+offline0: i4p--------r--- TCP [OR] 104.16.249.249:443 <-- [L] 192.168.1.119:51606
         : HTTP/S.netify.cloudflare-dns
         : H: mozilla.cloudflare-dns.com
+        : V: 0x0303
         : SNI: mozilla.cloudflare-dns.com
 
-offline0: i4p-u------r---- TCP [OR] 104.16.249.249:443 <-- [L] 192.168.1.119:51606
+offline0: i4p-u------r--- TCP [OR] 104.16.249.249:443 <-- [L] 192.168.1.119:51606
         : HTTP/S.netify.cloudflare-dns
         : H: mozilla.cloudflare-dns.com
+        : V: 0x0303 CS: 0x1301
         : SNI: mozilla.cloudflare-dns.com
 
-offline0: i4p--------r---- TCP [OR] 104.16.124.96:443 <-- [L] 192.168.1.119:51612
+offline0: i4p--------r--- TCP [OR] 104.16.124.96:443 <-- [L] 192.168.1.119:51612
         : HTTP/S
+        : V: 0x0303
 
-offline0: i4p-u------r---- TCP [OR] 104.16.124.96:443 <-- [L] 192.168.1.119:51612
+offline0: i4p-u------r--- TCP [OR] 104.16.124.96:443 <-- [L] 192.168.1.119:51612
         : HTTP/S
+        : V: 0x0303 CS: 0x1301
 
-offline0: i4p--------r---- TCP [OR] 104.17.198.37:443 <-- [L] 192.168.1.119:51635
+offline0: i4p--------r--- TCP [OR] 104.17.198.37:443 <-- [L] 192.168.1.119:51635
         : HTTP/S
         : H: 951c558a-5e07-47ca-a0c0-225da1b33163.is-cf.help.every1dns.net
+        : V: 0x0303
         : SNI: 951c558a-5e07-47ca-a0c0-225da1b33163.is-cf.help.every1dns.net
 
-offline0: i4p--------r---- TCP [OR] 104.17.198.37:443 <-- [L] 192.168.1.119:51636
+offline0: i4p--------r--- TCP [OR] 104.17.198.37:443 <-- [L] 192.168.1.119:51636
         : HTTP/S
         : H: 951c558a-5e07-47ca-a0c0-225da1b33163.is-doh.help.every1dns.net
+        : V: 0x0303
         : SNI: 951c558a-5e07-47ca-a0c0-225da1b33163.is-doh.help.every1dns.net
 
-offline0: i4p--------r---- TCP [OR] 104.22.72.170:443 <-- [L] 192.168.1.119:51637
+offline0: i4p--------r--- TCP [OR] 104.22.72.170:443 <-- [L] 192.168.1.119:51637
         : HTTP/S
+        : V: 0x0303
 
-offline0: i4p--------r-FA- TCP [OR] 104.22.72.170:443 <-- [L] 192.168.1.119:51639
+offline0: i4p--------r-F- TCP [OR] 104.22.72.170:443 <-- [L] 192.168.1.119:51639
         : HTTP/S
+        : V: 0x0303
 
-offline0: i4p--------r-FA- TCP [OR] 104.22.72.170:443 <-- [L] 192.168.1.119:51638
+offline0: i4p--------r-F- TCP [OR] 104.22.72.170:443 <-- [L] 192.168.1.119:51638
         : HTTP/S
+        : V: 0x0303
 
-offline0: i4p-u------r---- TCP [OR] 104.17.198.37:443 <-- [L] 192.168.1.119:51635
+offline0: i4p-u------r--- TCP [OR] 104.17.198.37:443 <-- [L] 192.168.1.119:51635
         : HTTP/S
         : H: 951c558a-5e07-47ca-a0c0-225da1b33163.is-cf.help.every1dns.net
+        : V: 0x0303 CS: 0x1301
         : SNI: 951c558a-5e07-47ca-a0c0-225da1b33163.is-cf.help.every1dns.net
 
-offline0: i4p-u------r---- TCP [OR] 104.17.198.37:443 <-- [L] 192.168.1.119:51636
+offline0: i4p-u------r--- TCP [OR] 104.17.198.37:443 <-- [L] 192.168.1.119:51636
         : HTTP/S
         : H: 951c558a-5e07-47ca-a0c0-225da1b33163.is-doh.help.every1dns.net
+        : V: 0x0303 CS: 0x1301
         : SNI: 951c558a-5e07-47ca-a0c0-225da1b33163.is-doh.help.every1dns.net
 
-offline0: i4p-u------r---- TCP [OR] 104.22.72.170:443 <-- [L] 192.168.1.119:51637
+offline0: i4p-u------r--- TCP [OR] 104.22.72.170:443 <-- [L] 192.168.1.119:51637
         : HTTP/S
+        : V: 0x0303 CS: 0x1301
 
-offline0: i4p-u------r-FA- TCP [OR] 104.22.72.170:443 <-- [L] 192.168.1.119:51639
+offline0: i4p-u------r-F- TCP [OR] 104.22.72.170:443 <-- [L] 192.168.1.119:51639
         : HTTP/S
+        : V: 0x0303 CS: 0x1301
 
-offline0: i4p-u------r-FA- TCP [OR] 104.22.72.170:443 <-- [L] 192.168.1.119:51638
+offline0: i4p-u------r-F- TCP [OR] 104.22.72.170:443 <-- [L] 192.168.1.119:51638
         : HTTP/S
+        : V: 0x0303 CS: 0x1301
 

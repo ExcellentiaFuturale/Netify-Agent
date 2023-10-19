@@ -1,0 +1,39 @@
+offline0: i4pc-------r--- UDP [OR] 93.57.123.227:3478 <-- [L] 192.168.12.156:46652
+        : STUN
+
+offline0: i4pc-------rs-- UDP [OR] 157.240.203.62:3478 <-- [L] 192.168.12.156:46652
+        : STUN.netify.meta-messaging
+
+offline0: i4pc-------rs-- UDP [OR] 157.240.231.62:3478 <-- [L] 192.168.12.156:46652
+        : STUN.netify.meta-messaging
+
+offline0: i4pc-------rs-- UDP [OR] 157.240.21.51:3478 <-- [L] 192.168.12.156:46652
+        : STUN.netify.meta-messaging
+
+offline0: i4pc-------rs-- UDP [OR] 157.240.195.48:3478 <-- [L] 192.168.12.156:46652
+        : STUN.netify.meta-messaging
+
+offline0: i4pc-------rs-- UDP [OR] 157.240.203.62:3478 <-- [L] 192.168.12.156:49526
+        : STUN.netify.meta-messaging
+
+offline0: i4pc-------rs-- UDP [OR] 157.240.231.62:3478 <-- [L] 192.168.12.156:49526
+        : STUN.netify.meta-messaging
+
+offline0: i4pc-------rs-- UDP [OR] 157.240.196.62:3478 <-- [L] 192.168.12.156:49526
+        : STUN.netify.meta-messaging
+
+offline0: i4pc-------rs-- UDP [OR] 179.60.192.48:3478 <-- [L] 192.168.12.156:49526
+        : STUN.netify.meta-messaging
+
+offline0: i4pc-------rs-- UDP [OR] 185.60.216.51:3478 <-- [L] 192.168.12.156:49526
+        : STUN.netify.meta-messaging
+
+offline0: i4pc-------r--- UDP [L] 10.82.40.241:40436 <-- [OL] 192.168.12.156:49526
+        : STUN
+
+offline0: i4pc-------r--- UDP [OR] 93.33.118.87:41107 <-- [L] 192.168.12.156:49526
+        : STUN
+
+offline0: i4pc-------r--- ICMP [OR] 93.63.100.129:0 --> [L] 192.168.12.156:0
+        : ICMP
+

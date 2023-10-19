@@ -1,26 +1,31 @@
-offline0: i4p--------r---- TCP [OR] 167.99.215.164:993 <-- [L] 192.168.1.8:50506
+offline0: i4p--------r--- TCP [OR] 167.99.215.164:993 <-- [L] 192.168.1.8:50506
         : IMAP/S
         : H: mail.ntop.org
+        : V: 0x0303
         : SNI: mail.ntop.org
 
-offline0: i4p-u------r---- TCP [OR] 167.99.215.164:993 <-- [L] 192.168.1.8:50506
+offline0: i4p-u------r--- TCP [OR] 167.99.215.164:993 <-- [L] 192.168.1.8:50506
         : IMAP/S
         : H: mail.ntop.org
+        : V: 0x0303 CS: 0xc030
         : SNI: mail.ntop.org
 
-offline0: i4p-u------r---- TCP [OR] 167.99.215.164:993 <-- [L] 192.168.1.8:50506
+offline0: i4p-u------r--- TCP [OR] 167.99.215.164:993 <-- [L] 192.168.1.8:50506
         : IMAP/S
         : H: mail.ntop.org
+        : V: 0x0303 CS: 0xc030
         : SNI: mail.ntop.org CN: mail.ntop.org
         : IDN: C=US, O=Let's Encrypt, CN=Let's Encrypt Authority X3 SDN: CN=mail.ntop.org
 
-offline0: i4p--------r---- TCP [L] 10.10.10.1:993 <-- [OL] 192.168.0.1:51529
+offline0: i4p--------r--- TCP [L] 10.10.10.1:993 <-- [OL] 192.168.0.1:51529
         : IMAP/S.netify.godaddy
         : H: imap.asia.secureserver.net
+        : V: 0x0303
         : SNI: imap.asia.secureserver.net
 
-offline0: i4p-u------r---- TCP [L] 10.10.10.1:993 <-- [OL] 192.168.0.1:51529
+offline0: i4p-u------r--- TCP [L] 10.10.10.1:993 <-- [OL] 192.168.0.1:51529
         : IMAP/S.netify.godaddy
         : H: imap.asia.secureserver.net
+        : V: 0x0303 CS: 0xc030
         : SNI: imap.asia.secureserver.net
 

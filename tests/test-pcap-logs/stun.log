@@ -1,14 +1,17 @@
-offline0: i6pc-------r---- UDP [OR] 2a38:e156:8167:a333:face:b00c:0:24d9:3478 <-- [L] 3516:bf0b:fc53:75e7:70af:f67f:8e49:f603:56880
+offline0: i4pc-------r--- TCP [L] 10.77.110.51:41588 --> [OL] 10.206.50.239:42000
         : STUN
 
-offline0: i4pc-------r---- UDP [OR] 31.13.86.54:40003 --> [L] 192.168.12.169:38123
-        : STUN.netify.meta-cdn
+offline0: i6p--------r--- UDP [OR] 2a38:e156:8167:a333:face:b00c:0:24d9:3478 <-- [L] 3516:bf0b:fc53:75e7:70af:f67f:8e49:f603:56880
+        : STUN
+
+offline0: i4pc-------r--- UDP [OR] 31.13.86.54:40003 --> [L] 192.168.12.169:38123
+        : STUN.netify.meta
         : H: turner.facebook
 
-offline0: i4pc-------r---- TCP [OR] 54.1.57.155:37257 --> [L] 87.47.100.17:3478
+offline0: i4pc-------r--- TCP [OR] 54.1.57.155:37257 --> [L] 87.47.100.17:3478
         : STUN
         : H: apps-host.com
 
-offline0: i4pc-------r---- UDP [OR] 142.250.82.99:3478 <-- [L] 192.168.12.169:49153
-        : STUN.netify.google
+offline0: i4pc-------rs-- UDP [OR] 142.250.82.99:3478 <-- [L] 192.168.12.169:49153
+        : Google/Meet/Duo.netify.google-hangouts
 

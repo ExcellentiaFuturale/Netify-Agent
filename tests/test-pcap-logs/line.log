@@ -1,28 +1,31 @@
-offline0: i4pc-------r---- UDP [L] 10.0.2.15:50835 --> [OR] 125.209.252.210:20610
+offline0: i4pc-------r--- UDP [L] 10.0.2.15:50835 --> [OR] 125.209.252.210:20610
         : Line/Call.netify.line
 
-offline0: i4p--------r---- TCP [L] 10.200.3.125:57841 --> [OR] 147.92.165.194:443
+offline0: i4p--------r--- TCP [L] 10.200.3.125:57841 --> [OR] 147.92.165.194:443
         : HTTP/S.netify.line
 
-offline0: i4p--------r-FA- TCP [L] 10.200.3.125:58160 --> [OR] 147.92.242.232:443
+offline0: i4p--------r--- TCP [L] 10.200.3.125:58160 --> [OR] 147.92.242.232:443
         : HTTP/S.netify.line
         : H: uts-front.line-apps.com
+        : V: 0x0303
         : SNI: uts-front.line-apps.com
 
-offline0: i4p-u------r-FA- TCP [L] 10.200.3.125:58160 --> [OR] 147.92.242.232:443
+offline0: i4p-u------r--- TCP [L] 10.200.3.125:58160 --> [OR] 147.92.242.232:443
         : HTTP/S.netify.line
         : H: uts-front.line-apps.com
+        : V: 0x0303 CS: 0xc030
         : SNI: uts-front.line-apps.com
 
-offline0: i4p-u------r-FA- TCP [L] 10.200.3.125:58160 --> [OR] 147.92.242.232:443
+offline0: i4p-u------r-F- TCP [L] 10.200.3.125:58160 --> [OR] 147.92.242.232:443
         : HTTP/S.netify.line
         : H: uts-front.line-apps.com
+        : V: 0x0303 CS: 0xc030
         : SNI: uts-front.line-apps.com
         : IDN: C=BE, O=GlobalSign nv-sa, CN=GlobalSign RSA OV SSL CA 2018 SDN: C=JP, ST=Tokyo-to, L=Shinjuku-ku, O=LINE Corporation, CN=*.line-apps.com
 
-offline0: i4pc-------r---- UDP [L] 10.200.3.125:51161 --> [OR] 147.92.169.90:29070
+offline0: i4pc-------r--- UDP [L] 10.200.3.125:51161 --> [OR] 147.92.169.90:29070
         : Line/Call.netify.line
 
-offline0: i4pc-------r---- UDP [L] 10.200.3.125:51170 --> [OR] 147.92.169.90:29070
+offline0: i4pc-------r--- UDP [L] 10.200.3.125:51170 --> [OR] 147.92.169.90:29070
         : Line/Call.netify.line
 

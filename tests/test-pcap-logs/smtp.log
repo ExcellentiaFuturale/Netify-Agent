@@ -1,4 +1,4 @@
-offline0: i4p--------r-FA- TCP [L] 172.16.114.207:25 <-- [OR] 194.7.248.153:2127
+offline0: i4p--------r-F- TCP [L] 172.16.114.207:25 <-- [OR] 194.7.248.153:2127
         : SMTP.netify.us-military
         : H: pigeon.eyrie.af.mil
 

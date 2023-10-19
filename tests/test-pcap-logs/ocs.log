@@ -1,86 +1,91 @@
-offline0: i4p--------r---- UDP [OR] 8.8.8.8:53 <-- [L] 192.168.180.2:38472
+offline0: i4p--------r--- UDP [OR] 8.8.8.8:53 <-- [L] 192.168.180.2:38472
         : DNS
         : H: ocu03.labgency.ws
 
-offline0: i4p--------r---- UDP [OR] 8.8.8.8:53 <-- [L] 192.168.180.2:40097
+offline0: i4p--------r--- UDP [OR] 8.8.8.8:53 <-- [L] 192.168.180.2:40097
         : DNS.netify.crashlytics
         : H: settings.crashlytics.com
 
-offline0: i4p--------r---- UDP [OR] 8.8.8.8:53 <-- [L] 192.168.180.2:1291
+offline0: i4p--------r--- UDP [OR] 8.8.8.8:53 <-- [L] 192.168.180.2:1291
         : DNS
         : H: api.eu01.capptain.com
 
-offline0: i4p--------r---- TCP [OR] 178.248.208.54:80 <-- [L] 192.168.180.2:48250
+offline0: i4p--------r--- TCP [OR] 178.248.208.54:80 <-- [L] 192.168.180.2:48250
         : HTTP
         : H: ocu03.labgency.ws
         : HTTP/UA: Mozilla/5.0 (Linux; U; Android 4.0.4; fr-fr; GT-P7510 Build/IMM76D) AppleWebKit/534.30 (KHTML, like Gecko) Version/4.0 Safari/534.30
         : URL: ocu03.labgency.ws/catalog/vod?v=3
 
-offline0: i4p--------r-FA- TCP [OR] 137.135.129.206:80 <-- [L] 192.168.180.2:53356
+offline0: i4p--------r-F- TCP [OR] 137.135.129.206:80 <-- [L] 192.168.180.2:53356
         : HTTP
         : H: api.eu01.capptain.com
         : URL: api.eu01.capptain.com/xmpp-disco?deviceid=f2c993d6218f5e22fe284b2e90c82f3b&push_on_device=true&appid=ocs000003
 
-offline0: i4p--------r-FA- TCP [OR] 137.135.129.206:80 <-- [L] 192.168.180.2:44959
+offline0: i4p--------r-F- TCP [OR] 137.135.129.206:80 <-- [L] 192.168.180.2:44959
         : HTTP
         : H: api.eu01.capptain.com
         : URL: api.eu01.capptain.com/ip-to-country
 
-offline0: i4p--------r---- UDP [OR] 8.8.8.8:53 <-- [L] 192.168.180.2:48770
+offline0: i4p--------r--- UDP [OR] 8.8.8.8:53 <-- [L] 192.168.180.2:48770
         : DNS.netify.android
         : H: android.clients.google.com
 
-offline0: i4p--------r-FA- TCP [L] 192.168.180.2:41223 --> [OR] 216.58.208.46:443
+offline0: i4p--------r-F- TCP [L] 192.168.180.2:41223 --> [OR] 216.58.208.46:443
         : HTTP/S.netify.google
+        : V: 0x0301
 
-offline0: i4p--------r-FA- TCP [OR] 23.21.230.199:443 <-- [L] 192.168.180.2:39263
+offline0: i4p--------r-F- TCP [OR] 23.21.230.199:443 <-- [L] 192.168.180.2:39263
         : HTTP/S.netify.crashlytics
         : H: settings.crashlytics.com
+        : V: 0x0301
         : SNI: settings.crashlytics.com
 
-offline0: i4p--------r---- UDP [OR] 8.8.8.8:53 <-- [L] 192.168.180.2:3621
+offline0: i4p--------r--- UDP [OR] 8.8.8.8:53 <-- [L] 192.168.180.2:3621
         : DNS
         : H: xmpp.device06.eu01.capptain.com
 
-offline0: i4p--------r---- UDP [OR] 8.8.8.8:53 <-- [L] 192.168.180.2:2589
+offline0: i4p--------r--- UDP [OR] 8.8.8.8:53 <-- [L] 192.168.180.2:2589
         : DNS
         : H: ocs.labgency.ws
 
-offline0: i4p--------r-FA- TCP [OR] 178.248.208.54:80 <-- [L] 192.168.180.2:49881
+offline0: i4p--------r-F- TCP [OR] 178.248.208.54:80 <-- [L] 192.168.180.2:49881
         : HTTP
         : H: ocu03.labgency.ws
         : HTTP/UA: Apache-HttpClient/UNAVAILABLE (java 1.4)
         : URL: ocu03.labgency.ws/catalog/vod?v=3
 
-offline0: i4p--------r---- TCP [OR] 178.248.208.54:443 <-- [L] 192.168.180.2:36680
+offline0: i4p--------r--- TCP [OR] 178.248.208.54:443 <-- [L] 192.168.180.2:36680
         : HTTP/S
         : H: ocs.labgency.ws
+        : V: 0x0301
         : SNI: ocs.labgency.ws
 
-offline0: i4p--------r---- TCP [OR] 64.233.184.188:443 <-- [L] 192.168.180.2:32946
+offline0: i4p--------r--- TCP [OR] 64.233.184.188:443 <-- [L] 192.168.180.2:32946
         : HTTP/S.netify.google-chat
         : H: mtalk.google.com
+        : V: 0x0303
         : SNI: mtalk.google.com
 
-offline0: i4p--------r---- UDP [OR] 8.8.8.8:53 <-- [L] 192.168.180.2:11793
+offline0: i4p--------r--- UDP [OR] 8.8.8.8:53 <-- [L] 192.168.180.2:11793
         : DNS.netify.google-play
         : H: play.googleapis.com
 
-offline0: i4p--------r---- TCP [OR] 64.233.166.95:443 <-- [L] 192.168.180.2:47803
+offline0: i4p--------r--- TCP [OR] 64.233.166.95:443 <-- [L] 192.168.180.2:47803
         : HTTP/S.netify.google
+        : V: 0x0301
 
-offline0: i4p--------r---- UDP [OR] 8.8.8.8:53 <-- [L] 192.168.180.2:24245
+offline0: i4p--------r--- UDP [OR] 8.8.8.8:53 <-- [L] 192.168.180.2:24245
         : DNS.netify.orange-cinema-series
         : H: www.ocs.fr
 
-offline0: i4p--------r---- TCP [OR] 178.248.208.210:80 <-- [L] 192.168.180.2:42590
+offline0: i4p--------r--- TCP [OR] 178.248.208.210:80 <-- [L] 192.168.180.2:42590
         : HTTP.netify.orange-cinema-series
         : H: www.ocs.fr
         : URL: www.ocs.fr/data_plateforme/program/18496/tv_detail_mortdunpourw0012236_72f6c.jpg
 
-offline0: i4pc-gx--------- TCP [OR] 137.135.131.52:5122 <-- [L] 192.168.180.2:46166
+offline0: i4pc-gx-------- TCP [OR] 137.135.131.52:5122 <-- [L] 192.168.180.2:46166
         : Unknown
 
-offline0: i4pc-gx-----s--- TCP [OR] 64.233.184.188:5228 <-- [L] 192.168.180.2:47699
+offline0: i4pc-gx-----s-- TCP [OR] 64.233.184.188:5228 <-- [L] 192.168.180.2:47699
         : XMPP.netify.google-chat
 

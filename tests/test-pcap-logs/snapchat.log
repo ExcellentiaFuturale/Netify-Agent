@@ -1,16 +1,20 @@
-offline0: i4p--------r-FA- TCP [L] 10.8.0.1:33233 --> [OR] 74.125.136.141:443
+offline0: i4p--------r-F- TCP [L] 10.8.0.1:33233 --> [OR] 74.125.136.141:443
         : HTTP/S.netify.google
+        : V: 0x0303
 
-offline0: i4pcu------r-FA- TCP [L] 10.8.0.1:33233 --> [OR] 74.125.136.141:443
+offline0: i4pcu------r-F- TCP [L] 10.8.0.1:33233 --> [OR] 74.125.136.141:443
         : HTTP/S.netify.google
+        : V: 0x0303 CS: 0xc02f
 
-offline0: i4p--------r---- TCP [L] 10.8.0.1:44536 --> [OR] 74.125.136.141:443
+offline0: i4p--------r--- TCP [L] 10.8.0.1:44536 --> [OR] 74.125.136.141:443
         : HTTP/S.netify.snapchat
         : H: feelinsonice-hrd.appspot.com
+        : V: 0x0303
         : SNI: feelinsonice-hrd.appspot.com
 
-offline0: i4p--------r---- TCP [L] 10.8.0.1:56193 --> [OR] 74.125.136.141:443
+offline0: i4p--------r--- TCP [L] 10.8.0.1:56193 --> [OR] 74.125.136.141:443
         : HTTP/S.netify.snapchat
         : H: feelinsonice-hrd.appspot.com
+        : V: 0x0303
         : SNI: feelinsonice-hrd.appspot.com
 

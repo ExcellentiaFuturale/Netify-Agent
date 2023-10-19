@@ -1,4 +1,4 @@
-offline0: i4p--------r---- TCP [L] 10.9.25.101:49165 --> [OR] 144.91.69.195:80
+offline0: i4p--------r--- TCP [L] 10.9.25.101:49165 --> [OR] 144.91.69.195:80
         : HTTP
         : H: 144.91.69.195
         : HTTP/UA: pwtyyEKzNtGatwnJjmCcBLbOveCVpc

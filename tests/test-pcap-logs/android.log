@@ -1,359 +1,394 @@
-offline0: i4p--------r---- TCP [OR] 95.101.24.53:443 <-- [L] 192.168.2.17:50677
+offline0: i4p--------r--- TCP [OR] 95.101.24.53:443 <-- [L] 192.168.2.17:50677
         : HTTP/S
 
-offline0: i4p--------r-FA- TCP [OR] 17.248.176.75:443 <-- [L] 192.168.2.17:50584
+offline0: i4p--------r--- TCP [OR] 17.248.176.75:443 <-- [L] 192.168.2.17:50584
         : HTTP/S.netify.apple
 
-offline0: i4p--------r-FA- TCP [OR] 17.248.176.75:443 <-- [L] 192.168.2.17:50580
+offline0: i4p--------r--- TCP [OR] 17.248.176.75:443 <-- [L] 192.168.2.17:50580
         : HTTP/S.netify.apple
 
-offline0: i4pc-------r---- UDP [L] 0.0.0.0:68 --> [OB] 255.255.255.255:67
+offline0: i4pc-------r--- UDP [L] 0.0.0.0:68 --> [OB] 255.255.255.255:67
         : DHCP
         : H: lucas-imac
         : DHCP/FP: 1,121,3,6,15,119,252,95,44,46
 
-offline0: i4pc-------r-FA- TCP [OR] 17.248.185.10:443 <-- [L] 192.168.2.17:50702
+offline0: i4pc-------r--- TCP [OR] 17.248.185.10:443 <-- [L] 192.168.2.17:50702
         : HTTP/S.netify.apple
 
-offline0: i4pc-------r---- UDP [L] 192.168.2.1:17500 --> [OL] 192.168.2.255:17500
+offline0: i4pc-------r--- UDP [L] 192.168.2.1:17500 --> [OL] 192.168.2.255:17500
         : Dropbox
 
-offline0: i4pc-------r---- UDP [L] 192.168.2.1:57621 --> [OL] 192.168.2.255:57621
+offline0: i4pc-------r--- UDP [L] 192.168.2.1:57621 --> [OL] 192.168.2.255:57621
         : Spotify.netify.spotify
 
-offline0: i4p--------r---- UDP [L] 169.254.225.216:5353 --> [OM] 224.0.0.251:5353
+offline0: i4p--------r--- UDP [L] 169.254.225.216:5353 --> [OM] 224.0.0.251:5353
         : MDNS.netify.internal-network
         : H: _spotify-connect._tcp.local
 
-offline0: i4p--------r---- UDP [L] 192.168.2.1:5353 --> [OM] 224.0.0.251:5353
+offline0: i4p--------r--- UDP [L] 192.168.2.1:5353 --> [OM] 224.0.0.251:5353
         : MDNS.netify.internal-network
         : H: _spotify-connect._tcp.local
 
-offline0: i4pc-------r---- UDP [L] 169.254.225.216:60538 --> [OM] 239.255.255.250:1900
+offline0: i4pc-------r--- UDP [L] 169.254.225.216:60538 --> [OM] 239.255.255.250:1900
         : SSDP
         : H: 239.255.255.250
 
-offline0: i4pc-------r---- UDP [L] 192.168.2.1:51411 --> [OM] 239.255.255.250:1900
+offline0: i4pc-------r--- UDP [L] 192.168.2.1:51411 --> [OM] 239.255.255.250:1900
         : SSDP
         : H: 239.255.255.250
 
-offline0: i6pc-------r---- IPv6-ICMP [L] :::0 --> [OM] ff02::1:ff9f:f627:0
+offline0: i6pc-------r--- IPv6-ICMP [L] :::0 --> [OM] ff02::1:ff9f:f627:0
         : ICMPv6
 
-offline0: i6pc-------r---- IPv6-ICMP [L] :::0 --> [OM] ff02::16:0
+offline0: i6pc-------r--- IPv6-ICMP [L] :::0 --> [OM] ff02::16:0
         : ICMPv6
 
-offline0: i4pc-------r---- UDP [L] 0.0.0.0:68 --> [OB] 255.255.255.255:67
+offline0: i4pc-------r--- UDP [L] 0.0.0.0:68 --> [OB] 255.255.255.255:67
         : DHCP
         : DHCP/FP: 1,3,6,15,26,28,51,58,59,43 DHCP/CI: android-dhcp-9
 
-offline0: i4pc-------r---- UDP [L] 192.168.2.1:67 <-- [OL] 192.168.2.16:68
+offline0: i4pc-------r--- UDP [L] 192.168.2.1:67 <-- [OL] 192.168.2.16:68
         : DHCP
 
-offline0: i6pc-------r---- UDP [L] fe80::4e6a:f6ff:fe9f:f627:546 <-- [OM] ff02::1:2:547
+offline0: i6pc-------r--- UDP [L] fe80::4e6a:f6ff:fe9f:f627:546 <-- [OM] ff02::1:2:547
         : DHCPv6
 
-offline0: i6pc-------r---- IPv6-ICMP [L] fe80::4e6a:f6ff:fe9f:f627:0 --> [OM] ff02::16:0
+offline0: i6pc-------r--- IPv6-ICMP [L] fe80::4e6a:f6ff:fe9f:f627:0 --> [OM] ff02::16:0
         : ICMPv6
 
-offline0: i6pc-------r---- IPv6-ICMP [L] fe80::4e6a:f6ff:fe9f:f627:0 --> [OM] ff02::2:0
+offline0: i6pc-------r--- IPv6-ICMP [L] fe80::4e6a:f6ff:fe9f:f627:0 --> [OM] ff02::2:0
         : ICMPv6
 
-offline0: i4p--------r---- UDP [L] 192.168.2.1:53 <-- [OL] 192.168.2.16:52953
+offline0: i4p--------r--- UDP [L] 192.168.2.1:53 <-- [OL] 192.168.2.16:52953
         : DNS.netify.apple
         : H: captive.apple.com
 
-offline0: i4p-----d--r-FA- TCP [OR] 17.253.53.201:80 <-- [L] 192.168.2.16:58338
+offline0: i4p-----d--r--- TCP [OR] 17.253.53.201:80 <-- [L] 192.168.2.16:58338
         : HTTP.netify.apple
         : D: captive.g.aaplimg.com H: captive.apple.com
         : HTTP/UA: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.32 Safari/537.36
         : URL: captive.apple.com/
 
-offline0: i4p--------r---- UDP [L] 192.168.2.1:53 <-- [OL] 192.168.2.16:35825
+offline0: i4p--------r--- UDP [L] 192.168.2.1:53 <-- [OL] 192.168.2.16:35825
         : DNS.netify.android
         : H: time.android.com
 
-offline0: i4pc----d--r---- UDP [L] 192.168.2.16:45863 --> [OR] 216.239.35.8:123
+offline0: i4pc----d--r--- UDP [L] 192.168.2.16:45863 --> [OR] 216.239.35.8:123
         : NTP.netify.android
         : D: time.android.com
 
-offline0: i4p--------r---- UDP [L] 192.168.2.1:53 <-- [OL] 192.168.2.16:34540
+offline0: i4p--------r--- UDP [L] 192.168.2.1:53 <-- [OL] 192.168.2.16:34540
         : DNS.netify.google
         : H: clients1.google.com
 
-offline0: i4p--------r---- UDP [L] 192.168.2.1:53 <-- [OL] 192.168.2.16:54837
+offline0: i4p--------r--- UDP [L] 192.168.2.1:53 <-- [OL] 192.168.2.16:54837
         : DNS.netify.google-play
         : H: play.googleapis.com
 
-offline0: i4p-----d--r-FA- TCP [L] 192.168.2.16:32974 --> [OR] 216.239.38.120:443
+offline0: i4p-----d--r--- TCP [L] 192.168.2.16:32974 --> [OR] 216.239.38.120:443
         : HTTP/S.netify.google
         : D: clients1.google.com
+        : V: 0x0303
         : SNI: clients1.google.com
 
-offline0: i4p-u---d--r-FA- TCP [L] 192.168.2.16:32974 --> [OR] 216.239.38.120:443
+offline0: i4p-u---d--r--- TCP [L] 192.168.2.16:32974 --> [OR] 216.239.38.120:443
         : HTTP/S.netify.google
         : D: clients1.google.com
+        : V: 0x0303 CS: 0xc02b
         : SNI: clients1.google.com
 
-offline0: i4p-u---d--r-FA- TCP [L] 192.168.2.16:32974 --> [OR] 216.239.38.120:443
+offline0: i4p-u---d--r--- TCP [L] 192.168.2.16:32974 --> [OR] 216.239.38.120:443
         : HTTP/S.netify.google
         : D: clients1.google.com
+        : V: 0x0303 CS: 0xc02b
         : SNI: clients1.google.com
         : IDN: C=US, O=Google Trust Services, CN=GTS CA 1O1 SDN: C=US, ST=California, L=Mountain View, O=Google LLC, CN=*.google.com
 
-offline0: i4p-----d--r---- TCP [OR] 172.217.20.74:443 <-- [L] 192.168.2.16:52486
+offline0: i4p-----d--r--- TCP [OR] 172.217.20.74:443 <-- [L] 192.168.2.16:52486
         : HTTP/S.netify.google-play
         : D: play.googleapis.com
+        : V: 0x0303
         : SNI: play.googleapis.com
 
-offline0: i4p--------r---- UDP [L] 192.168.2.1:53 <-- [OL] 192.168.2.16:47081
+offline0: i4p--------r--- UDP [L] 192.168.2.1:53 <-- [OL] 192.168.2.16:47081
         : DNS.netify.google
         : H: connectivitycheck.gstatic.com
 
-offline0: i4p-u---d--r---- TCP [OR] 172.217.20.74:443 <-- [L] 192.168.2.16:52486
+offline0: i4p-u---d--r--- TCP [OR] 172.217.20.74:443 <-- [L] 192.168.2.16:52486
         : HTTP/S.netify.google-play
         : D: play.googleapis.com
+        : V: 0x0303 CS: 0xc02b
         : SNI: play.googleapis.com
         : IDN: C=US, O=Google Trust Services, CN=GTS CA 1O1 SDN: C=US, ST=California, L=Mountain View, O=Google LLC, CN=*.storage.googleapis.com
 
-offline0: i4p-----d--r---- TCP [OR] 172.217.18.3:443 <-- [L] 192.168.2.16:36890
+offline0: i4p-----d--r--- TCP [OR] 172.217.18.3:443 <-- [L] 192.168.2.16:36890
         : HTTP/S.netify.google
         : D: connectivitycheck.gstatic.com
+        : V: 0x0303
         : SNI: connectivitycheck.gstatic.com
 
-offline0: i4p--------r---- UDP [L] 192.168.2.1:53 <-- [OL] 192.168.2.16:51430
+offline0: i4p--------r--- UDP [L] 192.168.2.1:53 <-- [OL] 192.168.2.16:51430
         : DNS.netify.google-ads
         : H: app-measurement.com
 
-offline0: i4p-u---d--r---- TCP [OR] 172.217.18.3:443 <-- [L] 192.168.2.16:36890
+offline0: i4p-u---d--r--- TCP [OR] 172.217.18.3:443 <-- [L] 192.168.2.16:36890
         : HTTP/S.netify.google
         : D: connectivitycheck.gstatic.com
+        : V: 0x0303 CS: 0xc02b
         : SNI: connectivitycheck.gstatic.com
         : IDN: C=US, O=Google Trust Services, CN=GTS CA 1O1 SDN: C=US, ST=California, L=Mountain View, O=Google LLC, CN=*.google.com
 
-offline0: i4p-----d--r---- TCP [OR] 172.217.18.3:443 <-- [L] 192.168.2.16:36888
+offline0: i4p-----d--r--- TCP [OR] 172.217.18.3:443 <-- [L] 192.168.2.16:36888
         : HTTP/S.netify.google
         : D: connectivitycheck.gstatic.com
+        : V: 0x0303
         : SNI: connectivitycheck.gstatic.com
 
-offline0: i4p--------r---- UDP [L] 192.168.2.1:53 <-- [OL] 192.168.2.16:39008
+offline0: i4p--------r--- UDP [L] 192.168.2.1:53 <-- [OL] 192.168.2.16:39008
         : DNS.netify.google-chat
         : H: mtalk.google.com
 
-offline0: i4p-----d--r---- TCP [OR] 172.217.168.206:443 <-- [L] 192.168.2.16:50384
+offline0: i4p-----d--r--- TCP [OR] 172.217.168.206:443 <-- [L] 192.168.2.16:50384
         : HTTP/S.netify.google-ads
         : D: app-measurement.com
+        : V: 0x0303
         : SNI: app-measurement.com
 
-offline0: i4p-u---d--r---- TCP [OR] 172.217.168.206:443 <-- [L] 192.168.2.16:50384
+offline0: i4p-u---d--r--- TCP [OR] 172.217.168.206:443 <-- [L] 192.168.2.16:50384
         : HTTP/S.netify.google-ads
         : D: app-measurement.com
+        : V: 0x0303 CS: 0xc02f
         : SNI: app-measurement.com
         : IDN: C=US, O=Google Trust Services, CN=GTS CA 1O1 SDN: C=US, ST=California, L=Mountain View, O=Google LLC, CN=*.google-analytics.com
 
-offline0: i4p--------r---- UDP [L] 192.168.2.1:53 <-- [OL] 192.168.2.16:36613
+offline0: i4p--------r--- UDP [L] 192.168.2.1:53 <-- [OL] 192.168.2.16:36613
         : DNS.netify.android
         : H: android.clients.google.com
 
-offline0: i4p--------r---- UDP [L] 192.168.2.1:53 <-- [OL] 192.168.2.16:32412
+offline0: i4p--------r--- UDP [L] 192.168.2.1:53 <-- [OL] 192.168.2.16:32412
         : DNS.netify.google
         : H: check.googlezip.net
 
-offline0: i4p--------r---- UDP [L] 192.168.2.1:53 <-- [OL] 192.168.2.16:7660
+offline0: i4p--------r--- UDP [L] 192.168.2.1:53 <-- [OL] 192.168.2.16:7660
         : DNS.netify.google
         : H: datasaver.googleapis.com
 
-offline0: i4p-----d--r---- TCP [L] 192.168.2.16:32990 --> [OR] 216.239.38.120:443
+offline0: i4p-----d--r--- TCP [L] 192.168.2.16:32990 --> [OR] 216.239.38.120:443
         : HTTP/S.netify.android
         : D: clients1.google.com H: android.clients.google.com
+        : V: 0x0303
         : SNI: android.clients.google.com
 
-offline0: i4p-----d--r---- TCP [L] 192.168.2.16:32986 --> [OR] 216.239.38.120:443
+offline0: i4p-----d--r--- TCP [L] 192.168.2.16:32986 --> [OR] 216.239.38.120:443
         : HTTP/S.netify.android
         : D: clients1.google.com H: android.clients.google.com
+        : V: 0x0303
         : SNI: android.clients.google.com
 
-offline0: i4p--------r---- UDP [L] 192.168.2.1:53 <-- [OL] 192.168.2.16:40580
+offline0: i4p--------r--- UDP [L] 192.168.2.1:53 <-- [OL] 192.168.2.16:40580
         : DNS.netify.google
         : H: www.google.com
 
-offline0: i4p-----d--r-FA- TCP [OR] 173.194.79.114:80 <-- [L] 192.168.2.16:36834
+offline0: i4p-----d--r--- TCP [OR] 173.194.79.114:80 <-- [L] 192.168.2.16:36834
         : HTTP.netify.google
         : D: check.googlezip.net
         : HTTP/UA: Mozilla/5.0 (Linux; Android 9; Nokia 2.2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.93 Mobile Safari/537.36
         : URL: check.googlezip.net/connect
 
-offline0: i4p-u---d--r---- TCP [L] 192.168.2.16:32990 --> [OR] 216.239.38.120:443
+offline0: i4p-u---d--r--- TCP [L] 192.168.2.16:32990 --> [OR] 216.239.38.120:443
         : HTTP/S.netify.android
         : D: clients1.google.com H: android.clients.google.com
+        : V: 0x0303 CS: 0x1301
         : SNI: android.clients.google.com
 
-offline0: i4p-u---d--r---- TCP [L] 192.168.2.16:32986 --> [OR] 216.239.38.120:443
+offline0: i4p-u---d--r--- TCP [L] 192.168.2.16:32986 --> [OR] 216.239.38.120:443
         : HTTP/S.netify.android
         : D: clients1.google.com H: android.clients.google.com
+        : V: 0x0303 CS: 0x1301
         : SNI: android.clients.google.com
 
-offline0: i4p-----d--r---- TCP [OR] 172.217.21.202:443 <-- [L] 192.168.2.16:51928
+offline0: i4p-----d--r--- TCP [OR] 172.217.21.202:443 <-- [L] 192.168.2.16:51928
         : HTTP/S.netify.google
         : D: datasaver.googleapis.com
+        : V: 0x0303
         : SNI: datasaver.googleapis.com
 
-offline0: i4p-u---d--r---- TCP [OR] 172.217.21.202:443 <-- [L] 192.168.2.16:51928
+offline0: i4p-u---d--r--- TCP [OR] 172.217.21.202:443 <-- [L] 192.168.2.16:51928
         : HTTP/S.netify.google
         : D: datasaver.googleapis.com
+        : V: 0x0303 CS: 0x1301
         : SNI: datasaver.googleapis.com
 
-offline0: i4p-----d--r---- TCP [L] 192.168.2.16:32996 --> [OR] 216.239.38.120:443
+offline0: i4p-----d--r--- TCP [L] 192.168.2.16:32996 --> [OR] 216.239.38.120:443
         : HTTP/S.netify.google
         : D: clients1.google.com H: www.google.com
+        : V: 0x0303
         : SNI: www.google.com
 
-offline0: i4p-----d--r---- TCP [L] 192.168.2.16:32988 --> [OR] 216.239.38.120:443
+offline0: i4p-----d--r--- TCP [L] 192.168.2.16:32988 --> [OR] 216.239.38.120:443
         : HTTP/S.netify.android
         : D: clients1.google.com H: android.clients.google.com
+        : V: 0x0303
         : SNI: android.clients.google.com
 
-offline0: i4p-u---d--r---- TCP [L] 192.168.2.16:32996 --> [OR] 216.239.38.120:443
+offline0: i4p-u---d--r--- TCP [L] 192.168.2.16:32996 --> [OR] 216.239.38.120:443
         : HTTP/S.netify.google
         : D: clients1.google.com H: www.google.com
+        : V: 0x0303 CS: 0xc02b
         : SNI: www.google.com CN: www.google.com
         : IDN: C=US, O=Google Trust Services, CN=GTS CA 1O1 SDN: C=US, ST=California, L=Mountain View, O=Google LLC, CN=www.google.com
 
-offline0: i4p-u---d--r---- TCP [L] 192.168.2.16:32988 --> [OR] 216.239.38.120:443
+offline0: i4p-u---d--r--- TCP [L] 192.168.2.16:32988 --> [OR] 216.239.38.120:443
         : HTTP/S.netify.android
         : D: clients1.google.com H: android.clients.google.com
+        : V: 0x0303 CS: 0x1301
         : SNI: android.clients.google.com
 
-offline0: i4p--------r---- UDP [L] 192.168.2.1:53 <-- [OL] 192.168.2.16:46359
+offline0: i4p--------r--- UDP [L] 192.168.2.1:53 <-- [OL] 192.168.2.16:46359
         : DNS.netify.google-authentication
         : H: accounts.google.com
 
-offline0: i4p-----d--r-FA- TCP [L] 192.168.2.16:32998 --> [OR] 216.239.38.120:443
+offline0: i4p-----d--r--- TCP [L] 192.168.2.16:32998 --> [OR] 216.239.38.120:443
         : HTTP/S.netify.google-authentication
         : D: clients1.google.com H: accounts.google.com
+        : V: 0x0303
         : SNI: accounts.google.com
 
-offline0: i4p--------r---- UDP [L] 192.168.2.1:53 <-- [OL] 192.168.2.16:35689
+offline0: i4p--------r--- UDP [L] 192.168.2.1:53 <-- [OL] 192.168.2.16:35689
         : DNS.netify.google
         : H: semanticlocation-pa.googleapis.com
 
-offline0: i4p-u---d--r-FA- TCP [L] 192.168.2.16:32998 --> [OR] 216.239.38.120:443
+offline0: i4p-u---d--r-F- TCP [L] 192.168.2.16:32998 --> [OR] 216.239.38.120:443
         : HTTP/S.netify.google-authentication
         : D: clients1.google.com H: accounts.google.com
+        : V: 0x0303 CS: 0x1301
         : SNI: accounts.google.com
 
-offline0: i4p--------r---- UDP [L] 192.168.2.1:53 <-- [OL] 192.168.2.16:22850
+offline0: i4p--------r--- UDP [L] 192.168.2.1:53 <-- [OL] 192.168.2.16:22850
         : DNS.netify.google
         : H: proxy.googlezip.net
 
-offline0: i4p--------r---- UDP [L] 192.168.2.1:53 <-- [OL] 192.168.2.16:58892
+offline0: i4p--------r--- UDP [L] 192.168.2.1:53 <-- [OL] 192.168.2.16:58892
         : DNS.netify.google-authentication
         : H: accounts.google.com
 
-offline0: i4p-----d--r-FA- TCP [OR] 172.217.20.76:443 <-- [L] 192.168.2.16:43634
+offline0: i4p-----d--r--- TCP [OR] 172.217.20.76:443 <-- [L] 192.168.2.16:43634
         : HTTP/S.netify.google
         : D: proxy.googlezip.net
+        : V: 0x0303
         : SNI: proxy.googlezip.net
 
-offline0: i4p-u---d--r-FA- TCP [OR] 172.217.20.76:443 <-- [L] 192.168.2.16:43634
+offline0: i4p-u---d--r-F- TCP [OR] 172.217.20.76:443 <-- [L] 192.168.2.16:43634
         : HTTP/S.netify.google
         : D: proxy.googlezip.net
+        : V: 0x0303 CS: 0x1301
         : SNI: proxy.googlezip.net
 
-offline0: i4p-----d--r---- TCP [L] 192.168.2.16:33002 --> [OR] 216.239.38.120:443
+offline0: i4p-----d--r--- TCP [L] 192.168.2.16:33002 --> [OR] 216.239.38.120:443
         : HTTP/S.netify.google-authentication
         : D: clients1.google.com H: accounts.google.com
+        : V: 0x0303
         : SNI: accounts.google.com
 
-offline0: i4p--------r---- UDP [L] 192.168.2.1:53 <-- [OL] 192.168.2.16:33240
+offline0: i4p--------r--- UDP [L] 192.168.2.1:53 <-- [OL] 192.168.2.16:33240
         : DNS.netify.google
         : H: check.googlezip.net
 
-offline0: i4p-u---d--r---- TCP [L] 192.168.2.16:33002 --> [OR] 216.239.38.120:443
+offline0: i4p-u---d--r--- TCP [L] 192.168.2.16:33002 --> [OR] 216.239.38.120:443
         : HTTP/S.netify.google-authentication
         : D: clients1.google.com H: accounts.google.com
+        : V: 0x0303 CS: 0x1301
         : SNI: accounts.google.com
 
-offline0: i4p--------r---- UDP [L] 192.168.2.1:53 <-- [OL] 192.168.2.16:18379
+offline0: i4p--------r--- UDP [L] 192.168.2.1:53 <-- [OL] 192.168.2.16:18379
         : DNS.netify.google
         : H: datasaver.googleapis.com
 
-offline0: i4p-----d--r---- TCP [OR] 173.194.79.114:80 <-- [L] 192.168.2.16:36848
+offline0: i4p-----d--r--- TCP [OR] 173.194.79.114:80 <-- [L] 192.168.2.16:36848
         : HTTP.netify.google
         : D: check.googlezip.net
         : HTTP/UA: Mozilla/5.0 (Linux; Android 9; Nokia 2.2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.93 Mobile Safari/537.36
         : URL: check.googlezip.net/connect
 
-offline0: i4p--------r---- UDP [L] 192.168.2.1:53 <-- [OL] 192.168.2.16:10677
+offline0: i4p--------r--- UDP [L] 192.168.2.1:53 <-- [OL] 192.168.2.16:10677
         : DNS.netify.google
         : H: proxy.googlezip.net
 
-offline0: i4p--------r---- UDP [L] 192.168.2.1:53 <-- [OL] 192.168.2.16:32832
+offline0: i4p--------r--- UDP [L] 192.168.2.1:53 <-- [OL] 192.168.2.16:32832
         : DNS.netify.google
         : H: www.google.com
 
-offline0: i4p-----d--r---- TCP [OR] 172.217.21.202:443 <-- [L] 192.168.2.16:51944
+offline0: i4p-----d--r--- TCP [OR] 172.217.21.202:443 <-- [L] 192.168.2.16:51944
         : HTTP/S.netify.google
         : D: datasaver.googleapis.com
+        : V: 0x0303
         : SNI: datasaver.googleapis.com
 
-offline0: i4p-----d--r---- TCP [L] 192.168.2.16:33014 --> [OR] 216.239.38.120:443
+offline0: i4p-----d--r--- TCP [L] 192.168.2.16:33014 --> [OR] 216.239.38.120:443
         : HTTP/S.netify.google
         : D: clients1.google.com H: www.google.com
+        : V: 0x0303
         : SNI: www.google.com
 
-offline0: i4p--------r---- UDP [L] 192.168.2.1:53 <-- [OL] 192.168.2.16:39760
+offline0: i4p--------r--- UDP [L] 192.168.2.1:53 <-- [OL] 192.168.2.16:39760
         : DNS.netify.android
         : H: android.googleapis.com
 
-offline0: i4p-----d--r-FA- TCP [OR] 172.217.20.76:443 <-- [L] 192.168.2.16:43646
+offline0: i4p-----d--r-F- TCP [OR] 172.217.20.76:443 <-- [L] 192.168.2.16:43646
         : HTTP/S.netify.google
         : D: proxy.googlezip.net
+        : V: 0x0303
         : SNI: proxy.googlezip.net
 
-offline0: i4p-u---d--r---- TCP [L] 192.168.2.16:33014 --> [OR] 216.239.38.120:443
+offline0: i4p-u---d--r--- TCP [L] 192.168.2.16:33014 --> [OR] 216.239.38.120:443
         : HTTP/S.netify.google
         : D: clients1.google.com H: www.google.com
+        : V: 0x0303 CS: 0x1301
         : SNI: www.google.com
 
-offline0: i4p-u---d--r---- TCP [OR] 172.217.21.202:443 <-- [L] 192.168.2.16:51944
+offline0: i4p-u---d--r--- TCP [OR] 172.217.21.202:443 <-- [L] 192.168.2.16:51944
         : HTTP/S.netify.google
         : D: datasaver.googleapis.com
+        : V: 0x0303 CS: 0x1301
         : SNI: datasaver.googleapis.com
 
-offline0: i4p-u---d--r-FA- TCP [OR] 172.217.20.76:443 <-- [L] 192.168.2.16:43646
+offline0: i4p-u---d--r-F- TCP [OR] 172.217.20.76:443 <-- [L] 192.168.2.16:43646
         : HTTP/S.netify.google
         : D: proxy.googlezip.net
+        : V: 0x0303 CS: 0x1301
         : SNI: proxy.googlezip.net
 
-offline0: i4p-----d--r---- TCP [OR] 172.217.22.10:443 <-- [L] 192.168.2.16:44374
+offline0: i4p-----d--r--- TCP [OR] 172.217.22.10:443 <-- [L] 192.168.2.16:44374
         : HTTP/S.netify.android
         : D: android.googleapis.com
+        : V: 0x0303
         : SNI: android.googleapis.com
 
-offline0: i4p-----d--r---- TCP [OR] 172.217.20.74:443 <-- [L] 192.168.2.16:52514
+offline0: i4p-----d--r--- TCP [OR] 172.217.20.74:443 <-- [L] 192.168.2.16:52514
         : HTTP/S.netify.google
         : D: play.googleapis.com H: semanticlocation-pa.googleapis.com
+        : V: 0x0303
         : SNI: semanticlocation-pa.googleapis.com
 
-offline0: i4p--------r---- UDP [L] 192.168.2.1:53 <-- [OL] 192.168.2.16:56312
+offline0: i4p--------r--- UDP [L] 192.168.2.1:53 <-- [OL] 192.168.2.16:56312
         : DNS.netify.google
         : H: proxy.googlezip.net
 
-offline0: i4p-u---d--r---- TCP [OR] 172.217.22.10:443 <-- [L] 192.168.2.16:44374
+offline0: i4p-u---d--r--- TCP [OR] 172.217.22.10:443 <-- [L] 192.168.2.16:44374
         : HTTP/S.netify.android
         : D: android.googleapis.com
+        : V: 0x0303 CS: 0x1301
         : SNI: android.googleapis.com
 
-offline0: i4pc-gx-d------- TCP [OR] 173.194.79.114:80 <-- [L] 192.168.2.16:36850
+offline0: i4pc-gx-d------ TCP [OR] 173.194.79.114:80 <-- [L] 192.168.2.16:36850
         : HTTP.netify.google
         : D: check.googlezip.net
 
-offline0: i4pc-gx-d---s--- TCP [L] 192.168.2.16:49510 --> [OR] 216.239.38.120:5228
+offline0: i4pc-gx-d---s-- TCP [L] 192.168.2.16:49510 --> [OR] 216.239.38.120:5228
         : XMPP.netify.google-chat
         : D: clients1.google.com
 
-offline0: i4pc-gx-d------- TCP [OR] 172.217.20.76:443 <-- [L] 192.168.2.16:43652
+offline0: i4pc-gx-d------ TCP [OR] 172.217.20.76:443 <-- [L] 192.168.2.16:43652
         : HTTP/S.netify.google
         : D: proxy.googlezip.net
         : SNI: proxy.googlezip.net

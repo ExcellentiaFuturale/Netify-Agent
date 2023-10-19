@@ -1,80 +1,95 @@
-offline0: i4p--------r-FA- TCP [OR] 82.81.46.13:10443 <-- [L] 192.168.1.178:61805
+offline0: i4p--------r--- TCP [OR] 82.81.46.13:10443 <-- [L] 192.168.1.178:61805
         : TLS
         : H: 82.81.46.13
+        : V: 0x0303
         : SNI: 82.81.46.13
 
-offline0: i4p-u------r-FA- TCP [OR] 82.81.46.13:10443 <-- [L] 192.168.1.178:61805
+offline0: i4p-u------r--- TCP [OR] 82.81.46.13:10443 <-- [L] 192.168.1.178:61805
         : TLS
         : H: 82.81.46.13
+        : V: 0x0303 CS: 0xc030
         : SNI: 82.81.46.13
 
-offline0: i4p-u------r-FA- TCP [OR] 82.81.46.13:10443 <-- [L] 192.168.1.178:61805
+offline0: i4p-u------r--- TCP [OR] 82.81.46.13:10443 <-- [L] 192.168.1.178:61805
         : TLS
         : H: 82.81.46.13
+        : V: 0x0303 CS: 0xc030
         : SNI: 82.81.46.13 CN: fwf60e4q16012050
         : IDN: C=US, ST=California, L=Sunnyvale, O=Fortinet, OU=Certificate Authority, CN=support SDN: C=US, ST=California, L=Sunnyvale, O=Fortinet, OU=FortiGate, CN=FWF60E4Q16012050
 
-offline0: i4p--------r-FA- TCP [OR] 82.81.46.13:10443 <-- [L] 192.168.1.178:61806
+offline0: i4p--------r--- TCP [OR] 82.81.46.13:10443 <-- [L] 192.168.1.178:61806
         : TLS
         : H: 82.81.46.13
+        : V: 0x0303
         : SNI: 82.81.46.13
 
-offline0: i4p-u------r-FA- TCP [OR] 82.81.46.13:10443 <-- [L] 192.168.1.178:61806
+offline0: i4p-u------r--- TCP [OR] 82.81.46.13:10443 <-- [L] 192.168.1.178:61806
         : TLS
         : H: 82.81.46.13
+        : V: 0x0303 CS: 0xc030
         : SNI: 82.81.46.13
 
-offline0: i4p-u------r-FA- TCP [OR] 82.81.46.13:10443 <-- [L] 192.168.1.178:61806
+offline0: i4p-u------r--- TCP [OR] 82.81.46.13:10443 <-- [L] 192.168.1.178:61806
         : TLS
         : H: 82.81.46.13
+        : V: 0x0303 CS: 0xc030
         : SNI: 82.81.46.13 CN: fwf60e4q16012050
         : IDN: C=US, ST=California, L=Sunnyvale, O=Fortinet, OU=Certificate Authority, CN=support SDN: C=US, ST=California, L=Sunnyvale, O=Fortinet, OU=FortiGate, CN=FWF60E4Q16012050
 
-offline0: i4p--------r-FA- TCP [OR] 82.81.46.13:10443 <-- [L] 192.168.1.178:61811
+offline0: i4p--------r--- TCP [OR] 82.81.46.13:10443 <-- [L] 192.168.1.178:61811
         : TLS
         : H: 82.81.46.13
+        : V: 0x0303
         : SNI: 82.81.46.13
 
-offline0: i4p-u------r-FA- TCP [OR] 82.81.46.13:10443 <-- [L] 192.168.1.178:61811
+offline0: i4p-u------r--- TCP [OR] 82.81.46.13:10443 <-- [L] 192.168.1.178:61811
         : TLS
         : H: 82.81.46.13
+        : V: 0x0303 CS: 0xc030
         : SNI: 82.81.46.13
 
-offline0: i4p-u------r-FA- TCP [OR] 82.81.46.13:10443 <-- [L] 192.168.1.178:61811
+offline0: i4p-u------r--- TCP [OR] 82.81.46.13:10443 <-- [L] 192.168.1.178:61811
         : TLS
         : H: 82.81.46.13
+        : V: 0x0303 CS: 0xc030
         : SNI: 82.81.46.13 CN: fwf60e4q16012050
         : IDN: C=US, ST=California, L=Sunnyvale, O=Fortinet, OU=Certificate Authority, CN=support SDN: C=US, ST=California, L=Sunnyvale, O=Fortinet, OU=FortiGate, CN=FWF60E4Q16012050
 
-offline0: i4p--------r-FA- TCP [OR] 82.81.46.13:10443 <-- [L] 192.168.1.178:61812
+offline0: i4p--------r--- TCP [OR] 82.81.46.13:10443 <-- [L] 192.168.1.178:61812
         : TLS
         : H: 82.81.46.13
+        : V: 0x0303
         : SNI: 82.81.46.13
 
-offline0: i4p-u------r-FA- TCP [OR] 82.81.46.13:10443 <-- [L] 192.168.1.178:61812
+offline0: i4p-u------r--- TCP [OR] 82.81.46.13:10443 <-- [L] 192.168.1.178:61812
         : TLS
         : H: 82.81.46.13
+        : V: 0x0303 CS: 0xc030
         : SNI: 82.81.46.13
 
-offline0: i4p-u------r-FA- TCP [OR] 82.81.46.13:10443 <-- [L] 192.168.1.178:61812
+offline0: i4p-u------r--- TCP [OR] 82.81.46.13:10443 <-- [L] 192.168.1.178:61812
         : TLS
         : H: 82.81.46.13
+        : V: 0x0303 CS: 0xc030
         : SNI: 82.81.46.13 CN: fwf60e4q16012050
         : IDN: C=US, ST=California, L=Sunnyvale, O=Fortinet, OU=Certificate Authority, CN=support SDN: C=US, ST=California, L=Sunnyvale, O=Fortinet, OU=FortiGate, CN=FWF60E4Q16012050
 
-offline0: i4p--------r---- TCP [OR] 82.81.46.13:10443 <-- [L] 192.168.1.178:61820
+offline0: i4p--------r--- TCP [OR] 82.81.46.13:10443 <-- [L] 192.168.1.178:61820
         : TLS
         : H: 82.81.46.13
+        : V: 0x0303
         : SNI: 82.81.46.13
 
-offline0: i4p-u------r---- TCP [OR] 82.81.46.13:10443 <-- [L] 192.168.1.178:61820
+offline0: i4p-u------r--- TCP [OR] 82.81.46.13:10443 <-- [L] 192.168.1.178:61820
         : TLS
         : H: 82.81.46.13
+        : V: 0x0303 CS: 0xc030
         : SNI: 82.81.46.13
 
-offline0: i4p-u------r---- TCP [OR] 82.81.46.13:10443 <-- [L] 192.168.1.178:61820
+offline0: i4p-u------r--- TCP [OR] 82.81.46.13:10443 <-- [L] 192.168.1.178:61820
         : TLS
         : H: 82.81.46.13
+        : V: 0x0303 CS: 0xc030
         : SNI: 82.81.46.13 CN: fwf60e4q16012050
         : IDN: C=US, ST=California, L=Sunnyvale, O=Fortinet, OU=Certificate Authority, CN=support SDN: C=US, ST=California, L=Sunnyvale, O=Fortinet, OU=FortiGate, CN=FWF60E4Q16012050
 

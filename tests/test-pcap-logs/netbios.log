@@ -1,56 +1,56 @@
-offline0: i4pc-------r---- UDP [L] 10.0.4.131:137 --> [OL] 10.0.5.255:137
+offline0: i4pc-------r--- UDP [L] 10.0.4.131:137 --> [OL] 10.0.5.255:137
         : NETBIOS
         : H: xstream_hy
 
-offline0: i4pc-------r---- UDP [L] 10.0.5.233:137 --> [OL] 10.0.5.255:137
+offline0: i4pc-------r--- UDP [L] 10.0.5.233:137 --> [OL] 10.0.5.255:137
         : NETBIOS
         : H: ozi
 
-offline0: i4pc-------r---- UDP [L] 10.0.5.9:138 --> [OL] 10.0.5.255:138
+offline0: i4pc-------r--- UDP [L] 10.0.5.9:138 --> [OL] 10.0.5.255:138
         : NETBIOS
         : H: nvr9
 
-offline0: i4pc-------r---- UDP [L] 10.0.1.87:57836 --> [OL] 10.0.4.24:137
+offline0: i4pc-------r--- UDP [L] 10.0.1.87:57836 --> [OL] 10.0.4.24:137
         : NETBIOS
 
-offline0: i4pc-------r---- UDP [L] 10.0.4.101:137 --> [OL] 10.0.5.255:137
+offline0: i4pc-------r--- UDP [L] 10.0.4.101:137 --> [OL] 10.0.5.255:137
         : NETBIOS
         : H: muli
 
-offline0: i4pc-------r---- UDP [L] 10.0.4.165:137 --> [OL] 10.0.5.255:137
+offline0: i4pc-------r--- UDP [L] 10.0.4.165:137 --> [OL] 10.0.5.255:137
         : NETBIOS
         : H: gunnar
 
-offline0: i4pc-------r---- UDP [L] 10.0.4.24:137 --> [OL] 10.0.4.165:137
+offline0: i4pc-------r--- UDP [L] 10.0.4.24:137 --> [OL] 10.0.4.165:137
         : NETBIOS
         : H: gunnar
 
-offline0: i4pc-------r---- UDP [L] 10.0.4.66:137 --> [OL] 10.0.5.255:137
+offline0: i4pc-------r--- UDP [L] 10.0.4.66:137 --> [OL] 10.0.5.255:137
         : NETBIOS
         : H: guru
 
-offline0: i4pc-------r---- UDP [L] 10.0.4.24:137 --> [OL] 10.0.5.255:137
+offline0: i4pc-------r--- UDP [L] 10.0.4.24:137 --> [OL] 10.0.5.255:137
         : NETBIOS
         : H: guru
 
-offline0: i4pc-------r---- UDP [L] 10.0.4.24:137 <-- [OL] 10.0.5.1:137
+offline0: i4pc-------r--- UDP [L] 10.0.4.24:137 <-- [OL] 10.0.5.1:137
         : NETBIOS
         : H: guru
 
-offline0: i4pc-------r---- UDP [L] 10.0.5.93:138 --> [OL] 10.0.5.255:138
+offline0: i4pc-------r--- UDP [L] 10.0.5.93:138 --> [OL] 10.0.5.255:138
         : NETBIOS
         : H: bowie
 
-offline0: i4pc-------r---- UDP [L] 10.0.4.24:137 <-- [OL] 10.0.5.233:137
+offline0: i4pc-------r--- UDP [L] 10.0.4.24:137 <-- [OL] 10.0.5.233:137
         : NETBIOS
 
-offline0: i4pc-------r---- UDP [L] 10.0.4.14:137 --> [OL] 10.0.5.255:137
+offline0: i4pc-------r--- UDP [L] 10.0.4.14:137 --> [OL] 10.0.5.255:137
         : NETBIOS
         : H: guru
 
-offline0: i4pc-------r---- UDP [L] 10.0.1.87:57921 --> [OL] 10.0.4.24:137
+offline0: i4pc-------r--- UDP [L] 10.0.1.87:57921 --> [OL] 10.0.4.24:137
         : NETBIOS
 
-offline0: i4pc-gx--------- TCP [L] 10.0.4.24:139 <-- [OL] 10.0.4.131:1398
+offline0: i4pc-gx-------- TCP [L] 10.0.4.24:139 <-- [OL] 10.0.4.131:1398
         : NETBIOS
 

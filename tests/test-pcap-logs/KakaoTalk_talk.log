@@ -1,77 +1,76 @@
-offline0: i4p--------r-FA- TCP [L] 10.24.82.188:48489 --> [OR] 203.205.147.215:80
+offline0: i4p--------r-F- TCP [L] 10.24.82.188:48489 --> [OR] 203.205.147.215:80
         : HTTP/Proxy.netify.wechat
         : H: hkminorshort.weixin.qq.com
         : HTTP/UA: MicroMessenger Client
         : URL: http://hkminorshort.weixin.qq.com/cgi-bin/micromsg-bin/rtkvreport
 
-offline0: i4p--------r---- TCP [L] 10.24.82.188:32968 --> [OR] 110.76.143.50:8080
-        : TLS
+offline0: i4pc-------rs-- TCP [L] 10.24.82.188:32968 --> [OR] 110.76.143.50:8080
+        : KakaoTalk/Voice.netify.kakao-corp
 
-offline0: i4p-u------r---- TCP [L] 10.24.82.188:32968 --> [OR] 110.76.143.50:8080
-        : TLS.netify.kakaotalk
+offline0: i4p--------r--- TCP [L] 10.24.82.188:58857 --> [OR] 110.76.143.50:9001
+        : TLS.netify.kakao-corp
+        : V: 0x0301
+
+offline0: i4p-u------r--- TCP [L] 10.24.82.188:58857 --> [OR] 110.76.143.50:9001
+        : TLS.netify.kakao-corp
+        : V: 0x0301 CS: 0x002f
         : CN: kakao.com
         : IDN: C=KR, L=Seoul, O=Kakao, CN=Kakao.com SDN: C=KR, L=Seoul, O=Kakao, CN=Kakao.com
 
-offline0: i4p--------r---- TCP [L] 10.24.82.188:58857 --> [OR] 110.76.143.50:9001
-        : TLS
-
-offline0: i4p-u------r---- TCP [L] 10.24.82.188:58857 --> [OR] 110.76.143.50:9001
-        : TLS.netify.kakaotalk
-        : CN: kakao.com
-        : IDN: C=KR, L=Seoul, O=Kakao, CN=Kakao.com SDN: C=KR, L=Seoul, O=Kakao, CN=Kakao.com
-
-offline0: i4pc-------rs--- TCP [L] 10.24.82.188:34686 --> [OR] 173.194.72.188:5228
+offline0: i4pc-------rs-- TCP [L] 10.24.82.188:34686 --> [OR] 173.194.72.188:5228
         : XMPP.netify.google-chat
 
-offline0: i4pc-------r---- UDP [OR] 1.201.1.174:23045 --> [L] 10.24.82.188:11321
+offline0: i4pc-------r--- UDP [OR] 1.201.1.174:23045 --> [L] 10.24.82.188:11321
         : KakaoTalk/Voice
 
-offline0: i4pc-------r---- UDP [OR] 1.201.1.174:23047 --> [L] 10.24.82.188:10269
+offline0: i4pc-------r--- UDP [OR] 1.201.1.174:23047 --> [L] 10.24.82.188:10269
         : KakaoTalk/Voice
 
-offline0: i4pc-------r---- UDP [OR] 1.201.1.174:23044 --> [L] 10.24.82.188:11320
+offline0: i4pc-------r--- UDP [OR] 1.201.1.174:23044 --> [L] 10.24.82.188:11320
         : RTP
 
-offline0: i4pc-------r---- UDP [OR] 1.201.1.174:23046 --> [L] 10.24.82.188:10268
+offline0: i4pc-------r--- UDP [OR] 1.201.1.174:23046 --> [L] 10.24.82.188:10268
         : RTP
 
-offline0: i4pc-------r---- TCP [L] 10.24.82.188:49217 --> [OR] 216.58.220.174:443
+offline0: i4pc-------r--- TCP [L] 10.24.82.188:49217 --> [OR] 216.58.220.174:443
         : HTTP/S.netify.google
 
-offline0: i4p--------r---- UDP [L] 10.24.82.188:25223 --> [OL] 10.188.1.1:53
+offline0: i4p--------r--- UDP [L] 10.24.82.188:25223 --> [OL] 10.188.1.1:53
         : DNS.netify.facebook
         : H: mqtt.facebook.com
 
-offline0: i4p--------r---- TCP [L] 10.24.82.188:59954 --> [OR] 173.252.88.128:443
-        : HTTP/S.netify.meta-cdn
+offline0: i4p--------r--- TCP [L] 10.24.82.188:59954 --> [OR] 173.252.88.128:443
+        : HTTP/S.netify.meta
+        : V: 0x0301
 
-offline0: i4pcu------r---- TCP [L] 10.24.82.188:59954 --> [OR] 173.252.88.128:443
-        : HTTP/S.netify.meta-cdn
+offline0: i4pcu------r--- TCP [L] 10.24.82.188:59954 --> [OR] 173.252.88.128:443
+        : HTTP/S.netify.meta
+        : V: 0x0301 CS: 0xc007
 
-offline0: i4pc-gx--------- TCP [L] 10.24.82.188:58916 --> [OR] 54.255.185.236:5222
+offline0: i4pc-gx-------- TCP [L] 10.24.82.188:58916 --> [OR] 54.255.185.236:5222
         : Unknown
 
-offline0: i4pc-gx--------- TCP [L] 10.24.82.188:46947 --> [OR] 139.150.0.125:443
-        : HTTP/S
+offline0: i4pc-gx-------- TCP [L] 10.24.82.188:46947 --> [OR] 139.150.0.125:443
+        : HTTP/S.netify.kakao-corp
 
-offline0: i4pc-gx--------- TCP [L] 10.24.82.188:56697 --> [OR] 216.58.220.161:443
+offline0: i4pc-gx-------- TCP [L] 10.24.82.188:56697 --> [OR] 216.58.220.161:443
         : HTTP/S.netify.google
 
-offline0: i4pc-gx--------- TCP [L] 10.24.82.188:59912 --> [OR] 173.252.88.128:443
-        : HTTP/S.netify.meta-cdn
+offline0: i4pc-gx-------- TCP [L] 10.24.82.188:59912 --> [OR] 173.252.88.128:443
+        : HTTP/S.netify.meta
 
-offline0: i4pc-gx--------- TCP [L] 10.24.82.188:51021 --> [OR] 103.246.57.251:8080
-        : HTTP/Proxy
+offline0: i4pc-gx-----s-- TCP [L] 10.24.82.188:51021 --> [OR] 103.246.57.251:8080
+        : KakaoTalk/Voice.netify.kakao-corp
 
-offline0: i4pc-gx--------- TCP [L] 10.24.82.188:38380 --> [OR] 173.194.117.229:443
+offline0: i4pc-gx-------- TCP [L] 10.24.82.188:38380 --> [OR] 173.194.117.229:443
         : HTTP/S.netify.google
 
-offline0: i4pc-gx--------- TCP [L] 10.24.82.188:52123 --> [OR] 173.252.122.1:443
-        : HTTP/S.netify.meta-cdn
+offline0: i4pc-gx-------- TCP [L] 10.24.82.188:52123 --> [OR] 173.252.122.1:443
+        : HTTP/S.netify.meta
 
-offline0: i4pc-gx--------- TCP [L] 10.24.82.188:53974 --> [OR] 203.205.151.233:8080
+offline0: i4pc-gx-------- TCP [L] 10.24.82.188:53974 --> [OR] 203.205.151.233:8080
         : HTTP/Proxy
 
-offline0: i4pc-gx------FA- TCP [L] 10.24.82.188:34533 --> [OR] 120.28.26.242:80
+offline0: i4pc-gx------F- TCP [L] 10.24.82.188:34533 --> [OR] 120.28.26.242:80
         : HTTP
 

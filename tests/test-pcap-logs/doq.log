@@ -1,6 +1,7 @@
-offline0: i6pc-------r---- UDP [L] ::1:784 <-- [OL] ::1:47826
+offline0: i6pc-------r--- UDP [L] ::1:784 <-- [OL] ::1:47826
         : QUIC
+        : V: 0x0304
 
-offline0: i6pc-------r---- IPv6-ICMP [L] ::1:0 <-- [OL] ::1:0
+offline0: i6pc-------r--- IPv6-ICMP [L] ::1:0 <-- [OL] ::1:0
         : ICMPv6
 

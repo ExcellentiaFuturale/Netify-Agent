@@ -1,47 +1,57 @@
-offline0: i4p--------r---- TCP [OR] 51.83.239.144:80 <-- [L] 192.168.149.129:36351
+offline0: i4p--------r--- TCP [OR] 51.83.239.144:80 <-- [L] 192.168.149.129:36351
         : TLS
 
-offline0: i4p--------r---- TCP [OR] 51.83.238.219:80 <-- [L] 192.168.149.129:43535
+offline0: i4p--------r--- TCP [OR] 51.83.238.219:80 <-- [L] 192.168.149.129:43535
         : TLS
+        : V: 0x0303
 
-offline0: i4p-u------r---- TCP [OR] 51.83.238.219:80 <-- [L] 192.168.149.129:43535
+offline0: i4p-u------r--- TCP [OR] 51.83.238.219:80 <-- [L] 192.168.149.129:43535
         : TLS
+        : V: 0x0303 CS: 0xc02c
 
-offline0: i4p-u------r---- TCP [OR] 51.83.238.219:80 <-- [L] 192.168.149.129:43535
+offline0: i4p-u------r--- TCP [OR] 51.83.238.219:80 <-- [L] 192.168.149.129:43535
         : TLS
+        : V: 0x0303 CS: 0xc02c
         : CN: anynet
         : IDN: CN=AnyNet Root CA, O=philandro Software GmbH, C=DE SDN: C=DE, O=philandro Software GmbH, CN=AnyNet Relay
 
-offline0: i4p--------r---- UDP [L] 192.168.1.1:53 <-- [OL] 192.168.1.187:59511
+offline0: i4p--------r--- UDP [L] 192.168.1.1:53 <-- [OL] 192.168.1.187:59511
         : DNS.netify.anydesk
         : H: relay-3185a847.net.anydesk.com
 
-offline0: i4p--------r---- UDP [L] 192.168.1.1:53 <-- [OL] 192.168.1.187:55376
+offline0: i4p--------r--- UDP [L] 192.168.1.1:53 <-- [OL] 192.168.1.187:55376
         : DNS.netify.anydesk
         : H: relay-9b6827f2.net.anydesk.com
 
-offline0: i4p--------r---- TCP [L] 192.168.1.178:7070 <-- [OL] 192.168.1.187:54164
+offline0: i4p--------r--- TCP [L] 192.168.1.178:7070 <-- [OL] 192.168.1.187:54164
         : TLS
+        : V: 0x0303
 
-offline0: i4p-u------r---- TCP [L] 192.168.1.178:7070 <-- [OL] 192.168.1.187:54164
+offline0: i4p-u------r--- TCP [L] 192.168.1.178:7070 <-- [OL] 192.168.1.187:54164
         : TLS
+        : V: 0x0303 CS: 0x009f
         : SDN: CN=AnyDesk Client, CN=AnyDesk Client
 
-offline0: i4p--------r-FA- TCP [L] 192.168.1.178:52039 --> [OL] 192.168.1.187:7070
+offline0: i4p--------r--- TCP [L] 192.168.1.178:52039 --> [OL] 192.168.1.187:7070
         : TLS
+        : V: 0x0303
 
-offline0: i4p-u------r-FA- TCP [L] 192.168.1.178:52039 --> [OL] 192.168.1.187:7070
+offline0: i4p-u------r-F- TCP [L] 192.168.1.178:52039 --> [OL] 192.168.1.187:7070
         : TLS
+        : V: 0x0303 CS: 0x009d
         : SDN: CN=AnyDesk Client, CN=AnyDesk Client
 
-offline0: i4p--------r---- TCP [L] 192.168.1.128:48260 --> [OR] 195.181.174.176:443
+offline0: i4p--------r--- TCP [L] 192.168.1.128:48260 --> [OR] 195.181.174.176:443
         : HTTP/S
+        : V: 0x0303
 
-offline0: i4p-u------r---- TCP [L] 192.168.1.128:48260 --> [OR] 195.181.174.176:443
+offline0: i4p-u------r--- TCP [L] 192.168.1.128:48260 --> [OR] 195.181.174.176:443
         : HTTP/S
+        : V: 0x0303 CS: 0xc02c
 
-offline0: i4p-u------r---- TCP [L] 192.168.1.128:48260 --> [OR] 195.181.174.176:443
+offline0: i4p-u------r--- TCP [L] 192.168.1.128:48260 --> [OR] 195.181.174.176:443
         : HTTP/S
+        : V: 0x0303 CS: 0xc02c
         : CN: anynet
         : IDN: CN=AnyNet Root CA, O=philandro Software GmbH, C=DE SDN: C=DE, O=philandro Software GmbH, CN=AnyNet Relay
 
