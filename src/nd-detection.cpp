@@ -23,7 +23,9 @@
 #endif
 
 #include "nd-detection.hpp"
+#include "nd-protos.hpp"
 #include "nd-tls-alpn.hpp"
+#include "ndpi_protocol_ids.h"
 
 // Enable flow hash cache debug logging
 // #define _ND_LOG_FHC             1
@@ -33,6 +35,9 @@
 
 // Enable to log custom domain category lookups
 // #define _ND_LOG_DOMAIN_LOOKUPS  1
+
+// Enable to log STUN debug
+// #define _ND_LOG_STUN 1
 
 #define ndEF    entry->flow
 #define ndEFNF  entry->flow->ndpi_flow
@@ -240,6 +245,35 @@ void ndDetectionThread::ProcessPacket(ndDetectionQueueEntry *entry) {
       ndEFNF, entry->data, entry->length,
       ndEF->ts_last_seen.load(), nullptr);
 
+    if (ndpi_rc.master_protocol == NDPI_PROTOCOL_STUN &&
+      ndpi_rc.app_protocol != NDPI_PROTOCOL_UNKNOWN)
+    {
+#ifdef _ND_LOG_STUN
+        nd_dprintf(
+          "%s: STUN[%lu]: master: %hu, app: %hu, stack[0]: "
+          "%hu, "
+          "stack[1]: %hu, detected_protocol: %hu\n",
+          tag.c_str(), ndEF->stats.detection_packets.load(),
+          ndpi_rc.master_protocol, ndpi_rc.app_protocol,
+          ndEFNF->detected_protocol_stack[0],
+          ndEFNF->detected_protocol_stack[1],
+          ndEF->detected_protocol);
+#endif
+        nd_proto_id_t id = nd_ndpi_proto_find(
+          ndpi_rc.app_protocol, ndEF);
+
+        if (id != ND_PROTO_TODO) {
+            ndEF->detected_protocol = id;
+#ifdef _ND_LOG_STUN
+            nd_dprintf(
+              "%s: STUN[%lu]: refined detected protocol: "
+              "%hu\n",
+              tag.c_str(), ndEF->stats.detection_packets.load(),
+              ndEF->detected_protocol);
+#endif
+        }
+    }
+
     if (ndEF->detected_protocol == ND_PROTO_UNKNOWN &&
       ndpi_rc.master_protocol != NDPI_PROTOCOL_UNKNOWN)
     {
@@ -290,7 +324,8 @@ void ndDetectionThread::ProcessPacket(ndDetectionQueueEntry *entry) {
                 }
 
                 ndEF->ndpi_risk_score = ndpi_risk2score(
-                  ndEFNF->risk, &ndEF->ndpi_risk_score_client,
+                  ndEFNF->risk,
+                  &ndEF->ndpi_risk_score_client,
                   &ndEF->ndpi_risk_score_server);
             }
 
@@ -531,6 +566,12 @@ void ndDetectionThread::ProcessFlow(ndDetectionQueueEntry *entry) {
           ndi.apps.Lookup("netify.avast"));
         break;
 
+    case ND_PROTO_FACEBOOK_VOIP:
+        // TODO: netify.meta-messaging or netify.facebook-messager?
+        SetDetectedApplication(entry,
+          ndi.apps.Lookup("netify.meta-messaging"));
+        break;
+
     case ND_PROTO_LINE_CALL:
         SetDetectedApplication(entry,
           ndi.apps.Lookup("netify.line"));
@@ -544,6 +585,17 @@ void ndDetectionThread::ProcessFlow(ndDetectionQueueEntry *entry) {
     case ND_PROTO_SPOTIFY:
         SetDetectedApplication(entry,
           ndi.apps.Lookup("netify.spotify"));
+        break;
+
+    case ND_PROTO_SIGNAL_CALL:
+        SetDetectedApplication(entry,
+          ndi.apps.Lookup("netify.signal"));
+        break;
+
+    case ND_PROTO_SKYPE_TEAMS_CALL:
+        // TODO: netify.skype or netify.teams?
+        SetDetectedApplication(entry,
+          ndi.apps.Lookup("netify.teams"));
         break;
 
     case ND_PROTO_STEAM:
@@ -579,6 +631,11 @@ void ndDetectionThread::ProcessFlow(ndDetectionQueueEntry *entry) {
     case ND_PROTO_UBNTAC2:
         SetDetectedApplication(entry,
           ndi.apps.Lookup("netify.ubiquiti"));
+        break;
+
+    case ND_PROTO_WHATSAPP_CALL:
+        SetDetectedApplication(entry,
+          ndi.apps.Lookup("netify.whatsapp"));
         break;
 
     case ND_PROTO_ZOOM:

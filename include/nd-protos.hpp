@@ -27,6 +27,7 @@
 #include <vector>
 
 #include "nd-ndpi.hpp"
+#include "ndpi_protocol_ids.h"
 
 using namespace std;
 
@@ -381,6 +382,7 @@ typedef enum {
     ND_PROTO_APACHE_THRIFT = 324,  // Apache Thrift
     ND_PROTO_SLP = 325,  // Service Location Protocol
     ND_PROTO_HTTP2 = 326,  // HTTP/2
+    ND_PROTO_FACEBOOK_VOIP = 327,  // Facebook VoIP (STUN)
 
     ND_PROTO_MAX,
     ND_PROTO_TODO = 0xffffffff
@@ -434,6 +436,7 @@ const nd_protos_t nd_protos = {
     { ND_PROTO_EAQ, "EAQ" },
     { ND_PROTO_ELASTICSEARCH, "ElasticSearch" },
     { ND_PROTO_ETHERNET_IP, "EtherNet/IP" },
+    { ND_PROTO_FACEBOOK_VOIP, "Facebook/VoIP" },
     { ND_PROTO_FASTCGI, "FastCGI" },
     { ND_PROTO_FIX, "FIX" },
     { ND_PROTO_FTP_CONTROL, "FTP/C" },
@@ -678,6 +681,7 @@ const nd_ndpi_proto_t nd_ndpi_protos = {
     { NDPI_PROTOCOL_EAQ, ND_PROTO_EAQ },
     { NDPI_PROTOCOL_ELASTICSEARCH, ND_PROTO_ELASTICSEARCH },
     { NDPI_PROTOCOL_ETHERNET_IP, ND_PROTO_ETHERNET_IP },
+    { NDPI_PROTOCOL_FACEBOOK_VOIP, ND_PROTO_FACEBOOK_VOIP },
     { NDPI_PROTOCOL_FASTCGI, ND_PROTO_FASTCGI },
     { NDPI_PROTOCOL_FIX, ND_PROTO_FIX },
     { NDPI_PROTOCOL_FTP_CONTROL, ND_PROTO_FTP_CONTROL },
@@ -937,9 +941,6 @@ const nd_ndpi_disabled_protos_t nd_ndpi_disabled_protos = {
     NDPI_PROTOCOL_FACEBOOK_REEL_STORY,  // Not a protocol:
     // ID# 337
     // (FBookReelStory)
-    NDPI_PROTOCOL_FACEBOOK_VOIP,  // Not a protocol (no
-    // dissector): ID# 268
-    // (FacebookVoip)
     NDPI_PROTOCOL_FORTICLIENT,  // Not a protocol (no
     // dissector): ID# 259
     // (FortiClient)
