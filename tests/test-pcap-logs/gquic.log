@@ -1,4 +1,4 @@
-offline0: i4pc-------r---- UDP [L] 10.44.5.25:61097 --> [OR] 216.58.213.163:443
+offline0: i4pc-------r--- UDP [L] 10.44.5.25:61097 --> [OR] 216.58.213.163:443
         : QUIC.netify.google
         : H: www.gstatic.com
         : SNI: www.gstatic.com

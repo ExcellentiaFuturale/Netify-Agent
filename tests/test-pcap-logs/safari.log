@@ -1,72 +1,86 @@
-offline0: i4p--------r---- TCP [OR] 146.48.58.18:443 <-- [L] 192.168.1.178:55262
+offline0: i4p--------r--- TCP [OR] 146.48.58.18:443 <-- [L] 192.168.1.178:55262
         : HTTP/S
         : H: www.iit.cnr.it
+        : V: 0x0303
         : SNI: www.iit.cnr.it
 
-offline0: i4p-u------r---- TCP [OR] 146.48.58.18:443 <-- [L] 192.168.1.178:55262
+offline0: i4p-u------r--- TCP [OR] 146.48.58.18:443 <-- [L] 192.168.1.178:55262
         : HTTP/S
         : H: www.iit.cnr.it
+        : V: 0x0303 CS: 0xc030
         : SNI: www.iit.cnr.it CN: www.iit.cnr.it
         : IDN: C=NL, ST=Noord-Holland, L=Amsterdam, O=TERENA, CN=TERENA SSL CA 3 SDN: C=IT, ST=Lazio, L=Roma, O=Consiglio Nazionale delle Ricerche, OU=IIT, CN=www.iit.cnr.it
 
-offline0: i4p--------r---- TCP [OR] 146.48.58.18:443 <-- [L] 192.168.1.178:55267
+offline0: i4p--------r--- TCP [OR] 146.48.58.18:443 <-- [L] 192.168.1.178:55267
         : HTTP/S
         : H: www.iit.cnr.it
+        : V: 0x0303
         : SNI: www.iit.cnr.it
 
-offline0: i4p--------r---- TCP [OR] 146.48.58.18:443 <-- [L] 192.168.1.178:55265
+offline0: i4p--------r--- TCP [OR] 146.48.58.18:443 <-- [L] 192.168.1.178:55265
         : HTTP/S
         : H: www.iit.cnr.it
+        : V: 0x0303
         : SNI: www.iit.cnr.it
 
-offline0: i4p--------r---- TCP [OR] 146.48.58.18:443 <-- [L] 192.168.1.178:55268
+offline0: i4p--------r--- TCP [OR] 146.48.58.18:443 <-- [L] 192.168.1.178:55268
         : HTTP/S
         : H: www.iit.cnr.it
+        : V: 0x0303
         : SNI: www.iit.cnr.it
 
-offline0: i4p--------r---- TCP [OR] 146.48.58.18:443 <-- [L] 192.168.1.178:55266
+offline0: i4p--------r--- TCP [OR] 146.48.58.18:443 <-- [L] 192.168.1.178:55266
         : HTTP/S
         : H: www.iit.cnr.it
+        : V: 0x0303
         : SNI: www.iit.cnr.it
 
-offline0: i4p--------r---- TCP [OR] 146.48.58.18:443 <-- [L] 192.168.1.178:55269
+offline0: i4p--------r--- TCP [OR] 146.48.58.18:443 <-- [L] 192.168.1.178:55269
         : HTTP/S
         : H: www.iit.cnr.it
+        : V: 0x0303
         : SNI: www.iit.cnr.it
 
-offline0: i4pcu------r---- TCP [OR] 146.48.58.18:443 <-- [L] 192.168.1.178:55267
+offline0: i4pcu------r--- TCP [OR] 146.48.58.18:443 <-- [L] 192.168.1.178:55267
         : HTTP/S
         : H: www.iit.cnr.it
+        : V: 0x0303 CS: 0xc030
         : SNI: www.iit.cnr.it
 
-offline0: i4pcu------r---- TCP [OR] 146.48.58.18:443 <-- [L] 192.168.1.178:55265
+offline0: i4pcu------r--- TCP [OR] 146.48.58.18:443 <-- [L] 192.168.1.178:55265
         : HTTP/S
         : H: www.iit.cnr.it
+        : V: 0x0303 CS: 0xc030
         : SNI: www.iit.cnr.it
 
-offline0: i4pcu------r---- TCP [OR] 146.48.58.18:443 <-- [L] 192.168.1.178:55268
+offline0: i4pcu------r--- TCP [OR] 146.48.58.18:443 <-- [L] 192.168.1.178:55268
         : HTTP/S
         : H: www.iit.cnr.it
+        : V: 0x0303 CS: 0xc030
         : SNI: www.iit.cnr.it
 
-offline0: i4pcu------r---- TCP [OR] 146.48.58.18:443 <-- [L] 192.168.1.178:55266
+offline0: i4pcu------r--- TCP [OR] 146.48.58.18:443 <-- [L] 192.168.1.178:55266
         : HTTP/S
         : H: www.iit.cnr.it
+        : V: 0x0303 CS: 0xc030
         : SNI: www.iit.cnr.it
 
-offline0: i4pcu------r---- TCP [OR] 146.48.58.18:443 <-- [L] 192.168.1.178:55269
+offline0: i4pcu------r--- TCP [OR] 146.48.58.18:443 <-- [L] 192.168.1.178:55269
         : HTTP/S
         : H: www.iit.cnr.it
+        : V: 0x0303 CS: 0xc030
         : SNI: www.iit.cnr.it
 
-offline0: i4p--------r---- TCP [OR] 146.48.58.18:443 <-- [L] 192.168.1.178:55285
+offline0: i4p--------r--- TCP [OR] 146.48.58.18:443 <-- [L] 192.168.1.178:55285
         : HTTP/S
         : H: www.iit.cnr.it
+        : V: 0x0303
         : SNI: www.iit.cnr.it
 
-offline0: i4p-u------r---- TCP [OR] 146.48.58.18:443 <-- [L] 192.168.1.178:55285
+offline0: i4p-u------r--- TCP [OR] 146.48.58.18:443 <-- [L] 192.168.1.178:55285
         : HTTP/S
         : H: www.iit.cnr.it
+        : V: 0x0303 CS: 0xc030
         : SNI: www.iit.cnr.it CN: www.iit.cnr.it
         : IDN: C=NL, ST=Noord-Holland, L=Amsterdam, O=TERENA, CN=TERENA SSL CA 3 SDN: C=IT, ST=Lazio, L=Roma, O=Consiglio Nazionale delle Ricerche, OU=IIT, CN=www.iit.cnr.it
 

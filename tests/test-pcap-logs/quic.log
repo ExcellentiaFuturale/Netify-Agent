@@ -1,46 +1,46 @@
-offline0: i4pc-------r---- UDP [L] 192.168.1.109:57833 --> [OR] 216.58.212.101:443
+offline0: i4pc-------r--- UDP [L] 192.168.1.109:57833 --> [OR] 216.58.212.101:443
         : QUIC.netify.gmail
         : H: mail.google.com
         : SNI: mail.google.com
 
-offline0: i4pc-------r---- UDP [L] 10.0.0.3:6121 <-- [OL] 10.0.0.4:40134
+offline0: i4pc-------r--- UDP [L] 10.0.0.3:6121 <-- [OL] 10.0.0.4:40134
         : QUIC
 
-offline0: i4pc-------r---- UDP [OR] 172.217.16.4:443 <-- [L] 192.168.1.105:45669
+offline0: i4pc-------r--- UDP [OR] 172.217.16.4:443 <-- [L] 192.168.1.105:45669
         : QUIC.netify.google
         : H: www.google.com
         : SNI: www.google.com
 
-offline0: i4pc-------r---- UDP [L] 192.168.1.105:34438 --> [OR] 216.58.210.238:443
+offline0: i4pc-------r--- UDP [L] 192.168.1.105:34438 --> [OR] 216.58.210.238:443
         : QUIC.netify.youtube
         : H: www.youtube.com
         : SNI: www.youtube.com
 
-offline0: i4pc-------r---- UDP [L] 192.168.1.105:48445 --> [OR] 216.58.214.110:443
+offline0: i4pc-------r--- UDP [L] 192.168.1.105:48445 --> [OR] 216.58.214.110:443
         : QUIC.netify.youtube
         : H: i.ytimg.com
         : SNI: i.ytimg.com
 
-offline0: i4pc-------r---- UDP [L] 192.168.1.105:40030 --> [OR] 216.58.201.227:443
+offline0: i4pc-------r--- UDP [L] 192.168.1.105:40030 --> [OR] 216.58.201.227:443
         : QUIC.netify.google
         : H: fonts.gstatic.com
         : SNI: fonts.gstatic.com
 
-offline0: i4pc-------r---- UDP [L] 192.168.1.105:55934 --> [OR] 216.58.201.238:443
+offline0: i4pc-------r--- UDP [L] 192.168.1.105:55934 --> [OR] 216.58.201.238:443
         : QUIC.netify.youtube
         : H: s.ytimg.com
         : SNI: s.ytimg.com
 
-offline0: i4pc-------r---- UDP [L] 192.168.1.105:53817 --> [OR] 216.58.210.225:443
+offline0: i4pc-------r--- UDP [L] 192.168.1.105:53817 --> [OR] 216.58.210.225:443
         : QUIC.netify.youtube
         : H: yt3.ggpht.com
         : SNI: yt3.ggpht.com
 
-offline0: i4pc-------r---- UDP [L] 192.168.1.109:35236 --> [OR] 216.58.210.206:443
+offline0: i4pc-------r--- UDP [L] 192.168.1.109:35236 --> [OR] 216.58.210.206:443
         : QUIC.netify.youtube
         : H: www.youtube.com
         : SNI: www.youtube.com
 
-offline0: i4pc-gx--------- UDP [OR] 172.217.16.3:443 <-- [L] 192.168.1.105:40461
+offline0: i4pc-gx-------- UDP [OR] 172.217.16.3:443 <-- [L] 192.168.1.105:40461
         : QUIC.netify.google
 

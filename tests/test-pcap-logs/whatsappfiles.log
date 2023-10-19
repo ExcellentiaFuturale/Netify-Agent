@@ -1,16 +1,19 @@
-offline0: i4p--------r-FA- TCP [OR] 185.60.216.53:443 <-- [L] 192.168.2.29:49674
+offline0: i4p--------r--- TCP [OR] 185.60.216.53:443 <-- [L] 192.168.2.29:49674
         : HTTP/S.netify.whatsapp
         : H: mmg-fna.whatsapp.net
+        : V: 0x0303
         : SNI: mmg-fna.whatsapp.net
 
-offline0: i4p-u------r-FA- TCP [OR] 185.60.216.53:443 <-- [L] 192.168.2.29:49674
+offline0: i4p-u------r--- TCP [OR] 185.60.216.53:443 <-- [L] 192.168.2.29:49674
         : HTTP/S.netify.whatsapp
         : H: mmg-fna.whatsapp.net
+        : V: 0x0303 CS: 0xc02b
         : SNI: mmg-fna.whatsapp.net
         : IDN: C=US, O=DigiCert Inc, OU=www.digicert.com, CN=DigiCert SHA2 High Assurance Server CA SDN: C=US, ST=California, L=Menlo Park, O=Facebook, Inc., CN=*.whatsapp.net
 
-offline0: i4p--------r---- TCP [OR] 185.60.216.53:443 <-- [L] 192.168.2.29:49698
+offline0: i4p--------r--- TCP [OR] 185.60.216.53:443 <-- [L] 192.168.2.29:49698
         : HTTP/S.netify.whatsapp
         : H: mmg-fna.whatsapp.net
+        : V: 0x0303
         : SNI: mmg-fna.whatsapp.net
 

@@ -1,33 +1,33 @@
-offline0: i4pc-------r---- UDP [L] 192.168.2.1:57621 --> [OL] 192.168.2.255:57621
+offline0: i4pc-------r--- UDP [L] 192.168.2.1:57621 --> [OL] 192.168.2.255:57621
         : Spotify.netify.spotify
 
-offline0: i4p--------r---- UDP [L] 192.168.2.1:53 <-- [OL] 192.168.2.4:61697
+offline0: i4p--------r--- UDP [L] 192.168.2.1:53 <-- [OL] 192.168.2.4:61697
         : DNS.netify.whatsapp
         : H: e12.whatsapp.net
 
-offline0: i4pc----d--r-FA- TCP [OR] 158.85.58.15:5222 <-- [L] 192.168.2.4:49206
+offline0: i4pc----d--r-F- TCP [OR] 158.85.58.15:5222 <-- [L] 192.168.2.4:49206
         : WhatsApp.netify.whatsapp
         : D: e12.whatsapp.net
 
-offline0: i4p--------r---- TCP [OR] 17.173.66.102:443 <-- [L] 192.168.2.4:49205
+offline0: i4p--------r--- TCP [OR] 17.173.66.102:443 <-- [L] 192.168.2.4:49205
         : HTTP/S.netify.apple
 
-offline0: i4pc-------r---- UDP [L] 192.168.2.1:17500 --> [OL] 192.168.2.255:17500
+offline0: i4pc-------r--- UDP [L] 192.168.2.1:17500 --> [OL] 192.168.2.255:17500
         : Dropbox
 
-offline0: i4pc-------r---- UDP [L] 0.0.0.0:68 --> [OB] 255.255.255.255:67
+offline0: i4pc-------r--- UDP [L] 0.0.0.0:68 --> [OB] 255.255.255.255:67
         : DHCP
         : H: lucas-imac
         : DHCP/FP: 1,3,6,15,119,95,252,44,46
 
-offline0: i4p--------r---- UDP [L] 192.168.2.4:5353 --> [OM] 224.0.0.251:5353
+offline0: i4p--------r--- UDP [L] 192.168.2.4:5353 --> [OM] 224.0.0.251:5353
         : MDNS.netify.internal-network
         : H: _raop._tcp.local
 
-offline0: i6p--------r---- UDP [L] fe80::189c:c31b:1298:224:5353 --> [OM] ff02::fb:5353
+offline0: i6p--------r--- UDP [L] fe80::189c:c31b:1298:224:5353 --> [OM] ff02::fb:5353
         : MDNS.netify.internal-network
         : H: _raop._tcp.local
 
-offline0: i4pc-------rsFA- TCP [OR] 17.110.229.14:5223 <-- [L] 192.168.2.4:49193
+offline0: i4pc-------rsF- TCP [OR] 17.110.229.14:5223 <-- [L] 192.168.2.4:49193
         : Apple/Push.netify.apple-push
 

@@ -1,16 +1,19 @@
-offline0: i4p--------r---- TCP [OR] 66.220.156.68:443 <-- [L] 192.168.43.18:52066
+offline0: i4p--------r--- TCP [OR] 66.220.156.68:443 <-- [L] 192.168.43.18:52066
         : HTTP/S.netify.facebook
         : H: facebook.com
+        : V: 0x0303
         : SNI: facebook.com
 
-offline0: i4p-u------r---- TCP [OR] 66.220.156.68:443 <-- [L] 192.168.43.18:52066
+offline0: i4p-u------r--- TCP [OR] 66.220.156.68:443 <-- [L] 192.168.43.18:52066
         : HTTP/S.netify.facebook
         : H: facebook.com
+        : V: 0x0303 CS: 0xc02b
         : SNI: facebook.com
         : IDN: C=US, O=DigiCert Inc, OU=www.digicert.com, CN=DigiCert SHA2 High Assurance Server CA SDN: C=US, ST=CA, L=Menlo Park, O=Facebook, Inc., CN=*.facebook.com
 
-offline0: i4p--------r---- TCP [OR] 31.13.86.36:443 <-- [L] 192.168.43.18:44614
+offline0: i4p--------r--- TCP [OR] 31.13.86.36:443 <-- [L] 192.168.43.18:44614
         : HTTP/S.netify.facebook
         : H: www.facebook.com
+        : V: 0x0303
         : SNI: www.facebook.com
 

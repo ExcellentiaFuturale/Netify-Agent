@@ -1,6 +1,6 @@
-offline0: i6pc-------r---- UDP [L] fe80::1:2029 --> [OM] ff02::66:2029
+offline0: i6pc-------r--- UDP [L] fe80::1:2029 --> [OM] ff02::66:2029
         : Cisco/HSRP
 
-offline0: i6pc-------r---- UDP [L] fe80::2:2029 --> [OM] ff02::66:2029
+offline0: i6pc-------r--- UDP [L] fe80::2:2029 --> [OM] ff02::66:2029
         : Cisco/HSRP
 
