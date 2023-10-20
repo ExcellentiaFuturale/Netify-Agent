@@ -242,8 +242,7 @@ void ndDNSHintCache::Save(void) {
 
     fprintf(hf, "\"host\",\"addr_digest\",\"ttl\"\n");
 
-    for (nd_dns_ar::iterator i = map_ar.begin();
-         i != map_ar.end(); i++)
+    for (nd_dns_ar::iterator i = map_ar.begin(); i != map_ar.end(); i++)
     {
         nd_sha1_to_string((const uint8_t *)i->first.c_str(), digest);
 
