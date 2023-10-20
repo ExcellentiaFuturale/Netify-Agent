@@ -60,7 +60,11 @@ bool ndCategories::Load(const string &filename) {
 
     if (jdata.find("application_tag_index") == jdata.end() ||
       jdata.find("protocol_tag_index") == jdata.end())
+    {
+        nd_dprintf("legacy category format detected: %s\n",
+          filename.c_str());
         return LoadLegacy(jdata);
+    }
 
     for (auto &ci : categories) {
         string key;
@@ -83,8 +87,6 @@ bool ndCategories::Load(const string &filename) {
 }
 
 bool ndCategories::LoadLegacy(const json &jdata) {
-    nd_printf("Legacy category format detected.\n");
-
     for (auto &ci : categories) {
         string key;
         nd_cat_id_t id = 1;
