@@ -17,9 +17,9 @@ Alternatively, binary packages are available for several common distributions.  
 
 ## Download Source
 
-Full source archives are [available](https://download.netify.ai/source/) from the Netify website.
+Full [source archives](https://download.netify.ai/source/) are available from the Netify website.
 
-Optionally, the source can be cloned with [git](https://gitlab.com/netify.ai/public/netify-agent.git).  When cloning the source tree, ensure you use `--recursive` to include all sub-modules.
+Optionally, the source can be cloned with [git](https://gitlab.com/netify.ai/public/netify-agent.git).  When cloning the source tree, include the `--recursive` option to clone the required sub-modules.
 
 ### Build Requirements
 Netify requires the following third-party packages:
@@ -48,9 +48,9 @@ Further user and developer documentation can be found [here](https://www.netify.
 ## License
 The Netify Agent is dual-licensed under commercial and open source licenses. The commercial license gives you the full rights to create and distribute software on your own terms without any open source license obligations.
 
-The Netify Agent is also available under GPL and LGPL open source licenses.  The open source licensing is ideal for student/academic purposes, hobby projects, internal research project, or other projects where all open source license obligations can be met.
+The Netify Agent is also available under GPL and LGPL open source licenses.  The open source licensing is ideal for student/academic purposes, hobby projects, internal research projects, or other projects where all open source license obligations can be met.
 
-The Netify Agent uses to the following libraries:
+The Netify Agent includes the following libraries:
 - nDPI - LGPL license
 - inih -  3-Clause BSD license
 - [optional] gperftools - Google license
