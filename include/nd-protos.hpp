@@ -383,6 +383,9 @@ typedef enum {
     ND_PROTO_SLP = 325,  // Service Location Protocol
     ND_PROTO_HTTP2 = 326,  // HTTP/2
     ND_PROTO_FACEBOOK_VOIP = 327,  // Facebook VoIP (STUN)
+    ND_PROTO_HAPROXY = 238,  // High availability load balancer and reverse proxy for TCP and HTTP-based applications
+    ND_PROTO_RMCP = 239,  // Remote Management Control Protocol, IPMI component
+    ND_PROTO_CAN = 240,  // Controller Area Network, ISO 11898-1
 
     ND_PROTO_MAX,
     ND_PROTO_TODO = 0xffffffff
@@ -406,6 +409,7 @@ const nd_protos_t nd_protos = {
     { ND_PROTO_BITCOIN, "Bitcoin" },
     { ND_PROTO_BITTORRENT, "BitTorrent" },
     { ND_PROTO_BJNP, "BJNP" },
+    { ND_PROTO_CAN, "CAN" },
     { ND_PROTO_CAPWAP, "CAPWAP" },
     { ND_PROTO_CASSANDRA, "Cassandra" },
     { ND_PROTO_CHECKMK, "CHECKMK" },
@@ -453,6 +457,7 @@ const nd_protos_t nd_protos = {
     { ND_PROTO_GUILDWARS, "Guildwars" },
     { ND_PROTO_H323, "H323" },
     { ND_PROTO_HALFLIFE2, "HalfLife2" },
+    { ND_PROTO_HAPROXY, "HAProxy" },
     { ND_PROTO_HOTS, "HerosOfTheStorm" },
     { ND_PROTO_HP_VIRTGRP, "HP/VirtGrp" },
     { ND_PROTO_HTTP2, "HTTP/2" },
@@ -537,6 +542,7 @@ const nd_protos_t nd_protos = {
     { ND_PROTO_REDIS, "Redis" },
     { ND_PROTO_REMOTE_SCAN, "RemoteScan" },
     { ND_PROTO_RIOTGAMES, "Riot/Games" },
+    { ND_PROTO_RMCP, "RMCP" },
     { ND_PROTO_RPC, "RPC" },
     { ND_PROTO_RSH, "RSH" },
     { ND_PROTO_RSYNC, "RSYNC" },
@@ -654,6 +660,7 @@ const nd_ndpi_proto_t nd_ndpi_protos = {
     { NDPI_PROTOCOL_BITCOIN, ND_PROTO_BITCOIN },
     { NDPI_PROTOCOL_BITTORRENT, ND_PROTO_BITTORRENT },
     { NDPI_PROTOCOL_BJNP, ND_PROTO_BJNP },
+    { NDPI_PROTOCOL_CAN, ND_PROTO_CAN },
     { NDPI_PROTOCOL_CAPWAP, ND_PROTO_CAPWAP },
     { NDPI_PROTOCOL_CASSANDRA, ND_PROTO_CASSANDRA },
     { NDPI_PROTOCOL_CHECKMK, ND_PROTO_CHECKMK },
@@ -698,6 +705,7 @@ const nd_ndpi_proto_t nd_ndpi_protos = {
     { NDPI_PROTOCOL_H323, ND_PROTO_H323 },
     { NDPI_PROTOCOL_HALFLIFE2, ND_PROTO_HALFLIFE2 },
     { NDPI_PROTOCOL_HANGOUT_DUO, ND_PROTO_GOOGLE_MEET_DUO },
+    { NDPI_PROTOCOL_HAPROXY, ND_PROTO_HAPROXY },
     { NDPI_PROTOCOL_HOTS, ND_PROTO_HOTS },
     { NDPI_PROTOCOL_HPVIRTGRP, ND_PROTO_HP_VIRTGRP },
     { NDPI_PROTOCOL_HSRP, ND_PROTO_CISCO_HSRP },
@@ -777,6 +785,7 @@ const nd_ndpi_proto_t nd_ndpi_protos = {
     { NDPI_PROTOCOL_RDP, ND_PROTO_RDP },
     { NDPI_PROTOCOL_REDIS, ND_PROTO_REDIS },
     { NDPI_PROTOCOL_RIOTGAMES, ND_PROTO_RIOTGAMES },
+    { NDPI_PROTOCOL_RMCP, ND_PROTO_RMCP },
     { NDPI_PROTOCOL_RPC, ND_PROTO_RPC },
     { NDPI_PROTOCOL_RSH, ND_PROTO_RSH },
     { NDPI_PROTOCOL_RSYNC, ND_PROTO_RSYNC },
