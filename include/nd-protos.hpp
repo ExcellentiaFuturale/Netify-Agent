@@ -383,9 +383,9 @@ typedef enum {
     ND_PROTO_SLP = 325,  // Service Location Protocol
     ND_PROTO_HTTP2 = 326,  // HTTP/2
     ND_PROTO_FACEBOOK_VOIP = 327,  // Facebook VoIP (STUN)
-    ND_PROTO_HAPROXY = 238,  // High availability load balancer and reverse proxy for TCP and HTTP-based applications
-    ND_PROTO_RMCP = 239,  // Remote Management Control Protocol, IPMI component
-    ND_PROTO_CAN = 240,  // Controller Area Network, ISO 11898-1
+    ND_PROTO_HAPROXY = 328,  // High availability load balancer and reverse proxy for TCP and HTTP-based applications
+    ND_PROTO_RMCP = 329,  // Remote Management Control Protocol, IPMI component
+    ND_PROTO_CAN = 330,  // Controller Area Network, ISO 11898-1
 
     ND_PROTO_MAX,
     ND_PROTO_TODO = 0xffffffff
