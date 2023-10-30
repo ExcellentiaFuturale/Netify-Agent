@@ -1026,9 +1026,7 @@ void ndDetectionThread::FlowUpdate(ndDetectionQueueEntry *entry) {
         if (ndGC.verbosity > 3)
             flags |= ndFlow::PRINTF_HASHES;
 
-        if (ndGC_VERBOSE || ndGC.h_flow != stderr)
-            ndEF->Print(flags);
-        else if (ndGC.debug_flow_print_exprs.size()) {
+        if (ndGC.debug_flow_print_exprs.size()) {
             for (auto &it : ndGC.debug_flow_print_exprs) {
                 try {
                     if (! parser.Parse(ndEF, it)) continue;
@@ -1041,6 +1039,8 @@ void ndDetectionThread::FlowUpdate(ndDetectionQueueEntry *entry) {
                 }
             }
         }
+        else if (ndGC_VERBOSE || ndGC.h_flow != stderr)
+            ndEF->Print(flags);
     }
 
     ndi.plugins.BroadcastProcessorEvent(
