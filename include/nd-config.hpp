@@ -93,11 +93,11 @@ enum nd_global_flags {
     ndGF_USE_CONNTRACK = (1 << 9),
     ndGF_USE_NETLINK = (1 << 10),
     ndGF_USE_NAPI = (1 << 11),
-    ndGF_FREE_BIT13 = (1 << 12),
-    ndGF_USE_DHC = (1 << 13),
-    ndGF_USE_FHC = (1 << 14),
-    ndGF_EXPORT_JSON = (1 << 15),
-    ndGF_VERBOSE = (1 << 16),
+    ndGF_USE_DHC = (1 << 12),
+    ndGF_USE_FHC = (1 << 13),
+    ndGF_EXPORT_JSON = (1 << 14),
+    ndGF_VERBOSE = (1 << 15),
+    ndGF_FREE_BIT17 = (1 << 16),
     ndGF_REPLAY_DELAY = (1 << 17),
     ndGF_REMAIN_IN_FOREGROUND = (1 << 18),
     ndGF_ALLOW_UNPRIV = (1 << 19),
@@ -246,6 +246,7 @@ public:
     uint32_t flags;
     uint8_t digest_app_config[SHA1_DIGEST_LENGTH];
     uint8_t digest_legacy_config[SHA1_DIGEST_LENGTH];
+    uint8_t verbosity;
     unsigned fhc_purge_divisor;
     unsigned fm_buckets;
     unsigned max_detection_pkts;

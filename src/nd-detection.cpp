@@ -1016,15 +1016,23 @@ void ndDetectionThread::FlowUpdate(ndDetectionQueueEntry *entry) {
         }
     }
 
-    if (ndGC.h_flow != stderr) ndEF->Print();
-    else if (ndGC_DEBUG) {
-        if (ndGC_VERBOSE) ndEF->Print();
+    if (ndGC_DEBUG || ndGC.h_flow != stderr) {
+        uint8_t flags = ndFlow::PRINTF_METADATA;
+
+        if (ndGC.verbosity > 1)
+            flags |= ndFlow::PRINTF_STATS;
+        if (ndGC.verbosity > 2)
+            flags |= ndFlow::PRINTF_MACS;
+        if (ndGC.verbosity > 3)
+            flags |= ndFlow::PRINTF_HASHES;
+
+        if (ndGC_VERBOSE || ndGC.h_flow != stderr)
+            ndEF->Print(flags);
         else if (ndGC.debug_flow_print_exprs.size()) {
             for (auto &it : ndGC.debug_flow_print_exprs) {
                 try {
                     if (! parser.Parse(ndEF, it)) continue;
-                    ndEF->Print(ndFlow::PRINTF_METADATA |
-                      ndFlow::PRINTF_STATS);
+                    ndEF->Print(flags);
                     break;
                 }
                 catch (string &e) {

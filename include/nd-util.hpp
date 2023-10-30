@@ -25,6 +25,7 @@
 
 #include <cstddef>
 #include <ctime>
+#include <iomanip>
 #include <map>
 #include <regex>
 #include <sstream>
@@ -105,6 +106,84 @@ public:
     virtual ~ndDebugLogStream() { delete rdbuf(); }
 };
 
+class ndLogFormat
+{
+public:
+    enum Format {
+        FORMAT_NONE,
+        FORMAT_BYTES,
+        FORMAT_PACKETS,
+        FORMAT_PERCENT,
+    };
+
+    ndLogFormat(Format format, float value, int width = 0,
+      int precision = 3)
+      : format(format), value(value), width(width),
+        precision(precision){};
+
+    friend std::ostream &
+    operator<<(std::ostream &os, const ndLogFormat &f) {
+        ios old_state(nullptr);
+        old_state.copyfmt(os);
+        os << setw(f.width) << setprecision(f.precision);
+
+        switch (f.format) {
+        case FORMAT_BYTES:
+            if (f.value >= 1099511627776.0f) {
+                os << (f.value / 1099511627776.0f)
+                   << setw(0) << " TiB";
+            }
+            else if (f.value >= 1073741824.0f) {
+                os << (f.value / 1073741824.0f) << setw(0) << " GiB";
+            }
+            else if (f.value >= 1048576.0f) {
+                os << (f.value / 1048576.0f) << setw(0) << " MiB";
+            }
+            else if (f.value >= 1024.0f) {
+                os << (f.value / 1024.0f) << setw(0) << " KiB";
+            }
+            else {
+                os << f.value;
+            }
+            break;
+
+        case FORMAT_PACKETS:
+            if (f.value >= 1000000000000.0f) {
+                os << (f.value / 1000000000000.0f)
+                   << setw(0) << " TP";
+            }
+            else if (f.value >= 1000000000.0f) {
+                os << (f.value / 1000000000.0f) << setw(0) << " GP";
+            }
+            else if (f.value >= 1000000.0f) {
+                os << (f.value / 1000000.0f) << setw(0) << " MP";
+            }
+            else if (f.value >= 1000.0f) {
+                os << (f.value / 1000.0f) << setw(0) << " KP";
+            }
+            else {
+                os << f.value;
+            }
+            break;
+
+        case FORMAT_PERCENT:
+            os << f.value << " "
+               << "%";
+            break;
+        default: os << f.value; break;
+        }
+
+        os.copyfmt(old_state);
+        return os;
+    }
+
+protected:
+    const Format format;
+    const float value;
+    const int width;
+    const int precision;
+};
+
 void nd_output_lock(void);
 void nd_output_unlock(void);
 
@@ -119,14 +198,6 @@ void nd_ndpi_debug_printf(uint32_t protocol, void *ndpi,
   ndpi_log_level_t level, const char *file,
   const char *func, unsigned line, const char *format, ...);
 #endif
-
-void nd_print_address(const struct sockaddr_storage *addr);
-
-void nd_print_binary(uint32_t byte);
-
-void nd_print_number(ostringstream &os, uint64_t value,
-  bool units_binary = true);
-void nd_print_percent(ostringstream &os, const double &value);
 
 void nd_ltrim(string &s, unsigned char c = 0);
 void nd_rtrim(string &s, unsigned char c = 0);

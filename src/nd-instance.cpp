@@ -524,7 +524,10 @@ ndInstance::InitializeConfig(int argc, char * const argv[]) {
         case 'V':
             CommandLineHelp(true);
             return ndCR_USAGE_OR_VERSION;
-        case 'v': ndGC_SetFlag(ndGF_VERBOSE, true); break;
+        case 'v':
+            ndGC_SetFlag(ndGF_VERBOSE, true);
+            ndGC.verbosity++;
+            break;
         case 'x':
             ndGC_SetFlag(ndGF_VERBOSE, false);
             ndGC.debug_flow_print_exprs.push_back(optarg);
@@ -923,7 +926,8 @@ void ndInstance::CommandLineHelp(bool version_only) {
           "debug mode, filter flow detections by "
           "expression.\n"
           "  -v, --verbose\n    In debug mode, display "
-          "real-time flow detections.\n"
+          "real-time flow detections.  Specify multiple "
+          "times to increase verbosity.\n"
           "  -R, --remain-in-foreground\n    Remain in "
           "foreground, don't daemonize (OpenWrt).\n"
           "  --allow-unprivileged\n    Allow executing the "

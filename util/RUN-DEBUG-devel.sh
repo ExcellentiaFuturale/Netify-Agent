@@ -40,9 +40,9 @@ SUDO=$(which sudo)
 
 if [ -z "${SUDO}" ]; then
   echo "WARNING: sudo not found, running as current user."
-  exec ${NETIFYD_PREFIX}/usr/sbin/netifyd -c ${NETIFYD_CONF} ${NETIFYD_OPTIONS} $@
+  exec ${NETIFYD_PREFIX}/usr/sbin/netifyd -c ${NETIFYD_CONF} ${NETIFYD_OPTIONS} "$@"
 else
-  exec ${SUDO} LD_LIBRARY_PATH=${LD_LIBRARY_PATH} ${NETIFYD_PREFIX}/usr/sbin/netifyd -c ${NETIFYD_CONF} ${NETIFYD_OPTIONS} $@
+  exec ${SUDO} LD_LIBRARY_PATH=${LD_LIBRARY_PATH} ${NETIFYD_PREFIX}/usr/sbin/netifyd -c ${NETIFYD_CONF} ${NETIFYD_OPTIONS} "$@"
 fi
 
 exit 0
