@@ -20,7 +20,7 @@
 
 #pragma once
 
-#define _NDFP_MAX_NAMELEN       64
+#define _NDFP_MAX_BUFLEN        256
 
 #define _NDFP_OTHER_UNKNOWN     0
 #define _NDFP_OTHER_UNSUPPORTED 1

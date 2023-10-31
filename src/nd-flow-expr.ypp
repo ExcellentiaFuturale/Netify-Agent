@@ -100,7 +100,7 @@ typedef void* yyscan_t;
 
 %union
 {
-    char string[_NDFP_MAX_NAMELEN];
+    char buffer[_NDFP_MAX_BUFLEN];
 
     bool bool_number;
     unsigned short us_number;
@@ -135,13 +135,13 @@ typedef void* yyscan_t;
 
 %token VALUE_ADDR_IPMASK
 %token <bool_number> VALUE_TRUE VALUE_FALSE
-%token <string> VALUE_ADDR_MAC VALUE_NAME VALUE_REGEX
-%token <string> VALUE_ADDR_IPV4 VALUE_ADDR_IPV4_CIDR
-%token <string> VALUE_ADDR_IPV6 VALUE_ADDR_IPV6_CIDR
+%token <buffer> VALUE_ADDR_MAC VALUE_NAME VALUE_REGEX
+%token <buffer> VALUE_ADDR_IPV4 VALUE_ADDR_IPV4_CIDR
+%token <buffer> VALUE_ADDR_IPV6 VALUE_ADDR_IPV6_CIDR
 %token <ul_number> VALUE_NUMBER
 
 %type <us_number> value_other_type value_origin_type
-%type <string> value_addr_ip
+%type <buffer> value_addr_ip
 %type <us_number> value_tunnel_type
 
 %type <bool_result> expr expr_ip_proto expr_ip_version expr_ip_nat expr_vlan_id expr_other_type
@@ -487,10 +487,10 @@ expr_other_ip:
     ;
 
 value_addr_ip:
-      VALUE_ADDR_IPV4 { strncpy($$, $1, _NDFP_MAX_NAMELEN); }
-    | VALUE_ADDR_IPV4_CIDR { strncpy($$, $1, _NDFP_MAX_NAMELEN); }
-    | VALUE_ADDR_IPV6 { strncpy($$, $1, _NDFP_MAX_NAMELEN); }
-    | VALUE_ADDR_IPV6_CIDR { strncpy($$, $1, _NDFP_MAX_NAMELEN); }
+      VALUE_ADDR_IPV4 { strncpy($$, $1, _NDFP_MAX_BUFLEN); }
+    | VALUE_ADDR_IPV4_CIDR { strncpy($$, $1, _NDFP_MAX_BUFLEN); }
+    | VALUE_ADDR_IPV6 { strncpy($$, $1, _NDFP_MAX_BUFLEN); }
+    | VALUE_ADDR_IPV6_CIDR { strncpy($$, $1, _NDFP_MAX_BUFLEN); }
     ;
 
 expr_local_port:
@@ -762,11 +762,11 @@ expr_app_name:
                 search.erase(p, 1);
 
             if (strncasecmp(
-                app.c_str(), search.c_str(), _NDFP_MAX_NAMELEN) == 0) {
+                app.c_str(), search.c_str(), _NDFP_MAX_BUFLEN) == 0) {
                 _NDFP_result = ($$ = true);
             }
             else if ((p = app.find_first_of(".")) != string::npos && strncasecmp(
-                app.substr(p + 1).c_str(), search.c_str(), _NDFP_MAX_NAMELEN) == 0) {
+                app.substr(p + 1).c_str(), search.c_str(), _NDFP_MAX_BUFLEN) == 0) {
                 _NDFP_result = ($$ = true);
             }
         }
@@ -787,11 +787,11 @@ expr_app_name:
                 search.erase(p, 1);
 
             if (strncasecmp(
-                app.c_str(), search.c_str(), _NDFP_MAX_NAMELEN) == 0) {
+                app.c_str(), search.c_str(), _NDFP_MAX_BUFLEN) == 0) {
                 _NDFP_result = ($$ = false);
             }
             else if ((p = app.find_first_of(".")) != string::npos && strncasecmp(
-                app.substr(p + 1).c_str(), search.c_str(), _NDFP_MAX_NAMELEN) == 0) {
+                app.substr(p + 1).c_str(), search.c_str(), _NDFP_MAX_BUFLEN) == 0) {
                 _NDFP_result = ($$ = false);
             }
         }
@@ -1121,7 +1121,7 @@ expr_proto_name:
                 search.erase(p, 1);
 
             _NDFP_result = ($$ = (strncasecmp(
-                _NDFP_flow->detected_protocol_name.c_str(), search.c_str(), _NDFP_MAX_NAMELEN
+                _NDFP_flow->detected_protocol_name.c_str(), search.c_str(), _NDFP_MAX_BUFLEN
             ) == 0));
         }
 
@@ -1140,7 +1140,7 @@ expr_proto_name:
                 search.erase(p, 1);
 
             _NDFP_result = ($$ = (strncasecmp(
-                _NDFP_flow->detected_protocol_name.c_str(), search.c_str(), _NDFP_MAX_NAMELEN
+                _NDFP_flow->detected_protocol_name.c_str(), search.c_str(), _NDFP_MAX_BUFLEN
             )));
         }
         _NDFP_debugf(
@@ -1211,7 +1211,7 @@ expr_detected_hostname:
                 search.erase(p, 1);
 
             if (strncasecmp(search.c_str(),
-                _NDFP_flow->host_server_name.c_str(), _NDFP_MAX_NAMELEN) == 0) {
+                _NDFP_flow->host_server_name.c_str(), _NDFP_MAX_BUFLEN) == 0) {
                 _NDFP_result = ($$ = true);
             }
         }
@@ -1229,7 +1229,7 @@ expr_detected_hostname:
                 search.erase(p, 1);
 
             if (strncasecmp(search.c_str(),
-                _NDFP_flow->host_server_name.c_str(), _NDFP_MAX_NAMELEN) == 0) {
+                _NDFP_flow->host_server_name.c_str(), _NDFP_MAX_BUFLEN) == 0) {
                 _NDFP_result = ($$ = false);
             }
         }

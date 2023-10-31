@@ -191,7 +191,7 @@ union YYSTYPE
 {
 #line 102 "nd-flow-expr.ypp"
 
-    char string[_NDFP_MAX_NAMELEN];
+    char buffer[_NDFP_MAX_BUFLEN];
 
     bool bool_number;
     unsigned short us_number;

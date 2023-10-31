@@ -1424,42 +1424,42 @@ yylval->bool_number=false; return VALUE_FALSE;
 case 54:
 YY_RULE_SETUP
 #line 85 "nd-flow-criteria.l"
-strncpy(yylval->string, yytext, _NDFP_MAX_NAMELEN); return VALUE_ADDR_MAC;
+strncpy(yylval->buffer, yytext, _NDFP_MAX_BUFLEN); return VALUE_ADDR_MAC;
 	YY_BREAK
 case 55:
 YY_RULE_SETUP
 #line 86 "nd-flow-criteria.l"
-strncpy(yylval->string, yytext, _NDFP_MAX_NAMELEN); return VALUE_ADDR_IPV4_CIDR;
+strncpy(yylval->buffer, yytext, _NDFP_MAX_BUFLEN); return VALUE_ADDR_IPV4_CIDR;
 	YY_BREAK
 case 56:
 YY_RULE_SETUP
 #line 87 "nd-flow-criteria.l"
-strncpy(yylval->string, yytext, _NDFP_MAX_NAMELEN); return VALUE_ADDR_IPV4;
+strncpy(yylval->buffer, yytext, _NDFP_MAX_BUFLEN); return VALUE_ADDR_IPV4;
 	YY_BREAK
 case 57:
 YY_RULE_SETUP
 #line 88 "nd-flow-criteria.l"
-strncpy(yylval->string, yytext, _NDFP_MAX_NAMELEN); return VALUE_ADDR_IPV6;
+strncpy(yylval->buffer, yytext, _NDFP_MAX_BUFLEN); return VALUE_ADDR_IPV6;
 	YY_BREAK
 case 58:
 YY_RULE_SETUP
 #line 89 "nd-flow-criteria.l"
-strncpy(yylval->string, yytext, _NDFP_MAX_NAMELEN); return VALUE_ADDR_IPV6_CIDR;
+strncpy(yylval->buffer, yytext, _NDFP_MAX_BUFLEN); return VALUE_ADDR_IPV6_CIDR;
 	YY_BREAK
 case 59:
 YY_RULE_SETUP
 #line 90 "nd-flow-criteria.l"
-strncpy(yylval->string, yytext, _NDFP_MAX_NAMELEN); return VALUE_ADDR_IPV6;
+strncpy(yylval->buffer, yytext, _NDFP_MAX_BUFLEN); return VALUE_ADDR_IPV6;
 	YY_BREAK
 case 60:
 YY_RULE_SETUP
 #line 91 "nd-flow-criteria.l"
-strncpy(yylval->string, yytext, _NDFP_MAX_NAMELEN); return VALUE_NAME;
+strncpy(yylval->buffer, yytext, _NDFP_MAX_BUFLEN); return VALUE_NAME;
 	YY_BREAK
 case 61:
 YY_RULE_SETUP
 #line 92 "nd-flow-criteria.l"
-strncpy(yylval->string, yytext, _NDFP_MAX_NAMELEN); return VALUE_REGEX;
+strncpy(yylval->buffer, yytext, _NDFP_MAX_BUFLEN); return VALUE_REGEX;
 	YY_BREAK
 case 62:
 YY_RULE_SETUP

@@ -338,7 +338,7 @@ union YYSTYPE
 {
 #line 102 "nd-flow-expr.ypp"
 
-    char string[_NDFP_MAX_NAMELEN];
+    char buffer[_NDFP_MAX_BUFLEN];
 
     bool bool_number;
     unsigned short us_number;
@@ -2217,9 +2217,9 @@ yyreduce:
 #line 430 "nd-flow-expr.ypp"
                                               {
         _NDFP_result = ((yyval.bool_result) = (
-            strncasecmp(_NDFP_local_mac, (yyvsp[0].string), ND_STR_ETHALEN) == 0
+            strncasecmp(_NDFP_local_mac, (yyvsp[0].buffer), ND_STR_ETHALEN) == 0
         ));
-        _NDFP_debugf("Local MAC == %s? %s\n", (yyvsp[0].string), (_NDFP_result) ? "yes" : "no");
+        _NDFP_debugf("Local MAC == %s? %s\n", (yyvsp[0].buffer), (_NDFP_result) ? "yes" : "no");
     }
 #line 2225 "nd-flow-expr.cpp"
     break;
@@ -2228,9 +2228,9 @@ yyreduce:
 #line 436 "nd-flow-expr.ypp"
                                                  {
         _NDFP_result = ((yyval.bool_result) = (
-            strncasecmp(_NDFP_local_mac, (yyvsp[0].string), ND_STR_ETHALEN) != 0
+            strncasecmp(_NDFP_local_mac, (yyvsp[0].buffer), ND_STR_ETHALEN) != 0
         ));
-        _NDFP_debugf("Local MAC != %s? %s\n", (yyvsp[0].string), (_NDFP_result) ? "yes" : "no");
+        _NDFP_debugf("Local MAC != %s? %s\n", (yyvsp[0].buffer), (_NDFP_result) ? "yes" : "no");
     }
 #line 2236 "nd-flow-expr.cpp"
     break;
@@ -2239,9 +2239,9 @@ yyreduce:
 #line 445 "nd-flow-expr.ypp"
                                               {
         _NDFP_result = ((yyval.bool_result) = (
-            strncasecmp(_NDFP_other_mac, (yyvsp[0].string), ND_STR_ETHALEN) == 0
+            strncasecmp(_NDFP_other_mac, (yyvsp[0].buffer), ND_STR_ETHALEN) == 0
         ));
-        _NDFP_debugf("Other MAC == %s? %s\n", (yyvsp[0].string), (_NDFP_result) ? "yes" : "no");
+        _NDFP_debugf("Other MAC == %s? %s\n", (yyvsp[0].buffer), (_NDFP_result) ? "yes" : "no");
     }
 #line 2247 "nd-flow-expr.cpp"
     break;
@@ -2250,9 +2250,9 @@ yyreduce:
 #line 451 "nd-flow-expr.ypp"
                                                  {
         _NDFP_result = ((yyval.bool_result) = (
-            strncasecmp(_NDFP_other_mac, (yyvsp[0].string), ND_STR_ETHALEN) != 0
+            strncasecmp(_NDFP_other_mac, (yyvsp[0].buffer), ND_STR_ETHALEN) != 0
         ));
-        _NDFP_debugf("Other MAC != %s? %s\n", (yyvsp[0].string), (_NDFP_result) ? "yes" : "no");
+        _NDFP_debugf("Other MAC != %s? %s\n", (yyvsp[0].buffer), (_NDFP_result) ? "yes" : "no");
     }
 #line 2258 "nd-flow-expr.cpp"
     break;
@@ -2261,9 +2261,9 @@ yyreduce:
 #line 460 "nd-flow-expr.ypp"
                                             {
         _NDFP_result = ((yyval.bool_result) = (
-            is_addr_equal(_NDFP_local_ip, (yyvsp[0].string)) == true
+            is_addr_equal(_NDFP_local_ip, (yyvsp[0].buffer)) == true
         ));
-        _NDFP_debugf("Local IP == %s? %s\n", (yyvsp[0].string), (_NDFP_result) ? "yes" : "no");
+        _NDFP_debugf("Local IP == %s? %s\n", (yyvsp[0].buffer), (_NDFP_result) ? "yes" : "no");
     }
 #line 2269 "nd-flow-expr.cpp"
     break;
@@ -2272,9 +2272,9 @@ yyreduce:
 #line 466 "nd-flow-expr.ypp"
                                                {
         _NDFP_result = ((yyval.bool_result) = (
-            is_addr_equal(_NDFP_local_ip, (yyvsp[0].string)) == false
+            is_addr_equal(_NDFP_local_ip, (yyvsp[0].buffer)) == false
         ));
-        _NDFP_debugf("Local IP != %s? %s\n", (yyvsp[0].string), (_NDFP_result) ? "yes" : "no");
+        _NDFP_debugf("Local IP != %s? %s\n", (yyvsp[0].buffer), (_NDFP_result) ? "yes" : "no");
     }
 #line 2280 "nd-flow-expr.cpp"
     break;
@@ -2283,9 +2283,9 @@ yyreduce:
 #line 475 "nd-flow-expr.ypp"
                                             {
         _NDFP_result = ((yyval.bool_result) = (
-            is_addr_equal(_NDFP_other_ip, (yyvsp[0].string)) == true
+            is_addr_equal(_NDFP_other_ip, (yyvsp[0].buffer)) == true
         ));
-        _NDFP_debugf("Other IP == %s? %s\n", (yyvsp[0].string), (_NDFP_result) ? "yes" : "no");
+        _NDFP_debugf("Other IP == %s? %s\n", (yyvsp[0].buffer), (_NDFP_result) ? "yes" : "no");
     }
 #line 2291 "nd-flow-expr.cpp"
     break;
@@ -2294,34 +2294,34 @@ yyreduce:
 #line 481 "nd-flow-expr.ypp"
                                                {
         _NDFP_result = ((yyval.bool_result) = (
-            is_addr_equal(_NDFP_other_ip, (yyvsp[0].string)) == false
+            is_addr_equal(_NDFP_other_ip, (yyvsp[0].buffer)) == false
         ));
-        _NDFP_debugf("Other IP != %s? %s\n", (yyvsp[0].string), (_NDFP_result) ? "yes" : "no");
+        _NDFP_debugf("Other IP != %s? %s\n", (yyvsp[0].buffer), (_NDFP_result) ? "yes" : "no");
     }
 #line 2302 "nd-flow-expr.cpp"
     break;
 
   case 79: /* value_addr_ip: VALUE_ADDR_IPV4  */
 #line 490 "nd-flow-expr.ypp"
-                      { strncpy((yyval.string), (yyvsp[0].string), _NDFP_MAX_NAMELEN); }
+                      { strncpy((yyval.buffer), (yyvsp[0].buffer), _NDFP_MAX_BUFLEN); }
 #line 2308 "nd-flow-expr.cpp"
     break;
 
   case 80: /* value_addr_ip: VALUE_ADDR_IPV4_CIDR  */
 #line 491 "nd-flow-expr.ypp"
-                           { strncpy((yyval.string), (yyvsp[0].string), _NDFP_MAX_NAMELEN); }
+                           { strncpy((yyval.buffer), (yyvsp[0].buffer), _NDFP_MAX_BUFLEN); }
 #line 2314 "nd-flow-expr.cpp"
     break;
 
   case 81: /* value_addr_ip: VALUE_ADDR_IPV6  */
 #line 492 "nd-flow-expr.ypp"
-                      { strncpy((yyval.string), (yyvsp[0].string), _NDFP_MAX_NAMELEN); }
+                      { strncpy((yyval.buffer), (yyvsp[0].buffer), _NDFP_MAX_BUFLEN); }
 #line 2320 "nd-flow-expr.cpp"
     break;
 
   case 82: /* value_addr_ip: VALUE_ADDR_IPV6_CIDR  */
 #line 493 "nd-flow-expr.ypp"
-                           { strncpy((yyval.string), (yyvsp[0].string), _NDFP_MAX_NAMELEN); }
+                           { strncpy((yyval.buffer), (yyvsp[0].buffer), _NDFP_MAX_BUFLEN); }
 #line 2326 "nd-flow-expr.cpp"
     break;
 
@@ -2754,24 +2754,24 @@ yyreduce:
         if (! _NDFP_flow->detected_application_name.empty()) {
 
             size_t p;
-            string search((yyvsp[0].string));
+            string search((yyvsp[0].buffer));
             string app(_NDFP_flow->detected_application_name);
 
             while ((p = search.find_first_of("'")) != string::npos)
                 search.erase(p, 1);
 
             if (strncasecmp(
-                app.c_str(), search.c_str(), _NDFP_MAX_NAMELEN) == 0) {
+                app.c_str(), search.c_str(), _NDFP_MAX_BUFLEN) == 0) {
                 _NDFP_result = ((yyval.bool_result) = true);
             }
             else if ((p = app.find_first_of(".")) != string::npos && strncasecmp(
-                app.substr(p + 1).c_str(), search.c_str(), _NDFP_MAX_NAMELEN) == 0) {
+                app.substr(p + 1).c_str(), search.c_str(), _NDFP_MAX_BUFLEN) == 0) {
                 _NDFP_result = ((yyval.bool_result) = true);
             }
         }
 
         _NDFP_debugf(
-            "Application name == %s? %s\n", (yyvsp[0].string), (_NDFP_result) ? "yes" : "no"
+            "Application name == %s? %s\n", (yyvsp[0].buffer), (_NDFP_result) ? "yes" : "no"
         );
     }
 #line 2778 "nd-flow-expr.cpp"
@@ -2784,24 +2784,24 @@ yyreduce:
         if (! _NDFP_flow->detected_application_name.empty()) {
 
             size_t p;
-            string search((yyvsp[0].string));
+            string search((yyvsp[0].buffer));
             string app(_NDFP_flow->detected_application_name);
 
             while ((p = search.find_first_of("'")) != string::npos)
                 search.erase(p, 1);
 
             if (strncasecmp(
-                app.c_str(), search.c_str(), _NDFP_MAX_NAMELEN) == 0) {
+                app.c_str(), search.c_str(), _NDFP_MAX_BUFLEN) == 0) {
                 _NDFP_result = ((yyval.bool_result) = false);
             }
             else if ((p = app.find_first_of(".")) != string::npos && strncasecmp(
-                app.substr(p + 1).c_str(), search.c_str(), _NDFP_MAX_NAMELEN) == 0) {
+                app.substr(p + 1).c_str(), search.c_str(), _NDFP_MAX_BUFLEN) == 0) {
                 _NDFP_result = ((yyval.bool_result) = false);
             }
         }
 
         _NDFP_debugf(
-            "Application name != %s? %s\n", (yyvsp[0].string), (_NDFP_result) ? "yes" : "no"
+            "Application name != %s? %s\n", (yyvsp[0].buffer), (_NDFP_result) ? "yes" : "no"
         );
     }
 #line 2808 "nd-flow-expr.cpp"
@@ -2811,7 +2811,7 @@ yyreduce:
 #line 806 "nd-flow-expr.ypp"
                                          {
         size_t p;
-        string category((yyvsp[0].string));
+        string category((yyvsp[0].buffer));
 
         while ((p = category.find_first_of("'")) != string::npos)
             category.erase(p, 1);
@@ -2832,7 +2832,7 @@ yyreduce:
             );
         }
 
-        _NDFP_debugf("App/domain category == %s? %s\n", (yyvsp[0].string), (_NDFP_result) ? "yes" : "no");
+        _NDFP_debugf("App/domain category == %s? %s\n", (yyvsp[0].buffer), (_NDFP_result) ? "yes" : "no");
     }
 #line 2838 "nd-flow-expr.cpp"
     break;
@@ -2841,7 +2841,7 @@ yyreduce:
 #line 831 "nd-flow-expr.ypp"
                                             {
         size_t p;
-        string category((yyvsp[0].string));
+        string category((yyvsp[0].buffer));
 
         while ((p = category.find_first_of("'")) != string::npos)
             category.erase(p, 1);
@@ -2862,7 +2862,7 @@ yyreduce:
             );
         }
 
-        _NDFP_debugf("App/domain category != %s? %s\n", (yyvsp[0].string), (_NDFP_result) ? "yes" : "no");
+        _NDFP_debugf("App/domain category != %s? %s\n", (yyvsp[0].buffer), (_NDFP_result) ? "yes" : "no");
     }
 #line 2868 "nd-flow-expr.cpp"
     break;
@@ -2889,7 +2889,7 @@ yyreduce:
 #line 867 "nd-flow-expr.ypp"
                                       {
         size_t p;
-        string risk((yyvsp[0].string));
+        string risk((yyvsp[0].buffer));
 
         while ((p = risk.find_first_of("'")) != string::npos)
             risk.erase(p, 1);
@@ -2903,7 +2903,7 @@ yyreduce:
             break;
         }
 
-        _NDFP_debugf("Risks == %s %s\n", (yyvsp[0].string), risk.c_str(), (_NDFP_result) ? "yes" : "no");
+        _NDFP_debugf("Risks == %s %s\n", (yyvsp[0].buffer), risk.c_str(), (_NDFP_result) ? "yes" : "no");
     }
 #line 2909 "nd-flow-expr.cpp"
     break;
@@ -2912,7 +2912,7 @@ yyreduce:
 #line 885 "nd-flow-expr.ypp"
                                          {
         size_t p;
-        string risk((yyvsp[0].string));
+        string risk((yyvsp[0].buffer));
 
         while ((p = risk.find_first_of("'")) != string::npos)
             risk.erase(p, 1);
@@ -2927,7 +2927,7 @@ yyreduce:
         }
 
         _NDFP_result = !_NDFP_result;
-        _NDFP_debugf("Risks != %s %s\n", (yyvsp[0].string), risk.c_str(), (_NDFP_result) ? "yes" : "no");
+        _NDFP_debugf("Risks != %s %s\n", (yyvsp[0].buffer), risk.c_str(), (_NDFP_result) ? "yes" : "no");
     }
 #line 2933 "nd-flow-expr.cpp"
     break;
@@ -3152,7 +3152,7 @@ yyreduce:
 #line 1012 "nd-flow-expr.ypp"
                                                      {
         size_t p;
-        string category((yyvsp[0].string));
+        string category((yyvsp[0].buffer));
 
         while ((p = category.find_first_of("'")) != string::npos)
             category.erase(p, 1);
@@ -3164,7 +3164,7 @@ yyreduce:
             )
         );
 
-        _NDFP_debugf("App category == %s? %s\n", (yyvsp[0].string), (_NDFP_result) ? "yes" : "no");
+        _NDFP_debugf("App category == %s? %s\n", (yyvsp[0].buffer), (_NDFP_result) ? "yes" : "no");
     }
 #line 3170 "nd-flow-expr.cpp"
     break;
@@ -3173,7 +3173,7 @@ yyreduce:
 #line 1028 "nd-flow-expr.ypp"
                                                         {
         size_t p;
-        string category((yyvsp[0].string));
+        string category((yyvsp[0].buffer));
 
         while ((p = category.find_first_of("'")) != string::npos)
             category.erase(p, 1);
@@ -3185,7 +3185,7 @@ yyreduce:
             )
         );
 
-        _NDFP_debugf("App category != %s? %s\n", (yyvsp[0].string), (_NDFP_result) ? "yes" : "no");
+        _NDFP_debugf("App category != %s? %s\n", (yyvsp[0].buffer), (_NDFP_result) ? "yes" : "no");
     }
 #line 3191 "nd-flow-expr.cpp"
     break;
@@ -3194,7 +3194,7 @@ yyreduce:
 #line 1047 "nd-flow-expr.ypp"
                                                 {
         size_t p;
-        string category((yyvsp[0].string));
+        string category((yyvsp[0].buffer));
 
         while ((p = category.find_first_of("'")) != string::npos)
             category.erase(p, 1);
@@ -3206,7 +3206,7 @@ yyreduce:
             )
         );
 
-        _NDFP_debugf("Domain category == %s? %s\n", (yyvsp[0].string), (_NDFP_result) ? "yes" : "no");
+        _NDFP_debugf("Domain category == %s? %s\n", (yyvsp[0].buffer), (_NDFP_result) ? "yes" : "no");
     }
 #line 3212 "nd-flow-expr.cpp"
     break;
@@ -3215,7 +3215,7 @@ yyreduce:
 #line 1063 "nd-flow-expr.ypp"
                                                    {
         size_t p;
-        string category((yyvsp[0].string));
+        string category((yyvsp[0].buffer));
 
         while ((p = category.find_first_of("'")) != string::npos)
             category.erase(p, 1);
@@ -3227,7 +3227,7 @@ yyreduce:
             )
         );
 
-        _NDFP_debugf("Domain category != %s? %s\n", (yyvsp[0].string), (_NDFP_result) ? "yes" : "no");
+        _NDFP_debugf("Domain category != %s? %s\n", (yyvsp[0].buffer), (_NDFP_result) ? "yes" : "no");
     }
 #line 3233 "nd-flow-expr.cpp"
     break;
@@ -3283,18 +3283,18 @@ yyreduce:
         if (! _NDFP_flow->detected_protocol_name.empty()) {
 
             size_t p;
-            string search((yyvsp[0].string));
+            string search((yyvsp[0].buffer));
 
             while ((p = search.find_first_of("'")) != string::npos)
                 search.erase(p, 1);
 
             _NDFP_result = ((yyval.bool_result) = (strncasecmp(
-                _NDFP_flow->detected_protocol_name.c_str(), search.c_str(), _NDFP_MAX_NAMELEN
+                _NDFP_flow->detected_protocol_name.c_str(), search.c_str(), _NDFP_MAX_BUFLEN
             ) == 0));
         }
 
         _NDFP_debugf(
-            "Protocol name == %s? %s\n", (yyvsp[0].string), (_NDFP_result) ? "yes" : "no"
+            "Protocol name == %s? %s\n", (yyvsp[0].buffer), (_NDFP_result) ? "yes" : "no"
         );
     }
 #line 3301 "nd-flow-expr.cpp"
@@ -3307,17 +3307,17 @@ yyreduce:
         if (! _NDFP_flow->detected_protocol_name.empty()) {
 
             size_t p;
-            string search((yyvsp[0].string));
+            string search((yyvsp[0].buffer));
 
             while ((p = search.find_first_of("'")) != string::npos)
                 search.erase(p, 1);
 
             _NDFP_result = ((yyval.bool_result) = (strncasecmp(
-                _NDFP_flow->detected_protocol_name.c_str(), search.c_str(), _NDFP_MAX_NAMELEN
+                _NDFP_flow->detected_protocol_name.c_str(), search.c_str(), _NDFP_MAX_BUFLEN
             )));
         }
         _NDFP_debugf(
-            "Protocol name != %s? %s\n", (yyvsp[0].string), (_NDFP_result) ? "yes" : "no"
+            "Protocol name != %s? %s\n", (yyvsp[0].buffer), (_NDFP_result) ? "yes" : "no"
         );
     }
 #line 3324 "nd-flow-expr.cpp"
@@ -3327,7 +3327,7 @@ yyreduce:
 #line 1153 "nd-flow-expr.ypp"
                                                   {
         size_t p;
-        string category((yyvsp[0].string));
+        string category((yyvsp[0].buffer));
 
         while ((p = category.find_first_of("'")) != string::npos)
             category.erase(p, 1);
@@ -3340,7 +3340,7 @@ yyreduce:
         );
 
         _NDFP_debugf("Protocol category == %s? %s\n",
-            (yyvsp[0].string), (_NDFP_result) ? "yes" : "no");
+            (yyvsp[0].buffer), (_NDFP_result) ? "yes" : "no");
     }
 #line 3346 "nd-flow-expr.cpp"
     break;
@@ -3349,7 +3349,7 @@ yyreduce:
 #line 1170 "nd-flow-expr.ypp"
                                                      {
         size_t p;
-        string category((yyvsp[0].string));
+        string category((yyvsp[0].buffer));
 
         while ((p = category.find_first_of("'")) != string::npos)
             category.erase(p, 1);
@@ -3362,7 +3362,7 @@ yyreduce:
         );
 
         _NDFP_debugf("Protocol category != %s? %s\n",
-            (yyvsp[0].string), (_NDFP_result) ? "yes" : "no");
+            (yyvsp[0].buffer), (_NDFP_result) ? "yes" : "no");
     }
 #line 3368 "nd-flow-expr.cpp"
     break;
@@ -3397,19 +3397,19 @@ yyreduce:
         _NDFP_result = ((yyval.bool_result) = false);
         if (_NDFP_flow->host_server_name[0] != '\0') {
             size_t p;
-            string search((yyvsp[0].string));
+            string search((yyvsp[0].buffer));
 
             while ((p = search.find_first_of("'")) != string::npos)
                 search.erase(p, 1);
 
             if (strncasecmp(search.c_str(),
-                _NDFP_flow->host_server_name.c_str(), _NDFP_MAX_NAMELEN) == 0) {
+                _NDFP_flow->host_server_name.c_str(), _NDFP_MAX_BUFLEN) == 0) {
                 _NDFP_result = ((yyval.bool_result) = true);
             }
         }
 
         _NDFP_debugf("Detected hostname == %s? %s\n",
-            (yyvsp[0].string), (_NDFP_result) ? "yes" : "no");
+            (yyvsp[0].buffer), (_NDFP_result) ? "yes" : "no");
     }
 #line 3415 "nd-flow-expr.cpp"
     break;
@@ -3420,19 +3420,19 @@ yyreduce:
         _NDFP_result = ((yyval.bool_result) = true);
         if (_NDFP_flow->host_server_name[0] != '\0') {
             size_t p;
-            string search((yyvsp[0].string));
+            string search((yyvsp[0].buffer));
 
             while ((p = search.find_first_of("'")) != string::npos)
                 search.erase(p, 1);
 
             if (strncasecmp(search.c_str(),
-                _NDFP_flow->host_server_name.c_str(), _NDFP_MAX_NAMELEN) == 0) {
+                _NDFP_flow->host_server_name.c_str(), _NDFP_MAX_BUFLEN) == 0) {
                 _NDFP_result = ((yyval.bool_result) = false);
             }
         }
 
         _NDFP_debugf("Detected hostname != %s? %s\n",
-            (yyvsp[0].string), (_NDFP_result) ? "yes" : "no");
+            (yyvsp[0].buffer), (_NDFP_result) ? "yes" : "no");
     }
 #line 3438 "nd-flow-expr.cpp"
     break;
@@ -3444,7 +3444,7 @@ yyreduce:
 #if HAVE_WORKING_REGEX
         if (_NDFP_flow->host_server_name[0] != '\0') {
             size_t p;
-            string rx((yyvsp[0].string));
+            string rx((yyvsp[0].buffer));
 
             while ((p = rx.find_first_of("'")) != string::npos)
                 rx.erase(p, 1);
@@ -3471,9 +3471,9 @@ yyreduce:
         }
 
         _NDFP_debugf("Detected hostname == %s? %s\n",
-            (yyvsp[0].string), (_NDFP_result) ? "yes" : "no");
+            (yyvsp[0].buffer), (_NDFP_result) ? "yes" : "no");
 #else
-        _NDFP_debugf("Detected hostname == %s? Broken regex support.\n", (yyvsp[0].string));
+        _NDFP_debugf("Detected hostname == %s? Broken regex support.\n", (yyvsp[0].buffer));
 #endif
     }
 #line 3480 "nd-flow-expr.cpp"
@@ -3485,7 +3485,7 @@ yyreduce:
         _NDFP_result = ((yyval.bool_result) = true);
 
         _NDFP_debugf("Detected hostname != %s? %s\n",
-            (yyvsp[0].string), (_NDFP_result) ? "yes" : "no");
+            (yyvsp[0].buffer), (_NDFP_result) ? "yes" : "no");
     }
 #line 3491 "nd-flow-expr.cpp"
     break;
