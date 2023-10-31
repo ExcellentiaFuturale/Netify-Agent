@@ -70,20 +70,24 @@ public:
     typedef pair<struct sockaddr_storage, struct sockaddr_storage> PrivatePair;
 
     ndAddr(uint8_t prefix = 0)
-      : addr{ { 0 } }, prefix(prefix), comparison_flags(cfALL) { }
+      : addr{ { 0 } }, prefix(prefix), cached_flags(mfNONE),
+        comparison_flags(cfALL) { }
 
     ndAddr(const string &addr)
-      : addr{ { 0 } }, prefix(0), comparison_flags(cfALL) {
+      : addr{ { 0 } }, prefix(0), cached_flags(mfNONE),
+        comparison_flags(cfALL) {
         Create(*this, addr);
     }
 
     ndAddr(const uint8_t *hw_addr, size_t length = ETH_ALEN)
-      : addr{ { 0 } }, prefix(0), comparison_flags(cfALL) {
+      : addr{ { 0 } }, prefix(0), cached_flags(mfNONE),
+        comparison_flags(cfALL) {
         Create(*this, hw_addr, length);
     }
 
     ndAddr(const struct sockaddr_storage *ss_addr, uint8_t prefix = 0)
-      : addr{ { 0 } }, prefix(0), comparison_flags(cfALL) {
+      : addr{ { 0 } }, prefix(0), cached_flags(mfNONE),
+        comparison_flags(cfALL) {
         Create(*this, ss_addr, prefix);
     }
     ndAddr(const struct sockaddr_storage &ss_addr, uint8_t prefix = 0)
@@ -91,7 +95,8 @@ public:
 
     ndAddr(const struct sockaddr_in *ss_in,
       uint8_t prefix = _ND_ADDR_BITSv4)
-      : addr{ { 0 } }, prefix(0), comparison_flags(cfALL) {
+      : addr{ { 0 } }, prefix(0), cached_flags(mfNONE),
+        comparison_flags(cfALL) {
         Create(*this, ss_in, prefix);
     }
     ndAddr(const struct sockaddr_in &ss_in,
@@ -100,7 +105,8 @@ public:
 
     ndAddr(const struct sockaddr_in6 *ss_in6,
       uint8_t prefix = _ND_ADDR_BITSv6)
-      : addr{ { 0 } }, prefix(0), comparison_flags(cfALL) {
+      : addr{ { 0 } }, prefix(0), cached_flags(mfNONE),
+        comparison_flags(cfALL) {
         Create(*this, ss_in6, prefix);
     }
     ndAddr(const struct sockaddr_in6 &ss_in6,
@@ -108,7 +114,8 @@ public:
       : ndAddr(&ss_in6, prefix) { }
 
     ndAddr(const struct in_addr *in_addr, uint8_t prefix = _ND_ADDR_BITSv4)
-      : addr{ { 0 } }, prefix(0), comparison_flags(cfALL) {
+      : addr{ { 0 } }, prefix(0), cached_flags(mfNONE),
+        comparison_flags(cfALL) {
         Create(*this, in_addr, prefix);
     }
     ndAddr(const struct in_addr &in_addr, uint8_t prefix = _ND_ADDR_BITSv4)
@@ -116,7 +123,8 @@ public:
 
     ndAddr(const struct in6_addr *in6_addr,
       uint8_t prefix = _ND_ADDR_BITSv6)
-      : addr{ { 0 } }, prefix(0), comparison_flags(cfALL) {
+      : addr{ { 0 } }, prefix(0), cached_flags(mfNONE),
+        comparison_flags(cfALL) {
         Create(*this, in6_addr, prefix);
     }
     ndAddr(const struct in6_addr &in6_addr,
@@ -204,7 +212,11 @@ public:
     static bool MakeString(const ndAddr &a, string &result,
       uint8_t flags = mfALL);
 
-    inline const string &GetString() const {
+    inline const string &GetString(uint8_t flags = mfNONE) const {
+        if (flags != cached_flags || cached_addr.empty()) {
+            cached_flags = flags;
+            ndAddr::MakeString(*this, cached_addr, cached_flags);
+        }
         return cached_addr;
     }
 
@@ -433,7 +445,8 @@ public:
 
     uint8_t prefix;
 
-    string cached_addr;
+    mutable uint8_t cached_flags;
+    mutable string cached_addr;
 
     uint8_t comparison_flags;
 };

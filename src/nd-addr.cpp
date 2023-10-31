@@ -55,7 +55,7 @@ bool ndAddr::Create(ndAddr &a, const string &addr) {
         }
 
         a.addr.ss.ss_family = AF_INET;
-        return ndAddr::MakeString(a, a.cached_addr, mfNONE);
+        return true;
     }
 
     if (inet_pton(AF_INET6, _addr.c_str(), &a.addr.in6.sin6_addr) == 1)
@@ -67,7 +67,7 @@ bool ndAddr::Create(ndAddr &a, const string &addr) {
         }
 
         a.addr.ss.ss_family = AF_INET6;
-        return ndAddr::MakeString(a, a.cached_addr, mfNONE);
+        return true;
     }
 
     switch (addr.size()) {
@@ -118,7 +118,7 @@ bool ndAddr::Create(ndAddr &a, const uint8_t *hw_addr, size_t length) {
         a.addr.dl.sdl_alen = ETH_ALEN;
         memcpy(a.addr.dl.sdl_data, hw_addr, ETH_ALEN);
 #endif
-        return ndAddr::MakeString(a, a.cached_addr, mfNONE);
+        return true;
 
     default:
         nd_dprintf("Invalid hardware address size: %lu\n", length);
@@ -164,7 +164,7 @@ bool ndAddr::Create(ndAddr &a,
         return false;
     }
 
-    return ndAddr::MakeString(a, a.cached_addr, mfNONE);
+    return true;
 }
 
 bool ndAddr::Create(ndAddr &a,
@@ -186,7 +186,7 @@ bool ndAddr::Create(ndAddr &a,
     if (prefix) a.prefix = prefix;
     else a.prefix = _ND_ADDR_BITSv4;
 
-    return ndAddr::MakeString(a, a.cached_addr, mfNONE);
+    return true;
 }
 
 bool ndAddr::Create(ndAddr &a,
@@ -208,7 +208,7 @@ bool ndAddr::Create(ndAddr &a,
     if (prefix) a.prefix = prefix;
     else a.prefix = _ND_ADDR_BITSv6;
 
-    return ndAddr::MakeString(a, a.cached_addr, mfNONE);
+    return true;
 }
 
 bool ndAddr::Create(ndAddr &a,
@@ -226,7 +226,7 @@ bool ndAddr::Create(ndAddr &a,
     if (prefix) a.prefix = prefix;
     else a.prefix = _ND_ADDR_BITSv4;
 
-    return ndAddr::MakeString(a, a.cached_addr, mfNONE);
+    return true;
 }
 
 bool ndAddr::Create(ndAddr &a,
@@ -244,7 +244,7 @@ bool ndAddr::Create(ndAddr &a,
     if (prefix) a.prefix = prefix;
     else a.prefix = _ND_ADDR_BITSv6;
 
-    return ndAddr::MakeString(a, a.cached_addr, mfNONE);
+    return true;
 }
 
 const uint8_t *ndAddr::GetAddress(void) const {
