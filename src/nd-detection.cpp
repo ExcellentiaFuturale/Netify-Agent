@@ -472,16 +472,17 @@ void ndDetectionThread::ProcessPacket(ndDetectionQueueEntry *entry) {
         if (ndEF->flags.risks_checked.load()) {
             nd_dprintf("%s: Risks checked.\n", tag.c_str());
         }
-#endif
         nd_dprintf(
           "%s: detection_init: %d, check_extra_packets: "
           "%d, fin_ack: %hhu\n",
           tag.c_str(), ndEF->flags.detection_init.load(),
           check_extra_packets, ndEF->flags.tcp_fin_ack.load());
+#endif
     }
 
-    // Flow detection complete.
     if (flow_update) FlowUpdate(entry);
+
+    // Flow detection complete?
     if (ndEF->flags.detection_init.load() && ! check_extra_packets)
         SetDetectionComplete(entry);
 }
