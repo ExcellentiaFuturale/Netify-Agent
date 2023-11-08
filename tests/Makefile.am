@@ -67,7 +67,7 @@ dirs:
 	$(MKDIR_P) \
 		"$(abs_builddir)/netifyd/var/run/netifyd" \
 		"$(abs_builddir)/netifyd/etc/netifyd/plugins.d" \
-		"$(abs_builddir)/netifyd/etc/netifyd/domains.d" \
+		"$(abs_builddir)/netifyd/etc/netifyd/categories.d" \
 		"$(abs_builddir)/netifyd/etc/netifyd/interfaces.d"
 
 test: dirs

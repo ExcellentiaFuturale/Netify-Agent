@@ -27,22 +27,67 @@
 #include <string>
 #include <unordered_set>
 
+#include "nd-addr.hpp"
+
 using json = nlohmann::json;
 using namespace std;
 
-#define ND_CAT_UNKNOWN    0
-#define ND_DOMAIN_UNKNOWN 0
-
-typedef enum {
-    ndCAT_TYPE_APP,
-    ndCAT_TYPE_PROTO,
-
-    ndCAT_TYPE_MAX
-} ndCategoryType;
-
-class ndCategories;
+#define ND_CAT_UNKNOWN 0
 
 typedef unsigned nd_cat_id_t;
+
+class ndCategory;
+
+class ndCategories
+{
+public:
+    enum Type {
+        TYPE_NONE,
+
+        TYPE_APP,
+        TYPE_PROTO,
+
+        TYPE_MAX
+    };
+
+    ndCategories();
+    virtual ~ndCategories();
+
+    bool Load(const string &filename);
+    bool Load(Type type, json &jdata);
+    bool Save(const string &filename);
+    void Dump(Type type = TYPE_MAX);
+
+    bool LoadDotDirectory(const string &path);
+
+    bool IsMember(Type type, nd_cat_id_t cat_id, unsigned id);
+    bool IsMember(Type type, const string &cat_tag, unsigned id);
+
+    nd_cat_id_t Lookup(Type type, unsigned id) const;
+    nd_cat_id_t LookupTag(Type type, const string &tag) const;
+    nd_cat_id_t ResolveTag(Type type, unsigned id, string &tag) const;
+
+    nd_cat_id_t LookupDotDirectory(const string &domain);
+    nd_cat_id_t LookupDotDirectory(const ndAddr &addr);
+
+protected:
+    mutable mutex lock;
+
+    typedef map<Type, ndCategory> cat_map;
+    cat_map categories;
+
+    typedef unordered_map<nd_cat_id_t, unordered_set<string>> cat_domain_map;
+    cat_domain_map domains;
+
+    bool LoadLegacy(const json &jdata);
+
+    void ResetCategories(void);
+    inline void ResetDomains(void);
+    void ResetNetworks(bool free_only = true);
+
+private:
+    void *networks4, *networks6;
+};
 
 class ndCategory
 {
@@ -58,67 +103,5 @@ protected:
     index_tag tag;
     index_cat index;
 
-    bool Load(json &jdata);
-
-    ndCategoryType type;
-};
-
-class ndCategories
-{
-public:
-    ndCategories() : last_update(0) {
-        // XXX: Must be in order of enum ndCategoryType, without
-        // gaps.
-        categories[ndCAT_TYPE_APP] = ndCategory();
-        categories[ndCAT_TYPE_PROTO] = ndCategory();
-    };
-
-    bool Load(const string &filename);
-    bool Load(ndCategoryType type, json &jdata);
-    bool Save(const string &filename);
-    void Dump(ndCategoryType type = ndCAT_TYPE_MAX);
-
-    time_t GetLastUpdate(void) { return last_update; }
-
-    bool IsMember(ndCategoryType type, nd_cat_id_t cat_id,
-      unsigned id);
-    bool IsMember(ndCategoryType type,
-      const string &cat_tag, unsigned id);
-
-    nd_cat_id_t Lookup(ndCategoryType type, unsigned id) const;
-    nd_cat_id_t
-    LookupTag(ndCategoryType type, const string &tag) const;
-    nd_cat_id_t ResolveTag(ndCategoryType type, unsigned id,
-      string &tag) const;
-
-    bool GetTagIndex(ndCategoryType type,
-      ndCategory::index_tag &index) const {
-        lock_guard<mutex> ul(lock);
-
-        auto it = categories.find(type);
-        if (it == categories.end()) return false;
-        index.insert(it->second.tag.begin(), it->second.tag.end());
-        return true;
-    }
-
-protected:
-    mutable mutex lock;
-    time_t last_update;
-    map<ndCategoryType, ndCategory> categories;
-
-    bool LoadLegacy(const json &jdata);
-};
-
-class ndDomains
-{
-public:
-    bool Load(const ndCategories &categories,
-      const string &path_domains);
-    nd_cat_id_t Lookup(const string &domain);
-
-protected:
-    mutex lock;
-    ndCategory::index_tag index_tag;
-    typedef unordered_map<nd_cat_id_t, unordered_set<string>> cat_domain_map;
-    cat_domain_map domains;
+    ndCategories::Type type;
 };

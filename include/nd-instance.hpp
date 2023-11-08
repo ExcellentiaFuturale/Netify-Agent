@@ -319,7 +319,6 @@ public:
     ndPacketStats pkt_stats_global;
     ndApplications apps;
     ndCategories categories;
-    ndDomains domains;
     ndInterfaces interfaces;
     ndAddrType addr_types;
     ndDNSHintCache *dns_hint_cache;

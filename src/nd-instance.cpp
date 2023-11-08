@@ -250,6 +250,8 @@ ndInstance::InitializeConfig(int argc, char * const argv[]) {
         { "disable-auto-flow-expiry", 0, 0, _ND_LO_DISABLE_AUTO_FLOW_EXPIRY },
 #define _ND_LO_RUN_WITHOUT_SOURCES 23
         { "run-without-sources", 0, 0, _ND_LO_RUN_WITHOUT_SOURCES },
+#define _ND_LO_VERBOSE_FLAG 24
+        { "verbose-flag", 1, 0, _ND_LO_VERBOSE_FLAG },
 
         { NULL, 0, 0, 0 } };
 
@@ -278,6 +280,9 @@ ndInstance::InitializeConfig(int argc, char * const argv[]) {
             return ndCR_INVALID_OPTION;
         case 'c': conf_filename = optarg; break;
         case 'd': ndGC_SetFlag(ndGF_DEBUG, true); break;
+        case 's':
+            ndGC_SetFlag(ndGF_DOTD_CATEGORIES, false);
+            break;
         default: break;
         }
     }
@@ -402,6 +407,32 @@ ndInstance::InitializeConfig(int argc, char * const argv[]) {
             break;
         case _ND_LO_RUN_WITHOUT_SOURCES:
             ndGC_SetFlag(ndGF_RUN_WITHOUT_SOURCES, true);
+            break;
+        case _ND_LO_VERBOSE_FLAG:
+            if (! strcasecmp(optarg, "event-dpi-new"))
+                ndGC.verbosity_flags |= ndGlobalConfig::VFLAG_EVENT_DPI_NEW;
+            else if (
+              ! strcasecmp(optarg, "no-event-dpi-new"))
+                ndGC.verbosity_flags &= ~ndGlobalConfig::VFLAG_EVENT_DPI_NEW;
+            else if (
+              ! strcasecmp(optarg, "event-dpi-update"))
+                ndGC.verbosity_flags |= ndGlobalConfig::VFLAG_EVENT_DPI_UPDATE;
+            else if (
+              ! strcasecmp(optarg, "no-event-dpi-update"))
+                ndGC.verbosity_flags &=
+                  ~ndGlobalConfig::VFLAG_EVENT_DPI_UPDATE;
+            else if (
+              ! strcasecmp(optarg, "event-dpi-complete"))
+                ndGC.verbosity_flags |=
+                  ndGlobalConfig::VFLAG_EVENT_DPI_COMPLETE;
+            else if (
+              ! strcasecmp(optarg, "no-event-dpi-complete"))
+                ndGC.verbosity_flags &=
+                  ~ndGlobalConfig::VFLAG_EVENT_DPI_COMPLETE;
+            else {
+                nd_printf(
+                  "WARNING: Invalid verbose-flag: %s\n", optarg);
+            }
             break;
         case '?':
             cerr << "Try `--help' for more information.\n";
@@ -756,10 +787,10 @@ bool ndInstance::DumpList(uint8_t type) {
     {
         if (type & ndDUMP_TYPE_CAT_APP &&
           ! (type & ndDUMP_TYPE_CAT_PROTO))
-            categories.Dump(ndCAT_TYPE_APP);
+            categories.Dump(ndCategories::TYPE_APP);
         else if (! (type & ndDUMP_TYPE_CAT_APP) &&
           type & ndDUMP_TYPE_CAT_PROTO)
-            categories.Dump(ndCAT_TYPE_PROTO);
+            categories.Dump(ndCategories::TYPE_PROTO);
         else categories.Dump();
     }
 
@@ -802,7 +833,9 @@ bool ndInstance::DumpList(uint8_t type) {
         {
             string tag;
             nd_cat_id_t cat_id = categories.ResolveTag(
-              (type & ndDUMP_TYPE_PROTOS) ? ndCAT_TYPE_PROTO : ndCAT_TYPE_APP,
+              (type & ndDUMP_TYPE_PROTOS) ?
+                ndCategories::TYPE_PROTO :
+                ndCategories::TYPE_APP,
               entry.first, tag);
 
             if (cat_id == ND_CAT_UNKNOWN || tag.empty())
@@ -824,7 +857,9 @@ bool ndInstance::DumpList(uint8_t type) {
         {
             string tag;
             nd_cat_id_t cat_id = categories.ResolveTag(
-              (type & ndDUMP_TYPE_PROTOS) ? ndCAT_TYPE_PROTO : ndCAT_TYPE_APP,
+              (type & ndDUMP_TYPE_PROTOS) ?
+                ndCategories::TYPE_PROTO :
+                ndCategories::TYPE_APP,
               entry.second, tag);
 
             if (cat_id == ND_CAT_UNKNOWN || tag.empty())
@@ -1885,8 +1920,8 @@ bool ndInstance::Reload(bool broadcast) {
         result = apps.LoadLegacy(ndGC.path_legacy_config);
 
     result = categories.Load(ndGC.path_cat_config);
-    if (ndGC_LOAD_DOMAINS) {
-        result = domains.Load(categories, ndGC.path_domains);
+    if (ndGC_DOTD_CATEGORIES) {
+        result = categories.LoadDotDirectory(ndGC.path_categories);
     }
 
     if (broadcast) {
@@ -2450,7 +2485,7 @@ void ndInstance::ProcessFlows(void) {
 
                 if (i->second.use_count() == 1) {
                     plugins.BroadcastProcessorEvent(
-                      ndPluginProcessor::EVENT_FLOW_EXPIRED,
+                      ndPluginProcessor::EVENT_FLOW_EXPIRE,
                       i->second);
 
                     i = fm.erase(i);

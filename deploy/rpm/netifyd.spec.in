@@ -190,7 +190,7 @@ exit 0
 %defattr(-,root,root)
 %dir %{_localstatedir}/run/%{name}
 %dir %attr(750,root,root) %{statedir_pdata}
-%dir %attr(750,root,root) %{statedir_pdata}/domains.d
+%dir %attr(750,root,root) %{statedir_pdata}/categories.d
 %dir %attr(750,root,root) %{statedir_pdata}/interfaces.d
 %{statedir_pdata}/interfaces.d/*
 %dir %attr(750,root,root) %{statedir_pdata}/plugins.d

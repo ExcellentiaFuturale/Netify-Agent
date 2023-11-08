@@ -43,7 +43,8 @@ ndGlobalConfig::ndGlobalConfig()
     path_agent_status(ND_AGENT_STATUS_PATH),
     path_app_config(ND_CONF_APP_PATH),
     path_cat_config(ND_CONF_CAT_PATH),
-    path_config(ND_CONF_FILE_NAME), path_domains(ND_DOMAINS_PATH),
+    path_categories(ND_CATEGORIES_PATH),
+    path_config(ND_CONF_FILE_NAME),
     path_functions(ND_FUNCTIONS_PATH),
     path_interfaces(ND_INTERFACES_PATH),
     path_legacy_config(ND_CONF_LEGACY_PATH),
@@ -63,7 +64,8 @@ ndGlobalConfig::ndGlobalConfig()
     max_packet_queue(ND_MAX_PKT_QUEUE_KB * 1024),
     max_capture_length(ND_PCAP_SNAPLEN), flags(0),
     digest_app_config{ 0 }, digest_legacy_config{ 0 },
-    verbosity(0), fhc_purge_divisor(ND_FHC_PURGE_DIVISOR),
+    verbosity(0), verbosity_flags(VFLAG_EVENT_DPI_NEW),
+    fhc_purge_divisor(ND_FHC_PURGE_DIVISOR),
     fm_buckets(ND_FLOW_MAP_BUCKETS),
     max_detection_pkts(ND_MAX_DETECTION_PKTS),
     max_fhc(ND_MAX_FHC_ENTRIES), max_flows(0),
@@ -178,9 +180,9 @@ bool ndGlobalConfig::Load(const string &filename) {
       path_state_persistent + "/" + ND_PLUGINS_BASE);
     nd_expand_variables(value, path_plugins, conf_vars);
 
-    value = r->Get("netifyd", "path_domains",
-      path_state_persistent + "/" + ND_DOMAINS_BASE);
-    nd_expand_variables(value, path_domains, conf_vars);
+    value = r->Get("netifyd", "path_categories",
+      path_state_persistent + "/" + ND_CATEGORIES_BASE);
+    nd_expand_variables(value, path_categories, conf_vars);
 
     value = r->Get("netifyd", "path_interfaces",
       path_state_persistent + "/" + ND_INTERFACES_BASE);
@@ -232,8 +234,8 @@ bool ndGlobalConfig::Load(const string &filename) {
     ndGC_SetFlag(ndGF_SOFT_DISSECTORS,
       r->GetBoolean("netifyd", "soft_dissectors", true));
 
-    ndGC_SetFlag(ndGF_LOAD_DOMAINS,
-      r->GetBoolean("netifyd", "load_domains", true));
+    ndGC_SetFlag(ndGF_DOTD_CATEGORIES,
+      r->GetBoolean("netifyd", "dotd_categories", true));
 
     fm_buckets = (unsigned)r->GetInteger("netifyd",
       "flow_map_buckets", ND_FLOW_MAP_BUCKETS);
@@ -1169,7 +1171,7 @@ void ndGlobalConfig::UpdatePaths(void) {
 
     path_plugins = path_state_persistent + "/" + ND_PLUGINS_BASE;
 
-    path_domains = path_state_persistent + "/" + ND_DOMAINS_BASE;
+    path_categories = path_state_persistent + "/" + ND_CATEGORIES_BASE;
 
     path_functions = path_shared_data + "/" + ND_FUNCTIONS_BASE;
 
@@ -1188,7 +1190,8 @@ void ndGlobalConfig::UpdateConfigVars(void) {
     conf_vars.insert(
       make_pair("${path_category_config}", path_cat_config));
     conf_vars.insert(make_pair("${path_plugins}", path_plugins));
-    conf_vars.insert(make_pair("${path_domains}", path_domains));
+    conf_vars.insert(
+      make_pair("${path_categories}", path_categories));
     conf_vars.insert(
       make_pair("${path_interfaces}", path_interfaces));
 }

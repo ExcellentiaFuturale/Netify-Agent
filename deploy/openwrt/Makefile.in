@@ -110,7 +110,7 @@ define Package/@PACKAGE_TARNAME@/install
 	$(INSTALL_DIR) $(1)/usr/lib
 	$(if $(CONFIG_NETIFYD_BUILD_SHARED_LIBRARY),$(CP) $(PKG_INSTALL_DIR)/usr/lib/lib@PACKAGE_TARNAME@.so.* $(1)/usr/lib,)
 	$(INSTALL_DIR) $(1)/etc/netifyd
-	$(INSTALL_DIR) $(1)/etc/netifyd/domains.d
+	$(INSTALL_DIR) $(1)/etc/netifyd/categories.d
 	$(INSTALL_DIR) $(1)/etc/netifyd/interfaces.d
 	$(INSTALL_DIR) $(1)/etc/netifyd/plugins.d
 	$(INSTALL_DATA) $(PKG_BUILD_DIR)/deploy/netify-apps.conf $(1)/etc/netifyd

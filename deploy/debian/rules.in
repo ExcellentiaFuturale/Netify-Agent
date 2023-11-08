@@ -27,7 +27,7 @@ override_dh_install:
 
 	install -d -m 0755 $(DESTDIR)@volatilestatedir@
 	install -d -m 0755 $(DESTDIR)@persistentstatedir@
-	install -d -m 0755 $(DESTDIR)@persistentstatedir@/domains.d
+	install -d -m 0755 $(DESTDIR)@persistentstatedir@/categories.d
 	install -d -m 0755 $(DESTDIR)@persistentstatedir@/interfaces.d
 	install -d -m 0755 $(DESTDIR)@persistentstatedir@/plugins.d
 

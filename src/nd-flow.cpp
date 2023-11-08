@@ -68,7 +68,7 @@ ndFlow::ndFlow(nd_iface_ptr &iface)
     ct_id(0), ct_mark(0),
 #endif
     lower_type(ndAddr::atNONE), upper_type(ndAddr::atNONE),
-    flags{}, gtp{ 0 }, risks{}, ndpi_risk_score(0),
+    flags{}, gtp{ 0 }, ndpi_risk_score(0),
     ndpi_risk_score_client(0), ndpi_risk_score_server(0) {
     gtp.version = 0xFF;
 
@@ -98,7 +98,7 @@ ndFlow::ndFlow(const ndFlow &flow)
     ct_id(0), ct_mark(0),
 #endif
     lower_type(ndAddr::atNONE), upper_type(ndAddr::atNONE),
-    flags{}, gtp(flow.gtp), risks{ 0 }, ndpi_risk_score(0),
+    flags{}, gtp(flow.gtp), ndpi_risk_score(0),
     ndpi_risk_score_client(0), ndpi_risk_score_server(0) {
     digest_lower.assign(flow.digest_lower.begin(),
       flow.digest_lower.end());
@@ -205,7 +205,7 @@ void ndFlow::Reset(bool full_reset) {
         flags.dhc_hit = false;
         flags.expired = false;
         flags.expiring = false;
-        flags.risk_checked = false;
+        flags.risks_checked = false;
         flags.soft_dissector = false;
 
         risks.clear();
@@ -375,7 +375,7 @@ void ndFlow::Print(uint8_t pflags) const {
           << (flags.dhc_hit.load() ? 'd' : '-')
           << (flags.fhc_hit.load() ? 'f' : '-')
           << (flags.ip_nat.load() ? 'n' : '-')
-          << (flags.risk_checked.load() ? 'r' : '-')
+          << (flags.risks_checked.load() && ! risks.empty() ? 'r' : '-')
           << (flags.soft_dissector.load() ? 's' : '-')
           << (flags.tcp_fin_ack.load() ? 'F' : '-')
           << ((privacy_mask & PRIVATE_LOWER) ?
@@ -568,6 +568,32 @@ void ndFlow::Print(uint8_t pflags) const {
                    stats.total_bytes.load());
 
             dls.imbue(locale("C"));
+        }
+
+        if ((pflags & PRINTF_RISKS)) {
+            if (flags.risks_checked.load() && ! risks.empty())
+            {
+                auto r = risks.begin();
+                if (r != risks.end()) {
+                    dls
+                      << endl
+                      << setw(iface->ifname.size()) << " "
+                      << setw(0) << ": RID" << setw(3)
+                      << (*r) << ": " << setw(0)
+                      << nd_risk_get_name(*r);
+                }
+                if (risks.size() > 1) {
+                    for (r = next(risks.begin()); r != risks.end(); r++)
+                    {
+                        dls
+                          << endl
+                          << setw(iface->ifname.size())
+                          << " " << setw(0) << ": RID"
+                          << setw(3) << (*r) << ": "
+                          << setw(0) << nd_risk_get_name(*r);
+                    }
+                }
+            }
         }
 
         if (multiline) dls << endl;

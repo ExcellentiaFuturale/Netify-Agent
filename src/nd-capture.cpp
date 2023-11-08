@@ -1079,6 +1079,9 @@ nd_process_ip:
                 break;
             }
         }
+
+        ndi.plugins.BroadcastProcessorEvent(
+          ndPluginProcessor::EVENT_FLOW_NEW);
     }
 
     ndi.flow_buckets->Release(flow_digest);

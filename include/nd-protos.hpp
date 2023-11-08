@@ -386,6 +386,9 @@ typedef enum {
     ND_PROTO_HAPROXY = 328,  // High availability load balancer and reverse proxy for TCP and HTTP-based applications
     ND_PROTO_RMCP = 329,  // Remote Management Control Protocol, IPMI component
     ND_PROTO_CAN = 330,  // Controller Area Network, ISO 11898-1
+    ND_PROTO_PROTOBUF = 331,  // Data serialzer: https://en.wikipedia.org/wiki/Protocol_Buffers
+    ND_PROTO_ETHEREUM = 332,  // Ethereum: decentralized block chain
+    ND_PROTO_TELEGRAM_VOIP = 333,  // Telegram VoIP (STUN)
 
     ND_PROTO_MAX,
     ND_PROTO_TODO = 0xffffffff
@@ -439,6 +442,7 @@ const nd_protos_t nd_protos = {
     { ND_PROTO_DTLS, "DTLS" },
     { ND_PROTO_EAQ, "EAQ" },
     { ND_PROTO_ELASTICSEARCH, "ElasticSearch" },
+    { ND_PROTO_ETHEREUM, "Ethereum" },
     { ND_PROTO_ETHERNET_IP, "EtherNet/IP" },
     { ND_PROTO_FACEBOOK_VOIP, "Facebook/VoIP" },
     { ND_PROTO_FASTCGI, "FastCGI" },
@@ -533,6 +537,7 @@ const nd_protos_t nd_protos = {
     { ND_PROTO_POSTGRES, "PGSQL" },
     { ND_PROTO_PPSTREAM, "PPStream" },
     { ND_PROTO_PPTP, "PPTP" },
+    { ND_PROTO_PROTOBUF, "Protobuf" },
     { ND_PROTO_QQLIVE, "QQLive" },
     { ND_PROTO_QQ, "QQ" },
     { ND_PROTO_QUIC, "QUIC" },
@@ -585,6 +590,7 @@ const nd_protos_t nd_protos = {
     { ND_PROTO_TEAMSPEAK, "TeamSpeak" },
     { ND_PROTO_TEAMVIEWER, "TeamViewer" },
     { ND_PROTO_TELEGRAM, "Telegram" },
+    { ND_PROTO_TELEGRAM_VOIP, "Telegram/VoIP" },
     { ND_PROTO_TELNET, "Telnet" },
     { ND_PROTO_TEREDO, "Teredo" },
     { ND_PROTO_TFTP, "TFTP" },
@@ -687,6 +693,7 @@ const nd_ndpi_proto_t nd_ndpi_protos = {
     { NDPI_PROTOCOL_DTLS, ND_PROTO_DTLS },
     { NDPI_PROTOCOL_EAQ, ND_PROTO_EAQ },
     { NDPI_PROTOCOL_ELASTICSEARCH, ND_PROTO_ELASTICSEARCH },
+    { NDPI_PROTOCOL_ETHEREUM, ND_PROTO_ETHEREUM },
     { NDPI_PROTOCOL_ETHERNET_IP, ND_PROTO_ETHERNET_IP },
     { NDPI_PROTOCOL_FACEBOOK_VOIP, ND_PROTO_FACEBOOK_VOIP },
     { NDPI_PROTOCOL_FASTCGI, ND_PROTO_FASTCGI },
@@ -778,6 +785,7 @@ const nd_ndpi_proto_t nd_ndpi_protos = {
     { NDPI_PROTOCOL_POSTGRES, ND_PROTO_POSTGRES },
     { NDPI_PROTOCOL_PPSTREAM, ND_PROTO_PPSTREAM },
     { NDPI_PROTOCOL_PPTP, ND_PROTO_PPTP },
+    { NDPI_PROTOCOL_PROTOBUF, ND_PROTO_PROTOBUF },
     { NDPI_PROTOCOL_QQ, ND_PROTO_QQ },
     { NDPI_PROTOCOL_QUIC, ND_PROTO_QUIC },
     { NDPI_PROTOCOL_RADIUS, ND_PROTO_RADIUS },
@@ -827,6 +835,7 @@ const nd_ndpi_proto_t nd_ndpi_protos = {
     { NDPI_PROTOCOL_TEAMSPEAK, ND_PROTO_TEAMSPEAK },
     { NDPI_PROTOCOL_TEAMVIEWER, ND_PROTO_TEAMVIEWER },
     { NDPI_PROTOCOL_TELEGRAM, ND_PROTO_TELEGRAM },
+    { NDPI_PROTOCOL_TELEGRAM_VOIP, ND_PROTO_TELEGRAM_VOIP },
     { NDPI_PROTOCOL_TELNET, ND_PROTO_TELNET },
     { NDPI_PROTOCOL_TEREDO, ND_PROTO_TEREDO },
     { NDPI_PROTOCOL_TFTP, ND_PROTO_TFTP },
@@ -1135,6 +1144,7 @@ const nd_ndpi_disabled_protos_t nd_ndpi_disabled_protos = {
     NDPI_PROTOCOL_PROTONVPN,  // Not a protocol: ID# 344 (ProtonVPN)
     NDPI_PROTOCOL_ROBLOX,  // Not a protocol: ID# 346 (Roblox)
     NDPI_PROTOCOL_MULLVAD,  // Not a protocol: ID# 348 (Mullvad)
+    NDPI_PROTOCOL_SINA_WEIBO,  // Not a protocol: ID# 356 (SinaWeibo)
 };
 
 typedef vector<uint16_t> nd_ndpi_free_protos_t;

@@ -106,7 +106,7 @@ enum nd_global_flags {
     ndGF_UPLOAD_NAT_FLOWS = (1 << 22),
     ndGF_AUTO_FLOW_EXPIRY = (1 << 23),
     ndGF_SOFT_DISSECTORS = (1 << 24),
-    ndGF_LOAD_DOMAINS = (1 << 25),
+    ndGF_DOTD_CATEGORIES = (1 << 25),
     ndGF_RUN_WITHOUT_SOURCES = (1 << 26),
 };
 
@@ -158,8 +158,8 @@ enum nd_global_flags {
     (ndGlobalConfig::GetInstance().flags & ndGF_AUTO_FLOW_EXPIRY)
 #define ndGC_SOFT_DISSECTORS \
     (ndGlobalConfig::GetInstance().flags & ndGF_SOFT_DISSECTORS)
-#define ndGC_LOAD_DOMAINS \
-    (ndGlobalConfig::GetInstance().flags & ndGF_LOAD_DOMAINS)
+#define ndGC_DOTD_CATEGORIES \
+    (ndGlobalConfig::GetInstance().flags & ndGF_DOTD_CATEGORIES)
 #define ndGC_RUN_WITHOUT_SOURCES \
     (ndGlobalConfig::GetInstance().flags & ndGF_RUN_WITHOUT_SOURCES)
 
@@ -216,8 +216,8 @@ public:
     string path_agent_status;
     string path_app_config;
     string path_cat_config;
+    string path_categories;
     string path_config;
-    string path_domains;
     string path_export_json;
     string path_functions;
     string path_interfaces;
@@ -247,6 +247,7 @@ public:
     uint8_t digest_app_config[SHA1_DIGEST_LENGTH];
     uint8_t digest_legacy_config[SHA1_DIGEST_LENGTH];
     uint8_t verbosity;
+    uint8_t verbosity_flags;
     unsigned fhc_purge_divisor;
     unsigned fm_buckets;
     unsigned max_detection_pkts;
@@ -260,6 +261,13 @@ public:
     unsigned ttl_napi_update;
     unsigned update_imf;
     unsigned update_interval;
+
+    enum VerbosityFlags {
+        VFLAG_NONE = 0x00,
+        VFLAG_EVENT_DPI_NEW = 0x01,
+        VFLAG_EVENT_DPI_UPDATE = 0x02,
+        VFLAG_EVENT_DPI_COMPLETE = 0x04,
+    };
 
     typedef vector<pair<string, string>> SocketHosts;
     SocketHosts socket_host;

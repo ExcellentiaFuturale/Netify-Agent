@@ -4,7 +4,7 @@
 @sample %%ETCDIR%%/netify-apps.conf.sample
 @sample %%ETCDIR%%/netify-categories.json.sample
 @dir /var/run/netifyd
-@dir %%ETCDIR%%/domains.d
+@dir %%ETCDIR%%/categories.d
 @dir %%ETCDIR%%/plugins.d
 %%ETCDIR%%/interfaces.d/10-example-pcap.conf
 lib/libnetifyd.so

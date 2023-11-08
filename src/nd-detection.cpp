@@ -18,6 +18,7 @@
 // License along with this program.  If not, see
 // <http://www.gnu.org/licenses/>.
 
+#include "nd-risks.hpp"
 #ifdef HAVE_CONFIG_H
 #include "config.h"
 #endif
@@ -34,10 +35,13 @@
 // #define _ND_LOG_PROTO_UNKNOWN   1
 
 // Enable to log custom domain category lookups
-// #define _ND_LOG_DOMAIN_LOOKUPS  1
+// #define _ND_LOG_CATEGORY_DOTD_LOOKUPS 1
 
 // Enable to log STUN debug
 // #define _ND_LOG_STUN 1
+
+// Enable to log risks debug
+// #define _ND_LOG_RISKS 1
 
 #define ndEF    entry->flow
 #define ndEFNF  entry->flow->ndpi_flow
@@ -210,8 +214,10 @@ void ndDetectionThread::ProcessPacketQueue(void) {
                         SetGuessedProtocol(entry);
 
                     ProcessFlow(entry);
-
                     FlowUpdate(entry);
+
+                    if (ndEF->flags.detection_complete.load() == false)
+                        SetDetectionComplete(entry);
                 }
 
                 if (ndEF->flags.expiring.load())
@@ -312,26 +318,6 @@ void ndDetectionThread::ProcessPacket(ndDetectionQueueEntry *entry) {
     }
 
     bool check_extra_packets = (ndEFNF->extra_packets_func != nullptr);
-
-    if (! ndEF->flags.risk_checked.load()) {
-        if (ndEFNF->risk_checked) {
-            if (ndEFNF->risk != NDPI_NO_RISK) {
-                for (unsigned i = 0; i < NDPI_MAX_RISK; i++) {
-                    if (NDPI_ISSET_BIT(ndEFNF->risk, i) != 0)
-                    {
-                        ndEF->risks.push_back(nd_ndpi_risk_find(i));
-                    }
-                }
-
-                ndEF->ndpi_risk_score = ndpi_risk2score(
-                  ndEFNF->risk,
-                  &ndEF->ndpi_risk_score_client,
-                  &ndEF->ndpi_risk_score_server);
-            }
-
-            ndEF->flags.risk_checked = true;
-        }
-    }
 
     if (ndEF->flags.detection_init.load() == false &&
       ndEF->detected_protocol != ND_PROTO_UNKNOWN)
@@ -450,6 +436,16 @@ void ndDetectionThread::ProcessPacket(ndDetectionQueueEntry *entry) {
         case ND_PROTO_LLMNR:
             // nd_dprintf("LLMNR flow updated.\n");
             break;
+        case ND_PROTO_SSH:
+            if (ndEF->ssh.server_agent[0] == '\0' &&
+              ndEFNFP.ssh.server_signature[0] != '\0')
+            {
+                snprintf(ndEF->ssh.server_agent, ND_FLOW_SSH_UALEN,
+                  "%s", ndEFNFP.ssh.server_signature);
+                flow_update = true;
+                ndEF->flags.detection_updated = true;
+            }
+            break;
         default: break;
         }
     }
@@ -459,12 +455,35 @@ void ndDetectionThread::ProcessPacket(ndDetectionQueueEntry *entry) {
             ndEF->stats.detection_packets.load(), (check_extra_packets) ? "yes" : "no");
     }
 #endif
-    // Flow detection complete.
-    if (ndEF->flags.detection_init.load() && ! check_extra_packets)
-        ndEF->flags.detection_complete = true;
+    if (ndEF->GetMasterProtocol() == ND_PROTO_TLS ||
+      ndEF->GetMasterProtocol() == ND_PROTO_QUIC)
+    {
+        if (ndEFNF->tls_quic.certificate_processed)
+            check_extra_packets = false;
+#if 0
+        if (ndEFNFP.tls_quic.hello_processed) {
+            nd_dprintf("%s: TLS hello processed.\n", tag.c_str());
+        }
+        if (ndEFNF->tls_quic.certificate_processed) {
+            nd_dprintf(
+              "%s: TLS server certificate processed.\n",
+              tag.c_str());
+        }
+        if (ndEF->flags.risks_checked.load()) {
+            nd_dprintf("%s: Risks checked.\n", tag.c_str());
+        }
+#endif
+        nd_dprintf(
+          "%s: detection_init: %d, check_extra_packets: "
+          "%d, fin_ack: %hhu\n",
+          tag.c_str(), ndEF->flags.detection_init.load(),
+          check_extra_packets, ndEF->flags.tcp_fin_ack.load());
+    }
 
-    // Last updates, write to socket(s)...
+    // Flow detection complete.
     if (flow_update) FlowUpdate(entry);
+    if (ndEF->flags.detection_init.load() && ! check_extra_packets)
+        SetDetectionComplete(entry);
 }
 
 bool ndDetectionThread::ProcessALPN(
@@ -611,6 +630,11 @@ void ndDetectionThread::ProcessFlow(ndDetectionQueueEntry *entry) {
     case ND_PROTO_TEAMVIEWER:
         SetDetectedApplication(entry,
           ndi.apps.Lookup("netify.teamviewer"));
+        break;
+
+    case ND_PROTO_TELEGRAM_VOIP:
+        SetDetectedApplication(entry,
+          ndi.apps.Lookup("netify.telegram"));
         break;
 
     case ND_PROTO_TIVOCONNECT:
@@ -878,13 +902,13 @@ void ndDetectionThread::ProcessFlow(ndDetectionQueueEntry *entry) {
 
     if (ndEF->detected_protocol != ND_PROTO_UNKNOWN) {
         ndEF->category.protocol = ndi.categories.Lookup(
-          ndCAT_TYPE_PROTO, (unsigned)ndEF->detected_protocol);
+          ndCategories::TYPE_PROTO, (unsigned)ndEF->detected_protocol);
     }
 
     if (ndEFNF->host_server_name[0] != '\0') {
-        ndEF->category.domain = ndi.domains.Lookup(
+        ndEF->category.domain = ndi.categories.LookupDotDirectory(
           ndEFNF->host_server_name);
-#ifdef _ND_LOG_DOMAIN_LOOKUPS
+#ifdef _ND_LOG_CATEGORY_DOTD_LOOKUPS
         nd_dprintf("%s: category.domain: %hu\n",
           tag.c_str(), ndEF->category.domain);
 #endif
@@ -954,6 +978,33 @@ void ndDetectionThread::ProcessFlow(ndDetectionQueueEntry *entry) {
     ndEF->flags.detection_init = true;
 }
 
+void ndDetectionThread::ProcessRisks(ndDetectionQueueEntry *entry) {
+    if (ndEFNF->risk != NDPI_NO_RISK) {
+        for (unsigned i = 0; i < NDPI_MAX_RISK; i++) {
+            if (NDPI_ISSET_BIT(ndEFNF->risk, i) != 0) {
+                ndEF->risks.insert(nd_ndpi_risk_find(i));
+            }
+        }
+#ifdef _ND_LOG_RISKS
+        if (! ndEF->risks.empty() &&
+          ! (ndEF->risks.size() == 1 && ndEF->risks[0] == 46))
+        {
+            ndDebugLogStream dls(ndDebugLogStream::DLT_FLOW);
+            nd_output_lock();
+            dls << tag << ": risks:";
+            for (auto &i : ndEF->risks) dls << " " << i;
+            dls << endl;
+            nd_output_unlock();
+        }
+#endif
+        ndEF->ndpi_risk_score = ndpi_risk2score(ndEFNF->risk,
+          &ndEF->ndpi_risk_score_client,
+          &ndEF->ndpi_risk_score_server);
+    }
+
+    ndEF->flags.risks_checked = true;
+}
+
 void ndDetectionThread::SetDetectedApplication(
   ndDetectionQueueEntry *entry, nd_app_id_t app_id) {
     if (app_id == ND_APP_UNKNOWN) return;
@@ -962,92 +1013,7 @@ void ndDetectionThread::SetDetectedApplication(
     ndi.apps.Lookup(app_id, ndEF->detected_application_name);
 
     ndEF->category.application = ndi.categories.Lookup(
-      ndCAT_TYPE_APP, app_id);
-}
-
-void ndDetectionThread::FlowUpdate(ndDetectionQueueEntry *entry) {
-    if (ndEF->category.application == ND_CAT_UNKNOWN &&
-      ndEF->detected_application != ND_APP_UNKNOWN)
-    {
-        ndEF->category.application = ndi.categories.Lookup(
-          ndCAT_TYPE_APP, (unsigned)ndEF->detected_application);
-    }
-
-    if (ndEF->category.protocol == ND_CAT_UNKNOWN &&
-      ndEF->detected_protocol != ND_PROTO_UNKNOWN)
-    {
-        ndEF->category.protocol = ndi.categories.Lookup(
-          ndCAT_TYPE_PROTO, (unsigned)ndEF->detected_protocol);
-    }
-
-    if (ndEF->category.domain == ND_DOMAIN_UNKNOWN &&
-      ndEFNF->host_server_name[0] != '\0')
-    {
-        ndEF->category.domain = ndi.domains.Lookup(
-          ndEFNF->host_server_name);
-    }
-
-    if (ndGC_SOFT_DISSECTORS) {
-        ndSoftDissector nsd;
-
-        if (ndi.apps.SoftDissectorMatch(ndEF, &parser, nsd)) {
-            ndEF->flags.soft_dissector = true;
-            ndEF->flags.detection_complete = true;
-
-            if (nsd.aid > -1) {
-                if (nsd.aid == ND_APP_UNKNOWN) {
-                    ndEF->detected_application = 0;
-                    ndEF->detected_application_name.clear();
-                    ndEF->category.application = ND_CAT_UNKNOWN;
-                }
-                else
-                    SetDetectedApplication(entry,
-                      (nd_app_id_t)nsd.aid);
-            }
-
-            if (nsd.pid > -1) {
-                ndEF->detected_protocol = (nd_proto_id_t)nsd.pid;
-
-                ndEF->category.protocol = ndi.categories.Lookup(
-                  ndCAT_TYPE_PROTO, (unsigned)ndEF->detected_protocol);
-                ndEF->detected_protocol_name =
-                  nd_proto_get_name(ndEF->detected_protocol);
-            }
-        }
-    }
-
-    if (ndGC_DEBUG || ndGC.h_flow != stderr) {
-        uint8_t flags = ndFlow::PRINTF_METADATA;
-
-        if (ndGC.verbosity > 1)
-            flags |= ndFlow::PRINTF_STATS;
-        if (ndGC.verbosity > 2)
-            flags |= ndFlow::PRINTF_MACS;
-        if (ndGC.verbosity > 3)
-            flags |= ndFlow::PRINTF_HASHES;
-
-        if (ndGC.debug_flow_print_exprs.size()) {
-            for (auto &it : ndGC.debug_flow_print_exprs) {
-                try {
-                    if (! parser.Parse(ndEF, it)) continue;
-                    ndEF->Print(flags);
-                    break;
-                }
-                catch (string &e) {
-                    nd_dprintf("%s: %s: %s\n", tag.c_str(),
-                      it.c_str(), e.c_str());
-                }
-            }
-        }
-        else if (ndGC_VERBOSE || ndGC.h_flow != stderr)
-            ndEF->Print(flags);
-    }
-
-    ndi.plugins.BroadcastProcessorEvent(
-      (ndEF->flags.detection_updated.load()) ?
-        ndPluginProcessor::EVENT_FLOW_UPDATED :
-        ndPluginProcessor::EVENT_FLOW_NEW,
-      ndEF);
+      ndCategories::TYPE_APP, app_id);
 }
 
 void ndDetectionThread::SetGuessedProtocol(
@@ -1066,7 +1032,132 @@ void ndDetectionThread::SetGuessedProtocol(
         }
     }
 
-    ndEF->flags.detection_init = true;
     ndEF->flags.detection_guessed = true;
+}
+
+void ndDetectionThread::SetDetectionComplete(
+  ndDetectionQueueEntry *entry) {
+
+    if (ndEF->flags.detection_complete.load()) return;
+
     ndEF->flags.detection_complete = true;
+    if (ndEF->flags.risks_checked.load() == false)
+        ProcessRisks(entry);
+
+    FlowUpdate(entry);
+}
+
+void ndDetectionThread::FlowUpdate(ndDetectionQueueEntry *entry) {
+    if (ndEF->category.application == ND_CAT_UNKNOWN &&
+      ndEF->detected_application != ND_APP_UNKNOWN)
+    {
+        ndEF->category.application = ndi.categories.Lookup(
+          ndCategories::TYPE_APP,
+          (unsigned)ndEF->detected_application);
+    }
+
+    if (ndEF->category.protocol == ND_CAT_UNKNOWN &&
+      ndEF->detected_protocol != ND_PROTO_UNKNOWN)
+    {
+        ndEF->category.protocol = ndi.categories.Lookup(
+          ndCategories::TYPE_PROTO, (unsigned)ndEF->detected_protocol);
+    }
+
+    if (ndEF->category.domain == ND_CAT_UNKNOWN &&
+      ndEFNF->host_server_name[0] != '\0')
+    {
+        ndEF->category.domain = ndi.categories.LookupDotDirectory(
+          ndEFNF->host_server_name);
+    }
+
+    if (ndGC_SOFT_DISSECTORS) {
+        ndSoftDissector nsd;
+
+        if (ndi.apps.SoftDissectorMatch(ndEF, &parser, nsd)) {
+            ndEF->flags.soft_dissector = true;
+
+            if (nsd.aid > -1) {
+                if (nsd.aid == ND_APP_UNKNOWN) {
+                    ndEF->detected_application = 0;
+                    ndEF->detected_application_name.clear();
+                    ndEF->category.application = ND_CAT_UNKNOWN;
+                }
+                else
+                    SetDetectedApplication(entry,
+                      (nd_app_id_t)nsd.aid);
+            }
+
+            if (nsd.pid > -1) {
+                ndEF->detected_protocol = (nd_proto_id_t)nsd.pid;
+
+                ndEF->category.protocol = ndi.categories.Lookup(
+                  ndCategories::TYPE_PROTO,
+                  (unsigned)ndEF->detected_protocol);
+                ndEF->detected_protocol_name =
+                  nd_proto_get_name(ndEF->detected_protocol);
+            }
+
+            SetDetectionComplete(entry);
+        }
+    }
+
+    ndPluginProcessor::Event event = ndPluginProcessor::EVENT_DPI_NEW;
+
+    if (ndEF->flags.detection_complete.load())
+        event = ndPluginProcessor::EVENT_DPI_COMPLETE;
+    else if (ndEF->flags.detection_updated.load())
+        event = ndPluginProcessor::EVENT_DPI_UPDATE;
+
+    ndi.plugins.BroadcastProcessorEvent(event);
+
+    if (ndGC_DEBUG || ndGC.h_flow != stderr) {
+        bool output = false;
+        uint8_t flags = ndFlow::PRINTF_METADATA;
+
+        if (ndGC.verbosity > 1)
+            flags |= ndFlow::PRINTF_STATS;
+        if (ndGC.verbosity > 2)
+            flags |= ndFlow::PRINTF_RISKS;
+        if (ndGC.verbosity > 3)
+            flags |= ndFlow::PRINTF_MACS;
+        if (ndGC.verbosity > 4)
+            flags |= ndFlow::PRINTF_HASHES;
+
+        if (ndGC.debug_flow_print_exprs.size()) {
+            for (auto &it : ndGC.debug_flow_print_exprs) {
+                try {
+                    if (! parser.Parse(ndEF, it)) continue;
+                    output = true;
+                    break;
+                }
+                catch (string &e) {
+                    nd_dprintf("%s: %s: %s\n", tag.c_str(),
+                      it.c_str(), e.c_str());
+                }
+            }
+        }
+        else if (ndGC_VERBOSE || ndGC.h_flow != stderr)
+            output = true;
+
+        switch (event) {
+        case ndPluginProcessor::EVENT_DPI_NEW:
+            if (! (ndGC.verbosity_flags &
+                  ndGlobalConfig::VFLAG_EVENT_DPI_NEW))
+                output = false;
+            break;
+        case ndPluginProcessor::EVENT_DPI_UPDATE:
+            if (! (ndGC.verbosity_flags &
+                  ndGlobalConfig::VFLAG_EVENT_DPI_UPDATE))
+                output = false;
+            break;
+        case ndPluginProcessor::EVENT_DPI_COMPLETE:
+            if (! (ndGC.verbosity_flags &
+                  ndGlobalConfig::VFLAG_EVENT_DPI_COMPLETE))
+                output = false;
+            break;
+        default: break;
+        }
+
+        if (output) ndEF->Print(flags);
+    }
 }

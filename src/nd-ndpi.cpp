@@ -126,7 +126,8 @@ void ndpi_global_init(void) {
 
     for (auto &it : nd_ndpi_disabled_protos) {
         NDPI_DEL_PROTOCOL_FROM_BITMASK(ndpi_protos, it);
-        nd_dprintf("Banned protocol by ID: %hu\n", it);
+        if (ndGC.verbosity > 4)
+            nd_dprintf("Banned protocol by ID: %hu\n", it);
     }
 }
 

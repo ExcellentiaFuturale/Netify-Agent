@@ -109,10 +109,12 @@ protected:
     bool ProcessALPN(ndDetectionQueueEntry *entry,
       bool client = true);
     void ProcessFlow(ndDetectionQueueEntry *entry);
+    void ProcessRisks(ndDetectionQueueEntry *entry);
 
     void SetDetectedApplication(ndDetectionQueueEntry *entry,
       nd_app_id_t app_id);
     void SetGuessedProtocol(ndDetectionQueueEntry *entry);
+    void SetDetectionComplete(ndDetectionQueueEntry *entry);
 
     void FlowUpdate(ndDetectionQueueEntry *entry);
 };

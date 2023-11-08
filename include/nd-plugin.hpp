@@ -191,16 +191,22 @@ public:
     virtual ~ndPluginProcessor();
 
     enum Event {
+        EVENT_NONE,
+
         EVENT_FLOW_MAP,  // ndFlowMap *
         EVENT_FLOW_NEW,  // nd_flow_ptr
-        EVENT_FLOW_UPDATED,  // nd_flow_ptr
         EVENT_FLOW_EXPIRING,  // nd_flow_ptr
-        EVENT_FLOW_EXPIRED,  // nd_flow_ptr
+        EVENT_FLOW_EXPIRE,  // nd_flow_ptr
+        EVENT_DPI_NEW,  // nd_flow_ptr
+        EVENT_DPI_UPDATE,  // nd_flow_ptr
+        EVENT_DPI_COMPLETE,  // nd_flow_ptr
         EVENT_INTERFACES,  // ndInterfaces
         EVENT_PKT_CAPTURE_STATS,  // string, ndPacketStats *
         EVENT_PKT_GLOBAL_STATS,  // ndPacketStats *
         EVENT_UPDATE_INIT,  // ndInstanceStatus *
         EVENT_UPDATE_COMPLETE,
+
+        EVENT_MAX
     };
 
     template <class T>

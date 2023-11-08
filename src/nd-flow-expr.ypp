@@ -117,7 +117,7 @@ typedef void* yyscan_t;
 %token FLOW_DETECTION_UPDATED
 %token FLOW_CATEGORY
 %token FLOW_RISKS FLOW_NDPI_RISK_SCORE FLOW_NDPI_RISK_SCORE_CLIENT FLOW_NDPI_RISK_SCORE_SERVER
-%token FLOW_DOMAIN_CATEGORY
+%token FLOW_DOMAIN_CATEGORY FLOW_NETWORK_CATEGORY
 %token FLOW_APPLICATION FLOW_APPLICATION_CATEGORY
 %token FLOW_PROTOCOL FLOW_PROTOCOL_CATEGORY
 %token FLOW_DETECTED_HOSTNAME FLOW_SSL_VERSION FLOW_SSL_CIPHER FLOW_ORIGIN
@@ -151,7 +151,7 @@ typedef void* yyscan_t;
 %type <bool_result> expr_category
 %type <bool_result> expr_risks expr_ndpi_risk_score expr_ndpi_risk_score_client expr_ndpi_risk_score_server
 %type <bool_result> expr_app expr_app_id expr_app_name expr_app_category
-%type <bool_result> expr_domain_category
+%type <bool_result> expr_domain_category expr_network_category
 %type <bool_result> expr_proto expr_proto_id expr_proto_name expr_proto_category
 %type <bool_result> expr_detected_hostname expr_ssl_version expr_ssl_cipher
 %type <bool_result> expr_origin expr_fwmark
@@ -186,6 +186,7 @@ expr:
     | expr_app
     | expr_app_category
     | expr_domain_category
+    | expr_network_category
     | expr_proto
     | expr_proto_category
     | expr_detected_hostname
@@ -813,7 +814,7 @@ expr_category:
         _NDFP_result = (
             $$ = (
                 _NDFP_categories.LookupTag(
-                    ndCAT_TYPE_APP, category) == _NDFP_flow->category.application
+                    ndCategories::TYPE_APP, category) == _NDFP_flow->category.application
             )
         );
 
@@ -821,7 +822,16 @@ expr_category:
             _NDFP_result = (
                 $$ = (
                     _NDFP_categories.LookupTag(
-                        ndCAT_TYPE_APP, category) == _NDFP_flow->category.domain
+                        ndCategories::TYPE_APP, category) == _NDFP_flow->category.domain
+                )
+            );
+        }
+
+        if (! _NDFP_result) {
+            _NDFP_result = (
+                $$ = (
+                    _NDFP_categories.LookupTag(
+                        ndCategories::TYPE_APP, category) == _NDFP_flow->category.network
                 )
             );
         }
@@ -838,7 +848,7 @@ expr_category:
         _NDFP_result = (
             $$ = (
                 _NDFP_categories.LookupTag(
-                    ndCAT_TYPE_APP, category) != _NDFP_flow->category.application
+                    ndCategories::TYPE_APP, category) != _NDFP_flow->category.application
             )
         );
 
@@ -846,7 +856,16 @@ expr_category:
             _NDFP_result = (
                 $$ = (
                     _NDFP_categories.LookupTag(
-                        ndCAT_TYPE_APP, category) != _NDFP_flow->category.domain
+                        ndCategories::TYPE_APP, category) != _NDFP_flow->category.domain
+                )
+            );
+        }
+
+        if (! _NDFP_result) {
+            _NDFP_result = (
+                $$ = (
+                    _NDFP_categories.LookupTag(
+                        ndCategories::TYPE_APP, category) != _NDFP_flow->category.network
                 )
             );
         }
@@ -1019,7 +1038,7 @@ expr_app_category:
         _NDFP_result = (
             $$ = (
                 _NDFP_categories.LookupTag(
-                    ndCAT_TYPE_APP, category) == _NDFP_flow->category.application
+                    ndCategories::TYPE_APP, category) == _NDFP_flow->category.application
             )
         );
 
@@ -1035,7 +1054,7 @@ expr_app_category:
         _NDFP_result = (
             $$ = (
                 _NDFP_categories.LookupTag(
-                    ndCAT_TYPE_APP, category) != _NDFP_flow->category.application
+                    ndCategories::TYPE_APP, category) != _NDFP_flow->category.application
             )
         );
 
@@ -1054,7 +1073,7 @@ expr_domain_category:
         _NDFP_result = (
             $$ = (
                 _NDFP_categories.LookupTag(
-                    ndCAT_TYPE_APP, category) == _NDFP_flow->category.domain
+                    ndCategories::TYPE_APP, category) == _NDFP_flow->category.domain
             )
         );
 
@@ -1070,11 +1089,46 @@ expr_domain_category:
         _NDFP_result = (
             $$ = (
                 _NDFP_categories.LookupTag(
-                    ndCAT_TYPE_APP, category) != _NDFP_flow->category.domain
+                    ndCategories::TYPE_APP, category) != _NDFP_flow->category.domain
             )
         );
 
         _NDFP_debugf("Domain category != %s? %s\n", $3, (_NDFP_result) ? "yes" : "no");
+    }
+    ;
+
+expr_network_category:
+      FLOW_NETWORK_CATEGORY CMP_EQUAL VALUE_NAME {
+        size_t p;
+        string category($3);
+
+        while ((p = category.find_first_of("'")) != string::npos)
+            category.erase(p, 1);
+
+        _NDFP_result = (
+            $$ = (
+                _NDFP_categories.LookupTag(
+                    ndCategories::TYPE_APP, category) == _NDFP_flow->category.network
+            )
+        );
+
+        _NDFP_debugf("Network category == %s? %s\n", $3, (_NDFP_result) ? "yes" : "no");
+    }
+    | FLOW_NETWORK_CATEGORY CMP_NOTEQUAL VALUE_NAME {
+        size_t p;
+        string category($3);
+
+        while ((p = category.find_first_of("'")) != string::npos)
+            category.erase(p, 1);
+
+        _NDFP_result = (
+            $$ = (
+                _NDFP_categories.LookupTag(
+                    ndCategories::TYPE_APP, category) != _NDFP_flow->category.network
+            )
+        );
+
+        _NDFP_debugf("Network category != %s? %s\n", $3, (_NDFP_result) ? "yes" : "no");
     }
     ;
 
@@ -1160,7 +1214,7 @@ expr_proto_category:
         _NDFP_result = (
             $$ = (
                 _NDFP_categories.LookupTag(
-                    ndCAT_TYPE_PROTO, category) == _NDFP_flow->category.protocol
+                    ndCategories::TYPE_PROTO, category) == _NDFP_flow->category.protocol
             )
         );
 
@@ -1177,7 +1231,7 @@ expr_proto_category:
         _NDFP_result = (
             $$ = (
                 _NDFP_categories.LookupTag(
-                    ndCAT_TYPE_PROTO, category) != _NDFP_flow->category.protocol
+                    ndCategories::TYPE_PROTO, category) != _NDFP_flow->category.protocol
             )
         );
 

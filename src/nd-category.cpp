@@ -26,10 +26,62 @@
 
 #include "nd-category.hpp"
 #include "nd-config.hpp"
+#include "nd-except.hpp"
 #include "nd-util.hpp"
 #include "netifyd.hpp"
 
 // #define _ND_LOG_DOMAINS   1
+
+typedef radix_tree<ndRadixNetworkEntry<_ND_ADDR_BITSv4>, nd_cat_id_t> nd_rn4_cat;
+typedef radix_tree<ndRadixNetworkEntry<_ND_ADDR_BITSv6>, nd_cat_id_t> nd_rn6_cat;
+
+ndCategories::ndCategories()
+  : networks4(nullptr), networks6(nullptr) {
+    categories.emplace(TYPE_APP, ndCategory());
+    categories.emplace(TYPE_PROTO, ndCategory());
+}
+
+ndCategories::~ndCategories() {
+    ResetNetworks(true);
+}
+
+void ndCategories::ResetCategories(void) {
+    for (auto &ci : categories) {
+        ci.second.tag.clear();
+        ci.second.index.clear();
+    }
+}
+
+void ndCategories::ResetDomains(void) {
+    domains.clear();
+}
+
+void ndCategories::ResetNetworks(bool free_only) {
+    if (networks4 != nullptr) {
+        nd_rn4_cat *rn4 = static_cast<nd_rn4_cat *>(networks4);
+        delete rn4;
+        networks4 = nullptr;
+    }
+
+    if (networks6 != nullptr) {
+        nd_rn6_cat *rn6 = static_cast<nd_rn6_cat *>(networks6);
+        delete rn6;
+        networks6 = nullptr;
+    }
+
+    if (! free_only) {
+        nd_rn4_cat *rn4 = new nd_rn4_cat;
+        nd_rn6_cat *rn6 = new nd_rn6_cat;
+
+        if (rn4 == nullptr || rn6 == nullptr) {
+            throw ndSystemException(__PRETTY_FUNCTION__,
+              "new", ENOMEM);
+        }
+
+        networks4 = static_cast<void *>(rn4);
+        networks6 = static_cast<void *>(rn6);
+    }
+}
 
 bool ndCategories::Load(const string &filename) {
     lock_guard<mutex> ul(lock);
@@ -56,8 +108,6 @@ bool ndCategories::Load(const string &filename) {
         return false;
     }
 
-    last_update = (time_t)(jdata["last_update"].get<unsigned>());
-
     if (jdata.find("application_tag_index") == jdata.end() ||
       jdata.find("protocol_tag_index") == jdata.end())
     {
@@ -66,12 +116,14 @@ bool ndCategories::Load(const string &filename) {
         return LoadLegacy(jdata);
     }
 
+    ResetCategories();
+
     for (auto &ci : categories) {
         string key;
 
         switch (ci.first) {
-        case ndCAT_TYPE_APP: key = "application"; break;
-        case ndCAT_TYPE_PROTO: key = "protocol"; break;
+        case TYPE_APP: key = "application"; break;
+        case TYPE_PROTO: key = "protocol"; break;
         default: break;
         }
 
@@ -87,13 +139,16 @@ bool ndCategories::Load(const string &filename) {
 }
 
 bool ndCategories::LoadLegacy(const json &jdata) {
+
+    ResetCategories();
+
     for (auto &ci : categories) {
         string key;
         nd_cat_id_t id = 1;
 
         switch (ci.first) {
-        case ndCAT_TYPE_APP: key = "application"; break;
-        case ndCAT_TYPE_PROTO: key = "protocol"; break;
+        case TYPE_APP: key = "application"; break;
+        case TYPE_PROTO: key = "protocol"; break;
         default: break;
         }
 
@@ -113,7 +168,7 @@ bool ndCategories::LoadLegacy(const json &jdata) {
     return true;
 }
 
-bool ndCategories::Load(ndCategoryType type, json &jdata) {
+bool ndCategories::Load(Type type, json &jdata) {
     lock_guard<mutex> ul(lock);
 
     auto ci = categories.find(type);
@@ -127,10 +182,8 @@ bool ndCategories::Load(ndCategoryType type, json &jdata) {
     string key;
 
     switch (type) {
-    case ndCAT_TYPE_APP:
-        key = "application_category";
-        break;
-    case ndCAT_TYPE_PROTO: key = "protocol_category"; break;
+    case TYPE_APP: key = "application_category"; break;
+    case TYPE_PROTO: key = "protocol_category"; break;
     default: break;
     }
 
@@ -164,15 +217,15 @@ bool ndCategories::Save(const string &filename) {
     json j;
 
     try {
-        j["last_update"] = time(NULL);
+        j["last_update"] = time(nullptr);
 
         for (auto &ci : categories) {
             switch (ci.first) {
-            case ndCAT_TYPE_APP:
+            case TYPE_APP:
                 j["application_tag_index"] = ci.second.tag;
                 j["application_index"] = ci.second.index;
                 break;
-            case ndCAT_TYPE_PROTO:
+            case TYPE_PROTO:
                 j["protocol_tag_index"] = ci.second.tag;
                 j["protocol_index"] = ci.second.index;
                 break;
@@ -211,26 +264,21 @@ bool ndCategories::Save(const string &filename) {
     return true;
 }
 
-void ndCategories::Dump(ndCategoryType type) {
+void ndCategories::Dump(Type type) {
     lock_guard<mutex> ul(lock);
 
     for (auto &ci : categories) {
-        if (type != ndCAT_TYPE_MAX && ci.first != type)
-            continue;
+        if (type != TYPE_MAX && ci.first != type) continue;
 
         for (auto &li : ci.second.tag) {
-            if (type != ndCAT_TYPE_MAX)
+            if (type != TYPE_MAX)
                 printf("%6u: %s\n", li.second, li.first.c_str());
             else {
                 string tag("unknown");
 
                 switch (ci.first) {
-                case ndCAT_TYPE_APP:
-                    tag = "application";
-                    break;
-                case ndCAT_TYPE_PROTO:
-                    tag = "protocol";
-                    break;
+                case TYPE_APP: tag = "application"; break;
+                case TYPE_PROTO: tag = "protocol"; break;
                 default: break;
                 }
 
@@ -241,8 +289,8 @@ void ndCategories::Dump(ndCategoryType type) {
     }
 }
 
-bool ndCategories::IsMember(ndCategoryType type,
-  nd_cat_id_t cat_id, unsigned id) {
+bool ndCategories::IsMember(Type type, nd_cat_id_t cat_id,
+  unsigned id) {
     lock_guard<mutex> ul(lock);
     auto ci = categories.find(type);
 
@@ -262,7 +310,7 @@ bool ndCategories::IsMember(ndCategoryType type,
     return false;
 }
 
-bool ndCategories::IsMember(ndCategoryType type,
+bool ndCategories::IsMember(Type type,
   const string &cat_tag, unsigned id) {
     lock_guard<mutex> ul(lock);
     auto ci = categories.find(type);
@@ -287,10 +335,7 @@ bool ndCategories::IsMember(ndCategoryType type,
     return true;
 }
 
-nd_cat_id_t
-ndCategories::Lookup(ndCategoryType type, unsigned id) const {
-    if (type >= ndCAT_TYPE_MAX) return ND_CAT_UNKNOWN;
-
+nd_cat_id_t ndCategories::Lookup(Type type, unsigned id) const {
     lock_guard<mutex> ul(lock);
 
     const auto index = categories.find(type);
@@ -304,10 +349,8 @@ ndCategories::Lookup(ndCategoryType type, unsigned id) const {
     return ND_CAT_UNKNOWN;
 }
 
-nd_cat_id_t ndCategories::LookupTag(ndCategoryType type,
-  const string &tag) const {
-    if (type >= ndCAT_TYPE_MAX) return ND_CAT_UNKNOWN;
-
+nd_cat_id_t
+ndCategories::LookupTag(Type type, const string &tag) const {
     lock_guard<mutex> ul(lock);
 
     const auto &index = categories.find(type);
@@ -319,12 +362,9 @@ nd_cat_id_t ndCategories::LookupTag(ndCategoryType type,
     return ND_CAT_UNKNOWN;
 }
 
-nd_cat_id_t ndCategories::ResolveTag(ndCategoryType type,
-  unsigned id, string &tag) const {
-    if (type >= ndCAT_TYPE_MAX) return ND_CAT_UNKNOWN;
-
+nd_cat_id_t ndCategories::ResolveTag(Type type, unsigned id,
+  string &tag) const {
     nd_cat_id_t cat_id = Lookup(type, id);
-
     if (cat_id == ND_CAT_UNKNOWN) return ND_CAT_UNKNOWN;
 
     lock_guard<mutex> ul(lock);
@@ -342,28 +382,26 @@ nd_cat_id_t ndCategories::ResolveTag(ndCategoryType type,
     return cat_id;
 }
 
-bool ndDomains::Load(const ndCategories &categories,
-  const string &path_domains) {
+bool ndCategories::LoadDotDirectory(const string &path) {
     lock_guard<mutex> ul(lock);
 
-    if (! categories.GetTagIndex(ndCAT_TYPE_APP, index_tag))
-        return false;
+    auto it_apps = categories.find(TYPE_APP);
+    if (it_apps == categories.end()) return false;
 
     vector<string> files;
-    if (! nd_scan_dotd(path_domains, files)) return true;
+    // /etc/netifyd/categories.d/10-adult.conf
+    // /etc/netifyd/categories.d/{pri}-{cat_tag}.conf
+    if (! nd_scan_dotd(path, files)) return true;
 
-    domains.clear();
-
-    // /etc/netifyd/domains.d/10-adult.txt
-    // /etc/netifyd/domains.d/{pri}-{cat_tag}.txt
+    ResetDomains();
+    ResetNetworks();
 
     for (auto &it : files) {
         size_t p1 = it.find_first_of("-");
         if (p1 == string::npos) {
             nd_dprintf(
-              "Rejecting domain file (wrong format; "
-              "missing "
-              "hyphen): %s\n",
+              "Rejecting category file (wrong format; "
+              "missing hyphen): %s\n",
               it.c_str());
             continue;
         }
@@ -371,52 +409,114 @@ bool ndDomains::Load(const ndCategories &categories,
         size_t p2 = it.find_last_of(".");
         if (p2 == string::npos) {
             nd_dprintf(
-              "Rejecting domain file (wrong format; "
-              "missing "
-              "extension): %s\n",
+              "Rejecting category file (wrong format; "
+              "missing extension): %s\n",
               it.c_str());
             continue;
         }
 
         string cat_tag = it.substr(p1 + 1, p2 - p1 - 1);
 
-        auto tag = index_tag.find(cat_tag);
-        if (tag == index_tag.end()) {
+        auto tag = it_apps->second.tag.find(cat_tag);
+        if (tag == it_apps->second.tag.end()) {
             nd_dprintf(
-              "Rejecting domain file (invalid category "
-              "tag): "
-              "%s\n",
+              "Rejecting category file (invalid category "
+              "tag): ",
               it.c_str());
             continue;
         }
 
-        nd_dprintf("Loading custom %s domain file: %s\n",
+        nd_dprintf("Loading %s category file: %s\n",
           tag->first.c_str(), it.c_str());
 
-        ifstream ifs(path_domains + "/" + it);
+        ifstream ifs(path + "/" + it);
 
         if (! ifs.is_open()) {
-            nd_printf(
-              "Error opening custom domain category file: "
-              "%s\n",
+            nd_printf("Error opening category file: %s\n",
               it.c_str());
             continue;
         }
 
-        string domain;
+        string line;
+        uint32_t networks = 0;
         unordered_set<string> entries;
-        while (ifs >> domain) entries.insert(domain);
 
-        domains.insert(make_pair(tag->second, entries));
+        while (getline(ifs, line)) {
+            nd_ltrim(line);
+            if (line.empty() || line[0] == '#') continue;
 
-        nd_dprintf("Loaded %u %s domains from: %s\n",
-          entries.size(), tag->first.c_str(), it.c_str());
+            size_t p;
+            if ((p = line.find_first_of(":")) == string::npos)
+                continue;
+
+            string type = line.substr(0, p);
+            if (type == "dom")
+                entries.insert(line.substr(p + 1));
+            else if (type != "net") {
+                ndAddr addr(line.substr(p + 1));
+
+                if (! addr.IsValid() || ! addr.IsIP()) {
+                    nd_printf(
+                      "Invalid IPv4/6 network address: "
+                      "%s: %s\n",
+                      it.c_str(), line.substr(p + 1).c_str());
+                    continue;
+                }
+
+                try {
+                    if (addr.IsIPv4()) {
+                        ndRadixNetworkEntry<_ND_ADDR_BITSv4> entry;
+                        if (ndRadixNetworkEntry<_ND_ADDR_BITSv4>::Create(
+                              entry, addr))
+                        {
+                            nd_rn4_cat *rn4 =
+                              static_cast<nd_rn4_cat *>(networks4);
+                            (*rn4)[entry] = tag->second;
+                            networks++;
+                        }
+                    }
+                    else {
+                        ndRadixNetworkEntry<_ND_ADDR_BITSv6> entry;
+                        if (ndRadixNetworkEntry<_ND_ADDR_BITSv6>::Create(
+                              entry, addr))
+                        {
+                            nd_rn6_cat *rn6 =
+                              static_cast<nd_rn6_cat *>(networks6);
+                            (*rn6)[entry] = tag->second;
+                            networks++;
+                        }
+                    }
+                }
+                catch (runtime_error &e) {
+                    nd_dprintf(
+                      "Error adding network: %s: %s: %s\n",
+                      it.c_str(),
+                      line.substr(p + 1).c_str(), e.what());
+                }
+            }
+        }
+
+        if (! entries.empty()) {
+            domains.insert(make_pair(tag->second, entries));
+
+            nd_dprintf(
+              "Loaded %u %s domains from category file: "
+              "%s\n",
+              entries.size(), tag->first.c_str(), it.c_str());
+        }
+
+        if (networks) {
+            nd_dprintf(
+              "Loaded %u %s networks from category file: "
+              "%s\n",
+              networks, tag->first.c_str(), it.c_str());
+        }
     }
 
     return true;
 }
 
-nd_cat_id_t ndDomains::Lookup(const string &domain) {
+nd_cat_id_t ndCategories::LookupDotDirectory(const string &domain) {
     lock_guard<mutex> ul(lock);
 
     string search(domain);
@@ -443,5 +543,9 @@ nd_cat_id_t ndDomains::Lookup(const string &domain) {
     }
     while (search.size() && p != string::npos);
 
-    return ND_DOMAIN_UNKNOWN;
+    return ND_CAT_UNKNOWN;
+}
+
+nd_cat_id_t ndCategories::LookupDotDirectory(const ndAddr &addr) {
+    return ND_CAT_UNKNOWN;
 }

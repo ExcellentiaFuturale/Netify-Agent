@@ -212,8 +212,9 @@ public:
         PRINTF_MACS = 0x02,
         PRINTF_METADATA = 0x04,
         PRINTF_STATS = 0x08,
+        PRINTF_RISKS = 0x10,
         PRINTF_ALL = (PRINTF_HASHES | PRINTF_MACS |
-          PRINTF_METADATA | PRINTF_STATS)
+          PRINTF_METADATA | PRINTF_STATS | PRINTF_RISKS)
     };
 
     void Print(uint8_t pflags = PRINTF_METADATA) const;
@@ -412,6 +413,8 @@ public:
               category.protocol);
             serialize(output, { "category", "domain" },
               category.domain);
+            serialize(output, { "category", "network" },
+              category.network);
 
             if (! dns_host_name.empty())
                 serialize(output, { "dns_host_name" }, dns_host_name);
@@ -676,6 +679,7 @@ public:
         nd_cat_id_t application;
         nd_cat_id_t protocol;
         nd_cat_id_t domain;
+        nd_cat_id_t network;
     } category;
 
     struct ndpi_flow_struct *ndpi_flow;
@@ -783,7 +787,7 @@ public:
         atomic<bool> expired;
         atomic<bool> expiring;
         atomic<bool> ip_nat;
-        atomic<bool> risk_checked;
+        atomic<bool> risks_checked;
         atomic<bool> soft_dissector;
         atomic<uint8_t> tcp_fin_ack;
     } flags;
@@ -801,7 +805,7 @@ public:
         uint8_t other_type;
     } gtp;
 
-    vector<nd_risk_id_t> risks;
+    set<nd_risk_id_t> risks;
     uint16_t ndpi_risk_score;
     uint16_t ndpi_risk_score_client;
     uint16_t ndpi_risk_score_server;

@@ -486,7 +486,7 @@ bool ndApplications::AddNetwork(nd_app_id_t id,
     }
 
     try {
-        if (addr.addr.ss.ss_family == AF_INET) {
+        if (addr.IsIPv4()) {
             ndRadixNetworkEntry<_ND_ADDR_BITSv4> entry;
             if (ndRadixNetworkEntry<_ND_ADDR_BITSv4>::Create(entry, addr))
             {
@@ -522,8 +522,10 @@ bool ndApplications::AddSoftDissector(signed aid,
 
     if (aid < 0 && pid < 0) return false;
 
-    nd_dprintf("%s: app: %d, proto: %d, expr: \"%s\"\n",
-      __PRETTY_FUNCTION__, aid, pid, decoded_expr.c_str());
+    if (ndGC.verbosity > 4) {
+        nd_dprintf("%s: app: %d, proto: %d, expr: \"%s\"\n",
+          __PRETTY_FUNCTION__, aid, pid, decoded_expr.c_str());
+    }
 
     soft_dissectors.push_back(
       ndSoftDissector(aid, pid, decoded_expr));
