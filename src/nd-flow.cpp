@@ -319,10 +319,11 @@ bool ndFlow::HasBTInfoHash(void) const {
       bt.info_hash_valid);
 }
 
-bool ndFlow::HasSSDPHeaders(void) const {
-    return (detected_protocol == ND_PROTO_SSDP &&
-      ssdp.headers.size());
+bool ndFlow::HasSSDPUserAgent(void) const {
+    return (GetMasterProtocol() == ND_PROTO_SSDP &&
+      http.user_agent[0] != '\0');
 }
+
 #if 0
 bool ndFlow::HasMiningVariant(void) const
 {
@@ -483,7 +484,7 @@ void ndFlow::Print(uint8_t pflags) const {
                     dls << " DHCP/CI: " << dhcp.class_ident;
             }
 
-            if (HasHttpUserAgent()) {
+            if (HasHttpUserAgent() || HasSSDPUserAgent()) {
                 dls << endl
                     << setw(iface->ifname.size()) << " "
                     << ":";
@@ -583,7 +584,8 @@ void ndFlow::Print(uint8_t pflags) const {
                       << nd_risk_get_name(*r);
                 }
                 if (risks.size() > 1) {
-                    for (r = next(risks.begin()); r != risks.end(); r++)
+                    for (r = next(risks.begin());
+                         r != risks.end(); r++)
                     {
                         dls
                           << endl

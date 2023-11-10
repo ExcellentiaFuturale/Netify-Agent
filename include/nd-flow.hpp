@@ -172,8 +172,6 @@ public:
 class ndFlow : public ndSerializer
 {
 public:
-    typedef unordered_map<string, string> KeyValueMap;
-
     ndFlow(nd_iface_ptr &iface);
     ndFlow(const ndFlow &flow);
     virtual ~ndFlow();
@@ -200,7 +198,7 @@ public:
     bool HasTLSClientJA3(void) const;
     bool HasTLSServerJA3(void) const;
     bool HasBTInfoHash(void) const;
-    bool HasSSDPHeaders(void) const;
+    bool HasSSDPUserAgent(void) const;
 #if 0
     bool HasMiningVariant(void) const;
 #endif
@@ -507,8 +505,12 @@ public:
                 serialize(output, { "bt", "info_hash" }, digest);
             }
 
-            if (HasSSDPHeaders())
-                serialize(output, { "ssdp" }, ssdp.headers);
+            if (HasSSDPUserAgent()) {
+                if (HasSSDPUserAgent()) {
+                    serialize(output,
+                      { "ssdp", "user_agent" }, http.user_agent);
+                }
+            }
 #if 0
             if (HasMiningVariant())
                 serialize(output, { "mining", "variant" }, mining.variant);
@@ -614,7 +616,8 @@ public:
               stats.upper_rate.load());
 
             if (ip_protocol == IPPROTO_TCP) {
-                serialize(output, { "tcp", "seq_errors" },
+                serialize(output,
+                  { "tcp", "seq_errors" },
                   stats.tcp_seq_errors.load());
                 serialize(output, { "tcp", "resets" },
                   stats.tcp_resets.load());
@@ -737,10 +740,6 @@ public:
 
     vector<string> tls_alpn, tls_alpn_server;
     atomic<bool> tls_alpn_set, tls_alpn_server_set;
-
-    struct {
-        KeyValueMap headers;
-    } ssdp;
 
     enum {
         TYPE_LOWER,

@@ -750,6 +750,7 @@ void ndDetectionThread::ProcessFlow(ndDetectionQueueEntry *entry) {
 
         break;
     case ND_PROTO_HTTP:
+    case ND_PROTO_SSDP:
         if (ndEFNF->http.user_agent != nullptr) {
             for (size_t i = 0;
                  i < strlen((const char *)ndEFNF->http.user_agent);
@@ -784,15 +785,6 @@ void ndDetectionThread::ProcessFlow(ndDetectionQueueEntry *entry) {
           "%s", ndEFNFP.ssh.client_signature);
         snprintf(ndEF->ssh.server_agent, ND_FLOW_SSH_UALEN,
           "%s", ndEFNFP.ssh.server_signature);
-        break;
-    case ND_PROTO_SSDP:
-        if (ndEFNF->http.user_agent != nullptr &&
-          strnlen(ndEFNF->http.user_agent, ND_FLOW_UA_LEN) != 0)
-        {
-            ndEF->ssdp.headers["user-agent"].assign(
-              ndEFNF->http.user_agent,
-              strnlen(ndEFNF->http.user_agent, ND_FLOW_UA_LEN));
-        }
         break;
     case ND_PROTO_BITTORRENT:
 #if 0
