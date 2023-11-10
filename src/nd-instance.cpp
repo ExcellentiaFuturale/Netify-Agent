@@ -294,8 +294,7 @@ ndInstance::InitializeConfig(int argc, char * const argv[]) {
 
         switch (rc) {
         case 'c':
-        case 'd':
-            break;
+        case 'd': break;
         case _ND_LO_DUMP_SORT_BY_TAG:
             dump_flags |= ndDUMP_SORT_BY_TAG;
             break;
@@ -661,8 +660,7 @@ bool ndInstance::Daemonize(void) {
         if (mkdir(ndGC.path_state_volatile.c_str(), 0755) != 0)
         {
             nd_printf(
-              "%s: Error creating volatile state path: "
-              "%s: "
+              "%s: Error creating volatile state path: %s: "
               "%s\n",
               tag.c_str(), ndGC.path_state_volatile.c_str(),
               strerror(errno));
@@ -1291,8 +1289,7 @@ bool ndInstance::DisplayAgentStatus(void) {
 
         if (nd_pid <= 0) {
             fprintf(stderr,
-              "%s%s The following run-time information "
-              "is "
+              "%s%s The following run-time information is "
               "likely out-dated.%s\n",
               ND_C_YELLOW, ND_I_WARN, ND_C_RESET);
         }
@@ -1351,14 +1348,8 @@ bool ndInstance::DisplayAgentStatus(void) {
         unsigned long flows_in_use =
           (unsigned long)jstatus["flows_in_use"].get<unsigned>();
 
-        //        if (flows_in_use) {
-        //            icon = ND_I_WARN;
-        //            color = ND_C_YELLOW;
-        //        }
-        //        else {
         icon = ND_I_INFO;
         color = ND_C_RESET;
-        //        }
 
         fprintf(stderr,
           "%s%s%s flows purged: %lu, in-use: %s%lu%s\n",
@@ -1537,8 +1528,7 @@ bool ndInstance::DisplayAgentStatus(void) {
 
         if (! ndGC_USE_NAPI) {
             fprintf(stderr,
-              "  %s Netify API updates can be enabled "
-              "from "
+              "  %s Netify API updates can be enabled from "
               "the configuration file:\n    %s\n",
               ND_I_NOTE, conf_filename.c_str());
         }
@@ -1583,10 +1573,9 @@ bool ndInstance::DisplayAgentStatus(void) {
             fprintf(stderr, "%s%s%s site UUID is not set.\n",
               ND_C_YELLOW, ND_I_WARN, ND_C_RESET);
             fprintf(stderr,
-              "  %s A new site UUID will be "
-              "automatically "
-              "set "
-              "after this agent has been provisioned.\n",
+              "  %s A new site UUID will be automatically "
+              "set after this agent has been "
+              "provisioned.\n",
               ND_I_NOTE);
         }
         else {
@@ -2042,9 +2031,8 @@ bool ndInstance::CreateCaptureThreads(ndInterfaces &ifaces,
 #endif
         default:
             nd_printf(
-              "%s: WARNING: Unsupported capture type: "
-              "%s: "
-              "%hu",
+              "%s: WARNING: Unsupported capture type: %s: "
+              "%hu\n",
               tag.c_str(), it.second->ifname.c_str(),
               it.second->capture_type);
         }
@@ -2518,9 +2506,8 @@ void ndInstance::ProcessFlows(void) {
 
     nd_dprintf(
       "%s: new: %lu, pre-dpi: %lu, in-use: %lu, purged "
-      "%lu, active: %lu,"
-      " idle: %lu, expiring: %lu, expired: %lu, total: "
-      "%lu\n",
+      "%lu, active: %lu, idle: %lu, expiring: %lu, "
+      "expired: %lu, total: %lu\n",
       tag.c_str(),
 
       flows_new, flows_pre_init, status.flows_in_use,
