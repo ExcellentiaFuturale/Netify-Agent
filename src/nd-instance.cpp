@@ -265,13 +265,6 @@ ndInstance::InitializeConfig(int argc, char * const argv[]) {
             break;
 
         switch (rc) {
-        case 0: break;
-        case _ND_LO_DUMP_SORT_BY_TAG:
-            dump_flags |= ndDUMP_SORT_BY_TAG;
-            break;
-        case _ND_LO_DUMP_WITH_CATS:
-            dump_flags |= ndDUMP_WITH_CATS;
-            break;
         case _ND_LO_IGNORE_IFACE_CONFIGS:
             ndGC_SetFlag(ndGF_IGNORE_IFACE_CONFIGS, true);
             break;
@@ -280,9 +273,6 @@ ndInstance::InitializeConfig(int argc, char * const argv[]) {
             return ndCR_INVALID_OPTION;
         case 'c': conf_filename = optarg; break;
         case 'd': ndGC_SetFlag(ndGF_DEBUG, true); break;
-        case 's':
-            ndGC_SetFlag(ndGF_DOTD_CATEGORIES, false);
-            break;
         default: break;
         }
     }
@@ -297,15 +287,24 @@ ndInstance::InitializeConfig(int argc, char * const argv[]) {
         ndGC.Close();
     }
 
-    Reload(false);
-
     optind = 1;
     while (true) {
         if ((rc = getopt_long(argc, argv, flags, options, NULL)) == -1)
             break;
 
         switch (rc) {
-        case 0: break;
+        case 'c':
+        case 'd':
+            break;
+        case _ND_LO_DUMP_SORT_BY_TAG:
+            dump_flags |= ndDUMP_SORT_BY_TAG;
+            break;
+        case _ND_LO_DUMP_WITH_CATS:
+            dump_flags |= ndDUMP_WITH_CATS;
+            break;
+        case _ND_LO_IGNORE_IFACE_CONFIGS:
+            ndGC_SetFlag(ndGF_IGNORE_IFACE_CONFIGS, true);
+            break;
         case _ND_LO_ENABLE_PLUGIN:
         case _ND_LO_DISABLE_PLUGIN:
         case _ND_LO_ENABLE_SINK:
@@ -348,59 +347,11 @@ ndInstance::InitializeConfig(int argc, char * const argv[]) {
                 return ndCR_INVALID_VALUE;
             }
             break;
-        case _ND_LO_EXPORT_APPS:
-#ifndef _ND_LEAN_AND_MEAN
-            rc = apps.Save("/dev/stdout");
-            return ndCR_Pack(ndCR_EXPORT_APPS, (rc) ? 0 : 1);
-#else
-            cerr << "Sorry, this feature was disabled "
-                    "(embedded).\n";
-            return ndCR_DISABLED_OPTION;
-#endif
-        case _ND_LO_DUMP_SORT_BY_TAG:
-            dump_flags |= ndDUMP_SORT_BY_TAG;
-            break;
-
-        case _ND_LO_DUMP_WITH_CATS:
-            dump_flags |= ndDUMP_WITH_CATS;
-            break;
-
-        case _ND_LO_DUMP_PROTOS:
-            rc = DumpList(ndDUMP_TYPE_PROTOS | dump_flags);
-            return ndCR_Pack(ndCR_DUMP_LIST, (rc) ? 0 : 1);
-        case _ND_LO_DUMP_APPS:
-            rc = DumpList(ndDUMP_TYPE_APPS | dump_flags);
-            return ndCR_Pack(ndCR_DUMP_LIST, (rc) ? 0 : 1);
-        case _ND_LO_DUMP_CAT:
-            if (strncasecmp("application", optarg, 11) == 0)
-                rc = DumpList(ndDUMP_TYPE_CAT_APP | dump_flags);
-            else if (strncasecmp("protocol", optarg, 8) == 0)
-                rc = DumpList(ndDUMP_TYPE_CAT_PROTO | dump_flags);
-            else {
-                cerr << "Invalid catetory type \"" << optarg
-                     << "\", valid types: applications, "
-                        "protocols\n";
-                rc = 0;
-            }
-            return ndCR_Pack(ndCR_DUMP_LIST, (rc) ? 0 : 1);
-        case _ND_LO_DUMP_CATS:
-            rc = DumpList(ndDUMP_TYPE_CATS | dump_flags);
-            return ndCR_Pack(ndCR_DUMP_LIST, (rc) ? 0 : 1);
-        case _ND_LO_DUMP_RISKS:
-            rc = DumpList(ndDUMP_TYPE_RISKS | dump_flags);
-            return ndCR_Pack(ndCR_DUMP_LIST, (rc) ? 0 : 1);
-        case _ND_LO_LOOKUP_IP:
-            rc = LookupAddress(optarg);
-            return ndCR_Pack(ndCR_LOOKUP_ADDR, (rc) ? 0 : 1);
         case _ND_LO_CAPTURE_DELAY:
             ndGC.ttl_capture_delay = atoi(optarg);
             break;
         case _ND_LO_ALLOW_UNPRIV:
             ndGC_SetFlag(ndGF_ALLOW_UNPRIV, true);
-            break;
-        case _ND_LO_IGNORE_IFACE_CONFIGS:
-            // XXX: Set in first getopt pass prior to loading
-            // configuration file.
             break;
         case _ND_LO_DISABLE_AUTO_FLOW_EXPIRY:
             ndGC_SetFlag(ndGF_AUTO_FLOW_EXPIRY, false);
@@ -434,9 +385,21 @@ ndInstance::InitializeConfig(int argc, char * const argv[]) {
                   "WARNING: Invalid verbose-flag: %s\n", optarg);
             }
             break;
-        case '?':
-            cerr << "Try `--help' for more information.\n";
-            return ndCR_INVALID_OPTION;
+        case _ND_LO_LOOKUP_IP:
+        case _ND_LO_EXPORT_APPS:
+        case _ND_LO_DUMP_PROTOS:
+        case _ND_LO_DUMP_APPS:
+        case _ND_LO_DUMP_CAT:
+        case _ND_LO_DUMP_CATS:
+        case _ND_LO_DUMP_RISKS:
+        case 'P':
+        case 's':
+            ndGC_SetFlag(ndGF_DOTD_CATEGORIES, false);
+            break;
+        case 'D':
+            ndGC_SetFlag(ndGF_DEBUG_CURL, true);
+            break;
+        case 'f': ndGC.path_legacy_config = optarg; break;
         case 'A':
             if (last_iface.size() == 0) {
                 cerr << "You must specify an interface "
@@ -445,11 +408,6 @@ ndInstance::InitializeConfig(int argc, char * const argv[]) {
             }
             ndGC.AddInterfaceAddress(last_iface, optarg);
             break;
-        case 'd': break;
-        case 'D':
-            ndGC_SetFlag(ndGF_DEBUG_CURL, true);
-            break;
-        case 'c': break;
         case 'E':
             if (! AddInterface(optarg, ndIR_WAN, ndCT_PCAP | ndCT_CMDLINE))
                 return ndCR_INVALID_INTERFACE;
@@ -463,10 +421,6 @@ ndInstance::InitializeConfig(int argc, char * const argv[]) {
             }
             ndGC.AddInterfaceFilter(last_iface, optarg);
             break;
-        case 'f': ndGC.path_legacy_config = optarg; break;
-        case 'h':
-            CommandLineHelp();
-            return ndCR_USAGE_OR_VERSION;
         case 'I':
             if (! AddInterface(optarg, ndIR_LAN, ndCT_PCAP | ndCT_CMDLINE))
                 return ndCR_INVALID_INTERFACE;
@@ -490,9 +444,6 @@ ndInstance::InitializeConfig(int argc, char * const argv[]) {
             }
             ndGC.AddInterfacePeer(last_iface, optarg);
             break;
-        case 'P':
-            rc = DumpList(ndDUMP_TYPE_ALL | dump_flags);
-            return ndCR_Pack(ndCR_DUMP_LIST, (rc) ? 0 : 1);
         case 'p':
             if ((rc = CheckAgentUUID())) {
                 string uuid;
@@ -523,10 +474,6 @@ ndInstance::InitializeConfig(int argc, char * const argv[]) {
                     "(embedded).\n";
             return ndCR_DISABLED_OPTION;
 #endif
-        case 's':
-            rc = DisplayAgentStatus();
-            return ndCR_Pack(ndCR_AGENT_STATUS, (rc) ? 0 : 1);
-            break;
         case 't':
             ndGC_SetFlag(ndGF_USE_CONNTRACK, false);
             break;
@@ -543,15 +490,11 @@ ndInstance::InitializeConfig(int argc, char * const argv[]) {
             string uuid;
             nd_generate_uuid(uuid);
             cout << uuid << endl;
-        }
             return ndCR_GENERATE_UUID;
+        }
         case 'u':
-            if (! ndGC.SaveUUID(ndGlobalConfig::UUID_AGENT, optarg))
-            {
-                return ndCR_Pack(ndCR_SAVE_UUID_FAILURE,
-                  (rc) ? 0 : 1);
-            }
-            break;
+            rc = ndGC.SaveUUID(ndGlobalConfig::UUID_AGENT, optarg);
+            return ndCR_Pack(ndCR_SAVE_UUID_FAILURE, (rc) ? 0 : 1);
         case 'V':
             CommandLineHelp(true);
             return ndCR_USAGE_OR_VERSION;
@@ -566,6 +509,57 @@ ndInstance::InitializeConfig(int argc, char * const argv[]) {
         default:
             CommandLineHelp();
             return ndCR_INVALID_OPTION;
+        }
+    }
+
+    Reload(false);
+
+    optind = 1;
+    while (true) {
+        if ((rc = getopt_long(argc, argv, flags, options, NULL)) == -1)
+            break;
+
+        switch (rc) {
+        case _ND_LO_EXPORT_APPS:
+#ifndef _ND_LEAN_AND_MEAN
+            rc = apps.Save("/dev/stdout");
+            return ndCR_Pack(ndCR_EXPORT_APPS, (rc) ? 0 : 1);
+#else
+            cerr << "Sorry, this feature was disabled "
+                    "(embedded).\n";
+            return ndCR_DISABLED_OPTION;
+#endif
+        case _ND_LO_DUMP_PROTOS:
+            rc = DumpList(ndDUMP_TYPE_PROTOS | dump_flags);
+            return ndCR_Pack(ndCR_DUMP_LIST, (rc) ? 0 : 1);
+        case _ND_LO_DUMP_APPS:
+            rc = DumpList(ndDUMP_TYPE_APPS | dump_flags);
+            return ndCR_Pack(ndCR_DUMP_LIST, (rc) ? 0 : 1);
+        case _ND_LO_DUMP_CAT:
+            if (strncasecmp("application", optarg, 11) == 0)
+                rc = DumpList(ndDUMP_TYPE_CAT_APP | dump_flags);
+            else if (strncasecmp("protocol", optarg, 8) == 0)
+                rc = DumpList(ndDUMP_TYPE_CAT_PROTO | dump_flags);
+            else {
+                cerr << "Invalid catetory type \"" << optarg
+                     << "\", valid types: applications, "
+                        "protocols\n";
+                rc = 0;
+            }
+            return ndCR_Pack(ndCR_DUMP_LIST, (rc) ? 0 : 1);
+        case _ND_LO_DUMP_CATS:
+            rc = DumpList(ndDUMP_TYPE_CATS | dump_flags);
+            return ndCR_Pack(ndCR_DUMP_LIST, (rc) ? 0 : 1);
+        case _ND_LO_DUMP_RISKS:
+            rc = DumpList(ndDUMP_TYPE_RISKS | dump_flags);
+            return ndCR_Pack(ndCR_DUMP_LIST, (rc) ? 0 : 1);
+        case 'P':
+            rc = DumpList(ndDUMP_TYPE_ALL | dump_flags);
+            return ndCR_Pack(ndCR_DUMP_LIST, (rc) ? 0 : 1);
+        case 's':
+            rc = DisplayAgentStatus();
+            return ndCR_Pack(ndCR_AGENT_STATUS, (rc) ? 0 : 1);
+        default: break;
         }
     }
 
@@ -971,8 +965,7 @@ void ndInstance::CommandLineHelp(bool version_only) {
           "with no capture sources.\n"
 
           "\nConfiguration options:\n"
-          "  -u, --uuid\n    Display configured Agent "
-          "UUID.\n"
+          "  -u, --uuid <uuid>\n    Set Agent UUID.\n"
           "  -U, --uuidgen\n    Generate (but don't save) "
           "a new Agent UUID.\n"
           "  -p, --provision\n    Provision Agent "
