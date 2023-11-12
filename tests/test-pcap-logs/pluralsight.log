@@ -1,76 +1,50 @@
-offline0: i4p--------r--- TCP [OR] 54.69.188.18:443 <-- [L] 192.168.1.128:42642
-        : HTTP/S.netify.pluralsight
-        : H: pluralsight.com
-        : V: 0x0303
-        : SNI: pluralsight.com
-
-offline0: i4p-u------r--- TCP [OR] 54.69.188.18:443 <-- [L] 192.168.1.128:42642
+offline0: i4pcu------r--- TCP [OR] 54.69.188.18:443 <-- [L] 192.168.1.128:42642
         : HTTP/S.netify.pluralsight
         : H: pluralsight.com
         : V: 0x0303 CS: 0xc02f
-        : SNI: pluralsight.com
-        : IDN: C=US, ST=Arizona, L=Scottsdale, O=GoDaddy.com, Inc., OU=http://certs.godaddy.com/repository/, CN=Go Daddy Secure Certificate Authority - G2 SDN: OU=Domain Control Validated, CN=*.pluralsight.com
+        : TLS/SNI: pluralsight.com
+        : TLS/IDN: C=US, ST=Arizona, L=Scottsdale, O=GoDaddy.com, Inc., OU=http://certs.godaddy.com/repository/, CN=Go Daddy Secure Certificate Authority - G2 TLS/SDN: OU=Domain Control Validated, CN=*.pluralsight.com
+        : RID 30: TLS Certificate Expired
+        : DP: 7 TP: 7 TB: 6.43 KiB
 
-offline0: i4p--------r--- TCP [OR] 146.75.62.208:443 <-- [L] 192.168.1.128:42782
-        : HTTP/S.netify.imgix
-        : H: pluralsight2.imgix.net
-        : V: 0x0303
-        : SNI: pluralsight2.imgix.net
-
-offline0: i4p--------r--- TCP [OR] 146.75.62.208:443 <-- [L] 192.168.1.128:42790
-        : HTTP/S.netify.imgix
-        : H: pluralsight.imgix.net
-        : V: 0x0303
-        : SNI: pluralsight.imgix.net
-
-offline0: i4p-u------r--- TCP [OR] 146.75.62.208:443 <-- [L] 192.168.1.128:42782
+offline0: i4pcu------r--- TCP [OR] 146.75.62.208:443 <-- [L] 192.168.1.128:42782
         : HTTP/S.netify.imgix
         : H: pluralsight2.imgix.net
         : V: 0x0303 CS: 0xc02f
-        : SNI: pluralsight2.imgix.net
-        : IDN: C=BE, O=GlobalSign nv-sa, CN=GlobalSign Atlas R3 DV TLS CA 2020 SDN: CN=*.imgix.com
+        : TLS/SNI: pluralsight2.imgix.net
+        : TLS/IDN: C=BE, O=GlobalSign nv-sa, CN=GlobalSign Atlas R3 DV TLS CA 2020 TLS/SDN: CN=*.imgix.com
+        : RID 30: TLS Certificate Expired
+        : DP: 6 TP: 6 TB: 4.83 KiB
 
-offline0: i4p-u------r--- TCP [OR] 146.75.62.208:443 <-- [L] 192.168.1.128:42790
+offline0: i4pcu------r--- TCP [OR] 146.75.62.208:443 <-- [L] 192.168.1.128:42790
         : HTTP/S.netify.imgix
         : H: pluralsight.imgix.net
         : V: 0x0303 CS: 0xc02f
-        : SNI: pluralsight.imgix.net
-        : IDN: C=BE, O=GlobalSign nv-sa, CN=GlobalSign Atlas R3 DV TLS CA 2020 SDN: CN=*.imgix.com
+        : TLS/SNI: pluralsight.imgix.net
+        : TLS/IDN: C=BE, O=GlobalSign nv-sa, CN=GlobalSign Atlas R3 DV TLS CA 2020 TLS/SDN: CN=*.imgix.com
+        : RID 30: TLS Certificate Expired
+        : DP: 6 TP: 6 TB: 4.83 KiB
 
-offline0: i4p--------r--- TCP [OR] 18.203.201.56:443 <-- [L] 192.168.1.128:42618
-        : HTTP/S.netify.pluralsight
-        : H: stt.pluralsight.com
-        : V: 0x0303
-        : SNI: stt.pluralsight.com
-
-offline0: i4p-u------r--- TCP [OR] 18.203.201.56:443 <-- [L] 192.168.1.128:42618
+offline0: i4pcu------r--- TCP [OR] 18.203.201.56:443 <-- [L] 192.168.1.128:42618
         : HTTP/S.netify.pluralsight
         : H: stt.pluralsight.com
         : V: 0x0303 CS: 0xc02f
-        : SNI: stt.pluralsight.com CN: stt.pluralsight.com
-        : IDN: C=US, O=DigiCert Inc, CN=DigiCert TLS RSA SHA256 2020 CA1 SDN: C=US, ST=California, L=San Jose, O=Adobe Systems Incorporated, CN=stt.pluralsight.com
+        : TLS/SNI: stt.pluralsight.com TLS/CN: stt.pluralsight.com
+        : TLS/IDN: C=US, O=DigiCert Inc, CN=DigiCert TLS RSA SHA256 2020 CA1 TLS/SDN: C=US, ST=California, L=San Jose, O=Adobe Systems Incorporated, CN=stt.pluralsight.com
+        : RID 30: TLS Certificate Expired
+        : DP: 6 TP: 6 TB: 5.15 KiB
 
-offline0: i4p--------r--- TCP [OR] 104.19.162.127:443 <-- [L] 192.168.1.128:48948
-        : HTTP/S.netify.pluralsight
-        : H: www.pluralsight.com
-        : V: 0x0303
-        : SNI: www.pluralsight.com
-
-offline0: i4p-u------r--- TCP [OR] 104.19.162.127:443 <-- [L] 192.168.1.128:48948
+offline0: i4pcu---------- TCP [OR] 104.19.162.127:443 <-- [L] 192.168.1.128:48948
         : HTTP/S.netify.pluralsight
         : H: www.pluralsight.com
         : V: 0x0303 CS: 0x1301
-        : SNI: www.pluralsight.com
+        : TLS/SNI: www.pluralsight.com
+        : DP: 4 TP: 4 TB: 2.17 KiB
 
-offline0: i4p--------r--- TCP [OR] 104.17.209.240:443 <-- [L] 192.168.1.128:44770
-        : HTTP/S.netify.qualtrics
-        : H: zn6qzq6caaucudesr-pluralsight.siteintercept.qualtrics.com
-        : V: 0x0303
-        : SNI: zn6qzq6caaucudesr-pluralsight.siteintercept.qualtrics.com
-
-offline0: i4p-u------r--- TCP [OR] 104.17.209.240:443 <-- [L] 192.168.1.128:44770
+offline0: i4pcu---------- TCP [OR] 104.17.209.240:443 <-- [L] 192.168.1.128:44770
         : HTTP/S.netify.qualtrics
         : H: zn6qzq6caaucudesr-pluralsight.siteintercept.qualtrics.com
         : V: 0x0303 CS: 0x1301
-        : SNI: zn6qzq6caaucudesr-pluralsight.siteintercept.qualtrics.com
+        : TLS/SNI: zn6qzq6caaucudesr-pluralsight.siteintercept.qualtrics.com
+        : DP: 4 TP: 4 TB: 2.17 KiB
 

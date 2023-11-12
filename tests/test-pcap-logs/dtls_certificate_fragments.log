@@ -1,6 +1,15 @@
-offline0: i4p--------r--- UDP [L] 10.186.198.149:39347 <-- [OR] 35.210.59.134:44443
+offline0: i4pc-------r--- UDP [L] 10.186.198.149:39347 <-- [OR] 35.210.59.134:44443
         : DTLS
+        : RID 30: TLS Certificate Expired
+        : RID 35: TLS SNI Extension Not Found
+        : RID 41: Weak TLS Cipher
+        : RID 47: TLS ALPN Not Found
+        : DP: 5 TP: 20 TB: 5.84 KiB
 
-offline0: i4p--------r--- UDP [OR] 104.153.87.149:50001 --> [L] 192.168.1.26:43594
+offline0: i4pc-------r--- UDP [OR] 104.153.87.149:50001 --> [L] 192.168.1.26:43594
         : DTLS
+        : RID 30: TLS Certificate Expired
+        : RID 35: TLS SNI Extension Not Found
+        : RID 47: TLS ALPN Not Found
+        : DP: 4 TP: 6 TB: 4.12 KiB
 

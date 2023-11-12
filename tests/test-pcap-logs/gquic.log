@@ -1,5 +1,7 @@
 offline0: i4pc-------r--- UDP [L] 10.44.5.25:61097 --> [OR] 216.58.213.163:443
         : QUIC.netify.google
         : H: www.gstatic.com
-        : SNI: www.gstatic.com
+        : TLS/SNI: www.gstatic.com
+        : RID 46: Unidirectional Traffic
+        : DP: 1 TP: 1 TB: 1.36 KiB
 

@@ -1,24 +1,18 @@
-offline0: i4p--------r-F- TCP [OR] 104.17.175.85:443 <-- [L] 192.168.1.21:55500
-        : HTTP/S
-        : H: these-are-not-the-droids-youre-looking-for.com
-        : V: 0x0303
-        : SNI: these-are-not-the-droids-youre-looking-for.com
-
-offline0: i4p-u------r-F- TCP [OR] 104.17.175.85:443 <-- [L] 192.168.1.21:55500
+offline0: i4pcu------r-F- TCP [OR] 104.17.175.85:443 <-- [L] 192.168.1.21:55500
         : HTTP/S
         : H: these-are-not-the-droids-youre-looking-for.com
         : V: 0x0303 CS: 0x1303
-        : SNI: these-are-not-the-droids-youre-looking-for.com
+        : TLS/SNI: these-are-not-the-droids-youre-looking-for.com
+        : RID 38: TLS Suspicious ESNI Usage
+        : RID 47: TLS ALPN Not Found
+        : DP: 6 TP: 20 TB: 8.53 KiB
 
-offline0: i4p--------r-F- TCP [OR] 104.17.175.85:443 <-- [L] 192.168.1.21:55514
-        : HTTP/S
-        : H: you-think-thats-normal-tls-traffic-youre-seeing.com
-        : V: 0x0303
-        : SNI: you-think-thats-normal-tls-traffic-youre-seeing.com
-
-offline0: i4p-u------r-F- TCP [OR] 104.17.175.85:443 <-- [L] 192.168.1.21:55514
+offline0: i4pcu------r-F- TCP [OR] 104.17.175.85:443 <-- [L] 192.168.1.21:55514
         : HTTP/S
         : H: you-think-thats-normal-tls-traffic-youre-seeing.com
         : V: 0x0303 CS: 0x1303
-        : SNI: you-think-thats-normal-tls-traffic-youre-seeing.com
+        : TLS/SNI: you-think-thats-normal-tls-traffic-youre-seeing.com
+        : RID 38: TLS Suspicious ESNI Usage
+        : RID 47: TLS ALPN Not Found
+        : DP: 6 TP: 18 TB: 7 KiB
 

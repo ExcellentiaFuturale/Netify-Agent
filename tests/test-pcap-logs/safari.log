@@ -1,86 +1,58 @@
-offline0: i4p--------r--- TCP [OR] 146.48.58.18:443 <-- [L] 192.168.1.178:55262
-        : HTTP/S
-        : H: www.iit.cnr.it
-        : V: 0x0303
-        : SNI: www.iit.cnr.it
-
-offline0: i4p-u------r--- TCP [OR] 146.48.58.18:443 <-- [L] 192.168.1.178:55262
+offline0: i4pcu------r--- TCP [OR] 146.48.58.18:443 <-- [L] 192.168.1.178:55262
         : HTTP/S
         : H: www.iit.cnr.it
         : V: 0x0303 CS: 0xc030
-        : SNI: www.iit.cnr.it CN: www.iit.cnr.it
-        : IDN: C=NL, ST=Noord-Holland, L=Amsterdam, O=TERENA, CN=TERENA SSL CA 3 SDN: C=IT, ST=Lazio, L=Roma, O=Consiglio Nazionale delle Ricerche, OU=IIT, CN=www.iit.cnr.it
-
-offline0: i4p--------r--- TCP [OR] 146.48.58.18:443 <-- [L] 192.168.1.178:55267
-        : HTTP/S
-        : H: www.iit.cnr.it
-        : V: 0x0303
-        : SNI: www.iit.cnr.it
-
-offline0: i4p--------r--- TCP [OR] 146.48.58.18:443 <-- [L] 192.168.1.178:55265
-        : HTTP/S
-        : H: www.iit.cnr.it
-        : V: 0x0303
-        : SNI: www.iit.cnr.it
-
-offline0: i4p--------r--- TCP [OR] 146.48.58.18:443 <-- [L] 192.168.1.178:55268
-        : HTTP/S
-        : H: www.iit.cnr.it
-        : V: 0x0303
-        : SNI: www.iit.cnr.it
-
-offline0: i4p--------r--- TCP [OR] 146.48.58.18:443 <-- [L] 192.168.1.178:55266
-        : HTTP/S
-        : H: www.iit.cnr.it
-        : V: 0x0303
-        : SNI: www.iit.cnr.it
-
-offline0: i4p--------r--- TCP [OR] 146.48.58.18:443 <-- [L] 192.168.1.178:55269
-        : HTTP/S
-        : H: www.iit.cnr.it
-        : V: 0x0303
-        : SNI: www.iit.cnr.it
+        : TLS/SNI: www.iit.cnr.it TLS/CN: www.iit.cnr.it
+        : TLS/IDN: C=NL, ST=Noord-Holland, L=Amsterdam, O=TERENA, CN=TERENA SSL CA 3 TLS/SDN: C=IT, ST=Lazio, L=Roma, O=Consiglio Nazionale delle Ricerche, OU=IIT, CN=www.iit.cnr.it
+        : RID 30: TLS Certificate Expired
+        : DP: 8 TP: 20 TB: 9.62 KiB
 
 offline0: i4pcu------r--- TCP [OR] 146.48.58.18:443 <-- [L] 192.168.1.178:55267
         : HTTP/S
         : H: www.iit.cnr.it
         : V: 0x0303 CS: 0xc030
-        : SNI: www.iit.cnr.it
+        : TLS/SNI: www.iit.cnr.it
+        : RID 47: TLS ALPN Not Found
+        : DP: 6 TP: 50 TB: 34.3 KiB
 
 offline0: i4pcu------r--- TCP [OR] 146.48.58.18:443 <-- [L] 192.168.1.178:55265
         : HTTP/S
         : H: www.iit.cnr.it
         : V: 0x0303 CS: 0xc030
-        : SNI: www.iit.cnr.it
+        : TLS/SNI: www.iit.cnr.it
+        : RID 47: TLS ALPN Not Found
+        : DP: 6 TP: 25 TB: 11.8 KiB
 
 offline0: i4pcu------r--- TCP [OR] 146.48.58.18:443 <-- [L] 192.168.1.178:55268
         : HTTP/S
         : H: www.iit.cnr.it
         : V: 0x0303 CS: 0xc030
-        : SNI: www.iit.cnr.it
+        : TLS/SNI: www.iit.cnr.it
+        : RID 47: TLS ALPN Not Found
+        : DP: 6 TP: 15 TB: 3.53 KiB
 
 offline0: i4pcu------r--- TCP [OR] 146.48.58.18:443 <-- [L] 192.168.1.178:55266
         : HTTP/S
         : H: www.iit.cnr.it
         : V: 0x0303 CS: 0xc030
-        : SNI: www.iit.cnr.it
+        : TLS/SNI: www.iit.cnr.it
+        : RID 47: TLS ALPN Not Found
+        : DP: 6 TP: 21 TB: 8.95 KiB
 
 offline0: i4pcu------r--- TCP [OR] 146.48.58.18:443 <-- [L] 192.168.1.178:55269
         : HTTP/S
         : H: www.iit.cnr.it
         : V: 0x0303 CS: 0xc030
-        : SNI: www.iit.cnr.it
+        : TLS/SNI: www.iit.cnr.it
+        : RID 47: TLS ALPN Not Found
+        : DP: 6 TP: 19 TB: 6.81 KiB
 
-offline0: i4p--------r--- TCP [OR] 146.48.58.18:443 <-- [L] 192.168.1.178:55285
-        : HTTP/S
-        : H: www.iit.cnr.it
-        : V: 0x0303
-        : SNI: www.iit.cnr.it
-
-offline0: i4p-u------r--- TCP [OR] 146.48.58.18:443 <-- [L] 192.168.1.178:55285
+offline0: i4pcu------r--- TCP [OR] 146.48.58.18:443 <-- [L] 192.168.1.178:55285
         : HTTP/S
         : H: www.iit.cnr.it
         : V: 0x0303 CS: 0xc030
-        : SNI: www.iit.cnr.it CN: www.iit.cnr.it
-        : IDN: C=NL, ST=Noord-Holland, L=Amsterdam, O=TERENA, CN=TERENA SSL CA 3 SDN: C=IT, ST=Lazio, L=Roma, O=Consiglio Nazionale delle Ricerche, OU=IIT, CN=www.iit.cnr.it
+        : TLS/SNI: www.iit.cnr.it TLS/CN: www.iit.cnr.it
+        : TLS/IDN: C=NL, ST=Noord-Holland, L=Amsterdam, O=TERENA, CN=TERENA SSL CA 3 TLS/SDN: C=IT, ST=Lazio, L=Roma, O=Consiglio Nazionale delle Ricerche, OU=IIT, CN=www.iit.cnr.it
+        : RID 30: TLS Certificate Expired
+        : DP: 8 TP: 18 TB: 6.46 KiB
 

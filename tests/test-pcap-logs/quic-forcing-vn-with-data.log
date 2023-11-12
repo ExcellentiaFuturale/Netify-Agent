@@ -1,3 +1,7 @@
-offline0: i4p--------r--- UDP [L] 192.168.56.103:55523 --> [OL] 192.168.56.104:4433
+offline0: i4pc-------r--- UDP [L] 192.168.56.103:55523 --> [OL] 192.168.56.104:4433
         : QUIC
+        : RID 16: Known Protocol on Non-standard Port
+        : RID 35: TLS SNI Extension Not Found
+        : RID 53: TLS ALPN/SNI Mismatch
+        : DP: 3 TP: 21 TB: 8.83 KiB
 

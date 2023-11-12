@@ -1,3 +1,6 @@
 offline0: i4pc-------r--- UDP [OR] 163.205.15.180:38876 --> [L] 191.62.60.190:443
         : DTLS
+        : RID 30: TLS Certificate Expired
+        : RID 46: Unidirectional Traffic
+        : DP: 1 TP: 1 TB: 1.45 KiB
 

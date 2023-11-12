@@ -2,5 +2,7 @@ offline0: i4pc-------r--- UDP [L] 10.9.0.1:36588 --> [OL] 10.9.0.2:443
         : QUIC.netify.internal-network
         : H: localhost
         : V: 0x0304
-        : SNI: localhost
+        : TLS/SNI: localhost
+        : RID 46: Unidirectional Traffic
+        : DP: 1 TP: 15 TB: 9.17 KiB
 

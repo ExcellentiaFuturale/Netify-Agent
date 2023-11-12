@@ -1,31 +1,39 @@
-offline0: i4p--------r--- TCP [OR] 144.195.73.154:443 <-- [L] 192.168.1.178:50076
-        : HTTP/S.netify.zoom
-        : H: zoomsjccv154mmr.sjc.zoom.us
-        : V: 0x0303
-        : SNI: zoomsjccv154mmr.sjc.zoom.us
-
-offline0: i4p-u------r--- TCP [OR] 144.195.73.154:443 <-- [L] 192.168.1.178:50076
+offline0: i4pcu------r--- TCP [OR] 144.195.73.154:443 <-- [L] 192.168.1.178:50076
         : HTTP/S.netify.zoom
         : H: zoomsjccv154mmr.sjc.zoom.us
         : V: 0x0303 CS: 0xc030
-        : SNI: zoomsjccv154mmr.sjc.zoom.us
+        : TLS/SNI: zoomsjccv154mmr.sjc.zoom.us
+        : TLS/IDN: C=US, O=DigiCert Inc, CN=DigiCert TLS RSA SHA256 2020 CA1 TLS/SDN: C=US, ST=California, L=San Jose, O=Zoom Video Communications, Inc., CN=*.sjc.zoom.us
+        : RID 30: TLS Certificate Expired
+        : RID 47: TLS ALPN Not Found
+        : DP: 8 TP: 20 TB: 8.36 KiB
 
-offline0: i4p-u------r--- TCP [OR] 144.195.73.154:443 <-- [L] 192.168.1.178:50076
-        : HTTP/S.netify.zoom
-        : H: zoomsjccv154mmr.sjc.zoom.us
-        : V: 0x0303 CS: 0xc030
-        : SNI: zoomsjccv154mmr.sjc.zoom.us
-        : IDN: C=US, O=DigiCert Inc, CN=DigiCert TLS RSA SHA256 2020 CA1 SDN: C=US, ST=California, L=San Jose, O=Zoom Video Communications, Inc., CN=*.sjc.zoom.us
-
-offline0: i4pc-------rs-- UDP [OR] 144.195.73.154:8801 <-- [L] 192.168.1.178:60653
+offline0: i4pc--------s-- UDP [OR] 144.195.73.154:8801 <-- [L] 192.168.1.178:60653
         : ZOOM.netify.zoom
+        : DP: 5 TP: 171 TB: 168 KiB
 
-offline0: i4pc-------rs-- UDP [OR] 144.195.73.154:8801 <-- [L] 192.168.1.178:58117
+offline0: i4pc--------s-- UDP [OR] 144.195.73.154:8801 <-- [L] 192.168.1.178:60653
         : ZOOM.netify.zoom
+        : DP: 5 TP: 171 TB: 168 KiB
 
-offline0: i4pc-------rs-- UDP [OR] 144.195.73.154:8801 <-- [L] 192.168.1.178:57953
+offline0: i4pc--------s-- UDP [OR] 144.195.73.154:8801 <-- [L] 192.168.1.178:58117
         : ZOOM.netify.zoom
+        : DP: 5 TP: 1.08 KP TB: 210 KiB
+
+offline0: i4pc--------s-- UDP [OR] 144.195.73.154:8801 <-- [L] 192.168.1.178:58117
+        : ZOOM.netify.zoom
+        : DP: 5 TP: 1.12 KP TB: 216 KiB
+
+offline0: i4pc--------s-- UDP [OR] 144.195.73.154:8801 <-- [L] 192.168.1.178:57953
+        : ZOOM.netify.zoom
+        : DP: 5 TP: 70 TB: 7.33 KiB
+
+offline0: i4pc--------s-- UDP [OR] 144.195.73.154:8801 <-- [L] 192.168.1.178:57953
+        : ZOOM.netify.zoom
+        : DP: 5 TP: 70 TB: 7.33 KiB
 
 offline0: i4pc-------r--- ICMP [OR] 144.195.73.154:0 <-- [L] 192.168.1.178:0
         : ICMP.netify.zoom
+        : RID 46: Unidirectional Traffic
+        : DP: 1 TP: 6 TB: 420
 

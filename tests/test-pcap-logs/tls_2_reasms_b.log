@@ -1,12 +1,7 @@
-offline0: i4p--------r--- TCP [OR] 88.14.137.195:443 <-- [L] 196.234.165.216:37658
-        : HTTP/S.netify.meta-cdn
-        : H: video.fmct2-3.fna.fbcdn.net
-        : V: 0x0303
-        : SNI: video.fmct2-3.fna.fbcdn.net
-
-offline0: i4p-u------r--- TCP [OR] 88.14.137.195:443 <-- [L] 196.234.165.216:37658
+offline0: i4pcu---------- TCP [OR] 88.14.137.195:443 <-- [L] 196.234.165.216:37658
         : HTTP/S.netify.meta-cdn
         : H: video.fmct2-3.fna.fbcdn.net
         : V: 0x0303 CS: 0x1301
-        : SNI: video.fmct2-3.fna.fbcdn.net
+        : TLS/SNI: video.fmct2-3.fna.fbcdn.net
+        : DP: 5 TP: 5 TB: 2.28 KiB
 

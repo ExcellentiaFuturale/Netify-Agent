@@ -1,27 +1,45 @@
 offline0: i4pc-------r--- UDP [L] 192.168.22.4:60887 --> [OL] 192.168.22.5:4789
         : VXLAN
+        : RID 46: Unidirectional Traffic
+        : DP: 1 TP: 2 TB: 252
 
 offline0: i4pc-------r--- UDP [L] 192.168.22.4:4789 <-- [OL] 192.168.22.5:43866
         : VXLAN
+        : RID 46: Unidirectional Traffic
+        : DP: 1 TP: 2 TB: 296
 
 offline0: i4pc-------r--- UDP [L] 192.168.22.4:49762 --> [OL] 192.168.22.5:4789
         : VXLAN
+        : RID 46: Unidirectional Traffic
+        : DP: 1 TP: 12 TB: 1.96 KiB
 
 offline0: i4pc-------r--- UDP [L] 192.168.22.4:4789 <-- [OL] 192.168.22.5:60230
         : VXLAN
+        : RID 46: Unidirectional Traffic
+        : DP: 1 TP: 13 TB: 5.52 KiB
 
 offline0: i4pc-------r--- UDP [L] 192.168.22.4:60351 --> [OL] 192.168.22.5:4789
         : VXLAN
+        : RID 46: Unidirectional Traffic
+        : DP: 1 TP: 2 TB: 260
 
 offline0: i4pc-------r--- UDP [L] 192.168.22.4:4789 <-- [OL] 192.168.22.5:50251
         : VXLAN
+        : RID 46: Unidirectional Traffic
+        : DP: 1 TP: 2 TB: 362
 
 offline0: i4pc-------r--- UDP [L] 192.168.22.4:40646 --> [OL] 192.168.22.5:4789
         : VXLAN
+        : RID 46: Unidirectional Traffic
+        : DP: 1 TP: 35 TB: 4.82 KiB
 
 offline0: i4pc-------r--- UDP [L] 192.168.22.4:4789 <-- [OL] 192.168.22.5:36286
         : VXLAN
+        : RID 46: Unidirectional Traffic
+        : DP: 1 TP: 56 TB: 69.6 KiB
 
 offline0: i4pc-------r--- UDP [L] 192.168.22.4:60230 --> [OL] 192.168.22.5:4789
         : VXLAN
+        : RID 46: Unidirectional Traffic
+        : DP: 1 TP: 3 TB: 324
 

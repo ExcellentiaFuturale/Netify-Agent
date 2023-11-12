@@ -1,19 +1,10 @@
-offline0: i4p--------r--- TCP [L] 10.10.10.1:443 <-- [OL] 192.168.0.1:58842
-        : HTTP/S.netify.utorrent
-        : H: web.utorrent.com
-        : V: 0x0303
-        : SNI: web.utorrent.com
-
-offline0: i4p-u------r--- TCP [L] 10.10.10.1:443 <-- [OL] 192.168.0.1:58842
+offline0: i4pcu------r--- TCP [L] 10.10.10.1:443 <-- [OL] 192.168.0.1:58842
         : HTTP/S.netify.utorrent
         : H: web.utorrent.com
         : V: 0x0303 CS: 0xc02f
-        : SNI: web.utorrent.com
-
-offline0: i4p-u------r--- TCP [L] 10.10.10.1:443 <-- [OL] 192.168.0.1:58842
-        : HTTP/S.netify.utorrent
-        : H: web.utorrent.com
-        : V: 0x0303 CS: 0xc02f
-        : SNI: web.utorrent.com
-        : IDN: C=US, ST=Arizona, L=Scottsdale, O=GoDaddy.com, Inc., OU=http://certs.godaddy.com/repository/, CN=Go Daddy Secure Certificate Authority - G2 SDN: CN=*.utorrent.com
+        : TLS/SNI: web.utorrent.com
+        : TLS/IDN: C=US, ST=Arizona, L=Scottsdale, O=GoDaddy.com, Inc., OU=http://certs.godaddy.com/repository/, CN=Go Daddy Secure Certificate Authority - G2 TLS/SDN: CN=*.utorrent.com
+        : RID 30: TLS Certificate Expired
+        : RID 47: TLS ALPN Not Found
+        : DP: 7 TP: 7 TB: 6.16 KiB
 

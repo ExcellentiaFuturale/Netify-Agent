@@ -339,9 +339,8 @@ bool ndFlow::HasMDNSDomainName(void) const {
 }
 
 void ndFlow::Print(uint8_t pflags) const {
-    ndDebugLogStream dls(ndDebugLogStream::DLT_FLOW);
-
     bool multiline = false;
+    ndDebugLogStream dls(ndDebugLogStream::DLT_FLOW);
 
     nd_output_lock();
 
@@ -356,7 +355,7 @@ void ndFlow::Print(uint8_t pflags) const {
             dls << ":";
             for (unsigned i = 0; i < 5; i++) {
                 dls << setw(2) << setfill('0') << hex
-                    << (int)digest_lower[i];
+                    << (int)digest_mdata[i];
             }
             dls << " ";
         }
@@ -505,7 +504,7 @@ void ndFlow::Print(uint8_t pflags) const {
                 if (HasSSHClientAgent())
                     dls << " SSH/CA: " << ssh.client_agent;
                 if (HasSSHServerAgent())
-                    dls << " SSH/CA: " << ssh.server_agent;
+                    dls << " SSH/SA: " << ssh.server_agent;
             }
 
             if ((GetMasterProtocol() == ND_PROTO_TLS ||
@@ -531,9 +530,9 @@ void ndFlow::Print(uint8_t pflags) const {
                     << setw(iface->ifname.size()) << " "
                     << ":";
                 if (HasTLSClientSNI())
-                    dls << " SNI: " << host_server_name;
+                    dls << " TLS/SNI: " << host_server_name;
                 if (HasTLSServerCN())
-                    dls << " CN: " << ssl.server_cn;
+                    dls << " TLS/CN: " << ssl.server_cn;
             }
 
             if (HasTLSIssuerDN() || HasTLSSubjectDN()) {
@@ -541,9 +540,35 @@ void ndFlow::Print(uint8_t pflags) const {
                     << setw(iface->ifname.size()) << " "
                     << ":";
                 if (HasTLSIssuerDN())
-                    dls << " IDN: " << ssl.issuer_dn;
+                    dls << " TLS/IDN: " << ssl.issuer_dn;
                 if (HasTLSSubjectDN())
-                    dls << " SDN: " << ssl.subject_dn;
+                    dls << " TLS/SDN: " << ssl.subject_dn;
+            }
+        }
+
+        if ((pflags & PRINTF_RISKS)) {
+            if (flags.risks_checked.load() && ! risks.empty())
+            {
+                auto r = risks.begin();
+                if (r != risks.end()) {
+                    dls
+                      << endl
+                      << setw(iface->ifname.size()) << " "
+                      << setw(0) << ": RID" << setw(3)
+                      << (*r) << ": " << setw(0)
+                      << nd_risk_get_name(*r);
+                }
+                if (risks.size() > 1) {
+                    for (r = next(risks.begin()); r != risks.end(); r++)
+                    {
+                        dls
+                          << endl
+                          << setw(iface->ifname.size())
+                          << " " << setw(0) << ": RID"
+                          << setw(3) << (*r) << ": "
+                          << setw(0) << nd_risk_get_name(*r);
+                    }
+                }
             }
         }
 
@@ -569,33 +594,6 @@ void ndFlow::Print(uint8_t pflags) const {
                    stats.total_bytes.load());
 
             dls.imbue(locale("C"));
-        }
-
-        if ((pflags & PRINTF_RISKS)) {
-            if (flags.risks_checked.load() && ! risks.empty())
-            {
-                auto r = risks.begin();
-                if (r != risks.end()) {
-                    dls
-                      << endl
-                      << setw(iface->ifname.size()) << " "
-                      << setw(0) << ": RID" << setw(3)
-                      << (*r) << ": " << setw(0)
-                      << nd_risk_get_name(*r);
-                }
-                if (risks.size() > 1) {
-                    for (r = next(risks.begin());
-                         r != risks.end(); r++)
-                    {
-                        dls
-                          << endl
-                          << setw(iface->ifname.size())
-                          << " " << setw(0) << ": RID"
-                          << setw(3) << (*r) << ": "
-                          << setw(0) << nd_risk_get_name(*r);
-                    }
-                }
-            }
         }
 
         if (multiline) dls << endl;

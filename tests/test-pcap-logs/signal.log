@@ -1,193 +1,133 @@
-offline0: i4pc-------r--- UDP [L] 0.0.0.0:68 --> [OB] 255.255.255.255:67
+offline0: i4pc----------- UDP [L] 0.0.0.0:68 --> [OB] 255.255.255.255:67
         : DHCP
         : H: lucas-imac
         : DHCP/FP: 1,121,3,6,15,119,252,95,44,46
+        : DP: 1 TP: 4 TB: 1.34 KiB
 
-offline0: i4p--------r--- UDP [L] 192.168.2.1:53 <-- [OL] 192.168.2.17:60793
+offline0: i4pc----------- UDP [L] 192.168.2.1:53 <-- [OL] 192.168.2.17:60793
         : DNS.netify.apple-itunes
         : H: e673.dsce9.akamaiedge.net
+        : DP: 2 TP: 2 TB: 186
 
-offline0: i4p-----d--r--- TCP [OR] 23.57.24.16:443 <-- [L] 192.168.2.17:57018
-        : HTTP/S.netify.apple-itunes
-        : D: e673.dsce9.akamaiedge.net H: itunes.apple.com
-        : V: 0x0303
-        : SNI: itunes.apple.com
-
-offline0: i4p-u---d--r--- TCP [OR] 23.57.24.16:443 <-- [L] 192.168.2.17:57018
+offline0: i4pcu---d----F- TCP [OR] 23.57.24.16:443 <-- [L] 192.168.2.17:57018
         : HTTP/S.netify.apple-itunes
         : D: e673.dsce9.akamaiedge.net H: itunes.apple.com
         : V: 0x0303 CS: 0x1302
-        : SNI: itunes.apple.com
+        : TLS/SNI: itunes.apple.com
+        : DP: 6 TP: 45 TB: 14.2 KiB
 
-offline0: i4p--------r--- TCP [OR] 34.225.240.173:443 <-- [L] 192.168.2.17:49226
+offline0: i4pcu---d--r-F- TCP [OR] 34.225.240.173:443 <-- [L] 192.168.2.17:49226
         : HTTP/S.netify.signal
-        : H: textsecure-service.whispersystems.org
-        : V: 0x0303
-        : SNI: textsecure-service.whispersystems.org
-
-offline0: i4p--------r--- TCP [OR] 34.225.240.173:443 <-- [L] 192.168.2.17:57019
-        : HTTP/S.netify.signal
-        : H: textsecure-service.whispersystems.org
-        : V: 0x0303
-        : SNI: textsecure-service.whispersystems.org
-
-offline0: i4p--------r--- TCP [OR] 34.225.240.173:443 <-- [L] 192.168.2.17:57021
-        : HTTP/S.netify.signal
-        : H: textsecure-service.whispersystems.org
-        : V: 0x0303
-        : SNI: textsecure-service.whispersystems.org
-
-offline0: i4p--------r--- TCP [OR] 34.225.240.173:443 <-- [L] 192.168.2.17:57020
-        : HTTP/S.netify.signal
-        : H: textsecure-service.whispersystems.org
-        : V: 0x0303
-        : SNI: textsecure-service.whispersystems.org
-
-offline0: i4p-u------r--- TCP [OR] 34.225.240.173:443 <-- [L] 192.168.2.17:49226
-        : HTTP/S.netify.signal
-        : H: textsecure-service.whispersystems.org
+        : D: textsecure-service.whispersystems.org
         : V: 0x0303 CS: 0xc02f
-        : SNI: textsecure-service.whispersystems.org
+        : TLS/SNI: textsecure-service.whispersystems.org TLS/CN: textsecure-service.whispersystems.org
+        : TLS/IDN: C=US, ST=California, L=San Francisco, O=Open Whisper Systems, OU=Open Whisper Systems, CN=TextSecure TLS/SDN: C=US, ST=California, O=Open Whisper Systems, OU=Open Whisper Systems, CN=textsecure-service.whispersystems.org
+        : RID 47: TLS ALPN Not Found
+        : DP: 7 TP: 24 TB: 5.13 KiB
 
-offline0: i4p-u------r--- TCP [OR] 34.225.240.173:443 <-- [L] 192.168.2.17:49226
+offline0: i4pcu---d------ TCP [OR] 34.225.240.173:443 <-- [L] 192.168.2.17:57019
         : HTTP/S.netify.signal
-        : H: textsecure-service.whispersystems.org
+        : D: textsecure-service.whispersystems.org
         : V: 0x0303 CS: 0xc02f
-        : SNI: textsecure-service.whispersystems.org CN: textsecure-service.whispersystems.org
-        : IDN: C=US, ST=California, L=San Francisco, O=Open Whisper Systems, OU=Open Whisper Systems, CN=TextSecure SDN: C=US, ST=California, O=Open Whisper Systems, OU=Open Whisper Systems, CN=textsecure-service.whispersystems.org
+        : TLS/SNI: textsecure-service.whispersystems.org TLS/CN: textsecure-service.whispersystems.org
+        : TLS/IDN: C=US, ST=California, L=San Francisco, O=Open Whisper Systems, OU=Open Whisper Systems, CN=TextSecure TLS/SDN: C=US, ST=California, O=Open Whisper Systems, OU=Open Whisper Systems, CN=textsecure-service.whispersystems.org
+        : DP: 7 TP: 27 TB: 5.49 KiB
 
-offline0: i4p-u------r--- TCP [OR] 34.225.240.173:443 <-- [L] 192.168.2.17:57019
+offline0: i4pcu---d------ TCP [OR] 34.225.240.173:443 <-- [L] 192.168.2.17:57021
         : HTTP/S.netify.signal
-        : H: textsecure-service.whispersystems.org
+        : D: textsecure-service.whispersystems.org
         : V: 0x0303 CS: 0xc02f
-        : SNI: textsecure-service.whispersystems.org CN: textsecure-service.whispersystems.org
-        : IDN: C=US, ST=California, L=San Francisco, O=Open Whisper Systems, OU=Open Whisper Systems, CN=TextSecure SDN: C=US, ST=California, O=Open Whisper Systems, OU=Open Whisper Systems, CN=textsecure-service.whispersystems.org
+        : TLS/SNI: textsecure-service.whispersystems.org TLS/CN: textsecure-service.whispersystems.org
+        : TLS/IDN: C=US, ST=California, L=San Francisco, O=Open Whisper Systems, OU=Open Whisper Systems, CN=TextSecure TLS/SDN: C=US, ST=California, O=Open Whisper Systems, OU=Open Whisper Systems, CN=textsecure-service.whispersystems.org
+        : DP: 7 TP: 26 TB: 5.68 KiB
 
-offline0: i4p-u------r--- TCP [OR] 34.225.240.173:443 <-- [L] 192.168.2.17:57021
+offline0: i4pcu---d------ TCP [OR] 34.225.240.173:443 <-- [L] 192.168.2.17:57020
         : HTTP/S.netify.signal
-        : H: textsecure-service.whispersystems.org
+        : D: textsecure-service.whispersystems.org
         : V: 0x0303 CS: 0xc02f
-        : SNI: textsecure-service.whispersystems.org CN: textsecure-service.whispersystems.org
-        : IDN: C=US, ST=California, L=San Francisco, O=Open Whisper Systems, OU=Open Whisper Systems, CN=TextSecure SDN: C=US, ST=California, O=Open Whisper Systems, OU=Open Whisper Systems, CN=textsecure-service.whispersystems.org
+        : TLS/SNI: textsecure-service.whispersystems.org TLS/CN: textsecure-service.whispersystems.org
+        : TLS/IDN: C=US, ST=California, L=San Francisco, O=Open Whisper Systems, OU=Open Whisper Systems, CN=TextSecure TLS/SDN: C=US, ST=California, O=Open Whisper Systems, OU=Open Whisper Systems, CN=textsecure-service.whispersystems.org
+        : DP: 7 TP: 27 TB: 5.53 KiB
 
-offline0: i4p-u------r--- TCP [OR] 34.225.240.173:443 <-- [L] 192.168.2.17:57020
-        : HTTP/S.netify.signal
-        : H: textsecure-service.whispersystems.org
-        : V: 0x0303 CS: 0xc02f
-        : SNI: textsecure-service.whispersystems.org CN: textsecure-service.whispersystems.org
-        : IDN: C=US, ST=California, L=San Francisco, O=Open Whisper Systems, OU=Open Whisper Systems, CN=TextSecure SDN: C=US, ST=California, O=Open Whisper Systems, OU=Open Whisper Systems, CN=textsecure-service.whispersystems.org
-
-offline0: i4p--------r-F- TCP [OR] 17.248.146.144:443 <-- [L] 192.168.2.17:56996
+offline0: i4pc-------r-F- TCP [OR] 17.248.146.144:443 <-- [L] 192.168.2.17:56996
         : HTTP/S.netify.apple
+        : RID 46: Unidirectional Traffic
+        : DP: 2 TP: 8 TB: 605
 
 offline0: i4pc-------r-F- TCP [OR] 2.18.232.118:443 <-- [L] 192.168.2.17:57017
         : HTTP/S
+        : RID 46: Unidirectional Traffic
+        : DP: 1 TP: 8 TB: 538
 
-offline0: i4p--------r--- UDP [L] 192.168.2.1:53 <-- [OL] 192.168.2.17:56263
+offline0: i4pc----------- UDP [L] 192.168.2.1:53 <-- [OL] 192.168.2.17:56263
         : DNS.netify.signal
         : H: textsecure-service.whispersystems.org
+        : DP: 2 TP: 2 TB: 290
 
 offline0: i4pc-------r--- ICMP [L] 192.168.2.1:0 <-- [OL] 192.168.2.17:0
         : ICMP
+        : RID 46: Unidirectional Traffic
+        : DP: 1 TP: 1 TB: 70
 
-offline0: i4p-----d--r-F- TCP [OR] 23.57.24.16:443 <-- [L] 192.168.2.17:57022
-        : HTTP/S.netify.apple-itunes
-        : D: e673.dsce9.akamaiedge.net H: itunes.apple.com
-        : V: 0x0303
-        : SNI: itunes.apple.com
-
-offline0: i4p-u---d--r-F- TCP [OR] 23.57.24.16:443 <-- [L] 192.168.2.17:57022
+offline0: i4pcu---d----F- TCP [OR] 23.57.24.16:443 <-- [L] 192.168.2.17:57022
         : HTTP/S.netify.apple-itunes
         : D: e673.dsce9.akamaiedge.net H: itunes.apple.com
         : V: 0x0303 CS: 0x1302
-        : SNI: itunes.apple.com
+        : TLS/SNI: itunes.apple.com
+        : DP: 6 TP: 45 TB: 14.9 KiB
 
-offline0: i4p-----d--r--- TCP [OR] 35.169.3.40:443 <-- [L] 192.168.2.17:49227
-        : HTTP/S.netify.signal
-        : D: textsecure-service.whispersystems.org
-        : V: 0x0303
-        : SNI: textsecure-service.whispersystems.org
-
-offline0: i4p-----d--r--- TCP [OR] 35.169.3.40:443 <-- [L] 192.168.2.17:57023
-        : HTTP/S.netify.signal
-        : D: textsecure-service.whispersystems.org
-        : V: 0x0303
-        : SNI: textsecure-service.whispersystems.org
-
-offline0: i4p-----d--r--- TCP [OR] 35.169.3.40:443 <-- [L] 192.168.2.17:57024
-        : HTTP/S.netify.signal
-        : D: textsecure-service.whispersystems.org
-        : V: 0x0303
-        : SNI: textsecure-service.whispersystems.org
-
-offline0: i4p-----d--r--- TCP [OR] 35.169.3.40:443 <-- [L] 192.168.2.17:57025
-        : HTTP/S.netify.signal
-        : D: textsecure-service.whispersystems.org
-        : V: 0x0303
-        : SNI: textsecure-service.whispersystems.org
-
-offline0: i4p-u---d--r--- TCP [OR] 35.169.3.40:443 <-- [L] 192.168.2.17:49227
+offline0: i4pcu---d--r--- TCP [OR] 35.169.3.40:443 <-- [L] 192.168.2.17:49227
         : HTTP/S.netify.signal
         : D: textsecure-service.whispersystems.org
         : V: 0x0303 CS: 0xc02f
-        : SNI: textsecure-service.whispersystems.org
+        : TLS/SNI: textsecure-service.whispersystems.org TLS/CN: textsecure-service.whispersystems.org
+        : TLS/IDN: C=US, ST=California, L=San Francisco, O=Open Whisper Systems, OU=Open Whisper Systems, CN=TextSecure TLS/SDN: C=US, ST=California, O=Open Whisper Systems, OU=Open Whisper Systems, CN=textsecure-service.whispersystems.org
+        : RID 47: TLS ALPN Not Found
+        : DP: 7 TP: 25 TB: 6.02 KiB
 
-offline0: i4p-u---d--r--- TCP [OR] 35.169.3.40:443 <-- [L] 192.168.2.17:49227
+offline0: i4pcu---d------ TCP [OR] 35.169.3.40:443 <-- [L] 192.168.2.17:57023
         : HTTP/S.netify.signal
         : D: textsecure-service.whispersystems.org
         : V: 0x0303 CS: 0xc02f
-        : SNI: textsecure-service.whispersystems.org CN: textsecure-service.whispersystems.org
-        : IDN: C=US, ST=California, L=San Francisco, O=Open Whisper Systems, OU=Open Whisper Systems, CN=TextSecure SDN: C=US, ST=California, O=Open Whisper Systems, OU=Open Whisper Systems, CN=textsecure-service.whispersystems.org
+        : TLS/SNI: textsecure-service.whispersystems.org TLS/CN: textsecure-service.whispersystems.org
+        : TLS/IDN: C=US, ST=California, L=San Francisco, O=Open Whisper Systems, OU=Open Whisper Systems, CN=TextSecure TLS/SDN: C=US, ST=California, O=Open Whisper Systems, OU=Open Whisper Systems, CN=textsecure-service.whispersystems.org
+        : DP: 7 TP: 26 TB: 5.48 KiB
 
-offline0: i4p-u---d--r--- TCP [OR] 35.169.3.40:443 <-- [L] 192.168.2.17:57023
+offline0: i4pcu---d------ TCP [OR] 35.169.3.40:443 <-- [L] 192.168.2.17:57025
         : HTTP/S.netify.signal
         : D: textsecure-service.whispersystems.org
         : V: 0x0303 CS: 0xc02f
-        : SNI: textsecure-service.whispersystems.org CN: textsecure-service.whispersystems.org
-        : IDN: C=US, ST=California, L=San Francisco, O=Open Whisper Systems, OU=Open Whisper Systems, CN=TextSecure SDN: C=US, ST=California, O=Open Whisper Systems, OU=Open Whisper Systems, CN=textsecure-service.whispersystems.org
+        : TLS/SNI: textsecure-service.whispersystems.org TLS/CN: textsecure-service.whispersystems.org
+        : TLS/IDN: C=US, ST=California, L=San Francisco, O=Open Whisper Systems, OU=Open Whisper Systems, CN=TextSecure TLS/SDN: C=US, ST=California, O=Open Whisper Systems, OU=Open Whisper Systems, CN=textsecure-service.whispersystems.org
+        : DP: 7 TP: 26 TB: 5.44 KiB
 
-offline0: i4p-u---d--r--- TCP [OR] 35.169.3.40:443 <-- [L] 192.168.2.17:57025
+offline0: i4pcu---d------ TCP [OR] 35.169.3.40:443 <-- [L] 192.168.2.17:57024
         : HTTP/S.netify.signal
         : D: textsecure-service.whispersystems.org
         : V: 0x0303 CS: 0xc02f
-        : SNI: textsecure-service.whispersystems.org CN: textsecure-service.whispersystems.org
-        : IDN: C=US, ST=California, L=San Francisco, O=Open Whisper Systems, OU=Open Whisper Systems, CN=TextSecure SDN: C=US, ST=California, O=Open Whisper Systems, OU=Open Whisper Systems, CN=textsecure-service.whispersystems.org
+        : TLS/SNI: textsecure-service.whispersystems.org TLS/CN: textsecure-service.whispersystems.org
+        : TLS/IDN: C=US, ST=California, L=San Francisco, O=Open Whisper Systems, OU=Open Whisper Systems, CN=TextSecure TLS/SDN: C=US, ST=California, O=Open Whisper Systems, OU=Open Whisper Systems, CN=textsecure-service.whispersystems.org
+        : DP: 7 TP: 26 TB: 5.69 KiB
 
-offline0: i4p-u---d--r--- TCP [OR] 35.169.3.40:443 <-- [L] 192.168.2.17:57024
+offline0: i4pcu---d------ TCP [OR] 35.169.3.40:443 <-- [L] 192.168.2.17:57026
         : HTTP/S.netify.signal
         : D: textsecure-service.whispersystems.org
         : V: 0x0303 CS: 0xc02f
-        : SNI: textsecure-service.whispersystems.org CN: textsecure-service.whispersystems.org
-        : IDN: C=US, ST=California, L=San Francisco, O=Open Whisper Systems, OU=Open Whisper Systems, CN=TextSecure SDN: C=US, ST=California, O=Open Whisper Systems, OU=Open Whisper Systems, CN=textsecure-service.whispersystems.org
+        : TLS/SNI: textsecure-service.whispersystems.org TLS/CN: textsecure-service.whispersystems.org
+        : TLS/IDN: C=US, ST=California, L=San Francisco, O=Open Whisper Systems, OU=Open Whisper Systems, CN=TextSecure TLS/SDN: C=US, ST=California, O=Open Whisper Systems, OU=Open Whisper Systems, CN=textsecure-service.whispersystems.org
+        : DP: 7 TP: 38 TB: 19.8 KiB
 
-offline0: i4p-----d--r--- TCP [OR] 35.169.3.40:443 <-- [L] 192.168.2.17:57026
-        : HTTP/S.netify.signal
-        : D: textsecure-service.whispersystems.org
-        : V: 0x0303
-        : SNI: textsecure-service.whispersystems.org
-
-offline0: i4p-u---d--r--- TCP [OR] 35.169.3.40:443 <-- [L] 192.168.2.17:57026
-        : HTTP/S.netify.signal
-        : D: textsecure-service.whispersystems.org
-        : V: 0x0303 CS: 0xc02f
-        : SNI: textsecure-service.whispersystems.org CN: textsecure-service.whispersystems.org
-        : IDN: C=US, ST=California, L=San Francisco, O=Open Whisper Systems, OU=Open Whisper Systems, CN=TextSecure SDN: C=US, ST=California, O=Open Whisper Systems, OU=Open Whisper Systems, CN=textsecure-service.whispersystems.org
-
-offline0: i4p-----d--r-F- TCP [OR] 23.57.24.16:443 <-- [L] 192.168.2.17:57016
+offline0: i4pc----d----F- TCP [OR] 23.57.24.16:443 <-- [L] 192.168.2.17:57016
         : HTTP/S.netify.apple-itunes
         : D: e673.dsce9.akamaiedge.net
-        : SNI: e673.dsce9.akamaiedge.net
+        : TLS/SNI: e673.dsce9.akamaiedge.net
+        : DP: 7 TP: 12 TB: 879
 
-offline0: i4p--------r--- TCP [OR] 13.35.253.42:443 <-- [L] 192.168.2.17:57027
-        : HTTP/S.netify.signal
-        : H: cdn.signal.org
-        : V: 0x0303
-        : SNI: cdn.signal.org
-
-offline0: i4p-u------r--- TCP [OR] 13.35.253.42:443 <-- [L] 192.168.2.17:57027
+offline0: i4pcu---------- TCP [OR] 13.35.253.42:443 <-- [L] 192.168.2.17:57027
         : HTTP/S.netify.signal
         : H: cdn.signal.org
         : V: 0x0303 CS: 0xc02f
-        : SNI: cdn.signal.org CN: cdn.signal.org
-        : IDN: C=US, ST=California, L=San Francisco, O=Open Whisper Systems, OU=Open Whisper Systems, CN=TextSecure SDN: C=US, ST=California, O=Open Whisper Systems, OU=Open Whisper Systems, CN=cdn.signal.org
+        : TLS/SNI: cdn.signal.org TLS/CN: cdn.signal.org
+        : TLS/IDN: C=US, ST=California, L=San Francisco, O=Open Whisper Systems, OU=Open Whisper Systems, CN=TextSecure TLS/SDN: C=US, ST=California, O=Open Whisper Systems, OU=Open Whisper Systems, CN=cdn.signal.org
+        : DP: 7 TP: 265 TB: 211 KiB
 

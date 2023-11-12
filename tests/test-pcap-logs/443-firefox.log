@@ -1,13 +1,9 @@
-offline0: i4p--------r--- TCP [OR] 178.62.197.130:443 <-- [L] 192.168.1.13:53096
-        : HTTP/S
-        : H: www.ntop.org
-        : V: 0x0303
-        : SNI: www.ntop.org
-
-offline0: i4p-u------r--- TCP [OR] 178.62.197.130:443 <-- [L] 192.168.1.13:53096
+offline0: i4pcu------r--- TCP [OR] 178.62.197.130:443 <-- [L] 192.168.1.13:53096
         : HTTP/S
         : H: www.ntop.org
         : V: 0x0303 CS: 0xcca8
-        : SNI: www.ntop.org CN: www.ntop.org
-        : IDN: C=US, O=Let's Encrypt, CN=Let's Encrypt Authority X3 SDN: CN=www.ntop.org
+        : TLS/SNI: www.ntop.org TLS/CN: www.ntop.org
+        : TLS/IDN: C=US, O=Let's Encrypt, CN=Let's Encrypt Authority X3 TLS/SDN: CN=www.ntop.org
+        : RID 30: TLS Certificate Expired
+        : DP: 7 TP: 566 TB: 394 KiB
 

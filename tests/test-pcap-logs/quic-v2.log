@@ -2,5 +2,8 @@ offline0: i6pc-------r--- UDP [L] ::1:4443 <-- [OL] ::1:42086
         : QUIC
         : H: test
         : V: 0x0304
-        : SNI: test
+        : TLS/SNI: test
+        : RID 16: Known Protocol on Non-standard Port
+        : RID 46: Unidirectional Traffic
+        : DP: 1 TP: 19 TB: 12.7 KiB
 

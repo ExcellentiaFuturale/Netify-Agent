@@ -203,25 +203,20 @@ void ndDetectionThread::ProcessPacketQueue(void) {
               (ndEF->flags.expiring.load() &&
                 ndEF->flags.expired.load() == false))
             {
-                if (ndEF->flags.detection_complete.load() == false &&
-                  ndEF->flags.detection_guessed.load() == false &&
-                  ndEF->detected_protocol == ND_PROTO_UNKNOWN)
-                {
-                    if (entry->packet != nullptr)
-                        ProcessPacket(entry);
+                if (entry->packet != nullptr)
+                    ProcessPacket(entry);
 
-                    if (ndEF->detected_protocol == ND_PROTO_UNKNOWN)
-                        SetGuessedProtocol(entry);
+                ProcessFlow(entry);
 
-                    ProcessFlow(entry);
-                    FlowUpdate(entry);
+                if (ndEF->detected_protocol == ND_PROTO_UNKNOWN)
+                    SetGuessedProtocol(entry);
 
-                    if (ndEF->flags.detection_complete.load() == false)
-                        SetDetectionComplete(entry);
-                }
+                SetDetectionComplete(entry);
 
-                if (ndEF->flags.expiring.load())
+                if (ndEF->flags.expiring.load()) {
                     ndEF->flags.expired = true;
+                    ndEF->flags.expiring = false;
+                }
             }
 
             if (ndEF->flags.detection_complete.load())
@@ -520,7 +515,8 @@ bool ndDetectionThread::ProcessALPN(
         {
             if ((ndGC_DEBUG && ndGC_VERBOSE)) {
                 nd_dprintf(
-                  "%s: TLS ALPN: refined: %s: %s -> %s\n",
+                  "%s: TLS ALPN: refined: %s: %s -> "
+                  "%s\n",
                   tag.c_str(), detected_alpn,
                   ndEF->detected_protocol_name.c_str(),
                   nd_proto_get_name(alpn->second));
@@ -826,12 +822,14 @@ void ndDetectionThread::ProcessFlow(ndDetectionQueueEntry *entry) {
                   flow_digest_mdata.begin()))
             {
                 nd_printf(
-                  "%s: restored flow metadata hash from "
+                  "%s: restored flow metadata hash "
+                  "from "
                   "cache.\n",
                   tag.c_str());
 #ifdef _ND_LOG_FHC
                 nd_dprintf(
-                  "%s: restored flow metadata hash from "
+                  "%s: restored flow metadata hash "
+                  "from "
                   "cache.\n",
                   tag.c_str());
 #endif

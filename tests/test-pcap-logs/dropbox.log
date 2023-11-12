@@ -1,50 +1,69 @@
 offline0: i4pc-------r--- UDP [L] 192.168.56.1:50311 --> [OL] 192.168.56.101:17500
         : Dropbox
+        : RID 46: Unidirectional Traffic
+        : DP: 1 TP: 200 TB: 19.6 KiB
 
 offline0: i4pc-------r--- UDP [L] 192.168.56.1:50318 --> [OL] 192.168.56.101:17500
         : Dropbox
+        : RID 46: Unidirectional Traffic
+        : DP: 1 TP: 200 TB: 19.7 KiB
 
 offline0: i4pc-------r--- UDP [L] 192.168.56.1:50312 --> [OL] 192.168.56.101:17500
         : Dropbox
+        : RID 46: Unidirectional Traffic
+        : DP: 1 TP: 200 TB: 19.7 KiB
 
 offline0: i4pc-------r--- UDP [L] 192.168.56.1:50319 --> [OL] 192.168.56.101:17500
         : Dropbox
+        : RID 46: Unidirectional Traffic
+        : DP: 1 TP: 200 TB: 19.7 KiB
 
-offline0: i4p--------r--- UDP [L] 192.168.1.105:55407 --> [OL] 192.168.1.254:53
+offline0: i4pc----------- UDP [L] 192.168.1.105:55407 --> [OL] 192.168.1.254:53
         : DNS.netify.dropbox
         : H: client.dropbox.com
+        : DP: 3 TP: 4 TB: 822
 
-offline0: i4p--------r--- UDP [L] 192.168.1.105:49112 --> [OL] 192.168.1.254:53
+offline0: i4pc----------- UDP [L] 192.168.1.105:49112 --> [OL] 192.168.1.254:53
         : DNS.netify.dropbox
         : H: client-cf.dropbox.com
+        : DP: 3 TP: 4 TB: 774
 
-offline0: i4p--------r--- UDP [L] 192.168.1.105:50789 --> [OL] 192.168.1.254:53
+offline0: i4pc----------- UDP [L] 192.168.1.105:50789 --> [OL] 192.168.1.254:53
         : DNS.netify.dropbox
         : H: d.dropbox.com
+        : DP: 3 TP: 4 TB: 792
 
-offline0: i4p--------r--- UDP [L] 192.168.1.105:36173 --> [OL] 192.168.1.254:53
+offline0: i4pc----------- UDP [L] 192.168.1.105:36173 --> [OL] 192.168.1.254:53
         : DNS.netify.dropbox
         : H: log.getdropbox.com
+        : DP: 5 TP: 8 TB: 1.36 KiB
 
-offline0: i4pc-------r--- UDP [L] 192.168.1.105:17500 --> [OB] 255.255.255.255:17500
+offline0: i4pc----------- UDP [L] 192.168.1.105:17500 --> [OB] 255.255.255.255:17500
         : Dropbox
+        : DP: 1 TP: 6 TB: 1.39 KiB
 
-offline0: i4pc-------r--- UDP [L] 192.168.1.105:17500 --> [OL] 192.168.1.255:17500
+offline0: i4pc----------- UDP [L] 192.168.1.105:17500 --> [OL] 192.168.1.255:17500
         : Dropbox
+        : DP: 1 TP: 6 TB: 1.39 KiB
 
-offline0: i4p--------r--- UDP [L] 192.168.1.105:33189 --> [OL] 192.168.1.254:53
+offline0: i4pc----------- UDP [L] 192.168.1.105:33189 --> [OL] 192.168.1.254:53
         : DNS.netify.dropbox
         : H: notify.dropbox.com
+        : DP: 3 TP: 4 TB: 744
 
-offline0: i4pc-------r--- UDP [L] 192.168.1.6:17500 --> [OB] 255.255.255.255:17500
+offline0: i4pc----------- UDP [L] 192.168.1.6:17500 --> [OB] 255.255.255.255:17500
         : Dropbox
+        : DP: 1 TP: 3 TB: 630
 
-offline0: i4pc-------r--- UDP [L] 192.168.1.6:17500 --> [OL] 192.168.1.255:17500
+offline0: i4pc----------- UDP [L] 192.168.1.6:17500 --> [OL] 192.168.1.255:17500
         : Dropbox
+        : DP: 1 TP: 3 TB: 630
 
-offline0: i4pc-------r--- UDP [L] 192.168.1.64:17500 --> [OB] 255.255.255.255:17500
+offline0: i4pc----------- UDP [L] 192.168.1.64:17500 --> [OB] 255.255.255.255:17500
         : Dropbox
+        : DP: 1 TP: 3 TB: 615
 
-offline0: i4pc-------r--- UDP [L] 192.168.1.64:17500 --> [OL] 192.168.1.255:17500
+offline0: i4pc----------- UDP [L] 192.168.1.64:17500 --> [OL] 192.168.1.255:17500
         : Dropbox
+        : DP: 1 TP: 3 TB: 615
 

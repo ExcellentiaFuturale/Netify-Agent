@@ -1,12 +1,20 @@
-offline0: i4p--------r--- TCP [OR] 104.27.129.77:443 <-- [L] 192.168.1.12:49886
+offline0: i4pc--x----r--- TCP [OR] 104.22.71.197:443 <-- [L] 192.168.1.12:49897
         : HTTP/S
         : V: 0x0303
+        : RID 35: TLS SNI Extension Not Found
+        : RID 46: Unidirectional Traffic
+        : RID 53: TLS ALPN/SNI Mismatch
+        : DP: 1 TP: 1 TB: 770
 
-offline0: i4p--------r--- TCP [OR] 104.16.125.175:443 <-- [L] 192.168.1.12:49887
+offline0: i4pc--x----r--- TCP [OR] 104.16.125.175:443 <-- [L] 192.168.1.12:49887
         : HTTP/S
         : V: 0x0303
+        : RID 46: Unidirectional Traffic
+        : DP: 1 TP: 1 TB: 770
 
-offline0: i4p--------r--- TCP [OR] 104.22.71.197:443 <-- [L] 192.168.1.12:49897
+offline0: i4pc--x----r--- TCP [OR] 104.27.129.77:443 <-- [L] 192.168.1.12:49886
         : HTTP/S
         : V: 0x0303
+        : RID 46: Unidirectional Traffic
+        : DP: 1 TP: 1 TB: 770
 

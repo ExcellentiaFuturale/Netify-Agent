@@ -1,3 +1,5 @@
 offline0: i4pc-------r--- TCP [OR] 178.71.206.1:6881 <-- [L] 192.168.122.34:48987
         : BitTorrent
+        : RID 16: Known Protocol on Non-standard Port
+        : DP: 10 TP: 100 TB: 94.6 KiB
 

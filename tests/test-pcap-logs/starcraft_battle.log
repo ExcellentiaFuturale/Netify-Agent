@@ -1,226 +1,291 @@
-offline0: i4p--------r--- TCP [OR] 192.30.252.91:443 <-- [L] 192.168.1.100:3213
+offline0: i4pc----------- TCP [OR] 192.30.252.91:443 <-- [L] 192.168.1.100:3213
         : HTTP/S
+        : DP: 2 TP: 3 TB: 234
 
-offline0: i4p--------r--- UDP [L] 192.168.1.100:58818 --> [OL] 192.168.1.254:53
+offline0: i4pc-------r--- UDP [L] 192.168.1.100:58818 --> [OL] 192.168.1.254:53
         : DNS.netify.reverse-dns
         : H: 91.252.30.192.in-addr.arpa
+        : RID 50: Minor Issues
+        : DP: 3 TP: 4 TB: 432
 
-offline0: i4p--------r--- UDP [L] 192.168.1.100:58831 --> [OL] 192.168.1.254:53
+offline0: i4pc-------r--- UDP [L] 192.168.1.100:58831 --> [OL] 192.168.1.254:53
         : DNS.netify.reverse-dns
         : H: 254.1.168.192.in-addr.arpa
+        : RID  8: Error Code
+        : DP: 4 TP: 4 TB: 417
 
-offline0: i4p--------r--- UDP [L] 192.168.1.100:58844 --> [OL] 192.168.1.254:53
+offline0: i4pc----------- UDP [L] 192.168.1.100:58844 --> [OL] 192.168.1.254:53
         : DNS.netify.reverse-dns
         : H: 40.186.239.80.in-addr.arpa
+        : DP: 2 TP: 2 TB: 210
 
-offline0: i4p--------r--- UDP [L] 192.168.1.100:58851 --> [OL] 192.168.1.254:53
+offline0: i4pc----------- UDP [L] 192.168.1.100:58851 --> [OL] 192.168.1.254:53
         : DNS.netify.reverse-dns
         : H: 22.40.194.173.in-addr.arpa
+        : DP: 3 TP: 4 TB: 455
 
-offline0: i4pc-------r--- UDP [L] 192.168.1.254:38605 --> [OM] 239.255.255.250:1900
+offline0: i4pc----------- UDP [L] 192.168.1.254:38605 --> [OM] 239.255.255.250:1900
         : SSDP
         : H: 239.255.255.250
+        : DP: 1 TP: 11 TB: 4.87 KiB
 
-offline0: i4p--------r--- TCP [OR] 173.194.113.224:80 <-- [L] 192.168.1.100:3506
+offline0: i4pc---------F- TCP [OR] 173.194.113.224:80 <-- [L] 192.168.1.100:3506
         : HTTP.netify.analytics
         : H: www.google-analytics.com
         : HTTP/UA: Battle.net/1.3.0.5952
         : URL: www.google-analytics.com/collect
+        : DP: 6 TP: 9 TB: 1.27 KiB
 
-offline0: i4p--------r--- UDP [L] 192.168.1.100:60026 --> [OL] 192.168.1.254:53
+offline0: i4pc-------r--- UDP [L] 192.168.1.100:60026 --> [OL] 192.168.1.254:53
         : DNS.netify.blizzard
         : H: llnw.blizzard.com
+        : RID 23: Risky Domain Name
+        : RID 27: Suspicious DGA Domain name
+        : DP: 3 TP: 4 TB: 442
 
-offline0: i4p-----d--r--- TCP [OR] 87.248.221.254:80 <-- [L] 192.168.1.100:3508
+offline0: i4pc----d--r-F- TCP [OR] 87.248.221.254:80 <-- [L] 192.168.1.100:3508
         : HTTP.netify.blizzard
         : D: blizzard.vo.llnwd.net H: llnw.blizzard.com
         : HTTP/UA: Blizzard Web Client
         : URL: llnw.blizzard.com/sc2-pod-retail/AF11CD00/EU/24621.direct/s2-36281-BA356DD57557728843CAF63A12C79AA3.mfil
+        : RID  2: Binary Application Transfer
+        : RID 27: Suspicious DGA Domain name
+        : DP: 6 TP: 179 TB: 131 KiB
 
-offline0: i4p--------r--- TCP [OR] 12.129.222.54:80 <-- [L] 192.168.1.100:3512
+offline0: i4pc-------r-F- TCP [OR] 12.129.222.54:80 <-- [L] 192.168.1.100:3512
         : HTTP
         : H: us.scan.worldofwarcraft.com
         : URL: us.scan.worldofwarcraft.com/update/Launcher.txt
+        : RID 14: HTTP Suspicious User-Agent
+        : RID 48: HTTP Obsolete Server
+        : DP: 6 TP: 9 TB: 880
 
-offline0: i4pc-------r-F- TCP [OR] 2.228.46.114:443 <-- [L] 192.168.1.100:3482
+offline0: i4pc---------F- TCP [OR] 2.228.46.114:443 <-- [L] 192.168.1.100:3482
         : HTTP/S
+        : DP: 2 TP: 4 TB: 275
 
-offline0: i4pc-------r-F- TCP [OR] 2.228.46.114:443 <-- [L] 192.168.1.100:3479
+offline0: i4pc---------F- TCP [OR] 2.228.46.114:443 <-- [L] 192.168.1.100:3479
         : HTTP/S
+        : DP: 2 TP: 4 TB: 275
 
-offline0: i4pc-------r-F- TCP [OR] 2.228.46.114:443 <-- [L] 192.168.1.100:3481
+offline0: i4pc---------F- TCP [OR] 2.228.46.114:443 <-- [L] 192.168.1.100:3481
         : HTTP/S
+        : DP: 2 TP: 4 TB: 275
 
-offline0: i4pc-------r-F- TCP [OR] 2.228.46.104:443 <-- [L] 192.168.1.100:3492
+offline0: i4pc---------F- TCP [OR] 2.228.46.104:443 <-- [L] 192.168.1.100:3492
         : HTTP/S
+        : DP: 2 TP: 4 TB: 275
 
-offline0: i4pc-------r-F- TCP [OR] 2.228.46.104:443 <-- [L] 192.168.1.100:3490
+offline0: i4pc---------F- TCP [OR] 2.228.46.104:443 <-- [L] 192.168.1.100:3490
         : HTTP/S
+        : DP: 2 TP: 4 TB: 275
 
-offline0: i4pc-------r-F- TCP [OR] 2.228.46.104:443 <-- [L] 192.168.1.100:3491
+offline0: i4pc---------F- TCP [OR] 2.228.46.104:443 <-- [L] 192.168.1.100:3491
         : HTTP/S
+        : DP: 2 TP: 4 TB: 275
 
-offline0: i4pc-------r-F- TCP [OR] 2.228.46.114:443 <-- [L] 192.168.1.100:3480
+offline0: i4pc---------F- TCP [OR] 2.228.46.114:443 <-- [L] 192.168.1.100:3480
         : HTTP/S
+        : DP: 2 TP: 4 TB: 275
 
-offline0: i4pc-------r-F- TCP [OR] 2.228.46.104:443 <-- [L] 192.168.1.100:3489
+offline0: i4pc---------F- TCP [OR] 2.228.46.104:443 <-- [L] 192.168.1.100:3489
         : HTTP/S
+        : DP: 2 TP: 4 TB: 275
 
-offline0: i4pc-------r--- IGMP [L] 192.168.1.107:0 --> [OM] 224.0.0.22:0
+offline0: i4pc----------- IGMP [L] 192.168.1.107:0 --> [OM] 224.0.0.22:0
         : IGMP
+        : DP: 1 TP: 2 TB: 120
 
-offline0: i4p--------r--- UDP [L] 192.168.1.100:53145 --> [OL] 192.168.1.254:53
+offline0: i4pc----------- UDP [L] 192.168.1.100:53145 --> [OL] 192.168.1.254:53
         : DNS.netify.blizzard
         : H: nydus.battle.net
+        : DP: 3 TP: 4 TB: 336
 
-offline0: i4p-----d--r--- TCP [OR] 80.239.186.26:80 <-- [L] 192.168.1.100:3515
+offline0: i4pc----d----F- TCP [OR] 80.239.186.26:80 <-- [L] 192.168.1.100:3515
         : HTTP.netify.blizzard
         : D: nydus.battle.net
         : HTTP/UA: Battle.net Web Client
         : URL: nydus.battle.net/S2/enGB/client/regions?build=enGB&targetRegion=EU
+        : DP: 6 TP: 10 TB: 1.2 KiB
 
-offline0: i4p--------r--- TCP [OR] 80.239.186.21:80 <-- [L] 192.168.1.100:3516
+offline0: i4pc---------F- TCP [OR] 80.239.186.21:80 <-- [L] 192.168.1.100:3516
         : HTTP.netify.blizzard
         : H: eu.launcher.battle.net
         : HTTP/UA: Battle.net Web Client
         : URL: eu.launcher.battle.net/service/s2/regionsxml/regions.xml
+        : DP: 6 TP: 12 TB: 3.59 KiB
 
-offline0: i4p-----d--r--- TCP [OR] 80.239.186.26:80 <-- [L] 192.168.1.100:3518
+offline0: i4pc----d----F- TCP [OR] 80.239.186.26:80 <-- [L] 192.168.1.100:3518
         : HTTP.netify.blizzard
         : D: nydus.battle.net
         : HTTP/UA: Battle.net Web Client
         : URL: nydus.battle.net/S2/enGB/client/alert?build=enGB&targetRegion=EU
+        : DP: 6 TP: 10 TB: 1.2 KiB
 
-offline0: i4pc-------r--- TCP [L] 192.168.1.100:3517 --> [OR] 213.248.127.130:1119
+offline0: i4pc----------- TCP [L] 192.168.1.100:3517 --> [OR] 213.248.127.130:1119
         : Starcraft
+        : DP: 4 TP: 215 TB: 49 KiB
 
-offline0: i4p--------r--- TCP [OR] 80.239.186.21:80 <-- [L] 192.168.1.100:3519
+offline0: i4pc---------F- TCP [OR] 80.239.186.21:80 <-- [L] 192.168.1.100:3519
         : HTTP.netify.blizzard
         : H: eu.launcher.battle.net
         : HTTP/UA: Battle.net Web Client
         : URL: eu.launcher.battle.net/service/s2/alert/en-gb
+        : DP: 6 TP: 9 TB: 979
 
-offline0: i4p-----d--r--- TCP [OR] 80.239.186.26:80 <-- [L] 192.168.1.100:3521
+offline0: i4pc----d----F- TCP [OR] 80.239.186.26:80 <-- [L] 192.168.1.100:3521
         : HTTP.netify.blizzard
         : D: nydus.battle.net
         : HTTP/UA: Battle.net Web Client
         : URL: nydus.battle.net/S2/enGB/client/regions?build=enGB&targetRegion=EU
+        : DP: 6 TP: 10 TB: 1.2 KiB
 
-offline0: i4p--------r--- TCP [OR] 80.239.186.21:80 <-- [L] 192.168.1.100:3522
+offline0: i4pc---------F- TCP [OR] 80.239.186.21:80 <-- [L] 192.168.1.100:3522
         : HTTP.netify.blizzard
         : H: eu.launcher.battle.net
         : HTTP/UA: Battle.net Web Client
         : URL: eu.launcher.battle.net/service/s2/regionsxml/regions.xml
+        : DP: 6 TP: 11 TB: 3.54 KiB
 
-offline0: i4p-----d--r--- TCP [OR] 80.239.186.26:80 <-- [L] 192.168.1.100:3523
+offline0: i4pc----d----F- TCP [OR] 80.239.186.26:80 <-- [L] 192.168.1.100:3523
         : HTTP.netify.blizzard
         : D: nydus.battle.net
         : HTTP/UA: Battle.net Web Client
         : URL: nydus.battle.net/S2/enGB/client/feed/live-event?build=enGB&targetRegion=EU
+        : DP: 6 TP: 10 TB: 1.18 KiB
 
-offline0: i4p-----d--r--- TCP [OR] 80.239.186.26:80 <-- [L] 192.168.1.100:3524
+offline0: i4pc----d----F- TCP [OR] 80.239.186.26:80 <-- [L] 192.168.1.100:3524
         : HTTP.netify.blizzard
         : D: nydus.battle.net
         : HTTP/UA: Battle.net Web Client
         : URL: nydus.battle.net/S2/enGB/client/feed/homepage?build=enGB&targetRegion=EU
+        : DP: 6 TP: 10 TB: 1.19 KiB
 
-offline0: i4p--------r--- TCP [OR] 80.239.186.40:80 <-- [L] 192.168.1.100:3525
+offline0: i4pc---------F- TCP [OR] 80.239.186.40:80 <-- [L] 192.168.1.100:3525
         : HTTP.netify.blizzard
         : H: eu.battle.net
         : HTTP/UA: Battle.net Web Client
         : URL: eu.battle.net/sc2/en-gb/data/live-events.xml
+        : DP: 6 TP: 12 TB: 3.84 KiB
 
-offline0: i4p--------r--- TCP [OR] 80.239.186.40:80 <-- [L] 192.168.1.100:3526
+offline0: i4pc---------F- TCP [OR] 80.239.186.40:80 <-- [L] 192.168.1.100:3526
         : HTTP.netify.blizzard
         : H: eu.battle.net
         : HTTP/UA: Battle.net Web Client
         : URL: eu.battle.net/sc2/en-gb/data/client-homepage.xml
+        : DP: 6 TP: 11 TB: 3.6 KiB
 
-offline0: i4p--------r--- UDP [L] 192.168.1.100:55468 --> [OL] 192.168.1.254:53
+offline0: i4pc----------- UDP [L] 192.168.1.100:55468 --> [OL] 192.168.1.254:53
         : DNS.netify.blizzard
         : H: bnetcmsus-a.akamaihd.net
+        : DP: 3 TP: 4 TB: 556
 
-offline0: i4p-----d--r--- TCP [OR] 2.228.46.112:80 <-- [L] 192.168.1.100:3527
+offline0: i4pc----d------ TCP [OR] 2.228.46.112:80 <-- [L] 192.168.1.100:3527
         : HTTP.netify.blizzard
         : D: a1961.g.akamai.net H: bnetcmsus-a.akamaihd.net
         : HTTP/UA: Battle.net Web Client
         : URL: bnetcmsus-a.akamaihd.net/cms/bnet_thumbnail/gc/GCF1DHMH8FDY1434670037434.jpg
+        : DP: 6 TP: 41 TB: 36.6 KiB
 
-offline0: i4p-----d--r--- TCP [OR] 2.228.46.112:80 <-- [L] 192.168.1.100:3529
+offline0: i4pc----d------ TCP [OR] 2.228.46.112:80 <-- [L] 192.168.1.100:3529
         : HTTP.netify.blizzard
         : D: a1961.g.akamai.net H: bnetcmsus-a.akamaihd.net
         : HTTP/UA: Battle.net Web Client
         : URL: bnetcmsus-a.akamaihd.net/cms/bnet_header/yf/YF9PRCZXJVPZ1428591254317.jpg
+        : DP: 6 TP: 29 TB: 24.5 KiB
 
-offline0: i4p-----d--r--- TCP [OR] 2.228.46.112:80 <-- [L] 192.168.1.100:3530
+offline0: i4pc----d------ TCP [OR] 2.228.46.112:80 <-- [L] 192.168.1.100:3530
         : HTTP.netify.blizzard
         : D: a1961.g.akamai.net H: bnetcmsus-a.akamaihd.net
         : HTTP/UA: Battle.net Web Client
         : URL: bnetcmsus-a.akamaihd.net/cms/bnet_header/0x/0XQ1VXR8ZR271434128527471.jpg
+        : DP: 6 TP: 29 TB: 24.5 KiB
 
-offline0: i4p-----d--r--- TCP [OR] 2.228.46.112:80 <-- [L] 192.168.1.100:3528
-        : HTTP.netify.blizzard
-        : D: a1961.g.akamai.net H: bnetcmsus-a.akamaihd.net
-        : HTTP/UA: Battle.net Web Client
-        : URL: bnetcmsus-a.akamaihd.net/cms/bnet_thumbnail/4j/4J7OUIISCLTQ1436943629210.jpg
-
-offline0: i4p-----d--r--- TCP [OR] 2.228.46.112:80 <-- [L] 192.168.1.100:3531
+offline0: i4pc----d------ TCP [OR] 2.228.46.112:80 <-- [L] 192.168.1.100:3531
         : HTTP.netify.blizzard
         : D: a1961.g.akamai.net H: bnetcmsus-a.akamaihd.net
         : HTTP/UA: Battle.net Web Client
         : URL: bnetcmsus-a.akamaihd.net/cms/bnet_header/fa/FA512IPUN0SE1436979936388.jpg
+        : DP: 6 TP: 29 TB: 24.5 KiB
 
-offline0: i4p-----d--r--- TCP [OR] 2.228.46.112:80 <-- [L] 192.168.1.100:3532
+offline0: i4pc----d------ TCP [OR] 2.228.46.112:80 <-- [L] 192.168.1.100:3528
+        : HTTP.netify.blizzard
+        : D: a1961.g.akamai.net H: bnetcmsus-a.akamaihd.net
+        : HTTP/UA: Battle.net Web Client
+        : URL: bnetcmsus-a.akamaihd.net/cms/bnet_thumbnail/4j/4J7OUIISCLTQ1436943629210.jpg
+        : DP: 6 TP: 29 TB: 24.5 KiB
+
+offline0: i4pc-gx----r--- TCP [OR] 80.239.186.40:443 <-- [L] 192.168.1.100:3478
+        : Unknown
+        : RID 46: Unidirectional Traffic
+        : RID 51: TCP Connection Issues
+        : DP: 1 TP: 1 TB: 60
+
+offline0: i4pc--x-d------ TCP [OR] 2.228.46.112:80 <-- [L] 192.168.1.100:3532
         : HTTP.netify.blizzard
         : D: a1961.g.akamai.net H: bnetcmsus-a.akamaihd.net
         : HTTP/UA: Battle.net Web Client
         : URL: bnetcmsus-a.akamaihd.net/cms/bnet_header/78/78XH2UNU4JYK1434560551687.jpg
+        : DP: 4 TP: 4 TB: 386
 
-offline0: i4p-----d--r--- TCP [OR] 2.228.46.112:80 <-- [L] 192.168.1.100:3533
+offline0: i4pc-gx-------- UDP [OR] 62.115.246.51:1119 <-- [L] 192.168.1.100:53146
+        : Unknown
+        : DP: 2 TP: 2 TB: 104
+
+offline0: i4pc-gx-------- UDP [L] 192.168.1.100:6113 --> [OR] 213.248.127.166:1119
+        : Unknown
+        : DP: 2 TP: 2 TB: 103
+
+offline0: i4pc--x-d------ TCP [OR] 2.228.46.112:80 <-- [L] 192.168.1.100:3533
         : HTTP.netify.blizzard
         : D: a1961.g.akamai.net H: bnetcmsus-a.akamaihd.net
         : HTTP/UA: Battle.net Web Client
         : URL: bnetcmsus-a.akamaihd.net/cms/bnet_header/mf/MFTH8TS42HKX1430183778319.jpg
-
-offline0: i4pc-gx-------- TCP [OR] 80.239.186.40:443 <-- [L] 192.168.1.100:3478
-        : HTTP/S
-
-offline0: i4pc-gx-------- UDP [OR] 62.115.246.51:1119 <-- [L] 192.168.1.100:53146
-        : Starcraft
-
-offline0: i4pc-gx-------- UDP [L] 192.168.1.100:6113 --> [OR] 213.248.127.166:1119
-        : Starcraft
+        : DP: 4 TP: 4 TB: 386
 
 offline0: i4pc-gx-------- TCP [L] 192.168.1.100:3052 --> [OR] 216.58.212.110:443
-        : HTTP/S.netify.google
+        : Unknown.netify.google
+        : DP: 2 TP: 2 TB: 121
 
 offline0: i4pc-gx-----s-- TCP [OR] 64.233.184.188:5228 --> [L] 192.168.1.100:2759
         : XMPP.netify.google-chat
+        : DP: 2 TP: 2 TB: 121
 
 offline0: i4pc-gx-------- UDP [OR] 5.42.180.154:1119 <-- [L] 192.168.1.100:53146
-        : Starcraft.netify.activision-blizzard
+        : Unknown.netify.activision-blizzard
+        : DP: 2 TP: 2 TB: 104
 
 offline0: i4pc-gx-------- UDP [OR] 173.194.40.22:443 <-- [L] 192.168.1.100:53568
-        : QUIC.netify.google
+        : Unknown.netify.google
+        : DP: 6 TP: 6 TB: 475
 
 offline0: i4pc-gx-------- UDP [L] 192.168.1.100:6113 --> [OR] 213.248.127.212:1119
-        : Starcraft
+        : Unknown
+        : DP: 2 TP: 2 TB: 103
 
 offline0: i4pc-gx------F- TCP [OR] 80.239.208.193:1119 <-- [L] 192.168.1.100:3427
-        : Starcraft
+        : Unknown
+        : DP: 13 TP: 13 TB: 902
 
-offline0: i4pc-gx-d------ TCP [OR] 2.228.46.112:80 <-- [L] 192.168.1.100:3534
-        : HTTP.netify.akamai
+offline0: i4pc-gx-d--r--- TCP [OR] 2.228.46.112:80 <-- [L] 192.168.1.100:3534
+        : Unknown.netify.akamai
         : D: a1961.g.akamai.net
+        : RID 46: Unidirectional Traffic
+        : DP: 1 TP: 1 TB: 66
 
 offline0: i4pc-gx------F- TCP [OR] 173.194.113.224:443 <-- [L] 192.168.1.100:3484
-        : HTTP/S.netify.google
+        : Unknown.netify.google
+        : DP: 3 TP: 3 TB: 168
 
 offline0: i4pc-gx------F- TCP [L] 192.168.1.100:3486 --> [OR] 199.38.164.156:443
-        : HTTP/S
+        : Unknown
+        : DP: 4 TP: 4 TB: 228
 
-offline0: i4pc-gx-d------ TCP [OR] 80.239.186.26:443 <-- [L] 192.168.1.100:3476
-        : HTTP/S.netify.blizzard
+offline0: i4pc-gx-d--r--- TCP [OR] 80.239.186.26:443 <-- [L] 192.168.1.100:3476
+        : Unknown.netify.blizzard
         : D: nydus.battle.net
-        : SNI: nydus.battle.net
+        : TLS/SNI: nydus.battle.net
+        : RID 46: Unidirectional Traffic
+        : RID 51: TCP Connection Issues
+        : DP: 1 TP: 1 TB: 60
 

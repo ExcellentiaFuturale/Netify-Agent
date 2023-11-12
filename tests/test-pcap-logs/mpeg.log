@@ -1,6 +1,7 @@
-offline0: i4p--------r-F- TCP [OR] 46.101.157.119:80 <-- [L] 192.168.80.160:55804
+offline0: i4pc----------- TCP [OR] 46.101.157.119:80 <-- [L] 192.168.80.160:55804
         : HTTP
         : H: luca.ntop.org
         : HTTP/UA: Wget/1.16.3 (darwin14.1.0)
         : URL: luca.ntop.org/0.mp3
+        : DP: 6 TP: 6 TB: 1.96 KiB
 

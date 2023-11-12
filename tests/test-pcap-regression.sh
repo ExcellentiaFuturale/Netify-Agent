@@ -36,7 +36,7 @@ run_test() {
         cat $1 > ${BASE}-test.cap || exit $?
     fi
     echo -e "\n${BOLD}>>> ${NAME}${NORMAL}"
-    CMD="${NETIFYD} -t -c $CONF --thread-detection-cores=1 -I ${BASE}-test.cap -A $NETWORK -T ${LOG}"
+    CMD="${NETIFYD} -vvv -t -c $CONF --thread-detection-cores=1 --verbose-flag no-event-dpi-new --verbose-flag event-dpi-complete -I ${BASE}-test.cap -A $NETWORK -T ${LOG}"
     if [ "x${WITH_VALGRIND}" == "xyes" ]; then
         CMD="/usr/local/bin/valgrind --tool=memcheck --leak-check=full --track-origins=yes --log-file=/tmp/${NAME}.log ${CMD}"
     else

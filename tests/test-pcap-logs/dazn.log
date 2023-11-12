@@ -1,36 +1,21 @@
-offline0: i4p--------r--- TCP [OR] 52.84.223.58:443 <-- [L] 192.168.1.128:54020
-        : HTTP/S.netify.dazn
-        : H: www.dazn.com
-        : V: 0x0303
-        : SNI: www.dazn.com
-
-offline0: i4p-u------r--- TCP [OR] 52.84.223.58:443 <-- [L] 192.168.1.128:54020
+offline0: i4pcu---------- TCP [OR] 52.84.223.58:443 <-- [L] 192.168.1.128:54020
         : HTTP/S.netify.dazn
         : H: www.dazn.com
         : V: 0x0303 CS: 0x1301
-        : SNI: www.dazn.com
+        : TLS/SNI: www.dazn.com
+        : DP: 4 TP: 4 TB: 2.17 KiB
 
-offline0: i4p--------r--- TCP [OR] 13.226.244.27:443 <-- [L] 192.168.1.128:46036
-        : HTTP/S.netify.dazn
-        : H: user-profile.ar.indazn.com
-        : V: 0x0303
-        : SNI: user-profile.ar.indazn.com
-
-offline0: i4p-u------r--- TCP [OR] 13.226.244.27:443 <-- [L] 192.168.1.128:46036
+offline0: i4pcu---------- TCP [OR] 13.226.244.27:443 <-- [L] 192.168.1.128:46036
         : HTTP/S.netify.dazn
         : H: user-profile.ar.indazn.com
         : V: 0x0303 CS: 0x1301
-        : SNI: user-profile.ar.indazn.com
+        : TLS/SNI: user-profile.ar.indazn.com
+        : DP: 4 TP: 4 TB: 2.17 KiB
 
-offline0: i4p--------r--- TCP [OR] 13.226.244.30:443 <-- [L] 192.168.1.128:40882
-        : HTTP/S.netify.dazn
-        : H: subscriptions-service.dazn-api.com
-        : V: 0x0303
-        : SNI: subscriptions-service.dazn-api.com
-
-offline0: i4p-u------r--- TCP [OR] 13.226.244.30:443 <-- [L] 192.168.1.128:40882
+offline0: i4pcu---------- TCP [OR] 13.226.244.30:443 <-- [L] 192.168.1.128:40882
         : HTTP/S.netify.dazn
         : H: subscriptions-service.dazn-api.com
         : V: 0x0303 CS: 0x1301
-        : SNI: subscriptions-service.dazn-api.com
+        : TLS/SNI: subscriptions-service.dazn-api.com
+        : DP: 4 TP: 4 TB: 2.17 KiB
 

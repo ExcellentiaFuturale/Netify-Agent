@@ -1,72 +1,122 @@
 offline0: i4pc-------r--- UDP [OR] 109.237.187.193:4500 <-- [L] 192.168.2.100:14500
         : IPSEC
+        : RID 46: Unidirectional Traffic
+        : DP: 1 TP: 1 TB: 858
 
 offline0: i4pc-------r--- UDP [OR] 109.237.187.193:500 <-- [L] 192.168.2.100:10500
         : IPSEC
+        : RID 46: Unidirectional Traffic
+        : DP: 1 TP: 12 TB: 6.11 KiB
 
 offline0: i4pc-------r--- UDP [OR] 109.237.187.195:4500 <-- [L] 192.168.2.100:14500
         : IPSEC
+        : RID 46: Unidirectional Traffic
+        : DP: 1 TP: 30 TB: 14.8 KiB
 
 offline0: i4pc-------r--- UDP [OR] 109.237.187.195:500 <-- [L] 192.168.2.100:10500
         : IPSEC
+        : RID 46: Unidirectional Traffic
+        : DP: 1 TP: 12 TB: 6.11 KiB
 
 offline0: i4pc-------r--- UDP [OR] 109.237.187.194:500 <-- [L] 192.168.2.100:10500
         : IPSEC
+        : RID 46: Unidirectional Traffic
+        : DP: 1 TP: 12 TB: 6.11 KiB
 
 offline0: i4pc-------r--- UDP [OR] 109.237.187.194:4500 <-- [L] 192.168.2.100:14500
         : IPSEC
+        : RID 46: Unidirectional Traffic
+        : DP: 1 TP: 30 TB: 14.7 KiB
 
 offline0: i4pc-------r--- UDP [OR] 109.237.187.225:500 <-- [L] 192.168.2.100:10500
         : IPSEC
+        : RID 46: Unidirectional Traffic
+        : DP: 1 TP: 8 TB: 4.07 KiB
 
 offline0: i4pc-------r--- UDP [OR] 109.237.187.225:4500 <-- [L] 192.168.2.100:14500
         : IPSEC
+        : RID 17: Malformed Packet
+        : RID 46: Unidirectional Traffic
+        : DP: 1 TP: 30 TB: 14.8 KiB
 
 offline0: i4pc-------r--- UDP [OR] 109.237.187.131:500 <-- [L] 192.168.2.100:10500
         : IPSEC
+        : RID 17: Malformed Packet
+        : RID 46: Unidirectional Traffic
+        : DP: 1 TP: 12 TB: 6.11 KiB
 
 offline0: i4pc-------r--- UDP [OR] 109.237.187.131:4500 <-- [L] 192.168.2.100:14500
         : IPSEC
+        : RID 46: Unidirectional Traffic
+        : DP: 1 TP: 45 TB: 22.1 KiB
 
 offline0: i4pc-------r--- UDP [OR] 109.237.187.193:4500 <-- [L] 192.168.2.100:43811
         : IPSEC
+        : RID 46: Unidirectional Traffic
+        : DP: 1 TP: 15 TB: 9.04 KiB
 
 offline0: i4pc-------r--- UDP [OR] 109.237.187.193:500 <-- [L] 192.168.2.100:43811
         : IPSEC
+        : RID 46: Unidirectional Traffic
+        : DP: 1 TP: 8 TB: 2.48 KiB
 
 offline0: i4pc-------r--- UDP [OR] 109.237.187.129:500 <-- [L] 192.168.2.100:10500
         : IPSEC
+        : RID 46: Unidirectional Traffic
+        : DP: 1 TP: 4 TB: 2.04 KiB
 
 offline0: i4pc-------r--- UDP [OR] 109.237.187.129:4500 <-- [L] 192.168.2.100:14500
         : IPSEC
+        : RID 46: Unidirectional Traffic
+        : DP: 1 TP: 15 TB: 7.38 KiB
 
 offline0: i4pc-------r--- UDP [OR] 109.237.187.227:500 <-- [L] 192.168.2.100:10500
         : IPSEC
+        : RID 46: Unidirectional Traffic
+        : DP: 1 TP: 107 TB: 54.6 KiB
 
 offline0: i4pc-------r--- UDP [OR] 109.237.187.227:4500 <-- [L] 192.168.2.100:14500
         : IPSEC
+        : RID 46: Unidirectional Traffic
+        : DP: 1 TP: 291 TB: 148 KiB
 
 offline0: i4pc-------r--- UDP [OR] 109.237.187.226:500 <-- [L] 192.168.2.100:10500
         : IPSEC
+        : RID 46: Unidirectional Traffic
+        : DP: 1 TP: 4 TB: 2.04 KiB
 
 offline0: i4pc-------r--- UDP [OR] 109.237.187.226:4500 <-- [L] 192.168.2.100:14500
         : IPSEC
+        : RID 46: Unidirectional Traffic
+        : DP: 1 TP: 15 TB: 7.38 KiB
 
 offline0: i4pc-------r--- UDP [OR] 109.237.187.130:500 <-- [L] 192.168.2.100:10500
         : IPSEC
+        : RID 46: Unidirectional Traffic
+        : DP: 1 TP: 24 TB: 12.2 KiB
 
 offline0: i4pc-------r--- UDP [OR] 109.237.187.130:4500 <-- [L] 192.168.2.100:14500
         : IPSEC
+        : RID 46: Unidirectional Traffic
+        : DP: 1 TP: 90 TB: 58.7 KiB
 
 offline0: i4pc-------r--- UDP [OR] 109.237.187.193:4500 <-- [L] 192.168.2.100:42593
         : IPSEC
+        : RID 46: Unidirectional Traffic
+        : DP: 1 TP: 15 TB: 9.17 KiB
 
 offline0: i4pc-------r--- UDP [OR] 109.237.187.193:500 <-- [L] 192.168.2.100:42593
         : IPSEC
+        : RID 46: Unidirectional Traffic
+        : DP: 1 TP: 8 TB: 2.48 KiB
 
 offline0: i4pc-------r--- UDP [OR] 109.237.187.194:4500 <-- [L] 192.168.2.100:41618
         : IPSEC
+        : RID 46: Unidirectional Traffic
+        : DP: 1 TP: 15 TB: 7.15 KiB
 
 offline0: i4pc-------r--- UDP [OR] 109.237.187.194:500 <-- [L] 192.168.2.100:41618
         : IPSEC
+        : RID 46: Unidirectional Traffic
+        : DP: 1 TP: 8 TB: 2.48 KiB
 

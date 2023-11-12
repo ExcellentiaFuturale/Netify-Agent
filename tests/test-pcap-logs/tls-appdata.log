@@ -1,6 +1,8 @@
-offline0: i4p--------r--- TCP [OR] 179.60.195.173:443 <-- [L] 192.168.2.100:60636
-        : HTTP/S.netify.meta
-
-offline0: i4p--------r--- TCP [OR] 52.223.198.7:443 <-- [L] 192.168.2.100:58976
+offline0: i4pc----------- TCP [OR] 52.223.198.7:443 <-- [L] 192.168.2.100:58976
         : HTTP/S.netify.twitch
+        : DP: 11 TP: 114 TB: 116 KiB
+
+offline0: i4pc--x-------- TCP [OR] 179.60.195.173:443 <-- [L] 192.168.2.100:60636
+        : HTTP/S.netify.meta
+        : DP: 6 TP: 6 TB: 789
 
