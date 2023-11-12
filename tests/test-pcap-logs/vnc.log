@@ -2,11 +2,11 @@ offline0: i4pc-------r--- TCP [OR] 95.237.48.208:59791 --> [L] 192.168.2.110:690
         : VNC
         : RID  4: Desktop/File Sharing
         : RID 16: Known Protocol on Non-standard Port
-        : DP: 5 TP: 744 TB: 52.7 KiB
+        : DP: 5
 
 offline0: i4pc-------r--- TCP [OR] 95.237.48.208:51559 --> [L] 192.168.2.110:6900
         : VNC
         : RID  4: Desktop/File Sharing
         : RID 16: Known Protocol on Non-standard Port
-        : DP: 5 TP: 312 TB: 22 KiB
+        : DP: 5
 

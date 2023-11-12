@@ -2,11 +2,11 @@ offline0: i4pc-------r-F- TCP [L] 127.0.0.1:514 <-- [OL] 127.0.0.1:1023
         : RSH
         : RID  3: Clear-Text Credentials
         : RID 42: Unsafe Protocol
-        : DP: 6 TP: 12 TB: 857
+        : DP: 6
 
 offline0: i4pc-------r-F- TCP [L] 127.0.0.1:514 <-- [OL] 127.0.0.1:1021
         : RSH
         : RID  3: Clear-Text Credentials
         : RID 42: Unsafe Protocol
-        : DP: 6 TP: 12 TB: 864
+        : DP: 6
 

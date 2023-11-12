@@ -1,7 +1,7 @@
 offline0: i4pc---------F- TCP [L] 10.0.2.15:44188 --> [OR] 192.0.47.59:43
         : Whois/DAS
         : H: example.com
-        : DP: 4 TP: 11 TB: 884
+        : DP: 4
 
 offline0: i4pcu------r--- TCP [L] 10.17.34.139:64016 --> [OL] 10.17.51.8:4343
         : TLS
@@ -12,10 +12,10 @@ offline0: i4pcu------r--- TCP [L] 10.17.34.139:64016 --> [OL] 10.17.51.8:4343
         : RID 30: TLS Certificate Expired
         : RID 35: TLS SNI Extension Not Found
         : RID 53: TLS ALPN/SNI Mismatch
-        : DP: 7 TP: 7 TB: 2 KiB
+        : DP: 7
 
 offline0: i4pc-gx----r-F- TCP [L] 10.160.63.128:53217 --> [OR] 192.30.45.30:43
         : Unknown
         : RID 46: Unidirectional Traffic
-        : DP: 5 TP: 5 TB: 3.33 KiB
+        : DP: 5
 

@@ -2,5 +2,5 @@ offline0: i4pc-------r--- UDP [L] 127.0.0.1:53 <-- [OL] 127.0.0.1:35980
         : DNS
         : H: www.allyourba
         : RID 15: Text With Non-Printable Characters
-        : DP: 2 TP: 2 TB: 196
+        : DP: 2
 

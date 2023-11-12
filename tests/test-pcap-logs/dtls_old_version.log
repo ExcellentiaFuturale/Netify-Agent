@@ -2,5 +2,5 @@ offline0: i4pc-------r--- UDP [OR] 37.188.4.115:56453 --> [L] 70.66.6.128:443
         : DTLS
         : RID 36: Obsolete TLS (v1.1 or older)
         : RID 41: Weak TLS Cipher
-        : DP: 7 TP: 7 TB: 994
+        : DP: 7
 

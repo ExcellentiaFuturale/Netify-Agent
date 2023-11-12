@@ -1,10 +1,10 @@
 offline0: i4pc-------rs-- UDP [OR] 78.46.76.2:80 <-- [L] 175.144.140.29:123
         : NTP.netify.ntp
         : RID 46: Unidirectional Traffic
-        : DP: 1 TP: 1 TB: 90
+        : DP: 1
 
 offline0: i4pc-------rs-- UDP [OR] 78.46.76.2:80 <-- [L] 175.144.140.29:123
         : NTP.netify.ntp
         : RID 46: Unidirectional Traffic
-        : DP: 1 TP: 1 TB: 90
+        : DP: 1
 

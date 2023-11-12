@@ -1105,14 +1105,17 @@ void ndDetectionThread::FlowUpdate(ndDetectionQueueEntry *entry) {
         bool output = false;
         uint8_t flags = ndFlow::PRINTF_METADATA;
 
-        if (ndGC.verbosity > 1)
-            flags |= ndFlow::PRINTF_STATS;
-        if (ndGC.verbosity > 2)
+        if (ndGC.verbosity > 1)  // -vv
             flags |= ndFlow::PRINTF_RISKS;
-        if (ndGC.verbosity > 3)
+        if (ndGC.verbosity > 2)  // -vvv
+            flags |= ndFlow::PRINTF_STATS;
+        if (ndGC.verbosity > 3)  // -vvvv
+            flags |= ndFlow::PRINTF_STATS_FULL;
+        if (ndGC.verbosity > 4)  // -vvvvv
             flags |= ndFlow::PRINTF_MACS;
-        if (ndGC.verbosity > 4)
+        if (ndGC.verbosity > 5)  // -vvvvvv
             flags |= ndFlow::PRINTF_HASHES;
+        if (ndGC.verbosity > 6) flags = ndFlow::PRINTF_ALL;
 
         if (ndGC.debug_flow_print_exprs.size()) {
             for (auto &it : ndGC.debug_flow_print_exprs) {

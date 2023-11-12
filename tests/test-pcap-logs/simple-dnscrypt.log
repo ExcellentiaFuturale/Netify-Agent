@@ -5,7 +5,7 @@ offline0: i4pcu------r--- TCP [OR] 134.119.26.24:443 <-- [L] 192.168.43.167:5023
         : TLS/SNI: simplednscrypt.org TLS/CN: simplednscrypt.org
         : TLS/IDN: C=GB, ST=Greater Manchester, L=Salford, O=COMODO CA Limited, CN=COMODO RSA Domain Validation Secure Server CA TLS/SDN: OU=Domain Control Validated, OU=PositiveSSL, CN=simplednscrypt.org
         : RID 30: TLS Certificate Expired
-        : DP: 11 TP: 11 TB: 7.2 KiB
+        : DP: 11
 
 offline0: i4pcu------r--- TCP [OR] 134.119.26.24:443 <-- [L] 192.168.43.167:50259
         : HTTP/S
@@ -14,7 +14,7 @@ offline0: i4pcu------r--- TCP [OR] 134.119.26.24:443 <-- [L] 192.168.43.167:5025
         : TLS/SNI: simplednscrypt.org TLS/CN: simplednscrypt.org
         : TLS/IDN: C=GB, ST=Greater Manchester, L=Salford, O=COMODO CA Limited, CN=COMODO RSA Domain Validation Secure Server CA TLS/SDN: OU=Domain Control Validated, OU=PositiveSSL, CN=simplednscrypt.org
         : RID 30: TLS Certificate Expired
-        : DP: 12 TP: 12 TB: 7.26 KiB
+        : DP: 12
 
 offline0: i4pcu------r--- TCP [OR] 134.119.26.24:443 <-- [L] 192.168.43.167:50253
         : HTTP/S
@@ -23,7 +23,7 @@ offline0: i4pcu------r--- TCP [OR] 134.119.26.24:443 <-- [L] 192.168.43.167:5025
         : TLS/SNI: simplednscrypt.org TLS/CN: simplednscrypt.org
         : TLS/IDN: C=GB, ST=Greater Manchester, L=Salford, O=COMODO CA Limited, CN=COMODO RSA Domain Validation Secure Server CA TLS/SDN: OU=Domain Control Validated, OU=PositiveSSL, CN=simplednscrypt.org
         : RID 30: TLS Certificate Expired
-        : DP: 12 TP: 12 TB: 7.26 KiB
+        : DP: 12
 
 offline0: i4pcu------r--- TCP [OR] 134.119.26.24:443 <-- [L] 192.168.43.167:50258
         : HTTP/S
@@ -32,5 +32,5 @@ offline0: i4pcu------r--- TCP [OR] 134.119.26.24:443 <-- [L] 192.168.43.167:5025
         : TLS/SNI: simplednscrypt.org TLS/CN: simplednscrypt.org
         : TLS/IDN: C=GB, ST=Greater Manchester, L=Salford, O=COMODO CA Limited, CN=COMODO RSA Domain Validation Secure Server CA TLS/SDN: OU=Domain Control Validated, OU=PositiveSSL, CN=simplednscrypt.org
         : RID 30: TLS Certificate Expired
-        : DP: 12 TP: 12 TB: 7.26 KiB
+        : DP: 12
 

@@ -4,5 +4,5 @@ offline0: i4pc--x----r--- TCP [OR] 8.8.8.8:853 <-- [L] 192.168.1.185:58290
         : RID 30: TLS Certificate Expired
         : RID 35: TLS SNI Extension Not Found
         : RID 47: TLS ALPN Not Found
-        : DP: 24 TP: 24 TB: 5.73 KiB
+        : DP: 24
 

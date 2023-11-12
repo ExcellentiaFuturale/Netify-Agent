@@ -2,5 +2,5 @@ offline0: i4pc-------r--- UDP [OR] 185.196.113.239:50257 --> [L] 223.116.105.247
         : DTLS
         : RID 35: TLS SNI Extension Not Found
         : RID 47: TLS ALPN Not Found
-        : DP: 4 TP: 4 TB: 604
+        : DP: 4
 

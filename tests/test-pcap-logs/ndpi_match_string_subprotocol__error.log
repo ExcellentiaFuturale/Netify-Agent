@@ -5,5 +5,5 @@ offline0: i4pc-------r--- TCP [L] 10.3.9.19:40632 --> [OL] 10.68.137.118:8091
         : URL: 10.68.137.118:8091/Apcn/ApcRemoteService
         : RID 10: Numeric IP Address
         : RID 16: Known Protocol on Non-standard Port
-        : DP: 3 TP: 3 TB: 1.63 KiB
+        : DP: 3
 

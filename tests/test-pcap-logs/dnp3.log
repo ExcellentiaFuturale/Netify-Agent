@@ -1,32 +1,32 @@
 offline0: i4pc----------- TCP [L] 10.0.0.3:20000 <-- [OL] 10.0.0.8:2789
         : DNP3
-        : DP: 10 TP: 39 TB: 2.53 KiB
+        : DP: 10
 
 offline0: i4pc---------F- TCP [L] 10.0.0.3:20000 <-- [OL] 10.0.0.8:2803
         : DNP3
-        : DP: 10 TP: 39 TB: 2.43 KiB
+        : DP: 10
 
 offline0: i4pc----------- TCP [L] 10.0.0.3:20000 <-- [OL] 10.0.0.8:2828
         : DNP3
-        : DP: 10 TP: 138 TB: 10.9 KiB
+        : DP: 10
 
 offline0: i4pc----------- TCP [L] 10.0.0.3:20000 <-- [OL] 10.0.0.9:1080
         : DNP3
-        : DP: 10 TP: 135 TB: 9.13 KiB
+        : DP: 10
 
 offline0: i4pc----------- TCP [L] 10.0.0.3:20000 <-- [OL] 10.0.0.8:1086
         : DNP3
-        : DP: 10 TP: 93 TB: 6.5 KiB
+        : DP: 10
 
 offline0: i4pc----------- TCP [L] 10.0.0.3:20000 <-- [OL] 10.0.0.8:1159
         : DNP3
-        : DP: 10 TP: 27 TB: 1.73 KiB
+        : DP: 10
 
 offline0: i4pc----------- TCP [L] 10.0.0.3:20000 <-- [OL] 10.0.0.8:1184
         : DNP3
-        : DP: 10 TP: 33 TB: 2.15 KiB
+        : DP: 10
 
 offline0: i4pc---------F- TCP [L] 10.0.0.3:20000 <-- [OL] 10.0.0.9:1084
         : DNP3
-        : DP: 10 TP: 39 TB: 2.43 KiB
+        : DP: 10
 

@@ -7,7 +7,7 @@ offline0: i4pcu------r-F- TCP [OR] 82.81.46.13:10443 <-- [L] 192.168.1.178:61805
         : RID 10: Numeric IP Address
         : RID 16: Known Protocol on Non-standard Port
         : RID 47: TLS ALPN Not Found
-        : DP: 7 TP: 21 TB: 4.71 KiB
+        : DP: 7
 
 offline0: i4pcu------r-F- TCP [OR] 82.81.46.13:10443 <-- [L] 192.168.1.178:61806
         : TLS
@@ -18,7 +18,7 @@ offline0: i4pcu------r-F- TCP [OR] 82.81.46.13:10443 <-- [L] 192.168.1.178:61806
         : RID 10: Numeric IP Address
         : RID 16: Known Protocol on Non-standard Port
         : RID 47: TLS ALPN Not Found
-        : DP: 7 TP: 25 TB: 8.22 KiB
+        : DP: 7
 
 offline0: i4pcu------r-F- TCP [OR] 82.81.46.13:10443 <-- [L] 192.168.1.178:61811
         : TLS
@@ -29,7 +29,7 @@ offline0: i4pcu------r-F- TCP [OR] 82.81.46.13:10443 <-- [L] 192.168.1.178:61811
         : RID 10: Numeric IP Address
         : RID 16: Known Protocol on Non-standard Port
         : RID 47: TLS ALPN Not Found
-        : DP: 7 TP: 24 TB: 5.33 KiB
+        : DP: 7
 
 offline0: i4pcu------r-F- TCP [OR] 82.81.46.13:10443 <-- [L] 192.168.1.178:61812
         : TLS
@@ -40,7 +40,7 @@ offline0: i4pcu------r-F- TCP [OR] 82.81.46.13:10443 <-- [L] 192.168.1.178:61812
         : RID 10: Numeric IP Address
         : RID 16: Known Protocol on Non-standard Port
         : RID 47: TLS ALPN Not Found
-        : DP: 7 TP: 29 TB: 9.02 KiB
+        : DP: 7
 
 offline0: i4pcu------r--- TCP [OR] 82.81.46.13:10443 <-- [L] 192.168.1.178:61820
         : TLS
@@ -51,5 +51,5 @@ offline0: i4pcu------r--- TCP [OR] 82.81.46.13:10443 <-- [L] 192.168.1.178:61820
         : RID 10: Numeric IP Address
         : RID 16: Known Protocol on Non-standard Port
         : RID 47: TLS ALPN Not Found
-        : DP: 7 TP: 1.85 KP TB: 382 KiB
+        : DP: 7
 

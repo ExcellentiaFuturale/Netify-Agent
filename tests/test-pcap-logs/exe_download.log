@@ -7,5 +7,5 @@ offline0: i4pc-------r--- TCP [L] 10.9.25.101:49165 --> [OR] 144.91.69.195:80
         : RID 10: Numeric IP Address
         : RID 14: HTTP Suspicious User-Agent
         : RID 48: HTTP Obsolete Server
-        : DP: 6 TP: 6 TB: 1.91 KiB
+        : DP: 6
 

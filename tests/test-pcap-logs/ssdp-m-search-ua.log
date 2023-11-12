@@ -2,5 +2,5 @@ offline0: i4pc----------- UDP [L] 192.168.242.50:56446 --> [OM] 239.255.255.250:
         : SSDP
         : H: 239.255.255.250
         : HTTP/UA: Google Chrome/99.0.4844.74 Mac OS X
-        : DP: 1 TP: 1 TB: 216
+        : DP: 1
 

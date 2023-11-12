@@ -6,7 +6,7 @@ offline0: i4pcu------r-F- TCP [OR] 91.143.93.242:443 <-- [L] 192.168.1.252:51110
         : TLS/IDN: CN=www.xkgk7fdx362yyyxib.com TLS/SDN: CN=www.g6ghvisevf3ibuu5.net
         : RID 30: TLS Certificate Expired
         : RID 36: Obsolete TLS (v1.1 or older)
-        : DP: 6 TP: 141 TB: 66.9 KiB
+        : DP: 6
 
 offline0: i4pcu------r-F- TCP [OR] 46.59.52.31:443 <-- [L] 192.168.1.252:51111
         : HTTP/S
@@ -18,7 +18,7 @@ offline0: i4pcu------r-F- TCP [OR] 46.59.52.31:443 <-- [L] 192.168.1.252:51111
         : RID 30: TLS Certificate Expired
         : RID 36: Obsolete TLS (v1.1 or older)
         : RID 42: Unsafe Protocol
-        : DP: 6 TP: 34 TB: 10.9 KiB
+        : DP: 6
 
 offline0: i4pcu------r--- TCP [OR] 38.229.70.53:443 <-- [L] 192.168.1.252:51112
         : HTTP/S
@@ -30,17 +30,17 @@ offline0: i4pcu------r--- TCP [OR] 38.229.70.53:443 <-- [L] 192.168.1.252:51112
         : RID 30: TLS Certificate Expired
         : RID 36: Obsolete TLS (v1.1 or older)
         : RID 42: Unsafe Protocol
-        : DP: 6 TP: 40 TB: 15.7 KiB
+        : DP: 6
 
 offline0: i4pc----------- UDP [L] 192.168.1.1:17500 --> [OL] 192.168.1.255:17500
         : Dropbox
-        : DP: 1 TP: 10 TB: 1.82 KiB
+        : DP: 1
 
 offline0: i4pc-------r--- UDP [L] 192.168.1.252:138 --> [OL] 192.168.1.255:138
         : NETBIOS
         : H: endian-pc
         : RID 42: Unsafe Protocol
-        : DP: 1 TP: 1 TB: 252
+        : DP: 1
 
 offline0: i4pcu------r-F- TCP [L] 192.168.1.252:51174 --> [OR] 212.83.155.250:443
         : HTTP/S
@@ -50,7 +50,7 @@ offline0: i4pcu------r-F- TCP [L] 192.168.1.252:51174 --> [OR] 212.83.155.250:44
         : TLS/IDN: CN=www.wohgpas45j6ucw.com TLS/SDN: CN=www.7d43ah2kikrabj.net
         : RID 30: TLS Certificate Expired
         : RID 36: Obsolete TLS (v1.1 or older)
-        : DP: 6 TP: 32 TB: 10.2 KiB
+        : DP: 6
 
 offline0: i4pcu------r-F- TCP [OR] 91.143.93.242:443 <-- [L] 192.168.1.252:51175
         : HTTP/S
@@ -62,7 +62,7 @@ offline0: i4pcu------r-F- TCP [OR] 91.143.93.242:443 <-- [L] 192.168.1.252:51175
         : RID 30: TLS Certificate Expired
         : RID 36: Obsolete TLS (v1.1 or older)
         : RID 42: Unsafe Protocol
-        : DP: 6 TP: 38 TB: 12.2 KiB
+        : DP: 6
 
 offline0: i4pcu------r--- TCP [OR] 38.229.70.53:443 <-- [L] 192.168.1.252:51176
         : HTTP/S
@@ -72,7 +72,7 @@ offline0: i4pcu------r--- TCP [OR] 38.229.70.53:443 <-- [L] 192.168.1.252:51176
         : TLS/IDN: CN=www.gg562izcxdvqdk.com TLS/SDN: CN=www.fcsyvnlemwxv5p.net
         : RID 30: TLS Certificate Expired
         : RID 36: Obsolete TLS (v1.1 or older)
-        : DP: 6 TP: 17 TB: 5.02 KiB
+        : DP: 6
 
 offline0: i4pcu------r-F- TCP [OR] 62.210.137.230:443 <-- [L] 192.168.1.252:51185
         : HTTP/S
@@ -82,14 +82,14 @@ offline0: i4pcu------r-F- TCP [OR] 62.210.137.230:443 <-- [L] 192.168.1.252:5118
         : TLS/IDN: CN=www.a3uycdf3rn5md.com TLS/SDN: CN=www.l7xvysfnvkb.net
         : RID 30: TLS Certificate Expired
         : RID 36: Obsolete TLS (v1.1 or older)
-        : DP: 6 TP: 29 TB: 9.43 KiB
+        : DP: 6
 
 offline0: i6pc----------- UDP [L] fe80::c583:1972:5728:7323:546 <-- [OM] ff02::1:2:547
         : DHCPv6
-        : DP: 1 TP: 6 TB: 906
+        : DP: 1
 
 offline0: i4pc-gx----r--- TCP [OR] 157.56.30.46:443 <-- [L] 192.168.1.252:51104
         : Unknown
         : RID 46: Unidirectional Traffic
-        : DP: 1 TP: 1 TB: 60
+        : DP: 1
 

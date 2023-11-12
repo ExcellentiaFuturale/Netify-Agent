@@ -7,5 +7,5 @@ offline0: i4pcu------r--- TCP [L] 192.168.17.53:49640 --> [OR] 212.227.17.186:14
         : RID 30: TLS Certificate Expired
         : RID 35: TLS SNI Extension Not Found
         : RID 47: TLS ALPN Not Found
-        : DP: 19 TP: 19 TB: 6.75 KiB
+        : DP: 19
 

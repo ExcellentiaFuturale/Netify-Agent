@@ -4,5 +4,5 @@ offline0: i4pcu-x----r--- TCP [OR] 57.91.202.194:50541 --> [L] 132.49.141.56:80
         : RID 16: Known Protocol on Non-standard Port
         : RID 35: TLS SNI Extension Not Found
         : RID 47: TLS ALPN Not Found
-        : DP: 13 TP: 13 TB: 2.38 KiB
+        : DP: 13
 

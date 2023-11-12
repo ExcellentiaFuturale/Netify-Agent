@@ -3,41 +3,41 @@ offline0: i4pc-------r--- TCP [L] 10.1.1.10:52470 --> [OL] 10.2.2.2:8554
         : HTTP/UA: LibVLC/3.0.16 (LIVE555 Streaming Media v2016.11.28)
         : RID 16: Known Protocol on Non-standard Port
         : RID 46: Unidirectional Traffic
-        : DP: 1 TP: 1 TB: 205
+        : DP: 1
 
 offline0: i4pc-------r--- TCP [L] 10.1.1.10:52472 --> [OL] 10.2.2.2:8554
         : RTSP
         : HTTP/UA: LibVLC/3.0.16 (LIVE555 Streaming Media v2016.11.28)
         : RID 16: Known Protocol on Non-standard Port
-        : DP: 13 TP: 13 TB: 958
+        : DP: 13
 
 offline0: i4pc-------r--- TCP [L] 10.1.1.10:52474 --> [OL] 10.2.2.2:8554
         : RTSP
         : HTTP/UA: LibVLC/3.0.16 (LIVE555 Streaming Media v2016.11.28)
         : RID 16: Known Protocol on Non-standard Port
-        : DP: 13 TP: 13 TB: 958
+        : DP: 13
 
 offline0: i4pc-------r--- TCP [L] 10.1.1.10:52476 --> [OL] 10.2.2.2:8554
         : RTSP
         : HTTP/UA: LibVLC/3.0.16 (LIVE555 Streaming Media v2016.11.28)
         : RID 16: Known Protocol on Non-standard Port
-        : DP: 13 TP: 13 TB: 958
+        : DP: 13
 
 offline0: i4pc-------r--- TCP [L] 10.1.1.10:52478 --> [OL] 10.2.2.2:8554
         : RTSP
         : HTTP/UA: LibVLC/3.0.16 (LIVE555 Streaming Media v2016.11.28)
         : RID 16: Known Protocol on Non-standard Port
-        : DP: 21 TP: 21 TB: 1.44 KiB
+        : DP: 21
 
 offline0: i4pc-------r--- TCP [L] 10.1.1.10:52480 --> [OL] 10.2.2.2:8554
         : RTSP
         : HTTP/UA: LibVLC/3.0.16 (LIVE555 Streaming Media v2016.11.28)
         : RID 16: Known Protocol on Non-standard Port
-        : DP: 13 TP: 13 TB: 958
+        : DP: 13
 
 offline0: i4pc-------r--- TCP [L] 10.1.1.10:52482 --> [OL] 10.2.2.2:8554
         : RTSP
         : HTTP/UA: LibVLC/3.0.16 (LIVE555 Streaming Media v2016.11.28)
         : RID 16: Known Protocol on Non-standard Port
-        : DP: 13 TP: 13 TB: 958
+        : DP: 13
 

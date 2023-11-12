@@ -1,32 +1,32 @@
 offline0: i4pc-------rs-- UDP [L] 10.8.0.1:46214 --> [OR] 200.89.75.198:123
         : NTP.netify.ntp
         : RID 46: Unidirectional Traffic
-        : DP: 1 TP: 2 TB: 180
+        : DP: 1
 
 offline0: i4pc-------rs-- UDP [L] 10.8.0.1:46214 --> [OR] 200.89.75.198:123
         : NTP.netify.ntp
         : RID 46: Unidirectional Traffic
-        : DP: 1 TP: 2 TB: 180
+        : DP: 1
 
 offline0: i4pc---------F- TCP [L] 10.8.0.1:45529 --> [OR] 54.230.227.172:80
         : HTTP.netify.waze
         : H: roadshields.waze.com
         : HTTP/UA: /3.9.4.0
         : URL: roadshields.waze.com/images/HD/CH2.png
-        : DP: 8 TP: 17 TB: 3.92 KiB
+        : DP: 8
 
 offline0: i4pcu------r--- TCP [L] 10.8.0.1:36585 --> [OR] 173.194.118.48:443
         : HTTP/S.netify.google
         : V: 0x0301 CS: 0xc011
         : RID 36: Obsolete TLS (v1.1 or older)
-        : DP: 6 TP: 13 TB: 2.09 KiB
+        : DP: 6
 
 offline0: i4pc---------F- TCP [L] 10.8.0.1:45536 --> [OR] 54.230.227.172:80
         : HTTP.netify.waze
         : H: cres.waze.com
         : HTTP/UA: /3.9.4.0
         : URL: cres.waze.com/lang_asr/lang.portuguese_br_asr
-        : DP: 8 TP: 15 TB: 1.33 KiB
+        : DP: 8
 
 offline0: i4pcu------r-F- TCP [L] 10.8.0.1:36100 --> [OR] 46.51.173.182:443
         : HTTP/S
@@ -35,7 +35,7 @@ offline0: i4pcu------r-F- TCP [L] 10.8.0.1:36100 --> [OR] 46.51.173.182:443
         : RID 30: TLS Certificate Expired
         : RID 36: Obsolete TLS (v1.1 or older)
         : RID 41: Weak TLS Cipher
-        : DP: 6 TP: 107 TB: 83.7 KiB
+        : DP: 6
 
 offline0: i4pcu------r-F- TCP [L] 10.8.0.1:36102 --> [OR] 46.51.173.182:443
         : HTTP/S
@@ -44,7 +44,7 @@ offline0: i4pcu------r-F- TCP [L] 10.8.0.1:36102 --> [OR] 46.51.173.182:443
         : RID 30: TLS Certificate Expired
         : RID 36: Obsolete TLS (v1.1 or older)
         : RID 41: Weak TLS Cipher
-        : DP: 8 TP: 37 TB: 11.7 KiB
+        : DP: 8
 
 offline0: i4pc-------r-F- TCP [L] 10.8.0.1:54915 --> [OR] 65.39.128.135:80
         : HTTP
@@ -52,28 +52,28 @@ offline0: i4pc-------r-F- TCP [L] 10.8.0.1:54915 --> [OR] 65.39.128.135:80
         : HTTP/UA: Android
         : URL: xtra1.gpsonextra.net/xtra2.bin
         : RID  2: Binary Application Transfer
-        : DP: 6 TP: 37 TB: 61.7 KiB
+        : DP: 6
 
 offline0: i4pc---------F- TCP [L] 10.8.0.1:45540 --> [OR] 54.230.227.172:80
         : HTTP.netify.waze
         : H: roadshields.waze.com
         : HTTP/UA: /3.9.4.0
         : URL: roadshields.waze.com/shields_conf_new_latam?rtserver-id=15
-        : DP: 8 TP: 14 TB: 1.26 KiB
+        : DP: 8
 
 offline0: i4pc---------F- TCP [L] 10.8.0.1:45538 --> [OR] 54.230.227.172:80
         : HTTP.netify.waze
         : H: cres.waze.com
         : HTTP/UA: /3.9.4.0
         : URL: cres.waze.com/lang_tts/lang.portuguese_br_tts?rtserver-id=15
-        : DP: 8 TP: 14 TB: 1.29 KiB
+        : DP: 8
 
 offline0: i4pc---------F- TCP [L] 10.8.0.1:45546 --> [OR] 54.230.227.172:80
         : HTTP.netify.waze
         : H: cres.waze.com
         : HTTP/UA: /3.9.4.0
         : URL: cres.waze.com/newVconfig/1.0/3/prompts_conf.buf?rtserver-id=15
-        : DP: 8 TP: 14 TB: 1.3 KiB
+        : DP: 8
 
 offline0: i4pcu------r--- TCP [L] 10.8.0.1:39010 --> [OR] 52.17.114.219:443
         : HTTP/S
@@ -81,21 +81,21 @@ offline0: i4pcu------r--- TCP [L] 10.8.0.1:39010 --> [OR] 52.17.114.219:443
         : TLS/IDN: C=US, O=Google Inc, CN=Google Internet Authority G2 TLS/SDN: C=US, ST=California, L=Mountain View, O=Google Inc, CN=*.world.waze.com
         : RID 30: TLS Certificate Expired
         : RID 36: Obsolete TLS (v1.1 or older)
-        : DP: 6 TP: 16 TB: 8.97 KiB
+        : DP: 6
 
 offline0: i4pc---------F- TCP [L] 10.8.0.1:45552 --> [OR] 54.230.227.172:80
         : HTTP.netify.waze
         : H: cres.waze.com
         : HTTP/UA: /3.9.4.0
         : URL: cres.waze.com/langs/1.0/lang.portuguese_br?rtserver-id=15
-        : DP: 8 TP: 14 TB: 1.29 KiB
+        : DP: 8
 
 offline0: i4pc---------F- TCP [L] 10.8.0.1:45554 --> [OR] 54.230.227.172:80
         : HTTP.netify.waze
         : H: cres.waze.com
         : HTTP/UA: /3.9.4.0
         : URL: cres.waze.com/newVconfig/1.0/3/lang.conf?rtserver-id=15
-        : DP: 8 TP: 14 TB: 1.29 KiB
+        : DP: 8
 
 offline0: i4pcu------r--- TCP [L] 10.8.0.1:51051 --> [OR] 176.34.103.105:443
         : HTTP/S
@@ -103,7 +103,7 @@ offline0: i4pcu------r--- TCP [L] 10.8.0.1:51051 --> [OR] 176.34.103.105:443
         : TLS/IDN: C=US, O=Google Inc, CN=Google Internet Authority G2 TLS/SDN: C=US, ST=California, L=Mountain View, O=Google Inc, CN=*.waze.com
         : RID 30: TLS Certificate Expired
         : RID 36: Obsolete TLS (v1.1 or older)
-        : DP: 8 TP: 21 TB: 7.53 KiB
+        : DP: 8
 
 offline0: i4pcu------r--- TCP [L] 10.8.0.1:51050 --> [OR] 176.34.103.105:443
         : HTTP/S
@@ -111,7 +111,7 @@ offline0: i4pcu------r--- TCP [L] 10.8.0.1:51050 --> [OR] 176.34.103.105:443
         : TLS/IDN: C=US, O=Google Inc, CN=Google Internet Authority G2 TLS/SDN: C=US, ST=California, L=Mountain View, O=Google Inc, CN=*.waze.com
         : RID 30: TLS Certificate Expired
         : RID 36: Obsolete TLS (v1.1 or older)
-        : DP: 8 TP: 18 TB: 5.42 KiB
+        : DP: 8
 
 offline0: i4pcu------r--- TCP [L] 10.8.0.1:51049 --> [OR] 176.34.103.105:443
         : HTTP/S
@@ -119,7 +119,7 @@ offline0: i4pcu------r--- TCP [L] 10.8.0.1:51049 --> [OR] 176.34.103.105:443
         : TLS/IDN: C=US, O=Google Inc, CN=Google Internet Authority G2 TLS/SDN: C=US, ST=California, L=Mountain View, O=Google Inc, CN=*.waze.com
         : RID 30: TLS Certificate Expired
         : RID 36: Obsolete TLS (v1.1 or older)
-        : DP: 10 TP: 23 TB: 7.64 KiB
+        : DP: 10
 
 offline0: i4pcu------r-F- TCP [L] 10.8.0.1:39021 --> [OR] 52.17.114.219:443
         : HTTP/S
@@ -127,7 +127,7 @@ offline0: i4pcu------r-F- TCP [L] 10.8.0.1:39021 --> [OR] 52.17.114.219:443
         : TLS/IDN: C=US, O=Google Inc, CN=Google Internet Authority G2 TLS/SDN: C=US, ST=California, L=Mountain View, O=Google Inc, CN=*.world.waze.com
         : RID 30: TLS Certificate Expired
         : RID 36: Obsolete TLS (v1.1 or older)
-        : DP: 8 TP: 33 TB: 57.5 KiB
+        : DP: 8
 
 offline0: i4pcu------r--- TCP [L] 10.8.0.1:36312 --> [OR] 176.34.186.180:443
         : HTTP/S
@@ -135,7 +135,7 @@ offline0: i4pcu------r--- TCP [L] 10.8.0.1:36312 --> [OR] 176.34.186.180:443
         : TLS/IDN: C=US, O=Google Inc, CN=Google Internet Authority G2 TLS/SDN: C=US, ST=California, L=Mountain View, O=Google Inc, CN=*.world.waze.com
         : RID 30: TLS Certificate Expired
         : RID 36: Obsolete TLS (v1.1 or older)
-        : DP: 8 TP: 32 TB: 43.6 KiB
+        : DP: 8
 
 offline0: i4pcu------r--- TCP [L] 10.8.0.1:36314 --> [OR] 176.34.186.180:443
         : HTTP/S
@@ -143,7 +143,7 @@ offline0: i4pcu------r--- TCP [L] 10.8.0.1:36314 --> [OR] 176.34.186.180:443
         : TLS/IDN: C=US, O=Google Inc, CN=Google Internet Authority G2 TLS/SDN: C=US, ST=California, L=Mountain View, O=Google Inc, CN=*.world.waze.com
         : RID 30: TLS Certificate Expired
         : RID 36: Obsolete TLS (v1.1 or older)
-        : DP: 8 TP: 20 TB: 5.54 KiB
+        : DP: 8
 
 offline0: i4pcu------r--- TCP [L] 10.8.0.1:36316 --> [OR] 176.34.186.180:443
         : HTTP/S
@@ -151,7 +151,7 @@ offline0: i4pcu------r--- TCP [L] 10.8.0.1:36316 --> [OR] 176.34.186.180:443
         : TLS/IDN: C=US, O=Google Inc, CN=Google Internet Authority G2 TLS/SDN: C=US, ST=California, L=Mountain View, O=Google Inc, CN=*.world.waze.com
         : RID 30: TLS Certificate Expired
         : RID 36: Obsolete TLS (v1.1 or older)
-        : DP: 6 TP: 28 TB: 27.2 KiB
+        : DP: 6
 
 offline0: i4pcu------r-F- TCP [L] 10.8.0.1:36134 --> [OR] 46.51.173.182:443
         : HTTP/S
@@ -160,11 +160,11 @@ offline0: i4pcu------r-F- TCP [L] 10.8.0.1:36134 --> [OR] 46.51.173.182:443
         : RID 30: TLS Certificate Expired
         : RID 36: Obsolete TLS (v1.1 or older)
         : RID 41: Weak TLS Cipher
-        : DP: 6 TP: 24 TB: 6.43 KiB
+        : DP: 6
 
 offline0: i4pc----------- TCP [L] 10.8.0.1:50828 --> [OR] 108.168.176.228:443
         : WhatsApp
-        : DP: 4 TP: 15 TB: 1.31 KiB
+        : DP: 4
 
 offline0: i4pcu------r-F- TCP [L] 10.8.0.1:36137 --> [OR] 46.51.173.182:443
         : HTTP/S
@@ -173,45 +173,45 @@ offline0: i4pcu------r-F- TCP [L] 10.8.0.1:36137 --> [OR] 46.51.173.182:443
         : RID 30: TLS Certificate Expired
         : RID 36: Obsolete TLS (v1.1 or older)
         : RID 41: Weak TLS Cipher
-        : DP: 8 TP: 23 TB: 5.61 KiB
+        : DP: 8
 
 offline0: i4pc-gx------F- TCP [L] 10.16.37.157:52746 --> [OR] 200.160.4.49:80
         : Unknown
-        : DP: 4 TP: 4 TB: 228
+        : DP: 4
 
 offline0: i4pc-gx------F- TCP [L] 10.8.0.1:45169 --> [OR] 200.160.4.198:80
         : Unknown
-        : DP: 4 TP: 4 TB: 216
+        : DP: 4
 
 offline0: i4pc-gx------F- TCP [L] 10.16.37.157:41823 --> [OR] 200.160.4.49:80
         : Unknown
-        : DP: 4 TP: 4 TB: 228
+        : DP: 4
 
 offline0: i4pc-gx------F- TCP [L] 10.16.37.157:46473 --> [OR] 200.160.4.49:80
         : Unknown
-        : DP: 4 TP: 4 TB: 228
+        : DP: 4
 
 offline0: i4pc-gx------F- TCP [L] 10.16.37.157:42256 --> [OR] 174.37.231.81:5222
         : Unknown
-        : DP: 10 TP: 10 TB: 786
+        : DP: 10
 
 offline0: i4pc-gx------F- TCP [L] 10.16.37.157:52953 --> [OR] 200.160.4.49:80
         : Unknown
-        : DP: 4 TP: 4 TB: 228
+        : DP: 4
 
 offline0: i4pc-gx------F- TCP [L] 10.8.0.1:43089 --> [OR] 200.160.4.198:443
         : Unknown
-        : DP: 4 TP: 4 TB: 216
+        : DP: 4
 
 offline0: i4pc-gx------F- TCP [L] 10.16.37.157:43991 --> [OR] 200.160.4.31:80
         : Unknown
-        : DP: 4 TP: 4 TB: 228
+        : DP: 4
 
 offline0: i4pc-gx------F- TCP [L] 10.8.0.1:60479 --> [OR] 200.160.4.49:443
         : Unknown
-        : DP: 4 TP: 4 TB: 216
+        : DP: 4
 
 offline0: i4pc-gx------F- TCP [L] 10.8.0.1:60574 --> [OR] 200.160.4.49:80
         : Unknown
-        : DP: 4 TP: 4 TB: 216
+        : DP: 4
 

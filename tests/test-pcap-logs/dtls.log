@@ -3,5 +3,5 @@ offline0: i4pc--x----r--- UDP [L] 192.168.13.57:56515 --> [OL] 192.168.13.203:40
         : RID 35: TLS SNI Extension Not Found
         : RID 46: Unidirectional Traffic
         : RID 47: TLS ALPN Not Found
-        : DP: 2 TP: 2 TB: 394
+        : DP: 2
 

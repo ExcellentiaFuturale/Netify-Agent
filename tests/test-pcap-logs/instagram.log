@@ -1,6 +1,6 @@
 offline0: i4pc----------- TCP [OR] 31.13.93.52:443 <-- [L] 192.168.0.103:33936
         : HTTP/S.netify.meta
-        : DP: 3 TP: 68 TB: 44.6 KiB
+        : DP: 3
 
 offline0: i4pcu------r--- TCP [OR] 173.252.107.4:443 <-- [L] 192.168.0.103:56382
         : HTTP/S.netify.instagram
@@ -8,68 +8,68 @@ offline0: i4pcu------r--- TCP [OR] 173.252.107.4:443 <-- [L] 192.168.0.103:56382
         : V: 0x0301 CS: 0xc013
         : TLS/SNI: telegraph-ash.instagram.com
         : RID 36: Obsolete TLS (v1.1 or older)
-        : DP: 6 TP: 17 TB: 2.58 KiB
+        : DP: 6
 
-offline0: i4pc----d------ TCP [OR] 46.33.70.160:80 <-- [L] 192.168.0.103:38816
+offline0: i4pc----------- TCP [OR] 46.33.70.160:80 <-- [L] 192.168.0.103:38816
         : HTTP.netify.instagram
-        : D: a1408.dspw43.akamai.net H: photos-h.ak.instagram.com
+        : H: photos-h.ak.instagram.com
         : HTTP/UA: Instagram 7.1.1 Android (19/4.4.2; 480dpi; 1080x1920; samsung; GT-I9505; jflte; qcom; it_IT)
         : URL: photos-h.ak.instagram.com/hphotos-ak-xap1/t51.2885-15/e35/10859994_1009433792434447_1627646062_n.jpg?se=7
-        : DP: 2 TP: 52 TB: 57.6 KiB
+        : DP: 2
 
 offline0: i4pc----------- TCP [OR] 82.85.26.162:80 <-- [L] 192.168.0.103:57936
         : HTTP.netify.instagram
         : H: photos-g.ak.instagram.com
         : HTTP/UA: Instagram 7.1.1 Android (19/4.4.2; 480dpi; 1080x1920; samsung; GT-I9505; jflte; qcom; it_IT)
         : URL: photos-g.ak.instagram.com/hphotos-ak-xaf1/t51.2885-15/e15/11386524_110257619317430_379513654_n.jpg
-        : DP: 2 TP: 58 TB: 49 KiB
+        : DP: 2
 
 offline0: i4pc---------F- TCP [OR] 82.85.26.186:80 <-- [L] 192.168.0.103:44379
         : HTTP.netify.instagram
         : H: photos-e.ak.instagram.com
         : HTTP/UA: Instagram 7.1.1 Android (19/4.4.2; 480dpi; 1080x1920; samsung; GT-I9505; jflte; qcom; it_IT)
         : URL: photos-e.ak.instagram.com/hphotos-ak-xaf1/t51.2885-15/e35/11379148_1449120228745316_607477962_n.jpg?se=7
-        : DP: 9 TP: 81 TB: 52.2 KiB
+        : DP: 9
 
 offline0: i4pc----------- UDP [L] 192.168.0.106:17500 --> [OB] 255.255.255.255:17500
         : Dropbox
-        : DP: 1 TP: 4 TB: 580
+        : DP: 1
 
 offline0: i4pc----------- UDP [L] 192.168.0.106:17500 --> [OL] 192.168.0.255:17500
         : Dropbox
-        : DP: 1 TP: 1 TB: 145
+        : DP: 1
 
 offline0: i4pc----------- TCP [OR] 31.13.93.52:443 <-- [L] 192.168.0.103:33934
         : HTTP/S.netify.meta
-        : DP: 3 TP: 12 TB: 5.9 KiB
+        : DP: 3
 
 offline0: i4pc----------- TCP [OR] 31.13.93.52:443 <-- [L] 192.168.0.103:33935
         : HTTP/S.netify.meta
-        : DP: 5 TP: 10 TB: 5.17 KiB
+        : DP: 5
 
 offline0: i4pc-------r--- ICMP [L] 192.168.0.103:0 <-- [OL] 192.168.0.103:0
         : ICMP
         : RID 46: Unidirectional Traffic
-        : DP: 1 TP: 5 TB: 510
+        : DP: 1
 
 offline0: i4pc-g-------F- TCP [OR] 77.67.29.17:80 <-- [L] 192.168.0.103:33976
         : Unknown
-        : DP: 32 TP: 34 TB: 28.4 KiB
+        : DP: 32
 
 offline0: i4pc----------- UDP [OR] 8.8.8.8:53 <-- [L] 192.168.0.103:51219
         : DNS.netify.akamai
         : H: igcdn-photos-h-a.akamaihd.net
-        : DP: 2 TP: 2 TB: 394
+        : DP: 2
 
 offline0: i4pc----------- UDP [OR] 8.8.8.8:53 <-- [L] 192.168.0.103:33603
         : DNS.netify.akamai
         : H: igcdn-photos-a-a.akamaihd.net
-        : DP: 2 TP: 2 TB: 298
+        : DP: 2
 
 offline0: i4pc----------- UDP [OR] 8.8.8.8:53 <-- [L] 192.168.0.103:26540
         : DNS.netify.akamai
         : H: igcdn-photos-g-a.akamaihd.net
-        : DP: 2 TP: 2 TB: 298
+        : DP: 2
 
 offline0: i4pcu---d--r--- TCP [OR] 46.33.70.136:443 <-- [L] 192.168.0.103:60908
         : HTTP/S.netify.akamai
@@ -79,7 +79,7 @@ offline0: i4pcu---d--r--- TCP [OR] 46.33.70.136:443 <-- [L] 192.168.0.103:60908
         : TLS/IDN: C=NL, L=Amsterdam, O=Verizon Enterprise Solutions, OU=Cybertrust, CN=Verizon Akamai SureServer CA G14-SHA1 TLS/SDN: C=US, ST=MA, L=Cambridge, O=Akamai Technologies Inc., CN=a248.e.akamai.net
         : RID 30: TLS Certificate Expired
         : RID 36: Obsolete TLS (v1.1 or older)
-        : DP: 10 TP: 19 TB: 9.12 KiB
+        : DP: 10
 
 offline0: i4pcu---d--r--- TCP [OR] 46.33.70.174:443 <-- [L] 192.168.0.103:44558
         : HTTP/S.netify.akamai
@@ -89,7 +89,7 @@ offline0: i4pcu---d--r--- TCP [OR] 46.33.70.174:443 <-- [L] 192.168.0.103:44558
         : TLS/IDN: C=NL, L=Amsterdam, O=Verizon Enterprise Solutions, OU=Cybertrust, CN=Verizon Akamai SureServer CA G14-SHA1 TLS/SDN: C=US, ST=MA, L=Cambridge, O=Akamai Technologies Inc., CN=a248.e.akamai.net
         : RID 30: TLS Certificate Expired
         : RID 36: Obsolete TLS (v1.1 or older)
-        : DP: 10 TP: 17 TB: 6.22 KiB
+        : DP: 10
 
 offline0: i4pcu---d--r--- TCP [OR] 82.85.26.154:443 <-- [L] 192.168.0.103:41181
         : HTTP/S.netify.akamai
@@ -99,7 +99,7 @@ offline0: i4pcu---d--r--- TCP [OR] 82.85.26.154:443 <-- [L] 192.168.0.103:41181
         : TLS/IDN: C=NL, L=Amsterdam, O=Verizon Enterprise Solutions, OU=Cybertrust, CN=Verizon Akamai SureServer CA G14-SHA1 TLS/SDN: C=US, ST=MA, L=Cambridge, O=Akamai Technologies Inc., CN=a248.e.akamai.net
         : RID 30: TLS Certificate Expired
         : RID 36: Obsolete TLS (v1.1 or older)
-        : DP: 10 TP: 14 TB: 5.44 KiB
+        : DP: 10
 
 offline0: i4pcu---d--r--- TCP [OR] 82.85.26.154:443 <-- [L] 192.168.0.103:41182
         : HTTP/S.netify.akamai
@@ -109,96 +109,96 @@ offline0: i4pcu---d--r--- TCP [OR] 82.85.26.154:443 <-- [L] 192.168.0.103:41182
         : TLS/IDN: C=NL, L=Amsterdam, O=Verizon Enterprise Solutions, OU=Cybertrust, CN=Verizon Akamai SureServer CA G14-SHA1 TLS/SDN: C=US, ST=MA, L=Cambridge, O=Akamai Technologies Inc., CN=a248.e.akamai.net
         : RID 30: TLS Certificate Expired
         : RID 36: Obsolete TLS (v1.1 or older)
-        : DP: 10 TP: 14 TB: 5.44 KiB
+        : DP: 10
 
 offline0: i4pc----------- TCP [OR] 31.13.93.52:443 <-- [L] 192.168.0.103:33763
         : HTTP/S.netify.meta
-        : DP: 5 TP: 11 TB: 5.27 KiB
+        : DP: 5
 
 offline0: i4pc----------- TCP [OR] 82.85.26.162:80 <-- [L] 192.168.0.103:58052
         : HTTP.netify.instagram
         : H: photos-g.ak.instagram.com
         : HTTP/UA: Instagram 7.1.1 Android (19/4.4.2; 480dpi; 1080x1920; samsung; GT-I9505; jflte; qcom; it_IT)
         : URL: photos-g.ak.instagram.com/hphotos-ak-xaf1/t51.2885-15/e35/11417349_1610424452559638_1559096152_n.jpg?se=7
-        : DP: 2 TP: 75 TB: 55.9 KiB
+        : DP: 2
 
 offline0: i4pc-g--------- TCP [OR] 31.13.86.52:80 <-- [L] 192.168.0.103:58216
         : Unknown.netify.meta
-        : DP: 32 TP: 40 TB: 38.1 KiB
+        : DP: 32
 
 offline0: i4pc-------r-F- TCP [OR] 46.33.70.159:443 <-- [L] 192.168.0.103:58690
         : HTTP/S
         : RID 46: Unidirectional Traffic
-        : DP: 1 TP: 2 TB: 169
+        : DP: 1
 
 offline0: i4pc-g--------- TCP [OR] 2.22.236.51:80 <-- [L] 192.168.0.103:44151
         : Unknown
-        : DP: 32 TP: 49 TB: 37.8 KiB
+        : DP: 32
 
 offline0: i4pcu---------- TCP [OR] 31.13.86.52:443 <-- [L] 192.168.2.17:49355
         : HTTP/S.netify.instagram
         : H: scontent-mxp1-1.cdninstagram.com
         : V: 0x0303 CS: 0x1301
         : TLS/SNI: scontent-mxp1-1.cdninstagram.com
-        : DP: 6 TP: 16 TB: 5.65 KiB
+        : DP: 6
 
 offline0: i4pcu--------F- TCP [OR] 31.13.86.52:443 <-- [L] 192.168.2.17:49357
         : HTTP/S.netify.instagram
         : H: scontent-mxp1-1.cdninstagram.com
         : V: 0x0303 CS: 0x1301
         : TLS/SNI: scontent-mxp1-1.cdninstagram.com
-        : DP: 8 TP: 144 TB: 105 KiB
+        : DP: 8
 
 offline0: i4pcu---------- TCP [OR] 31.13.86.52:443 <-- [L] 192.168.2.17:49358
         : HTTP/S.netify.instagram
         : H: scontent-mxp1-1.cdninstagram.com
         : V: 0x0303 CS: 0x1301
         : TLS/SNI: scontent-mxp1-1.cdninstagram.com
-        : DP: 8 TP: 17 TB: 8.69 KiB
+        : DP: 8
 
 offline0: i4pcu---------- TCP [OR] 31.13.86.52:443 <-- [L] 192.168.2.17:49359
         : HTTP/S.netify.instagram
         : H: scontent-mxp1-1.cdninstagram.com
         : V: 0x0303 CS: 0x1301
         : TLS/SNI: scontent-mxp1-1.cdninstagram.com
-        : DP: 8 TP: 10 TB: 3.76 KiB
+        : DP: 8
 
 offline0: i4pcu---------- TCP [OR] 31.13.86.52:443 <-- [L] 192.168.2.17:49360
         : HTTP/S.netify.instagram
         : H: scontent-mxp1-1.cdninstagram.com
         : V: 0x0303 CS: 0x1301
         : TLS/SNI: scontent-mxp1-1.cdninstagram.com
-        : DP: 8 TP: 16 TB: 8.32 KiB
+        : DP: 8
 
 offline0: i4pcu---------- TCP [OR] 31.13.86.52:443 <-- [L] 192.168.2.17:49361
         : HTTP/S.netify.instagram
         : H: scontent-mxp1-1.cdninstagram.com
         : V: 0x0303 CS: 0x1301
         : TLS/SNI: scontent-mxp1-1.cdninstagram.com
-        : DP: 8 TP: 10 TB: 1.87 KiB
+        : DP: 8
 
 offline0: i4pc--x----r--- UDP [OR] 8.8.8.8:53 <-- [L] 192.168.0.103:27124
         : DNS.netify.instagram
         : H: photos-b.ak.instagram.com
         : RID 46: Unidirectional Traffic
-        : DP: 1 TP: 1 TB: 85
+        : DP: 1
 
 offline0: i4pc-gx-------- UDP [L] 192.168.0.1:520 --> [OL] 192.168.0.255:520
         : Unknown
-        : DP: 1 TP: 1 TB: 66
+        : DP: 1
 
 offline0: i4pc-gx-d----F- TCP [OR] 46.33.70.160:80 <-- [L] 192.168.0.103:38817
         : Unknown.netify.akamai
         : D: a1408.dspw43.akamai.net
-        : DP: 3 TP: 3 TB: 198
+        : DP: 3
 
 offline0: i4pc-gx-------- TCP [OR] 92.122.48.138:80 <-- [L] 192.168.0.103:41562
         : Unknown
-        : DP: 25 TP: 25 TB: 23 KiB
+        : DP: 25
 
 offline0: i4pc-gx-------- TCP [OR] 46.33.70.150:80 <-- [L] 192.168.0.103:40855
         : Unknown
-        : DP: 2 TP: 2 TB: 140
+        : DP: 2
 
 offline0: i4pc--x-d--r--- TCP [OR] 82.85.26.153:80 <-- [L] 192.168.0.103:37350
         : HTTP.netify.instagram
@@ -206,11 +206,11 @@ offline0: i4pc--x-d--r--- TCP [OR] 82.85.26.153:80 <-- [L] 192.168.0.103:37350
         : HTTP/UA: Instagram 7.1.1 Android (19/4.4.2; 480dpi; 1080x1920; samsung; GT-I9505; jflte; qcom; it_IT)
         : URL: photos-a.ak.instagram.com/hphotos-ak-xfa1/t51.2885-15/e35/11248829_853782121373976_909936934_n.jpg?se=7
         : RID 46: Unidirectional Traffic
-        : DP: 1 TP: 1 TB: 324
+        : DP: 1
 
 offline0: i4pc-gx------F- TCP [OR] 82.85.26.185:80 <-- [L] 192.168.0.103:57966
         : Unknown
-        : DP: 3 TP: 3 TB: 198
+        : DP: 3
 
 offline0: i4pc--x----r--- TCP [OR] 82.85.26.162:80 <-- [L] 192.168.0.103:58053
         : HTTP.netify.instagram
@@ -218,12 +218,12 @@ offline0: i4pc--x----r--- TCP [OR] 82.85.26.162:80 <-- [L] 192.168.0.103:58053
         : HTTP/UA: Instagram 7.1.1 Android (19/4.4.2; 480dpi; 1080x1920; samsung; GT-I9505; jflte; qcom; it_IT)
         : URL: photos-g.ak.instagram.com/hphotos-ak-xfa1/t51.2885-15/e35/11379284_1651416798408214_1525641466_n.jpg
         : RID 46: Unidirectional Traffic
-        : DP: 1 TP: 1 TB: 321
+        : DP: 1
 
 offline0: i4pc--x-------- TCP [OR] 82.85.26.185:80 <-- [L] 192.168.0.103:57965
         : HTTP.netify.instagram
         : H: photos-f.ak.instagram.com
         : HTTP/UA: Instagram 7.1.1 Android (19/4.4.2; 480dpi; 1080x1920; samsung; GT-I9505; jflte; qcom; it_IT)
         : URL: photos-f.ak.instagram.com/hphotos-ak-xfa1/t51.2885-15/e35/11424623_1608163109450421_663315883_n.jpg?se=7
-        : DP: 7 TP: 7 TB: 3.92 KiB
+        : DP: 7
 

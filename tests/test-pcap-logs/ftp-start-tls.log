@@ -7,5 +7,5 @@ offline0: i4pcu------r--- TCP [L] 10.220.50.76:21 <-- [OL] 10.238.26.36:62092
         : RID 41: Weak TLS Cipher
         : RID 42: Unsafe Protocol
         : RID 47: TLS ALPN Not Found
-        : DP: 17 TP: 51 TB: 7.33 KiB
+        : DP: 17
 

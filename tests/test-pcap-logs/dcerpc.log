@@ -1,20 +1,20 @@
 offline0: i4pc-------r--- UDP [L] 192.168.1.11:49155 --> [OL] 192.168.1.20:34964
         : RPC
         : RID 46: Unidirectional Traffic
-        : DP: 1 TP: 6 TB: 3.62 KiB
+        : DP: 1
 
 offline0: i4pc-------r--- UDP [L] 192.168.1.11:49155 <-- [OL] 192.168.1.20:49161
         : RPC
         : RID 46: Unidirectional Traffic
-        : DP: 1 TP: 6 TB: 2.41 KiB
+        : DP: 1
 
 offline0: i4pc-------r--- UDP [L] 192.168.1.11:34964 <-- [OL] 192.168.1.20:49162
         : RPC
         : RID 46: Unidirectional Traffic
-        : DP: 1 TP: 2 TB: 348
+        : DP: 1
 
 offline0: i4pc-------r--- UDP [L] 192.168.1.11:49154 <-- [OL] 192.168.1.20:49162
         : RPC
         : RID 46: Unidirectional Traffic
-        : DP: 1 TP: 2 TB: 348
+        : DP: 1
 

@@ -4,5 +4,5 @@ offline0: i6pc-------r--- UDP [L] ::1:4443 <-- [OL] ::1:58822
         : RID 35: TLS SNI Extension Not Found
         : RID 46: Unidirectional Traffic
         : RID 53: TLS ALPN/SNI Mismatch
-        : DP: 2 TP: 4 TB: 3.9 KiB
+        : DP: 2
 

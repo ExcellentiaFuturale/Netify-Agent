@@ -3,5 +3,5 @@ offline0: i4pc-------r--- UDP [OR] 61.68.110.153:53045 <-- [L] 212.32.214.39:614
         : RID 35: TLS SNI Extension Not Found
         : RID 41: Weak TLS Cipher
         : RID 47: TLS ALPN Not Found
-        : DP: 4 TP: 30 TB: 4.87 KiB
+        : DP: 4
 

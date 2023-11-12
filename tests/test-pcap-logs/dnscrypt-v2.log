@@ -1,12 +1,12 @@
 offline0: i4pc----------- UDP [L] 127.0.0.1:38650 --> [OR] 127.0.0.2:5353
         : DNSCrypt
-        : DP: 2 TP: 2 TB: 1.38 KiB
+        : DP: 2
 
 offline0: i4pc----------- UDP [L] 127.0.0.1:42883 --> [OR] 127.0.0.2:5353
         : DNSCrypt
-        : DP: 2 TP: 2 TB: 1.32 KiB
+        : DP: 2
 
 offline0: i4pc----------- UDP [L] 127.0.0.1:50893 --> [OR] 127.0.0.2:5353
         : DNSCrypt
-        : DP: 2 TP: 2 TB: 1.5 KiB
+        : DP: 2
 

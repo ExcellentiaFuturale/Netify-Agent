@@ -5,12 +5,12 @@ offline0: i4pcu------r--- TCP [OR] 66.220.156.68:443 <-- [L] 192.168.43.18:52066
         : TLS/SNI: facebook.com
         : TLS/IDN: C=US, O=DigiCert Inc, OU=www.digicert.com, CN=DigiCert SHA2 High Assurance Server CA TLS/SDN: C=US, ST=CA, L=Menlo Park, O=Facebook, Inc., CN=*.facebook.com
         : RID 30: TLS Certificate Expired
-        : DP: 10 TP: 19 TB: 5.61 KiB
+        : DP: 10
 
 offline0: i4pcu---------- TCP [OR] 31.13.86.36:443 <-- [L] 192.168.43.18:44614
         : HTTP/S.netify.facebook
         : H: www.facebook.com
         : V: 0x0303 CS: 0xc02b
         : TLS/SNI: www.facebook.com
-        : DP: 6 TP: 41 TB: 24.2 KiB
+        : DP: 6
 

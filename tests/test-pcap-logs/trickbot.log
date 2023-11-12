@@ -6,5 +6,5 @@ offline0: i4pc-------r-F- TCP [L] 10.12.29.101:61318 --> [OR] 82.118.225.196:708
         : RID 10: Numeric IP Address
         : RID 11: HTTP Suspicious Content
         : RID 16: Known Protocol on Non-standard Port
-        : DP: 8 TP: 74 TB: 60.5 KiB
+        : DP: 8
 

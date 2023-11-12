@@ -1,6 +1,6 @@
 offline0: i4pc----------- TCP [OR] 85.154.114.113:56028 --> [L] 185.32.192.30:80
         : SOAP
-        : DP: 5 TP: 5 TB: 3.85 KiB
+        : DP: 5
 
 offline0: i4pc--x----r--- TCP [OR] 23.2.213.165:4176 <-- [L] 192.168.2.100:50100
         : HTTP.netify.microsoft
@@ -9,9 +9,9 @@ offline0: i4pc--x----r--- TCP [OR] 23.2.213.165:4176 <-- [L] 192.168.2.100:50100
         : URL: go.microsoft.com/fwlink/?LinkID=252669&clcid=0x409
         : RID 16: Known Protocol on Non-standard Port
         : RID 46: Unidirectional Traffic
-        : DP: 1 TP: 1 TB: 1.47 KiB
+        : DP: 1
 
 offline0: i4pc-gx------F- TCP [OR] 23.2.213.165:80 <-- [L] 192.168.2.100:50100
         : Unknown
-        : DP: 14 TP: 14 TB: 5.37 KiB
+        : DP: 14
 

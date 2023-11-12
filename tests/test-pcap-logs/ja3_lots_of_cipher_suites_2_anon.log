@@ -9,5 +9,5 @@ offline0: i4pcu------r--- TCP [OR] 151.121.193.160:443 <-- [L] 192.168.147.177:5
         : RID 37: Self-signed Certificate
         : RID 41: Weak TLS Cipher
         : RID 47: TLS ALPN Not Found
-        : DP: 7 TP: 27 TB: 6.85 KiB
+        : DP: 7
 

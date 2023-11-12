@@ -559,7 +559,8 @@ void ndFlow::Print(uint8_t pflags) const {
                       << nd_risk_get_name(*r);
                 }
                 if (risks.size() > 1) {
-                    for (r = next(risks.begin()); r != risks.end(); r++)
+                    for (r = next(risks.begin());
+                         r != risks.end(); r++)
                     {
                         dls
                           << endl
@@ -577,21 +578,24 @@ void ndFlow::Print(uint8_t pflags) const {
 
             dls.imbue(locale(""));
 
-            dls
-              << endl
-              << setw(iface->ifname.size()) << " "
-              << ": "
-              << "DP: "
-              << ndLogFormat(ndLogFormat::FORMAT_BYTES,
-                   stats.detection_packets.load())
-              << " "
-              << "TP: "
-              << ndLogFormat(ndLogFormat::FORMAT_PACKETS,
-                   stats.total_packets.load())
-              << " "
-              << "TB: "
-              << ndLogFormat(ndLogFormat::FORMAT_BYTES,
-                   stats.total_bytes.load());
+            dls << endl
+                << setw(iface->ifname.size()) << " "
+                << ": "
+                << "DP: "
+                << ndLogFormat(ndLogFormat::FORMAT_BYTES,
+                     stats.detection_packets.load());
+
+            if ((pflags & PRINTF_STATS_FULL)) {
+                dls
+                  << " "
+                  << "TP: "
+                  << ndLogFormat(ndLogFormat::FORMAT_PACKETS,
+                       stats.total_packets.load())
+                  << " "
+                  << "TB: "
+                  << ndLogFormat(ndLogFormat::FORMAT_BYTES,
+                       stats.total_bytes.load());
+            }
 
             dls.imbue(locale("C"));
         }

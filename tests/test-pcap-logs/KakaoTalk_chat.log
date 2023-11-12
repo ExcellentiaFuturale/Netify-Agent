@@ -1,79 +1,79 @@
 offline0: i4pc----------- UDP [L] 10.24.82.188:35603 --> [OL] 10.188.1.1:53
         : DNS.netify.kakao-corp
         : H: ac-talk.kakao.com
-        : DP: 2 TP: 2 TB: 215
+        : DP: 2
 
 offline0: i4pc----------- UDP [L] 10.24.82.188:38448 --> [OL] 10.188.1.1:53
         : DNS.netify.kakao-corp
         : H: auth.kakao.com
-        : DP: 2 TP: 2 TB: 190
+        : DP: 2
 
 offline0: i4pc----------- UDP [L] 10.24.82.188:57816 --> [OL] 10.188.1.1:53
         : DNS.netify.kakaotalk
         : H: katalk.kakao.com
-        : DP: 2 TP: 2 TB: 244
+        : DP: 2
 
 offline0: i4pc----------- UDP [L] 10.24.82.188:58810 --> [OL] 10.188.1.1:53
         : DNS.netify.kakao-corp
         : H: item.kakao.com
-        : DP: 2 TP: 2 TB: 190
+        : DP: 2
 
 offline0: i4pc----------- UDP [L] 10.24.82.188:12908 --> [OL] 10.188.1.1:53
         : DNS.netify.kakao-corp
         : H: up-m.talk.kakao.com
-        : DP: 2 TP: 2 TB: 205
+        : DP: 2
 
 offline0: i4pc----------- UDP [L] 10.24.82.188:41909 --> [OL] 10.188.1.1:53
         : DNS.netify.kakao-corp
         : H: booking.loco.kakao.com
-        : DP: 2 TP: 2 TB: 214
+        : DP: 2
 
 offline0: i4pc----------- UDP [L] 10.24.82.188:5929 --> [OL] 10.188.1.1:53
         : DNS.netify.kakao-corp
         : H: up-p.talk.kakao.com
-        : DP: 2 TP: 2 TB: 205
+        : DP: 2
 
 offline0: i4pc----------- UDP [L] 10.24.82.188:9094 --> [OL] 10.188.1.1:53
         : DNS.netify.kakao-corp
         : H: up-v.talk.kakao.com
-        : DP: 2 TP: 2 TB: 205
+        : DP: 2
 
 offline0: i4pc----------- UDP [L] 10.24.82.188:56820 --> [OL] 10.188.1.1:53
         : DNS.netify.kakao-corp
         : H: up-c.talk.kakao.com
-        : DP: 2 TP: 2 TB: 205
+        : DP: 2
 
 offline0: i4pc----------- UDP [L] 10.24.82.188:29029 --> [OL] 10.188.1.1:53
         : DNS.netify.kakao-corp
         : H: up-a.talk.kakao.com
-        : DP: 2 TP: 2 TB: 205
+        : DP: 2
 
 offline0: i4pc----------- UDP [L] 10.24.82.188:43077 --> [OL] 10.188.1.1:53
         : DNS.netify.kakao-corp
         : H: dn-l.talk.kakao.com
-        : DP: 2 TP: 2 TB: 178
+        : DP: 2
 
 offline0: i4pc----------- UDP [L] 10.24.82.188:25117 --> [OL] 10.188.1.1:53
         : DNS.netify.kakao-corp
         : H: up-gp.talk.kakao.com
-        : DP: 2 TP: 2 TB: 208
+        : DP: 2
 
 offline0: i4pc----------- UDP [L] 10.24.82.188:61011 --> [OL] 10.188.1.1:53
         : DNS.netify.kakao-corp
         : H: plus-talk.kakao.com
-        : DP: 2 TP: 2 TB: 200
+        : DP: 2
 
 offline0: i4pc----------- UDP [L] 10.24.82.188:61011 --> [OL] 10.188.191.1:53
         : DNS.netify.kakao-corp
         : H: plus-talk.kakao.com
-        : DP: 2 TP: 2 TB: 200
+        : DP: 2
 
 offline0: i4pc-------r--- ICMP [L] 10.24.82.188:0 --> [OL] 10.188.191.1:0
         : ICMP
         : RID 46: Unidirectional Traffic
-        : DP: 1 TP: 1 TB: 147
+        : DP: 1
 
-offline0: i4pcu---d--r--- TCP [L] 10.24.82.188:37821 --> [OR] 210.103.240.15:443
+offline0: i4pcu---d--r-F- TCP [L] 10.24.82.188:37821 --> [OR] 210.103.240.15:443
         : HTTP/S.netify.kakao-corp
         : D: auth.gl.kakao.com
         : V: 0x0301 CS: 0x002f
@@ -82,12 +82,12 @@ offline0: i4pcu---d--r--- TCP [L] 10.24.82.188:37821 --> [OR] 210.103.240.15:443
         : RID 30: TLS Certificate Expired
         : RID 36: Obsolete TLS (v1.1 or older)
         : RID 41: Weak TLS Cipher
-        : DP: 13 TP: 13 TB: 4.39 KiB
+        : DP: 13
 
-offline0: i4pc-------r--- TCP [L] 10.24.82.188:47007 --> [OR] 31.13.68.73:443
+offline0: i4pc-------r-F- TCP [L] 10.24.82.188:47007 --> [OR] 31.13.68.73:443
         : HTTP/S.netify.meta
         : RID 46: Unidirectional Traffic
-        : DP: 1 TP: 1 TB: 83
+        : DP: 1
 
 offline0: i4pcu------r--- TCP [L] 10.24.82.188:35503 --> [OR] 173.252.97.2:443
         : HTTP/S.netify.meta
@@ -95,19 +95,19 @@ offline0: i4pcu------r--- TCP [L] 10.24.82.188:35503 --> [OR] 173.252.97.2:443
         : TLS/IDN: C=US, O=DigiCert Inc, OU=www.digicert.com, CN=DigiCert High Assurance CA-3 TLS/SDN: C=US, ST=CA, L=Menlo Park, O=Facebook, Inc., CN=*.facebook.com
         : RID 30: TLS Certificate Expired
         : RID 36: Obsolete TLS (v1.1 or older)
-        : DP: 15 TP: 15 TB: 4.69 KiB
+        : DP: 15
 
 offline0: i4pc----------- UDP [L] 10.24.82.188:24596 --> [OL] 10.188.1.1:53
         : DNS.netify.facebook
         : H: api.facebook.com
-        : DP: 2 TP: 2 TB: 196
+        : DP: 2
 
-offline0: i4pc----------- TCP [L] 10.24.82.188:37553 --> [OR] 31.13.68.84:80
+offline0: i4pc----d----F- TCP [L] 10.24.82.188:37553 --> [OR] 31.13.68.84:80
         : HTTP.netify.facebook
-        : H: www.facebook.com
+        : D: star.c10r.facebook.com H: www.facebook.com
         : HTTP/UA: Dalvik/1.6.0 (Linux; U; Android 4.4.4; MI 3W MIUI/V6.4.3.0.KXDMICB)
         : URL: www.facebook.com/mobile/status.php
-        : DP: 7 TP: 7 TB: 890
+        : DP: 7
 
 offline0: i4pcu---d--r--- TCP [L] 10.24.82.188:45209 --> [OR] 31.13.68.84:443
         : HTTP/S.netify.facebook
@@ -117,12 +117,12 @@ offline0: i4pcu---d--r--- TCP [L] 10.24.82.188:45209 --> [OR] 31.13.68.84:443
         : TLS/IDN: C=US, O=DigiCert Inc, OU=www.digicert.com, CN=DigiCert High Assurance CA-3 TLS/SDN: C=US, ST=CA, L=Menlo Park, O=Facebook, Inc., CN=*.facebook.com
         : RID 30: TLS Certificate Expired
         : RID 47: TLS ALPN Not Found
-        : DP: 10 TP: 10 TB: 4.72 KiB
+        : DP: 10
 
 offline0: i4pc----------- UDP [L] 10.24.82.188:19582 --> [OL] 10.188.1.1:53
         : DNS.netify.facebook
         : H: graph.facebook.com
-        : DP: 2 TP: 2 TB: 218
+        : DP: 2
 
 offline0: i4pcu---d--r--- TCP [L] 10.24.82.188:43581 --> [OR] 31.13.68.70:443
         : HTTP/S.netify.facebook
@@ -132,17 +132,17 @@ offline0: i4pcu---d--r--- TCP [L] 10.24.82.188:43581 --> [OR] 31.13.68.70:443
         : TLS/IDN: C=US, O=DigiCert Inc, OU=www.digicert.com, CN=DigiCert High Assurance CA-3 TLS/SDN: C=US, ST=CA, L=Menlo Park, O=Facebook, Inc., CN=*.facebook.com
         : RID 30: TLS Certificate Expired
         : RID 47: TLS ALPN Not Found
-        : DP: 12 TP: 12 TB: 4.72 KiB
+        : DP: 12
 
 offline0: i4pc----------- UDP [L] 10.24.82.188:4017 --> [OL] 10.188.1.1:53
         : DNS.netify.facebook
         : H: developers.facebook.com
-        : DP: 2 TP: 2 TB: 229
+        : DP: 2
 
 offline0: i4pc----------- UDP [L] 10.24.82.188:14650 --> [OL] 10.188.1.1:53
         : DNS.netify.reverse-dns
         : H: 2.97.252.173.in-addr.arpa
-        : DP: 2 TP: 2 TB: 217
+        : DP: 2
 
 offline0: i4pcu---d--r--- TCP [L] 10.24.82.188:45211 --> [OR] 31.13.68.84:443
         : HTTP/S.netify.facebook
@@ -152,7 +152,7 @@ offline0: i4pcu---d--r--- TCP [L] 10.24.82.188:45211 --> [OR] 31.13.68.84:443
         : TLS/IDN: C=US, O=DigiCert Inc, OU=www.digicert.com, CN=DigiCert High Assurance CA-3 TLS/SDN: C=US, ST=CA, L=Menlo Park, O=Facebook, Inc., CN=*.facebook.com
         : RID 30: TLS Certificate Expired
         : RID 47: TLS ALPN Not Found
-        : DP: 10 TP: 29 TB: 8.86 KiB
+        : DP: 10
 
 offline0: i4pcu---d--r--- TCP [L] 10.24.82.188:45213 --> [OR] 31.13.68.84:443
         : HTTP/S.netify.facebook
@@ -162,14 +162,14 @@ offline0: i4pcu---d--r--- TCP [L] 10.24.82.188:45213 --> [OR] 31.13.68.84:443
         : TLS/IDN: C=US, O=DigiCert Inc, OU=www.digicert.com, CN=DigiCert High Assurance CA-3 TLS/SDN: C=US, ST=CA, L=Menlo Park, O=Facebook, Inc., CN=*.facebook.com
         : RID 30: TLS Certificate Expired
         : RID 36: Obsolete TLS (v1.1 or older)
-        : DP: 13 TP: 28 TB: 7.38 KiB
+        : DP: 13
 
 offline0: i4pc----d----F- TCP [L] 10.24.82.188:37557 --> [OR] 31.13.68.84:80
         : HTTP.netify.facebook
         : D: star.c10r.facebook.com H: www.facebook.com
         : HTTP/UA: Dalvik/1.6.0 (Linux; U; Android 4.4.4; MI 3W MIUI/V6.4.3.0.KXDMICB)
         : URL: www.facebook.com/mobile/status.php
-        : DP: 7 TP: 11 TB: 1.09 KiB
+        : DP: 7
 
 offline0: i4pcu------r--- TCP [L] 10.24.82.188:35511 --> [OR] 173.252.97.2:443
         : HTTP/S.netify.meta
@@ -177,60 +177,60 @@ offline0: i4pcu------r--- TCP [L] 10.24.82.188:35511 --> [OR] 173.252.97.2:443
         : TLS/IDN: C=US, O=DigiCert Inc, OU=www.digicert.com, CN=DigiCert High Assurance CA-3 TLS/SDN: C=US, ST=CA, L=Menlo Park, O=Facebook, Inc., CN=*.facebook.com
         : RID 30: TLS Certificate Expired
         : RID 36: Obsolete TLS (v1.1 or older)
-        : DP: 9 TP: 36 TB: 6.98 KiB
+        : DP: 9
 
 offline0: i4pc-------rs-- TCP [L] 10.24.82.188:34686 --> [OR] 173.194.72.188:5228
         : XMPP.netify.google-chat
         : RID 16: Known Protocol on Non-standard Port
         : RID 46: Unidirectional Traffic
-        : DP: 1 TP: 1 TB: 164
+        : DP: 1
 
 offline0: i4pc-------rs-- TCP [L] 10.24.82.188:34686 --> [OR] 173.194.72.188:5228
         : XMPP.netify.google-chat
         : RID 16: Known Protocol on Non-standard Port
         : RID 46: Unidirectional Traffic
-        : DP: 1 TP: 1 TB: 164
+        : DP: 1
 
 offline0: i4pc-------r--- TCP [L] 10.24.82.188:49217 --> [OR] 216.58.220.174:443
         : HTTP/S.netify.google
         : RID 46: Unidirectional Traffic
-        : DP: 1 TP: 1 TB: 83
+        : DP: 1
 
 offline0: i4pc-gx------F- TCP [L] 10.24.82.188:35922 --> [OR] 216.58.221.10:80
         : Unknown.netify.google
-        : DP: 14 TP: 14 TB: 784
+        : DP: 14
 
 offline0: i4pc-gx-------- TCP [L] 10.24.82.188:46947 --> [OR] 139.150.0.125:443
         : Unknown.netify.kakao-corp
-        : DP: 18 TP: 18 TB: 2.35 KiB
+        : DP: 18
 
 offline0: i4pc-gx-d----F- TCP [L] 10.24.82.188:42332 --> [OR] 210.103.240.15:443
         : Unknown.netify.kakao-corp
         : D: auth.gl.kakao.com
         : TLS/SNI: auth.gl.kakao.com
-        : DP: 5 TP: 5 TB: 280
+        : DP: 5
 
 offline0: i4pc-gx----r--- TCP [L] 10.24.82.188:34503 --> [OR] 120.28.26.242:80
         : Unknown
         : RID 46: Unidirectional Traffic
         : RID 51: TCP Connection Issues
-        : DP: 1 TP: 1 TB: 56
+        : DP: 1
 
 offline0: i4pc-gx----rs-- TCP [L] 10.24.82.188:51021 --> [OR] 103.246.57.251:8080
         : KakaoTalk/Voice.netify.kakao-corp
         : RID 52: Fully Encrypted Flow
-        : DP: 26 TP: 26 TB: 3.83 KiB
+        : DP: 26
 
 offline0: i4pc--x----r--- TCP [L] 10.24.82.188:58927 --> [OR] 54.255.253.199:5223
         : TLS
         : RID 16: Known Protocol on Non-standard Port
         : RID 46: Unidirectional Traffic
-        : DP: 2 TP: 2 TB: 181
+        : DP: 2
 
 offline0: i4pc--x----r--- TCP [L] 10.24.82.188:58964 --> [OR] 54.255.253.199:5223
         : TLS
         : V: 0x0301
         : RID 16: Known Protocol on Non-standard Port
         : RID 36: Obsolete TLS (v1.1 or older)
-        : DP: 6 TP: 6 TB: 1.85 KiB
+        : DP: 6
 

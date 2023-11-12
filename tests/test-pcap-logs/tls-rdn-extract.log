@@ -7,5 +7,5 @@ offline0: i4pcu------r--- TCP [L] 10.0.0.1:31337 --> [OR] 213.199.149.251:443
         : RID 30: TLS Certificate Expired
         : RID 36: Obsolete TLS (v1.1 or older)
         : RID 41: Weak TLS Cipher
-        : DP: 6 TP: 6 TB: 7.04 KiB
+        : DP: 6
 

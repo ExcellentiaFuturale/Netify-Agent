@@ -4,5 +4,5 @@ offline0: i4pc-------r--- UDP [OR] 40.154.127.200:49836 --> [L] 166.240.188.209:
         : V: 0x0304
         : TLS/SNI: fonts.googleapis.com
         : RID 46: Unidirectional Traffic
-        : DP: 1 TP: 12 TB: 8.22 KiB
+        : DP: 1
 

@@ -1,37 +1,37 @@
 offline0: i4pc----------- UDP [L] 127.0.0.1:36576 --> [OL] 127.0.0.1:25826
         : Collectd.netify.internal-network
         : H: devlap.fritz.box
-        : DP: 1 TP: 1 TB: 1.34 KiB
+        : DP: 1
 
 offline0: i4pc----------- UDP [L] 127.0.0.1:36064 --> [OL] 127.0.0.1:25826
         : Collectd.netify.internal-network
         : H: devlap.fritz.box
-        : DP: 1 TP: 1 TB: 1.34 KiB
+        : DP: 1
 
 offline0: i4pc----------- UDP [L] 127.0.0.1:54138 --> [OL] 127.0.0.1:25826
         : Collectd.netify.internal-network
         : H: devlap.fritz.box
-        : DP: 1 TP: 5 TB: 6.59 KiB
+        : DP: 1
 
 offline0: i4pc----------- UDP [L] 127.0.0.1:35988 --> [OL] 127.0.0.1:25826
         : Collectd.netify.internal-network
         : H: devlap.fritz.box
-        : DP: 1 TP: 49 TB: 64.5 KiB
+        : DP: 1
 
 offline0: i4pc----------- UDP [L] 127.0.0.1:36832 --> [OL] 127.0.0.1:25826
         : Collectd.netify.internal-network
         : H: devlap.fritz.box
-        : DP: 1 TP: 17 TB: 22.2 KiB
+        : DP: 1
 
 offline0: i4pc-gx-------- UDP [L] 127.0.0.1:36320 --> [OL] 127.0.0.1:25826
         : Unknown
-        : DP: 1 TP: 1 TB: 1.34 KiB
+        : DP: 1
 
 offline0: i4pc-gx-------- UDP [L] 192.168.178.35:39577 --> [OM] 239.192.74.66:25826
         : Unknown
-        : DP: 1 TP: 1 TB: 1.38 KiB
+        : DP: 1
 
 offline0: i4pc-gx-------- UDP [L] 192.168.178.35:39576 --> [OM] 239.192.74.66:25826
         : Unknown
-        : DP: 6 TP: 6 TB: 8.17 KiB
+        : DP: 6
 

@@ -4,7 +4,7 @@ offline0: i4pc-------r--- UDP [OR] 133.205.75.230:56528 --> [L] 208.229.157.81:4
         : V: 0x0304
         : TLS/SNI: update.googleapis.com
         : RID 46: Unidirectional Traffic
-        : DP: 1 TP: 4 TB: 5.44 KiB
+        : DP: 1
 
 offline0: i4pc-------r--- UDP [OR] 147.196.90.42:61647 --> [L] 177.86.46.206:443
         : QUIC.netify.google
@@ -12,7 +12,7 @@ offline0: i4pc-------r--- UDP [OR] 147.196.90.42:61647 --> [L] 177.86.46.206:443
         : V: 0x0304
         : TLS/SNI: sb-ssl.google.com
         : RID 46: Unidirectional Traffic
-        : DP: 1 TP: 4 TB: 5.44 KiB
+        : DP: 1
 
 offline0: i4pc-------r--- UDP [OR] 168.144.64.5:55376 --> [L] 212.22.246.243:443
         : QUIC.netify.google
@@ -20,7 +20,7 @@ offline0: i4pc-------r--- UDP [OR] 168.144.64.5:55376 --> [L] 212.22.246.243:443
         : V: 0x0304
         : TLS/SNI: www.google.com
         : RID 46: Unidirectional Traffic
-        : DP: 1 TP: 2 TB: 2.72 KiB
+        : DP: 1
 
 offline0: i4pc-------r--- UDP [OR] 133.202.76.105:443 <-- [L] 168.144.64.5:64964
         : QUIC.netify.google-authentication
@@ -28,7 +28,7 @@ offline0: i4pc-------r--- UDP [OR] 133.202.76.105:443 <-- [L] 168.144.64.5:64964
         : V: 0x0304
         : TLS/SNI: accounts.google.com
         : RID 46: Unidirectional Traffic
-        : DP: 1 TP: 2 TB: 2.72 KiB
+        : DP: 1
 
 offline0: i4pc-------r--- UDP [OR] 112.1.105.138:443 <-- [L] 168.144.64.5:55844
         : QUIC.netify.android
@@ -36,7 +36,7 @@ offline0: i4pc-------r--- UDP [OR] 112.1.105.138:443 <-- [L] 168.144.64.5:55844
         : V: 0x0304
         : TLS/SNI: android.clients.google.com
         : RID 46: Unidirectional Traffic
-        : DP: 1 TP: 1 TB: 1.36 KiB
+        : DP: 1
 
 offline0: i4pc-------r--- UDP [OR] 37.47.218.224:443 <-- [L] 168.144.64.5:59827
         : QUIC.netify.google-ads
@@ -44,21 +44,21 @@ offline0: i4pc-------r--- UDP [OR] 37.47.218.224:443 <-- [L] 168.144.64.5:59827
         : V: 0x0304
         : TLS/SNI: www.googleadservices.com
         : RID 46: Unidirectional Traffic
-        : DP: 1 TP: 2 TB: 2.72 KiB
+        : DP: 1
 
 offline0: i4pc----------- UDP [OR] 168.144.64.5:51053 --> [L] 241.138.147.133:443
         : QUIC.netify.google
         : H: content-autofill.googleapis.com
         : V: 0x0304
         : TLS/SNI: content-autofill.googleapis.com
-        : DP: 1 TP: 2 TB: 2.72 KiB
+        : DP: 1
 
 offline0: i4pc----------- UDP [L] 10.117.78.100:44252 --> [OR] 251.236.18.198:443
         : QUIC.netify.google-authentication
         : H: accounts.google.com
         : V: 0x0304
         : TLS/SNI: accounts.google.com
-        : DP: 1 TP: 1 TB: 1.36 KiB
+        : DP: 1
 
 offline0: i4pc-------r--- UDP [L] 10.117.78.100:55273 --> [OR] 202.152.155.121:443
         : QUIC.netify.google
@@ -66,7 +66,7 @@ offline0: i4pc-------r--- UDP [L] 10.117.78.100:55273 --> [OR] 202.152.155.121:4
         : V: 0x0304
         : TLS/SNI: clients4.google.com
         : RID 46: Unidirectional Traffic
-        : DP: 1 TP: 1 TB: 1.36 KiB
+        : DP: 1
 
 offline0: i4pc-------r--- UDP [OR] 113.250.137.243:443 <-- [L] 168.144.64.5:53404
         : QUIC.netify.google
@@ -74,7 +74,7 @@ offline0: i4pc-------r--- UDP [OR] 113.250.137.243:443 <-- [L] 168.144.64.5:5340
         : V: 0x0304
         : TLS/SNI: update.googleapis.com
         : RID 46: Unidirectional Traffic
-        : DP: 1 TP: 1 TB: 1.36 KiB
+        : DP: 1
 
 offline0: i4pc-------r--- UDP [OR] 128.248.24.1:443 <-- [L] 168.144.64.5:53431
         : QUIC.netify.google
@@ -82,7 +82,7 @@ offline0: i4pc-------r--- UDP [OR] 128.248.24.1:443 <-- [L] 168.144.64.5:53431
         : V: 0x0304
         : TLS/SNI: fonts.gstatic.com
         : RID 46: Unidirectional Traffic
-        : DP: 1 TP: 2 TB: 2.72 KiB
+        : DP: 1
 
 offline0: i4pc-------r--- UDP [OR] 121.209.126.161:443 <-- [L] 168.144.64.5:50482
         : QUIC.netify.youtube
@@ -90,7 +90,7 @@ offline0: i4pc-------r--- UDP [OR] 121.209.126.161:443 <-- [L] 168.144.64.5:5048
         : V: 0x0304
         : TLS/SNI: yt3.ggpht.com
         : RID 46: Unidirectional Traffic
-        : DP: 1 TP: 1 TB: 1.36 KiB
+        : DP: 1
 
 offline0: i4pc-------r--- UDP [OR] 158.146.215.30:443 <-- [L] 168.144.64.5:62652
         : QUIC.netify.google-ads
@@ -98,7 +98,7 @@ offline0: i4pc-------r--- UDP [OR] 158.146.215.30:443 <-- [L] 168.144.64.5:62652
         : V: 0x0304
         : TLS/SNI: static.doubleclick.net
         : RID 46: Unidirectional Traffic
-        : DP: 1 TP: 1 TB: 1.36 KiB
+        : DP: 1
 
 offline0: i4pc-------r--- UDP [OR] 9.65.169.252:443 <-- [L] 168.144.64.5:63136
         : QUIC.netify.youtube
@@ -106,7 +106,7 @@ offline0: i4pc-------r--- UDP [OR] 9.65.169.252:443 <-- [L] 168.144.64.5:63136
         : V: 0x0304
         : TLS/SNI: suggestqueries-clients6.youtube.com
         : RID 46: Unidirectional Traffic
-        : DP: 1 TP: 1 TB: 1.36 KiB
+        : DP: 1
 
 offline0: i4pc-------r--- UDP [OR] 102.194.207.179:443 <-- [L] 168.144.64.5:51456
         : QUIC.netify.google
@@ -114,7 +114,7 @@ offline0: i4pc-------r--- UDP [OR] 102.194.207.179:443 <-- [L] 168.144.64.5:5145
         : V: 0x0304
         : TLS/SNI: clientservices.googleapis.com
         : RID 46: Unidirectional Traffic
-        : DP: 1 TP: 1 TB: 1.36 KiB
+        : DP: 1
 
 offline0: i4pc-------r--- UDP [OR] 113.250.137.243:443 <-- [L] 168.144.64.5:63163
         : QUIC.netify.google
@@ -122,7 +122,7 @@ offline0: i4pc-------r--- UDP [OR] 113.250.137.243:443 <-- [L] 168.144.64.5:6316
         : V: 0x0304
         : TLS/SNI: update.googleapis.com
         : RID 46: Unidirectional Traffic
-        : DP: 1 TP: 1 TB: 1.36 KiB
+        : DP: 1
 
 offline0: i4pc-------r--- UDP [OR] 153.98.28.78:443 <-- [L] 168.144.64.5:54016
         : QUIC.netify.google-dns
@@ -130,7 +130,7 @@ offline0: i4pc-------r--- UDP [OR] 153.98.28.78:443 <-- [L] 168.144.64.5:54016
         : V: 0x0304
         : TLS/SNI: dns.google
         : RID 46: Unidirectional Traffic
-        : DP: 1 TP: 1 TB: 1.36 KiB
+        : DP: 1
 
 offline0: i4pc-------r--- UDP [OR] 99.42.133.245:443 <-- [L] 168.144.64.5:51248
         : QUIC.netify.google-cloud
@@ -138,7 +138,7 @@ offline0: i4pc-------r--- UDP [OR] 99.42.133.245:443 <-- [L] 168.144.64.5:51248
         : V: 0x0304
         : TLS/SNI: beacons.gcp.gvt2.com
         : RID 46: Unidirectional Traffic
-        : DP: 1 TP: 1 TB: 1.36 KiB
+        : DP: 1
 
 offline0: i4pc-------r--- UDP [OR] 45.228.175.189:443 <-- [L] 168.144.64.5:60896
         : QUIC.netify.google
@@ -146,7 +146,7 @@ offline0: i4pc-------r--- UDP [OR] 45.228.175.189:443 <-- [L] 168.144.64.5:60896
         : V: 0x0304
         : TLS/SNI: www.google.com
         : RID 46: Unidirectional Traffic
-        : DP: 1 TP: 1 TB: 1.36 KiB
+        : DP: 1
 
 offline0: i4pc-------r--- UDP [OR] 128.248.24.1:443 <-- [L] 168.144.64.5:60551
         : QUIC.netify.google
@@ -154,7 +154,7 @@ offline0: i4pc-------r--- UDP [OR] 128.248.24.1:443 <-- [L] 168.144.64.5:60551
         : V: 0x0304
         : TLS/SNI: beacons.gvt2.com
         : RID 46: Unidirectional Traffic
-        : DP: 1 TP: 1 TB: 1.36 KiB
+        : DP: 1
 
 offline0: i4pc-------r--- UDP [OR] 168.144.64.5:56488 --> [L] 177.86.46.206:443
         : QUIC.netify.youtube
@@ -162,7 +162,7 @@ offline0: i4pc-------r--- UDP [OR] 168.144.64.5:56488 --> [L] 177.86.46.206:443
         : V: 0x0304
         : TLS/SNI: www.youtube.com
         : RID 46: Unidirectional Traffic
-        : DP: 1 TP: 1 TB: 1.36 KiB
+        : DP: 1
 
 offline0: i4pc-------r--- UDP [OR] 153.98.28.78:443 <-- [L] 168.144.64.5:49153
         : QUIC.netify.google-dns
@@ -170,7 +170,7 @@ offline0: i4pc-------r--- UDP [OR] 153.98.28.78:443 <-- [L] 168.144.64.5:49153
         : V: 0x0304
         : TLS/SNI: dns.google
         : RID 46: Unidirectional Traffic
-        : DP: 1 TP: 1 TB: 1.36 KiB
+        : DP: 1
 
 offline0: i4pc-------r--- UDP [OR] 128.248.24.1:443 <-- [L] 168.144.64.5:51296
         : QUIC.netify.google-cloud
@@ -178,7 +178,7 @@ offline0: i4pc-------r--- UDP [OR] 128.248.24.1:443 <-- [L] 168.144.64.5:51296
         : V: 0x0304
         : TLS/SNI: beacons.gcp.gvt2.com
         : RID 46: Unidirectional Traffic
-        : DP: 1 TP: 1 TB: 1.36 KiB
+        : DP: 1
 
 offline0: i4pc-------r--- UDP [OR] 76.83.40.87:443 <-- [L] 168.144.64.5:57767
         : QUIC.netify.youtube
@@ -186,7 +186,7 @@ offline0: i4pc-------r--- UDP [OR] 76.83.40.87:443 <-- [L] 168.144.64.5:57767
         : V: 0x0304
         : TLS/SNI: r11---sn-vh5ouxa-hjuk.googlevideo.com
         : RID 46: Unidirectional Traffic
-        : DP: 1 TP: 1 TB: 1.36 KiB
+        : DP: 1
 
 offline0: i4pc-------r--- UDP [OR] 168.144.64.5:63736 --> [L] 213.188.47.247:443
         : QUIC.netify.youtube
@@ -194,14 +194,14 @@ offline0: i4pc-------r--- UDP [OR] 168.144.64.5:63736 --> [L] 213.188.47.247:443
         : V: 0x0304
         : TLS/SNI: r4---sn-vh5ouxa-hjud.googlevideo.com
         : RID 46: Unidirectional Traffic
-        : DP: 1 TP: 1 TB: 1.36 KiB
+        : DP: 1
 
 offline0: i4pc----------- UDP [OR] 168.144.64.5:52273 --> [L] 244.214.160.219:443
         : QUIC.netify.youtube
         : H: r3---sn-vh5ouxa-hju6.googlevideo.com
         : V: 0x0304
         : TLS/SNI: r3---sn-vh5ouxa-hju6.googlevideo.com
-        : DP: 1 TP: 1 TB: 1.36 KiB
+        : DP: 1
 
 offline0: i4pc-------r--- UDP [OR] 35.194.157.47:443 <-- [L] 168.144.64.5:49324
         : QUIC.netify.google-ads
@@ -209,7 +209,7 @@ offline0: i4pc-------r--- UDP [OR] 35.194.157.47:443 <-- [L] 168.144.64.5:49324
         : V: 0x0304
         : TLS/SNI: pagead2.googlesyndication.com
         : RID 46: Unidirectional Traffic
-        : DP: 1 TP: 1 TB: 1.36 KiB
+        : DP: 1
 
 offline0: i4pc-------r--- UDP [OR] 136.125.67.96:443 <-- [L] 168.144.64.5:62047
         : QUIC.netify.google
@@ -217,7 +217,7 @@ offline0: i4pc-------r--- UDP [OR] 136.125.67.96:443 <-- [L] 168.144.64.5:62047
         : V: 0x0304
         : TLS/SNI: beacons4.gvt2.com
         : RID 46: Unidirectional Traffic
-        : DP: 1 TP: 1 TB: 1.36 KiB
+        : DP: 1
 
 offline0: i4pc-------r--- UDP [OR] 168.144.64.5:64976 --> [L] 220.80.126.73:443
         : QUIC.netify.youtube
@@ -225,7 +225,7 @@ offline0: i4pc-------r--- UDP [OR] 168.144.64.5:64976 --> [L] 220.80.126.73:443
         : V: 0x0304
         : TLS/SNI: r1---sn-hju7enel.googlevideo.com
         : RID 46: Unidirectional Traffic
-        : DP: 1 TP: 1 TB: 1.36 KiB
+        : DP: 1
 
 offline0: i4pc-------r--- UDP [OR] 35.194.157.47:443 <-- [L] 168.144.64.5:61209
         : QUIC.netify.google-ads
@@ -233,7 +233,7 @@ offline0: i4pc-------r--- UDP [OR] 35.194.157.47:443 <-- [L] 168.144.64.5:61209
         : V: 0x0304
         : TLS/SNI: www.googleadservices.com
         : RID 46: Unidirectional Traffic
-        : DP: 1 TP: 1 TB: 1.36 KiB
+        : DP: 1
 
 offline0: i4pc-------r--- UDP [OR] 99.45.60.254:443 <-- [L] 168.144.64.5:50540
         : QUIC.netify.youtube
@@ -241,7 +241,7 @@ offline0: i4pc-------r--- UDP [OR] 99.45.60.254:443 <-- [L] 168.144.64.5:50540
         : V: 0x0304
         : TLS/SNI: i.ytimg.com
         : RID 46: Unidirectional Traffic
-        : DP: 1 TP: 1 TB: 1.36 KiB
+        : DP: 1
 
 offline0: i4pc-------r--- UDP [OR] 9.65.169.252:443 <-- [L] 168.144.64.5:60809
         : QUIC.netify.youtube
@@ -249,7 +249,7 @@ offline0: i4pc-------r--- UDP [OR] 9.65.169.252:443 <-- [L] 168.144.64.5:60809
         : V: 0x0304
         : TLS/SNI: suggestqueries-clients6.youtube.com
         : RID 46: Unidirectional Traffic
-        : DP: 1 TP: 1 TB: 1.36 KiB
+        : DP: 1
 
 offline0: i4pc-------r--- UDP [OR] 168.144.64.5:55637 --> [L] 169.81.163.225:443
         : QUIC.netify.youtube
@@ -257,7 +257,7 @@ offline0: i4pc-------r--- UDP [OR] 168.144.64.5:55637 --> [L] 169.81.163.225:443
         : V: 0x0304
         : TLS/SNI: r3---sn-hju7enel.googlevideo.com
         : RID 46: Unidirectional Traffic
-        : DP: 1 TP: 1 TB: 1.36 KiB
+        : DP: 1
 
 offline0: i4pc-------r--- UDP [OR] 113.250.137.243:443 <-- [L] 168.144.64.5:53127
         : QUIC.netify.google
@@ -265,7 +265,7 @@ offline0: i4pc-------r--- UDP [OR] 113.250.137.243:443 <-- [L] 168.144.64.5:5312
         : V: 0x0304
         : TLS/SNI: b1.nel.goog
         : RID 46: Unidirectional Traffic
-        : DP: 1 TP: 1 TB: 1.36 KiB
+        : DP: 1
 
 offline0: i4pc-------r--- UDP [OR] 152.128.87.238:443 <-- [L] 168.144.64.5:50073
         : QUIC.netify.youtube
@@ -273,14 +273,14 @@ offline0: i4pc-------r--- UDP [OR] 152.128.87.238:443 <-- [L] 168.144.64.5:50073
         : V: 0x0304
         : TLS/SNI: r3---sn-vh5ouxa-hjud.googlevideo.com
         : RID 46: Unidirectional Traffic
-        : DP: 1 TP: 1 TB: 1.36 KiB
+        : DP: 1
 
 offline0: i4pc----------- UDP [L] 192.168.254.11:59048 --> [OR] 251.236.18.198:443
         : QUIC.netify.google-authentication
         : H: accounts.google.com
         : V: 0x0304
         : TLS/SNI: accounts.google.com
-        : DP: 1 TP: 1 TB: 1.36 KiB
+        : DP: 1
 
 offline0: i4pc-------r--- UDP [OR] 93.100.151.221:443 <-- [L] 192.168.254.11:38331
         : QUIC.netify.google
@@ -288,7 +288,7 @@ offline0: i4pc-------r--- UDP [OR] 93.100.151.221:443 <-- [L] 192.168.254.11:383
         : V: 0x0304
         : TLS/SNI: litepages.googlezip.net
         : RID 46: Unidirectional Traffic
-        : DP: 1 TP: 1 TB: 1.36 KiB
+        : DP: 1
 
 offline0: i4pc-------r--- UDP [OR] 170.196.90.126:443 <-- [L] 192.168.254.11:45652
         : QUIC.netify.google
@@ -296,7 +296,7 @@ offline0: i4pc-------r--- UDP [OR] 170.196.90.126:443 <-- [L] 192.168.254.11:456
         : V: 0x0304
         : TLS/SNI: content-autofill.googleapis.com
         : RID 46: Unidirectional Traffic
-        : DP: 1 TP: 1 TB: 1.36 KiB
+        : DP: 1
 
 offline0: i4pc-------r--- UDP [OR] 98.251.203.81:443 <-- [L] 192.168.254.11:43427
         : QUIC.netify.google
@@ -304,7 +304,7 @@ offline0: i4pc-------r--- UDP [OR] 98.251.203.81:443 <-- [L] 192.168.254.11:4342
         : V: 0x0304
         : TLS/SNI: optimizationguide-pa.googleapis.com
         : RID 46: Unidirectional Traffic
-        : DP: 1 TP: 1 TB: 1.36 KiB
+        : DP: 1
 
 offline0: i4pc-------r--- UDP [OR] 171.182.169.23:443 <-- [L] 192.168.254.11:54692
         : QUIC.netify.bank-of-america
@@ -312,7 +312,7 @@ offline0: i4pc-------r--- UDP [OR] 171.182.169.23:443 <-- [L] 192.168.254.11:546
         : V: 0x0304
         : TLS/SNI: www.freearabianporn.com
         : RID 46: Unidirectional Traffic
-        : DP: 1 TP: 1 TB: 1.36 KiB
+        : DP: 1
 
 offline0: i4pc-------r--- UDP [OR] 168.78.153.39:443 <-- [L] 192.168.254.11:35124
         : QUIC
@@ -320,7 +320,7 @@ offline0: i4pc-------r--- UDP [OR] 168.78.153.39:443 <-- [L] 192.168.254.11:3512
         : V: 0x0304
         : TLS/SNI: s-img.adskeeper.co.uk
         : RID 46: Unidirectional Traffic
-        : DP: 1 TP: 2 TB: 2.72 KiB
+        : DP: 1
 
 offline0: i4pc-------r--- UDP [OR] 117.148.117.30:443 <-- [L] 192.168.254.11:51075
         : QUIC.netify.google-ads
@@ -328,7 +328,7 @@ offline0: i4pc-------r--- UDP [OR] 117.148.117.30:443 <-- [L] 192.168.254.11:510
         : V: 0x0304
         : TLS/SNI: pagead2.googlesyndication.com
         : RID 46: Unidirectional Traffic
-        : DP: 1 TP: 1 TB: 1.36 KiB
+        : DP: 1
 
 offline0: i4pc-------r--- UDP [OR] 87.179.155.149:443 <-- [L] 192.168.254.11:49689
         : QUIC.netify.google
@@ -336,7 +336,7 @@ offline0: i4pc-------r--- UDP [OR] 87.179.155.149:443 <-- [L] 192.168.254.11:496
         : V: 0x0304
         : TLS/SNI: www.google.com
         : RID 46: Unidirectional Traffic
-        : DP: 1 TP: 1 TB: 1.36 KiB
+        : DP: 1
 
 offline0: i4pc-------r--- UDP [OR] 113.250.137.243:443 <-- [L] 168.144.64.5:62818
         : QUIC.netify.google
@@ -344,7 +344,7 @@ offline0: i4pc-------r--- UDP [OR] 113.250.137.243:443 <-- [L] 168.144.64.5:6281
         : V: 0x0304
         : TLS/SNI: clientservices.googleapis.com
         : RID 46: Unidirectional Traffic
-        : DP: 1 TP: 1 TB: 1.36 KiB
+        : DP: 1
 
 offline0: i4pc-------r--- UDP [OR] 125.136.204.4:443 <-- [L] 168.144.64.5:56425
         : QUIC.netify.youtube
@@ -352,7 +352,7 @@ offline0: i4pc-------r--- UDP [OR] 125.136.204.4:443 <-- [L] 168.144.64.5:56425
         : V: 0x0304
         : TLS/SNI: r1---sn-vh5ouxa-hjuk.googlevideo.com
         : RID 46: Unidirectional Traffic
-        : DP: 1 TP: 1 TB: 1.36 KiB
+        : DP: 1
 
 offline0: i4pc-------r--- UDP [OR] 153.98.28.78:443 <-- [L] 168.144.64.5:59622
         : QUIC.netify.google-dns
@@ -360,7 +360,7 @@ offline0: i4pc-------r--- UDP [OR] 153.98.28.78:443 <-- [L] 168.144.64.5:59622
         : V: 0x0304
         : TLS/SNI: dns.google
         : RID 46: Unidirectional Traffic
-        : DP: 1 TP: 1 TB: 1.36 KiB
+        : DP: 1
 
 offline0: i4pc-------r--- UDP [OR] 108.171.138.182:443 <-- [L] 168.144.64.5:50552
         : QUIC.netify.google
@@ -368,7 +368,7 @@ offline0: i4pc-------r--- UDP [OR] 108.171.138.182:443 <-- [L] 168.144.64.5:5055
         : V: 0x0304
         : TLS/SNI: beacons.gvt2.com
         : RID 46: Unidirectional Traffic
-        : DP: 1 TP: 1 TB: 1.36 KiB
+        : DP: 1
 
 offline0: i4pc-------r--- UDP [OR] 113.250.137.243:443 <-- [L] 168.144.64.5:56844
         : QUIC.netify.google
@@ -376,7 +376,7 @@ offline0: i4pc-------r--- UDP [OR] 113.250.137.243:443 <-- [L] 168.144.64.5:5684
         : V: 0x0304
         : TLS/SNI: b1.nel.goog
         : RID 46: Unidirectional Traffic
-        : DP: 1 TP: 1 TB: 1.36 KiB
+        : DP: 1
 
 offline0: i4pc-------r--- UDP [OR] 153.98.28.78:443 <-- [L] 168.144.64.5:58414
         : QUIC.netify.google-dns
@@ -384,7 +384,7 @@ offline0: i4pc-------r--- UDP [OR] 153.98.28.78:443 <-- [L] 168.144.64.5:58414
         : V: 0x0304
         : TLS/SNI: dns.google
         : RID 46: Unidirectional Traffic
-        : DP: 1 TP: 1 TB: 1.36 KiB
+        : DP: 1
 
 offline0: i4pc-------r--- UDP [OR] 16.232.218.117:443 <-- [L] 168.144.64.5:61341
         : QUIC.netify.youtube
@@ -392,7 +392,7 @@ offline0: i4pc-------r--- UDP [OR] 16.232.218.117:443 <-- [L] 168.144.64.5:61341
         : V: 0x0304
         : TLS/SNI: r9---sn-vh5ouxa-hjuk.googlevideo.com
         : RID 46: Unidirectional Traffic
-        : DP: 1 TP: 1 TB: 1.36 KiB
+        : DP: 1
 
 offline0: i4pc-------r--- UDP [OR] 113.250.137.243:443 <-- [L] 168.144.64.5:56683
         : QUIC.netify.google
@@ -400,7 +400,7 @@ offline0: i4pc-------r--- UDP [OR] 113.250.137.243:443 <-- [L] 168.144.64.5:5668
         : V: 0x0304
         : TLS/SNI: b1.nel.goog
         : RID 46: Unidirectional Traffic
-        : DP: 1 TP: 1 TB: 1.36 KiB
+        : DP: 1
 
 offline0: i4pc-------r--- UDP [OR] 16.232.218.117:443 <-- [L] 168.144.64.5:64700
         : QUIC.netify.youtube
@@ -408,7 +408,7 @@ offline0: i4pc-------r--- UDP [OR] 16.232.218.117:443 <-- [L] 168.144.64.5:64700
         : V: 0x0304
         : TLS/SNI: r9---sn-vh5ouxa-hjuk.googlevideo.com
         : RID 46: Unidirectional Traffic
-        : DP: 1 TP: 1 TB: 1.36 KiB
+        : DP: 1
 
 offline0: i4pc-------r--- UDP [OR] 9.65.169.252:443 <-- [L] 168.144.64.5:60936
         : QUIC.netify.youtube
@@ -416,7 +416,7 @@ offline0: i4pc-------r--- UDP [OR] 9.65.169.252:443 <-- [L] 168.144.64.5:60936
         : V: 0x0304
         : TLS/SNI: suggestqueries-clients6.youtube.com
         : RID 46: Unidirectional Traffic
-        : DP: 1 TP: 1 TB: 1.36 KiB
+        : DP: 1
 
 offline0: i4pc-------r--- UDP [OR] 22.12.150.194:443 <-- [L] 168.144.64.5:59965
         : QUIC.netify.youtube
@@ -424,7 +424,7 @@ offline0: i4pc-------r--- UDP [OR] 22.12.150.194:443 <-- [L] 168.144.64.5:59965
         : V: 0x0304
         : TLS/SNI: r1---sn-vh5ouxa-hju6.googlevideo.com
         : RID 46: Unidirectional Traffic
-        : DP: 1 TP: 1 TB: 1.36 KiB
+        : DP: 1
 
 offline0: i4pc-------r--- UDP [OR] 113.250.137.243:443 <-- [L] 168.144.64.5:64693
         : QUIC.netify.google
@@ -432,7 +432,7 @@ offline0: i4pc-------r--- UDP [OR] 113.250.137.243:443 <-- [L] 168.144.64.5:6469
         : V: 0x0304
         : TLS/SNI: b1.nel.goog
         : RID 46: Unidirectional Traffic
-        : DP: 1 TP: 1 TB: 1.36 KiB
+        : DP: 1
 
 offline0: i4pc-------r--- UDP [OR] 117.148.117.30:443 <-- [L] 168.144.64.5:59680
         : QUIC.netify.google-ads
@@ -440,7 +440,7 @@ offline0: i4pc-------r--- UDP [OR] 117.148.117.30:443 <-- [L] 168.144.64.5:59680
         : V: 0x0304
         : TLS/SNI: googleads.g.doubleclick.net
         : RID 46: Unidirectional Traffic
-        : DP: 1 TP: 1 TB: 1.36 KiB
+        : DP: 1
 
 offline0: i4pc-------r--- UDP [OR] 168.144.64.5:57565 --> [L] 217.254.108.174:443
         : QUIC.netify.youtube
@@ -448,7 +448,7 @@ offline0: i4pc-------r--- UDP [OR] 168.144.64.5:57565 --> [L] 217.254.108.174:44
         : V: 0x0304
         : TLS/SNI: r2---sn-vh5ouxa-hjuk.googlevideo.com
         : RID 46: Unidirectional Traffic
-        : DP: 1 TP: 1 TB: 1.36 KiB
+        : DP: 1
 
 offline0: i4pc-------r--- UDP [OR] 143.52.137.18:443 <-- [L] 168.144.64.5:52387
         : QUIC.netify.google-ads
@@ -456,7 +456,7 @@ offline0: i4pc-------r--- UDP [OR] 143.52.137.18:443 <-- [L] 168.144.64.5:52387
         : V: 0x0304
         : TLS/SNI: pagead2.googlesyndication.com
         : RID 46: Unidirectional Traffic
-        : DP: 1 TP: 1 TB: 1.36 KiB
+        : DP: 1
 
 offline0: i4pc-------r--- UDP [OR] 113.250.137.243:443 <-- [L] 168.144.64.5:49860
         : QUIC.netify.google
@@ -464,7 +464,7 @@ offline0: i4pc-------r--- UDP [OR] 113.250.137.243:443 <-- [L] 168.144.64.5:4986
         : V: 0x0304
         : TLS/SNI: b1.nel.goog
         : RID 46: Unidirectional Traffic
-        : DP: 1 TP: 1 TB: 1.36 KiB
+        : DP: 1
 
 offline0: i4pc-------r--- UDP [OR] 168.144.64.5:60949 --> [L] 185.186.183.185:443
         : QUIC.netify.google
@@ -472,7 +472,7 @@ offline0: i4pc-------r--- UDP [OR] 168.144.64.5:60949 --> [L] 185.186.183.185:44
         : V: 0x0304
         : TLS/SNI: content-autofill.googleapis.com
         : RID 46: Unidirectional Traffic
-        : DP: 1 TP: 1 TB: 1.36 KiB
+        : DP: 1
 
 offline0: i4pc-------r--- UDP [OR] 137.238.249.2:443 <-- [L] 168.144.64.5:57735
         : QUIC.netify.google-ads
@@ -480,7 +480,7 @@ offline0: i4pc-------r--- UDP [OR] 137.238.249.2:443 <-- [L] 168.144.64.5:57735
         : V: 0x0304
         : TLS/SNI: ade.googlesyndication.com
         : RID 46: Unidirectional Traffic
-        : DP: 1 TP: 1 TB: 1.36 KiB
+        : DP: 1
 
 offline0: i4pc-------r--- UDP [OR] 52.187.20.175:50588 --> [L] 208.229.157.81:443
         : QUIC.netify.google
@@ -488,7 +488,7 @@ offline0: i4pc-------r--- UDP [OR] 52.187.20.175:50588 --> [L] 208.229.157.81:44
         : V: 0x0304
         : TLS/SNI: update.googleapis.com
         : RID 46: Unidirectional Traffic
-        : DP: 1 TP: 4 TB: 5.44 KiB
+        : DP: 1
 
 offline0: i4pc-------r--- UDP [OR] 52.187.20.175:61089 --> [L] 99.42.133.245:443
         : QUIC.netify.google
@@ -496,7 +496,7 @@ offline0: i4pc-------r--- UDP [OR] 52.187.20.175:61089 --> [L] 99.42.133.245:443
         : V: 0x0304
         : TLS/SNI: clientservices.googleapis.com
         : RID 46: Unidirectional Traffic
-        : DP: 1 TP: 4 TB: 5.44 KiB
+        : DP: 1
 
 offline0: i4pc-------r--- UDP [OR] 52.187.20.175:49880 --> [L] 208.229.157.81:443
         : QUIC.netify.google
@@ -504,7 +504,7 @@ offline0: i4pc-------r--- UDP [OR] 52.187.20.175:49880 --> [L] 208.229.157.81:44
         : V: 0x0304
         : TLS/SNI: update.googleapis.com
         : RID 46: Unidirectional Traffic
-        : DP: 1 TP: 4 TB: 5.44 KiB
+        : DP: 1
 
 offline0: i4pc-------r--- UDP [OR] 159.117.176.124:58337 --> [L] 208.229.157.81:443
         : QUIC.netify.google
@@ -512,7 +512,7 @@ offline0: i4pc-------r--- UDP [OR] 159.117.176.124:58337 --> [L] 208.229.157.81:
         : V: 0x0304
         : TLS/SNI: clientservices.googleapis.com
         : RID 46: Unidirectional Traffic
-        : DP: 1 TP: 4 TB: 5.44 KiB
+        : DP: 1
 
 offline0: i4pc-------r--- UDP [OR] 159.117.176.124:49867 --> [L] 198.74.29.79:443
         : QUIC.netify.google
@@ -520,7 +520,7 @@ offline0: i4pc-------r--- UDP [OR] 159.117.176.124:49867 --> [L] 198.74.29.79:44
         : V: 0x0304
         : TLS/SNI: content-autofill.googleapis.com
         : RID 46: Unidirectional Traffic
-        : DP: 1 TP: 4 TB: 5.44 KiB
+        : DP: 1
 
 offline0: i4pc-------r--- UDP [OR] 52.187.20.175:58123 --> [L] 118.89.218.46:443
         : QUIC.netify.google-authentication
@@ -528,7 +528,7 @@ offline0: i4pc-------r--- UDP [OR] 52.187.20.175:58123 --> [L] 118.89.218.46:443
         : V: 0x0304
         : TLS/SNI: accounts.google.com
         : RID 46: Unidirectional Traffic
-        : DP: 1 TP: 2 TB: 2.72 KiB
+        : DP: 1
 
 offline0: i4pc-------r--- UDP [OR] 52.187.20.175:63507 --> [L] 121.209.126.161:443
         : QUIC.netify.google
@@ -536,7 +536,7 @@ offline0: i4pc-------r--- UDP [OR] 52.187.20.175:63507 --> [L] 121.209.126.161:4
         : V: 0x0304
         : TLS/SNI: clients2.googleusercontent.com
         : RID 46: Unidirectional Traffic
-        : DP: 1 TP: 3 TB: 4.08 KiB
+        : DP: 1
 
 offline0: i4pc-------r--- UDP [OR] 52.187.20.175:57066 --> [L] 108.171.138.182:443
         : QUIC.netify.google
@@ -544,7 +544,7 @@ offline0: i4pc-------r--- UDP [OR] 52.187.20.175:57066 --> [L] 108.171.138.182:4
         : V: 0x0304
         : TLS/SNI: clientservices.googleapis.com
         : RID 46: Unidirectional Traffic
-        : DP: 1 TP: 4 TB: 5.44 KiB
+        : DP: 1
 
 offline0: i4pc-------r--- UDP [OR] 52.187.20.175:52512 --> [L] 196.245.61.64:443
         : QUIC.netify.google
@@ -552,7 +552,7 @@ offline0: i4pc-------r--- UDP [OR] 52.187.20.175:52512 --> [L] 196.245.61.64:443
         : V: 0x0304
         : TLS/SNI: safebrowsing.googleapis.com
         : RID 46: Unidirectional Traffic
-        : DP: 1 TP: 4 TB: 5.44 KiB
+        : DP: 1
 
 offline0: i4pc-------r--- UDP [OR] 52.187.20.175:51619 --> [L] 208.229.157.81:443
         : QUIC.netify.google
@@ -560,7 +560,7 @@ offline0: i4pc-------r--- UDP [OR] 52.187.20.175:51619 --> [L] 208.229.157.81:44
         : V: 0x0304
         : TLS/SNI: clientservices.googleapis.com
         : RID 46: Unidirectional Traffic
-        : DP: 1 TP: 4 TB: 5.44 KiB
+        : DP: 1
 
 offline0: i4pc-------r--- UDP [OR] 93.100.151.221:443 <-- [L] 168.144.64.5:58703
         : QUIC.netify.android
@@ -568,7 +568,7 @@ offline0: i4pc-------r--- UDP [OR] 93.100.151.221:443 <-- [L] 168.144.64.5:58703
         : V: 0x0304
         : TLS/SNI: android.clients.google.com
         : RID 46: Unidirectional Traffic
-        : DP: 1 TP: 1 TB: 1.36 KiB
+        : DP: 1
 
 offline0: i4pc-------r--- UDP [OR] 128.248.24.1:443 <-- [L] 168.144.64.5:55066
         : QUIC.netify.google
@@ -576,7 +576,7 @@ offline0: i4pc-------r--- UDP [OR] 128.248.24.1:443 <-- [L] 168.144.64.5:55066
         : V: 0x0304
         : TLS/SNI: fonts.gstatic.com
         : RID 46: Unidirectional Traffic
-        : DP: 1 TP: 1 TB: 1.36 KiB
+        : DP: 1
 
 offline0: i4pc-------r--- UDP [OR] 65.33.51.74:443 <-- [L] 168.144.64.5:61886
         : QUIC.netify.google-ads
@@ -584,7 +584,7 @@ offline0: i4pc-------r--- UDP [OR] 65.33.51.74:443 <-- [L] 168.144.64.5:61886
         : V: 0x0304
         : TLS/SNI: adservice.google.com
         : RID 46: Unidirectional Traffic
-        : DP: 1 TP: 1 TB: 1.36 KiB
+        : DP: 1
 
 offline0: i4pc-------r--- UDP [OR] 128.248.24.1:443 <-- [L] 168.144.64.5:65391
         : QUIC.netify.google
@@ -592,7 +592,7 @@ offline0: i4pc-------r--- UDP [OR] 128.248.24.1:443 <-- [L] 168.144.64.5:65391
         : V: 0x0304
         : TLS/SNI: fonts.gstatic.com
         : RID 46: Unidirectional Traffic
-        : DP: 1 TP: 1 TB: 1.36 KiB
+        : DP: 1
 
 offline0: i4pc-------r--- UDP [OR] 117.148.117.30:443 <-- [L] 168.144.64.5:58832
         : QUIC.netify.google-ads
@@ -600,7 +600,7 @@ offline0: i4pc-------r--- UDP [OR] 117.148.117.30:443 <-- [L] 168.144.64.5:58832
         : V: 0x0304
         : TLS/SNI: googleads.g.doubleclick.net
         : RID 46: Unidirectional Traffic
-        : DP: 1 TP: 1 TB: 1.36 KiB
+        : DP: 1
 
 offline0: i4pc-------r--- UDP [OR] 38.57.8.121:443 <-- [L] 168.144.64.5:58429
         : QUIC.netify.google-ads
@@ -608,7 +608,7 @@ offline0: i4pc-------r--- UDP [OR] 38.57.8.121:443 <-- [L] 168.144.64.5:58429
         : V: 0x0304
         : TLS/SNI: static.doubleclick.net
         : RID 46: Unidirectional Traffic
-        : DP: 1 TP: 1 TB: 1.36 KiB
+        : DP: 1
 
 offline0: i4pc-------r--- UDP [OR] 113.250.137.243:443 <-- [L] 168.144.64.5:55479
         : QUIC.netify.google
@@ -616,7 +616,7 @@ offline0: i4pc-------r--- UDP [OR] 113.250.137.243:443 <-- [L] 168.144.64.5:5547
         : V: 0x0304
         : TLS/SNI: clientservices.googleapis.com
         : RID 46: Unidirectional Traffic
-        : DP: 1 TP: 1 TB: 1.36 KiB
+        : DP: 1
 
 offline0: i4pc-------r--- UDP [OR] 128.248.24.1:443 <-- [L] 168.144.64.5:60934
         : QUIC.netify.google-cloud
@@ -624,7 +624,7 @@ offline0: i4pc-------r--- UDP [OR] 128.248.24.1:443 <-- [L] 168.144.64.5:60934
         : V: 0x0304
         : TLS/SNI: beacons.gcp.gvt2.com
         : RID 46: Unidirectional Traffic
-        : DP: 1 TP: 1 TB: 1.36 KiB
+        : DP: 1
 
 offline0: i4pc-------r--- UDP [OR] 128.248.24.1:443 <-- [L] 168.144.64.5:59785
         : QUIC.netify.google-cloud
@@ -632,7 +632,7 @@ offline0: i4pc-------r--- UDP [OR] 128.248.24.1:443 <-- [L] 168.144.64.5:59785
         : V: 0x0304
         : TLS/SNI: beacons.gcp.gvt2.com
         : RID 46: Unidirectional Traffic
-        : DP: 1 TP: 1 TB: 1.36 KiB
+        : DP: 1
 
 offline0: i4pc-------r--- UDP [OR] 153.98.28.78:443 <-- [L] 168.144.64.5:59327
         : QUIC.netify.google-dns
@@ -640,7 +640,7 @@ offline0: i4pc-------r--- UDP [OR] 153.98.28.78:443 <-- [L] 168.144.64.5:59327
         : V: 0x0304
         : TLS/SNI: dns.google
         : RID 46: Unidirectional Traffic
-        : DP: 1 TP: 1 TB: 1.36 KiB
+        : DP: 1
 
 offline0: i4pc-------r--- UDP [OR] 39.227.72.32:443 <-- [L] 168.144.64.5:63925
         : QUIC.netify.google
@@ -648,7 +648,7 @@ offline0: i4pc-------r--- UDP [OR] 39.227.72.32:443 <-- [L] 168.144.64.5:63925
         : V: 0x0304
         : TLS/SNI: beacons2.gvt2.com
         : RID 46: Unidirectional Traffic
-        : DP: 1 TP: 1 TB: 1.36 KiB
+        : DP: 1
 
 offline0: i4pc-------r--- UDP [OR] 103.179.40.184:443 <-- [L] 168.144.64.5:49926
         : QUIC.netify.youtube
@@ -656,7 +656,7 @@ offline0: i4pc-------r--- UDP [OR] 103.179.40.184:443 <-- [L] 168.144.64.5:49926
         : V: 0x0304
         : TLS/SNI: r5---sn-vh5ouxa-hju6.googlevideo.com
         : RID 46: Unidirectional Traffic
-        : DP: 1 TP: 1 TB: 1.36 KiB
+        : DP: 1
 
 offline0: i4pc-------r--- UDP [OR] 117.148.117.30:443 <-- [L] 168.144.64.5:56384
         : QUIC.netify.google-ads
@@ -664,7 +664,7 @@ offline0: i4pc-------r--- UDP [OR] 117.148.117.30:443 <-- [L] 168.144.64.5:56384
         : V: 0x0304
         : TLS/SNI: pagead2.googlesyndication.com
         : RID 46: Unidirectional Traffic
-        : DP: 1 TP: 1 TB: 1.36 KiB
+        : DP: 1
 
 offline0: i4pc-------r--- UDP [OR] 137.238.249.2:443 <-- [L] 168.144.64.5:57398
         : QUIC.netify.google-ads
@@ -672,7 +672,7 @@ offline0: i4pc-------r--- UDP [OR] 137.238.249.2:443 <-- [L] 168.144.64.5:57398
         : V: 0x0304
         : TLS/SNI: www.googleadservices.com
         : RID 46: Unidirectional Traffic
-        : DP: 1 TP: 1 TB: 1.36 KiB
+        : DP: 1
 
 offline0: i4pc-------r--- UDP [OR] 102.194.207.179:443 <-- [L] 168.144.64.5:64497
         : QUIC.netify.google
@@ -680,7 +680,7 @@ offline0: i4pc-------r--- UDP [OR] 102.194.207.179:443 <-- [L] 168.144.64.5:6449
         : V: 0x0304
         : TLS/SNI: beacons.gvt2.com
         : RID 46: Unidirectional Traffic
-        : DP: 1 TP: 1 TB: 1.36 KiB
+        : DP: 1
 
 offline0: i4pc-------r--- UDP [OR] 117.148.117.30:443 <-- [L] 168.144.64.5:55572
         : QUIC.netify.google-ads
@@ -688,7 +688,7 @@ offline0: i4pc-------r--- UDP [OR] 117.148.117.30:443 <-- [L] 168.144.64.5:55572
         : V: 0x0304
         : TLS/SNI: googleads.g.doubleclick.net
         : RID 46: Unidirectional Traffic
-        : DP: 1 TP: 1 TB: 1.36 KiB
+        : DP: 1
 
 offline0: i4pc-------r--- UDP [OR] 128.248.24.1:443 <-- [L] 168.144.64.5:58956
         : QUIC.netify.google-cloud
@@ -696,7 +696,7 @@ offline0: i4pc-------r--- UDP [OR] 128.248.24.1:443 <-- [L] 168.144.64.5:58956
         : V: 0x0304
         : TLS/SNI: beacons.gcp.gvt2.com
         : RID 46: Unidirectional Traffic
-        : DP: 1 TP: 1 TB: 1.36 KiB
+        : DP: 1
 
 offline0: i4pc-------r--- UDP [OR] 102.194.207.179:443 <-- [L] 168.144.64.5:54449
         : QUIC.netify.google
@@ -704,7 +704,7 @@ offline0: i4pc-------r--- UDP [OR] 102.194.207.179:443 <-- [L] 168.144.64.5:5444
         : V: 0x0304
         : TLS/SNI: beacons3.gvt2.com
         : RID 46: Unidirectional Traffic
-        : DP: 1 TP: 1 TB: 1.36 KiB
+        : DP: 1
 
 offline0: i4pc-------r--- UDP [OR] 93.100.151.221:443 <-- [L] 168.144.64.5:60342
         : QUIC.netify.youtube
@@ -712,7 +712,7 @@ offline0: i4pc-------r--- UDP [OR] 93.100.151.221:443 <-- [L] 168.144.64.5:60342
         : V: 0x0304
         : TLS/SNI: suggestqueries-clients6.youtube.com
         : RID 46: Unidirectional Traffic
-        : DP: 1 TP: 1 TB: 1.36 KiB
+        : DP: 1
 
 offline0: i4pc-------r--- UDP [OR] 9.65.169.252:443 <-- [L] 168.144.64.5:65186
         : QUIC.netify.youtube
@@ -720,7 +720,7 @@ offline0: i4pc-------r--- UDP [OR] 9.65.169.252:443 <-- [L] 168.144.64.5:65186
         : V: 0x0304
         : TLS/SNI: www.youtube.com
         : RID 46: Unidirectional Traffic
-        : DP: 1 TP: 1 TB: 1.36 KiB
+        : DP: 1
 
 offline0: i4pc-------r--- UDP [OR] 93.100.151.221:443 <-- [L] 168.144.64.5:52942
         : QUIC.netify.google
@@ -728,7 +728,7 @@ offline0: i4pc-------r--- UDP [OR] 93.100.151.221:443 <-- [L] 168.144.64.5:52942
         : V: 0x0304
         : TLS/SNI: clients2.google.com
         : RID 46: Unidirectional Traffic
-        : DP: 1 TP: 1 TB: 1.36 KiB
+        : DP: 1
 
 offline0: i4pc-------r--- UDP [OR] 52.187.20.175:62114 --> [L] 198.74.29.79:443
         : QUIC.netify.google
@@ -736,7 +736,7 @@ offline0: i4pc-------r--- UDP [OR] 52.187.20.175:62114 --> [L] 198.74.29.79:443
         : V: 0x0304
         : TLS/SNI: safebrowsing.googleapis.com
         : RID 46: Unidirectional Traffic
-        : DP: 1 TP: 4 TB: 5.44 KiB
+        : DP: 1
 
 offline0: i4pc-------r--- UDP [OR] 35.194.157.47:443 <-- [L] 168.144.64.5:55561
         : QUIC.netify.google-ads
@@ -744,7 +744,7 @@ offline0: i4pc-------r--- UDP [OR] 35.194.157.47:443 <-- [L] 168.144.64.5:55561
         : V: 0x0304
         : TLS/SNI: googleads.g.doubleclick.net
         : RID 46: Unidirectional Traffic
-        : DP: 1 TP: 1 TB: 1.36 KiB
+        : DP: 1
 
 offline0: i4pc-------r--- UDP [OR] 159.117.176.124:61202 --> [L] 198.74.29.79:443
         : QUIC.netify.google
@@ -752,7 +752,7 @@ offline0: i4pc-------r--- UDP [OR] 159.117.176.124:61202 --> [L] 198.74.29.79:44
         : V: 0x0304
         : TLS/SNI: safebrowsing.googleapis.com
         : RID 46: Unidirectional Traffic
-        : DP: 1 TP: 4 TB: 5.44 KiB
+        : DP: 1
 
 offline0: i4pc-------r--- UDP [OR] 128.248.24.1:443 <-- [L] 159.117.176.124:49521
         : QUIC.netify.google
@@ -760,7 +760,7 @@ offline0: i4pc-------r--- UDP [OR] 128.248.24.1:443 <-- [L] 159.117.176.124:4952
         : V: 0x0304
         : TLS/SNI: clientservices.googleapis.com
         : RID 46: Unidirectional Traffic
-        : DP: 1 TP: 4 TB: 5.44 KiB
+        : DP: 1
 
 offline0: i4pc-------r--- UDP [OR] 168.144.64.5:49217 --> [L] 185.186.183.185:443
         : QUIC.netify.google
@@ -768,7 +768,7 @@ offline0: i4pc-------r--- UDP [OR] 168.144.64.5:49217 --> [L] 185.186.183.185:44
         : V: 0x0304
         : TLS/SNI: safebrowsing.googleapis.com
         : RID 46: Unidirectional Traffic
-        : DP: 1 TP: 1 TB: 1.36 KiB
+        : DP: 1
 
 offline0: i4pc-------r--- UDP [OR] 52.187.20.175:61286 --> [L] 198.74.29.79:443
         : QUIC.netify.google
@@ -776,7 +776,7 @@ offline0: i4pc-------r--- UDP [OR] 52.187.20.175:61286 --> [L] 198.74.29.79:443
         : V: 0x0304
         : TLS/SNI: safebrowsing.googleapis.com
         : RID 46: Unidirectional Traffic
-        : DP: 1 TP: 4 TB: 5.44 KiB
+        : DP: 1
 
 offline0: i4pc-------r--- UDP [OR] 52.187.20.175:53260 --> [L] 102.194.207.179:443
         : QUIC.netify.google
@@ -784,7 +784,7 @@ offline0: i4pc-------r--- UDP [OR] 52.187.20.175:53260 --> [L] 102.194.207.179:4
         : V: 0x0304
         : TLS/SNI: clientservices.googleapis.com
         : RID 46: Unidirectional Traffic
-        : DP: 1 TP: 4 TB: 5.44 KiB
+        : DP: 1
 
 offline0: i4pc-------r--- UDP [OR] 76.231.104.92:443 <-- [L] 168.144.64.5:50023
         : QUIC.netify.youtube
@@ -792,7 +792,7 @@ offline0: i4pc-------r--- UDP [OR] 76.231.104.92:443 <-- [L] 168.144.64.5:50023
         : V: 0x0304
         : TLS/SNI: www.youtube.com
         : RID 46: Unidirectional Traffic
-        : DP: 1 TP: 1 TB: 1.36 KiB
+        : DP: 1
 
 offline0: i4pc-------r--- UDP [OR] 65.33.51.74:443 <-- [L] 168.144.64.5:65360
         : QUIC.netify.google-ads
@@ -800,7 +800,7 @@ offline0: i4pc-------r--- UDP [OR] 65.33.51.74:443 <-- [L] 168.144.64.5:65360
         : V: 0x0304
         : TLS/SNI: googleads.g.doubleclick.net
         : RID 46: Unidirectional Traffic
-        : DP: 1 TP: 1 TB: 1.36 KiB
+        : DP: 1
 
 offline0: i4pc-------r--- UDP [OR] 159.117.176.124:64134 --> [L] 207.121.63.92:443
         : QUIC.netify.google
@@ -808,7 +808,7 @@ offline0: i4pc-------r--- UDP [OR] 159.117.176.124:64134 --> [L] 207.121.63.92:4
         : V: 0x0304
         : TLS/SNI: www.google.com
         : RID 46: Unidirectional Traffic
-        : DP: 1 TP: 4 TB: 5.44 KiB
+        : DP: 1
 
 offline0: i4pc-------r--- UDP [OR] 52.187.20.175:61484 --> [L] 202.152.155.121:443
         : QUIC.netify.google-authentication
@@ -816,7 +816,7 @@ offline0: i4pc-------r--- UDP [OR] 52.187.20.175:61484 --> [L] 202.152.155.121:4
         : V: 0x0304
         : TLS/SNI: ogs.google.com
         : RID 46: Unidirectional Traffic
-        : DP: 1 TP: 4 TB: 5.44 KiB
+        : DP: 1
 
 offline0: i4pc-------r--- UDP [OR] 16.205.123.234:443 <-- [L] 159.117.176.124:51856
         : QUIC.netify.whatsapp
@@ -824,7 +824,7 @@ offline0: i4pc-------r--- UDP [OR] 16.205.123.234:443 <-- [L] 159.117.176.124:51
         : V: 0x0304
         : TLS/SNI: media.fmct2-1.fna.whatsapp.net
         : RID 46: Unidirectional Traffic
-        : DP: 1 TP: 1 TB: 1.36 KiB
+        : DP: 1
 
 offline0: i4pc-------r--- UDP [OR] 153.98.28.78:443 <-- [L] 168.144.64.5:54120
         : QUIC.netify.google-dns
@@ -832,7 +832,7 @@ offline0: i4pc-------r--- UDP [OR] 153.98.28.78:443 <-- [L] 168.144.64.5:54120
         : V: 0x0304
         : TLS/SNI: dns.google
         : RID 46: Unidirectional Traffic
-        : DP: 1 TP: 1 TB: 1.36 KiB
+        : DP: 1
 
 offline0: i4pc-------r--- UDP [OR] 153.98.28.78:443 <-- [L] 168.144.64.5:52396
         : QUIC.netify.google-dns
@@ -840,7 +840,7 @@ offline0: i4pc-------r--- UDP [OR] 153.98.28.78:443 <-- [L] 168.144.64.5:52396
         : V: 0x0304
         : TLS/SNI: dns.google
         : RID 46: Unidirectional Traffic
-        : DP: 1 TP: 1 TB: 1.36 KiB
+        : DP: 1
 
 offline0: i4pc-------r--- UDP [OR] 126.3.93.89:443 <-- [L] 168.144.64.5:50224
         : QUIC.netify.google
@@ -848,7 +848,7 @@ offline0: i4pc-------r--- UDP [OR] 126.3.93.89:443 <-- [L] 168.144.64.5:50224
         : V: 0x0304
         : TLS/SNI: www.googleapis.com
         : RID 46: Unidirectional Traffic
-        : DP: 1 TP: 4 TB: 5.44 KiB
+        : DP: 1
 
 offline0: i4pc-------r--- UDP [OR] 31.219.210.96:443 <-- [L] 168.144.64.5:62719
         : QUIC.netify.google
@@ -856,7 +856,7 @@ offline0: i4pc-------r--- UDP [OR] 31.219.210.96:443 <-- [L] 168.144.64.5:62719
         : V: 0x0304
         : TLS/SNI: lh4.googleusercontent.com
         : RID 46: Unidirectional Traffic
-        : DP: 1 TP: 2 TB: 2.72 KiB
+        : DP: 1
 
 offline0: i4pc-------r--- UDP [OR] 168.144.64.5:58351 --> [L] 193.68.169.100:443
         : QUIC.netify.google
@@ -864,7 +864,7 @@ offline0: i4pc-------r--- UDP [OR] 168.144.64.5:58351 --> [L] 193.68.169.100:443
         : V: 0x0304
         : TLS/SNI: www.gstatic.com
         : RID 46: Unidirectional Traffic
-        : DP: 1 TP: 3 TB: 4.08 KiB
+        : DP: 1
 
 offline0: i4pc-------r--- UDP [OR] 7.71.118.27:443 <-- [L] 168.144.64.5:57319
         : QUIC.netify.android
@@ -872,7 +872,7 @@ offline0: i4pc-------r--- UDP [OR] 7.71.118.27:443 <-- [L] 168.144.64.5:57319
         : V: 0x0304
         : TLS/SNI: android.clients.google.com
         : RID 46: Unidirectional Traffic
-        : DP: 1 TP: 1 TB: 1.36 KiB
+        : DP: 1
 
 offline0: i4pc-------r--- UDP [OR] 53.101.228.200:443 <-- [L] 168.144.64.5:60919
         : QUIC.netify.google-ads
@@ -880,7 +880,7 @@ offline0: i4pc-------r--- UDP [OR] 53.101.228.200:443 <-- [L] 168.144.64.5:60919
         : V: 0x0304
         : TLS/SNI: adservice.google.com
         : RID 46: Unidirectional Traffic
-        : DP: 1 TP: 1 TB: 1.36 KiB
+        : DP: 1
 
 offline0: i4pc-------r--- UDP [OR] 144.237.113.58:443 <-- [L] 168.144.64.5:50423
         : QUIC.netify.google
@@ -888,7 +888,7 @@ offline0: i4pc-------r--- UDP [OR] 144.237.113.58:443 <-- [L] 168.144.64.5:50423
         : V: 0x0304
         : TLS/SNI: www.google.com
         : RID 46: Unidirectional Traffic
-        : DP: 1 TP: 1 TB: 1.36 KiB
+        : DP: 1
 
 offline0: i4pc-------r--- UDP [OR] 76.231.104.92:443 <-- [L] 168.144.64.5:59206
         : QUIC.netify.google-authentication
@@ -896,5 +896,5 @@ offline0: i4pc-------r--- UDP [OR] 76.231.104.92:443 <-- [L] 168.144.64.5:59206
         : V: 0x0304
         : TLS/SNI: ogs.google.com
         : RID 46: Unidirectional Traffic
-        : DP: 1 TP: 1 TB: 1.36 KiB
+        : DP: 1
 

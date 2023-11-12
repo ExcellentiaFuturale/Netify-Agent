@@ -4,5 +4,5 @@ offline0: i4pc-------r--- UDP [L] 10.0.2.15:35601 --> [OR] 31.13.86.8:443
         : V: 0x0304
         : TLS/SNI: graph.facebook.com
         : RID 46: Unidirectional Traffic
-        : DP: 1 TP: 490 TB: 282 KiB
+        : DP: 1
 

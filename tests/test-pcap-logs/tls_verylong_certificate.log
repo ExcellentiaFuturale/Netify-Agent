@@ -5,5 +5,5 @@ offline0: i4pcu------r-F- TCP [OR] 151.101.66.49:443 <-- [L] 192.168.1.160:54804
         : TLS/SNI: feodotracker.abuse.ch TLS/CN: p2.shared.global.fastly.net
         : TLS/IDN: C=BE, O=GlobalSign nv-sa, CN=GlobalSign CloudSSL CA - SHA256 - G3 TLS/SDN: C=US, ST=California, L=San Francisco, O=Fastly, Inc., CN=p2.shared.global.fastly.net
         : RID 30: TLS Certificate Expired
-        : DP: 11 TP: 48 TB: 21.7 KiB
+        : DP: 11
 

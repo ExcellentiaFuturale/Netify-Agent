@@ -6,5 +6,5 @@ offline0: i4pcu------r--- TCP [L] 10.206.65.249:443 <-- [OL] 10.206.131.18:58657
         : RID 29: TLS Certificate About To Expire
         : RID 35: TLS SNI Extension Not Found
         : RID 47: TLS ALPN Not Found
-        : DP: 7 TP: 7 TB: 4.1 KiB
+        : DP: 7
 

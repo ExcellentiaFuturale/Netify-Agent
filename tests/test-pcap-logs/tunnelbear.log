@@ -5,7 +5,7 @@ offline0: i4pcu------r-F- TCP [L] 10.8.0.1:45104 --> [OR] 104.17.115.40:443
         : TLS/SNI: api.polargrizzly.com
         : TLS/IDN: C=GB, ST=Greater Manchester, L=Salford, O=Sectigo Limited, CN=Sectigo ECC Domain Validation Secure Server CA TLS/SDN: CN=*.polargrizzly.com
         : RID 30: TLS Certificate Expired
-        : DP: 6 TP: 55 TB: 16.3 KiB
+        : DP: 6
 
 offline0: i4pcu------r--- TCP [L] 10.8.0.1:50178 --> [OR] 104.17.154.236:443
         : HTTP/S.netify.tunnelbear
@@ -14,7 +14,7 @@ offline0: i4pcu------r--- TCP [L] 10.8.0.1:50178 --> [OR] 104.17.154.236:443
         : TLS/SNI: api.tunnelbear.com
         : TLS/IDN: C=GB, ST=Greater Manchester, L=Salford, O=Sectigo Limited, CN=Sectigo RSA Domain Validation Secure Server CA TLS/SDN: CN=*.tunnelbear.com
         : RID 30: TLS Certificate Expired
-        : DP: 6 TP: 25 TB: 9.75 KiB
+        : DP: 6
 
 offline0: i4pcu------r-F- TCP [L] 10.8.0.1:45106 --> [OR] 104.17.115.40:443
         : HTTP/S.netify.tunnelbear
@@ -23,7 +23,7 @@ offline0: i4pcu------r-F- TCP [L] 10.8.0.1:45106 --> [OR] 104.17.115.40:443
         : TLS/SNI: api.polargrizzly.com
         : TLS/IDN: C=GB, ST=Greater Manchester, L=Salford, O=Sectigo Limited, CN=Sectigo ECC Domain Validation Secure Server CA TLS/SDN: CN=*.polargrizzly.com
         : RID 30: TLS Certificate Expired
-        : DP: 6 TP: 13 TB: 5.33 KiB
+        : DP: 6
 
 offline0: i4pcu------r-F- TCP [L] 10.8.0.1:45108 --> [OR] 104.17.115.40:443
         : HTTP/S.netify.tunnelbear
@@ -32,7 +32,7 @@ offline0: i4pcu------r-F- TCP [L] 10.8.0.1:45108 --> [OR] 104.17.115.40:443
         : TLS/SNI: api.polargrizzly.com
         : TLS/IDN: C=GB, ST=Greater Manchester, L=Salford, O=Sectigo Limited, CN=Sectigo ECC Domain Validation Secure Server CA TLS/SDN: CN=*.polargrizzly.com
         : RID 30: TLS Certificate Expired
-        : DP: 6 TP: 17 TB: 5.54 KiB
+        : DP: 6
 
 offline0: i4pcu------r-F- TCP [L] 10.8.0.1:45114 --> [OR] 104.17.115.40:443
         : HTTP/S.netify.tunnelbear
@@ -41,7 +41,7 @@ offline0: i4pcu------r-F- TCP [L] 10.8.0.1:45114 --> [OR] 104.17.115.40:443
         : TLS/SNI: api.polargrizzly.com
         : TLS/IDN: C=GB, ST=Greater Manchester, L=Salford, O=Sectigo Limited, CN=Sectigo ECC Domain Validation Secure Server CA TLS/SDN: CN=*.polargrizzly.com
         : RID 30: TLS Certificate Expired
-        : DP: 6 TP: 13 TB: 5.33 KiB
+        : DP: 6
 
 offline0: i4pcu------r--- TCP [L] 10.8.0.1:47496 --> [OR] 162.247.243.188:443
         : HTTP/S.netify.new-relic
@@ -50,21 +50,21 @@ offline0: i4pcu------r--- TCP [L] 10.8.0.1:47496 --> [OR] 162.247.243.188:443
         : TLS/SNI: mobile-collector.newrelic.com
         : TLS/IDN: C=US, O=DigiCert Inc, CN=DigiCert TLS RSA SHA256 2020 CA1 TLS/SDN: C=US, ST=California, L=San Francisco, O=New Relic, Inc., CN=*.newrelic.com
         : RID 30: TLS Certificate Expired
-        : DP: 6 TP: 17 TB: 6.66 KiB
+        : DP: 6
 
 offline0: i4pcu--------F- TCP [L] 10.8.0.1:45126 --> [OR] 104.17.115.40:443
         : HTTP/S.netify.tunnelbear
         : H: api.polargrizzly.com
         : V: 0x0303 CS: 0xc02b
         : TLS/SNI: api.polargrizzly.com
-        : DP: 6 TP: 32 TB: 5.11 KiB
+        : DP: 6
 
 offline0: i4pcu--------F- TCP [L] 10.8.0.1:45124 --> [OR] 104.17.115.40:443
         : HTTP/S.netify.tunnelbear
         : H: api.polargrizzly.com
         : V: 0x0303 CS: 0xc02b
         : TLS/SNI: api.polargrizzly.com
-        : DP: 6 TP: 17 TB: 1.79 KiB
+        : DP: 6
 
 offline0: i4pcu------r--- TCP [L] 10.8.0.1:60224 --> [OR] 157.240.7.32:443
         : HTTP/S.netify.meta-messaging
@@ -72,7 +72,7 @@ offline0: i4pcu------r--- TCP [L] 10.8.0.1:60224 --> [OR] 157.240.7.32:443
         : V: 0x0303 CS: 0x1301
         : TLS/SNI: mqtt-mini.facebook.com
         : RID 47: TLS ALPN Not Found
-        : DP: 6 TP: 18 TB: 5.14 KiB
+        : DP: 6
 
 offline0: i4pcu------r--- TCP [L] 10.8.0.1:47594 --> [OR] 99.83.135.170:443
         : HTTP/S.netify.grammarly
@@ -82,56 +82,56 @@ offline0: i4pcu------r--- TCP [L] 10.8.0.1:47594 --> [OR] 99.83.135.170:443
         : TLS/IDN: C=US, O=Amazon, OU=Server CA 1B, CN=Amazon TLS/SDN: CN=capi.grammarly.com
         : RID 30: TLS Certificate Expired
         : RID 47: TLS ALPN Not Found
-        : DP: 8 TP: 24 TB: 8.9 KiB
+        : DP: 8
 
 offline0: i4pc-------rs-- TCP [L] 10.8.0.1:47046 --> [OR] 74.125.200.188:5228
         : XMPP.netify.google-chat
         : H: mtalk.google.com
         : RID 16: Known Protocol on Non-standard Port
         : RID 47: TLS ALPN Not Found
-        : DP: 4 TP: 15 TB: 2.6 KiB
+        : DP: 4
 
 offline0: i4pc-------rs-- TCP [L] 10.8.0.1:47046 --> [OR] 74.125.200.188:5228
         : XMPP.netify.google-chat
         : H: mtalk.google.com
         : RID 16: Known Protocol on Non-standard Port
         : RID 47: TLS ALPN Not Found
-        : DP: 4 TP: 15 TB: 2.6 KiB
+        : DP: 4
 
 offline0: i4pcu--------F- TCP [L] 10.8.0.1:33830 --> [OR] 104.17.114.40:443
         : HTTP/S.netify.tunnelbear
         : H: api.polargrizzly.com
         : V: 0x0303 CS: 0xc02b
         : TLS/SNI: api.polargrizzly.com
-        : DP: 6 TP: 59 TB: 13.8 KiB
+        : DP: 6
 
 offline0: i4pcu--------F- TCP [L] 10.8.0.1:33846 --> [OR] 104.17.114.40:443
         : HTTP/S.netify.tunnelbear
         : H: api.polargrizzly.com
         : V: 0x0303 CS: 0xc02b
         : TLS/SNI: api.polargrizzly.com
-        : DP: 6 TP: 19 TB: 1.89 KiB
+        : DP: 6
 
 offline0: i4pcu--------F- TCP [L] 10.8.0.1:33842 --> [OR] 104.17.114.40:443
         : HTTP/S.netify.tunnelbear
         : H: api.polargrizzly.com
         : V: 0x0303 CS: 0xc02b
         : TLS/SNI: api.polargrizzly.com
-        : DP: 6 TP: 15 TB: 1.75 KiB
+        : DP: 6
 
 offline0: i4pcu--------F- TCP [L] 10.8.0.1:33838 --> [OR] 104.17.114.40:443
         : HTTP/S.netify.tunnelbear
         : H: api.polargrizzly.com
         : V: 0x0303 CS: 0xc02b
         : TLS/SNI: api.polargrizzly.com
-        : DP: 6 TP: 15 TB: 1.75 KiB
+        : DP: 6
 
 offline0: i4pcu--------F- TCP [L] 10.8.0.1:33848 --> [OR] 104.17.114.40:443
         : HTTP/S.netify.tunnelbear
         : H: api.polargrizzly.com
         : V: 0x0303 CS: 0xc02b
         : TLS/SNI: api.polargrizzly.com
-        : DP: 6 TP: 15 TB: 1.75 KiB
+        : DP: 6
 
 offline0: i4pcu------r--- TCP [L] 10.8.0.1:50904 --> [OR] 104.17.154.236:443
         : HTTP/S.netify.tunnelbear
@@ -140,7 +140,7 @@ offline0: i4pcu------r--- TCP [L] 10.8.0.1:50904 --> [OR] 104.17.154.236:443
         : TLS/SNI: api.tunnelbear.com
         : TLS/IDN: C=GB, ST=Greater Manchester, L=Salford, O=Sectigo Limited, CN=Sectigo RSA Domain Validation Secure Server CA TLS/SDN: CN=*.tunnelbear.com
         : RID 30: TLS Certificate Expired
-        : DP: 6 TP: 20 TB: 9.46 KiB
+        : DP: 6
 
 offline0: i4pcu------r--- TCP [L] 10.8.0.1:48222 --> [OR] 162.247.243.188:443
         : HTTP/S.netify.new-relic
@@ -149,14 +149,14 @@ offline0: i4pcu------r--- TCP [L] 10.8.0.1:48222 --> [OR] 162.247.243.188:443
         : TLS/SNI: mobile-collector.newrelic.com
         : TLS/IDN: C=US, O=DigiCert Inc, CN=DigiCert TLS RSA SHA256 2020 CA1 TLS/SDN: C=US, ST=California, L=San Francisco, O=New Relic, Inc., CN=*.newrelic.com
         : RID 30: TLS Certificate Expired
-        : DP: 6 TP: 17 TB: 6.75 KiB
+        : DP: 6
 
 offline0: i4pc--x-------- TCP [L] 10.8.0.1:33858 --> [OR] 104.17.114.40:443
         : HTTP/S.netify.tunnelbear
         : H: api.polargrizzly.com
         : V: 0x0303
         : TLS/SNI: api.polargrizzly.com
-        : DP: 5 TP: 5 TB: 807
+        : DP: 5
 
 offline0: i4pc--x----r--- TCP [L] 10.158.132.91:38398 --> [OR] 104.17.114.40:443
         : HTTP/S.netify.tunnelbear
@@ -164,9 +164,9 @@ offline0: i4pc--x----r--- TCP [L] 10.158.132.91:38398 --> [OR] 104.17.114.40:443
         : V: 0x0303
         : TLS/SNI: api.polargrizzly.com
         : RID 46: Unidirectional Traffic
-        : DP: 5 TP: 5 TB: 1.78 KiB
+        : DP: 5
 
 offline0: i4pc-gx------F- TCP [OR] 8.8.8.8:53 <-- [L] 10.158.132.91:51120
         : Unknown.netify.google
-        : DP: 5 TP: 5 TB: 306
+        : DP: 5
 
